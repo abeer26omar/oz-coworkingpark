@@ -1,0 +1,18 @@
+/*Start Our Locations*/
+.locations .location-slider{
+    font-family: questrial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: #000000;
+}
+.locations .slick-dots{
+    text-align: end;
+}
+.locations .large-head{
+    font-size: var(--font-size-41);
+}
+.locations .slick-slide img {
+    width: 80%;
+}
