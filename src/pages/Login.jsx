@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginForm from "../components/Forms/LoginForm/LoginForm";
+import LoginForm from "../components/Auth/LoginForm/LoginForm";
 import Users from "../components/TestComponents/Users";
 import MemberApi from "../components/TestComponents/MemberApi/MemberApi";
 import TestApi from "../components/TestComponents/TestApi";
