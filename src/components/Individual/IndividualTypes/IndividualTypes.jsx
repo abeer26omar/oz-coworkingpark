@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import React from 'react';
 import {individualTypes} from "../../../Data/IndividualsTypesData";
 import IndividualTypesList from "./IndividualTypesList";
@@ -6,6 +7,7 @@ import './IndividualTypes.css';
 const IndividualTypes = () => {
     return (
         <>
+
             <section className="Individual-types p-60">
                 <div className="container">
                     <div className="row">

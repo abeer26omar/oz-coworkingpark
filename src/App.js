@@ -5,9 +5,11 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Membership from "./pages/Membership";
 import Login from "./pages/Login";
-import { Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router,  Route, Routes} from 'react-router-dom';
 import ContactUs from "./pages/ContactUS";
 import Individual from "./pages/Individual";
+import MembershipOptions from "./components/Membership/MembershipOptions/MembershipOptions";
+import UserProfile from "./components/Membership/MembershipOptions/MembershipOptions";
 
 function App() {
   return (
@@ -16,8 +18,11 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Login/>}/>
                     <Route path="/membership" element={<Membership/>}/>
+                    <Route path="/membership/:id" element={<MembershipOptions />} />
                     <Route path="/contactus" element={<ContactUs/>}/>
                     <Route path="/individual" element={<Individual/>}/>
+                    {/*<Route path="/individual/:memberId" element={<Individual/>}/>*/}
+
                 </Routes>
         <Footer/>
     </>

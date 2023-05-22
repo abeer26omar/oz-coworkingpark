@@ -9,6 +9,7 @@ import card1 from '../../../assets/images/card1.png'
 import MembershipTypesList from "./MembershipTypesList";
 import {memberTypes} from "../../../Data/MemberTypesData";
 import FormData from "form-data";
+import MembershipOptions from "../MembershipOptions/MembershipOptions";
 const MembershipTypes = () => {
     const [listMembershipsTypes, setListMembershipsTypes] = useState([]);
 
@@ -44,6 +45,7 @@ const MembershipTypes = () => {
     useEffect(()=>{
         GetMembershipTypes();
     },[])
+
 
     // Start Slider Sittings
     const settings =  {
@@ -108,7 +110,6 @@ const MembershipTypes = () => {
             {/*</div>*/}
 
 
-
             {/*// <!--Start Our Membership Types-->*/}
             <section className="membership-types p-60">
                 <Container fluid >
@@ -121,14 +122,35 @@ const MembershipTypes = () => {
                         <Col lg={12}>
                             <Slider {...settings}>
                             {listMembershipsTypes.map((listMembershipType, index) => {
-                                const {id, name, logo, link} = listMembershipType;
+                                const {id, name, logo, link, description} = listMembershipType;
                                 return(
                                     <div key={index}>
-                                    <MembershipTypesList  id={id} name={name} logo={logo} link={link}/>
+                                        {listMembershipType.options.map((option, index) => {
+                                            const {price, id, name, logo, type} = option;
+                                            console.log('Price:', price);
+                                            return (
+                                                <>
+                                                    <li key={index}>{price}</li>
+                                                    <li >{type}</li>
+
+
+
+                                                </>
+                                            )
+
+                                        })}
+
+                                    <MembershipTypesList  id={id} name={name} logo={logo} link={link} description={description}/>
                                     </div>
                                 )
-                            })}
+
+                            }
+
+                            )}
                             </Slider>
+                            <div>
+
+                            </div>
                         </Col>
                     </Row>
                 </Container>

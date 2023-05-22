@@ -26,8 +26,8 @@ const LoginForm = () => {
     let FormData = require('form-data');
     let data = new FormData();
     data.append('server_key', 'c04919f13f43b612fff3b76c5d08b2d6');
-    data.append('username', 'ahmed@gmail.com');
-    data.append('password', '1212');
+    data.append('username', 'demo@demo.com');
+    data.append('password', 'pass');
 
 
     let config = {
