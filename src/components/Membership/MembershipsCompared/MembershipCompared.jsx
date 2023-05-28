@@ -26,37 +26,37 @@ const MembershipCompared = () => {
                                 <tbody>
                                 <tr>
                                     <th className="table-item" scope="row">Lorem ipsum dolor sit amet,</th>
-                                    <td><img src={check}/></td>
-                                    <td><img src={check}/></td>
-                                    <td><img src={check}/></td>
+                                    <td><img src={check} alt={check}/></td>
+                                    <td><img src={check} alt={check}/></td>
+                                    <td><img src={check} alt={check}/></td>
                                 </tr>
                                 <tr>
                                     <th className="table-item" scope="row">Lorem ipsum dolor sit amet,</th>
-                                    <td><img src={check}/></td>
-                                    <td><img src={check}/></td>
-                                    <td><img src={check}/></td>
+                                    <td><img src={check} alt={check}/></td>
+                                    <td><img src={check} alt={check}/></td>
+                                    <td><img src={check} alt={check}/></td>
                                 </tr>
                                 <tr>
                                     <th className="table-item" scope="row">Lorem ipsum dolor sit amet,</th>
-                                    <td className="img-check"><img src={check}/>
+                                    <td className="img-check"><img src={check} alt={check}/>
                                     </td>
-                                    <td className="img-check"><img src={check}/>
+                                    <td className="img-check"><img src={check} alt={check}/>
                                     </td>
-                                    <td className="img-check"><img src={check}/>
+                                    <td className="img-check"><img src={check} alt={check}/>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <th className="table-item" scope="row">Lorem ipsum dolor sit amet,</th>
                                     <td>-</td>
-                                    <td><img src={check}/></td>
-                                    <td><img src={check}/></td>
+                                    <td><img src={check} alt={check}/></td>
+                                    <td><img src={check} alt={check}/></td>
                                 </tr>
                                 <tr>
                                     <th className="table-item" scope="row">Lorem ipsum dolor sit amet,</th>
                                     <td>-</td>
                                     <td>-</td>
-                                    <td><img src={check}/></td>
+                                    <td><img src={check} alt={check}/></td>
                                 </tr>
                                 <tr className="buttons-apply">
                                     <td></td>

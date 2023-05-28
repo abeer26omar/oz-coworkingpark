@@ -1,8 +1,8 @@
 import React from 'react';
 import './Services.css';
 
-import vector from "../../assets/images/Vector.png";
-import {services} from "../../Data/ServicesData";
+import vector from "../../../assets/images/Vector.png";
+import {services} from "../../../Data/ServicesData";
 import ServicesList from "./ServicesList";
 const Services = () => {
     return (
@@ -10,7 +10,7 @@ const Services = () => {
             <section className="what-get p-60">
                 <div className="position-relative">
                     <img src={vector} className="position-absolute"
-                         style={{top: "0px", left: "0", width: "100px"}}/>
+                         style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>
                 </div>
                 <div className="container">
                     <div className="row">

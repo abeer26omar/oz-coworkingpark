@@ -8,7 +8,7 @@
     text-transform: uppercase;
 }
 .nav-link:hover{
-    color: var(--semantic-color1);
+    /*color: var(--semantic-color1);*/
     cursor: pointer;
     transition: 1s;
     transform: scale(1.2);

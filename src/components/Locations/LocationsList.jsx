@@ -8,7 +8,7 @@ const LocationsList = ({id, address, img}) => {
                 <img src={img} className="figure-img img-fluid"
                      alt={address}/>
                 <div className="d-flex justify-content-start pt-5">
-                    <img src={mapPoint} className="mx-3" style={{width: "24px", height: "24px"}}/>
+                    <img src={mapPoint} className="mx-3" style={{width: "24px", height: "24px"}} alt="map"/>
 
                     <p className="figure-caption location-slider mt-auto">{address}</p>
                 </div>

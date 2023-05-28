@@ -1,11 +1,12 @@
 import React from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import vectorRight from '../../../assets/images/VectorRight.png';
-import './Individual.css';
+import './Membership.css';
 import Slider from "react-slick";
 import IndividualHeaderList from "./IndividualHeaderList";
-import { individualHeaderss} from "../../../Data/IndividualHeadersData";
-const IndividualHeader = () => {
+import {individualHeaderss} from "../../../Data/IndividualHeadersData";
+import MembershipOptionsHeaderList from "./MembershipOptionsHeaderList";
+const MembershipOptionsHeader = () => {
     const  settings = {
         dots: true,
         infinite: true,
@@ -26,7 +27,7 @@ const IndividualHeader = () => {
                                 {individualHeaderss.map((individualHeader,index)=>{
                                     const {id, title, head, text} = individualHeader;
                                     return(
-                                        <IndividualHeaderList id={id} head={head} text={text} title={title}/>
+                                        <MembershipOptionsHeaderList id={id} head={head} text={text} title={title}/>
                                     )
                                 })}
                             </Slider>
@@ -42,4 +43,4 @@ const IndividualHeader = () => {
     );
 };
 
-export default IndividualHeader;
+export default MembershipOptionsHeader;

@@ -37,7 +37,7 @@
     border: none;
 }
 .member_discount{
-    font-family: 'Questrial';
+    font-family: 'Questrial', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: var(--font-size-16);
@@ -46,7 +46,7 @@
     color: var(--secondary-color2);
 }
 .current_price{
-    font-family: 'Couture';
+    font-family: 'Couture', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: var(--font-size-16);

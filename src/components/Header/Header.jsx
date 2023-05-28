@@ -6,7 +6,6 @@ import loginIcon from '../../assets/images/icons/loginIcon.png';
 import {NavLink} from "react-router-dom";
 import {Nav, Container} from "react-bootstrap";
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 const Header = () => {
     const [showBasic, setShowBasic] = useState(false);
     return (
@@ -17,19 +16,19 @@ const Header = () => {
                     <img src={logo} className="w-75" alt={logo}/>
                 </NavLink>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"   onClick={() => setShowBasic(!showBasic)}  />
-                <Navbar.Collapse  id="basic-navbar-nav"  show={showBasic} >
+                <Navbar.Collapse  id="basic-navbar-nav"  show={showBasic.toString()} >
                     <Nav className="m-auto">
-                                <NavLink className="nav-link active" >About OZ</ NavLink>
-                                <NavLink className="nav-link" to="/">Venues</ NavLink>
-                                <NavLink className="nav-link">Community</ NavLink>
+                                <NavLink className="nav-link active"  to={"/"}>About OZ</ NavLink>
+                                <NavLink className="nav-link" to={"/"}>Venues</ NavLink>
+                                <NavLink className="nav-link" to={"/"}>Community</ NavLink>
                                 <NavLink   className="nav-link" to={"/membership"}>Membership</ NavLink>
-                                <NavLink className="nav-link">F & B</ NavLink>
-                                <NavLink  className="nav-link" >Events</ NavLink>
+                                <NavLink className="nav-link" to={"/"}>F & B</ NavLink>
+                                <NavLink  className="nav-link" to={"/"} >Events</ NavLink>
 
                     </Nav>
                     <div className="d-flex justify-content-end">
                         <NavLink className="nav-link navbar-text mx-4" to={"/contactus"}>inquire</ NavLink>
-                        <NavLink className="nav-link m-auto" to={"/"}>Login<img className="" src={loginIcon}/> </ NavLink>
+                        <NavLink className="nav-link m-auto" to={"/"}>Login<img className="" src={loginIcon} alt="login"/> </ NavLink>
                     </div>
                 </Navbar.Collapse>
             </Container>

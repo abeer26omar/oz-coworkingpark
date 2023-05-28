@@ -37,6 +37,7 @@ const Footer = () => {
                                             <div className="mb-3">
                                                 <h3 className="text-center pb-4">Follow us</h3>
                                                 <div className="d-flex justify-content-between mb-3">
+                                                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                                     <a href="#" target="_blank">
                                                         <img src={facebookWhite} alt="facebook"/>
                                                     </a>

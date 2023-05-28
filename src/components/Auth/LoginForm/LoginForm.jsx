@@ -11,9 +11,9 @@ import { useNavigate } from 'react-router-dom';
 const SERVER_KEY = 'c04919f13f43b612fff3b76c5d08b2d6';
 
 const LoginForm = () => {
-    function handleJsonData(data) {
-        console.log(data);
-    }
+    // function handleJsonData(data) {
+    //     console.log(data);
+    // }
 
     const [credentials, setCredentials] = useState({
         username: '',
@@ -55,7 +55,7 @@ const LoginForm = () => {
             })
             .catch((error) => {
                 console.log(error);
-                navigate('/individual')
+                navigate('/login')
             });
     };
 

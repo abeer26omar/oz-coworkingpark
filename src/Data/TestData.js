@@ -1949,7 +1949,7 @@ export const testsTypes = [
                     "by_product": "By <a href=\"{product_url}\">{product_name}</a>, posted {product_time}, in <a href=\"{product_category}\">{product_category_name}</a>",
                     "payment_declined": "Payment declined, please try again later.",
                     "c_payment": "Confirming payment, please wait..",
-                    "earn_users": "Earn up to ${amount} for each user your refer to us !",
+                    "earn_users": 'Earn up to ${amount} for each user your refer to us !',
                     "earn_users_pro": "Earn up to ${amount} for each user your refer to us and will subscribe to any of our pro packages.",
                     "my_affiliates": "My Affiliates",
                     "my_balance": "Current balance",

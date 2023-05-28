@@ -2,14 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import axios from 'axios';
 import Slider from "react-slick";
-
-// import Images
-import card1 from '../../../assets/images/card1.png'
-
 import MembershipTypesList from "./MembershipTypesList";
-import {memberTypes} from "../../../Data/MemberTypesData";
-import FormData from "form-data";
-import MembershipOptions from "../MembershipOptions/MembershipOptions";
 const MembershipTypes = () => {
     const [listMembershipsTypes, setListMembershipsTypes] = useState([]);
 
@@ -32,16 +25,16 @@ const MembershipTypes = () => {
     const GetMembershipTypes = () => {
 
         axios(config)
-        .then(function (response) {
-            setListMembershipsTypes(response.data.data);
-            console.log(JSON.stringify(response.data));
-            console.log(response.data.data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+            .then(function (response) {
+                setListMembershipsTypes(response.data.data);
+                console.log(JSON.stringify(response.data));
+                console.log(response.data.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
-};
+    };
     useEffect(()=>{
         GetMembershipTypes();
     },[])
@@ -100,16 +93,6 @@ const MembershipTypes = () => {
     return (
         <>
 
-            {/*<div>*/}
-            {/*    {listMembershipsTypes.map((listMembershipType, index)=>*/}
-            {/*        <div key={index}>*/}
-            {/*            <h1>{listMembershipType.name}</h1>*/}
-            {/*            {console.log(listMembershipType.name)}*/}
-            {/*        </div>*/}
-            {/*    )}*/}
-            {/*</div>*/}
-
-
             {/*// <!--Start Our Membership Types-->*/}
             <section className="membership-types p-60">
                 <Container fluid >
@@ -121,36 +104,17 @@ const MembershipTypes = () => {
                         </Col>
                         <Col lg={12}>
                             <Slider {...settings}>
-                            {listMembershipsTypes.map((listMembershipType, index) => {
-                                const {id, name, logo, link, description} = listMembershipType;
-                                return(
-                                    <div key={index}>
-                                        {listMembershipType.options.map((option, index) => {
-                                            const {price, id, name, logo, type} = option;
-                                            console.log('Price:', price);
-                                            return (
-                                                <>
-                                                    <li key={index}>{price}</li>
-                                                    <li >{type}</li>
-
-
-
-                                                </>
-                                            )
-
-                                        })}
-
-                                    <MembershipTypesList  id={id} name={name} logo={logo} link={link} description={description}/>
-                                    </div>
-                                )
-
-                            }
-
-                            )}
+                                {listMembershipsTypes.map((listMembershipType, index) => {
+                                        const {id, name, logo, link, description} = listMembershipType;
+                                        return(
+                                            <div key={index}>
+                                                <MembershipTypesList  id={id} name={name} logo={logo} link={link} description={description}/>
+                                            </div>
+                                        )
+                                    }
+                                )}
                             </Slider>
-                            <div>
 
-                            </div>
                         </Col>
                     </Row>
                 </Container>

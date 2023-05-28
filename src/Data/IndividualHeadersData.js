@@ -1,4 +1,3 @@
-import office from '../assets/images/office.png';
 export const individualHeaderss = [
     {
         id:1,

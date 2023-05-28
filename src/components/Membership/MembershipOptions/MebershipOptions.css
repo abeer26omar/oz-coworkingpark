@@ -1,3 +1,16 @@
+.Individual-types .card{
+    box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;
+    border: none;
+}
+.Individual-types .card-img-top{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.Individual-types .card-title{
+    font-weight: var(--font-weight-bold);
+}
+/*END*/
+
 /*Start Become a member Section*/
 .become-member .large-head{
     line-height: 79px;
@@ -26,7 +39,7 @@
     line-height: 49px;
 }
 /*END*/
-/*Start membership types*/
+/*Start membership one option */
 .membership-types .large-head{
     font-size: var(--font-size-41);
     margin-bottom: 10px;

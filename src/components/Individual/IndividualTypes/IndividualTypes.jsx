@@ -1,4 +1,3 @@
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import React from 'react';
 import {individualTypes} from "../../../Data/IndividualsTypesData";
 import IndividualTypesList from "./IndividualTypesList";
