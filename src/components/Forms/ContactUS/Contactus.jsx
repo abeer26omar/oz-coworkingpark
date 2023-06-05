@@ -4,8 +4,10 @@ import {Col, Container, Row} from "react-bootstrap";
 import './Contactus.css';
 import axios from 'axios';
 import FormData from "form-data";
+import {Login} from "../../../apis/auth_api/LoginApi";
+import {inquiry} from "../../../apis/Api";
 const Contactus = () => {
-    const[formData,setFormData] = useState({
+    const [formState, setFormState]= useState({
         first_name:'',
         last_name:'',
         email:'',
@@ -17,76 +19,28 @@ const Contactus = () => {
 
     const handleInputChange = event => {
         const{name, value} = event.target;
-        setFormData({...formData,[name]: value});
+        setFormState({...formState,[name]: value});
     }
 
-    // let axios = require('axios');
-    // let FormData = require('form-data');
-    // let data = new FormData();
-    // data.append('server_key', 'c04919f13f43b612fff3b76c5d08b2d6');
-    // data.append('first_name', 'Ahmed N.');
-    // data.append('last_name', 'Galal');
-    // data.append('email', 'qbizns@yahoo.com');
-    // data.append('phone', '01002948785');
-    // data.append('user_type', 'company');
-    // data.append('inquiry_type', 'one');
-    // data.append('location_id', '1');
-
-
-
-
-    // const handleSubmit = event => {
-    //     event.preventDefault();
-    //     axios(config)
-    //         .then(response=> {
-    //             setFormData(response)
-    //             console.log(response);
-    //         })
-    //         .catch(error => {
-    //             console.error(error);
-    //         })
-    // }
-
-    const data = new FormData();
-    data.append('server_key', 'c04919f13f43b612fff3b76c5d08b2d6');
-    data.append('first_name', formData.first_name);
-    data.append('last_name', formData.last_name);
-    data.append('email', formData.email);
-    data.append('phone', formData.phone);
-    data.append('user_type', formData.user_type);
-    data.append('inquiry_type', formData.inquiry_type);
-    data.append('location_id', formData.location_id);
-
-    let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: 'https://modest-banzai.78-141-219-156.plesk.page/api/inquiry',
-        data : data,
-    };
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
-        axios(config)
-            .then(response => {
-                // handle successful response
-                setFormData(response.data);
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-                // handle error
+        try {
+            const result = await inquiry(formState);
+            console.log(result);
+            setFormState({
+                first_name:'',
+                last_name:'',
+                email:'',
+                phone:'',
+                user_type:'',
+                inquiry_type:'',
+                location_id:''
             });
+        } catch (error) {
+            console.log(error);
+        }
     };
-
-
-    //
-    // axios(config)
-    //     .then(function (response) {
-    //         console.log(JSON.stringify(response.data));
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     });
-
+    const apiUrl = process.env.REACT_APP_API_URL;
 
 
     return (
@@ -101,6 +55,7 @@ const Contactus = () => {
                             <div className="head-content-left-shape text-left pb-3 position-relative">
                                 <h1 className="hand-write">Lets Connect,</h1>
                                 <h3 className="bold-head">Schedule a tour, say hello</h3>
+                                <p>The API URL is: {apiUrl}</p>
                             </div>
                         </Col>
                         <Col lg={6}>
@@ -114,7 +69,7 @@ const Contactus = () => {
                                                        placeholder="Enter Your First Name"
                                                        name="first_name"
                                                        id='first_name'
-                                                       value={formData.first_name} onChange={handleInputChange}
+                                                       value={formState.first_name} onChange={handleInputChange}
                                                        required/>
                                             </div>
                                         </Col>
@@ -126,7 +81,7 @@ const Contactus = () => {
                                                        placeholder="Enter Your Last Name"
                                                        name="last_name"
                                                        id='last_name'
-                                                       value={formData.last_name} onChange={handleInputChange}
+                                                       value={formState.last_name} onChange={handleInputChange}
                                                        required/>
                                             </div>
                                         </Col>
@@ -138,7 +93,7 @@ const Contactus = () => {
                                                        placeholder="Enter Your Email"
                                                        name="email"
                                                        id='email'
-                                                       value={formData.email} onChange={handleInputChange}
+                                                       value={formState.email} onChange={handleInputChange}
                                                        required/>
                                             </div>
                                         </Col>
@@ -150,14 +105,14 @@ const Contactus = () => {
                                                        placeholder="Phone No."
                                                        name="phone"
                                                        id='phone'
-                                                       value={formData.phone} onChange={handleInputChange}
+                                                       value={formState.phone} onChange={handleInputChange}
                                                        required/>
                                             </div>
                                         </Col>
                                         <Col lg={12}>
                                             <div className="form__group field my-3">
                                                 <label htmlFor="phone" className="form__label">User Type</label>
-                                                <select value={formData.user_type} onChange={handleInputChange} className="form__field placeholderSelect"  required>
+                                                <select value={formState.user_type} onChange={handleInputChange} className="form__field placeholderSelect"  required>
                                                     <option disabled className="" selected>Enter user type</option>
                                                     <option value="company">company</option>
                                                     <option value="individual">individual</option>
@@ -169,7 +124,7 @@ const Contactus = () => {
                                         <Col lg={12}>
                                             <div className="form__group field my-3">
                                                 <label  className="form__label">Inquiry Type</label>
-                                                <select value={formData.inquiry_type} onChange={handleInputChange} className="form__field placeholderSelect" required>
+                                                <select value={formState.inquiry_type} onChange={handleInputChange} className="form__field placeholderSelect" required>
                                                     <option disabled selected>Choose Service</option>
                                                     <option value="one">One</option>
                                                     <option value="two">Two</option>
@@ -180,7 +135,7 @@ const Contactus = () => {
                                         <Col lg={12}>
                                             <div className="form__group field my-3">
                                                 <label htmlFor="phone" className="form__label">Locations</label>
-                                                <select value={formData.location_id} onChange={handleInputChange} className="form__field placeholderSelect" required>
+                                                <select value={formState.location_id} onChange={handleInputChange} className="form__field placeholderSelect" required>
                                                     <option disabled selected>Choose Location</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>

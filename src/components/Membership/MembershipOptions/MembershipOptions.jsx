@@ -9,37 +9,53 @@ import vectorRight from "../../../assets/images/VectorRight.png";
 import MembershipOptionsHeaderList from "./MembershipOptionsHeaderList";
 import MembershipCompared from "../MembershipsCompared/MembershipCompared";
 import Services from "../Services/Services";
+import {getListMembershipTypes, getMembershipOptions} from "../../../apis/Api";
 const MembershipOptions = () => {
     const { id } = useParams();
 
     const [listMembershipsTypes, setListMembershipsTypes] = useState([]);
 
     // List Membership types API
-    let axios = require("axios");
-    let FormData = require("form-data");
-    let data = new FormData();
-    data.append("server_key", "c04919f13f43b612fff3b76c5d08b2d6");
+    // let axios = require("axios");
+    // let FormData = require("form-data");
+    // let data = new FormData();
+    // data.append("server_key", "c04919f13f43b612fff3b76c5d08b2d6");
+    //
+    // let config = {
+    //     method: "post",
+    //     maxBodyLength: Infinity,
+    //     url: `https://modest-banzai.78-141-219-156.plesk.page/api/list_membership_types?access_token=10b8d16368bdf5888ad890c73536ac25e00004c2e742813a131a99c13ae81d6bc257b2a935584948bdc8b08ca966b6626e1f186f03c9a060&id=${id}`,
+    //     data: data,
+    // };
 
-    let config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        url: `https://modest-banzai.78-141-219-156.plesk.page/api/list_membership_types?access_token=10b8d16368bdf5888ad890c73536ac25e00004c2e742813a131a99c13ae81d6bc257b2a935584948bdc8b08ca966b6626e1f186f03c9a060&id=${id}`,        data: data,
-    };
+    // const GetOptionTypes = () => {
+    //     axios(config)
+    //         .then(function (response) {
+    //             setListMembershipsTypes(response.data.data);
+    //             console.log(JSON.stringify(response.data));
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         });
+    // };
+    //
+    // useEffect(() => {
+    //     GetOptionTypes();
+    // }, [id]);
 
-    const GetOptionTypes = () => {
-        axios(config)
-            .then(function (response) {
-                setListMembershipsTypes(response.data.data);
-                console.log(JSON.stringify(response.data));
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
 
-    useEffect(() => {
-        GetOptionTypes();
-    }, [id]);
+    useEffect(()=>{
+        const fetchData = async () => {
+            const result = await getMembershipOptions();
+            setListMembershipsTypes(result);
+            console.log(result);
+        };
+        fetchData();
+    },[id]);
+
+
+
+
 
     // const filteredOptions = listMembershipsTypes.flatMap((type) => type.options.filter((option) => option.id === `${id}`));
     // const filteredOptions = listMembershipsTypes.flatMap(function(type) {

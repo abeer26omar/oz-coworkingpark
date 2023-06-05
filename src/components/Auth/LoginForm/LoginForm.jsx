@@ -5,62 +5,35 @@ import vector from '../../../assets/images/Vector.png';
 import facebook from '../../../assets/images/icons/facebook.png';
 import google from '../../../assets/images/icons/google.png';
 import linkedin from '../../../assets/images/icons/linkedin.png';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
-const SERVER_KEY = 'c04919f13f43b612fff3b76c5d08b2d6';
+import { Login } from '../../../apis/auth_api/LoginApi';
 
 const LoginForm = () => {
-    // function handleJsonData(data) {
-    //     console.log(data);
-    // }
-
     const [credentials, setCredentials] = useState({
         username: '',
-        password: '',
+        password: ''
     });
 
     const navigate = useNavigate();
-
-    let axios = require('axios');
-    let FormData = require('form-data');
-    let data = new FormData();
-    data.append('server_key', 'c04919f13f43b612fff3b76c5d08b2d6');
-    data.append('username', 'demo@demo.com');
-    data.append('password', 'pass');
-
-
-    let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: 'https://modest-banzai.78-141-219-156.plesk.page/api/auth',
-        // headers: {
-        //     ...data.getHeaders()
-        // },
-        data : data
-    };
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setCredentials({ ...credentials, [name]: value });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        axios(config)
-            .then((response) => {
-                setCredentials(response.data);
-                console.log(response.data);
-                navigate('/membership')
-            })
-            .catch((error) => {
-                console.log(error);
-                navigate('/login')
-            });
+
+        try {
+            const result = await Login(credentials.username, credentials.password);
+            setCredentials(result);
+            console.log(result)
+            navigate('/membership');
+        } catch (error) {
+            console.log(error);
+            navigate('/');
+        }
     };
-
-
-
 
     return (
         <>
@@ -142,13 +115,13 @@ const LoginForm = () => {
 
                                 <div className="py-3 log-social text-center">
                                     <a href="src/components/Auth/Login/LoginForm#" target="_blank">
-                                        <img src={facebook} alt="Facebook"/>
+                                        <img src={facebook} alt="Facebook" />
                                     </a>
                                     <a href="src/components/Auth/Login/LoginForm#" target="_blank">
-                                        <img src={google} alt="Google"/>
+                                        <img src={google} alt="Google" />
                                     </a>
                                     <a href="src/components/Auth/Login/LoginForm#" target="_blank">
-                                        <img src={linkedin} alt="LinkedIn"/>
+                                        <img src={linkedin} alt="LinkedIn" />
                                     </a>
                                 </div>
                             </div>
