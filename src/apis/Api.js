@@ -4,6 +4,29 @@ import FormData from 'form-data';
 import {useParams} from "react-router-dom";
 
 // MembershipTypes API
+// export const getListMembershipTypes = async () => {
+//     try {
+//         const formData = new FormData();
+//         formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+//
+//         const config = {
+//             method: 'post',
+//             // url: 'https://modest-banzai.78-141-219-156.plesk.page/api/list_membership_types?access_token=10b8d16368bdf5888ad890c73536ac25e00004c2e742813a131a99c13ae81d6bc257b2a935584948bdc8b08ca966b6626e1f186f03c9a060',
+//             url:`${process.env.REACT_APP_API_URL}/api/list_membership_types?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`,
+//             data: formData,
+//             maxContentLength: Infinity,
+//             maxBodyLength: Infinity
+//         };
+//
+//         const response = await axios(config);
+//         console.log(response.data);
+//         return response.data;
+//     } catch (error) {
+//         console.error(error);
+//     }
+// };
+
+
 export const getListMembershipTypes = async () => {
     try {
         const formData = new FormData();
@@ -11,19 +34,27 @@ export const getListMembershipTypes = async () => {
 
         const config = {
             method: 'post',
-            // url: 'https://modest-banzai.78-141-219-156.plesk.page/api/list_membership_types?access_token=10b8d16368bdf5888ad890c73536ac25e00004c2e742813a131a99c13ae81d6bc257b2a935584948bdc8b08ca966b6626e1f186f03c9a060',
-           url:`${process.env.REACT_APP_API_URL}/api/list_membership_types?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`,
+            url: `${process.env.REACT_APP_API_URL}/api/list_membership_types?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`,
             data: formData,
             maxContentLength: Infinity,
-            maxBodyLength: Infinity
+            maxBodyLength: Infinity,
+            timeout: 10000,
         };
 
         const response = await axios(config);
-        return response.data.data;
+        if (response.data.status === 'success') {
+            return response.data.data.options;
+        } else {
+            console.error(response.data.message);
+            return [];
+        }
     } catch (error) {
         console.error(error);
+        return [];
     }
 };
+
+
 
 export const getMembershipOptions = async (id) => {
     try {

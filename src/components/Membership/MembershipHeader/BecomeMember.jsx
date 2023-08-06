@@ -1,7 +1,6 @@
 import React from 'react';
 import './BecomeMember.css';
 import {Col, Container, Figure, Row} from "react-bootstrap";
-
 // Import Images
 import workingSpace from '../../../assets/images/workingSpace.png';
 import vectorRight from '../../../assets/images/VectorRight.png';
@@ -23,7 +22,9 @@ const BecomeMember = () => {
                         <Col lg={5} sm={12}>
                             <Figure className="figure d-flex position-relative">
                                 <span className=" caption-rotate">Membership</span>
-                                <img src={workingSpace} className="figure-img img-fluid" alt="Working Space"/>
+                                {/*<LazyLoadImage src={workingSpace} className="figure-img img-fluid" alt="Working Space" effect="blur"/>*/}
+                                    <img src={workingSpace} className="figure-img img-fluid" alt="Working Space" loading=""/>
+
                             </Figure>
                         </Col>
                     </Row>

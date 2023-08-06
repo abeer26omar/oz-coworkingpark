@@ -18,4 +18,10 @@ export const locationsData = [
         img:  office
         // link:
     },
+    {
+        id:4,
+        address:"Giza - sheikh Zayed",
+        img:  office
+        // link:
+    },
 ];

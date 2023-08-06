@@ -2,10 +2,10 @@
 .locations .location-slider{
     font-family: questrial, sans-serif;
     font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-16);
     line-height: 130%;
-    color: #000000;
+    color: var(--primary-color);
 }
 .locations .slick-dots{
     text-align: end;
@@ -13,6 +13,22 @@
 .locations .large-head{
     font-size: var(--font-size-41);
 }
+.box-locations{
+    margin: 25px auto;
+}
+
 .locations .slick-slide img {
-    width: 80%;
+    width: 100%;
+}
+ .locations .slick-slide{
+    margin: auto !important;
+}
+.locations .slick-dots{
+    position: absolute;
+    bottom: 36px;
+    display: block;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    right: 0;
 }

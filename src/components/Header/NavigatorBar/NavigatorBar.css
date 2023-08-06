@@ -1,0 +1,13 @@
+.navigator{
+    padding: 38px 42px;
+}
+.title-name{
+    color: var(--primary-color);
+    font-family: Couture;
+    font-size: var(--font-size-52);
+    font-style: normal;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0;
+    line-height: 120%;
+    text-transform: uppercase;
+}

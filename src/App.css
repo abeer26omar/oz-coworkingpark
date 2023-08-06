@@ -10,6 +10,8 @@
     8-Form Fields
     9-Headers
     10-Sliders
+    11-borders
+    12-commen classes
 */
 html, body{
   background-color: var(--neturals-color1);
@@ -87,10 +89,25 @@ a{
 .p-120{
   padding: 120px 0;
 }
+.p-20{
+  padding: 20px 0;
+}
+.px-60{
+  padding: 0 60px;
+}
 /*******************************************/
+
+/***************Margin Size ********************/
+.m-35{
+  margin: 35px 0;
+}
 /*******************************************/
 
 /******************Buttons*********************************/
+.btn{
+  --bs-btn-border-radius:0 ;
+
+}
 /*outLine Button*/
 .button-one-outline {
   align-items: center;
@@ -141,6 +158,32 @@ a{
   color: rgba(0, 0, 0, 0.65);
   transform: translateY(0);
 }
+
+.button-outLine {
+  border: 1px solid;
+  border-color: var(--neturals-color2);
+  color: #fff;
+  margin:auto 32px;
+  height: 48px;
+  width: 192px;
+  font-family: Questrial;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%;
+  padding: 14px;
+}
+.button-outLine:hover{
+  cursor: pointer;
+  background-color: var(--neturals-color2);
+  color: var(--primary-color);
+}
+.btn-bg-white{
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  margin: auto;
+}
+
 /******************************************/
 /******************************************/
 
@@ -440,3 +483,72 @@ a{
   width: 100px;
   top: -60px;
 }
+/*End*/
+/*11-Borders*/
+.border-of-section{
+  border-top: 1.5px solid #BDBDBD;
+  border-bottom: 1.5px solid #BDBDBD;
+  background: #F0F2F4;
+}
+.border-left{
+  border-left: 1.5px solid var(--secondary-color2)
+}
+.border-right{
+  border-right: 1.5px solid var(--secondary-color2)
+}
+/*End*/
+/*Common Classes*/
+.head-of-section{
+  border-top: 1.5px solid #BDBDBD;
+  background: #F0F2F4;
+  margin-top: 35px;
+}
+.h2-text {
+  color: var(--primary-color);
+  font-family: goldenHopes;
+  font-size: var(--font-size-83);
+  font-style: normal;
+  font-weight: var(--font-weight-regular);
+  left: 0;
+  letter-spacing: 0;
+  line-height: 120%;
+  text-align: center;
+  /*white-space: nowrap;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 20px 0;
+}
+
+.box-content .h2-text-box {
+  color: var(--primary-color);
+  font-family: Couture;
+  font-size: var(--font-size-52);
+  font-style: normal;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: 0;
+  line-height: 120%;
+  /*white-space: nowrap;*/
+  margin-bottom: 16px;
+}
+
+.box-content .p-text-box {
+  color: var(--primary-color);
+  font-family: Questrial;
+  font-size: var(--font-size-16);
+  font-style: normal;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: 0;
+  line-height: 130%;
+  opacity: 0.7;
+  text-align: justify;
+  margin-bottom: 32px;
+}
+.image-box{
+  margin: 32px 0;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+

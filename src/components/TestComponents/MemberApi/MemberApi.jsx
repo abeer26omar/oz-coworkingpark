@@ -51,7 +51,7 @@ const MemberApi = () => {
 
                     console.log(data.data.config.pro_packages['1'].id);
                     console.log(data.data.config.bank_transfer_note);
-                    console.log(data)
+                    console.log(data);
 
                 }
 
