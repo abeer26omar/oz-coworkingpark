@@ -1,0 +1,40 @@
+.monoBlock-white {
+    background-color: #F0F2F4;
+    padding: 140px 0;
+}
+
+.monoBlock-white .text-h1 {
+    color: var(--primary-color);
+    font-family: Couture;
+    font-size: var(--font-size-66);
+    font-style: normal;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0;
+    line-height: 120%;
+    text-align: center;
+    white-space: nowrap;
+    margin-bottom: 32px;
+}
+
+.monoBlock-white .text-p {
+    color: var(--primary-color);
+    font-family: Questrial;
+    font-size: var(--font-size-16);
+    font-style: normal;
+    font-weight: var(--font-weight-regular);
+    letter-spacing: 0;
+    line-height: 130%;
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+/*.button-outLine {*/
+/*    background-color: var(--primary-color);*/
+/*    color: var(--neturals-color2);*/
+/*}*/
+
+/*.button-outLine:hover {*/
+/*    cursor: pointer;*/
+/*    background-color: var(--neturals-color2);*/
+/*    color: var(--primary-color);*/
+/*}*/

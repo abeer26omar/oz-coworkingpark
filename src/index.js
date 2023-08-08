@@ -5,14 +5,16 @@ import reportWebVitals from './reportWebVitals';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './index.css';
-
+import 'masonry-layout/masonry';
 
 import {BrowserRouter} from "react-router-dom";
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+    <BrowserRouter>
+        <App/>
+    </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

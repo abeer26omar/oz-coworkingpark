@@ -1,3 +1,7 @@
-.contactus form{
+.contactus form {
     padding: 0 75px;
+}
+
+.contactus .btn-bg-white {
+    background-color: #fff;
 }

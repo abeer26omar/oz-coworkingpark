@@ -16,7 +16,6 @@ const NavigatorBar = () => {
                             <NavLink className="nav-link links-margin" to={"/"}>News Feed</NavLink>
                             <NavLink className="nav-link links-margin" to={"/"}>Events</NavLink>
                             <NavLink className="nav-link links-margin" to={"/"}>Gallery</NavLink>
-
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

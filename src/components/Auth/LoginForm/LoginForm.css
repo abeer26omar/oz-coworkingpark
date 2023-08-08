@@ -1,6 +1,10 @@
 /*LOGIN FORM STYLE*/
-.login-card form{
+.login-card form {
     padding: 0 75px !important;
+}
+
+.login .btn-bg-white {
+    background-color: #FFFFFF;
 }
 
 /*END*/
