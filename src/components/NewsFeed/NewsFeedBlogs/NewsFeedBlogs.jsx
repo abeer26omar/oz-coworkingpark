@@ -1,71 +1,30 @@
 import React from 'react';
 import './NewsFeedBlog.css';
-import {MasonryGrid} from "@egjs/react-grid";
-import Card from "react-bootstrap/Card";
-import cardLayout from '../../../assets/images/cardlayout.png';
-
-import cardLayout2 from '../../../assets/images/cardlayout2.png';
+import Masonry from "react-responsive-masonry";
+import {NewsFeedData} from "../../../Data/NewsFeedData";
+import NewsFeedBlogList from "./NewsFeedBlogList";
 
 const NewsFeedBlogs = () => {
-    const columnSizeRatio = window.innerWidth / 1000;
+
+
     return (
+        <section className="feed">
+            <div className="container-fluid">
+                <Masonry columnsCount={4} gutter="30px" className="newsfeeds ">
 
-        <MasonryGrid
-            className="container-fluid"
-            gap={200}
-            defaultDirection={"center"}
-            align={""}
-            column={4}
-            columnSize={296}
-            columnSizeRatio={columnSizeRatio}
-            onRenderComplete={e => {
-                console.log(e);
-            }}
-        >
+                    {NewsFeedData.map((feed, index) => {
+                        const {id, text, title, img, linkText, category} = feed;
+                        return (
+                            <div key={index}>
+                                <NewsFeedBlogList id={id} title={title} img={img} text={text} linkText={linkText}
+                                                  category={category}/>
+                            </div>
+                        )
+                    })}
 
-            <div className={"item"}>
-                <Card className="">
-                    <Card.Img variant="top" src={cardLayout} className="rounded-0" title="test"/>
-                    <Card.Body>
-                        <Card.Title>Lorem Ipsum</Card.Title>
-                        <Card.Text>Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod</Card.Text>
-                        <a className="btn button-outLine btn-bg-white">Public Event</a>
-                    </Card.Body>
-                </Card>
+                </Masonry>
             </div>
-            <div className={"item"}>
-                <Card className="">
-                    <Card.Img variant="top" src={cardLayout} className="rounded-0" title="test"/>
-                    <Card.Body>
-                        <Card.Title>Lorem Ipsum</Card.Title>
-                        <Card.Text>Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod</Card.Text>
-                        <a className="btn button-outLine btn-bg-white">Public Event</a>
-                    </Card.Body>
-                </Card>
-            </div>
-            <div className={"item"}>
-                <Card className="">
-                    <Card.Img variant="top" src={cardLayout2} className="rounded-0" title="test"/>
-                    <Card.Body>
-                        <Card.Title>Lorem Ipsum</Card.Title>
-                        <Card.Text>Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod</Card.Text>
-                        <a className="btn button-outLine btn-bg-white">Public Event</a>
-                    </Card.Body>
-                </Card>
-            </div>
-            <div className={"item"}>
-                <Card className="">
-                    <Card.Img variant="top" src={cardLayout} className="rounded-0" title="test"/>
-                    <Card.Body>
-                        <Card.Title>Lorem Ipsum</Card.Title>
-                        <Card.Text>Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod</Card.Text>
-                        <a className="btn button-outLine btn-bg-white">Public Event</a>
-                    </Card.Body>
-                </Card>
-            </div>
-
-
-        </MasonryGrid>
+        </section>
 
 
     )
