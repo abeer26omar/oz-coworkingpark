@@ -11,7 +11,8 @@
     9-Headers
     10-Sliders
     11-borders
-    12-commen classes
+    12-common classes
+    13-Card Carousel Style
 */
 html, body {
     background-color: var(--neturals-color1);
@@ -73,6 +74,7 @@ a {
     font-family: goldenHopes;
     src: url(assets/fonts/golden-hopes/golden-hopes.otf);
 }
+
 
 @font-face {
     font-family: couture;
@@ -195,6 +197,12 @@ a {
     border-color: var(--primary-color);
     color: var(--primary-color);
     margin: auto;
+}
+
+.btn-bg-white:hover {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--neturals-color2);
 }
 
 /******************************************/
@@ -541,6 +549,10 @@ a {
     border-right: 1.5px solid var(--secondary-color2)
 }
 
+.border-bottom {
+    border-bottom: 1.5px solid var(--secondary-color2);
+}
+
 /*End*/
 /*Common Classes*/
 .head-of-section {
@@ -597,5 +609,49 @@ a {
     padding-left: 32px;
     padding-right: 32px;
 }
+
+/*END*/
+/*13-Cards slider*/
+
+.slider-card {
+    border: none !important;
+    background-color: transparent !important;
+}
+
+.slider-card .card-title {
+    font-family: Couture;
+    font-size: var(--font-size-26);
+    font-style: normal;
+    font-weight: var(--font-weight-bold);
+    line-height: 120%;
+    margin-bottom: 8px;
+}
+
+.slider-card .card-text {
+    color: var(--primary-color);
+    font-family: Questrial;
+    font-size: var(--font-size-16);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 20.8px */
+    opacity: 0.7;
+    margin-bottom: 16px;
+}
+
+.slider-card .card-img-top {
+    width: 100%;
+    height: auto;
+}
+
+.slider-card .card-category {
+    color: var(--primary-color);
+    text-align: center;
+    font-family: Couture;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: var(--font-weight-regular);
+    margin-bottom: 16px;
+}
+
 
 
