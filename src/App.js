@@ -12,21 +12,38 @@ import Joinus from "./components/Forms/JoinUS/Joinus";
 import MembershipSingleOption from "./components/Membership/MembershipOptions/MembershipSingleOption";
 import Home from "./pages/Home";
 import Community from "./pages/Community";
+import NewsFeed from "./pages/NewsFeed";
+import SingleNewFeed from "./components/NewsFeed/NewsFeedBlogs/SingleNewFeed/SingleNewFeed";
+import CommunityEventsExplore
+    from "./components/Community/CommunityEvents/CommunityEventsExplore/CommunityEventsExplore";
+import CommunityEventsDetails
+    from "./components/Community/CommunityEvents/CommunityEventsDetails/CommunityEventsDetails";
 
 function App() {
     return (
         <>
             <Header/>
             <Routes>
+                {/*----------------------Start Single Pages Routes------------------------------*/}
                 <Route path="/" element={<Home/>}/>
+                <Route path="/joinus" element={<Joinus/>}/>
+                <Route path="/contactus" element={<ContactUs/>}/>
+                {/*----------------------End Single Pages Routes---------------------------------*/}
+                {/*----------------------Start Authentication Routes-----------------------------*/}
                 <Route path="/login" element={<Login/>}/>
+                {/*----------------------END Authentication Routes-------------------------------*/}
+                {/*----------------------Start Membership Routes---------------------------------*/}
                 <Route path="/membership" element={<Membership/>}/>
                 <Route path="/membership/:id" element={<MembershipOptions/>}/>
-                <Route path="/contactus" element={<ContactUs/>}/>
                 <Route path="/singleMember/:id" element={<MembershipSingleOption/>}/>
-                <Route path="/joinus" element={<Joinus/>}/>
+                {/*----------------------End Membership Routes-----------------------------------*/}
+                {/*----------------------Start Community Routes----------------------------------*/}
                 <Route path="/community" element={<Community/>}/>
-                {/*<Route path="/newsfeed" element={<NewsFeed />} />*/}
+                <Route path="/events" element={<CommunityEventsExplore/>}/>
+                <Route path="/events/communityEventsDetails" element={<CommunityEventsDetails/>}/>
+                <Route path="/community/newsfeed" element={<NewsFeed/>}/>
+                <Route path="/community/newsfeed/singleFeed" element={<SingleNewFeed/>}/>
+                {/*----------------------End Community Routes-------------------------------------*/}
             </Routes>
             <Footer/>
         </>
