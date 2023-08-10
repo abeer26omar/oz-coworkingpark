@@ -4,9 +4,10 @@ import vectorRight from '../../../assets/images/VectorRight.png';
 import './Individual.css';
 import Slider from "react-slick";
 import IndividualHeaderList from "./IndividualHeaderList";
-import { individualHeaderss} from "../../../Data/IndividualHeadersData";
+import {individualHeaderss} from "../../../Data/IndividualHeadersData";
+
 const IndividualHeader = () => {
-    const  settings = {
+    const settings = {
         dots: true,
         infinite: true,
         speed: 300,
@@ -15,6 +16,7 @@ const IndividualHeader = () => {
         arrows: false,
         autoplay: true,
         autoplaySpeed: 3000,
+        lazyLoad: true,
     }
     return (
         <>
@@ -23,9 +25,9 @@ const IndividualHeader = () => {
                     <Row>
                         <Col lg={12} className="p-0 ">
                             <Slider {...settings} className="bg-sliderImage background-cover">
-                                {individualHeaderss.map((individualHeader,index)=>{
+                                {individualHeaderss.map((individualHeader, index) => {
                                     const {id, title, head, text} = individualHeader;
-                                    return(
+                                    return (
                                         <IndividualHeaderList id={id} head={head} text={text} title={title}/>
                                     )
                                 })}

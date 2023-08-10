@@ -3,11 +3,11 @@ import {Col, Container, Row} from "react-bootstrap";
 import vectorRight from '../../../assets/images/VectorRight.png';
 import './Membership.css';
 import Slider from "react-slick";
-import IndividualHeaderList from "./IndividualHeaderList";
 import {individualHeaderss} from "../../../Data/IndividualHeadersData";
 import MembershipOptionsHeaderList from "./MembershipOptionsHeaderList";
+
 const MembershipOptionsHeader = () => {
-    const  settings = {
+    const settings = {
         dots: true,
         infinite: true,
         speed: 300,
@@ -16,6 +16,7 @@ const MembershipOptionsHeader = () => {
         arrows: false,
         autoplay: true,
         autoplaySpeed: 3000,
+        lazyLoad: true,
     }
     return (
         <>
@@ -24,9 +25,9 @@ const MembershipOptionsHeader = () => {
                     <Row>
                         <Col lg={12} className="p-0 ">
                             <Slider {...settings} className="bg-sliderImage background-cover">
-                                {individualHeaderss.map((individualHeader,index)=>{
+                                {individualHeaderss.map((individualHeader, index) => {
                                     const {id, title, head, text} = individualHeader;
-                                    return(
+                                    return (
                                         <MembershipOptionsHeaderList id={id} head={head} text={text} title={title}/>
                                     )
                                 })}
