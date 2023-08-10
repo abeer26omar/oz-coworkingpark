@@ -5,6 +5,7 @@
 
 .login .btn-bg-white {
     background-color: #FFFFFF;
+    border-radius: 0;
 }
 
 /*END*/

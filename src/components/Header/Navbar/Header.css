@@ -4,13 +4,18 @@
     padding: 0;
 }
 
-.nav-link {
+.nav-link, .nav-link-two {
     color: var(--primary-color);
     font-family: couture, sans-serif;
     font-size: var(--font-size-13);
     font-weight: 400;
     letter-spacing: 1px;
     text-transform: capitalize;
+}
+
+
+.navbar-nav .nav-link.active {
+    border-bottom: 1px solid var(--primary-color);
 }
 
 .nav-link:hover {
@@ -40,7 +45,6 @@
 .sun-border {
     margin-left: 14px;
     margin-right: 14px;
-
 }
 
 .links-margin {
@@ -49,9 +53,13 @@
     padding-left: 0 !important;
 }
 
+.sticky-top {
+    background: var(--neturals-color1);
+}
+
 .title-name {
     color: var(--primary-color);
-    font-family: Couture;
+    font-family: goldenHopes;
     font-size: var(--font-size-52);
     font-style: normal;
     font-weight: var(--font-weight-bold);
