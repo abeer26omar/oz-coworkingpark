@@ -1,8 +1,9 @@
-.monoBlock{
+.monoBlock {
     background-color: #000000;
     padding: 140px 0;
 }
-.text-h1{
+
+.text-h1 {
     color: var(--neturals-color1);
     font-family: Couture;
     font-size: var(--font-size-66);
@@ -15,7 +16,7 @@
     margin-bottom: 32px;
 }
 
-.text-p{
+.text-p {
     color: var(--neturals-color1);
     font-family: Questrial;
     font-size: var(--font-size-16);
@@ -27,8 +28,8 @@
     margin-bottom: 48px;
 }
 
-.button-outLine:hover{
-    cursor: pointer;
-    background-color: var(--neturals-color2);
-    color: var(--primary-color);
-}
+/*.button-outLine:hover{*/
+/*    cursor: pointer;*/
+/*    background-color: var(--neturals-color2);*/
+/*    color: var(--primary-color);*/
+/*}*/
