@@ -1,14 +1,8 @@
 import React from 'react';
-import {Col, Container, Row} from "react-bootstrap";
 import './Locations.css'
 import Slider from "react-slick";
 import LocationsList from "./LocationsList";
 import {locationsData} from "../../Data/LocationsData";
-import aminites from "../../assets/images/aminites.png";
-import alarm from "../../assets/images/icons/Alarm.svg";
-import hand from "../../assets/images/icons/Hand Stars.svg";
-import gym from "../../assets/images/icons/Dumbbell Large.svg";
-import user from "../../assets/images/icons/Users.svg";
 
 const Locations = () => {
     const settings = {
@@ -21,6 +15,7 @@ const Locations = () => {
         arrows: false,
         autoplay: true,
         autoplaySpeed: 3000,
+        lazyLoad: true
     }
     return (
         <>
@@ -76,21 +71,24 @@ const Locations = () => {
                             <div className="box-content px-60">
                                 <h2 className="h2-text-box">Locations</h2>
                                 <p className="p-text-box">
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur
-                                    dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor
-                                    sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing eliteiusmod
+                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
+                                    amet, consectetur
+                                    dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit
+                                    eiusmod Lorem ipsum dolor
+                                    sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur
+                                    dipiscing eliteiusmod
                                 </p>
                                 <a href="#" className="btn button-outLine btn-bg-white">Explore</a>
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left ">
                             <Slider {...settings}>
-                                {locationsData.map((location, index)=>{
+                                {locationsData.map((location, index) => {
                                     const {id, address, img} = location;
-                                    return(
+                                    return (
                                         <div key={index}>
-                                        <LocationsList id={id} address={address} img={img}/>
-                                            </div>
+                                            <LocationsList id={id} address={address} img={img}/>
+                                        </div>
                                     )
                                 })}
                             </Slider>
