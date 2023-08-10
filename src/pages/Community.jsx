@@ -4,19 +4,21 @@ import CommunityNews from "../components/Community/CommunityNewsFeed/CommunityNe
 import CommunityEvents from "../components/Community/CommunityEvents/CommunityEvents";
 import CommunityGallery from "../components/Community/CommunityGallery/CommunityGallery";
 import NewsLetter from "../components/NewsLetter/NewsLetter";
-import JoinCommunityWhite from "../components/MonoBlocks/JoinCommunityWhite";
+import JoinCommunityWhite from "../components/MonoBlocks/JoinCommunityWhite/JoinCommunityWhite";
+import CommunityPepole from "../components/MonoBlocks/CommunityPepoleBlack/CommunityPepole";
 
 const Community = () => {
-  return (
-    <>
-      <CommunityHeader />
-      <CommunityNews />
-      <CommunityEvents />
-      <CommunityGallery />
-      <JoinCommunityWhite />
-      <NewsLetter />
-    </>
-  );
+    return (
+        <>
+            <CommunityHeader/>
+            <CommunityPepole/>
+            <CommunityNews/>
+            <CommunityEvents/>
+            <CommunityGallery/>
+            <JoinCommunityWhite/>
+            <NewsLetter/>
+        </>
+    );
 };
 
 export default Community;

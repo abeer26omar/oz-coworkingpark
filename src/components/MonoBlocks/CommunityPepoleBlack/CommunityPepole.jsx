@@ -1,15 +1,15 @@
-import React from "react";
-import "./MonoBlocks.css";
+import React from 'react';
+import '../MonoBlocks.css';
 
-const JoinCommunityWhite = () => {
+const CommunityPeople = () => {
     return (
         <>
-            <section className="monoBlock monoBlock-white">
+            <section className="monoBlock ">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="content-block">
-                                <h1 className="text-h1">JOIN OUR COMMUNITY </h1>
+                                <h1 className="text-h1">where like-minded people meet</h1>
                                 <p className="text-p">
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
@@ -18,17 +18,14 @@ const JoinCommunityWhite = () => {
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                 </p>
                             </div>
-                            <div className="buttons d-flex justify-content-center align-items-center">
-                                <a href="#" className="btn button-outLine btn-bg-white">
-                                    Connect
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+
         </>
     );
 };
 
-export default JoinCommunityWhite;
+export default CommunityPeople;

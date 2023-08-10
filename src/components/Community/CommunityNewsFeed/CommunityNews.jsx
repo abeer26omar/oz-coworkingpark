@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 import "./CommunityNewsFeed.css";
 import Slider from "react-slick";
 import CommunityNewsList from "./CommunityNewsList";
 import {newsData} from "../../../Data/NewsData";
+import {NavLink} from "react-router-dom";
 
 const CommunityNews = () => {
     const settings = {
@@ -15,12 +16,12 @@ const CommunityNews = () => {
         arrows: false,
         autoplay: true,
         autoplaySpeed: 3000,
+        lazyLoad: true,
     };
-    const [activeLink, setActiveLink] = useState("");
 
     return (
         <>
-            <section className="news-feed">
+            <section id="community-newsfeed" className="news-feed">
                 <div className="container-fluid">
                     <div className="row"></div>
                     <div className="row border-of-section ">
@@ -34,12 +35,12 @@ const CommunityNews = () => {
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing eliteiusmod
                                 </p>
-                                <a
-                                    to={"/"}
+                                <NavLink
+                                    to={"/community/newsfeed"}
                                     className="btn button-outLine btn-bg-white"
                                 >
                                     Explore
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left ">
