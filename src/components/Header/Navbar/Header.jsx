@@ -14,7 +14,7 @@ const Header = () => {
         <>
             <Navbar expand="lg" sticky="top">
                 <Container fluid>
-                    <NavLink className="navbar-brand" target="_blank" to={"/"}>
+                    <NavLink className="navbar-brand" to={"/"}>
                         <img src={logo} className="w-100" alt={logo}/>
                     </NavLink>
                     <Navbar.Toggle
@@ -51,9 +51,9 @@ const Header = () => {
                             </NavLink>
                             <NavLink
                                 className="nav-link links-margin"
-                                to={"/events"}
+                                to={"/private"}
                             >
-                                Events
+                                Private Event
                             </NavLink>
                         </Nav>
                         <div className="d-flex justify-content-end align-items-center ">

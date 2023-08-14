@@ -69,11 +69,9 @@ const CommunityEvents = () => {
                                                     eiusmod Lorem ipsum dolor sit amet,consectetur dipiscing
                                                     elit Lorem ipsum dolor sit amet, consectetur
                                                 </p>
-                                                <NavLink to={"/events"}
+                                                <NavLink to={"/community/events"}
                                                          className="btn button-outLine btn-bg-white mx-3">Explore</NavLink>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>

@@ -9,7 +9,7 @@ const MultipleEventSlider = () => {
         dots: false,
         infinite: true,
         arrows: false,
-        autoplay: false,
+        autoplay: true,
         autoplaySpeed: 3000,
         rows: 2,
         slidesPerRow: 2,

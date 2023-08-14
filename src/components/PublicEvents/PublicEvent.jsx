@@ -18,7 +18,7 @@ const PublicEvent = () => {
         autoplaySpeed: 1500,
         cssEase: "linear",
         adaptiveHeight: true,
-        lazyLoad: true,
+        lazyLoad: false,
         responsive: [
             {
                 breakpoint: 1024,

@@ -1,0 +1,25 @@
+.prevent-header {
+    background-image: none;
+}
+
+.prevent-header .text-wrapper-2 {
+    font-size: var(--font-size-94);
+    /*margin-bottom: 32px !important;*/
+}
+
+.prevent-header .p {
+    line-height: 1.5;
+    text-align: justify;
+    width: 50%;
+    font-size: var(--font-size-16);
+}
+
+
+.prevent-header .group-2 {
+    position: absolute;
+    width: 100%;
+    left: 35px;
+    bottom: 0%;
+    transform: translateY(-96px);
+
+}

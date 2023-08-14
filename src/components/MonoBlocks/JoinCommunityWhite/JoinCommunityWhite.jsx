@@ -1,5 +1,6 @@
 import React from "react";
 import "../MonoBlocks.css";
+import {Link} from "react-router-dom";
 
 const JoinCommunityWhite = () => {
     return (
@@ -19,9 +20,10 @@ const JoinCommunityWhite = () => {
                                 </p>
                             </div>
                             <div className="buttons d-flex justify-content-center align-items-center">
-                                <a href="src/components/MonoBlocks#" className="btn button-outLine btn-bg-white">
+                                <Link to="/contactus" href="src/components/MonoBlocks#"
+                                      className="btn button-outLine btn-bg-white">
                                     Connect
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

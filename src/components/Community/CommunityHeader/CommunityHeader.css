@@ -28,9 +28,10 @@
 }
 
 .community-header .group-2 {
+    position: absolute;
     width: 100%;
     left: 35px;
-    top: 60% !important;
-    transform: translateY(0);
+    bottom: 0;
+    transform: translateY(-96px);
 
 }

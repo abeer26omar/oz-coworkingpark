@@ -3,6 +3,7 @@ import './Locations.css'
 import Slider from "react-slick";
 import LocationsList from "./LocationsList";
 import {locationsData} from "../../Data/LocationsData";
+import {Link} from "react-router-dom";
 
 const Locations = () => {
     const settings = {
@@ -78,7 +79,7 @@ const Locations = () => {
                                     sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur
                                     dipiscing eliteiusmod
                                 </p>
-                                <a href="#" className="btn button-outLine btn-bg-white">Explore</a>
+                                <Link to="/houses" className="btn button-outLine btn-bg-white">Explore</Link>
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left ">

@@ -18,12 +18,17 @@ import CommunityEventsExplore
     from "./components/Community/CommunityEvents/CommunityEventsExplore/CommunityEventsExplore";
 import CommunityEventsDetails
     from "./components/Community/CommunityEvents/CommunityEventsDetails/CommunityEventsDetails";
+import PrivateEvents from "./pages/PrivateEvents";
+import Houses from "./pages/Houses";
+import HouseDetails from "./components/Houses/HousesDetails/HouseDetails";
 
 function App() {
+
     return (
         <>
             <Header/>
             <Routes>
+
                 {/*----------------------Start Single Pages Routes------------------------------*/}
                 <Route path="/" element={<Home/>}/>
                 <Route path="/joinus" element={<Joinus/>}/>
@@ -39,11 +44,20 @@ function App() {
                 {/*----------------------End Membership Routes-----------------------------------*/}
                 {/*----------------------Start Community Routes----------------------------------*/}
                 <Route path="/community" element={<Community/>}/>
-                <Route path="/events" element={<CommunityEventsExplore/>}/>
+                <Route path="/community/events" element={<CommunityEventsExplore/>}/>
                 <Route path="/events/communityEventsDetails" element={<CommunityEventsDetails/>}/>
                 <Route path="/community/newsfeed" element={<NewsFeed/>}/>
                 <Route path="/community/newsfeed/singleFeed" element={<SingleNewFeed/>}/>
                 {/*----------------------End Community Routes-------------------------------------*/}
+                {/*----------------------Start Private Events Routes------------------------------*/}
+                <Route path="/private" element={<PrivateEvents/>}/>
+                {/*----------------------End Private Events Routes--------------------------------*/}
+                {/*----------------------Start Houses Locations Routes----------------------------*/}
+                <Route path="/houses" element={<Houses/>}/>
+                <Route path="/houses/:id" element={<HouseDetails/>}/>
+                {/*----------------------End Houses Locations Routes------------------------------*/}
+
+
             </Routes>
             <Footer/>
         </>

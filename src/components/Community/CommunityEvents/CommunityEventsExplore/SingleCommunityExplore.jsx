@@ -5,6 +5,7 @@ import user from "../../../../assets/images/icons/user.svg";
 import time from "../../../../assets/images/icons/alarm-event.svg";
 import './CommunityEventsExplore.css';
 import favs from "../../../../assets/images/icons/heart.svg";
+import {Link} from "react-router-dom";
 
 const SingleCommunityExplore = ({id, img, title, text, category, linkText, day, host, clock}) => {
     return (
@@ -34,7 +35,8 @@ const SingleCommunityExplore = ({id, img, title, text, category, linkText, day, 
                         </div>
                     </div>
                     <div className="cards-event-buttons">
-                        <a className="btn button-outLine btn-bg-white">Attend</a>
+                        <Link to="/events/communityEventsDetails"
+                              className="btn button-outLine btn-bg-white">Attend</Link>
                         <a className="share-button">
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">

@@ -6,8 +6,8 @@
     width: 100%;
     height: 100vh;
     background-repeat: no-repeat;
-    background-size:75%;
-    background-position:center center;
+    background-size: 75%;
+    background-position: center center;
     opacity: .9;
     overflow: hidden;
 }
@@ -60,7 +60,7 @@
     color: transparent;
     font-family: goldenHopes;
     font-size: var(--font-size-66);
-    font-weight: var( --font-weight-regular);
+    font-weight: var(--font-weight-regular);
     letter-spacing: 0;
     line-height: 79.2px;
     width: 100%;
@@ -100,7 +100,7 @@
     color: var(--neturals-color1);
     font-size: var(--font-size-16);
     font-weight: var(--font-weight-regular);
-    letter-spacing:0;
+    letter-spacing: 0;
     font-family: Questrial;
     font-style: normal;
     line-height: 130%;
@@ -110,7 +110,7 @@
 
 .box .text-wrapper-3 {
     -webkit-text-stroke: 0.5px #ffffff;
-    border-color:var(--neturals-color1);
+    border-color: var(--neturals-color1);
     color: var(--neturals-color1);
     font-family: Questrial;
     font-size: var(--font-size-16);
@@ -155,7 +155,7 @@
 }
 
 
-.box .group-2 {
+.box .home-group {
     position: absolute;
     top: 40%;
     left: 20px;
@@ -174,7 +174,8 @@
 .box .text-wrapper-3 {
 
 }
-.btn-header{
+
+.btn-header {
     color: var(--neturals-color1);
     font-family: Questrial;
     font-size: var(--font-size-16);
@@ -190,7 +191,8 @@
     border: 1px solid;
     width: 100%;
 }
-.btn-header:hover{
+
+.btn-header:hover {
     background-color: var(--primary-color);
     color: #fff;
     border: none;
@@ -212,10 +214,12 @@
     top: calc(50% + 100px);
     width: 168px;
 }
-.box .play-modal:hover{
+
+.box .play-modal:hover {
     border-bottom: 1px solid #fff;
     border-rounded: 0;
 }
+
 .box .play-icon {
     fill: #ffffff;
     height: 24px;
@@ -232,6 +236,7 @@
     line-height: 120%;
     white-space: nowrap;
 }
+
 /*.box .modal-header{*/
 /*    border: none !important;*/
 /*}*/
