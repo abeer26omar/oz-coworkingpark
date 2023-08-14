@@ -86,7 +86,7 @@ const Header = () => {
                                 Login
                             </NavLink>
                             <svg
-                                className="margin-links"
+                                className="margin-links user-icon"
                                 width="24"
                                 height="24"
                                 viewBox="0 0 24 24"
