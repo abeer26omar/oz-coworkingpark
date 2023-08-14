@@ -58,6 +58,10 @@
     width: 85%;
 }
 
+.events-show .single-event-slider .card-img-top {
+    height: 400px;
+}
+
 .details-event {
     margin: 24px 8px;
 }
@@ -110,4 +114,8 @@
 
 .single-event-slider .slick-slide {
     margin: 0 !important;
+}
+
+.single-margin {
+    margin: 32px 0;
 }

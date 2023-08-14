@@ -39,7 +39,7 @@ const CommunityEventsExplore = () => {
             <section className="events-show border-bottom border-top">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-6 m-auto ">
+                        <div className="col-lg-6 single-margin ">
                             <div className="single-event-slider ">
                                 <SingleEventSlider/>
                             </div>

@@ -23,18 +23,18 @@ const Header = () => {
                     />
                     <Navbar.Collapse id="basic-navbar-nav" show={showBasic.toString()}>
                         <Nav className="m-auto">
-                            <NavLink
+                            <a
                                 className="nav-link links-margin"
-                                to={"/"}
+                                href="#"
                             >
                                 Booking
-                            </NavLink>
-                            <NavLink
+                            </a>
+                            <a
                                 className="nav-link links-margin"
-                                to={"/"}
+                                href="#"
                             >
                                 About OZ
-                            </NavLink>
+                            </a>
 
                             <NavLink
                                 className="nav-link links-margin"

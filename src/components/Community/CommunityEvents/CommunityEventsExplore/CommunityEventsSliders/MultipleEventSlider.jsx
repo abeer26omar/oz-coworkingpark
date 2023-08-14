@@ -11,7 +11,7 @@ const MultipleEventSlider = () => {
         arrows: false,
         autoplay: true,
         autoplaySpeed: 3000,
-        rows: 2,
+        rows: 1,
         slidesPerRow: 2,
         vertical: true,
         verticalSwiping: true,
@@ -23,7 +23,7 @@ const MultipleEventSlider = () => {
         duration: 3000,
         useTransform: true,
         lazyLoad: true,
-        adaptiveHeight: true,
+        adaptiveHeight: false,
 
 
         // adaptiveHeight: true,

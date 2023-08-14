@@ -79,7 +79,7 @@
 .box .span {
     color: #d0df00;
     font-family: couture;
-    font-size: var(--font-size-52);
+    font-size: var(--font-size-52) !important;
     font-style: normal;
     font-weight: var(--font-weight-bold);
     letter-spacing: 0;
@@ -157,9 +157,9 @@
 
 .box .home-group {
     position: absolute;
-    top: 40%;
+    bottom: 0;
     left: 20px;
-    transform: translateY(-30%);
+    transform: translateY(-200px);
 }
 
 .box .frame {
@@ -167,7 +167,7 @@
     /*height: 48px;*/
     left: 20px;
     position: absolute;
-    top: calc(50% + 100px);
+    top: calc(70% + 100px);
     /*width: 168px;*/
 }
 
@@ -211,7 +211,7 @@
     height: 48px;
     left: 180px;
     position: absolute;
-    top: calc(50% + 100px);
+    top: calc(70% + 100px);
     width: 168px;
 }
 
