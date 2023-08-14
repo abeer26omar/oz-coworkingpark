@@ -1,6 +1,7 @@
 {
   "name": "oz-react",
   "version": "0.1.0",
+  "homepage": "https://Ahmed2398.github.io",
   "private": true,
   "dependencies": {
     "@egjs/grid": "^1.14.2",
