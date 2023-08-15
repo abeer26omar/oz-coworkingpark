@@ -674,7 +674,6 @@ a {
         position: absolute;
         left: 0;
         top: 0;
-        transform: translate(-145px, 25px);
-        background-color: red;
+        transform: translate(-240px, 25px);
     }
 }
