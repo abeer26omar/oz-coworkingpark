@@ -55,8 +55,11 @@ const Contactus = () => {
                     <Row>
                         <Col lg={6}>
                             <div className="head-content-left-shape text-left pb-3 position-relative">
-                                <h1 className="hand-write">Lets Connect,</h1>
-                                <h3 className="bold-head">Schedule a tour, say hello</h3>
+                                <div className="text-shape">
+                                    <h1 className="hand-write">Lets Connect,</h1>
+                                    <h3 className="bold-head">Schedule a tour, say hello</h3>
+                                </div>
+
                                 {/*<p>The API URL is: {apiUrl}</p>*/}
                             </div>
                         </Col>

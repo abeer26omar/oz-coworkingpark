@@ -401,9 +401,18 @@ a {
 }
 
 .head-content-left-shape {
-    margin-left: -3rem;
-    margin-top: 5rem;
+    /*margin-left: -3rem;*/
+    /*margin-top: 5rem;*/
+
 }
+
+.head-content-left-shape .text-shape {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(20px, 25px);
+}
+
 
 .head-content-left-shape .bold-head {
     line-height: 2;
@@ -654,4 +663,18 @@ a {
 }
 
 
+/*Media Query Test*/
 
+@media (min-width: 1440px) and (max-width: 2560px) {
+    .links-margin {
+        margin: auto 42px;
+    }
+
+    .head-content-left-shape .text-shape {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: translate(-145px, 25px);
+        background-color: red;
+    }
+}

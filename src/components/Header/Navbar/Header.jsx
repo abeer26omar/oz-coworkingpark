@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./Header.css";
 import logo from "../../../assets/images/logo.svg";
 
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import {Container, Nav} from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 
@@ -14,9 +14,18 @@ const Header = () => {
         <>
             <Navbar expand="lg" sticky="top">
                 <Container fluid>
-                    <NavLink className="navbar-brand" to={"/"}>
+                    <Link className="navbar-brand" to={"/"}
+                          onClick={() => {
+                              window.scroll({
+                                  top: 0,
+                                  left: 0,
+                                  behavior: "smooth",
+                              });
+                          }}
+                    >
                         <img src={logo} className="w-100" alt={logo}/>
-                    </NavLink>
+
+                    </Link>
                     <Navbar.Toggle
                         aria-controls="basic-navbar-nav"
                         onClick={() => setShowBasic(!showBasic)}
@@ -35,6 +44,21 @@ const Header = () => {
                             >
                                 About OZ
                             </a>
+
+                            {/*<Link*/}
+                            {/*    className="nav-link links-margin"*/}
+                            {/*    to={"/home"}*/}
+                            {/*    // onClick={() => {*/}
+                            {/*    //     window.scroll({*/}
+                            {/*    //         top: 0,*/}
+                            {/*    //         left: 0,*/}
+                            {/*    //         behavior: "smooth",*/}
+                            {/*    //     });*/}
+                            {/*    // }}*/}
+                            {/*>*/}
+                            {/*    home*/}
+                            {/*</Link>*/}
+
 
                             <NavLink
                                 className="nav-link links-margin"

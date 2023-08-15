@@ -27,6 +27,7 @@ const HouseDetails = () => {
     }
     return (
         <>
+
             {/*<h1>House ID: {id}</h1>*/}
 
             <Navbar expand="lg" className="bg-body-tertiary navigator">

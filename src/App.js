@@ -21,46 +21,48 @@ import CommunityEventsDetails
 import PrivateEvents from "./pages/PrivateEvents";
 import Houses from "./pages/Houses";
 import HouseDetails from "./components/Houses/HousesDetails/HouseDetails";
+import ScrollToTop from "./ScrollToTop";
+
 
 function App() {
 
     return (
-        <>
-            <Header/>
-            <Routes>
+        <div className="App">
+            <ScrollToTop/>
 
-                {/*----------------------Start Single Pages Routes------------------------------*/}
+            <Header/>
+
+            <Routes>
+                {/* Start Single Pages Routes */}
                 <Route path="/" element={<Home/>}/>
                 <Route path="/joinus" element={<Joinus/>}/>
                 <Route path="/contactus" element={<ContactUs/>}/>
-                {/*----------------------End Single Pages Routes---------------------------------*/}
-                {/*----------------------Start Authentication Routes-----------------------------*/}
+                {/* End Single Pages Routes */}
+                {/* Start Authentication Routes */}
                 <Route path="/login" element={<Login/>}/>
-                {/*----------------------END Authentication Routes-------------------------------*/}
-                {/*----------------------Start Membership Routes---------------------------------*/}
+                {/* END Authentication Routes */}
+                {/* Start Membership Routes */}
                 <Route path="/membership" element={<Membership/>}/>
                 <Route path="/membership/:id" element={<MembershipOptions/>}/>
                 <Route path="/singleMember/:id" element={<MembershipSingleOption/>}/>
-                {/*----------------------End Membership Routes-----------------------------------*/}
-                {/*----------------------Start Community Routes----------------------------------*/}
+                {/* End Membership Routes */}
+                {/* Start Community Routes */}
                 <Route path="/community" element={<Community/>}/>
                 <Route path="/community/events" element={<CommunityEventsExplore/>}/>
                 <Route path="/events/communityEventsDetails" element={<CommunityEventsDetails/>}/>
                 <Route path="/community/newsfeed" element={<NewsFeed/>}/>
                 <Route path="/community/newsfeed/singleFeed" element={<SingleNewFeed/>}/>
-                {/*----------------------End Community Routes-------------------------------------*/}
-                {/*----------------------Start Private Events Routes------------------------------*/}
+                {/* End Community Routes */}
+                {/* Start Private Events Routes */}
                 <Route path="/private" element={<PrivateEvents/>}/>
-                {/*----------------------End Private Events Routes--------------------------------*/}
-                {/*----------------------Start Houses Locations Routes----------------------------*/}
+                {/* End Private Events Routes */}
+                {/* Start Houses Locations Routes */}
                 <Route path="/houses" element={<Houses/>}/>
                 <Route path="/houses/:id" element={<HouseDetails/>}/>
-                {/*----------------------End Houses Locations Routes------------------------------*/}
-
-
+                {/* End Houses Locations Routes */}
             </Routes>
             <Footer/>
-        </>
+        </div>
     );
 }
 

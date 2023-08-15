@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import {Col, Container, Form, Row} from "react-bootstrap";
 import "./LoginForm.css";
 import vector from "../../../assets/images/Vector.png";
-import facebook from "../../../assets/images/icons/facebook.png";
-import google from "../../../assets/images/icons/google.png";
-import linkedin from "../../../assets/images/icons/linkedin.png";
+import facebook from "../../../assets/images/icons/Facebook.svg";
+import google from "../../../assets/images/icons/Google.svg";
+import linkedin from "../../../assets/images/icons/linkedin.svg";
 import {useNavigate} from "react-router-dom";
 import {Login} from "../../../apis/auth_api/LoginApi";
 
@@ -23,7 +23,6 @@ const LoginForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         try {
             const result = await Login(credentials.username, credentials.password);
             setCredentials(result);
@@ -113,7 +112,7 @@ const LoginForm = () => {
                                     </div>
                                 </Form>
 
-                                <div className="py-3 log-social d-flex justify-content-around align-items-center">
+                                <div className="py-3 log-social text-center">
                                     <a
                                         href="src/components/Auth/Login/LoginForm#"
                                         target="_blank"

@@ -39,8 +39,9 @@
 }
 
 .margin-links {
-    margin-right: 14px;
+    margin-right: 24px;
 }
+
 
 .sun-border {
     margin-left: 14px;
@@ -48,10 +49,16 @@
 }
 
 .links-margin {
-    /*margin: auto 24px;*/
-    margin: auto 42px;
+    margin: auto 20px;
+    /*margin: auto 42px;*/
     padding-right: 0 !important;
     padding-left: 0 !important;
+}
+
+@media (min-width: 1440px) and (max-width: 2560px) {
+    .links-margin {
+        margin: auto 42px;
+    }
 }
 
 .user-icon {

@@ -6,14 +6,18 @@ const Joinus = () => {
         <>
             <section className="contactus my-5">
                 <div className="position-relative">
-                    <img src={vector} className="position-absolute" style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>
+                    <img src={vector} className="position-absolute" style={{top: "0px", left: "0", width: "100px"}}
+                         alt="shape"/>
                 </div>
                 <div className="container">
                     <div className="row ">
                         <div className="col-lg-6">
                             <div className="head-content-left-shape text-left pb-3 position-relative">
-                                <h1 className="hand-write">Join us</h1>
-                                <h3 className="bold-head">Get started to join with oz community</h3>
+                                <div className="text-shape">
+                                    <h1 className="hand-write">Join us</h1>
+                                    <h3 className="bold-head">Get started to join with oz community</h3>
+                                </div>
+
                             </div>
                         </div>
                         <div className="col-lg-6">

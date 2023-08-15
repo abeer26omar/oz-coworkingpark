@@ -79,7 +79,10 @@ const Locations = () => {
                                     sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur
                                     dipiscing eliteiusmod
                                 </p>
-                                <Link to="/houses" className="btn button-outLine btn-bg-white">Explore</Link>
+                                <Link
+                                    to="/houses" className="btn button-outLine btn-bg-white"
+                                    
+                                >Explore</Link>
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left ">

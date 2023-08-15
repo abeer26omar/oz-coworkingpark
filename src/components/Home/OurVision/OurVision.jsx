@@ -5,6 +5,7 @@ import aminites from "../../../assets/images/aminites.png";
 import fb from "../../../assets/images/fb.png";
 import Locations from "../../Locations/Locations";
 import PublicEvent from "../../PublicEvents/./PublicEvent";
+import {Link} from "react-router-dom";
 
 const OurVision = () => {
     return (
@@ -147,9 +148,9 @@ const OurVision = () => {
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing eliteiusmod
                                 </p>
-                                <a to="/community/newsfeed" className="btn button-outLine btn-bg-white">
+                                <Link to="/community/newsfeed" className="btn button-outLine btn-bg-white">
                                     Explore
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
