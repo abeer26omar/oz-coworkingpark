@@ -32,12 +32,12 @@ const Header = () => {
                     />
                     <Navbar.Collapse id="basic-navbar-nav" show={showBasic.toString()}>
                         <Nav className="m-auto">
-                            <a
+                            <Link
                                 className="nav-link links-margin"
-                                href="#"
+                                to="/booking"
                             >
                                 Booking
-                            </a>
+                            </Link>
                             <a
                                 className="nav-link links-margin"
                                 href="#"

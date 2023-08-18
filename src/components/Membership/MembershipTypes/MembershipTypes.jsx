@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Col, Container, Row} from 'react-bootstrap';
 import Slider from 'react-slick';
 import MembershipTypesList from './MembershipTypesList';
-import { getListMembershipTypes } from '../../../apis/Api';
+import {getListMembershipTypes} from '../../../apis/Api';
 
 const MembershipTypes = () => {
     const [listMembershipsTypes, setListMembershipsTypes] = useState([]);
@@ -24,16 +24,30 @@ const MembershipTypes = () => {
     //     fetchData();
     // }, []);
 
-    useEffect(()=>{
-        const fetchData = async () => {
-            const result = await getListMembershipTypes();
-            setListMembershipsTypes(result);
-            console.log(result);
-        };
-        fetchData();
-    },[]);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const result = await getListMembershipTypes();
+    //         setListMembershipsTypes(result);
+    //         console.log(result);
+    //     };
+    //     fetchData();
+    // }, []);
 
-    const settings =  {
+    async function fetchData() {
+        try {
+            const membershipTypes = await getListMembershipTypes();
+            setListMembershipsTypes(membershipTypes);
+            console.log('Membership Types:', membershipTypes);
+            // Handle the membershipTypes data as needed
+            console.log("good");
+        } catch (error) {
+            console.error('Error fetching membership types:', error);
+        }
+    }
+
+    fetchData();
+
+    const settings = {
         dots: false,
         arrows: true,
         infinite: true,
@@ -96,7 +110,7 @@ const MembershipTypes = () => {
                         <Col lg={12}>
                             <Slider {...settings}>
                                 {listMembershipsTypes.map((listMembershipType, index) => {
-                                    const { id, name, logo, link, description } = listMembershipType;
+                                    const {id, name, logo, link, description} = listMembershipType;
                                     return (
                                         <div key={index}>
                                             <MembershipTypesList

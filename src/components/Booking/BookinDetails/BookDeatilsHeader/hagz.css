@@ -1,0 +1,237 @@
+/*! CSS Used from: https://www.properhotel.com/wp-content/themes/properhotel/css/style.css ; media=all */
+.bookbottom__ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+.bookbottom__li {
+    flex: 1;
+    border: 1px solid rgba(251, 251, 251, .8);
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bookbottom__li * {
+    color: #fff;
+}
+
+.bookbottom__form input[type="text"],
+.bookbottom__form input[type="number"],
+.bookbottom__form input[type="email"],
+.bookbottom__form input[type="password"],
+.bookbottom__form textarea {
+
+    color: #ccc;
+    background: transparent;
+    border: 0;
+    border: none;
+    outline: none;
+}
+
+.bookbottom__form input[type="text"]::placeholder,
+.bookbottom__form input[type="number"]::placeholder,
+.bookbottom__form input[type="email"]::placeholder,
+.bookbottom__form input[type="password"]::placeholder,
+.bookbottom__form textarea::placeholder {
+    color: #fff;
+    background: transparent;
+    border: 0;
+}
+
+.bookbottom__form input[type="text"],
+.bookbottom__form input[type="number"],
+.bookbottom__form input[type="email"],
+.bookbottom__form input[type="password"],
+.bookbottom__form textarea {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #fff;
+}
+
+.bookbottom__form input[type="text"]:focus,
+.bookbottom__form input[type="number"]:focus,
+.bookbottom__form input[type="email"]:focus,
+.bookbottom__form input[type="password"]:focus,
+.bookbottom__form textarea:focus {
+    outline: none;
+    background-color: transparent;
+    color: #000;
+}
+
+.select-date-costume react-datepicker__month-container {
+    width: 393px;
+    height: 367px;
+}
+
+.select-date-costume .react-datepicker__header {
+    background-color: #fff !important;
+    border-bottom: 0;
+    padding: 0px 0;
+}
+
+.select-date-costume .react-datepicker__navigation {
+    top: 40px;
+}
+
+.select-date-costume .react-datepicker__navigation--previous {
+    left: 322px;
+}
+
+.select-date-costume .react-datepicker__current-month {
+    margin: 32px 0;
+
+}
+
+.select-date-costume .react-datepicker__header .react-datepicker__current-month {
+    color: var(--primary-color);
+    font-family: Couture;
+    font-size: var(--font-size-20);
+    font-weight: var(--font-weight-bold);
+    line-height: 120%; /* 24px */
+    text-align: start;
+    margin-left: 34px;
+}
+
+.select-date-costume .react-datepicker__day-name {
+    color: var(--secondary-color2) !important;
+    text-align: center;
+    font-family: Questrial;
+    font-size: var(--font-size-13);
+    font-style: normal;
+    font-weight: var(--font-weight-regular);
+    line-height: 120%; /* 15.6px */
+    /*padding: 22px 34px;*/
+    border-bottom: 0;
+    margin-right: 16px;
+}
+
+.select-date-costume .react-datepicker__month {
+    border: none;
+}
+
+.select-date-costume .react-datepicker__day-names {
+    text-align: start;
+    margin-bottom: 0;
+    margin-left: 34px;
+
+}
+
+.select-date-costume .react-datepicker__week {
+    margin-left: 0;
+    padding: 0px 0;
+}
+
+.select-date-costume .react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name {
+    margin-right: 16px;
+    color: var(--primary-color);
+    text-align: center;
+    font-family: Questrial;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 20.8px */
+    padding: 5px 0;
+}
+
+.select-date-costume .react-datepicker__day--keyboard-selected {
+    border-radius: 0;
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.select-date-costume .react-datepicker__day--selected {
+    border-radius: 0;
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+
+.react-datepicker__time-container {
+    width: 408px;
+    height: 308px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.react-datepicker__time-container .react-datepicker__time {
+    width: 100%;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+    width: 100%;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item {
+    height: auto !important;
+    padding: 0;
+    white-space: nowrap;
+    color: var(--primary-color);
+    text-align: center;
+
+    /* 16 R */
+    font-family: Questrial;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.react-datepicker__header--time {
+    padding: 0;
+    background-color: transparent !important;
+    border: 0;
+}
+
+
+.react-datepicker-time__header {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    color: var(--primary-color);
+
+    /* 18 b */
+    font-family: Couture;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; /* 21.6px */
+    padding-left: 24px;
+    background-color: transparent;
+}
+
+.place-text {
+    color: #000;
+    font-family: Couture;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; /* 21.6px */
+    border: 0;
+    background-color: transparent;
+}
+
+.select-date-costume {
+    display: flex;
+}
+
+.ReactModal__Content--after-open {
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 100px 20px;
+    width: 450px;
+    transform: translateX(-50%);
+    right: -96px;
+    left: 309px;
+    border: 0;
+    bottom: 25px;
+    height: 500px;
+}
+

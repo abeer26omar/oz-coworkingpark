@@ -22,6 +22,8 @@ import PrivateEvents from "./pages/PrivateEvents";
 import Houses from "./pages/Houses";
 import HouseDetails from "./components/Houses/HousesDetails/HouseDetails";
 import ScrollToTop from "./ScrollToTop";
+import Booking from "./pages/Booking";
+import BookingDetails from "./components/Booking/BookinDetails/BookingDetails";
 
 
 function App() {
@@ -60,6 +62,10 @@ function App() {
                 <Route path="/houses" element={<Houses/>}/>
                 <Route path="/houses/:id" element={<HouseDetails/>}/>
                 {/* End Houses Locations Routes */}
+                {/* Start Booking Locations Routes */}
+                <Route path="/booking" element={<Booking/>}/>
+                <Route path="/bookingDetails" element={<BookingDetails/>}/>
+                {/* End Booking Locations Routes */}
             </Routes>
             <Footer/>
         </div>

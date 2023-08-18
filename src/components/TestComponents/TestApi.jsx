@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-import Slider from "react-slick";
 import {memberTypes} from "../../Data/MemberTypesData";
 import MembershipTypesList from "../Membership/MembershipTypes/MembershipTypesList";
+
 const TestApi = () => {
 
     const [data, setUserData] = useState([]);
@@ -20,7 +19,7 @@ const TestApi = () => {
             // headers: {
             //     ...data.getHeaders()
             // },
-            data : data
+            data: data
         };
 
         axios(config)
@@ -46,36 +45,31 @@ const TestApi = () => {
     //     console.log(hello())
     // }
     return (
-    <div>
-        {/*<ul>*/}
-        {/*{Object.keys(data).map((key, index, )=>*/}
-        {/*    <div>*/}
-        {/*            <li key={index}>*/}
-        {/*                <h2 style={{"color":'red'}}>{data.data.config.pro_packages[1].type}</h2>*/}
-        {/*                <h2  style={{"color":'blue'}}> {data.data.config.pro_packages[2].type}</h2>*/}
-        {/*                <h2  style={{"color":'orange'}}>{data.data.config.pro_packages[3].type}</h2>*/}
-        {/*                <h2  style={{"color":'black'}}>{data.data.config.pro_packages[4].type}</h2>*/}
-        {/*            </li>*/}
-        {/*        /!*<h1>{key}</h1>*!/*/}
-        {/*    </div>*/}
-        {/*)}*/}
-        {/*</ul>*/}
+        <div>
+            {/*<ul>*/}
+            {/*{Object.keys(data).map((key, index, )=>*/}
+            {/*    <div>*/}
+            {/*            <li key={index}>*/}
+            {/*                <h2 style={{"color":'red'}}>{data.data.config.pro_packages[1].type}</h2>*/}
+            {/*                <h2  style={{"color":'blue'}}> {data.data.config.pro_packages[2].type}</h2>*/}
+            {/*                <h2  style={{"color":'orange'}}>{data.data.config.pro_packages[3].type}</h2>*/}
+            {/*                <h2  style={{"color":'black'}}>{data.data.config.pro_packages[4].type}</h2>*/}
+            {/*            </li>*/}
+            {/*        /!*<h1>{key}</h1>*!/*/}
+            {/*    </div>*/}
+            {/*)}*/}
+            {/*</ul>*/}
 
 
-
-
-
-        {/*<Slider {...settings}>*/}
-        {/*    {memberTypes.map((memberType, index) => {*/}
-        {/*        const {id, name, img, link} = memberType;*/}
-        {/*        return(*/}
-        {/*            <div key={index}>*/}
-        {/*                <MembershipTypesList  id={id} name={name} img={img} link={link}/>*/}
-        {/*            </div>*/}
-        {/*        )*/}
-        {/*    })}*/}
-        {/*</Slider>*/}
-    </div>
+            {memberTypes.map((memberType, index) => {
+                const {id, name, img, link} = memberType;
+                return (
+                    <div key={index}>
+                        <MembershipTypesList id={id} name={name} img={img} link={link}/>
+                    </div>
+                )
+            })}
+        </div>
     );
 };
 export default TestApi;

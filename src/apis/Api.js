@@ -1,7 +1,6 @@
-import React , {useState} from "react";
+import React from "react";
 import axios from 'axios';
 import FormData from 'form-data';
-import {useParams} from "react-router-dom";
 
 // MembershipTypes API
 // export const getListMembershipTypes = async () => {
@@ -55,7 +54,6 @@ export const getListMembershipTypes = async () => {
 };
 
 
-
 export const getMembershipOptions = async (id) => {
     try {
         const formData = new FormData();
@@ -104,6 +102,7 @@ export const inquiry = async (formState) => {
     } catch (error) {
         console.error(error);
         throw new Error('Failed to submit inquiry');
-    };
+    }
+    ;
 
 };
