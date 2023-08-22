@@ -140,7 +140,7 @@ const OurVision = () => {
 
                         <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto ">
                             <div className="box-content px-60">
-                                <h2 className="h2-text-box">achievements for OZ</h2>
+                                <h2 className="h2-text-box achievement-text ">achievements for OZ</h2>
                                 <p className="p-text-box">
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
