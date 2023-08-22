@@ -24,6 +24,7 @@ import HouseDetails from "./components/Houses/HousesDetails/HouseDetails";
 import ScrollToTop from "./ScrollToTop";
 import Booking from "./pages/Booking";
 import BookingDetails from "./components/Booking/BookinDetails/BookingDetails";
+import BookingSummary from "./components/Booking/BookinDetails/SpaceDetails/BookingSummary/BookingSummary";
 
 
 function App() {
@@ -65,6 +66,8 @@ function App() {
                 {/* Start Booking Locations Routes */}
                 <Route path="/booking" element={<Booking/>}/>
                 <Route path="/bookingDetails" element={<BookingDetails/>}/>
+                <Route path="/bookingDetails/bookNow" element={<BookingSummary/>}/>
+
                 {/* End Booking Locations Routes */}
             </Routes>
             <Footer/>

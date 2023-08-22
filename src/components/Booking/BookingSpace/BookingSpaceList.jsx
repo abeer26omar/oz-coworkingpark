@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from "react-bootstrap/Card";
 import favs from "../../../assets/images/icons/heart.svg";
+import {NavLink} from "react-router-dom";
 
 const BookingSpaceList = ({id, img, text, price, title, options}) => {
     return (
@@ -27,8 +28,8 @@ const BookingSpaceList = ({id, img, text, price, title, options}) => {
                     <div
                         className="d-flex justify-content-between align-items-center card-footer">
                         <span className="price-hour">{price} / Hour</span>
-                        <a href="#"
-                           className="btn button-outLine btn-bg-white">Book Now</a>
+                        <NavLink to="/bookingDetails"
+                                 className="btn button-outLine btn-bg-white">Book Now</NavLink>
                     </div>
 
                 </Card.Body>

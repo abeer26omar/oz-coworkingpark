@@ -1,7 +1,7 @@
 import React from 'react';
 import community from "../../../../assets/images/bookings/bookingdetails.png";
 import '../BookingDetails.css';
-import Hagz from "./Hagz";
+import BookingForm from "./BookingForm";
 
 
 const BookingDetailsHeader = () => {
@@ -27,7 +27,7 @@ const BookingDetailsHeader = () => {
 
 
                                     <div className="box-book">
-                                        <Hagz/>
+                                        <BookingForm/>
                                     </div>
 
                                 </div>

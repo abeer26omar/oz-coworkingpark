@@ -4,26 +4,21 @@ import alarmbook from '../../../../assets/images/icons/alarmbook.svg';
 import people from '../../../../assets/images/icons/people.svg';
 import "react-datepicker/dist/react-datepicker.css";
 
-import './hagz.css'
+import './BookingForm.css'
 import DatePicker from "react-datepicker";
+import {NavLink} from "react-router-dom";
 
-const Hagz = () => {
+const BookingForm = () => {
     const [startDate, setStartDate] = useState(null);
-    const [startTime, setStartTime] = useState(null);
-    const [endTime, setEndTime] = useState(null);
+    const [selectedStartTime, setSelectedStartTime] = useState(null);
+    const [selectedEndTime, setSelectedEndTime] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
 
 
     const handleDateChange = (date) => {
         setStartDate(date);
     };
-    const [selectedStartTime, setSelectedStartTime] = useState(null);
-    const [selectedEndTime, setSelectedEndTime] = useState(null);
 
-    const handleButtonClick = (e) => {
-        e.preventDefault();
-        setIsOpen(true);
-    };
 
     const handleStartTimeChange = (startTime) => {
         setSelectedStartTime(startTime);
@@ -34,9 +29,52 @@ const Hagz = () => {
         setSelectedEndTime(endTime);
 
     };
-    // const handleEndTimeChange = (endTime) => {
-    //     setSelectedEndTime(endTime);
-    // };
+    // END Time Picker
+    const [counter, setCounter] = useState(0);
+    const [initialCount, setInitialCount] = useState(0);
+    const handleInitialCountChange = (event) => {
+        event.preventDefault();
+
+        setInitialCount(event.target.value);
+    };
+
+    const openSelectGuest = (event) => {
+        event.preventDefault();
+        setIsOpen(!isOpen);
+
+    }
+
+    const closeSelectGuest = (event) => {
+        event.preventDefault();
+        setIsOpen(!isOpen);
+    }
+    //
+    // let body = document.querySelector("body");
+    //
+    // body.addEventListener("click", closeSelectGuest);
+    const increment = (event) => {
+        event.preventDefault();
+        setCounter(counter + 1)
+    }
+
+    // const decrement = (event) => {
+    //     event.preventDefault();
+    //     if (setCounter < 0) {
+    //         setCounter((counter) => counter - 1);
+    //     }
+    //     // setCounter(counter - 1)
+    // }
+
+    const decrement = (event) => {
+        event.preventDefault();
+        if (counter > 0) {
+            setCounter((prevCount) => prevCount - 1);
+        }
+    };
+    const handleReset = (event) => {
+        event.preventDefault();
+        setCounter(initialCount);
+    };
 
 
     return (
@@ -50,6 +88,7 @@ const Hagz = () => {
                         <input type="hidden" id="bookbottom-value-depart" name="depart" value="09/09/2023"/>
                         <input type="hidden" id="bookbottom-value-adult" name="adult" value="1"/>
                         <ul className="bookbottom__ul">
+
                             <li className="bookbottom__li bookbottom__li--icon bookbottom__li--icon-guests">
                                 <div className="bookbottom__guesticon">
                                     <img
@@ -60,17 +99,25 @@ const Hagz = () => {
                                 </div>
                             </li>
                             <li className="bookbottom__li bookbottom__li--select bookbottom__li--select-guests">
+                                <div className="bookbottom__select position-relative">
+                                    {/*<div className="bookbottom__select-text">Total Guests</div>*/}
+                                    <button className="button-select-guest" onClick={openSelectGuest}>
+                                        {counter !== null && counter != 0 ? `${counter} persons` : "Number of People"}
+                                    </button>
 
-                                <div className="bookbottom__select" data-target="adult">
-                                    <div className="bookbottom__select-text">Total Guests</div>
-                                    <div className="bookbottom__select-options">
-                                        <div className="bookbottom__select-option" data-value="1">1</div>
-                                        <div className="bookbottom__select-option" data-value="2">2</div>
-                                        <div className="bookbottom__select-option" data-value="3">3</div>
-                                        <div className="bookbottom__select-option" data-value="4">4</div>
-                                    </div>
+                                    {isOpen && (
+                                        <div className='counter-container'>
+                                            <span onClick={closeSelectGuest}>Number of People ✖</span>
+                                            <button className="decrement-btn" onClick={decrement}>-
+                                            </button>
+                                            <p className="counter-number">{counter}</p>
+                                            <button onClick={increment}>+
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                             </li>
+
                             <li className="bookbottom__li bookbottom__li--icon bookbottom__li--icon-datepicker">
                                 <div className="bookbottom__calicon">
                                     <img
@@ -99,44 +146,53 @@ const Hagz = () => {
                                 <div className="bookbottom__select active" data-target="roomType">
                                     <div className="bookbottom__select-text ">
                                         <div className="position-relative">
+
                                             {/*<button onClick={handleButtonClick}>Open Date Pickers</button>*/}
-                                            <div>
+                                            <div className="time-container">
                                                 {selectedEndTime ? (
                                                     <div>
-                                                        <p>Start Time: {selectedStartTime.toLocaleTimeString()}</p>
-                                                        <p>End Time: {selectedEndTime.toLocaleTimeString()}</p>
-                                                        <DatePicker
-                                                            // selected={selectedStartTime}
-                                                            onChange={handleStartTimeChange}
-                                                            showTimeSelect
-                                                            showTimeSelectOnly
-                                                            timeIntervals={15}
-                                                            timeCaption="Start Time"
-                                                            dateFormat="h:mm aa"
-                                                            selectsStart
-                                                            startDate={selectedStartTime}
-                                                            endDate={selectedEndTime}
-                                                            fixedHeight
-                                                            placeholderText="Edit Time"
-                                                            className="place-text"
-                                                            // Open the start time picker automatically
-                                                        />
+                                                        <div className="d-flex justify-content-center">
+                                                            <p>
+                                                                <DatePicker
+                                                                    // selected={selectedStartTime}
+                                                                    onChange={handleStartTimeChange}
+                                                                    showTimeSelect
+                                                                    showTimeSelectOnly
+                                                                    timeIntervals={15}
+                                                                    timeCaption="Start Time"
+                                                                    dateFormat="h:mm aa"
+                                                                    selectsStart
+                                                                    startDate={selectedStartTime}
+                                                                    endDate={selectedEndTime}
+                                                                    fixedHeight
+                                                                    placeholderText={selectedStartTime.toLocaleTimeString()}
+                                                                    className="place-text"
+                                                                    // Open the start time picker automatically
+                                                                >
+                                                                </DatePicker>
+                                                            </p>
+                                                            <p className="mx-3">-</p>
+                                                            <p className="place-text">{selectedEndTime.toLocaleTimeString()}</p>
+                                                        </div>
+
+
                                                     </div>
                                                 ) : (
                                                     <div>
                                                         <DatePicker
                                                             selected={selectedStartTime}
                                                             onChange={handleStartTimeChange}
+
                                                             showTimeSelect
                                                             showTimeSelectOnly
-                                                            timeIntervals={15}
-                                                            timeCaption="Start Time"
+                                                            timeIntervals={5}
+                                                            timeCaption="Check In"
                                                             dateFormat="h:mm aa"
                                                             selectsStart
                                                             startDate={selectedStartTime}
                                                             endDate={selectedEndTime}
                                                             fixedHeight
-                                                            placeholderText="Check In"
+                                                            placeholderText="Select Time"
                                                             className="place-text"
                                                             // Open the start time picker automatically
                                                         />
@@ -156,7 +212,6 @@ const Hagz = () => {
                                                                 maxTime={new Date().setHours(23, 45)}
                                                                 disabled={!selectedStartTime}
                                                                 fixedHeight
-                                                                placeholderText="Check Out"
                                                                 className="place-text"
                                                                 open={true} // Open the end time picker automatically
                                                             />
@@ -173,7 +228,8 @@ const Hagz = () => {
 
                             <li className="bookbottom__li bookbottom__li--submit">
                                 <div className="btnlinks">
-                                    <input type="submit" value="Book Now" className="reservebutton"/>
+                                    <NavLink to="/bookingDetails/bookNow" className="reservebutton">Book Now</NavLink>
+                                    {/*<input type="submit" value="" className="reservebutton"/>*/}
                                 </div>
                             </li>
                         </ul>
@@ -185,4 +241,4 @@ const Hagz = () => {
     );
 };
 
-export default Hagz;
+export default BookingForm;
