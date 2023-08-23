@@ -39,7 +39,6 @@ const Home = () => {
             <MonoBlock2/>
             <Partners/>
             <NewsLetter/>
-
         </>
     );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import gallery from "../../../assets/images/gallery.png";
+import {NavLink} from "react-router-dom";
 
 const CommunityGallery = () => {
     return (
@@ -18,9 +19,9 @@ const CommunityGallery = () => {
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing eliteiusmod
                                 </p>
-                                <a href="#" className="btn button-outLine btn-bg-white">
+                                <NavLink t={"/galleryshow"} className="btn button-outLine btn-bg-white">
                                     Explore
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left ">
