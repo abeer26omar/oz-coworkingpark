@@ -6,7 +6,6 @@ import MonoBlock2 from "../components/Home/HomeMonoBlock/MonoBlock2";
 import OurVision from "../components/Home/OurVision/OurVision";
 import NewsLetter from "../components/NewsLetter/NewsLetter";
 import Partners from "../components/Partners/Partners";
-import DatePicker from "react-datepicker";
 
 const Home = () => {
     const [startTime, setStartTime] = useState(null);
@@ -40,33 +39,7 @@ const Home = () => {
             <MonoBlock2/>
             <Partners/>
             <NewsLetter/>
-            <DatePicker
-                selected={startTime}
-                onChange={handleStartTimeChange}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                timeCaption="Start Time"
-                dateFormat="h:mm aa"
-                selectsStart
-                startDate={startTime}
-                endDate={endTime}
-            />
-            <DatePicker
-                selected={endTime}
-                onChange={handleEndTimeChange}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                timeCaption="End Time"
-                dateFormat="h:mm aa"
-                selectsEnd
-                startDate={startTime}
-                endDate={endTime}
-                minTime={startTime}
-                maxTime={new Date().setHours(23, 45)}
-                disabled={!startTime}
-            />
+
         </>
     );
 };
