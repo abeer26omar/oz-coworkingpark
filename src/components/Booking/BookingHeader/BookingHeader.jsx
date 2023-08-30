@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from "react-bootstrap/Navbar";
-import {Container, Nav} from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import booking from "../../../assets/images/videos/community.mp4";
 import './BookinHeader.css'
 
@@ -21,14 +21,7 @@ const BookingHeader = () => {
                     >
                         <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
                     </svg>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ms-auto">
-                            <>
 
-                            </>
-                        </Nav>
-                    </Navbar.Collapse>
                 </Container>
             </Navbar>
 

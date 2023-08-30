@@ -12,12 +12,12 @@ import {Link, NavLink} from "react-router-dom";
 import {Container, Nav} from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 
-const Header = ({showGalleryLogo}) => {
+const Header = ({showBlackNav}) => {
     const [showBasic, setShowBasic] = useState(false);
 
-    const logoImage = showGalleryLogo ? galleryLogo : logo;
-    const userIcon = showGalleryLogo ? userwhite : userblack;
-    const listIcon = showGalleryLogo ? listWhite : listBlack;
+    const logoImage = showBlackNav ? galleryLogo : logo;
+    const userIcon = showBlackNav ? userwhite : userblack;
+    const listIcon = showBlackNav ? listWhite : listBlack;
     return (
         <>
             <Navbar expand="lg" sticky="top">
@@ -46,12 +46,12 @@ const Header = ({showGalleryLogo}) => {
                             >
                                 Booking
                             </Link>
-                            <a
+                            <Link
                                 className="nav-link links-margin"
-                                href="#"
+                                to="/about"
                             >
                                 About OZ
-                            </a>
+                            </Link>
 
                             {/*<Link*/}
                             {/*    className="nav-link links-margin"*/}

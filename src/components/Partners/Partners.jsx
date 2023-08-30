@@ -18,17 +18,17 @@ const Partners = () => {
                         </div>
                     </div>
                     <div className="row" style={{marginTop: "40px"}}>
-                        <div className="col-lg-3 col-md-6 col-sm-12 border-right">
+                        <div className="col-lg-3 col-md-6 col-sm-6 col-6 border-right">
                             <img src={logo1} alt="partner logo" className="d-flex m-auto"/>
                         </div>
-                        <div className="col-lg-3 col-md-6 col-sm-12 border-right">
-                            <img src={logo2} alt="partner logo" className="d-flex m-auto" />
+                        <div className="col-lg-3 col-md-6 col-sm-6 col-6 border-right">
+                            <img src={logo2} alt="partner logo" className="d-flex m-auto"/>
                         </div>
-                        <div className="col-lg-3 col-md-6 col-sm-12 border-right">
-                            <img src={logo3} alt="partner logo" className="d-flex m-auto" />
+                        <div className="col-lg-3 col-md-6 col-sm-6 col-6 border-right">
+                            <img src={logo3} alt="partner logo" className="d-flex m-auto"/>
                         </div>
-                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                            <img src={logo4} alt="partner logo" className="d-flex m-auto" />
+                        <div className="col-lg-3 col-md-6 col-sm-6 col-6 ">
+                            <img src={logo4} alt="partner logo" className="d-flex m-auto"/>
                         </div>
                     </div>
                 </div>

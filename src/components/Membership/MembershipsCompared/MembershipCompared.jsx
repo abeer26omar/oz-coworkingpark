@@ -1,11 +1,13 @@
 import React from 'react';
 import check from '../../../assets/images/icons/twemoji_check-mark.svg';
 import './MembershipCompared.css';
+import {Link} from "react-router-dom";
+
 const MembershipCompared = () => {
     return (
         <>
             <section className="memberships-compared p-60 table-responsive">
-                <div className="container">
+                <div className="container-fluid">
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="head-content pb-5">
@@ -14,7 +16,7 @@ const MembershipCompared = () => {
                             <table className="table table-compared ">
                                 <thead>
                                 <tr>
-                                    <th className="table-head" style={{textAlign:"left"}} scope="col">Memberships
+                                    <th className="table-head" style={{textAlign: "left"}} scope="col">Memberships
                                         compared
                                     </th>
                                     <th className="table-head" scope="col">Limited 8</th>
@@ -60,9 +62,12 @@ const MembershipCompared = () => {
                                 </tr>
                                 <tr className="buttons-apply">
                                     <td></td>
-                                    <td><a href="src/components/Membership/MembershipsCompared#" className="button-one-outline p-0 my-3" tabIndex="-1">Apply</a></td>
-                                    <td><a href="src/components/Membership/MembershipsCompared#" className="button-one-outline p-0 my-3" tabIndex="-1">Apply</a></td>
-                                    <td><a href="src/components/Membership/MembershipsCompared#" className="button-one-outline p-0 my-3" tabIndex="-1">Apply</a></td>
+                                    <td><Link to="/limited"
+                                              className="button-one-outline p-0 my-3" tabIndex="-1">Apply</Link></td>
+                                    <td><Link to="/limited"
+                                              className="button-one-outline p-0 my-3" tabIndex="-1">Apply</Link></td>
+                                    <td><Link to="/limited"
+                                              className="button-one-outline p-0 my-3" tabIndex="-1">Apply</Link></td>
                                 </tr>
                                 <tr>
                                     <th className="table-item" scope="row">Price for membership</th>

@@ -42,6 +42,8 @@ const PublicEvent = () => {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
+                    speed: 3000,
+
                 },
             },
         ],

@@ -26,35 +26,32 @@ const CommunityHeader = () => {
                     >
                         <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
                     </svg>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ms-auto">
-                            <>
-                                <NavLink className="nav-link-two links-margin" onClick={() => {
-                                    window.location.href = '#community-newsfeed';
-                                }}>
-                                    News Feed
-                                </NavLink>
-                                <NavLink className="nav-link-two  links-margin"
-                                         onClick={() => {
-                                             window.location.href = '#community-events';
-                                         }}
-                                         smooth={true}
-                                         smoothScrollTimeout={1000}
-                                >
-                                    Events
-                                </NavLink>
-                                <NavLink className="nav-link-two links-margin"
-                                         onClick={() => {
-                                             window.location.href = '#community-gallery';
-                                         }
-                                         }
-                                >
-                                    Gallery
-                                </NavLink>
-                            </>
-                        </Nav>
-                    </Navbar.Collapse>
+                    <Nav className="ms-auto nav-head">
+                        <>
+                            <NavLink className="nav-link-two links-margin" onClick={() => {
+                                window.location.href = '#community-newsfeed';
+                            }}>
+                                News Feed
+                            </NavLink>
+                            <NavLink className="nav-link-two  links-margin"
+                                     onClick={() => {
+                                         window.location.href = '#community-events';
+                                     }}
+                                     smooth={true}
+                                     smoothScrollTimeout={1000}
+                            >
+                                Events
+                            </NavLink>
+                            <NavLink className="nav-link-two links-margin"
+                                     onClick={() => {
+                                         window.location.href = '#community-gallery';
+                                     }
+                                     }
+                            >
+                                Gallery
+                            </NavLink>
+                        </>
+                    </Nav>
                 </Container>
             </Navbar>
 

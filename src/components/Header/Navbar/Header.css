@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
 .nav-link, .nav-link-two {
     color: var(--primary-color);
     font-family: couture, sans-serif;

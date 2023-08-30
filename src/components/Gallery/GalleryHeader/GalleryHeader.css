@@ -29,3 +29,7 @@
     font-weight: 400;
     line-height: 120%; /* 62.4px */
 }
+
+.galleryHeader img {
+    width: 100%;
+}

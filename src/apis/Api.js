@@ -37,12 +37,12 @@ export const getListMembershipTypes = async () => {
             data: formData,
             maxContentLength: Infinity,
             maxBodyLength: Infinity,
-            timeout: 10000,
         };
 
         const response = await axios(config);
         if (response.data.status === 'success') {
-            return response.data.data.options;
+            return response.data.data;
+            console.log(response.data.data)
         } else {
             console.error(response.data.message);
             return [];

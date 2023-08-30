@@ -1,62 +1,294 @@
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-    .large-head{
-        font-size: var(--font-size-23);
-        line-height: 35px;
+/* Styles for devices with a width up to 768px (mobile devices) */
+@media (max-width: 768px) {
+    /* CSS rules for mobile devices */
+    /*Start Default Classes*/
+    .sun-border {
+        margin: 0;
     }
-    .shape-right img{
-        width: 40px;
-        top: -30px;
+
+    .box-content {
+        padding: 30px 30px;
     }
-    /*END*/
-    /*Start Membership page*/
-    .become-member .large-head{
-        font-size: var(--font-size-23);
-        line-height: 35px;
+
+    .h2-text {
+        font-size: var(--font-size-52);
     }
-    .community-creators .large-head {
-        font-size: var(--font-size-23);
-        line-height: 35px;
+
+    .box-content .h2-text-box {
+        font-size: var(--font-size-32);
+        text-align: center;
     }
-    .membership-types .large-head {
-        font-size: var(--font-size-23);
-        margin-bottom: 10px;
+
+    .image-box {
+        padding: 0;
     }
-    .membership-types .card-title{
-        font-size: var(--font-size-18);
+
+    .title-name {
+        font-size: 32px;
+        margin: auto;
     }
-    /*END*/
-    /*Start IndividualHeader*/
-    .become-member-slider .head-content{
+
+    .navigator .p-name {
         width: 100%;
+        margin: auto;
+        margin-bottom: auto;
+        margin-bottom: 16px;
+        text-align: center;
     }
-    .become-member-slider .head-content{
-        bottom: 0;
-        padding-left: 0;
+
+    .box-content .p-text-box {
+        margin-bottom: 0;
     }
-    .become-member-slider .head-content .hand-write{
-        font-size: var(--font-size-20);
-        line-height: 1;
+
+    .nav-head {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin: auto;
+        flex-wrap: wrap;
     }
-    .become-member-slider .large-head{
-        font-size: var(--font-size-23);
-        line-height: 1.2;
+
+    .navigator svg {
+        display: none;
     }
-    .become-member-slider .text-content{
-        font-size: var(--font-size-13);
-        line-height: 1.2;
+
+    .head-content-left-shape {
+        height: 200px;
+    }
+
+    /*End Default Classes*/
+    /*Start Header Components*/
+    .navbar-toggler {
+
+    }
+
+    /*End Header Components*/
+    /*Start Footer Component*/
+    .footer-single-col {
+        margin-top: 32px
+    }
+
+    .footer-links {
+        display: flex;
+    }
+
+    .footer-links .links-derictions {
+        flex-direction: column;
+        align-items: unset;
+    }
+
+    .footer-social svg {
+        display: none;
+    }
+
+    .footer-section .links-derictions a {
+        margin: 0;
+        margin-top: 12px;
+        font-size: 16px;
+    }
+
+    .social-links a img {
+        margin: auto 16px;
+    }
+
+    /*End Footer Component*/
+    /* Home Page */
+    /*Start Header Component*/
+    .box .text-wrapper-2 {
+        font-size: 32px;
+    }
+
+    .box .p {
+        width: 95%;
+    }
+
+    /*END Header Component*/
+    /*Start Mono Block Components*/
+    .monoBlock .text-h1 {
+        font-size: 32px;
+    }
+
+    .monoBlock .text-p {
+        text-align: justify;
+    }
+
+    /*End Mono Block Components*/
+    /*Start Public Events Component*/
+    .events .p-text-box {
+        font-size: 16px;
+    }
+
+    /*End Public Events Component*/
+    /*    Start News Letter Component */
+    .newsLetters .form__field {
+        width: 75%;
+    }
+
+    /*    END News Letter Component*/
+    /*    House Page*/
+    /*    Start House Component*/
+    .locations-houses .box-office {
+        padding: 0;
+        margin: 16px 0;
+    }
+
+    .locations-houses .location-contact {
+        padding: 16px 0
+    }
+
+    .btn-explore {
+        margin-bottom: 16px;
+    }
+
+    .locations-houses .box-office img {
+        padding: 0;
+    }
+
+    .nav-head {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        /*margin: auto;*/
+        flex-wrap: wrap;
+        margin-bottom: 22px;
+    }
+
+    .nav-head .button-outLine {
+        margin: 16px auto;
+    }
+
+    .next-compound .h4-text {
+        font-size: 12px;
+    }
+
+    .next-compound .map-point {
+        width: 16px;
+        height: 16px;
+        margin: auto 4px;
+    }
+
+    /*    End House Component*/
+    /* Start Private Events*/
+    .private-events-head .links-margin {
+        font-size: 10px;
+        margin: auto 8px;
+    }
+
+    .private-events-details .h2-text-box {
+        text-align: left;
+    }
+
+    .private-events-details .places {
+        margin-top: 1rem;
+    }
+
+    .private-events-details .image-box {
+        margin: 0;
+        padding: 30px 0;
+    }
+
+    /* END Private Events*/
+    /*    Contact Us Page */
+    .contactus form {
+        padding: 0 28px;
+    }
+
+    /*    End Contact us*/
+    /*    Start Login Page*/
+    .login-card form {
+        padding: 0 28px;
+    }
+
+    .login-card form .group-check {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    /*    End Login Page*/
+    /*Start Community Feed */
+    .community-header .group-2 {
+        left: 10px;
+    }
+
+    .community-header .box .p {
+        width: 90%;
+    }
+
+    .box-content .btn-bg-white {
+        margin-top: 16px;
+    }
+
+    .box-content .h2-text-box {
+        text-align: left;
+    }
+
+    /*Start News Feed */
+    .news-header .group-2 {
+        left: 10px;
+    }
+
+    .title-feed-header .name-feed {
+        font-size: 32px;
+    }
+
+    .news-details .image-header {
+        padding: 8px 0;
+    }
+
+    .news-details .box-details h3 {
+        font-size: 21px;
+        margin-bottom: 20px;
+    }
+
+    .news-details .box-details {
+        padding: 30px 30px;
+    }
+
+    /*End News Feed */
+    /*Start Community Events */
+    .com-events .group-2 {
+        left: 10px;
+    }
+
+    .events-show .single-event-slider {
+        padding: 0;
+    }
+
+    .events-show .single-event-slider .cards-event-buttons .button-outLine {
+        width: 65%;
+    }
+
+    .slider-card .card-text {
+        margin-bottom: 0;
+        font-size: 12px;
+    }
+
+    .events-show .title-explore {
+        font-size: 16px;
+
+    }
+
+    /*End Community Events */
+    .booking-space .book-title {
+        font-size: 32px;
+        text-align: center;
+
+    }
+
+    .booking-space .btn-spaces-filter {
+        text-align: center;
+        margin: 8px auto;
+        padding: 8px 0;
     }
 
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {}
+/* Styles for devices with a width between 769px and 1024px (tablets) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* CSS rules for tablets */
+}
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {}
+/* Styles for devices with a width above 1024px (laptops and desktops) */
+@media (min-width: 1025px) {
+    /* CSS rules for laptops and desktops */
+}

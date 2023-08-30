@@ -44,40 +44,37 @@ const HouseDetails = () => {
                     >
                         <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
                     </svg>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ms-auto">
-                            <>
-                                <NavLink className="nav-link-two links-margin" onClick={() => {
-                                    window.location.href = '#community-events';
-                                }}>
-                                    Community Events
-                                </NavLink>
-                                <NavLink className="nav-link-two  links-margin"
-                                         onClick={() => {
-                                             window.location.href = '#f-b';
-                                         }}
-                                         smooth={true}
-                                         smoothScrollTimeout={1000}
-                                >
-                                    F&B
-                                </NavLink>
-                                <NavLink className="nav-link-two links-margin"
-                                         onClick={() => {
-                                             window.location.href = '#amenities';
-                                         }
-                                         }
-                                >
-                                    Amenities
-                                </NavLink>
-                                <NavLink className="nav-link-two btn button-outLine btn-bg-white"
-                                         to="/inquery"
-                                >
-                                    Inquiry
-                                </NavLink>
-                            </>
-                        </Nav>
-                    </Navbar.Collapse>
+                    <Nav className="ms-auto nav-head">
+                        <>
+                            <NavLink className="nav-link-two links-margin" onClick={() => {
+                                window.location.href = '#community-events';
+                            }}>
+                                Community Events
+                            </NavLink>
+                            <NavLink className="nav-link-two  links-margin"
+                                     onClick={() => {
+                                         window.location.href = '#f-b';
+                                     }}
+                                     smooth={true}
+                                     smoothScrollTimeout={1000}
+                            >
+                                F&B
+                            </NavLink>
+                            <NavLink className="nav-link-two links-margin"
+                                     onClick={() => {
+                                         window.location.href = '#amenities';
+                                     }
+                                     }
+                            >
+                                Amenities
+                            </NavLink>
+                            <NavLink className="nav-link-two btn button-outLine btn-bg-white"
+                                     to="/inquery"
+                            >
+                                Inquiry
+                            </NavLink>
+                        </>
+                    </Nav>
                 </Container>
             </Navbar>
 

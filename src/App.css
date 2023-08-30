@@ -18,6 +18,11 @@ html, body {
     background-color: var(--neturals-color1);
 }
 
+.body-dark {
+    background-color: #000;
+
+}
+
 a {
     text-decoration: none;
 }

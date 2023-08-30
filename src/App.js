@@ -27,6 +27,14 @@ import BookingDetails from "./components/Booking/BookinDetails/BookingDetails";
 import BookingSummary from "./components/Booking/BookinDetails/SpaceDetails/BookingSummary/BookingSummary";
 import Gallery from "./pages/Gallery";
 import styled from 'styled-components';
+import MemberDetailsTest from "./components/Membership/MembershipTypes/MemberDetailsTest";
+import MemberLimitedTest from "./components/Membership/MembershipTypes/MemberLimitedTest/MemberLimitedTest";
+import About from "./pages/About";
+
+const StyledBody = styled.body`
+  background-color: ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
+          isGalleryRoute || isLimitedRoute || isAboutRoute ? '#000' : 'initial'};
+`;
 
 const AppContainer = styled.nav`
   /* Default styles for the header */
@@ -37,10 +45,12 @@ const AppContainer = styled.nav`
   //}
 
   /* Styles for the header in the gallery route */
-  ${({isGalleryRoute}) =>
-          isGalleryRoute &&
-          `
-        
+  ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
+          (isGalleryRoute || isLimitedRoute || isAboutRoute) &&
+          `  
+          html, body {
+        background-color: #000 ;
+      }
     .navbar {
           background:#000;
     }
@@ -53,53 +63,66 @@ const AppContainer = styled.nav`
 function App() {
     const location = useLocation();
     const isGalleryRoute = location.pathname === '/galleryshow';
+    const isLimitedRoute = location.pathname === '/limited';
+    const isAboutRoute = location.pathname === '/about';
 
     return (
         <div className="App">
-            <AppContainer isGalleryRoute={isGalleryRoute}>
-                <ScrollToTop/>
+            <StyledBody isGalleryRoute={isGalleryRoute}
+                        isLimitedRoute={isLimitedRoute}
+                        isAboutRoute={isAboutRoute}>
 
-                <Header className="navbar" showGalleryLogo={isGalleryRoute}/>
+                <AppContainer isGalleryRoute={isGalleryRoute} isLimitedRoute={isLimitedRoute}
+                              isAboutRoute={isAboutRoute}>
+                    <ScrollToTop/>
 
-                <Routes>
-                    {/* Start Single Pages Routes */}
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/joinus" element={<Joinus/>}/>
-                    <Route path="/contactus" element={<ContactUs/>}/>
-                    {/* End Single Pages Routes */}
-                    {/* Start Authentication Routes */}
-                    <Route path="/login" element={<Login/>}/>
-                    {/* END Authentication Routes */}
-                    {/* Start Membership Routes */}
-                    <Route path="/membership" element={<Membership/>}/>
-                    <Route path="/membership/:id" element={<MembershipOptions/>}/>
-                    <Route path="/singleMember/:id" element={<MembershipSingleOption/>}/>
-                    {/* End Membership Routes */}
-                    {/* Start Community Routes */}
-                    <Route path="/community" element={<Community/>}/>
-                    <Route path="/community/events" element={<CommunityEventsExplore/>}/>
-                    <Route path="/events/communityEventsDetails" element={<CommunityEventsDetails/>}/>
-                    <Route path="/community/newsfeed" element={<NewsFeed/>}/>
-                    <Route path="/community/newsfeed/singleFeed" element={<SingleNewFeed/>}/>
-                    {/* End Community Routes */}
-                    {/* Start Private Events Routes */}
-                    <Route path="/private" element={<PrivateEvents/>}/>
-                    {/* End Private Events Routes */}
-                    {/* Start Houses Locations Routes */}
-                    <Route path="/houses" element={<Houses/>}/>
-                    <Route path="/houses/:id" element={<HouseDetails/>}/>
-                    {/* End Houses Locations Routes */}
-                    {/* Start Booking Routes */}
-                    <Route path="/booking" element={<Booking/>}/>
-                    <Route path="/bookingDetails" element={<BookingDetails/>}/>
-                    <Route path="/bookingDetails/bookNow" element={<BookingSummary/>}/>
-                    {/* End Booking Routes */}
-                    {/* Start Gallery  Routes */}
-                    <Route path="/galleryshow" element={<Gallery/>}/>
-                    {/* End Gallery Routes */}
-                </Routes>
-                <Footer/>
-            </AppContainer>
+                    <Header className="navbar" showBlackNav={isGalleryRoute || isLimitedRoute || isAboutRoute}/>
+
+                    <Routes>
+                        {/* Start Single Pages Routes */}
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/about" element={<About/>}/>
+                        <Route path="/joinus" element={<Joinus/>}/>
+                        <Route path="/contactus" element={<ContactUs/>}/>
+                        {/* End Single Pages Routes */}
+                        {/* Start Authentication Routes */}
+                        <Route path="/login" element={<Login/>}/>
+                        {/* END Authentication Routes */}
+                        {/* Start Membership Routes */}
+                        <Route path="/membership" element={<Membership/>}/>
+                        <Route path="/membershipDetailsTest" element={<MemberDetailsTest/>}/>
+                        <Route path="/limited" element={<MemberLimitedTest/>}/>
+
+
+                        <Route path="/membership/:id" element={<MembershipOptions/>}/>
+                        <Route path="/singleMember/:id" element={<MembershipSingleOption/>}/>
+                        {/* End Membership Routes */}
+                        {/* Start Community Routes */}
+                        <Route path="/community" element={<Community/>}/>
+                        <Route path="/community/events" element={<CommunityEventsExplore/>}/>
+                        <Route path="/events/communityEventsDetails" element={<CommunityEventsDetails/>}/>
+                        <Route path="/community/newsfeed" element={<NewsFeed/>}/>
+                        <Route path="/community/newsfeed/singleFeed" element={<SingleNewFeed/>}/>
+                        {/* End Community Routes */}
+                        {/* Start Private Events Routes */}
+                        <Route path="/private" element={<PrivateEvents/>}/>
+                        {/* End Private Events Routes */}
+                        {/* Start Houses Locations Routes */}
+                        <Route path="/houses" element={<Houses/>}/>
+                        <Route path="/houses/:id" element={<HouseDetails/>}/>
+                        {/* End Houses Locations Routes */}
+                        {/* Start Booking Routes */}
+                        <Route path="/booking" element={<Booking/>}/>
+                        <Route path="/bookingDetails" element={<BookingDetails/>}/>
+                        <Route path="/bookingDetails/bookNow" element={<BookingSummary/>}/>
+                        {/* End Booking Routes */}
+                        {/* Start Gallery  Routes */}
+                        <Route path="/galleryshow" element={<Gallery/>}/>
+                        {/* End Gallery Routes */}
+                    </Routes>
+                    <Footer/>
+                </AppContainer>
+            </StyledBody>
         </div>
     );
 }

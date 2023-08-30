@@ -1,22 +1,26 @@
-.Individual-types .card{
+.Individual-types .card {
     box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;
     border: none;
 }
-.Individual-types .card-img-top{
+
+.Individual-types .card-img-top {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-.Individual-types .card-title{
+
+.Individual-types .card-title {
     font-weight: var(--font-weight-bold);
 }
+
 /*END*/
 
 /*Start Become a member Section*/
-.become-member .large-head{
+.become-member .large-head {
     line-height: 79px;
 
 }
-.caption-rotate{
+
+.caption-rotate {
     position: absolute;
     right: 55%;
     top: 165px;
@@ -26,29 +30,35 @@
     font-size: var(--font-size-66);
     line-height: 120%;
     /* identical to box height, or 100px */
-    letter-spacing: 0 ;
+    letter-spacing: 0;
     /* Primary 1 */
     color: var(--primary-color);
     opacity: 0.2;
-    filter: invert(75%);    transform: rotate(90deg);
+    filter: invert(75%);
+    transform: rotate(90deg);
 }
+
 /*END*/
 /*Start community-creators*/
-.community-creators .large-head{
+.community-creators .large-head {
     font-size: var(--font-size-41);
     line-height: 49px;
 }
+
 /*END*/
 /*Start membership one option */
-.membership-types .large-head{
+.membership-types .large-head {
     font-size: var(--font-size-41);
     margin-bottom: 10px;
 }
-.membership-types .card-body{
+
+.membership-types .card-body {
     background: #FFFFFF;
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);*/
+    box-shadow: none;
 }
-.membership-types .card-title{
+
+.membership-types .card-title {
     font-family: couture, sans-serif;
     font-style: normal;
     font-weight: var(--font-weight-bold);
@@ -56,16 +66,21 @@
     line-height: 120%;
     color: var(--primary-color);
 }
-.membership-types .card{
+
+.membership-types .card {
     background: #FFFFFF;
     /*box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);*/
     border: none;
 }
-.membership-types .card-img-top{
+
+.membership-types .card-img-top {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-.membership-types .card-title{
+
+.membership-types .card-title {
     font-weight: var(--font-weight-bold);
 }
+
 /*END*/
+

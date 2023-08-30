@@ -1,5 +1,6 @@
 .title-feed-header {
-    padding: 40px 70px 80px;
+    /*padding: 40px 70px 80px;*/
+    margin: 60px auto;
 }
 
 .title-feed-header .news-feed-head {
@@ -89,4 +90,9 @@
 
 .news-details .box-details .btn {
     margin-top: 60px;
+}
+
+.news-details img {
+    width: 100%;
+    margin: 8px
 }

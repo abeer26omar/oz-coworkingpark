@@ -307,7 +307,7 @@ bookbottom__ul img {
     display: flex;
     align-items: center;
     width: 410px;
-    justify-content: start;
+    justify-content: flex-start;
     background-color: #fff;
     height: 71px;
     padding: 30px 8px;

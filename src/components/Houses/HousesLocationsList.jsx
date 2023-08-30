@@ -6,7 +6,7 @@ const HousesLocationsList = ({id, img, government, address}) => {
         <>
 
             <div className="box-office" key={id}>
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="d-lg-flex justify-content-between align-items-center d-sm-block">
                     <div className="location-contact">
                         <h2 className="h2-text-box">{address}</h2>
                         <span className="government">{government}</span>

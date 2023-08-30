@@ -90,7 +90,8 @@ const SingleNewFeed = () => {
                                 </p>
                             </div>
                             <div className="box-details border-bottom">
-                                <div className="d-flex justify-content-between align-items-center ">
+                                <div
+                                    className="d-lg-flex justify-content-between align-items-center d-sm-block m-sm-auto ">
                                     <img src={blog1}/>
                                     <img src={blog2}/>
                                 </div>

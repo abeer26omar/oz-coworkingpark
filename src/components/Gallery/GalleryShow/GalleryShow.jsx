@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './GalleryShow.css';
-import Masonry from "react-responsive-masonry";
+import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import {GalleryData} from "../../../Data/GalleryData";
 
 const GalleryShow = () => {
@@ -43,23 +43,28 @@ const GalleryShow = () => {
                             </div>
                         </div>
                         <div className="filterButtons">{filterButtons}</div>
-
-                        <Masonry columnsCount={3} gutter="30px">
-                            {filteredGalleryData.map((gallery, index) => {
-                                const {img, id, category, text, date, title} = gallery;
-                                return (
-                                    <div key={id} className={`gallery-item ${category}`}>
-                                        <div className="position-relative">
-                                            <img src={img} alt={`Gallery Item ${id}`}/>
-                                            <div className="gallery-description">
-                                                <h3>{title}</h3>
-                                                <span>{date}</span>
+                        <ResponsiveMasonry
+                            columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}>
+                            <Masonry columnsCount={3} gutter="30px">
+                                {filteredGalleryData.map((gallery, index) => {
+                                    const {img, id, category, text, date, title} = gallery;
+                                    return (
+                                        <div key={id} className={`gallery-item ${category}`}>
+                                            <div className="position-relative">
+                                                <img src={img} alt={`Gallery Item ${id}`}/>
+                                                <div className="gallery-description">
+                                                    <h3>{title}</h3>
+                                                    <span>{date}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
-                        </Masonry>
+                                    );
+                                })}
+                            </Masonry>
+
+                        </ResponsiveMasonry>
+
+
                     </div>
                 </div>
             </section>

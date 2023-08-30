@@ -55,7 +55,7 @@ const LoginForm = () => {
                                     <h3 className="bold-head">Please Sign in</h3>
                                 </div>
                                 <Form onSubmit={handleSubmit}>
-                                    <div className="form__group field my-3">
+                                    <div className="form__group field my-3 group-check">
                                         <label htmlFor="email" className="form__label">
                                             Email
                                         </label>
