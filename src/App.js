@@ -30,6 +30,7 @@ import styled from 'styled-components';
 import MemberDetailsTest from "./components/Membership/MembershipTypes/MemberDetailsTest";
 import MemberLimitedTest from "./components/Membership/MembershipTypes/MemberLimitedTest/MemberLimitedTest";
 import About from "./pages/About";
+import Profile from "./pages/Profile";
 
 const StyledBody = styled.body`
   background-color: ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
@@ -84,6 +85,7 @@ function App() {
                         <Route path="/about" element={<About/>}/>
                         <Route path="/joinus" element={<Joinus/>}/>
                         <Route path="/contactus" element={<ContactUs/>}/>
+                        <Route path="/profile" element={<Profile/>}/>
                         {/* End Single Pages Routes */}
                         {/* Start Authentication Routes */}
                         <Route path="/login" element={<Login/>}/>

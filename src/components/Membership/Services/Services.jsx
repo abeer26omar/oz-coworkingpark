@@ -4,11 +4,16 @@ import './Services.css';
 import vector from "../../../assets/images/Vector.png";
 import {services} from "../../../Data/ServicesData";
 import ServicesList from "./ServicesList";
+import {useLocation} from "react-router-dom";
 
 const Services = () => {
+    const location = useLocation();
+
+    // Check if the current path matches "/membership"
+    const isMembershipPage = location.pathname === '/membership';
     return (
         <>
-            <section className="what-get p-60">
+            <section className=" {`membership-component ${isMembershipPage ? 'yellow-background p-60' : ''}`}">
                 <div className="position-relative mb-5" style={{height: "100px"}}>
                     <img src={vector} className="position-absolute"
                          style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>

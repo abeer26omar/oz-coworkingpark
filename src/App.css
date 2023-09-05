@@ -202,6 +202,7 @@ a {
     border-color: var(--primary-color);
     color: var(--primary-color);
     margin: auto;
+    border-radius: 0;
 }
 
 .btn-bg-white:hover {
