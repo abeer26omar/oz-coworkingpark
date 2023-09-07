@@ -11,11 +11,11 @@
     }
 
     .h2-text {
-        font-size: var(--font-size-52);
+        font-size: var(--font-size-41);
     }
 
     .box-content .h2-text-box {
-        font-size: var(--font-size-32);
+        font-size: var(--font-size-26);
         text-align: center;
     }
 
@@ -95,7 +95,7 @@
     /* Home Page */
     /*Start Header Component*/
     .box .text-wrapper-2 {
-        font-size: 32px;
+        font-size: 26px;
     }
 
     .box .p {
@@ -105,7 +105,7 @@
     /*END Header Component*/
     /*Start Mono Block Components*/
     .monoBlock .text-h1 {
-        font-size: 32px;
+        font-size: 26px;
     }
 
     .monoBlock .text-p {
@@ -228,7 +228,7 @@
     }
 
     .title-feed-header .name-feed {
-        font-size: 32px;
+        font-size: 26px;
     }
 
     .news-details .image-header {
