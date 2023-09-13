@@ -57,7 +57,7 @@ const ProfileTabs = () => {
 
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-lg-3 border-right">
+                    <div className="col-md-4 col-lg-3 border-right">
                         <Tabs activeKey={activeTab} onSelect={handleTabSelect} id="my-tabs"
                               className="tabs-btns d-block">
                             <Tab eventKey="tab1"
@@ -70,7 +70,7 @@ const ProfileTabs = () => {
                                  title={renderTabTitle('Terms & Conditions', require('../../../assets/images/icons/Notes.png'))}/>
                         </Tabs>
                     </div>
-                    <div className="col-lg-9">
+                    <div className="col-md-8 col-lg-9">
                         {renderTabContent()}
                     </div>
                 </div>

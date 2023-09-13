@@ -18,8 +18,8 @@ const MonoBlock = (props) => {
                             <div
                                 className="buttons d-lg-flex d-md-flex d-sm-block my-3 justify-content-center align-items-center text-center">
                                 {links.map((linkText, index) => (
-                                    <a key={index} href="#" className={`btn button-outLine my-3 ${className}`}>
-                                        {linkText}
+                                    <a key={index} href="#" className={`btn button-outLine my-3 ${linkText.className}`}>
+                                        {linkText.label}
                                     </a>
                                 ))}
                             </div>

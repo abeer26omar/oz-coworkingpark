@@ -88,3 +88,12 @@
     margin: auto;
     border-radius: 0;
 }
+
+.bg-white .btn-bg-white:hover {
+    border-color: var(--primary-color);
+    color: #fff;
+    margin: auto;
+    border-radius: 0;
+    background-color: var(--primary-color);
+}
+

@@ -119,8 +119,9 @@ const Header = ({showBlackNav}) => {
                             >
                                 Login
                             </NavLink>
-                            <Media
-                                type="img" src={userIcon} className="margin-links user-icon"/>
+                            <NavLink to="/profile"> <Media type="img" src={userIcon}
+                                                           className="margin-links user-icon"/>
+                            </NavLink>
                             <Media
                                 type="img" src={listIcon}/>
                             <div className="sun-border">

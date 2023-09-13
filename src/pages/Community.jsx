@@ -14,13 +14,12 @@ const Community = () => {
             <CommunityNews/>
             <CommunityEvents/>
             <CommunityGallery/>
-            <MonoBlock className="bg-white " title="JOIN OUR COMMUNITY" desc=" Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
+            <MonoBlock className="bg-white  " title="JOIN OUR COMMUNITY" desc=" Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod"
-                       link={["Connect"]}
-                       numberOfLinksToShow={1}
+                       link={[{className: "btn-bg-white", label: "Connect"}]} numberOfLinksToShow={1}
             />
             <NewsLetter/>
         </>

@@ -12,7 +12,7 @@ import Media from "../../Media/Media";
 const OurVision = () => {
     return (
         <>
-            <TestComponents title={'hello'} description={'ddhdhdjdjj'} className={'bg'}/>
+            {/*<TestComponents title={'hello'} description={'ddhdhdjdjj'} className={'bg'}/>*/}
             <section className=" head-of-section">
                 <div className="container-fluid">
                     <div className="row">

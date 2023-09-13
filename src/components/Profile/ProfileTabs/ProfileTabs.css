@@ -1,5 +1,7 @@
 .tabs-btns {
-    padding: 55px 45px 40px 70px;
+    /*padding: 55px 45px 40px 70px;*/
+    padding: 55px 0;
+    border-bottom: 0;
 }
 
 .tabs-btns button {
