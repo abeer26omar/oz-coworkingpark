@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './GalleryShow.css';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import {GalleryData} from "../../../Data/GalleryData";
+import Media from "../../Media/Media";
 
 const GalleryShow = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
@@ -51,7 +52,8 @@ const GalleryShow = () => {
                                     return (
                                         <div key={id} className={`gallery-item ${category}`}>
                                             <div className="position-relative">
-                                                <img src={img} alt={`Gallery Item ${id}`}/>
+                                                <Media
+                                                    type="img" src={img} alt={`Gallery Item ${id}`}/>
                                                 <div className="gallery-description">
                                                     <h3>{title}</h3>
                                                     <span>{date}</span>

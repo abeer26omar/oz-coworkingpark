@@ -77,14 +77,17 @@ const MembershipTypes = () => {
                 breakpoint: 768,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 2
+                    slidesToScroll: 2,
+                    autoplay: false,
+
                 }
             },
             {
                 breakpoint: 600,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 2
+                    slidesToScroll: 2,
+                    autoplay: false,
                 }
             },
             {

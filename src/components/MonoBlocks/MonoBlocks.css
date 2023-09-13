@@ -1,5 +1,8 @@
-.monoBlock {
+.bgBlack {
     background-color: #000000;
+}
+
+.monoBlock {
     padding: 140px 0;
 }
 
@@ -35,12 +38,12 @@
 /*}*/
 
 
-.monoBlock-white {
+.bg-white {
     background-color: #F0F2F4;
     padding: 140px 0;
 }
 
-.monoBlock-white .text-h1 {
+.bg-white .text-h1 {
     color: var(--primary-color);
     font-family: Couture;
     font-size: var(--font-size-66);
@@ -53,7 +56,7 @@
     margin-bottom: 32px;
 }
 
-.monoBlock-white .text-p {
+.bg-white .text-p {
     color: var(--primary-color);
     font-family: Questrial;
     font-size: var(--font-size-16);
@@ -75,3 +78,13 @@
 /*    background-color: var(--neturals-color2);*/
 /*    color: var(--primary-color);*/
 /*}*/
+.buttons {
+    text-transform: uppercase;
+}
+
+.bg-white .btn-bg-white {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    margin: auto;
+    border-radius: 0;
+}

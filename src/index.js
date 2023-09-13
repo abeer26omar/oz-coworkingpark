@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './index.css';
 import './assets/css/mediaQuery.css'
-import 'masonry-layout/masonry';
 
 import {BrowserRouter} from "react-router-dom";
 

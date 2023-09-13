@@ -1,6 +1,7 @@
 import React from 'react';
 import PlaceItem from "./PlaceItem";
 import {Link} from "react-router-dom";
+import Media from "../Media/Media";
 
 const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
     const isEven = index % 2 === 0;
@@ -11,7 +12,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
 
         return (
             <>
-                <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto">
+                <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 border-right">
                     <div className="box-content px-60">
                         <h2 className="h2-text-box">{address}</h2>
                         <p className="p-text-box">
@@ -39,9 +40,10 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                     </div>
 
                 </div>
-                <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left">
+                <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 m-auto">
                     <figure className="">
-                        <img
+                        <Media
+                            type="img"
                             id={`image-place-${id}`}
                             src={img}
                             className="figure-img img-fluid image-box w-100"
@@ -54,9 +56,10 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
     } else {
         return (
             <>
-                <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-right">
+                <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 m-auto">
                     <figure className="">
-                        <img
+                        <Media
+                            type="img"
                             id={`image-place-${id}`}
                             src={img}
                             className="figure-img img-fluid image-box w-100"
@@ -64,7 +67,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                         />
                     </figure>
                 </div>
-                <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto">
+                <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 border-left">
                     <div className="box-content px-60">
                         <h2 className="h2-text-box">{address}</h2>
                         <p className="p-text-box">

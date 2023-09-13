@@ -7,6 +7,7 @@ import ServicesList from "./ServicesList";
 import vector from "../../../assets/images/Vector.png";
 import Locations from "../../Locations/Locations";
 import {getMembershipOptions} from "../../../apis/Api";
+import Media from "../../Media/Media";
 
 const MembershipSingleOption = () => {
     const {id} = useParams();
@@ -112,8 +113,9 @@ const MembershipSingleOption = () => {
             {/*Start Section What-get*/}
             <section className="what-get p-60">
                 <div className="position-relative">
-                    <img src={vector} className="position-absolute"
-                         style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>
+                    <Media
+                        type="img" src={vector} className="position-absolute"
+                        style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>
                 </div>
                 <div className="container">
                     <div className="row">

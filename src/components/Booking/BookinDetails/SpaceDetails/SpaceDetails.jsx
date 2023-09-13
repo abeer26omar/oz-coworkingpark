@@ -3,6 +3,7 @@ import './SpaceDetails.css';
 import wifi from '../../../../assets/images/icons/wifi.png';
 import chair from '../../../../assets/images/icons/chair.png';
 import printer from '../../../../assets/images/icons/print.png';
+import Media from "../../../Media/Media";
 
 const SpaceDetails = () => {
     return (
@@ -40,7 +41,7 @@ const SpaceDetails = () => {
                             </div>
 
                         </div>
-                        <div className="col-lg-6 col-md-6 col-sm-12">
+                        <div className="col-lg-6 col-md-6 col-sm-12 m-sm-auto">
                             <div className="space-price">
                                 <h2 className="h2-description">
                                     Price
@@ -57,15 +58,18 @@ const SpaceDetails = () => {
                                 <div className="facilities-list">
                                     <ul>
                                         <li>
-                                            <img src={wifi}/>
+                                            <Media
+                                                type="img" src={wifi}/>
                                             wifi
                                         </li>
                                         <li>
-                                            <img src={chair}/>
+                                            <Media
+                                                type="img" src={chair}/>
                                             Chairs
                                         </li>
                                         <li>
-                                            <img src={printer}/>
+                                            <Media
+                                                type="img" src={printer}/>
                                             Printer
                                         </li>
                                     </ul>

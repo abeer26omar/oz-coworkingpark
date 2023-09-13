@@ -1,5 +1,6 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import Media from "../Media/Media";
+import Buttons from "../Buttons/Buttons";
 
 const HousesLocationsList = ({id, img, government, address}) => {
     return (
@@ -12,10 +13,12 @@ const HousesLocationsList = ({id, img, government, address}) => {
                         <span className="government">{government}</span>
                     </div>
                     <div className="btn-explore">
-                        <Link to={`/houses/${id}`} href="#" className="btn button-outLine btn-bg-white ">Explore</Link>
+                        <Buttons href='/houses/${id}'
+                        >Explore</Buttons>
                     </div>
                 </div>
-                <img src={img} alt="office" className="w-100"/>
+                <Media
+                    type="img" src={img} alt="office" className="w-100"/>
 
 
             </div>

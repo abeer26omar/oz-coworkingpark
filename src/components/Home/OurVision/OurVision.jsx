@@ -5,11 +5,14 @@ import aminites from "../../../assets/images/aminites.png";
 import fb from "../../../assets/images/fb.png";
 import Locations from "../../Locations/Locations";
 import PublicEvent from "../../PublicEvents/./PublicEvent";
-import {Link} from "react-router-dom";
+import TestComponents from "../../TestComponents";
+import Buttons from "../../Buttons/Buttons";
+import Media from "../../Media/Media";
 
 const OurVision = () => {
     return (
         <>
+            <TestComponents title={'hello'} description={'ddhdhdjdjj'} className={'bg'}/>
             <section className=" head-of-section">
                 <div className="container-fluid">
                     <div className="row">
@@ -20,8 +23,8 @@ const OurVision = () => {
                         </div>
                     </div>
                     <div className="row border-of-section ">
-                        <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto">
-                            <div className="box-content px-60">
+                        <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 m-auto">
+                            <div className="box-content px-60 ">
                                 <h2 className="h2-text-box">About OZ</h2>
                                 <p className="p-text-box">
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
@@ -30,12 +33,10 @@ const OurVision = () => {
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing eliteiusmod
                                 </p>
-                                <a href="#" className="btn button-outLine btn-bg-white">
-                                    Our Vision
-                                </a>
+                                <Buttons href="#"> Our Vision</Buttons>
                             </div>
                         </div>
-                        <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left">
+                        <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6   border-left">
                             <img
                                 className="image-box w-100"
                                 src={vision}
@@ -129,16 +130,16 @@ const OurVision = () => {
                         </div>
                     </div>
                     <div className="row border-of-section ">
-                        <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-right ">
-                            <img
-                                className="image-box w-100"
-                                src={aminites}
-                                alt="Our OZ Vision"
-                                lazyLoad
+                        <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 border-right">
+                            <Media type="img"
+                                   className="image-box w-100"
+                                   src={aminites}
+                                   alt="Our OZ Vision"
+
                             />
                         </div>
 
-                        <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto ">
+                        <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 m-auto">
                             <div className="box-content px-60">
                                 <h2 className="h2-text-box achievement-text ">achievements for OZ</h2>
                                 <p className="p-text-box">
@@ -148,9 +149,9 @@ const OurVision = () => {
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing eliteiusmod
                                 </p>
-                                <Link to="/community/newsfeed" className="btn button-outLine btn-bg-white">
-                                    Explore
-                                </Link>
+
+                                <Buttons href="/community/newsfeed"> Explore</Buttons>
+
                             </div>
                         </div>
                     </div>
@@ -172,11 +173,11 @@ const OurVision = () => {
                         </div>
                     </div>
                     <div className="row border-of-section ">
-                        <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-right ">
-                            <img className="image-box w-100" src={fb} alt="Our OZ Vision"/>
+                        <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 border-right ">
+                            <Media type="img" className="image-box w-100" src={fb} alt="Our OZ Vision"/>
                         </div>
 
-                        <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto ">
+                        <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 m-auto ">
                             <div className="box-content px-60">
                                 <h2 className="h2-text-box">
                                     FRESH RECIPES
@@ -189,9 +190,7 @@ const OurVision = () => {
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing eliteiusmod
                                 </p>
-                                <a href="#" className="btn button-outLine btn-bg-white">
-                                    Explore F&B
-                                </a>
+                                <Buttons href=""> F&B</Buttons>
                             </div>
                         </div>
                     </div>

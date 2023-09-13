@@ -18,6 +18,7 @@ import hobbiesLabel from '../../../../assets/images/icons/Widget 4.png';
 import editProfile from '../../../../assets/images/icons/editprofile.png';
 import {ImMinus, ImPlus} from "react-icons/im";
 import '../PersonalContent.css'
+import Media from "../../../Media/Media";
 
 const PersonalData = () => {
 
@@ -60,7 +61,8 @@ const PersonalData = () => {
                                     <div className="form__group field my-3">
                                         <label htmlFor="name"
                                                className="form__label d-flex align-items-center justify-content-start">
-                                            <img src={nameLabel} alt="name" className="me-2"/>
+                                            <Media
+                                                type="img" src={nameLabel} alt="name" className="me-2"/>
                                             First Name
                                         </label>
                                         <Field id="name" name="name" placeholder="name" className="form__field"/>
@@ -70,7 +72,7 @@ const PersonalData = () => {
                                     <div className="form__group field my-3">
                                         <label htmlFor="emailAddress"
                                                className="form__label d-flex align-items-center justify-content-start">
-                                            <img src={emailLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={emailLabel} alt="name" className="me-2"/>
                                             E-Mail Address
                                         </label>
                                         <Field id="emailAddress" name="emailAddress" placeholder="Email Address"
@@ -82,7 +84,7 @@ const PersonalData = () => {
                                     <div className="form__group field my-3">
                                         <label htmlFor="mobileNumber"
                                                className="form__label d-flex align-items-center justify-content-start">
-                                            <img src={mobileLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={mobileLabel} alt="name" className="me-2"/>
                                             Mobile Number
                                         </label>
                                         <Field id="mobileNumber" name="mobileNumber" placeholder="Mobile Number "
@@ -93,7 +95,7 @@ const PersonalData = () => {
                                     <div className="form__group field my-3">
                                         <label htmlFor="gender"
                                                className="form__label d-flex align-items-center justify-content-start">
-                                            <img src={genderLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={genderLabel} alt="name" className="me-2"/>
                                             Gender
                                         </label>
                                         <Field as="select" name="gender" className="form__field placeholderSelect">
@@ -112,7 +114,7 @@ const PersonalData = () => {
                                     <div className="form__group field my-3">
                                         <label htmlFor="mobileNumber"
                                                className="form__label d-flex align-items-center justify-content-start">
-                                            <img src={birthdayLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={birthdayLabel} alt="name" className="me-2"/>
                                             Birth of date
                                         </label>
                                         <Field type="date" id="birthdayDate" name="birthdayDate"
@@ -124,7 +126,7 @@ const PersonalData = () => {
                                     <div className="form__group field my-3">
                                         <label htmlFor="mobileNumber"
                                                className="form__label d-flex align-items-center justify-content-start">
-                                            <img src={jobLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={jobLabel} alt="name" className="me-2"/>
                                             Job title
                                         </label>
                                         <Field id="jobTitle" name="jobTitle"
@@ -137,7 +139,7 @@ const PersonalData = () => {
                                     <div className="form__group field my-3">
                                         <label htmlFor="industry"
                                                className="form__label d-flex align-items-center justify-content-start">
-                                            <img src={industryLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={industryLabel} alt="name" className="me-2"/>
                                             Industry
                                         </label>
                                         <Field id="industry" name="industry"
@@ -150,7 +152,7 @@ const PersonalData = () => {
                                     <div className="form__group field my-3">
                                         <label htmlFor="companyName"
                                                className="form__label d-flex align-items-center justify-content-start">
-                                            <img src={companyLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={companyLabel} alt="name" className="me-2"/>
                                             Company Name
                                         </label>
                                         <Field id="companyName" name="companyName"
@@ -163,7 +165,7 @@ const PersonalData = () => {
                                     <div className="form__group field my-3">
                                         <label htmlFor="city"
                                                className="form__label d-flex align-items-center justify-content-start">
-                                            <img src={cityLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={cityLabel} alt="name" className="me-2"/>
                                             City
                                         </label>
                                         <Field id="city" name="city"
@@ -175,7 +177,7 @@ const PersonalData = () => {
                                     <div className="form__group field my-3">
                                         <label htmlFor="nationality"
                                                className="form__label d-flex align-items-center justify-content-start">
-                                            <img src={nationalityLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={nationalityLabel} alt="name" className="me-2"/>
                                             Nationality
                                         </label>
                                         <Field id="nationality" name="nationality"
@@ -190,7 +192,7 @@ const PersonalData = () => {
                                             htmlFor="interest"
                                             className="form__label d-flex align-items-center justify-content-start"
                                         >
-                                            <img src={interestLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={interestLabel} alt="name" className="me-2"/>
                                             Interest
                                         </label>
                                         <FieldArray name="interest">
@@ -231,7 +233,7 @@ const PersonalData = () => {
                                     <div className="form__group field my-3">
                                         <label htmlFor="howDidYouKnowUs"
                                                className="form__label d-flex align-items-center justify-content-start">
-                                            <img src={knowLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={knowLabel} alt="name" className="me-2"/>
                                             How did you know us ?
                                         </label>
                                         <Field as="select" name="howDidYouKnowUs"
@@ -252,7 +254,7 @@ const PersonalData = () => {
                                     <div className="form__group field my-3">
                                         <label htmlFor="serviceProvide"
                                                className="form__label d-flex align-items-center justify-content-start">
-                                            <img src={provideLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={provideLabel} alt="name" className="me-2"/>
                                             What Service can you Provide ?
                                         </label>
                                         <Field id="serviceProvide" name="serviceProvide"
@@ -265,7 +267,7 @@ const PersonalData = () => {
                                     <div className="form__group field my-3">
                                         <label htmlFor="serviceProvide"
                                                className="form__label d-flex align-items-center justify-content-start">
-                                            <img src={aboutLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={aboutLabel} alt="name" className="me-2"/>
                                             About Me
                                         </label>
                                         <Field id="serviceProvide" name="serviceProvide"
@@ -280,7 +282,7 @@ const PersonalData = () => {
                                             htmlFor="hobbies"
                                             className="form__label d-flex align-items-center justify-content-start"
                                         >
-                                            <img src={hobbiesLabel} alt="name" className="me-2"/>
+                                            <Media type="img" src={hobbiesLabel} alt="name" className="me-2"/>
                                             Hobbies
                                         </label>
                                         <FieldArray name="hobbies">
@@ -319,7 +321,7 @@ const PersonalData = () => {
 
                                 <div className="col-lg-12 text-center">
                                     <button type="submit" className="button-one-outline btn-bg-white">Edit Profile
-                                        <img src={editProfile}/>
+                                        <Media type="img" src={editProfile}/>
                                     </button>
                                 </div>
 

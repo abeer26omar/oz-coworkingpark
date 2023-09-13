@@ -11,6 +11,7 @@ import listWhite from '../../../assets/images/icons/listWhite.svg';
 import {Link, NavLink} from "react-router-dom";
 import {Container, Nav} from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
+import Media from "../../Media/Media";
 
 const Header = ({showBlackNav}) => {
     const [showBasic, setShowBasic] = useState(false);
@@ -31,7 +32,8 @@ const Header = ({showBlackNav}) => {
                               });
                           }}
                     >
-                        <img src={logoImage} className="w-100" alt={logo}/>
+                        <Media
+                            type="img" src={logoImage} className="w-100" alt={logo}/>
 
                     </Link>
                     <Navbar.Toggle
@@ -117,8 +119,10 @@ const Header = ({showBlackNav}) => {
                             >
                                 Login
                             </NavLink>
-                            <img src={userIcon} className="margin-links user-icon"/>
-                            <img src={listIcon}/>
+                            <Media
+                                type="img" src={userIcon} className="margin-links user-icon"/>
+                            <Media
+                                type="img" src={listIcon}/>
                             <div className="sun-border">
                                 <svg
                                     style={{margin: "auto 30px"}}

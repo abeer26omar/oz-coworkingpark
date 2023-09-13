@@ -1,3 +1,12 @@
+.locations .lazy-load-image-loaded {
+    width: 100%;
+}
+
+.box-office .lazy-load-image-loaded {
+    width: 100%;
+
+}
+
 .navigator .p-name {
     font-family: Questrial;
     font-size: var(--font-size-16);

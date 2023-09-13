@@ -2,6 +2,7 @@ import React from 'react';
 import community from "../../../../assets/images/bookings/bookingdetails.png";
 import '../BookingDetails.css';
 import BookingForm from "./BookingForm";
+import Media from "../../../Media/Media";
 
 
 const BookingDetailsHeader = () => {
@@ -17,7 +18,8 @@ const BookingDetailsHeader = () => {
                                     <div className="rectangle-wrapper">
                                         <div className="rectangle"/>
                                     </div>
-                                    <img className="img" alt="Group" src={community}/>
+                                    <Media
+                                        type="img" className="img" alt="Group" src={community}/>
                                     <div className="">
                                         <span className="text-one">Booking </span>
                                     </div>

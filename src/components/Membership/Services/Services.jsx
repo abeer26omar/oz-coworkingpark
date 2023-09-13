@@ -5,6 +5,7 @@ import vector from "../../../assets/images/Vector.png";
 import {services} from "../../../Data/ServicesData";
 import ServicesList from "./ServicesList";
 import {useLocation} from "react-router-dom";
+import Media from "../../Media/Media";
 
 const Services = () => {
     const location = useLocation();
@@ -15,8 +16,9 @@ const Services = () => {
         <>
             <section className=" {`membership-component ${isMembershipPage ? 'yellow-background p-60' : ''}`}">
                 <div className="position-relative mb-5" style={{height: "100px"}}>
-                    <img src={vector} className="position-absolute"
-                         style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>
+                    <Media
+                        type="img" src={vector} className="position-absolute"
+                        style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>
                     <div className="head-content-left-shape text-left  position-absolute"
                          style={{top: "40px", left: "100px"}}>
                         <h3 className="bold-head mb-4 ">What you'll get</h3>

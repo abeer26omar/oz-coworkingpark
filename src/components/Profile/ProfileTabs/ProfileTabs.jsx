@@ -5,6 +5,7 @@ import PersonalData from "../ProfileContent/Personal Data/PersonalData";
 import ChangePassword from "../ProfileContent/Change Password/ChangePassword";
 import PrivacyPolicy from "../ProfileContent/Privacy Policy/PrivacyPolicy";
 import TermsConditions from "../ProfileContent/TermsConditions/TermsConditions";
+import Media from "../../Media/Media";
 
 const ProfileTabs = () => {
     const [activeTab, setActiveTab] = useState('tab1');
@@ -46,7 +47,8 @@ const ProfileTabs = () => {
 
     const renderTabTitle = (title, imageSrc) => (
         <div className="d-flex align-items-center">
-            <img src={imageSrc} alt="Tab Icon" className="me-3"/>
+            <Media
+                type="img" src={imageSrc} alt="Tab Icon" className="me-3"/>
             {title}
         </div>
     );

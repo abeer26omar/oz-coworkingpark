@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import './MemberLimitedTest.css';
 import vector from "../../../../assets/images/Vector.png";
 import {services} from "../../../../Data/ServicesLimitedData";
+import Media from "../../../Media/Media";
 
 const MemberLimitedTest = () => {
     return (
@@ -34,11 +35,11 @@ const MemberLimitedTest = () => {
                         </div>
                         <div
                             className="col-md-6 col-lg-6 col-sm-6 col-xs-6 d-flex justify-content-center align-items-center">
-                            <img
+                            <Media
+                                type="img"
                                 className="image-box w-75"
                                 src={at_oz}
                                 alt="Our OZ Vision"
-                                lazyLoad
                             />
                         </div>
                     </div>
@@ -47,8 +48,9 @@ const MemberLimitedTest = () => {
 
             <section className="what-get p-60">
                 <div className="position-relative mb-5" style={{height: "185px"}}>
-                    <img src={vector} className="position-absolute"
-                         style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>
+                    <Media
+                        type="img" src={vector} className="position-absolute"
+                        style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>
                     <div className="head-content-left-shape text-left  position-absolute"
                          style={{top: "40px", left: "100px"}}>
                         <h3 className="bold-head mb-4 ">What you'll get</h3>
@@ -73,7 +75,8 @@ const MemberLimitedTest = () => {
                                 <div className="col-lg-6 col-md-6 col-sm-12 py-3 border-all">
                                     <div className="d-flex align-items-center justify-content-between">
                                         <div className="d-flex align-items-center w-50">
-                                            <img src={imgwhite} alt={title}/>
+                                            <Media
+                                                type="img" src={imgwhite} alt={title}/>
                                             <h2 className="bold-head mt-3">{title}</h2>
                                         </div>
 

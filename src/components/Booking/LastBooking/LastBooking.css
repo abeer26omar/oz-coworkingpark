@@ -108,3 +108,11 @@
     top: 10px;
     cursor: pointer;
 }
+
+.book-card .lazy-load-image-loaded {
+    width: 100%
+}
+
+.book-card .lazy-load-image-loaded img {
+    width: 100%
+}

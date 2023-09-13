@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import './BookingForm.css'
 import DatePicker from "react-datepicker";
 import {NavLink} from "react-router-dom";
+import Media from "../../../Media/Media";
 
 const BookingForm = () => {
     const [startDate, setStartDate] = useState(null);
@@ -91,10 +92,11 @@ const BookingForm = () => {
 
                             <li className="bookbottom__li bookbottom__li--icon bookbottom__li--icon-guests">
                                 <div className="bookbottom__guesticon">
-                                    <img
+                                    <Media
+                                        type="img"
                                         src={people}
                                         alt="Icon Profile New"
-                                        className=" ls-is-cached lazyloaded"/>
+                                        className=" ls-is-cached"/>
 
                                 </div>
                             </li>
@@ -120,10 +122,11 @@ const BookingForm = () => {
 
                             <li className="bookbottom__li bookbottom__li--icon bookbottom__li--icon-datepicker">
                                 <div className="bookbottom__calicon">
-                                    <img
+                                    <Media
+                                        type="img"
                                         src={callenderbook}
                                         alt="icon cal new"
-                                        className=" ls-is-cached lazyloaded"/>
+                                        className=" ls-is-cached"/>
 
                                 </div>
                             </li>
@@ -139,7 +142,9 @@ const BookingForm = () => {
                             </li>
                             <li className="bookbottom__li bookbottom__li--icon">
                                 <div className="bookbottom__roomicon">
-                                    <img src={alarmbook} alt="icon bed new" className=" ls-is-cached lazyloaded"/>
+                                    <Media
+                                        type="img" src={alarmbook} alt="icon bed new"
+                                        className=" ls-is-cached lazyloaded"/>
                                 </div>
                             </li>
                             <li className="bookbottom__li bookbottom__li--select">

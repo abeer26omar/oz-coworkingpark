@@ -1,3 +1,7 @@
+.news-feed .lazy-load-image-loaded {
+    width: 100%;
+}
+
 .news-feed {
     margin-top: 32px;
     margin-bottom: 32px;

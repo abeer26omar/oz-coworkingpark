@@ -8,6 +8,7 @@ import bottom_arrow from "../../../assets/images/icons/bookbottom.svg";
 import LastBooking from "../LastBooking/LastBooking";
 import BookingFilter from "../BookingFilter/BookingFilter";
 import BookingSpaceList from "./BookingSpaceList";
+import Media from "../../Media/Media";
 
 const BookingSpace = () => {
         const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -219,15 +220,16 @@ const BookingSpace = () => {
                             </Slider>
                         </div>
                         <div className="row border-top border-bottom booking-space-margin">
-                            <div className="col-lg-6 border-right">
+                            <div className="col-lg-4 col-md-6 col-sm-12 border-right">
                                 <h2 className="book-title">Meeting Room</h2>
                             </div>
-                            <div className="col-lg-6  text-end m-auto">
+                            <div className="col-lg-8 col-md-6 col-sm-12  text-end  m-auto">
                                 <div className="btn-spaces-filter">
                                     <button href="#" className="btn button-outLine btn-bg-white btn-filter"
                                             onClick={toggleFilter}
                                     >
-                                        <img src={filtericons} alt="filter icon" className="icon-filter"/>
+                                        <Media
+                                            type="img" src={filtericons} alt="filter icon" className="icon-filter"/>
                                         Filter
                                     </button>
                                 </div>
@@ -256,8 +258,10 @@ const BookingSpace = () => {
                             </div>
                             {cards.length < BookingsData.length && (
                                 <div style={{marginTop: "32px"}}>
-                                    <Button variant="link" className="btn-cards-more" onClick={handleShowMore}>Show more<img
-                                        src={bottom_arrow} alt="arrow"/> </Button>
+                                    <Button variant="link" className="btn-cards-more" onClick={handleShowMore}>Show more
+                                        <Media
+                                            type="img"
+                                            src={bottom_arrow} alt="arrow"/> </Button>
                                 </div>
                             )}
 

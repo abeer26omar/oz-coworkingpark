@@ -30,11 +30,12 @@ const PublicEvent = () => {
                 },
             },
             {
-                breakpoint: 600,
+                breakpoint: 769,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
                     initialSlide: 2,
+                    dots: false
                 },
             },
             {
@@ -43,6 +44,7 @@ const PublicEvent = () => {
                     slidesToShow: 1,
                     slidesToScroll: 1,
                     speed: 3000,
+                    dots: false
 
                 },
             },

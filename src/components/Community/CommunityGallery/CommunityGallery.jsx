@@ -1,6 +1,7 @@
 import React from "react";
 import gallery from "../../../assets/images/gallery.png";
-import {NavLink} from "react-router-dom";
+import Media from "../../Media/Media";
+import Buttons from "../../Buttons/Buttons";
 
 const CommunityGallery = () => {
     return (
@@ -19,17 +20,17 @@ const CommunityGallery = () => {
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing eliteiusmod
                                 </p>
-                                <NavLink t={"/galleryshow"} className="btn button-outLine btn-bg-white">
+                                <Buttons href="/galleryshow">
                                     Explore
-                                </NavLink>
+                                </Buttons>
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left ">
-                            <img
+                            <Media
+                                type="img"
                                 className="image-box w-100"
                                 src={gallery}
                                 alt="Our OZ Vision"
-                                lazyLoad
                             />
                         </div>
                     </div>

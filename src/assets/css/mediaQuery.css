@@ -10,6 +10,7 @@
         padding: 30px 30px;
     }
 
+
     .h2-text {
         font-size: var(--font-size-41);
     }
@@ -58,10 +59,6 @@
 
     /*End Default Classes*/
     /*Start Header Components*/
-    .navbar-toggler {
-
-    }
-
     /*End Header Components*/
     /*Start Footer Component*/
     .footer-single-col {
@@ -268,6 +265,10 @@
 
     }
 
+    .multiple-event-slider .slick-slide {
+        width: 100%;
+    }
+
     /*End Community Events */
     .booking-space .book-title {
         font-size: 32px;
@@ -281,11 +282,181 @@
         padding: 8px 0;
     }
 
+    /*    END */
+    /*    Start client component */
+    .partners .head-content .h3-text {
+        font-size: 18px;
+    }
+
+    /*    End client component  */
+    /*    Strat About */
+    .about-group {
+        transform: translate(0%, 40%);
+    }
+
+    .about-group .an-innovative-co {
+        width: 100%;
+        line-height: .5;
+    }
+
+    .about-group .p {
+        width: 100%;
+        text-align: justify;
+        padding: 0 10px;
+    }
+
+    .about-section .box-content-black {
+        padding: 39px 10px 59px;
+    }
+
+    .head-amenities .text-h2 {
+        font-size: 32px;
+    }
+
+    .what-get img {
+        margin: auto;
+    }
+
 }
 
 /* Styles for devices with a width between 769px and 1024px (tablets) */
 @media (min-width: 769px) and (max-width: 1024px) {
     /* CSS rules for tablets */
+    /*Start Default Classes*/
+    .px-60 {
+        padding: 30px 10px;
+    }
+
+    .image-box {
+        padding: 0;
+    }
+
+    .box-content {
+        padding: 30px 30px;
+
+    }
+
+    .h2-text {
+        font-size: 42px;
+    }
+
+    .box-content .h2-text-box {
+        font-size: var(--font-size-26);
+        text-align: center;
+    }
+
+    /*End Default Classes*/
+    /*Start Footer*/
+    .footer-social .border-footer {
+        display: none;
+    }
+
+    .footer-single-col {
+        margin-top: 32px
+    }
+
+    .footer-single-col img {
+
+    }
+
+    .footer-links {
+        display: flex;
+    }
+
+    .footer-links .links-derictions {
+        flex-direction: column;
+        align-items: unset;
+    }
+
+    .footer-social svg {
+        display: none;
+    }
+
+    .footer-section .links-derictions a {
+        margin: 0;
+        margin-top: 12px;
+        font-size: 16px;
+    }
+
+    .social-links a img {
+        margin: auto 16px;
+    }
+
+
+    /*END Footer*/
+    /*Start Public Events Component*/
+    .events .card-title {
+        font-size: 20px;
+    }
+
+    /*END Public Events Component*/
+    /*Start Community*/
+    .community-events-details .box-content {
+        padding: 10px 10px;
+    }
+
+    /*END Community*/
+    /*Start membership*/
+    .membership-types .card-title {
+        font-size: 18px;
+    }
+
+    /*END membership*/
+    /*Start .locations*/
+    .locations-houses .location-contact .h2-text-box {
+        font-size: 32px;
+    }
+
+    .box-office .btn-explore {
+        margin-bottom: 16px;
+    }
+
+    /*    END */
+    /*    Start Mono Block*/
+    .monoBlock-white .text-h1 {
+        font-size: 42px;
+    }
+
+    /*    END Mono Block*/
+    /*    Start Private Events*/
+    .private-events-head {
+        margin: auto;
+    }
+
+    /*    END*/
+    /*    Start Booking*/
+    .booking-space .book-title {
+        font-size: 32px;
+    }
+
+    .space-details .space-description {
+        padding: 10px 10px;
+    }
+
+    .space-details .space-description .h2-description {
+        font-size: 22px;
+    }
+
+    .space-details .space-description .p-description {
+        font-size: 16px;
+        text-align: justify;
+    }
+
+    .space-details .space-price, .space-facilities {
+        padding: 10px;
+    }
+
+    .space-details .space-facilities {
+        padding: 10px;
+    }
+
+    .space-details .space-capacity {
+        padding: 10px;
+    }
+
+    .space-details .catering {
+        padding: 10px 10px;
+    }
 }
 
 /* Styles for devices with a width above 1024px (laptops and desktops) */

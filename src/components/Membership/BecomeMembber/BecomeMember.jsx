@@ -2,6 +2,7 @@ import React from 'react';
 import './BecomeMember.css';
 // Import Images
 import workspace from '../../../assets/images/workingSpace.png';
+import Media from "../../Media/Media";
 
 const BecomeMember = () => {
     return (
@@ -11,16 +12,16 @@ const BecomeMember = () => {
                 <div className="container-fluid">
 
                     <div className="row border-of-section ">
-                        <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-right ">
-                            <img
+                        <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 m-auto ">
+                            <Media
+                                type="img"
                                 className="image-box w-100"
                                 src={workspace}
                                 alt="Our OZ Vision"
-                                lazyLoad
                             />
                         </div>
 
-                        <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto ">
+                        <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 border-left ">
                             <div className="box-content px-60">
                                 <h2 className="h2-text">Become a member</h2>
 
@@ -39,7 +40,7 @@ const BecomeMember = () => {
 
 
             {/* <!--End Become a member-->*/}
-            
+
         </>
     );
 };

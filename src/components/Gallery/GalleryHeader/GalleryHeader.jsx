@@ -2,6 +2,7 @@ import React from 'react';
 import './GalleryHeader.css';
 import galleryHeaderone from '../../../assets/images/galleryheaderone.png';
 import galleryHeadertwo from '../../../assets/images/galleryheadertwo.png';
+import Media from "../../Media/Media";
 
 const GalleryHeader = () => {
     return (
@@ -11,7 +12,8 @@ const GalleryHeader = () => {
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="position-relative">
-                                <img src={galleryHeaderone}/>
+                                <Media
+                                    type="img" src={galleryHeaderone}/>
                                 <div className="text-gallery">
                                     <span>Community</span>
                                     <h2>gallery</h2>
@@ -20,7 +22,8 @@ const GalleryHeader = () => {
 
                         </div>
                         <div className="col-lg-6 text-center    ">
-                            <img src={galleryHeadertwo}/>
+                            <Media
+                                type="img" src={galleryHeadertwo}/>
                         </div>
                     </div>
                 </div>

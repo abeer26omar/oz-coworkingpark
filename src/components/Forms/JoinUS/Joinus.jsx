@@ -1,13 +1,16 @@
 import React from 'react';
 import vector from "../../../assets/images/Vector.png";
+import Media from "../../Media/Media";
 
 const Joinus = () => {
     return (
         <>
             <section className="contactus my-5">
                 <div className="position-relative">
-                    <img src={vector} className="position-absolute" style={{top: "0px", left: "0", width: "100px"}}
-                         alt="shape"/>
+                    <Media
+                        type="img" src={vector} className="position-absolute"
+                        style={{top: "0px", left: "0", width: "100px"}}
+                        alt="shape"/>
                 </div>
                 <div className="container">
                     <div className="row ">

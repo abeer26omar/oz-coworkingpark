@@ -7,6 +7,8 @@ import google from "../../../assets/images/icons/Google.svg";
 import linkedin from "../../../assets/images/icons/linkedin.svg";
 import {useNavigate} from "react-router-dom";
 import {Login} from "../../../apis/auth_api/LoginApi";
+import Media from "../../Media/Media";
+import Buttons from "../../Buttons/Buttons";
 
 const LoginForm = () => {
     const [credentials, setCredentials] = useState({
@@ -39,7 +41,8 @@ const LoginForm = () => {
             {/*// <!--Start Login Section-->*/}
             <section className="login my-5">
                 <div className="position-relative">
-                    <img
+                    <Media
+                        type="img"
                         src={vector}
                         alt="shape"
                         className="position-absolute"
@@ -96,9 +99,9 @@ const LoginForm = () => {
                                             </label>
                                         </div>
                                         <div className="">
-                                            <a className="forget_password" href="#">
+                                            <Buttons className="forget_password" href="#">
                                                 Forget your password?
-                                            </a>
+                                            </Buttons>
                                         </div>
                                     </div>
 
@@ -113,24 +116,27 @@ const LoginForm = () => {
                                 </Form>
 
                                 <div className="py-3 log-social text-center">
+                                    <Buttons
+                                        href="src/components/Auth/Login/LoginForm#"
+                                        target="_blank"
+                                    >
+                                        <Media
+                                            type="img" src={facebook} alt="Facebook"/>
+                                    </Buttons>
                                     <a
                                         href="src/components/Auth/Login/LoginForm#"
                                         target="_blank"
                                     >
-                                        <img src={facebook} alt="Facebook"/>
+                                        <Media
+                                            type="img" src={google} alt="Google"/>
                                     </a>
-                                    <a
+                                    <Buttons
                                         href="src/components/Auth/Login/LoginForm#"
                                         target="_blank"
                                     >
-                                        <img src={google} alt="Google"/>
-                                    </a>
-                                    <a
-                                        href="src/components/Auth/Login/LoginForm#"
-                                        target="_blank"
-                                    >
-                                        <img src={linkedin} alt="LinkedIn"/>
-                                    </a>
+                                        <Media
+                                            type="img" src={linkedin} alt="LinkedIn"/>
+                                    </Buttons>
                                 </div>
                             </div>
                         </Col>

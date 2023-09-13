@@ -3,6 +3,7 @@ import vector from "../../../assets/images/Vector.png";
 import {Col, Container, Row} from "react-bootstrap";
 import "./Contactus.css";
 import {inquiry} from "../../../apis/Api";
+import Media from "../../Media/Media";
 
 const Contactus = () => {
     const [formState, setFormState] = useState({
@@ -42,10 +43,11 @@ const Contactus = () => {
 
     return (
         <>
-            
+
             <section className="contactus my-5">
                 <div className="position-relative">
-                    <img
+                    <Media
+                        type="img"
                         src={vector}
                         className="position-absolute"
                         style={{top: "0px", left: "0", width: "100px"}}

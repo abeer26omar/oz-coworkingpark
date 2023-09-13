@@ -10,6 +10,7 @@ import HouseServices from "./HouseServices/HouseServices";
 import CommunityHouses from "./HousesCommunityEvents/CommunityHouses";
 import Navbar from "react-bootstrap/Navbar";
 import {Container, Nav} from "react-bootstrap";
+import Media from "../../Media/Media";
 
 const HouseDetails = () => {
     const {id} = useParams();
@@ -135,7 +136,8 @@ const HouseDetails = () => {
                         </div>
 
                         <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left ">
-                            <img className="image-box w-100" src={fb} alt="Our OZ Vision"/>
+                            <Media
+                                type="img" className="image-box w-100" src={fb} alt="Our OZ Vision"/>
                         </div>
 
                     </div>

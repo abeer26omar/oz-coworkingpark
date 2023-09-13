@@ -1,7 +1,8 @@
 import React from 'react';
 import check from '../../../assets/images/icons/twemoji_check-mark.svg';
 import './MembershipCompared.css';
-import {Link} from "react-router-dom";
+import Media from "../../Media/Media";
+import Buttons from "../../Buttons/Buttons";
 
 const MembershipCompared = () => {
     return (
@@ -28,46 +29,61 @@ const MembershipCompared = () => {
                                 <tbody>
                                 <tr>
                                     <th className="table-item" scope="row">Lorem ipsum dolor sit amet,</th>
-                                    <td><img src={check} alt={check}/></td>
-                                    <td><img src={check} alt={check}/></td>
-                                    <td><img src={check} alt={check}/></td>
+                                    <td><Media
+                                        type="img" src={check} alt={check}/></td>
+                                    <td><Media
+                                        type="img" src={check} alt={check}/></td>
+                                    <td><Media
+                                        type="img" src={check} alt={check}/></td>
                                 </tr>
                                 <tr>
                                     <th className="table-item" scope="row">Lorem ipsum dolor sit amet,</th>
-                                    <td><img src={check} alt={check}/></td>
-                                    <td><img src={check} alt={check}/></td>
-                                    <td><img src={check} alt={check}/></td>
+                                    <td><Media
+                                        type="img" src={check} alt={check}/></td>
+                                    <td><Media
+                                        type="img" src={check} alt={check}/></td>
+                                    <td><Media
+                                        type="img" src={check} alt={check}/></td>
                                 </tr>
                                 <tr>
                                     <th className="table-item" scope="row">Lorem ipsum dolor sit amet,</th>
-                                    <td className="img-check"><img src={check} alt={check}/>
+                                    <td className="img-check"><Media
+                                        type="img" src={check} alt={check}/>
                                     </td>
-                                    <td className="img-check"><img src={check} alt={check}/>
+                                    <td className="img-check"><Media
+                                        type="img" src={check} alt={check}/>
                                     </td>
-                                    <td className="img-check"><img src={check} alt={check}/>
+                                    <td className="img-check"><Media
+                                        type="img" src={check} alt={check}/>
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <th className="table-item" scope="row">Lorem ipsum dolor sit amet,</th>
                                     <td>-</td>
-                                    <td><img src={check} alt={check}/></td>
-                                    <td><img src={check} alt={check}/></td>
+                                    <td><Media
+                                        type="img" src={check} alt={check}/></td>
+                                    <td><Media
+                                        type="img" src={check} alt={check}/></td>
                                 </tr>
                                 <tr>
                                     <th className="table-item" scope="row">Lorem ipsum dolor sit amet,</th>
                                     <td>-</td>
                                     <td>-</td>
-                                    <td><img src={check} alt={check}/></td>
+                                    <td><Media
+                                        type="img" src={check} alt={check}/></td>
                                 </tr>
                                 <tr className="buttons-apply">
                                     <td></td>
-                                    <td><Link to="/limited"
-                                              className="button-one-outline p-0 my-3" tabIndex="-1">Apply</Link></td>
-                                    <td><Link to="/limited"
-                                              className="button-one-outline p-0 my-3" tabIndex="-1">Apply</Link></td>
-                                    <td><Link to="/limited"
-                                              className="button-one-outline p-0 my-3" tabIndex="-1">Apply</Link></td>
+                                    <td><Buttons href="/limited"
+                                                 className="button-one-outline p-0 my-3" tabIndex="-1">Apply</Buttons>
+                                    </td>
+                                    <td><Buttons href="/limited"
+                                                 className="button-one-outline p-0 my-3" tabIndex="-1">Apply</Buttons>
+                                    </td>
+                                    <td><Buttons href="/limited"
+                                                 className="button-one-outline p-0 my-3" tabIndex="-1">Apply</Buttons>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th className="table-item" scope="row">Price for membership</th>

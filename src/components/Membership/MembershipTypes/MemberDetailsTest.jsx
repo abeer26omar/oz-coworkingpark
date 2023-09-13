@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import {memberTypes} from "../../../Data/MemberTypesData";
 import MembershipTypesList from "./MembershipTypesList";
 import MembershipCompared from "../MembershipsCompared/MembershipCompared";
+import Media from "../../Media/Media";
 
 const MemberDetailsTest = () => {
     const settings = {
@@ -68,7 +69,8 @@ const MemberDetailsTest = () => {
                         <Col lg={12} className="p-0 ">
                             <div className="slide position-relative ">
                                 <div className="header-member-details ">
-                                    <img src={work} alt="test" className='background-cover-api w-100 '/>
+                                    <Media
+                                        type="img" src={work} alt="test" className='background-cover-api w-100 '/>
                                     <div className="head-content position-absolute">
                                         <h1 className="hand-write">Individual</h1>
                                         <h2 className="large-head mb-4">The Social</h2>
@@ -87,8 +89,9 @@ const MemberDetailsTest = () => {
                                     ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,</p>
                             </div>
                             <div className="d-flex justify-content-end position-relative ">
-                                <img src={vectorRight} className="position-absolute" alt="shape"
-                                     style={{bottom: "30px", width: "100px"}}/>
+                                <Media
+                                    type="img" src={vectorRight} className="position-absolute" alt="shape"
+                                    style={{bottom: "30px", width: "100px"}}/>
                             </div>
                         </Col>
                     </Row>

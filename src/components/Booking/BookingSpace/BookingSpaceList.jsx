@@ -1,7 +1,8 @@
 import React from 'react';
 import Card from "react-bootstrap/Card";
 import favs from "../../../assets/images/icons/heart.svg";
-import {NavLink} from "react-router-dom";
+import Media from "../../Media/Media";
+import Buttons from "../../Buttons/Buttons";
 
 const BookingSpaceList = ({id, img, text, price, title, options}) => {
     return (
@@ -9,9 +10,10 @@ const BookingSpaceList = ({id, img, text, price, title, options}) => {
             <Card className="book-card" key={id}>
 
                 <div className="position-relative">
-                    <Card.Img variant="top" src={img} className="rounded-0"
-                              title="desk room"/>
-                    <img src={favs} alt={title} className="fav-event"/>
+                    <Media type="img" src={img} class="card-img-top rounded-0" title="desk room"/>
+
+                    <img src={favs} alt="fav" className="fav-event"/>
+
 
                 </div>
                 <Card.Body>
@@ -28,8 +30,7 @@ const BookingSpaceList = ({id, img, text, price, title, options}) => {
                     <div
                         className="d-flex justify-content-between align-items-center card-footer">
                         <span className="price-hour">{price} / Hour</span>
-                        <NavLink to="/bookingDetails"
-                                 className="btn button-outLine btn-bg-white">Book Now</NavLink>
+                        <Buttons href="/bookingDetails">Book Now</Buttons>
                     </div>
 
                 </Card.Body>

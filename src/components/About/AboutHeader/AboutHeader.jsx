@@ -1,6 +1,7 @@
 import React from 'react';
 import about from "../../../assets/images/about/aboutHeader.png";
 import './AboutHeader.css'
+import Media from "../../Media/Media";
 
 const AboutHeader = () => {
     return (
@@ -12,7 +13,7 @@ const AboutHeader = () => {
                             <div className="rectangle-wrapper">
                                 <div className="rectangle"/>
                             </div>
-                            <img className="img" alt="Group" src={about}/>
+                            <Media type="img" className="img" alt="Group" src={about}/>
                             <div className="group-2 about-group">
                                 <h1 className="an-innovative-co">
                                     <span className="text-wrapper-2">We Are a place for creative and fun</span>

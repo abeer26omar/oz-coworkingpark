@@ -5,6 +5,7 @@ import logoWhite from "../../assets/images/logoWhite.svg";
 import facebookWhite from "../../assets/images/icons/facebookWhite.png";
 import twitterWhite from "../../assets/images/icons/twitterWhite.png";
 import linkedinWhite from "../../assets/images/icons/insta.png";
+import Media from "../Media/Media";
 
 const Footer = () => {
     return (
@@ -17,8 +18,9 @@ const Footer = () => {
                         <div className="row justify-content-between align-items-center">
                             <div className="col-md-9 col-lg-3  mb-lg-0">
                                 <div className="footer-single-col">
-                                    <div className="footer-single-col d-flex justify-content-center ">
-                                        <img
+                                    <div className="footer-single-col d-flex justify-content-lg-start ">
+                                        <Media
+                                            type="img"
                                             src={logoWhite}
                                             alt="logo"
                                             className="img-fluid w-50 "
@@ -68,12 +70,12 @@ const Footer = () => {
                                             <div className="footer-social">
                                                 <div className="d-flex justify-content-center align-items-center ">
                                                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                                    <svg
-                                                        width="2"
-                                                        height="170"
-                                                        viewBox="0 0 2 170"
-                                                        fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg"
+                                                    <svg className="border-footer"
+                                                         width="2"
+                                                         height="170"
+                                                         viewBox="0 0 2 170"
+                                                         fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg"
                                                     >
                                                         <path
                                                             d="M1 0L1.00001 170"
@@ -83,13 +85,16 @@ const Footer = () => {
                                                     </svg>
                                                     <div className="social-links d-flex align-items-center">
                                                         <a href="#" target="_blank">
-                                                            <img src={facebookWhite} alt="facebook"/>
+                                                            <Media
+                                                                type="img" src={facebookWhite} alt="facebook"/>
                                                         </a>
                                                         <a href="#" target="_blank">
-                                                            <img src={twitterWhite} alt="twitter"/>
+                                                            <Media
+                                                                type="img" src={twitterWhite} alt="twitter"/>
                                                         </a>
                                                         <a href="#" target="_blank">
-                                                            <img src={linkedinWhite} alt="linkedin"/>
+                                                            <Media
+                                                                type="img" src={linkedinWhite} alt="linkedin"/>
                                                         </a>
                                                     </div>
                                                 </div>

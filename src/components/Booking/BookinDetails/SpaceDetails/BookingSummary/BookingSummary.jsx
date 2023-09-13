@@ -14,6 +14,7 @@ import share from '../../../../../assets/images/icons/share.svg';
 import shape from "../../../../../assets/images/VectorRight.png";
 import cash from '../../../../../assets/images/icons/Cash.svg';
 import wallet from '../../../../../assets/images/icons/Credit.svg';
+import Media from "../../../../Media/Media";
 
 const BookingSummary = () => {
     const steps = [
@@ -77,10 +78,12 @@ const BookingSummary = () => {
     return (
         <>
             <section className="summary">
-                <div className="position-relative"><img
-                    src={shape}
-                    alt="shape" className="position-absolute"
-                    style={{top: "125px", right: "0", width: "100px"}}/></div>
+                <div className="position-relative">
+                    <Media
+                        type="img"
+                        src={shape}
+                        alt="shape" className="position-absolute"
+                        style={{top: "125px", right: "0", width: "100px"}}/></div>
                 <div className="container">
 
                     <Tab.Container activeKey={steps[activeStep]?.key} onSelect={handleTabSelect}>
@@ -110,19 +113,23 @@ const BookingSummary = () => {
                                                     <div className="col-lg-6 col-md-6 col-sm-12 border-right">
                                                         <ul className="list-details">
                                                             <li>
-                                                                <img src={callender}/>
+                                                                <Media
+                                                                    type="img" src={callender}/>
                                                                 Sunday, Feb. 2 , 2023
                                                             </li>
                                                             <li>
-                                                                <img src={clockTime}/>
+                                                                <Media
+                                                                    type="img" src={clockTime}/>
                                                                 09:00 PM - 12:00 PM (3 hours )
                                                             </li>
                                                             <li>
-                                                                <img src={user}/>
+                                                                <Media
+                                                                    type="img" src={user}/>
                                                                 3 People
                                                             </li>
                                                             <li>
-                                                                <img src={handMoney}/>
+                                                                <Media
+                                                                    type="img" src={handMoney}/>
                                                                 15.000 EGP
                                                             </li>
                                                         </ul>
@@ -130,18 +137,22 @@ const BookingSummary = () => {
                                                     <div className="col-lg-6 col-md-6 col-sm-12 ">
                                                         <ul className="list-details">
                                                             <li>
-                                                                <img src={map}/>
+                                                                <Media
+                                                                    type="img" src={map}/>
                                                                 El-Sheikh Zayed - Giza
                                                             </li>
                                                             <li>
-                                                                <img src={starshand}/>
+                                                                <Media
+                                                                    type="img" src={starshand}/>
                                                                 Screen , Printing
                                                             </li>
                                                             <li>
-                                                                <img src={userplus}/>
+                                                                <Media
+                                                                    type="img" src={userplus}/>
                                                                 https://www.oz coworking space.com
-                                                                <img src={share}
-                                                                     style={{width: "48px", height: "48px"}}/>
+                                                                <Media
+                                                                    type="img" src={share}
+                                                                    style={{width: "48px", height: "48px"}}/>
                                                             </li>
 
                                                         </ul>
@@ -180,7 +191,8 @@ const BookingSummary = () => {
                                                             <Form>
                                                                 <div
                                                                     className="d-flex align-items-center method-payment">
-                                                                    <img src={cash}/>
+                                                                    <Media
+                                                                        type="img" src={cash}/>
                                                                     <Form.Check
                                                                         type="radio"
                                                                         label="Option 1"
@@ -191,7 +203,8 @@ const BookingSummary = () => {
                                                                 </div>
                                                                 <div
                                                                     className="d-flex align-items-center method-payment">
-                                                                    <img src={wallet}/>
+                                                                    <Media
+                                                                        type="img" src={wallet}/>
                                                                     <Form.Check
                                                                         type="radio"
                                                                         label="Option 2"

@@ -1,6 +1,7 @@
 import React from 'react';
 import userprofile from '../../../assets/images/userprofile.png'
 import './ProfileHeader.css'
+import Media from "../../Media/Media";
 
 const ProfileHeader = () => {
     return (
@@ -10,7 +11,8 @@ const ProfileHeader = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="d-flex align-items-center">
-                                <img src={userprofile} alt="user name"/>
+                                <Media
+                                    type="img" src={userprofile} alt="user name"/>
                                 <div className="d-block">
                                     <h2 className="user-name">Samara Mohamed</h2>
                                     <span className="job-name">Data scientist</span>

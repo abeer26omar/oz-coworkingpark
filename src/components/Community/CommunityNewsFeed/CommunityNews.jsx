@@ -3,7 +3,7 @@ import "./CommunityNewsFeed.css";
 import Slider from "react-slick";
 import CommunityNewsList from "./CommunityNewsList";
 import {newsData} from "../../../Data/NewsData";
-import {NavLink} from "react-router-dom";
+import Buttons from "../../Buttons/Buttons";
 
 const CommunityNews = () => {
     const settings = {
@@ -35,12 +35,12 @@ const CommunityNews = () => {
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing eliteiusmod
                                 </p>
-                                <NavLink
-                                    to={"/community/newsfeed"}
+                                <Buttons
+                                    href="/community/newsfeed"
                                     className="btn button-outLine btn-bg-white"
                                 >
                                     Explore
-                                </NavLink>
+                                </Buttons>
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left ">

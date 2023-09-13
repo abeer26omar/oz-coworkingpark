@@ -11,11 +11,14 @@ const MonoBlock2 = () => {
                             <div className="content-block">
                                 <h1 className="text-h1">I'LL BE AT OZ</h1>
                                 <p className="text-p">
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
+                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
+                                    amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur
+                                    dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit
+                                    eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                 </p>
                             </div>
                             <div className="buttons d-flex justify-content-center align-items-center">
-                                <a href="#" className="btn button-outLine">Become  a Member</a>
+                                <a href="#" className="btn button-outLine">Become a Member</a>
                             </div>
                         </div>
                     </div>

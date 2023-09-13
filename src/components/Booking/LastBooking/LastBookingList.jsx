@@ -2,6 +2,9 @@ import React from 'react';
 import Card from "react-bootstrap/Card";
 import bookImg from "../../../assets/images/bookings/book1.png";
 import favs from "../../../assets/images/icons/heart.svg";
+import Media from "../../Media/Media";
+import './LastBooking.css'
+import Buttons from "../../Buttons/Buttons";
 
 const LastBookingList = () => {
     return (
@@ -9,9 +12,10 @@ const LastBookingList = () => {
             <div className="col-lg-4 col-md-6 col-sm-12">
                 <Card className="book-card">
                     <div className="position-relative">
-                        <Card.Img variant="top" src={bookImg} className="rounded-0"
-                                  title="desk room"/>
+
+                        <Media type="img" src={bookImg} class="card-img-top rounded-0" title="desk room"/>
                         <img src={favs} alt="fav" className="fav-event"/>
+
 
                     </div>
 
@@ -36,8 +40,7 @@ const LastBookingList = () => {
                         <div
                             className="d-flex justify-content-between align-items-center card-footer">
                             <span className="price-hour">125.000 / Hour</span>
-                            <a href="#"
-                               className="btn button-outLine btn-bg-white">Book Now</a>
+                            <Buttons href="#">Book Now</Buttons>
                         </div>
 
                     </Card.Body>
@@ -50,8 +53,8 @@ const LastBookingList = () => {
             <div className="col-lg-4 col-md-6 col-sm-12">
                 <Card className="book-card">
                     <div className="position-relative">
-                        <Card.Img variant="top" src={bookImg} className="rounded-0"
-                                  title="desk room"/>
+                        <Media type="img" src={bookImg} class="card-img-top rounded-0" title="desk room"/>
+
                         <img src={favs} alt="fav" className="fav-event"/>
 
                     </div>
@@ -77,8 +80,7 @@ const LastBookingList = () => {
                         <div
                             className="d-flex justify-content-between align-items-center card-footer">
                             <span className="price-hour">125.000 / Hour</span>
-                            <a href="#"
-                               className="btn button-outLine btn-bg-white">Book Now</a>
+                            <Buttons href="#">Book Now</Buttons>
                         </div>
 
                     </Card.Body>
@@ -91,8 +93,8 @@ const LastBookingList = () => {
             <div className="col-lg-4 col-md-6 col-sm-12">
                 <Card className="book-card">
                     <div className="position-relative">
-                        <Card.Img variant="top" src={bookImg} className="rounded-0"
-                                  title="desk room"/>
+                        <Media type="img" src={bookImg} class="card-img-top rounded-0" title="desk room"/>
+
                         <img src={favs} alt="fav" className="fav-event"/>
 
                     </div>
@@ -118,8 +120,7 @@ const LastBookingList = () => {
                         <div
                             className="d-flex justify-content-between align-items-center card-footer">
                             <span className="price-hour">125.000 / Hour</span>
-                            <a href="#"
-                               className="btn button-outLine btn-bg-white">Book Now</a>
+                            <Buttons href="#">Book Now</Buttons>
                         </div>
 
                     </Card.Body>

@@ -1,42 +1,36 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import HomeHeader from "../components/Home/HomeHeader/HomeHeader";
-import MonoBlockOne from "../components/Home/HomeMonoBlock/MonoBlockOne";
-import MonoBlock2 from "../components/Home/HomeMonoBlock/MonoBlock2";
 import OurVision from "../components/Home/OurVision/OurVision";
 import NewsLetter from "../components/NewsLetter/NewsLetter";
 import Partners from "../components/Partners/Partners";
+import MonoBlock from "../components/MonoBlocks/MonoBlock";
 
 const Home = () => {
-    const [startTime, setStartTime] = useState(null);
-    const [endTime, setEndTime] = useState(null);
-
-    // const handleTimeChange = (date) => {
-    //     setStartTime(date);
-    // };
 
 
-    const handleStartTimeChange = (date) => {
-        if (endTime && date > endTime) {
-            // If the selected start time is after the current end time, reset end time
-            setEndTime(null);
-        }
-        setStartTime(date);
-    };
-
-    const handleEndTimeChange = (date) => {
-        if (startTime && date < startTime) {
-            // If the selected end time is before the current start time, reset start time
-            setStartTime(null);
-        }
-        setEndTime(date);
-    };
     return (
         <>
             <HomeHeader/>
-            <MonoBlockOne/>
+            <MonoBlock title="hello"
+                       desc=" Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
+                                    amet, consectetur
+                                    dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit
+                                    eiusmod Lorem ipsum dolor sit
+                                    amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur
+                                    dipiscing elit
+                                    eiusmod&nbsp;&nbsp;
+                                    Lorem ipsum dolor sit amet, consectetur"
+                       link={["Booking", "Booking", "Booking"]}
+                       numberOfLinksToShow={3}
+                       className="bgBlack"
+            />
             <OurVision/>
-            <MonoBlock2/>
+            <MonoBlock title="I'LL BE AT OZ"
+                       desc="Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod"
+                       link={["Become a Member"]}
+                       numberOfLinksToShow={1}
+            />
             <Partners/>
             <NewsLetter/>
         </>

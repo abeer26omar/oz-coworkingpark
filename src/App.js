@@ -58,6 +58,8 @@ const AppContainer = styled.nav`
     .nav-link{
         color:#fff;
     }
+    .navbar-toggler{
+    background-color:#fff;
   `}
 `;
 

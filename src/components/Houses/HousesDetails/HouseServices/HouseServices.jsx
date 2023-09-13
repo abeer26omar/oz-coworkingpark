@@ -2,13 +2,15 @@ import React from 'react';
 import vector from "../../../../assets/images/Vector.png";
 import {services} from "../../../../Data/ServicesData";
 import HouseServicesList from "./HouseServicesList";
+import Media from "../../../Media/Media";
 
 const HouseServices = () => {
     return (
         <section id="amenities" className="what-get p-60">
             <div className="position-relative">
-                <img src={vector} className="position-absolute"
-                     style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>
+                <Media
+                    type="img" src={vector} className="position-absolute"
+                    style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>
             </div>
             <div className="container">
                 <div className="row">

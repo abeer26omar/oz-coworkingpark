@@ -8,6 +8,7 @@ import about4 from "../../../assets/images/about/about3.png";
 import about5 from "../../../assets/images/about/about5.png";
 import about6 from "../../../assets/images/about/about6.png";
 import {services} from "../../../Data/ServicesLimitedData";
+import Media from "../../Media/Media";
 
 
 const AboutOz = () => {
@@ -15,8 +16,9 @@ const AboutOz = () => {
         <>
             <section className="about-oz body-dark">
                 <div className="position-relative mb-5" style={{height: "0"}}>
-                    <img src={vector} className="position-absolute"
-                         style={{top: "0px", right: "0", width: "100px"}} alt="shape"/>
+                    <Media
+                        type="img" src={vector} className="position-absolute"
+                        style={{top: "0px", right: "0", width: "100px"}} alt="shape"/>
                     <div className="head-content-left-shape text-left  position-absolute"
                          style={{top: "40px", left: "100px"}}>
 
@@ -48,11 +50,11 @@ const AboutOz = () => {
 
                     <div className="row ">
                         <div className="col-md-6 col-lg-6 col-sm-6 col-xs-6 box-content-black">
-                            <img
+                            <Media
+                                type="img"
                                 className="image-box w-100"
                                 src={aboutone}
                                 alt="Our OZ Vision"
-                                lazyLoad
                             />
                         </div>
 
@@ -79,23 +81,23 @@ const AboutOz = () => {
                             </div>
                         </div>
                         <div className="col-md-6 col-lg-6 col-sm-6 col-xs-6 box-content-black">
-                            <img
+                            <Media
+                                type="img"
                                 className="image-box w-100"
                                 src={aboutwo}
                                 alt="Our OZ Vision"
-                                lazyLoad
                             />
                         </div>
 
 
                         <div className="col-md-8 col-lg-8 col-sm-8 col-xs-8 box-content-black  ">
                             <div className="box-content ">
-                                <div className="d-flex justify-content-center ">
-                                    <img
+                                <div className=" d-lg-flex  d-md-flex d-sm-block justify-content-center ">
+                                    <Media
+                                        type="img"
                                         className=" img-fixed "
                                         src={about3}
                                         alt="Our OZ Vision"
-                                        lazyLoad
                                     />
                                     <div className="">
 
@@ -114,11 +116,11 @@ const AboutOz = () => {
                             </div>
                         </div>
                         <div className="col-md-4 col-lg-4 col-sm-4 col-xs-4 box-content-black">
-                            <img
+                            <Media
+                                type="img"
                                 className="image-box w-100"
                                 src={about4}
                                 alt="Our OZ Vision"
-                                lazyLoad
                                 style={{
                                     width: "448px",
                                     height: "549px",
@@ -141,11 +143,11 @@ const AboutOz = () => {
                                         </p>
                                     </div>
 
-                                    <img
+                                    <Media
+                                        type="img"
                                         className=" img-events "
                                         src={about5}
                                         alt="Our OZ Vision"
-                                        lazyLoad
                                     />
                                 </div>
 
@@ -153,11 +155,11 @@ const AboutOz = () => {
                             </div>
                         </div>
                         <div className="col-md-6 col-lg-6 col-sm-6 col-xs-6 m-auto box-content-black  ">
-                            <img
+                            <Media
+                                type="img"
                                 className="image-box w-100"
                                 src={about6}
                                 alt="Our OZ Vision"
-                                lazyLoad
                                 style={{
                                     width: "762px",
                                     height: "546px"
@@ -185,8 +187,9 @@ const AboutOz = () => {
 
                                 <div className="col-lg-6 col-md-6 col-sm-12 py-3 border-all">
                                     <div className="d-flex align-items-center justify-content-between">
-                                        <div className="d-flex align-items-center w-50">
-                                            <img src={imgwhite} alt={title}/>
+                                        <div className="d-lg-flex d-md-flex d-sm-block align-items-center w-50">
+                                            <Media
+                                                type="img" src={imgwhite} alt={title}/>
                                             <h2 className="bold-head mt-3">{title}</h2>
                                         </div>
 
