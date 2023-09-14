@@ -4,7 +4,9 @@
     left: 0;
     top: 0;
     bottom: 0;
-    transform: translate(321px, 289px);
+    transform: translate(0%, 50%);
+    text-align: center;
+    width: 100%;
 }
 
 .about-box .img {
@@ -13,11 +15,12 @@
 
 .about-group .an-innovative-co {
     word-wrap: break-word;
-    width: 60%;
+    width: 100%;
     text-align: center;
 }
 
 .about-box .p {
-    width: 804px;
+    /*width: 804px;*/
+    width: 100%;
 }
 

@@ -220,10 +220,10 @@ const BookingSpace = () => {
                             </Slider>
                         </div>
                         <div className="row border-top border-bottom booking-space-margin">
-                            <div className="col-lg-4 col-md-6 col-sm-12 border-right">
+                            <div className="col-lg-6 col-md-6 col-sm-12 border-right">
                                 <h2 className="book-title">Meeting Room</h2>
                             </div>
-                            <div className="col-lg-8 col-md-6 col-sm-12  text-end  m-auto">
+                            <div className="col-lg-6 col-md-6 col-sm-12  text-end  m-auto">
                                 <div className="btn-spaces-filter">
                                     <button href="#" className="btn button-outLine btn-bg-white btn-filter"
                                             onClick={toggleFilter}

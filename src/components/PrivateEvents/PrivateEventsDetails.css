@@ -16,10 +16,25 @@
     margin-bottom: 16px;
 }
 
-.private-events-details .places .active {
+.private-events-details .places li.active {
     color: var(--primary-color);
 }
 
+/*.private-events-details .places:active {*/
+/*    color: var(--primary-color);*/
+/*}*/
+
+/*.private-events-details .places .nonactive {*/
+/*    color: var(--secondary-color2);*/
+/*}*/
+
+/*.private-events-details .places li[data-active="true"] {*/
+/*    color: red;*/
+/*}*/
+
+/*.private-events-details .places li[data-active="false"] {*/
+/*    color: black;*/
+/*}*/
 
 .private-events-details .buttons-group {
     margin-top: 36px;

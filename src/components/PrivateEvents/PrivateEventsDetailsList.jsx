@@ -1,7 +1,6 @@
 import React from 'react';
 import PlaceItem from "./PlaceItem";
 import {Link} from "react-router-dom";
-import Media from "../Media/Media";
 
 const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
     const isEven = index % 2 === 0;
@@ -42,8 +41,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                 </div>
                 <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 m-auto">
                     <figure className="">
-                        <Media
-                            type="img"
+                        <img
                             id={`image-place-${id}`}
                             src={img}
                             className="figure-img img-fluid image-box w-100"
@@ -58,8 +56,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
             <>
                 <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 m-auto">
                     <figure className="">
-                        <Media
-                            type="img"
+                        <img
                             id={`image-place-${id}`}
                             src={img}
                             className="figure-img img-fluid image-box w-100"
