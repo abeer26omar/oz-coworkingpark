@@ -23,7 +23,7 @@ const Footer = () => {
                                             type="img"
                                             src={logoWhite}
                                             alt="logo"
-                                            className="img-fluid w-50 "
+                                            className="img-fluid w-100 "
                                         />
                                     </div>
 
