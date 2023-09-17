@@ -8,7 +8,6 @@ import linkedin from "../../../assets/images/icons/linkedin.svg";
 import {useNavigate} from "react-router-dom";
 import {Login} from "../../../apis/auth_api/LoginApi";
 import Media from "../../Media/Media";
-import Buttons from "../../Buttons/Buttons";
 
 const LoginForm = () => {
     const [credentials, setCredentials] = useState({
@@ -99,9 +98,9 @@ const LoginForm = () => {
                                             </label>
                                         </div>
                                         <div className="">
-                                            <Buttons className="forget_password" href="#">
+                                            <a className="forget_password" href="#">
                                                 Forget your password?
-                                            </Buttons>
+                                            </a>
                                         </div>
                                     </div>
 
@@ -116,13 +115,13 @@ const LoginForm = () => {
                                 </Form>
 
                                 <div className="py-3 log-social text-center">
-                                    <Buttons
+                                    <a
                                         href="src/components/Auth/Login/LoginForm#"
                                         target="_blank"
                                     >
                                         <Media
                                             type="img" src={facebook} alt="Facebook"/>
-                                    </Buttons>
+                                    </a>
                                     <a
                                         href="src/components/Auth/Login/LoginForm#"
                                         target="_blank"
@@ -130,13 +129,13 @@ const LoginForm = () => {
                                         <Media
                                             type="img" src={google} alt="Google"/>
                                     </a>
-                                    <Buttons
+                                    <a
                                         href="src/components/Auth/Login/LoginForm#"
                                         target="_blank"
                                     >
                                         <Media
                                             type="img" src={linkedin} alt="LinkedIn"/>
-                                    </Buttons>
+                                    </a>
                                 </div>
                             </div>
                         </Col>
