@@ -128,7 +128,9 @@ const MembershipCompared = () => {
 
                                     {filteredOptions[0].options.map((option) => (
                                         <td key={option.id}>
-                                            <button onClick={() => handleCheckout(option.type)}>Apply</button>
+                                            <button className="button-one-outline btn-bg-white"
+                                                    onClick={() => handleCheckout(option.type)}>Apply
+                                            </button>
                                         </td>
                                     ))}
                                 </tr>
