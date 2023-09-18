@@ -38,6 +38,7 @@ const MembershipOptionsHeader = () => {
                                     type="img" src={vectorRight} className="position-absolute" alt="shape"/>
                             </div>
                         </Col>
+
                     </Row>
                 </Container>
             </section>

@@ -9,7 +9,6 @@ import {Route, Routes, useLocation} from "react-router-dom";
 import ContactUs from "./pages/ContactUS";
 import MembershipOptions from "./components/Membership/MembershipOptions/MembershipOptions";
 import Joinus from "./components/Forms/JoinUS/Joinus";
-import MembershipSingleOption from "./components/Membership/MembershipOptions/MembershipSingleOption";
 import Home from "./pages/Home";
 import Community from "./pages/Community";
 import NewsFeed from "./pages/NewsFeed";
@@ -27,10 +26,9 @@ import BookingDetails from "./components/Booking/BookinDetails/BookingDetails";
 import BookingSummary from "./components/Booking/BookinDetails/SpaceDetails/BookingSummary/BookingSummary";
 import Gallery from "./pages/Gallery";
 import styled from 'styled-components';
-import MemberDetailsTest from "./components/Membership/MembershipTypes/MemberDetailsTest";
-import MemberLimitedTest from "./components/Membership/MembershipTypes/MemberLimitedTest/MemberLimitedTest";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
+import MemberLimitedTest from "./components/Membership/MembershipTypes/MemberLimitedTest/MemberLimitedTest";
 
 const StyledBody = styled.body`
   background-color: ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
@@ -94,12 +92,14 @@ function App() {
                         {/* END Authentication Routes */}
                         {/* Start Membership Routes */}
                         <Route path="/membership" element={<Membership/>}/>
-                        <Route path="/membershipDetailsTest" element={<MemberDetailsTest/>}/>
-                        <Route path="/limited" element={<MemberLimitedTest/>}/>
+                        {/*<Route path="/membershipDetailsTest" element={<MemberDetailsTest/>}/>*/}
+                        {/*<Route path="/limited" element={<MemberLimitedTest/>}/>*/}
 
 
                         <Route path="/membership/:id" element={<MembershipOptions/>}/>
-                        <Route path="/singleMember/:id" element={<MembershipSingleOption/>}/>
+                        <Route path="/singleMember/:id" element={<MemberLimitedTest/>}/>
+
+                        {/*<Route path="/singleMember/:id" element={<MembershipSingleOption/>}/>*/}
                         {/* End Membership Routes */}
                         {/* Start Community Routes */}
                         <Route path="/community" element={<Community/>}/>

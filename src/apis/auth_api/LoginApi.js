@@ -12,8 +12,6 @@ export const Login = async (username, password) => {
             method: 'post',
             url: `${process.env.REACT_APP_API_URL}/api/auth`,
             data: formData,
-            // maxContentLength: Infinity,
-            // maxBodyLength: Infinity
         };
 
         const response = await axios(config);

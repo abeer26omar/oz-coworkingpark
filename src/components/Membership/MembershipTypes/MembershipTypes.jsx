@@ -3,10 +3,9 @@ import {Col, Container, Row} from 'react-bootstrap';
 import {getListMembershipTypes} from '../../../apis/Api';
 import Slider from "react-slick";
 import MembershipTypesList from "./MembershipTypesList";
-import {memberTypes} from '../../../Data/MemberTypesData';
 import './MembershipTypes.css';
 
-const MembershipTypes = () => {
+const MembershipTypes = (props) => {
     const [listMembershipsTypes, setListMembershipsTypes] = useState([]);
 
     // useEffect(() => {
@@ -56,7 +55,7 @@ const MembershipTypes = () => {
         dots: false,
         arrows: true,
         infinite: true,
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 1000,
@@ -67,8 +66,8 @@ const MembershipTypes = () => {
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
                     infinite: true,
                     dots: true
                 }
@@ -96,6 +95,11 @@ const MembershipTypes = () => {
                     slidesToShow: 1,
                     slidesToScroll: 1
                 }
+            },
+            {
+                breakpoint: 3,
+                settings: "unslick",
+
             }
             // You can unslick at a given breakpoint now by adding:
             // settings: "unslick"
@@ -103,62 +107,75 @@ const MembershipTypes = () => {
         ]
 
     };
+    const renderSlider = () => {
+        if (listMembershipsTypes.length <= 4) {
+            // Don't render a slider if there are less than 3 slides.
+            return (
+                <div className="row">
+
+                    {listMembershipsTypes.map((listMembershipType, index) => {
+                        const {id, name, logo, link, description, img} = listMembershipType;
+                        return (
+                            <div className="col-lg-3" key={id}>
+
+                                <MembershipTypesList
+                                    key={index}
+                                    id={id}
+                                    name={name}
+                                    logo={logo}
+                                    link={link}
+                                    description={description}
+                                    img={img}
+                                />
+
+                            </div>
+                        );
+                    })}
+                </div>
+            );
+        } else {
+            return (
+                <Slider {...settings}>
+                    {listMembershipsTypes.map((listMembershipType, index) => {
+                        const {id, name, logo, link, description, img} = listMembershipType;
+                        return (
+                            <div className="row">
+                                <div className="col-lg-12" key={index}>
+                                    <MembershipTypesList
+                                        id={id}
+                                        name={name}
+                                        logo={logo}
+                                        link={link}
+                                        description={description}
+                                        img={img}
+                                    />
+                                </div>
+                            </div>
+                        );
+                    })}
+                </Slider>
+            );
+        }
+    };
 
     return (
         <>
 
             {/*// <!--Start Our Membership Types-->*/}
-            <section className="membership-types   ">
+            <section className={`membership-types ${props.className}`}>
                 <Container fluid>
                     <Row>
-                        <div className="col-lg-12 border-bottom">
+                        <div className="col-lg-12 border-bottom border-top ">
                             <div className="head-content-sec">
-                                <h2 className="h2-text">Types</h2>
+                                <h2 className="h2-text">{props.headTitle}</h2>
                             </div>
                         </div>
                         <Col lg={12}>
                             <h2 className="h2-text-bold">Membership individual</h2>
-                            <Slider {...settings}>
-                                {memberTypes.map((listMembershipType, index) => {
-                                    const {id, name, logo, link, description, img} = listMembershipType;
-                                    return (
-                                        <div key={index}>
-                                            <MembershipTypesList
-                                                id={id}
-                                                name={name}
-                                                logo={logo}
-                                                link={link}
-                                                description={description}
-                                                img={img}
-                                            />
-                                        </div>
-                                    );
-                                })}
-                            </Slider>
+                            {renderSlider()}
                         </Col>
                     </Row>
-                    <Row>
-                        <Col lg={12} className="border-bottom py-5">
-                            <h2 className="h2-text-bold">Membership Corporate</h2>
-                            <Slider {...settings}>
-                                {memberTypes.map((listMembershipType, index) => {
-                                    const {id, name, logo, link, description, img} = listMembershipType;
-                                    return (
-                                        <div key={index}>
-                                            <MembershipTypesList
-                                                id={id}
-                                                name={name}
-                                                logo={logo}
-                                                link={link}
-                                                description={description}
-                                                img={img}
-                                            />
-                                        </div>
-                                    );
-                                })}
-                            </Slider>
-                        </Col>
-                    </Row>
+
                 </Container>
             </section>
             {/*// <!--END Section-->*/}

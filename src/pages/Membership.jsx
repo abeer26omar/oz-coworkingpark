@@ -10,7 +10,7 @@ const Membership = () => {
         <>
             <MembershipHeader/>
             <BecomeMember/>
-            <MembershipTypes/>
+            <MembershipTypes headTitle="Types"/>
             <Locations/>
             <Services/>
 

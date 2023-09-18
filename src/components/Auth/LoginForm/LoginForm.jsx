@@ -28,6 +28,7 @@ const LoginForm = () => {
             const result = await Login(credentials.username, credentials.password);
             setCredentials(result);
             console.log(result);
+            
             navigate("/membership");
         } catch (error) {
             console.log(error);
