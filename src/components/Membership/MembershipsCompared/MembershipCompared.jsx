@@ -5,11 +5,15 @@ import './MembershipCompared.css';
 import Media from '../../Media/Media';
 import {getMembershipOptions} from '../../../apis/Api';
 
-const MembershipCompared = () => {
+const MembershipCompared = (key, value) => {
     const [listMembershipsTypes, setListMembershipsTypes] = useState([]);
     const {id} = useParams();
     const navigate = useNavigate();
     const [selectedType, setSelectedType] = useState('');
+    const [selectedDiscount, setSelectedDiscount] = useState('');
+    const [selectedPrice, setSelectedPrice] = useState('');
+    const [selectedAmenities, setSelectedAmenities] = useState('');
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -51,24 +55,25 @@ const MembershipCompared = () => {
     });
 
     const handleCheckout = (type) => {
-        setSelectedType(type);
-        // Save selected type in local storage
-        localStorage.setItem('selectedType', type);
+        const selectedOption = filteredOptions.find((option) => option.type === type);
+
+        if (selectedOption) {
+            const {discount, price, amenities} = selectedOption;
+
+            setSelectedType(type);
+            setSelectedDiscount(discount);
+            setSelectedPrice(price);
+            setSelectedAmenities(amenities);
+            // Save selected type, discount, and price in local storage
+            localStorage.setItem('selectedType', type);
+            localStorage.setItem('selectedDiscount', discount);
+            localStorage.setItem('selectedPrice', price);
+            localStorage.setItem('selectedAmenities', JSON.stringify(amenities));
+        }
+
         // Navigate to the inquiry page with selected type as a parameter
         navigate('/joinus');
     };
-    // const handleCheckout = (type) => {
-    //     const selectedType = {
-    //         type: type.type,
-    //         amenities: type.amenities ? type.amenities.map((amenity) => amenity.title) : [],
-    //     };
-    //
-    //     // Save selected type in local storage
-    //     localStorage.setItem('selectedType', JSON.stringify(selectedType));
-    //
-    //     // Navigate to the inquiry page
-    //     navigate('/joinus');
-    // };
 
     return (
         <>
@@ -115,9 +120,9 @@ const MembershipCompared = () => {
                                     </th>
                                     {filteredOptions[0].options.map((option) => (
                                         <td key={option.id}>
-                                            <del className="member_discount">{option.discount}</del>
+                                            <del className="member_discount">{option.discount} / Monthly</del>
                                             <br/>
-                                            <strong className="current_price">{option.price}</strong>
+                                            <strong className="current_price">{option.price} / Monthly</strong>
                                         </td>
                                     ))}
                                 </tr>
@@ -128,7 +133,9 @@ const MembershipCompared = () => {
 
                                     {filteredOptions[0].options.map((option) => (
                                         <td key={option.id}>
-                                            <button onClick={() => handleCheckout(option.type)}>Apply</button>
+                                            <button className="button-one-outline btn-bg-white"
+                                                    onClick={() => handleCheckout(option.type)}>Apply
+                                            </button>
                                         </td>
                                     ))}
                                 </tr>

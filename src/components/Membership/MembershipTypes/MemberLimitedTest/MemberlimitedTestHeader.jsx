@@ -1,7 +1,6 @@
 import React from 'react';
-import newsfeed from "../../../../assets/images/videos/limited.mp4";
 
-const MemberlimitedTestHeader = () => {
+const MemberlimitedTestHeader = ({typeName, optionImage, optionType, optionDescription}) => {
     return (
         <>
             <div className="box news-header">
@@ -11,26 +10,21 @@ const MemberlimitedTestHeader = () => {
                             <div className="rectangle-wrapper">
                                 <div className="rectangle"/>
                             </div>
-                            <video
+                            <img
                                 className="img"
                                 alt="Group"
-                                src={newsfeed}
-                                autoPlay
-                                muted
-                                loop
+                                src={optionImage}
+                                // autoPlay
+                                // muted
+                                // loop
                             />
                             <div className="group-2">
                                 <h1 className="an-innovative-co position-relative">
-                                    <span className="text-wrapper head-co">The social</span>
-                                    <span className="text-wrapper-2">limited 8</span>
+                                    <span className="text-wrapper head-co">{typeName}</span>
+                                    <span className="text-wrapper-2">{optionType}</span>
                                 </h1>
                                 <p className="p">
-                                    Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit
-                                    amet, consectetuerLorem ipsum dolor sit amet,
-                                    consectetuerLorem ipsum dolor sit amet, Lorem ipsum dolor sit
-                                    amet, consectetuerLorem ipsum dolor sit amet,
-                                    consectetuerLorem ipsum dolor sit amet, consectetuerLorem
-                                    ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,
+                                    {optionDescription}
                                 </p>
                             </div>
                         </div>

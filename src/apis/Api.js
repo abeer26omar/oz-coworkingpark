@@ -75,6 +75,27 @@ export const getMembershipOptions = async (id) => {
 };
 
 
+// List Amenities Group API
+export const getlistAmenities = async () => {
+
+    try {
+        const formData = new FormData();
+        formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+
+        const config = {
+            method: 'post',
+            url: `${process.env.REACT_APP_API_URL}/api/list_amenities_group?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`,
+            data: formData,
+        };
+
+        const response = await axios(config);
+        return response.data.data;
+    } catch (error) {
+        console.error(error);
+    }
+
+};
+
 //Inquire API
 export const inquiry = async (formState) => {
     try {

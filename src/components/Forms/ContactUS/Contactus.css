@@ -1,3 +1,9 @@
+.contactus .head-content-left-shape .text-shape {
+
+    transform: translate(-240px, 25px);
+
+}
+
 .contactus form {
     padding: 0 75px;
 }

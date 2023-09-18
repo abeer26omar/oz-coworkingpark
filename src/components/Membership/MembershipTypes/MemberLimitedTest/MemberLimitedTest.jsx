@@ -1,16 +1,68 @@
-import React from 'react';
-import MemberlimitedTestHeader from "./MemberlimitedTestHeader";
+import React, {useEffect, useState} from 'react';
 import at_oz from "../../../../assets/images/at_oz.png";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import './MemberLimitedTest.css';
 import vector from "../../../../assets/images/Vector.png";
-import {services} from "../../../../Data/ServicesLimitedData";
 import Media from "../../../Media/Media";
+import {getMembershipOptions} from "../../../../apis/Api";
+import MemberlimitedTestHeader from "./MemberlimitedTestHeader";
 
 const MemberLimitedTest = () => {
+    const {id} = useParams();
+    const [memberName, setMemberName] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await getMembershipOptions();
+            setMemberName(result);
+            console.log(result);
+        }
+        fetchData();
+    }, [id]);
+
+    // Make Function FilteredOptions to Get only on ID Properties not all
+    const filteredOptions = memberName.flatMap(function (type) {
+        return type.options.map(function (option) {
+            return {
+                ...type, // include all the properties of the type object
+                ...option,// include all the properties of the option object
+                typeId: type.id,
+                typeDescription: type.description,
+                typeName: type.name,
+                typePrice: type.price,
+                optionId: option.id,
+                optionType: option.type,
+                optionImage: option.image,
+                optionPrice: option.price,
+                optionDescription: option.description,
+
+
+            };
+        });
+    }).filter(function (option) {
+        return option.optionId === `${id}`
+
+    })
+
     return (
         <>
-            <MemberlimitedTestHeader/>
+            {filteredOptions.map((option, index) => {
+                const {
+                    id,
+                    typeName,
+                    optionId,
+                    optionType,
+                    optionImage,
+                    optionDescription
+                } = option;
+                return (
+                    <>
+                        <MemberlimitedTestHeader key={index} id={id} typeName={typeName} optionImage={optionImage}
+                                                 optionId={optionId} optionType={optionType}
+                                                 optionDescription={optionDescription}/>
+                    </>
+                )
+            })}
+
 
             <section className="at_oz">
                 <div className="container-fluid">
@@ -68,23 +120,24 @@ const MemberLimitedTest = () => {
                             {/*</div>*/}
                         </div>
 
-                        {services.map((service, index) => {
-                            const {id, title, imgwhite, text} = service;
+                        {filteredOptions.map((option, index) => {
+                            const {amenities} = option;
                             return (
-
                                 <div className="col-lg-6 col-md-6 col-sm-12 py-3 border-all">
-                                    <div className="d-flex align-items-center justify-content-between">
-                                        <div className="d-flex align-items-center w-50">
-                                            <Media
-                                                type="img" src={imgwhite} alt={title}/>
-                                            <h2 className="bold-head mt-3">{title}</h2>
-                                        </div>
 
-                                        <p className="text-content text-left mt-4">{text}</p>
-                                    </div>
+                                    {amenities.map((amenity) => (
+                                        <div className="d-flex align-items-center justify-content-between">
+                                            <div className="d-flex align-items-center w-50">
+                                                <Media
+                                                    type="img" src={amenity.logo} alt={amenity.title}/>
+                                                <h2 className="bold-head mt-3">{amenity.title}</h2>
+                                            </div>
+                                            {/*<p className="text-content text-left mt-4">{amenities.title}</p>*/}
+                                        </div>
+                                    ))}
                                 </div>
-                            )
-                        })}
+                            );
+                        })};
                     </div>
                 </div>
             </section>

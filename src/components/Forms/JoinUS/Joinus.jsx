@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Swal from 'sweetalert2';
 import './Joinus.css';
 import vector from "../../../assets/images/Vector.png";
@@ -6,7 +6,15 @@ import Media from "../../Media/Media";
 
 const Joinus = () => {
     const selectedType = localStorage.getItem('selectedType') || '';
+    const discount = localStorage.getItem('selectedDiscount') || '';
+    const price = localStorage.getItem('selectedPrice') || '';
+    const amenities = JSON.parse(localStorage.getItem('selectedAmenities')) || [];
 
+    const [selectedAmenities, setSelectedAmenities] = useState([]);
+
+    useEffect(() => {
+        setSelectedAmenities(amenities);
+    }, [amenities]);
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -27,6 +35,9 @@ const Joinus = () => {
 
             // Clear local storage
             localStorage.removeItem('selectedType');
+            localStorage.removeItem('selectedDiscount');
+            localStorage.removeItem('selectedPrice');
+            localStorage.removeItem('selectedAmenities');
 
             // Navigate to profile page
             window.location.href = '/profile'; // Replace '/profile' with the actual URL of your profile page
@@ -59,21 +70,21 @@ const Joinus = () => {
                                 <div className=" name-price d-flex align-items-center justify-content-between">
                                     <h2 className="d-flex justify-content-start align-items-center ">{selectedType}</h2>
                                     <div className="d-block">
-                                        <del className="member_discount">25EGP / Monthly</del>
+                                        <del className="member_discount">{discount} / Monthly</del>
                                         <br/>
-                                        <strong className="current_price">15.00 / Monthly</strong>
+                                        <strong className="current_price">{price} / Monthly</strong>
                                     </div>
                                 </div>
                                 <ul className="amenties-select">
-                                    <li>Lorem ipsum dolor sit amet, consectetuerLorem ipsumconsectetue</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetuerLorem ipsumconsectetue</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetuerLorem ipsumconsectetue</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetuerLorem ipsumconsectetue</li>
-                                    <li>Lorem ipsum dolor sit amet, consectetuerLorem ipsumconsectetue</li>
+                                    {selectedAmenities.map((amenity, index) => (
+                                        <li key={index} className="d-flex align-items-center ">
+                                            <img src={amenity.logo} alt={amenity.title} className="me-4"/>
+                                            <span> {amenity.title}</span>
+                                        </li>
+                                    ))}
 
                                 </ul>
                             </div>
-                            {/*<h1>Selected Type: {selectedType}</h1>*/}
                         </div>
                         <div className="col-lg-6">
                             <div className="form-card py-3">

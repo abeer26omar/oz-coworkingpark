@@ -23,8 +23,8 @@
     font-size: var(--font-size-23);
 }
 
-.features img {
-    width: 50px;
+.features .services-icons {
+    width: 100%;
     text-align: left !important;
 }
 

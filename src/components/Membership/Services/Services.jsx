@@ -1,14 +1,29 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './Services.css';
 
 import vector from "../../../assets/images/Vector.png";
-import {services} from "../../../Data/ServicesData";
 import ServicesList from "./ServicesList";
 import {useLocation} from "react-router-dom";
 import Media from "../../Media/Media";
+import {getlistAmenities} from "../../../apis/Api";
 
 const Services = () => {
     const location = useLocation();
+    const [amenities, setAmenities] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await getlistAmenities();
+                setAmenities(response);
+                // console.log(response);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     // Check if the current path matches "/membership"
     const isMembershipPage = location.pathname === '/membership';
@@ -36,11 +51,11 @@ const Services = () => {
                             {/*</div>*/}
                         </div>
 
-                        {services.map((service, index) => {
-                            const {id, title, img, text} = service;
+                        {amenities.map((amenity, index) => {
+                            const {id, name, logo} = amenity;
                             return (
                                 <div className="col-lg-4 col-md-6 col-sm-12 my-5">
-                                    <ServicesList id={id} title={title} img={img} text={text}/>
+                                    <ServicesList id={id} name={name} logo={logo}/>
                                 </div>
                             )
                         })}
