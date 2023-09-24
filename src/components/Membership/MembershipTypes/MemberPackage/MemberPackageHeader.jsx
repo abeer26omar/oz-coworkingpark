@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MemberlimitedTestHeader = ({typeName, optionImage, optionType, optionDescription}) => {
+const MemberPackageHeader = ({typeName, optionImage, optionType, optionDescription}) => {
     return (
         <>
             <div className="box news-header">
@@ -36,4 +36,4 @@ const MemberlimitedTestHeader = ({typeName, optionImage, optionType, optionDescr
     );
 };
 
-export default MemberlimitedTestHeader;
+export default MemberPackageHeader;

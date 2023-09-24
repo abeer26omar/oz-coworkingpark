@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import at_oz from "../../../../assets/images/at_oz.png";
 import {Link, useParams} from "react-router-dom";
-import './MemberLimitedTest.css';
+import './MemberPackage.css';
 import vector from "../../../../assets/images/Vector.png";
 import Media from "../../../Media/Media";
 import {getMembershipOptions} from "../../../../apis/Api";
-import MemberlimitedTestHeader from "./MemberlimitedTestHeader";
+import MemberPackageHeader from "./MemberPackageHeader";
 
-const MemberLimitedTest = () => {
+const MemberPackage = () => {
     const {id} = useParams();
     const [memberName, setMemberName] = useState([]);
     useEffect(() => {
@@ -56,9 +56,9 @@ const MemberLimitedTest = () => {
                 } = option;
                 return (
                     <>
-                        <MemberlimitedTestHeader key={index} id={id} typeName={typeName} optionImage={optionImage}
-                                                 optionId={optionId} optionType={optionType}
-                                                 optionDescription={optionDescription}/>
+                        <MemberPackageHeader key={index} id={id} typeName={typeName} optionImage={optionImage}
+                                             optionId={optionId} optionType={optionType}
+                                             optionDescription={optionDescription}/>
                     </>
                 )
             })}
@@ -147,4 +147,4 @@ const MemberLimitedTest = () => {
     );
 };
 
-export default MemberLimitedTest;
+export default MemberPackage;

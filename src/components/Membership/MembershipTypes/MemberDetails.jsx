@@ -10,7 +10,7 @@ import MembershipTypesList from "./MembershipTypesList";
 import MembershipCompared from "../MembershipsCompared/MembershipCompared";
 import Media from "../../Media/Media";
 
-const MemberDetailsTest = () => {
+const MemberDetails = () => {
     const settings = {
         dots: false,
         arrows: true,
@@ -167,4 +167,4 @@ const MemberDetailsTest = () => {
     );
 };
 
-export default MemberDetailsTest;
+export default MemberDetails;

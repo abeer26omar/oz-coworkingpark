@@ -28,11 +28,11 @@ import Gallery from "./pages/Gallery";
 import styled from 'styled-components';
 import About from "./pages/About";
 import Profile from "./pages/Profile";
-import MemberLimitedTest from "./components/Membership/MembershipTypes/MemberLimitedTest/MemberLimitedTest";
+import MemberPackage from "./components/Membership/MembershipTypes/MemberPackage/MemberPackage";
 
 const StyledBody = styled.body`
   background-color: ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
-          isGalleryRoute || isLimitedRoute || isAboutRoute ? '#000' : 'initial'};
+    isGalleryRoute || isLimitedRoute || isAboutRoute ? '#000' : 'initial'};
 `;
 
 const AppContainer = styled.nav`
@@ -45,8 +45,8 @@ const AppContainer = styled.nav`
 
   /* Styles for the header in the gallery route */
   ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
-          (isGalleryRoute || isLimitedRoute || isAboutRoute) &&
-          `  
+    (isGalleryRoute || isLimitedRoute || isAboutRoute) &&
+    `  
           html, body {
         background-color: #000 ;
       }
@@ -92,12 +92,12 @@ function App() {
                         {/* END Authentication Routes */}
                         {/* Start Membership Routes */}
                         <Route path="/membership" element={<Membership/>}/>
-                        {/*<Route path="/membershipDetailsTest" element={<MemberDetailsTest/>}/>*/}
-                        {/*<Route path="/limited" element={<MemberLimitedTest/>}/>*/}
+                        {/*<Route path="/membershipDetailsTest" element={<MemberDetails/>}/>*/}
+                        {/*<Route path="/limited" element={<MemberPackage/>}/>*/}
 
 
                         <Route path="/membership/:id" element={<MembershipOptions/>}/>
-                        <Route path="/singleMember/:id" element={<MemberLimitedTest/>}/>
+                        <Route path="/singleMember/:id" element={<MemberPackage/>}/>
 
                         {/*<Route path="/singleMember/:id" element={<MembershipSingleOption/>}/>*/}
                         {/* End Membership Routes */}
