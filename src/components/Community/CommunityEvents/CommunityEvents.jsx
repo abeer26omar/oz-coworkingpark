@@ -63,7 +63,7 @@ const CommunityEvents = () => {
                                             <h2 className="h2-text-box">WHAT'S ON events </h2>
                                         </div>
                                         <div className="col-lg-8 col-sm-12 m-auto">
-                                            <div className="d-flex align-items-center">
+                                            <div className="d-lg-flex d-sm-block align-items-center">
                                                 <p className="p-text-box">
                                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit
                                                     eiusmod Lorem ipsum dolor sit amet,consectetur dipiscing

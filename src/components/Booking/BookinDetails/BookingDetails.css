@@ -1,0 +1,50 @@
+.booking-details-header .box {
+    background-image: none;
+}
+
+.booking-details-header .box .img {
+    height: 100vh;
+}
+
+.booking-details-header .overlap-group .text-one {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transform: translate(44%, 35%);
+    color: var(--accent-color);
+    font-family: goldenHopes;
+    font-size: var(--font-size-58);
+    font-style: normal;
+    font-weight: var(--font-weight-regular);
+    line-height: 120%;
+}
+
+.booking-details-header .overlap-group .text-two {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    /*transform: translate(22%, 50%);*/
+    /*transform: translate(630px, 50%);*/
+    transform: translate(0, 50%);
+    color: #fff;
+    font-family: Couture;
+    font-size: var(--font-size-74);
+    font-style: normal;
+    font-weight: var(--font-weight-bold);
+    line-height: 120%;
+    text-align: center;
+}
+
+.box-book {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.form-horizontal {
+    display: flex;
+}

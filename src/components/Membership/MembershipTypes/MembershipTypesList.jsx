@@ -1,22 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import {Link, NavLink, Route} from "react-router-dom";
+import React from 'react';
 import './MembershipTypes.css';
-import axios from "axios";
-import FormData from "form-data";
-const MembershipTypesList = ({id,logo,name,description}) => {
+import Media from "../../Media/Media";
+import {Link} from "react-router-dom";
+
+const MembershipTypesList = ({id, logo, name, description, img}) => {
 
     return (
         <>
-                <div  key={id}>
-                    <div className="card my-2 h-100" >
-                                <img src={logo} className="card-img-top" alt={name}/>
-                                    <div className="card-body">
-                                        <h5 className="card-title my-3">{name}</h5>
-                                        <p className="text-muted">{description}</p>
-                                        <Link to={`/membership/${id}`} name={name} className="button-one-outline p-0 my-3">{name}</Link>
-                                    </div>
-                            </div>
+            <div className="card my-2 h-100">
+                <Media
+                    type="img" src={logo} className="card-img-top" alt={name}/>
+                <div className="card-body">
+                    <h5 className="card-title ">{name}</h5>
+                    {/*<p className="text-muted">{description}</p>*/}
+                    <Link to={`/membership/${id}`} name={name}
+                          className="btn button-outLine btn-bg-white">{name}</Link>
+                    {/*<Buttons href='/membershipDetailsTest' name={name}>{name}</Buttons>*/}
                 </div>
+            </div>
         </>
     );
 };

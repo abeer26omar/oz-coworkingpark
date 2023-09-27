@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './HomeHeader.css';
 import headVideo from '../../../assets/images/videos/header.mp4';
 import Button from 'react-bootstrap/Button';
@@ -8,6 +8,12 @@ const HomeHeader = () => {
     const [show, setShow] = useState(false);
     const [fullscreen, setFullscreen] = useState(true);
 
+    const [currentTime, setCurrentTime] = useState(0);
+
+    useEffect(() => {
+        // Start the video playing from the beginning
+        setCurrentTime(0);
+    }, []);
     const handleClose = () => setShow(false);
 
     function handleShow(breakpoint) {
@@ -24,6 +30,7 @@ const HomeHeader = () => {
                             <div className="rectangle-wrapper">
                                 <div className="rectangle"/>
                             </div>
+
                             <video className="img" alt="Group" src={headVideo} autoPlay muted loop/>
                             <div className="group-2 home-group">
                                 <h1 className="an-innovative-co">

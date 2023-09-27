@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 const JoinCommunityWhite = () => {
     return (
         <>
-            <section className="monoBlock monoBlock-white">
+            <section className="monoBlock bg-white">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">

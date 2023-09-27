@@ -5,6 +5,9 @@ import vector from "../../../../assets/images/VectorRight.png";
 import headNews from "../../../../assets/images/news/test.png";
 import blog2 from "../../../../assets/images/news/newsblog2.png";
 import blog1 from "../../../../assets/images/news/newsblog.png";
+import {NavLink} from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import imageone from "../../../../assets/images/news/news1.png"
 
 const SingleNewFeed = () => {
     return (
@@ -87,7 +90,8 @@ const SingleNewFeed = () => {
                                 </p>
                             </div>
                             <div className="box-details border-bottom">
-                                <div className="d-flex justify-content-between align-items-center ">
+                                <div
+                                    className="d-lg-flex justify-content-between align-items-center d-sm-block m-sm-auto ">
                                     <img src={blog1}/>
                                     <img src={blog2}/>
                                 </div>
@@ -105,6 +109,58 @@ const SingleNewFeed = () => {
                                     amet, consectetur dipiscing elit eiusmod
                                 </p>
                                 <a href="#" className="btn button-outLine btn-bg-white ">Our Vision</a>
+                            </div>
+
+                        </div>
+                        <div className="col-lg-4">
+                            <div className="box-details ">
+                                <h3>
+                                    Articles Related
+                                </h3>
+                                <div className="newsfeeds border-0 m-0 p-0 ">
+                                    <NavLink to={"/community/newsfeed/singleFeed"}>
+                                        <Card className="Card-news">
+                                            <Card.Img variant="top" src={imageone} className="rounded-0 " title="art"
+                                                      loading="lazy"/>
+                                            <Card.Body>
+                                                <span className="feed-category">Art</span>
+                                                <Card.Title>Lorem ipsum</Card.Title>
+                                                <Card.Text>Lorem ipsum dolor sit amet, consectetur dipiscing elit
+                                                    eiusmod</Card.Text>
+                                                {/*<a className="btn button-outLine btn-bg-white">{linkText}</a>*/}
+                                            </Card.Body>
+                                        </Card>
+                                    </NavLink>
+
+                                    <NavLink to={"/community/newsfeed/singleFeed"}>
+                                        <Card className="Card-news">
+                                            <Card.Img variant="top" src={imageone} className="rounded-0 " title="art"
+                                                      loading="lazy"/>
+                                            <Card.Body>
+                                                <span className="feed-category">Art</span>
+                                                <Card.Title>Lorem ipsum</Card.Title>
+                                                <Card.Text>Lorem ipsum dolor sit amet, consectetur dipiscing elit
+                                                    eiusmod</Card.Text>
+                                                {/*<a className="btn button-outLine btn-bg-white">{linkText}</a>*/}
+                                            </Card.Body>
+                                        </Card>
+                                    </NavLink>
+                                    <NavLink to={"/community/newsfeed/singleFeed"}>
+                                        <Card className="Card-news">
+                                            <Card.Img variant="top" src={imageone} className="rounded-0 " title="art"
+                                                      loading="lazy"/>
+                                            <Card.Body>
+                                                <span className="feed-category">Art</span>
+                                                <Card.Title>Lorem ipsum</Card.Title>
+                                                <Card.Text>Lorem ipsum dolor sit amet, consectetur dipiscing elit
+                                                    eiusmod</Card.Text>
+                                                {/*<a className="btn button-outLine btn-bg-white">{linkText}</a>*/}
+                                            </Card.Body>
+                                        </Card>
+                                    </NavLink>
+
+                                </div>
+
                             </div>
 
                         </div>

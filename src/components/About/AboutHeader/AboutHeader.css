@@ -1,0 +1,26 @@
+
+.about-group {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translate(0%, 50%);
+    text-align: center;
+    width: 100%;
+}
+
+.about-box .img {
+    height: 100vh;
+}
+
+.about-group .an-innovative-co {
+    word-wrap: break-word;
+    width: 100%;
+    text-align: center;
+}
+
+.about-box .p {
+    /*width: 804px;*/
+    width: 100%;
+}
+

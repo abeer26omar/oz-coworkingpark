@@ -8,6 +8,8 @@ import gym from "../../../../assets/images/icons/calendar-event.svg";
 import user from "../../../../assets/images/icons/user.svg";
 import './CommunityEventsDetails.css';
 import Slider from "react-slick";
+import Media from "../../../Media/Media";
+import Buttons from "../../../Buttons/Buttons";
 
 const CommunityEventsDetails = () => {
     const settings = {
@@ -65,7 +67,7 @@ const CommunityEventsDetails = () => {
             <section className="community-events-details">
                 <div className="container-fluid">
                     <div className="row border-of-section ">
-                        <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 border-right  ">
+                        <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 border-right  ">
                             <div className="box-content">
                                 <h2 className="h2-text-box">Summer Sessions</h2>
                                 <div className="event-type-details">
@@ -74,7 +76,8 @@ const CommunityEventsDetails = () => {
                                 <div
                                     className="d-flex  mb-5 amenities-box-details">
                                     <div className="amenities-box">
-                                        <img
+                                        <Media
+                                            type="img"
                                             src={alarm}
                                             alt="alarm amenities-icon"
                                             className="amenties-icon"
@@ -83,7 +86,8 @@ const CommunityEventsDetails = () => {
                                     </div>
 
                                     <div className="amenities-box">
-                                        <img
+                                        <Media
+                                            type="img"
                                             src={gym}
                                             alt="alarm amenities-icon"
                                             className="amenties-icon"
@@ -91,7 +95,8 @@ const CommunityEventsDetails = () => {
                                         <h5 className="amenities-text">03:00 Pm</h5>
                                     </div>
                                     <div className="amenities-box">
-                                        <img
+                                        <Media
+                                            type="img"
                                             src={user}
                                             alt="alarm amenities-icon"
                                             className="amenties-icon"
@@ -100,30 +105,33 @@ const CommunityEventsDetails = () => {
                                     </div>
 
                                 </div>
-                                <a href="#" className="btn button-outLine btn-bg-white">
+                                <Buttons href="#">
                                     Explore
-                                </a>
+                                </Buttons>
                             </div>
                         </div>
 
-                        <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6  m-auto ">
+                        <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6  m-auto ">
                             <Slider {...settings}>
                                 <div>
-                                    <img
+                                    <Media
+                                        type="img"
                                         className="image-box w-100"
                                         src={aminites}
                                         alt="Our OZ Vision"
                                     />
                                 </div>
                                 <div>
-                                    <img
+                                    <Media
+                                        type="img"
                                         className="image-box w-100"
                                         src={aminites}
                                         alt="Our OZ Vision"
                                     />
                                 </div>
                                 <div>
-                                    <img
+                                    <Media
+                                        type="img"
                                         className="image-box w-100"
                                         src={aminites}
                                         alt="Our OZ Vision"
@@ -157,8 +165,8 @@ const CommunityEventsDetails = () => {
                             </div>
 
                             <div className="cards-event-buttons text-center">
-                                <a className="btn button-outLine btn-bg-white ">Attend</a>
-                                <a className="share-button">
+                                <Buttons href='#'>Attend</Buttons>
+                                <Buttons href='#' className="share-button">
                                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <g filter="url(#filter0_b_3532_22581)">
@@ -191,7 +199,7 @@ const CommunityEventsDetails = () => {
                                             </filter>
                                         </defs>
                                     </svg>
-                                </a>
+                                </Buttons>
                                 <a className="share-button">
                                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -236,22 +244,16 @@ const CommunityEventsDetails = () => {
                         <div className="col-md-12 col-lg-12 col-sm-12 col-xs-6">
                             <Slider {...settingsGallry}>
                                 <div>
-                                    <img
+                                    <Media
+                                        type="img"
                                         className="image-box w-100"
                                         src={aminites}
                                         alt="Our OZ Vision"
                                     />
                                 </div>
                                 <div>
-                                    <img
-                                        className="image-box w-100"
-                                        src={aminites}
-                                        alt="Our OZ Vision"
-                                    />
-
-                                </div>
-                                <div>
-                                    <img
+                                    <Media
+                                        type="img"
                                         className="image-box w-100"
                                         src={aminites}
                                         alt="Our OZ Vision"
@@ -259,7 +261,17 @@ const CommunityEventsDetails = () => {
 
                                 </div>
                                 <div>
-                                    <img
+                                    <Media
+                                        type="img"
+                                        className="image-box w-100"
+                                        src={aminites}
+                                        alt="Our OZ Vision"
+                                    />
+
+                                </div>
+                                <div>
+                                    <Media
+                                        type="img"
                                         className="image-box w-100"
                                         src={aminites}
                                         alt="Our OZ Vision"

@@ -5,6 +5,7 @@ import './Individual.css';
 import Slider from "react-slick";
 import IndividualHeaderList from "./IndividualHeaderList";
 import {individualHeaderss} from "../../../Data/IndividualHeadersData";
+import Media from "../../Media/Media";
 
 const IndividualHeader = () => {
     const settings = {
@@ -33,7 +34,8 @@ const IndividualHeader = () => {
                                 })}
                             </Slider>
                             <div className="d-flex justify-content-end position-relative shape-right">
-                                <img src={vectorRight} className="position-absolute" alt="shape"/>
+                                <Media
+                                    type="img" src={vectorRight} className="position-absolute" alt="shape"/>
                             </div>
                         </Col>
                     </Row>

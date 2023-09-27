@@ -11,7 +11,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
 
         return (
             <>
-                <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto">
+                <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 border-right">
                     <div className="box-content px-60">
                         <h2 className="h2-text-box">{address}</h2>
                         <p className="p-text-box">
@@ -39,7 +39,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                     </div>
 
                 </div>
-                <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left">
+                <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 m-auto">
                     <figure className="">
                         <img
                             id={`image-place-${id}`}
@@ -54,7 +54,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
     } else {
         return (
             <>
-                <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-right">
+                <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 m-auto">
                     <figure className="">
                         <img
                             id={`image-place-${id}`}
@@ -64,7 +64,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                         />
                     </figure>
                 </div>
-                <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto">
+                <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 border-left">
                     <div className="box-content px-60">
                         <h2 className="h2-text-box">{address}</h2>
                         <p className="p-text-box">

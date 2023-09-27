@@ -1,40 +1,74 @@
 import React, {useState} from "react";
 import "./Header.css";
 import logo from "../../../assets/images/logo.svg";
+import galleryLogo from "../../../assets/images/logoWhite.svg";
+import userblack from '../../../assets/images/icons/userblack.svg';
+import userwhite from '../../../assets/images/icons/userwhite.svg';
+import listBlack from '../../../assets/images/icons/listBlack.svg';
 
-import {NavLink} from "react-router-dom";
+import listWhite from '../../../assets/images/icons/listWhite.svg';
+
+import {Link, NavLink} from "react-router-dom";
 import {Container, Nav} from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
+import Media from "../../Media/Media";
 
-const Header = () => {
+const Header = ({showBlackNav}) => {
     const [showBasic, setShowBasic] = useState(false);
 
-
+    const logoImage = showBlackNav ? galleryLogo : logo;
+    const userIcon = showBlackNav ? userwhite : userblack;
+    const listIcon = showBlackNav ? listWhite : listBlack;
     return (
         <>
             <Navbar expand="lg" sticky="top">
                 <Container fluid>
-                    <NavLink className="navbar-brand" to={"/"}>
-                        <img src={logo} className="w-100" alt={logo}/>
-                    </NavLink>
+                    <Link className="navbar-brand" to={"/"}
+                          onClick={() => {
+                              window.scroll({
+                                  top: 0,
+                                  left: 0,
+                                  behavior: "smooth",
+                              });
+                          }}
+                    >
+                        <Media
+                            type="img" src={logoImage} className="w-100" alt={logo}/>
+
+                    </Link>
                     <Navbar.Toggle
                         aria-controls="basic-navbar-nav"
                         onClick={() => setShowBasic(!showBasic)}
                     />
                     <Navbar.Collapse id="basic-navbar-nav" show={showBasic.toString()}>
                         <Nav className="m-auto">
-                            <NavLink
+                            <Link
                                 className="nav-link links-margin"
-                                to={"/"}
+                                to="/booking"
                             >
                                 Booking
-                            </NavLink>
-                            <NavLink
+                            </Link>
+                            <Link
                                 className="nav-link links-margin"
-                                to={"/"}
+                                to="/about"
                             >
                                 About OZ
-                            </NavLink>
+                            </Link>
+
+                            {/*<Link*/}
+                            {/*    className="nav-link links-margin"*/}
+                            {/*    to={"/home"}*/}
+                            {/*    // onClick={() => {*/}
+                            {/*    //     window.scroll({*/}
+                            {/*    //         top: 0,*/}
+                            {/*    //         left: 0,*/}
+                            {/*    //         behavior: "smooth",*/}
+                            {/*    //     });*/}
+                            {/*    // }}*/}
+                            {/*>*/}
+                            {/*    home*/}
+                            {/*</Link>*/}
+
 
                             <NavLink
                                 className="nav-link links-margin"
@@ -85,64 +119,11 @@ const Header = () => {
                             >
                                 Login
                             </NavLink>
-                            <svg
-                                className="margin-links"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z"
-                                    stroke="black"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
-                                <path
-                                    d="M4.27148 18.3457C4.27148 18.3457 6.5005 15.5 12.0005 15.5C17.5005 15.5 19.7296 18.3457 19.7296 18.3457"
-                                    stroke="black"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
-                                <path
-                                    d="M12 12C13.6569 12 15 10.6569 15 9C15 7.34315 13.6569 6 12 6C10.3431 6 9 7.34315 9 9C9 10.6569 10.3431 12 12 12Z"
-                                    stroke="#BDBDBD"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
-                            </svg>
-                            <svg
-                                width="32"
-                                height="32"
-                                viewBox="0 0 32 32"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M5.33398 9.3335L26.6673 9.3335"
-                                    stroke="black"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                />
-                                <path
-                                    opacity="0.6"
-                                    d="M12 16H26.6667"
-                                    stroke="black"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                />
-                                <path
-                                    opacity="0.4"
-                                    d="M20 22.6665H26.6667"
-                                    stroke="#BDBDBD"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                />
-                            </svg>
+                            <NavLink to="/profile"> <Media type="img" src={userIcon}
+                                                           className="margin-links user-icon"/>
+                            </NavLink>
+                            <Media
+                                type="img" src={listIcon}/>
                             <div className="sun-border">
                                 <svg
                                     style={{margin: "auto 30px"}}

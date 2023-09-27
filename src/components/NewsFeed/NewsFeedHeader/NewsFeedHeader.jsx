@@ -3,6 +3,7 @@ import "./NewsFeedHeader.css";
 import newsfeed from "../../../assets/images/newsfeed.png";
 import Navbar from "react-bootstrap/Navbar";
 import {Container, Nav} from "react-bootstrap";
+import Media from "../../Media/Media";
 
 
 const NewsFeedHeader = () => {
@@ -74,7 +75,8 @@ const NewsFeedHeader = () => {
                             <div className="rectangle-wrapper">
                                 <div className="rectangle"/>
                             </div>
-                            <img
+                            <Media
+                                type="img"
                                 className="img"
                                 alt="Group"
                                 src={newsfeed}

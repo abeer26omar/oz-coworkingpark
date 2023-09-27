@@ -5,6 +5,7 @@ import './Membership.css';
 import Slider from "react-slick";
 import {individualHeaderss} from "../../../Data/IndividualHeadersData";
 import MembershipOptionsHeaderList from "./MembershipOptionsHeaderList";
+import Media from "../../Media/Media";
 
 const MembershipOptionsHeader = () => {
     const settings = {
@@ -33,9 +34,11 @@ const MembershipOptionsHeader = () => {
                                 })}
                             </Slider>
                             <div className="d-flex justify-content-end position-relative shape-right">
-                                <img src={vectorRight} className="position-absolute" alt="shape"/>
+                                <Media
+                                    type="img" src={vectorRight} className="position-absolute" alt="shape"/>
                             </div>
                         </Col>
+
                     </Row>
                 </Container>
             </section>

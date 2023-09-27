@@ -3,11 +3,14 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url(../../../assets/images/layer.png);
+    /*background-image: url(../../../assets/images/layer.png);*/
 }
-.background-cover-api{
+
+.background-cover-api {
     width: 100%;
+    opacity: 1;
 }
+
 .slide {
     height: 100vh;
 }
@@ -19,33 +22,43 @@
 .become-member-slider .slider {
     width: 100% !important;
 }
-.bg-sliderImage .slick-slide{
+
+.bg-sliderImage .slick-slide {
     margin: 0;
 }
-.become-member-slider .slider{
+
+.become-member-slider .slider {
     margin: 0;
 }
-.become-member-slider .slick-slide{
+
+.become-member-slider .slick-slide {
     margin: 0;
 }
-.become-member-slider .head-content{
+
+.become-member-slider .head-content {
     position: absolute !important;
     bottom: 100px;
     padding-left: 2rem;
     width: 50%;
 }
-.become-member-slider .head-content .hand-write{
+
+.become-member-slider .head-content .hand-write {
     color: var(--accent-color);
     line-height: 120%;
 }
 
-.become-member-slider .large-head{
+.become-member-slider .large-head {
     color: var(--neturals-color2);
     line-height: 120%;
 }
-.become-member-slider .text-content{
+
+.become-member-slider .text-content {
     color: var(--neturals-color2);
     line-height: 1.5;
     font-size: 16px;
 
+}
+
+.description-membership {
+    margin-top: 80px;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from "react-bootstrap/Navbar";
-import {Container, Nav} from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import './HousesLocations.css'
 import {locationsData} from "../../Data/LocationsData";
 import HousesLocationsList from "./HousesLocationsList";
@@ -26,12 +26,7 @@ const HousesLocations = () => {
                         dolor sit
                         amet,
                         consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, </p>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ms-auto">
 
-                        </Nav>
-                    </Navbar.Collapse>
                 </Container>
             </Navbar>
 

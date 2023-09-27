@@ -1,7 +1,6 @@
-import React , {useState} from "react";
+import React from "react";
 import axios from 'axios';
 import FormData from 'form-data';
-import {useParams} from "react-router-dom";
 
 // MembershipTypes API
 // export const getListMembershipTypes = async () => {
@@ -38,12 +37,12 @@ export const getListMembershipTypes = async () => {
             data: formData,
             maxContentLength: Infinity,
             maxBodyLength: Infinity,
-            timeout: 10000,
         };
 
         const response = await axios(config);
         if (response.data.status === 'success') {
-            return response.data.data.options;
+            return response.data.data;
+            console.log(response.data.data)
         } else {
             console.error(response.data.message);
             return [];
@@ -53,7 +52,6 @@ export const getListMembershipTypes = async () => {
         return [];
     }
 };
-
 
 
 export const getMembershipOptions = async (id) => {
@@ -76,6 +74,27 @@ export const getMembershipOptions = async (id) => {
     }
 };
 
+
+// List Amenities Group API
+export const getlistAmenities = async () => {
+
+    try {
+        const formData = new FormData();
+        formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+
+        const config = {
+            method: 'post',
+            url: `${process.env.REACT_APP_API_URL}/api/list_amenities_group?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`,
+            data: formData,
+        };
+
+        const response = await axios(config);
+        return response.data.data;
+    } catch (error) {
+        console.error(error);
+    }
+
+};
 
 //Inquire API
 export const inquiry = async (formState) => {
@@ -104,6 +123,7 @@ export const inquiry = async (formState) => {
     } catch (error) {
         console.error(error);
         throw new Error('Failed to submit inquiry');
-    };
+    }
+    ;
 
 };

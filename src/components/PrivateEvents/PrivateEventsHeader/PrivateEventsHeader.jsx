@@ -23,31 +23,29 @@ const PrivateEventsHeader = () => {
                     >
                         <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
                     </svg>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="ms-auto">
-                            <>
 
-                                {PrivateEventsData.map((addevent, index) => {
-                                    const {address} = addevent;
-                                    return (
-                                        <NavLink className="nav-link-two links-margin" key={index}>
-                                            {address}
+                    <Nav className="ms-auto nav-head private-events-head ">
+                        <>
 
-                                        </NavLink>
-                                    )
-                                })}
+                            {PrivateEventsData.map((addevent, index) => {
+                                const {address} = addevent;
+                                return (
+                                    <NavLink className="nav-link-two links-margin" key={index}>
+                                        {address}
+
+                                    </NavLink>
+                                )
+                            })}
 
 
-                                {/*<NavLink className="nav-link-two links-margin" onClick={() => {*/}
-                                {/*    window.location.href = '#community-newsfeed';*/}
-                                {/*}}>*/}
-                                {/*    El- sheikh Zayed*/}
-                                {/*</NavLink>*/}
+                            {/*<NavLink className="nav-link-two links-margin" onClick={() => {*/}
+                            {/*    window.location.href = '#community-newsfeed';*/}
+                            {/*}}>*/}
+                            {/*    El- sheikh Zayed*/}
+                            {/*</NavLink>*/}
 
-                            </>
-                        </Nav>
-                    </Navbar.Collapse>
+                        </>
+                    </Nav>
                 </Container>
             </Navbar>
 

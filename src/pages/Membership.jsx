@@ -1,19 +1,23 @@
 import React from 'react';
-import BecomeMember from "../components/Membership/MembershipHeader/BecomeMember";
+import BecomeMember from "../components/Membership/BecomeMembber/BecomeMember";
 import MembershipTypes from "../components/Membership/MembershipTypes/MembershipTypes";
+import MembershipHeader from "../components/Membership/MembershipHeader/MembershipHeader";
 import Locations from "../components/Locations/Locations";
-import JoinUs from "./JoinUs";
-import TestApi from "../components/TestComponents/TestApi";
-import MemberApi from "../components/TestComponents/MemberApi/MemberApi";
+import Services from "../components/Membership/Services/Services";
 
 const Membership = () => {
     return (
         <>
+            <MembershipHeader/>
             <BecomeMember/>
-            <MembershipTypes/>
+            <MembershipTypes headTitle="Types"/>
+            <Locations/>
+            <Services/>
+
+            {/*<MemberTests/>*/}
             {/*<TestApi/>*/}
             {/*<MemberApi/>*/}
-            <Locations/>
+            {/*<Locations/>*/}
         </>
     );
 };
