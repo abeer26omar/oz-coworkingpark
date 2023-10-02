@@ -4,8 +4,13 @@ import MembershipTypes from "../components/Membership/MembershipTypes/Membership
 import MembershipHeader from "../components/Membership/MembershipHeader/MembershipHeader";
 import Locations from "../components/Locations/Locations";
 import Services from "../components/Membership/Services/Services";
-
+import { config } from '../apis/config';
+import { useEffect ,useState } from 'react';
 const Membership = () => {
+    const [data , setData] = useState([])
+useEffect(()=>{
+    setData(config('membership '))
+},[])
     return (
         <>
             <MembershipHeader/>

@@ -5,8 +5,13 @@ import CommunityEvents from "../components/Community/CommunityEvents/CommunityEv
 import CommunityGallery from "../components/Community/CommunityGallery/CommunityGallery";
 import NewsLetter from "../components/NewsLetter/NewsLetter";
 import MonoBlock from "../components/MonoBlocks/MonoBlock";
-
+import { config } from '../apis/config';
+import { useEffect ,useState } from 'react';
 const Community = () => {
+    const [data , setData] = useState([])
+useEffect(()=>{
+    setData(config('community '))
+},[])
     return (
         <>
             <CommunityHeader/>

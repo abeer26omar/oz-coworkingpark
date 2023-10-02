@@ -1,5 +1,4 @@
 import React from 'react';
-
 import HomeHeader from "../components/Home/HomeHeader/HomeHeader";
 import NewsLetter from "../components/NewsLetter/NewsLetter";
 import Partners from "../components/Partners/Partners";
@@ -8,30 +7,43 @@ import PublicEvent from "../components/PublicEvents/PublicEvent";
 import Locations from "../components/Locations/Locations";
 import LeftContent from "../components/Home/ContentComponent/LeftContent";
 import RightContent from "../components/Home/ContentComponent/RightContent";
+import { config } from '../apis/config';
+import { useEffect ,useState } from 'react';
 
 const Home = () => {
+const [data , setData] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
 
 
+useEffect(()=>{
+    config('home').then(res =>{
+        setData(res)
+        setLoading(false)
+    })
+    .catch(err =>{
+        setError(err)
+        setLoading(false)
+    })
+},[])
+const getComponentValue = (param) => {
+    const matchingItems = data.filter(ele => ele.key.match(param));
+    return matchingItems;
+};
     return (
         <>
-            <HomeHeader/>
-            <MonoBlock title="hello"
-                       desc=" Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
-                                    amet, consectetur
-                                    dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit
-                                    eiusmod Lorem ipsum dolor sit
-                                    amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur
-                                    dipiscing elit
-                                    eiusmod&nbsp;&nbsp;
-                                    Lorem ipsum dolor sit amet, consectetur"
-                       link={[
-                           {className: "btn button-outLine", label: "Booking"},
-                           {className: "btn button-outLine", label: "Booking"},
-                           {className: "btn button-outLine", label: "Booking"},
-                       ]}
-                       numberOfLinksToShow={3}
-                       className="bgBlack"
-            />
+
+            {/* <HomeHeader headerConfig={getComponentValue('header')}/> */}
+            <MonoBlock 
+                configData = {getComponentValue('mono_block')}
+                        link={[
+                            {className: "btn button-outLine", label: "Booking"},
+                            {className: "btn button-outLine", label: "Booking"},
+                            {className: "btn button-outLine", label: "Booking"},
+                            ]}
+                        numberOfLinksToShow={3}
+                        className="bgBlack"
+                        />
             <LeftContent head="Our Vision" title="About OZ"
                          desc="Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing eliteiusmod"
                          link="Our Vision"/>

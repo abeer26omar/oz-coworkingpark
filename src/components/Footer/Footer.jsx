@@ -1,6 +1,5 @@
 import React from "react";
 import "./Footer.css";
-
 import logoWhite from "../../assets/images/logoWhite.svg";
 import facebookWhite from "../../assets/images/icons/facebookWhite.png";
 import twitterWhite from "../../assets/images/icons/twitterWhite.png";

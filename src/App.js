@@ -53,7 +53,7 @@ const AppContainer = styled.nav`
     .navbar {
           background:#000;
     }
-    .nav-link{
+    .nav-link{ 
         color:#fff;
     }
     .navbar-toggler{
