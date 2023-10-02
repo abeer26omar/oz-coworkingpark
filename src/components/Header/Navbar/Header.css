@@ -7,6 +7,9 @@
 .navbar-toggler:focus {
     box-shadow: none;
 }
+.nav-mob{
+    display: flex;
+}
 
 .nav-link, .nav-link-two {
     color: var(--primary-color);
@@ -94,4 +97,16 @@
 /************************************************************/
 
 
+
+
+
+@media screen and (max-width:768px) {
+  .nav-mobile{
+    flex-direction: column-reverse;
+  }
+    .ul-mobile{
+        flex-direction: column;
+        text-align: center;
+    }
+}
 

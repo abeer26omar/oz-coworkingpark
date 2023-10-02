@@ -4,9 +4,11 @@ import headVideo from '../../../assets/images/videos/header.mp4';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-const HomeHeader = () => {
+const HomeHeader = (props) => {
     const [show, setShow] = useState(false);
     const [fullscreen, setFullscreen] = useState(true);
+    const [configObject, setConfigObject] = useState({});
+
 
     const [currentTime, setCurrentTime] = useState(0);
 
@@ -20,7 +22,6 @@ const HomeHeader = () => {
         setFullscreen(breakpoint);
         setShow(true);
     }
-
     return (
         <>
             <div className="box">
@@ -33,16 +34,23 @@ const HomeHeader = () => {
 
                             <video className="img" alt="Group" src={headVideo} autoPlay muted loop/>
                             <div className="group-2 home-group">
-                                <h1 className="an-innovative-co">
-                                    <span className="text-wrapper">An Innovative</span>
-                                    <span className="span"> <br/></span>
-                                    <span className="text-wrapper-2">co-working space</span>
-                                </h1>
-                                <p className="p">
-                                    Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,
-                                    consectetuerLorem ipsum dolor sit
-                                    amet, consectetuerLorem ipsum dolor sit amet,
-                                </p>
+                                
+                            {props.headerConfig.map((configItem, index) => (
+                                <React.Fragment key={index}>
+                                    {configItem.key === 'home_page_main_header' && (
+                                    <h1 className="an-innovative-co">
+                                        <span className="text-wrapper">{configItem.value}</span>
+                                        <span className="span"> <br /></span>
+                                        <span className="text-wrapper-2">co-working space</span>
+                                    </h1>
+                                    )}
+                                    {configItem.key === 'home_page_sub_header' && (
+                                    <p className="p">
+                                        {configItem.value}
+                                    </p>
+                                    )}
+                                </React.Fragment>
+                            ))}
                             </div>
                             <div className="frame">
                                 <div className="">

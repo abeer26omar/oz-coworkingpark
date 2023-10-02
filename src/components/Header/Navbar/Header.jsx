@@ -12,16 +12,16 @@ import {Link, NavLink} from "react-router-dom";
 import {Container, Nav} from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import Media from "../../Media/Media";
-
+import {AiOutlineClose} from 'react-icons/ai';
+import {AiOutlineBars} from 'react-icons/ai';
 const Header = ({showBlackNav}) => {
     const [showBasic, setShowBasic] = useState(false);
-
     const logoImage = showBlackNav ? galleryLogo : logo;
     const userIcon = showBlackNav ? userwhite : userblack;
     const listIcon = showBlackNav ? listWhite : listBlack;
     return (
         <>
-            <Navbar expand="lg" sticky="top">
+            <Navbar className="position-relative" expand="lg" sticky="top">
                 <Container fluid>
                     <Link className="navbar-brand" to={"/"}
                           onClick={() => {
@@ -36,12 +36,12 @@ const Header = ({showBlackNav}) => {
                             type="img" src={logoImage} className="w-100" alt={logo}/>
 
                     </Link>
-                    <Navbar.Toggle
+                    {/* <Navbar.Toggle
                         aria-controls="basic-navbar-nav"
                         onClick={() => setShowBasic(!showBasic)}
-                    />
-                    <Navbar.Collapse id="basic-navbar-nav" show={showBasic.toString()}>
-                        <Nav className="m-auto">
+                    /> */}
+                    <nav className="d-flex nav-mobile" id="basic-navbar-nav" show={showBasic.toString()}>
+                        <div className="m-auto d-flex ul-mobile">
                             <Link
                                 className="nav-link links-margin"
                                 to="/booking"
@@ -55,19 +55,7 @@ const Header = ({showBlackNav}) => {
                                 About OZ
                             </Link>
 
-                            {/*<Link*/}
-                            {/*    className="nav-link links-margin"*/}
-                            {/*    to={"/home"}*/}
-                            {/*    // onClick={() => {*/}
-                            {/*    //     window.scroll({*/}
-                            {/*    //         top: 0,*/}
-                            {/*    //         left: 0,*/}
-                            {/*    //         behavior: "smooth",*/}
-                            {/*    //     });*/}
-                            {/*    // }}*/}
-                            {/*>*/}
-                            {/*    home*/}
-                            {/*</Link>*/}
+                  
 
 
                             <NavLink
@@ -89,7 +77,7 @@ const Header = ({showBlackNav}) => {
                             >
                                 Private Event
                             </NavLink>
-                        </Nav>
+                        </div>
                         <div className="d-flex justify-content-end align-items-center ">
                             <NavLink
                                 className="nav-link links-margin"
@@ -146,7 +134,7 @@ const Header = ({showBlackNav}) => {
                                 </svg>
                             </div>
                         </div>
-                    </Navbar.Collapse>
+                    </nav>
                 </Container>
             </Navbar>
 
