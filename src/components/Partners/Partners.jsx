@@ -1,12 +1,38 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import './Partners.css';
-import logo1 from '../../assets/images/partners/logo1.png';
-import logo2 from '../../assets/images/partners/logo2.png';
-import logo3 from '../../assets/images/partners/logo3.png';
-import logo4 from '../../assets/images/partners/logo4.png';
+import Slider from "react-slick";
 import Media from "../Media/Media";
+import axios from "axios";
 
 const Partners = () => {
+    const [partners, setpartners] = useState([]);
+    useEffect(()=>{
+        const getPartners = async ()=>{
+            try{
+                const config = {
+                    method: 'get',
+                    url: `${process.env.REACT_APP_API_CONFIG_URL}/api/partners`
+                };
+                const response = await axios(config);
+                console.log(response.data.data);
+                setpartners(response.data.data);
+            }catch(error){
+                console.error(error);
+            }
+        }
+        getPartners();
+    },[]);
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 4,
+        cssEase: "linear",
+        arrows: false,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        lazyLoad: true
+    }
     return (
         <>
             <section className="partners p-120">
@@ -19,22 +45,20 @@ const Partners = () => {
                         </div>
                     </div>
                     <div className="row" style={{marginTop: "40px"}}>
-                        <div className="col-lg-3 col-md-6 col-sm-6 col-6 text-center border-right">
-                            <Media
-                                type="img" src={logo1} alt="partner logo" className="d-flex m-auto"/>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-sm-6 col-6 text-center border-right">
-                            <Media
-                                type="img" src={logo2} alt="partner logo" className="d-flex m-auto"/>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-sm-6 col-6 text-center border-right">
-                            <Media
-                                type="img" src={logo3} alt="partner logo" className="d-flex m-auto"/>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-sm-6 col-6 text-center ">
-                            <Media
-                                type="img" src={logo4} alt="partner logo" className="d-flex m-auto"/>
-                        </div>
+                        <Slider {...settings}>
+                            {partners.map((partner, index) => {
+                                const {id, name, image} = partner;
+                                    return (
+                                        <div className="col-lg-3 col-md-6 col-sm-6 col-6 text-center border-right" key={index}>
+                                            <Media
+                                                type="img" 
+                                                src={image} 
+                                                alt={name} 
+                                                className="d-flex m-auto"/>
+                                        </div>
+                                    )
+                            })}
+                        </Slider>
                     </div>
                 </div>
             </section>

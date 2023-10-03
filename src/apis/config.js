@@ -5,11 +5,11 @@ import { useEffect } from 'react';
 
 
 export const config = async(page_name)=>{
-    // useEffect(()=>{})
+    // useEffect(()=>{}) 
     try{
         const config = {
             method: 'get',
-            url: `https://dashboard.ozcoworkingpark.com/api/config?page=${page_name}`
+            url: `${process.env.REACT_APP_API_CONFIG_URL}/api/config?page=${page_name}`
         };
        const response = await axios(config)
             // console.log(response.data.data)

@@ -1,23 +1,40 @@
-import React, {useState} from 'react';
+import {useState, useEffect} from 'react';
 import './GalleryShow.css';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
-import {GalleryData} from "../../../Data/GalleryData";
+// import {GalleryData} from "../../../Data/GalleryData";
 import Media from "../../Media/Media";
+import axios from "axios";
 
 const GalleryShow = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
-    const [filteredGalleryData, setFilteredGalleryData] = useState(GalleryData);
+    const [filteredGalleryData, setFilteredGalleryData] = useState([]);
 
     function handleCategorySelect(category) {
         setSelectedCategory(category);
 
         if (category === 'All') {
-            setFilteredGalleryData(GalleryData);
+            setFilteredGalleryData(filteredGalleryData);
         } else {
-            const filteredData = GalleryData.filter((gallery) => gallery.category === category);
+            const filteredData = filteredGalleryData.filter((gallery) => gallery.category === category);
             setFilteredGalleryData(filteredData);
         }
     }
+    useEffect(()=>{
+        const getGalleryData = async ()=>{
+            try{
+                const config = {
+                    method: 'get',
+                    url: `${process.env.REACT_APP_API_CONFIG_URL}/api/gallery`
+                };
+                const response = await axios(config);
+                console.log(response.data.data);
+                setFilteredGalleryData(response.data.data);
+            }catch(error){
+                console.error(error);
+            }
+        }
+        getGalleryData();
+    },[]);
 
     const categories = ['All', 'Events', 'Exhibition', 'F&B'];
 
@@ -47,13 +64,13 @@ const GalleryShow = () => {
                         <ResponsiveMasonry
                             columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}>
                             <Masonry columnsCount={3} gutter="30px">
-                                {filteredGalleryData.map((gallery, index) => {
-                                    const {img, id, category, text, date, title} = gallery;
+                                {filteredGalleryData.map((gallery) => {
+                                    const {image, id, category, text, date, title} = gallery;
                                     return (
                                         <div key={id} className={`gallery-item ${category}`}>
                                             <div className="position-relative">
                                                 <Media
-                                                    type="img" src={img} alt={`Gallery Item ${id}`}/>
+                                                    type="img" src={image} alt={`Gallery Item ${id}`}/>
                                                 <div className="gallery-description">
                                                     <h3>{title}</h3>
                                                     <span>{date}</span>

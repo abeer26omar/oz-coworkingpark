@@ -7,11 +7,29 @@ import about3 from "../../../assets/images/about/about4.png";
 import about4 from "../../../assets/images/about/about3.png";
 import about5 from "../../../assets/images/about/about5.png";
 import about6 from "../../../assets/images/about/about6.png";
-import {services} from "../../../Data/ServicesLimitedData";
 import Media from "../../Media/Media";
+import { useEffect, useState } from 'react';
+import axios from "axios";
 
 
 const AboutOz = () => {
+    const [amenities, setamenities] = useState([]);
+    useEffect(()=>{
+        const getAmenities = async ()=>{
+            try{
+                const config = {
+                    method: 'get',
+                    url: `${process.env.REACT_APP_API_CONFIG_URL}/api/about_us_amenities`
+                };
+                const response = await axios(config);
+                console.log(response.data.data);
+                setamenities(response.data.data);
+            }catch(error){
+                console.error(error);
+            }
+        }
+        getAmenities();
+    },[]);
     return (
         <>
             <section className="about-oz body-dark">
@@ -181,19 +199,17 @@ const AboutOz = () => {
                             </div>
                         </div>
 
-                        {services.map((service, index) => {
-                            const {title, imgwhite, text} = service;
+                        {amenities.map((service, index) => {
+                            const {title, image, description} = service;
                             return (
-
-                                <div className="col-lg-6 col-md-6 col-sm-12 py-3 border-all">
+                                <div className="col-lg-6 col-md-6 col-sm-12 py-3 border-all" key={index}>
                                     <div className="d-flex align-items-center justify-content-between">
                                         <div className="d-lg-flex d-md-flex d-sm-block align-items-center w-50">
                                             <Media
-                                                type="img" src={imgwhite} alt={title}/>
-                                            <h2 className="bold-head mt-3">{title}</h2>
+                                                type="img" src={image} alt={title}/>
+                                                <h2 className="bold-head mt-3">{title}</h2>
                                         </div>
-
-                                        <p className="text-content text-left mt-4">{text}</p>
+                                        <p className="text-content text-left mt-4">{description}</p>
                                     </div>
                                 </div>
                             )

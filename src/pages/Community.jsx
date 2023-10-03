@@ -10,7 +10,7 @@ import { useEffect ,useState } from 'react';
 const Community = () => {
     const [data , setData] = useState([])
 useEffect(()=>{
-    setData(config('community '))
+    setData(config('community'))
 },[])
     return (
         <>

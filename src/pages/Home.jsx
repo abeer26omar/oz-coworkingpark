@@ -32,8 +32,7 @@ const getComponentValue = (param) => {
 };
     return (
         <>
-
-            {/* <HomeHeader headerConfig={getComponentValue('header')}/> */}
+            <HomeHeader headerConfig={getComponentValue('header')}/>
             <MonoBlock 
                 configData = {getComponentValue('mono_block')}
                         link={[
