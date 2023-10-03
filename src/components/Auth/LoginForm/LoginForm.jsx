@@ -1,41 +1,29 @@
-import React, {useState} from "react";
-import {Col, Container, Form, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import "./LoginForm.css";
 import vector from "../../../assets/images/Vector.png";
 import facebook from "../../../assets/images/icons/Facebook.svg";
 import google from "../../../assets/images/icons/Google.svg";
 import linkedin from "../../../assets/images/icons/linkedin.svg";
-import {useNavigate} from "react-router-dom";
-import {Login} from "../../../apis/auth_api/LoginApi";
 import Media from "../../Media/Media";
+import Form from './Form';
 
 const LoginForm = () => {
-    const [credentials, setCredentials] = useState({
-        username: "",
-        password: "",
-    });
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const handleInputChange = (event) => {
-        const {name, value} = event.target;
-        setCredentials({...credentials, [name]: value});
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            const result = await Login(credentials.username, credentials.password);
-            setCredentials(result);
-            console.log(result);
+    // const handleSubmit = async (event) => {
+    //     event.preventDefault();
+    //     try {
+    //         const result = await Login(credentials.username, credentials.password);
+    //         setCredentials(result);
+    //         console.log(result);
             
-            navigate("/membership");
-        } catch (error) {
-            console.log(error);
-            navigate("/");
-        }
-    };
-
+    //         navigate("/membership");
+    //     } catch (error) {
+    //         console.log(error);
+    //         navigate("/");
+    //     }
+    // };
     return (
         <>
             {/*// <!--Start Login Section-->*/}
@@ -57,7 +45,7 @@ const LoginForm = () => {
                                     <h1 className="hand-write">Welcome</h1>
                                     <h3 className="bold-head">Please Sign in</h3>
                                 </div>
-                                <Form onSubmit={handleSubmit}>
+                                {/* <Form onSubmit={handleSubmit}>
                                     <div className="form__group field my-3 group-check">
                                         <label htmlFor="email" className="form__label">
                                             Email
@@ -113,8 +101,8 @@ const LoginForm = () => {
                                             Login
                                         </button>
                                     </div>
-                                </Form>
-
+                                </Form> */}
+                                <Form />
                                 <div className="py-3 log-social text-center">
                                     <a
                                         href="src/components/Auth/Login/LoginForm#"
