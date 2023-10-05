@@ -3,7 +3,8 @@ import "./Content.css";
 import Buttons from "../../Buttons/Buttons";
 import Media from "../../Media/Media";
 import vision from "../../../assets/images/vision.png";
-const RightContent = (props) => {
+const RightContentFB = (props) => {
+    console.log(props.configData)
     return (
         <>
             <section className=" ">
@@ -13,7 +14,7 @@ const RightContent = (props) => {
                                 <React.Fragment key={index}> 
                     <div className="row">
                         <div className="col-lg-12">
-                            {configItem.key === "home_page_newsfeed_title" && 
+                            {configItem.key === "home_page_fb_title" && 
                              <div className="head-content-sec">
                                 <h2 className="h2-text">{configItem.value}</h2>
                              </div> }     
@@ -24,7 +25,7 @@ const RightContent = (props) => {
                     <div className="row R-flex border-of-section ">
                              {props.configData ? props.configData.map((configItem , index)=>(
                         <React.Fragment key={index}>
-                             {configItem.key === "home_page_newsfeed_image" && 
+                             {configItem.key === "home_page_fb_image" && 
                          <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-right">
                            <Media type="img"
                                    className="image-box w-100"
@@ -33,7 +34,7 @@ const RightContent = (props) => {
                             />
                          </div>
                              }
-                            {configItem.key === "home_page_newsfeed_description" &&
+                            {configItem.key === "home_page_fb_description" &&
                                 <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto ">
                                   <div className="box-content px-60">
                                     <h2 className="h2-text-box achievement-text ">achievements for OZ</h2>
@@ -53,4 +54,4 @@ const RightContent = (props) => {
     );
 };
 
-export default RightContent;
+export default RightContentFB;

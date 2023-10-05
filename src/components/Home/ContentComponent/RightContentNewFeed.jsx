@@ -3,7 +3,7 @@ import "./Content.css";
 import Buttons from "../../Buttons/Buttons";
 import Media from "../../Media/Media";
 import vision from "../../../assets/images/vision.png";
-const RightContent = (props) => {
+const RightContentNewFeed = (props) => {
     return (
         <>
             <section className=" ">
@@ -53,4 +53,4 @@ const RightContent = (props) => {
     );
 };
 
-export default RightContent;
+export default RightContentNewFeed;

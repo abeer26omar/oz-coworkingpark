@@ -14,8 +14,8 @@ const Footer = () => {
                 {/*// <!--footer top start-->*/}
                 <div className="footer-top  text-white ">
                     <div className="container-fluid">
-                        <div className="row justify-content-between align-items-center">
-                            <div className="col-md-9 col-lg-3  mb-lg-0">
+                        <div className="row  align-items-center">
+                            <div className="col-md-3 col-lg-3 col-sm-12 mb-lg-0">
                                 <div className="footer-single-col">
                                     <div className="footer-single-col d-flex justify-content-lg-start ">
                                         <Media
@@ -29,13 +29,11 @@ const Footer = () => {
                                     {/*<span>© 2023, Made with passion by Macber EG</span>*/}
                                 </div>
                             </div>
-                            <div className="col-md-12 col-lg-9 col-sm-12 mt-md-0 mt-lg-0 m-auto">
-                                <div className="row">
-                                    <div className="col-lg-9 col-sm-12 m-auto ">
-                                        <div className="footer-single-col">
-                                            <div className="footer-links">
-                                                <div className="d-flex   links-derictions">
+                            <div className="col-md-9 col-lg-9 col-sm-12 mt-md-0 mt-lg-0 ">
+                                            <div className="footer-links">                                                <div className=" row  links-derictions">
                                                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                                                    <div className="col-xl-4  col-lg-3 links-derictions">
+
                                                     <a href="#" target="_blank">
                                                         Booking
                                                     </a>
@@ -48,6 +46,9 @@ const Footer = () => {
                                                     <a href="#" target="_blank">
                                                         Events
                                                     </a>
+                                                    </div>
+                                                    <div className="col-xl-5 col-lg-3 links-derictions">
+
                                                     <a href="#" target="_blank">
                                                         FAQs
                                                     </a>
@@ -60,12 +61,8 @@ const Footer = () => {
                                                     <a href="#" target="_blank">
                                                         Site Map
                                                     </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-3 col-sm-12 ">
-                                        <div className="footer-single-col ">
+                                                    </div>
+                                                     <div className="col-xl-3 col-lg-3 footer-single-col ">
                                             <div className="footer-social">
                                                 <div className="d-flex justify-content-center align-items-center ">
                                                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
@@ -98,9 +95,10 @@ const Footer = () => {
                                                     </div>
                                                 </div>
                                             </div>
+                                        {/* </div> */}
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

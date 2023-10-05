@@ -4,7 +4,7 @@ import './MonoBlocks.css';
 const MonoBlock = (props) => {
     const {configMonoBlock, link, className, numberOfLinksToShow} = props;
     const links = Array.isArray(link) ? link.slice(0, numberOfLinksToShow) : [];
-console.log(configMonoBlock);
+// console.log(configData);
     return (
         <>
             <section className={`monoBlock ${className}`}>
@@ -12,12 +12,12 @@ console.log(configMonoBlock);
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="content-block">
-                                {/* {configMonoBlock.map((configItem, index) => (
+                                {/* {configData ? configData.map((configItem, index) => (
                                     <React.Fragment key={index}>
                                        {configItem.key === 'home_page_mono_block_title' && <h1 className="text-h1">{configItem.value}</h1>}
                                         {configItem.key === 'home_page_mono_block_description' && <p className="text-p">{configItem.value}</p>}
                                     </React.Fragment>
-                                ))} */}
+                                )): ''} */}
                             </div>
                             <div
                                 className="buttons d-lg-flex d-md-flex d-sm-block my-3 justify-content-center align-items-center text-center">
