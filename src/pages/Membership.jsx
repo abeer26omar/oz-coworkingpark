@@ -4,6 +4,7 @@ import MembershipTypes from "../components/Membership/MembershipTypes/Membership
 import MembershipHeader from "../components/Membership/MembershipHeader/MembershipHeader";
 import Locations from "../components/Locations/Locations";
 import Services from "../components/Membership/Services/Services";
+import Amenities from '../components/Membership/Amenities/Amenities';
 import { config } from '../apis/config';
 import { useEffect ,useState } from 'react';
 const Membership = () => {
@@ -17,6 +18,7 @@ useEffect(()=>{
             <BecomeMember/>
             <MembershipTypes headTitle="Types"/>
             <Locations/>
+            <Amenities />
             <Services/>
 
             {/*<MemberTests/>*/}
