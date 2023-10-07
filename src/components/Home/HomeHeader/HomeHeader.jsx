@@ -38,13 +38,13 @@ const HomeHeader = (props) => {
                             {props.headerConfig.map((configItem, index) => (
                                 <React.Fragment key={index}>
                                     {configItem.key === 'home_page_main_header' && (
-                                    <h1 className="an-innovative-co">
                                         <span className="text-wrapper">{configItem.value}</span>
-                                        <span className="span"> <br /></span>
-                                        <span className="text-wrapper-2">co-working space</span>
-                                    </h1>
                                     )}
+                                    <br />
                                     {configItem.key === 'home_page_sub_header' && (
+                                        <span className="text-wrapper-2">{configItem.value}</span>
+                                    )}                                   
+                                    {configItem.key === 'home_page_header_description' && (
                                     <p className="p">
                                         {configItem.value}
                                     </p>
