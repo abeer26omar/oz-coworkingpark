@@ -202,14 +202,14 @@ const AboutOz = () => {
                         {amenities.map((service, index) => {
                             const {title, image, description} = service;
                             return (
-                                <div className="col-lg-6 col-md-6 col-sm-12 py-3 border-all" key={index}>
+                                <div className="col-lg-6 col-md-6 col-sm-12 py-4 border-all" key={index}>
                                     <div className="d-flex align-items-center justify-content-between">
                                         <div className="d-lg-flex d-md-flex d-sm-block align-items-center w-50">
                                             <Media
                                                 type="img" src={image} alt={title}/>
-                                                <h2 className="bold-head mt-3">{title}</h2>
+                                                <h2 className="bold-head m-0">{title}</h2>
                                         </div>
-                                        <p className="text-content text-left mt-4">{description}</p>
+                                        <p className="text-content text-left m-0">{description}</p>
                                     </div>
                                 </div>
                             )

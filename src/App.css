@@ -125,6 +125,11 @@ a {
     --bs-btn-border-radius: 0;
 
 }
+/* nav-tabs */
+.nav-tabs,
+.btn:active {
+    border: none !important;
+}
 
 /*outLine Button*/
 .button-one-outline {
