@@ -4,10 +4,10 @@ import {Link} from "react-router-dom";
 const Buttons = (props) => {
     return (
         <>
-            {!props.tagType && <Link className={`btn button-outLine btn-bg-white ${props.className} `} to={props.href}
+            {props.tagType === 'link' && <Link className={`btn button-outLine ${props.className} `} to={props.href}
                                      onClick={props.onclick}>{props.children}</Link>}
-            {props.tagType && <props.tagType className={`${props.className} btn`} onClick={props.onclick}
-                                             type={props.type}>{props.children}</props.tagType>}
+            {props.tagType === 'button' && <button className={`${props.className} btn`} onClick={props.onclick}
+                                             type={props.type}>{props.children}</button>}
         </>
     );
 };

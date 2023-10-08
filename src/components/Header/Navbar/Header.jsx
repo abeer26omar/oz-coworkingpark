@@ -5,9 +5,7 @@ import galleryLogo from "../../../assets/images/logoWhite.svg";
 import userblack from '../../../assets/images/icons/userblack.svg';
 import userwhite from '../../../assets/images/icons/userwhite.svg';
 import listBlack from '../../../assets/images/icons/listBlack.svg';
-
 import listWhite from '../../../assets/images/icons/listWhite.svg';
-
 import {Link, NavLink} from "react-router-dom";
 import {Container, Nav} from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
@@ -15,6 +13,7 @@ import Media from "../../Media/Media";
 import {AiOutlineClose} from 'react-icons/ai';
 import {AiOutlineBars} from 'react-icons/ai';
 const Header = ({showBlackNav}) => {
+    const [Open , SetOpen] = useState(true);
     const [showBasic, setShowBasic] = useState(false);
     const logoImage = showBlackNav ? galleryLogo : logo;
     const userIcon = showBlackNav ? userwhite : userblack;
@@ -22,7 +21,7 @@ const Header = ({showBlackNav}) => {
     return (
         <>
             <Navbar className="position-relative" expand="lg" sticky="top">
-                <Container fluid>
+                <Container fluid className="flex-evenly">
                     <Link className="navbar-brand" to={"/"}
                           onClick={() => {
                               window.scroll({
@@ -33,14 +32,10 @@ const Header = ({showBlackNav}) => {
                           }}
                     >
                         <Media
-                            type="img" src={logoImage} className="w-100" alt={logo}/>
+                            type="img" src={logoImage} className="logo" alt={logo}/>
 
                     </Link>
-                    {/* <Navbar.Toggle
-                        aria-controls="basic-navbar-nav"
-                        onClick={() => setShowBasic(!showBasic)}
-                    /> */}
-                    <nav className="d-flex nav-mobile" id="basic-navbar-nav" show={showBasic.toString()}>
+                    <nav className={ Open ? "d-flex nav-mobile"  : "d-flex nav-mobile block"} id="basic-navbar-nav" show={showBasic.toString()}>
                         <div className="m-auto d-flex ul-mobile">
                             <Link
                                 className="nav-link links-margin"
@@ -135,10 +130,11 @@ const Header = ({showBlackNav}) => {
                             </div>
                         </div>
                     </nav>
+                     <button onClick={()=>SetOpen(!Open)} className='icons'>
+                    {Open ?  <AiOutlineBars/> : <AiOutlineClose/>}
+                    </button>
                 </Container>
             </Navbar>
-
-
         </>
     );
 };
