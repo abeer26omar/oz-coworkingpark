@@ -1,25 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {NavLink, useParams} from "react-router-dom";
 import Slider from "react-slick";
-import {locationsData} from "../../../Data/LocationsData";
 import LocationsList from "../../Locations/LocationsList";
 import './HouseDetails.css';
-import fb from "../../../assets/images/fb.png";
 import mapPoint from "../../../assets/images/icons/mapPoint.svg";
 import HouseServices from "./HouseServices/HouseServices";
 import CommunityHouses from "./HousesCommunityEvents/CommunityHouses";
 import Navbar from "react-bootstrap/Navbar";
 import {Container, Nav} from "react-bootstrap";
 import Media from "../../Media/Media";
+import axios from "axios";
 
 const HouseDetails = () => {
     const {id} = useParams();
+    const [houseDetails, setHouseDetails] = useState({});
+    const [response, setResponse] = useState('');
+
+    useEffect(()=>{
+        const getHouseDetails = async ()=>{
+            try{
+                const config = {
+                    method: 'get',
+                    url: `${process.env.REACT_APP_API_CONFIG_URL}/api/locations/${id}`
+                };
+                const response = await axios(config);
+                setHouseDetails(response.data.data);
+            }catch(error){
+                setResponse(error.response.data.message);
+            }
+        }
+        getHouseDetails();
+    },[]);
     const settings = {
         dots: true,
-        infinite: true,
         speed: 300,
         slidesToShow: 1,
-        adaptiveHeight: true,
         cssEase: "linear",
         arrows: false,
         autoplay: true,
@@ -28,14 +43,11 @@ const HouseDetails = () => {
     }
     return (
         <>
-
-            {/*<h1>House ID: {id}</h1>*/}
-
             <Navbar expand="lg" className="bg-body-tertiary navigator">
                 <Container fluid>
-                    <Navbar.Brand className="title-name" href="#home">
-                        El- sheikh Zayed
-                    </Navbar.Brand>
+                    <p className="title-name">
+                        {houseDetails.title}
+                    </p>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="2"
@@ -85,35 +97,30 @@ const HouseDetails = () => {
                     <div className="row border-of-section ">
                         <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto ">
                             <div className="box-content px-60">
-                                <h2 className="h2-text-box">Next to Iwan Compound</h2>
+                                <h2 className="h2-text-box">{houseDetails.address}</h2>
                                 <p className="p-text-box">
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
-                                    amet, consectetur
-                                    dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit
-                                    eiusmod Lorem ipsum dolor
-                                    sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur
-                                    dipiscing eliteiusmod
+                                   {houseDetails.description}
                                 </p>
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left ">
                             <Slider {...settings}>
-                                {locationsData.map((location, index) => {
-                                    const {id, address, img} = location;
+                                {houseDetails.images && houseDetails.images.map((house, index) => {
+                                    const {id, path} = house;
                                     return (
                                         <div key={index}>
-                                            <LocationsList id={id} img={img}/>
+                                            <LocationsList id={id} img={path}/>
                                         </div>
                                     )
                                 })}
                             </Slider>
                         </div>
-
+                        {response !== '' && <p className={`mt-2 mb-0`}>{response}</p>}
                     </div>
                 </div>
             </section>
 
-            <CommunityHouses/>
+            <CommunityHouses description={houseDetails.community_event_description} event_images={houseDetails.community_event_images} />
 
 
             <section id="f-b" className="fab ">
@@ -125,11 +132,7 @@ const HouseDetails = () => {
                                     F&B
                                 </h2>
                                 <p className="p-text-box">
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing eliteiusmod
+                                   {houseDetails.fb_description}
                                 </p>
 
                             </div>
@@ -137,7 +140,7 @@ const HouseDetails = () => {
 
                         <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left ">
                             <Media
-                                type="img" className="image-box w-100" src={fb} alt="Our OZ Vision"/>
+                                type="img" className="image-box w-100" src={houseDetails.fb_image} alt="Our OZ Vision"/>
                         </div>
 
                     </div>
@@ -154,7 +157,7 @@ const HouseDetails = () => {
                                 <img src={mapPoint} className="mx-3 map-point"
                                      style={{width: "24px", height: "24px"}}
                                      alt="map"/>
-                                Giza - EL - Sheikh Zayed - Next to Iwan Compound
+                                {houseDetails.title} - {houseDetails.address}
                             </h4>
 
                         </div>

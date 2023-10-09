@@ -446,9 +446,9 @@ a {
     margin: 0 auto;
 }
 
-.slick-slide {
+/* .slick-slide {
     margin: 0 20px;
-}
+} */
 
 .slick-slide img {
     width: 100%;
@@ -555,7 +555,10 @@ a {
     width: 100px;
     top: -60px;
 }
-
+.img-fit{
+    object-fit: cover;
+    object-position: center;
+}
 /*End*/
 /*11-Borders*/
 .border-of-section {

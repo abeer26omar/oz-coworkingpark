@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from "react-bootstrap/Navbar";
 import {Container} from "react-bootstrap";
-import './HousesLocations.css'
-import {locationsData} from "../../Data/LocationsData";
+import './HousesLocations.css';
 import HousesLocationsList from "./HousesLocationsList";
+import axios from "axios";
 
 const HousesLocations = () => {
+    const [locations, setLocations] = useState([]);
+    const [response, setResponse] = useState('');
+    useEffect(()=>{
+        const getLocations = async ()=>{
+            try{
+                const config = {
+                    method: 'get',
+                    url: `${process.env.REACT_APP_API_CONFIG_URL}/api/locations`
+                };
+                const response = await axios(config);
+                setLocations(response.data.data);
+            }catch(error){
+                setResponse(error.response.data.message);
+            }
+        }
+        getLocations();
+    },[]);
     return (
         <>
             <Navbar expand="lg" className="bg-body-tertiary navigator">
-                <Container fluid>
-                    <Navbar.Brand className="title-name" href="#home">
+                <Container fluid className='justify-content-start'>
+                    <p className="title-name">
                         Houses
-                    </Navbar.Brand>
+                    </p>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="2"
@@ -35,16 +52,15 @@ const HousesLocations = () => {
                     <div className="row">
 
 
-                        {locationsData.map((locations, index) => {
-                            const {id, address, government, img} = locations;
+                        {locations.map((locations, index) => {
+                            const {id, address, title, main_image} = locations;
                             return (
                                 <div className="col-lg-6 col-md-6 col-sm-12 border-all " key={index}>
-                                    <HousesLocationsList id={id} address={address} government={government}
-
-                                                         img={img}/>
+                                    <HousesLocationsList id={id} title={title} address={address} main_image={main_image}/>
                                 </div>
                             )
                         })}
+                        {response !== '' && <p className={`mt-2 mb-0`}>{response}</p>}
 
                     </div>
                 </div>
