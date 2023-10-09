@@ -3,7 +3,9 @@ import axios from "axios";
 import { Formik } from 'formik';
 import * as Yup from "yup";
 import Buttons from '../Buttons/Buttons';
+import { useState } from 'react';
 const NewsLetter = () => {
+    const [response, setResponse] = useState('')
     const getNewsLetter = async (values)=>{
         try{
             const config = {
@@ -14,10 +16,14 @@ const NewsLetter = () => {
                 }
             };
             const response = await axios(config);
-            console.log(response.data.message);
+            setResponse(response.data.message);
+            resetForm(values);
         }catch(error){
-            console.error(error);
+            setResponse(error.response.data.message)
         }
+    }
+    const resetForm = (values)=>{
+        values.email = ''
     }
     return (
         <>
@@ -34,9 +40,10 @@ const NewsLetter = () => {
                                         email: '',
                                     }
                                 }
-                                onSubmit={async values => {
+                                onSubmit={async (values) => {
                                     await new Promise(resolve => setTimeout(resolve, 0));
                                     getNewsLetter(values);
+                                    setResponse('')
                                 }}
                                 validationSchema={Yup.object().shape({
                                     email: Yup.string().email().required('Required'),
@@ -46,7 +53,6 @@ const NewsLetter = () => {
                                         values,
                                         touched,
                                         errors,
-                                        isSubmitting,
                                         handleChange,
                                         handleBlur,
                                         handleSubmit,
@@ -70,6 +76,7 @@ const NewsLetter = () => {
                                                     onBlur={handleBlur}
                                                 /> 
                                                 {errors.email && touched.email && <p className='text-danger mt-2 mb-0'>{errors.email}</p>}
+                                                {response && <p className={`text-white mt-2 mb-0`}>{response}</p>}
                                             </div>
                                             <div className="buttons d-flex justify-content-center align-items-center">
                                                 <Buttons tagType='button' type="submit" className="button-one-outline btn-bg-white">Subscribe</Buttons>
