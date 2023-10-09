@@ -20,7 +20,7 @@ const CommunityGallery = () => {
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing eliteiusmod
                                 </p>
-                                <Buttons href="/galleryshow">
+                                <Buttons href="/galleryshow" tagType = 'link'>
                                     Explore
                                 </Buttons>
                             </div>

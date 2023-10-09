@@ -6,6 +6,7 @@ import axios from "axios";
 
 const Partners = () => {
     const [partners, setpartners] = useState([]);
+    const [response, setResponse] = useState('');
     useEffect(()=>{
         const getPartners = async ()=>{
             try{
@@ -14,24 +15,46 @@ const Partners = () => {
                     url: `${process.env.REACT_APP_API_CONFIG_URL}/api/partners`
                 };
                 const response = await axios(config);
-                console.log(response.data.data);
                 setpartners(response.data.data);
             }catch(error){
-                console.error(error);
+                setResponse(error.response.data.message)
             }
         }
         getPartners();
     },[]);
     const settings = {
-        dots: true,
-        infinite: true,
-        speed: 300,
+        dots: false,
+        infinite: false,
         slidesToShow: 4,
+        slidesToScroll: 4,
         cssEase: "linear",
         arrows: false,
         autoplay: true,
         autoplaySpeed: 3000,
-        lazyLoad: true
+        lazyLoad: true,
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                }
+            },
+            {
+                breakpoint: 575,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                }
+            },
+            {
+                breakpoint: 425,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }
+        ]
     }
     return (
         <>
@@ -46,10 +69,10 @@ const Partners = () => {
                     </div>
                     <div className="row" style={{marginTop: "40px"}}>
                         <Slider {...settings}>
-                            {partners.map((partner, index) => {
+                            {partners.length !== 0 && partners.map((partner, index) => {
                                 const {id, name, image} = partner;
                                     return (
-                                        <div className="col-lg-3 col-md-6 col-sm-6 col-6 text-center border-right" key={index}>
+                                        <div className="col-lg-3 d-flex justify-content-center align-items-center border-right" key={index}>
                                             <Media
                                                 type="img" 
                                                 src={image} 
@@ -59,6 +82,8 @@ const Partners = () => {
                                     )
                             })}
                         </Slider>
+                        {partners.length === 0 && <p className=''>theres is no partners yet!!</p>}
+                        {response !== '' && <p className={`mt-2 mb-0`}>{response}</p>}
                     </div>
                 </div>
             </section>

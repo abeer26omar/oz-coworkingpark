@@ -1,16 +1,13 @@
 import React from 'react';
 import Slider from "react-slick";
-import {locationsData} from "../../../../Data/LocationsData";
 import LocationsList from "../../../Locations/LocationsList";
-import './CommunityHouses.css'
+import './CommunityHouses.css';
 
-const CommunityHouses = () => {
+const CommunityHouses = (props) => {
     const settings = {
         dots: true,
-        infinite: true,
         speed: 300,
         slidesToShow: 1,
-        adaptiveHeight: true,
         cssEase: "linear",
         arrows: false,
         autoplay: true,
@@ -25,11 +22,11 @@ const CommunityHouses = () => {
                     <div className="row border-of-section ">
                         <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-right ">
                             <Slider {...settings}>
-                                {locationsData.map((location, index) => {
-                                    const {id, address, img} = location;
+                                {props.event_images && props.event_images.map((location, index) => {
+                                    const {id, address, path} = location;
                                     return (
                                         <div key={index}>
-                                            <LocationsList id={id} img={img}/>
+                                            <LocationsList id={id} img={path}/>
                                         </div>
                                     )
                                 })}
@@ -39,12 +36,7 @@ const CommunityHouses = () => {
                             <div className="box-content px-60">
                                 <h2 className="h2-text-box">Community Events</h2>
                                 <p className="p-text-box">
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
-                                    amet, consectetur
-                                    dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit
-                                    eiusmod Lorem ipsum dolor
-                                    sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur
-                                    dipiscing eliteiusmod
+                                    {props.description}
                                 </p>
                             </div>
                         </div>
