@@ -10,8 +10,12 @@
 .nav-mob{
     display: flex;
 }
-
-.nav-link, .nav-link-two {
+.links-booking a{
+    padding: 0 10px;
+    /* margin: 0 10px; */
+    /* width: 10%; */
+}
+.nav-bar-link, .nav-link-two {
     color: var(--primary-color);
     font-family: couture, sans-serif;
     font-size: var(--font-size-13);
@@ -58,14 +62,13 @@
 
 .links-margin {
     margin: auto 20px;
-    /*margin: auto 42px;*/
     padding-right: 0 !important;
     padding-left: 0 !important;
 }
 
 @media (min-width: 1440px) and (max-width: 2560px) {
     .links-margin {
-        margin: auto 42px;
+        margin: auto 30px;
     }
 }
 
@@ -119,7 +122,11 @@
         opacity: 1;
         top: 50px;
         transition: 0.5s;
-        }
+        
+    }
+    .nav-mobile.none{
+        opacity: 0;
+    }
     .ul-mobile{
         flex-direction: column;
         text-align: center;
@@ -127,6 +134,11 @@
     }
     .links-margin {
         margin: 20px auto;
+    }
+    .links-margin:hover + .nav-mobile {
+           opacity: 0;
+           top: 50px;
+           transition: 0.5s;
     }
     .icons{
         display: block;
@@ -144,6 +156,9 @@
         margin: auto 10px;
         font-size: 10px;
     }
+    .nav-link{
+        color: var(--primary-color) !important;
+    }
     .sun-border {
         margin-left: 5px;
         margin-right: 5px;
@@ -152,19 +167,3 @@
 }
 
 
-/* @media screen and (min-width:1025px) and (max-width:1440px) { */
-    /* .logo {
-        width: 7rem;
-    }
-    .links-margin {
-        margin: auto 12px;
-        font-size: 10px;
-    }
-    .sun-border {
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-    .flex-evenly{
-        justify-content: space-evenly;
-    } */
-/* } */
