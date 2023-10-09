@@ -47,11 +47,11 @@ const AppContainer = styled.nav`
   ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
     (isGalleryRoute || isLimitedRoute || isAboutRoute) &&
     `  
-          html, body {
+      html, body {
         background-color: #000 ;
       }
-    .navbar {
-          background:#000;
+    .navbar,.nav-mobile {
+        background:#000 !important;
     }
     .nav-link{ 
         color:#fff;

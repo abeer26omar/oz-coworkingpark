@@ -18,11 +18,12 @@ const Header = ({showBlackNav}) => {
     const logoImage = showBlackNav ? galleryLogo : logo;
     const userIcon = showBlackNav ? userwhite : userblack;
     const listIcon = showBlackNav ? listWhite : listBlack;
+    const [Close , setClose] =useState(true)
     return (
         <>
             <Navbar className="position-relative" expand="lg" sticky="top">
                 <Container fluid className="flex-evenly">
-                    <Link className="navbar-brand" to={"/"}
+                    <Link className="navbar-brand " to={"/"}
                           onClick={() => {
                               window.scroll({
                                   top: 0,
@@ -32,19 +33,21 @@ const Header = ({showBlackNav}) => {
                           }}
                     >
                         <Media
-                            type="img" src={logoImage} className="logo" alt={logo}/>
+                            type="img" src={logoImage} className="logo " alt={logo}/>
 
                     </Link>
                     <nav className={ Open ? "d-flex nav-mobile"  : "d-flex nav-mobile block"} id="basic-navbar-nav" show={showBasic.toString()}>
                         <div className="m-auto d-flex ul-mobile">
                             <Link
+                            onClick={()=>SetOpen(!Open)}
                                 className="nav-link links-margin"
                                 to="/booking"
                             >
                                 Booking
                             </Link>
                             <Link
-                                className="nav-link links-margin"
+                              onClick={()=>SetOpen(!Open)}
+                                className="nav-link links-margin "
                                 to="/about"
                             >
                                 About OZ
@@ -54,6 +57,7 @@ const Header = ({showBlackNav}) => {
 
 
                             <NavLink
+                              onClick={()=>SetOpen(!Open)}
                                 className="nav-link links-margin"
                                 to={"/community"}
                             >
@@ -61,12 +65,14 @@ const Header = ({showBlackNav}) => {
                             </NavLink>
 
                             <NavLink
+                              onClick={()=>SetOpen(!Open)}
                                 className="nav-link links-margin"
                                 to={"/membership"}
                             >
                                 Membership
                             </NavLink>
                             <NavLink
+                              onClick={()=>SetOpen(!Open)}
                                 className="nav-link links-margin"
                                 to={"/private"}
                             >
@@ -75,6 +81,7 @@ const Header = ({showBlackNav}) => {
                         </div>
                         <div className="d-flex justify-content-end align-items-center ">
                             <NavLink
+                              onClick={()=>SetOpen(!Open)}
                                 className="nav-link links-margin"
                                 to={"/contactus"}
                             >
@@ -97,13 +104,16 @@ const Header = ({showBlackNav}) => {
                                 </svg>
                             </NavLink>
                             <NavLink
+                              onClick={()=>SetOpen(!Open)}
                                 className="nav-link links-margin"
                                 to={"/login"}
                             >
                                 Login
                             </NavLink>
-                            <NavLink to="/profile"> <Media type="img" src={userIcon}
-                                                           className="margin-links user-icon"/>
+                            <NavLink    onClick={()=>SetOpen(!Open)} 
+                            to="/profile">
+                             <Media type="img" src={userIcon}
+                              className="margin-links user-icon"/>
                             </NavLink>
                             <Media
                                 type="img" src={listIcon}/>
