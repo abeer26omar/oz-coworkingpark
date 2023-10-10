@@ -1,9 +1,11 @@
 import React from "react";
 import "./Content.css";
-import vision from "../../../assets/images/vision.png";
+// import vision from "../../../assets/images/vision.png";
 import Buttons from "../../Buttons/Buttons";
 import Media from "../../Media/Media";
-
+import HeadFeature from "../../UI/HeadFeature";
+import ParagraphBlack from "../../UI/ParagraphBlack";
+import DescriptionBlack from "../../UI/DescriptionBlack";
 const LeftContent = (props) => {
       return (
         <>
@@ -15,7 +17,7 @@ const LeftContent = (props) => {
                         <div className="col-lg-12">
                             {configItem.key === "home_page_about_us_title" && 
                              <div className="head-content-sec">
-                                <h2 className="h2-text">{configItem.value}</h2>
+                                <HeadFeature HeadFeature={configItem.value}/>                              
                              </div> }     
                         </div>
                     </div>
@@ -27,8 +29,8 @@ const LeftContent = (props) => {
                              {configItem.key === "home_page_about_us_description" && 
                                 <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto">
                                   <div className="box-content px-60 ">
-                                     <h2 className="h2-text-box">{configItem.value}</h2>
-                                      <p className="p-text-box">{configItem.value}</p>
+                                     <ParagraphBlack titleBox={configItem.value}/>
+                                     <DescriptionBlack descBlack={configItem.value}/>
                                 <Buttons href="#"> Explore</Buttons>
                                   </div>
                                 </div>}

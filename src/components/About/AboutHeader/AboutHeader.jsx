@@ -2,6 +2,8 @@ import React from 'react';
 import about from "../../../assets/images/about/aboutHeader.png";
 import './AboutHeader.css'
 import Media from "../../Media/Media";
+import Paragraph from '../../UI/Paragraph';
+import Description from '../../UI/Description';
 
 const AboutHeader = () => {
     return (
@@ -16,15 +18,10 @@ const AboutHeader = () => {
                             <Media type="img" className="img" alt="Group" src={about}/>
                             <div className="group-2 about-group">
                                 <h1 className="an-innovative-co">
-                                    <span className="text-wrapper-2">We Are a place for creative and fun</span>
+                                    <Paragraph  title={'We Are a place for creative and fun'}/>
                                 </h1>
-                                <p className="p">
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
-                                    amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur
-                                    dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit
-                                    eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum
-                                    dolor sit amet, consectetur
-                                </p>
+                                <Description className={'my-40'} desc={'Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sitipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit '}
+                                />
                             </div>
 
 

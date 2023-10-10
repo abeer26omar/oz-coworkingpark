@@ -37,6 +37,7 @@ a {
     --neturals-color2: #ffffff;
     --semantic-color1: #07c669;
     --semantic-color2: #cb0a05;
+    --Head_color: #f0f1f4;
     /*******************************************/
     /*******************************************/
 
@@ -112,6 +113,9 @@ a {
 }
 
 /*******************************************/
+.head_color{
+    color: var(--Head_color);
+}
 
 /***************Margin Size ********************/
 .m-35 {
@@ -597,7 +601,6 @@ a {
     letter-spacing: 0;
     line-height: 120%;
     text-align: center;
-    /*white-space: nowrap;*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -618,11 +621,12 @@ a {
 }
 
 .box-content .p-text-box {
-    color: var(--primary-color);
     font-family: Questrial;
     font-size: var(--font-size-16);
     font-style: normal;
     font-weight: var(--font-weight-regular);
+    
+    color: var(--primary-color);
     letter-spacing: 0;
     line-height: 130%;
     opacity: 0.7;
@@ -678,10 +682,20 @@ a {
     font-weight: var(--font-weight-regular);
     margin-bottom: 16px;
 }
-
-
+.home-events  .slick-slide{
+    padding: 0 1rem;
+}
+/* ///// */
+.m_b_center{
+    text-align: center;
+    margin-bottom: 48px !important;
+}
+.my-40{
+    margin-top: 40px !important;
+    margin-bottom: 40px !important;
+}
 /*Media Query Test*/
-
+/* 
 @media (min-width: 1440px) and (max-width: 2560px) {
     .links-margin {
         margin: auto 42px;
@@ -693,4 +707,4 @@ a {
         top: 0;
         transform: translate(-240px, 25px);
     }
-}
+} */

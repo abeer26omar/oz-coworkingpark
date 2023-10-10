@@ -14,26 +14,29 @@ import Buttons from '../components/Buttons/Buttons';
 import MonoBlockMember from '../components/MonoBlocks/MonoBlockMember';
 import RightContentFB from '../components/Home/ContentComponent/RightContentFB';
 import RightContentNewFeed from '../components/Home/ContentComponent/RightContentNewFeed';
+import { useData } from '../apis/auth_api/Createdata';
 const Home = () => {
-const [data , setData] = useState([]);
-const [loading, setLoading] = useState(true);
-const [error, setError] = useState(null);
+// const [data , setData] = useState([]);
+// const [loading, setLoading] = useState(true);
+// const [error, setError] = useState(null);
+const DataLocation = useData();
+const getComponentValue = DataLocation.getComponentValue
+// console.log(DataLocation.getComponentValue('page_location'))
+// useEffect(()=>{
+//     config('home').then(res =>{
+//         setData(res)
+//         setLoading(false)
+//     })
+//     .catch(err =>{
+//         setError(err)
+//         setLoading(false)
+//     })
+// },[])
 
-
-useEffect(()=>{
-    config('home').then(res =>{
-        setData(res)
-        setLoading(false)
-    })
-    .catch(err =>{
-        setError(err)
-        setLoading(false)
-    })
-},[])
-const getComponentValue = (param) => {
-    const matchingItems = data.filter(ele => ele.key.match(param));
-    return matchingItems;
-};
+// const getComponentValue = (param) => {
+//     const matchingItems = data.filter(ele => ele.key.match(param));
+//     return matchingItems;
+// };
     return (
         <>
 

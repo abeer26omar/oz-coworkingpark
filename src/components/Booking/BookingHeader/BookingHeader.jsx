@@ -3,6 +3,8 @@ import Navbar from "react-bootstrap/Navbar";
 import {Container} from "react-bootstrap";
 import booking from "../../../assets/images/videos/community.mp4";
 import './BookinHeader.css'
+import Paragraph from '../../UI/Paragraph';
+import Description from '../../UI/Description';
 
 const BookingHeader = () => {
     return (
@@ -34,17 +36,9 @@ const BookingHeader = () => {
                             </div>
                             <video className="img" alt="Group" src={booking} autoPlay muted loop/>
                             <div className="group-2">
-                                <h1 className="an-innovative-co">
-                                    <span className="text-wrapper-2">Booking</span>
-                                </h1>
-                                <p className="p">Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,
-                                    consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,
-                                    Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,
-                                    consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,
-                                    consectetuerLorem ipsum dolor sit amet,</p>
+                                <Paragraph title={'Booking'}/>                                 
+                                <Description className={'my-40 w-50'} desc={ 'Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,'}/>
                             </div>
-
-
                         </div>
                     </div>
                 </div>

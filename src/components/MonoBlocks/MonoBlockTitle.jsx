@@ -1,6 +1,6 @@
-
 import React from "react";
 import Buttons from "../Buttons/Buttons";
+import Description from "../UI/Description";
 const  MonoBlockTitle = (props) => {
     console.log(props.configData)
 return(<>
@@ -13,7 +13,7 @@ return(<>
                                 {props.configData ? props.configData.map((configItem, index) => (
                                     <React.Fragment key={index}>
                                         {configItem.key === 'home_page_mono_block_title' && <h1 className="text-h1">{configItem.value}</h1>}
-                                        {configItem.key === 'home_page_mono_block_description' && <p className="text-p">{configItem.value}</p>}
+                                        {configItem.key === 'home_page_mono_block_description' && <Description className={'m_b_center'} desc={configItem.value}/>}
                                     </React.Fragment>
                                 )):''}
                             </div>

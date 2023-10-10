@@ -3,7 +3,9 @@ import './HomeHeader.css';
 import headVideo from '../../../assets/images/videos/header.mp4';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-
+import Paragraph from '../../UI/Paragraph';
+import Mainheader from '../../UI/Mainheader'
+import Description from '../../UI/Description';
 const HomeHeader = (props) => {
     const [show, setShow] = useState(false);
     const [fullscreen, setFullscreen] = useState(true);
@@ -31,27 +33,22 @@ const HomeHeader = (props) => {
                             <div className="rectangle-wrapper">
                                 <div className="rectangle"/>
                             </div>
-
                             <video className="img" alt="Group" src={headVideo} autoPlay muted loop/>
-                            <div className="group-2 home-group">
-                                
+                            <div className="group-2 home-group">                                
                             {props.headerConfig.map((configItem, index) => (
                                 <React.Fragment key={index}>
                                     {configItem.key === 'home_page_main_header' && (
-                                        <span className="text-wrapper">{configItem.value}</span>
+                                        <Mainheader title= {configItem.value}/>
                                     )}
-                                    <br />
+                                  
                                     {configItem.key === 'home_page_sub_header' && (
-                                        <span className="text-wrapper-2">{configItem.value}</span>
+                                        <Paragraph title={configItem.value}/>
                                     )}                                   
                                     {configItem.key === 'home_page_header_description' && (
-                                    <p className="p">
-                                        {configItem.value}
-                                    </p>
+                                    <Description desc={configItem.value}/>
                                     )}
                                 </React.Fragment>
                             ))}
-                            </div>
                             <div className="frame">
                                 <div className="">
                                     <a href="#" className="btn btn-header">
@@ -59,9 +56,7 @@ const HomeHeader = (props) => {
                                     </a>
                                 </div>
                             </div>
-
                             <div className="video-button">
-
                                 <Button variant="transparent" onClick={handleShow} className="d-flex play-modal">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +82,6 @@ const HomeHeader = (props) => {
                                     </svg>
                                     <div className="text-wrapper-4 mx-2">Play Video</div>
                                 </Button>
-
                                 <Modal
                                     show={show}
                                     fullscreen={fullscreen}
@@ -100,12 +94,9 @@ const HomeHeader = (props) => {
                                     </Modal.Header>
                                     <Modal.Body>
                                         <video className="img w-100" alt="Group" src={headVideo} autoPlay muted loop/>
-
                                     </Modal.Body>
-
                                 </Modal>
-
-
+                            </div>
                             </div>
                         </div>
                     </div>
