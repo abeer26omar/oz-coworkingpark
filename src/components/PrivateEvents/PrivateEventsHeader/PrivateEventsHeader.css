@@ -3,7 +3,7 @@
 }
 
 .prevent-header .text-wrapper-2 {
-    font-size: var(--font-size-94);
+    /* font-size: var(--font-size-94); */
     /*margin-bottom: 32px !important;*/
 }
 

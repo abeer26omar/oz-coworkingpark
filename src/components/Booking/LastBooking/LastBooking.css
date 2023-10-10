@@ -116,3 +116,10 @@
 .book-card .lazy-load-image-loaded img {
     width: 100%
 }
+
+@media screen and (max-width:575px) {
+    .last-booking .h2-text-box{
+        font-size: var(--font-size-16);
+    }
+    
+}

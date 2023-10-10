@@ -29,6 +29,7 @@ import styled from 'styled-components';
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import MemberPackage from "./components/Membership/MembershipTypes/MemberPackage/MemberPackage";
+import { DataProvider } from "./apis/auth_api/Createdata";
 
 const StyledBody = styled.body`
   background-color: ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
@@ -69,6 +70,7 @@ function App() {
 
     return (
         <div className="App">
+          <DataProvider>
             <StyledBody isGalleryRoute={isGalleryRoute}
                         isLimitedRoute={isLimitedRoute}
                         isAboutRoute={isAboutRoute}>
@@ -127,6 +129,7 @@ function App() {
                     <Footer/>
                 </AppContainer>
             </StyledBody>
+            </DataProvider>
         </div>
     );
 }

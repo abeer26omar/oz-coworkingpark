@@ -22,7 +22,7 @@ const Header = ({showBlackNav}) => {
     return (
         <>
             <Navbar className="position-relative" expand="lg" sticky="top">
-                <Container fluid className="flex-evenly">
+                <div className="container-fluid">
                     <Link className="navbar-brand " to={"/"}
                           onClick={() => {
                               window.scroll({
@@ -37,7 +37,7 @@ const Header = ({showBlackNav}) => {
 
                     </Link>
                     <nav className={ Open ? "d-flex nav-mobile"  : "d-flex nav-mobile block"} id="basic-navbar-nav" show={showBasic.toString()}>
-                        <div className="m-auto d-flex ul-mobile">
+                        <div className=" d-flex ul-mobile">
                             <Link
                             onClick={()=>SetOpen(!Open)}
                                 className="nav-link links-margin"
@@ -79,6 +79,7 @@ const Header = ({showBlackNav}) => {
                                 Private Event
                             </NavLink>
                         </div>
+                    </nav>
                         <div className="d-flex justify-content-end align-items-center ">
                             <NavLink
                               onClick={()=>SetOpen(!Open)}
@@ -115,13 +116,10 @@ const Header = ({showBlackNav}) => {
                              <Media type="img" src={userIcon}
                               className="margin-links user-icon"/>
                             </NavLink>
-                            <Media
-                                type="img" src={listIcon}/>
+                            <Media type="img" src={listIcon}/>
                             <div className="sun-border">
                                 <svg
-                                    style={{margin: "auto 30px"}}
-                                    width="2"
-                                    height="96"
+                                   className="line-nav"
                                     viewBox="0 0 2 96"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -129,8 +127,7 @@ const Header = ({showBlackNav}) => {
                                     <path d="M1 0L1 96" stroke="#BDBDBD"/>
                                 </svg>
                                 <svg
-                                    width="32"
-                                    height="32"
+                                    className="circle-nav"
                                     viewBox="0 0 32 32"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -138,15 +135,13 @@ const Header = ({showBlackNav}) => {
                                     <circle opacity="0.5" cx="16" cy="16" r="16" fill="#D0DF00"/>
                                 </svg>
                             </div>
-                        </div>
-                    </nav>
-                     <button onClick={()=>SetOpen(!Open)} className='icons'>
+                     {/* <button onClick={()=>SetOpen(!Open)} className='icons'>
                     {Open ?  <AiOutlineBars/> : <AiOutlineClose/>}
-                    </button>
-                </Container>
+                    </button> */}
+                        </div>
+                </div>
             </Navbar>
         </>
     );
 };
-
-export default Header;
+export default React.memo(Header);

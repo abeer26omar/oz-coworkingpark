@@ -345,9 +345,9 @@
 
     /*End Default Classes*/
     /*Start Footer*/
-    .footer-social .border-footer {
+    /* .footer-social .border-footer {
         display: none;
-    }
+    } */
 /* 
     .footer-single-col {
         margin-top: 32px
@@ -366,9 +366,9 @@
         align-items: unset;
     } */
 
-    .footer-social svg {
+    /* .footer-social svg {
         display: none;
-    }
+    } */
 
     /* .footer-section .links-derictions a {
         margin: 0;
