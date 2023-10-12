@@ -239,7 +239,6 @@ const BookingSpace = () => {
                         <div className="filter border-top border-bottom">
                             <BookingFilter isOpen={isFilterOpen}/>
                         </div>
-
                         <div className="booking-section border-top border-bottom">
                             <div className="row">
                                 {cards.map((book, index) => {
@@ -277,4 +276,4 @@ const BookingSpace = () => {
     }
 ;
 
-export default BookingSpace;
+export default React.memo(BookingSpace);

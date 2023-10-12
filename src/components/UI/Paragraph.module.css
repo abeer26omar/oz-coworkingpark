@@ -1,9 +1,9 @@
 .head_paragraph{
+    font-size: var(--font-size-52);
+    font-weight: var(--font-weight-bold);
     color: var(--Head_color);
     font-family: couture;
-    font-size: var(--font-size-52);
     font-style: normal;
-    font-weight: var(--font-weight-bold);
     letter-spacing: 0;
     line-height: 120%;
     margin: 0;
@@ -67,4 +67,30 @@
     text-align: justify;
     margin-bottom: 32px;
         
+}
+
+
+@media screen and (max-width:575px) {
+.head_paragraph,
+.paragraph_black,
+.head_feature,
+.main_header {
+     font-size: var(--font-size-20) !important;
+}
+
+.description_black {
+    font-size: var(--font-size-16) !important;
+}
+
+}
+@media screen and (max-width:1200px) {
+.head_paragraph,
+.paragraph_black,
+.head_feature,
+.main_header{
+    font-size: var(--font-size-36);
+}
+.description_black{
+    font-size: var(--font-size-24);
+}
 }

@@ -2,21 +2,22 @@ import React from "react";
 import "./Content.css";
 import Buttons from "../../Buttons/Buttons";
 import Media from "../../Media/Media";
-import vision from "../../../assets/images/vision.png";
+import HeadFeature from "../../UI/HeadFeature";
+import ParagraphBlack from "../../UI/ParagraphBlack";
+import DescriptionBlack from "../../UI/DescriptionBlack";
 const RightContentFB = (props) => {
     console.log(props.configData)
     return (
         <>
             <section className=" ">
                 <div className="container-fluid">
-
                        {props.configData ? props.configData.map((configItem , index)=>(
                                 <React.Fragment key={index}> 
                     <div className="row">
                         <div className="col-lg-12">
                             {configItem.key === "home_page_fb_title" && 
                              <div className="head-content-sec">
-                                <h2 className="h2-text">{configItem.value}</h2>
+                                     <HeadFeature HeadFeature={configItem.value}/>                              
                              </div> }     
                         </div>
                     </div>
@@ -37,10 +38,8 @@ const RightContentFB = (props) => {
                             {configItem.key === "home_page_fb_description" &&
                                 <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto ">
                                   <div className="box-content px-60">
-                                    <h2 className="h2-text-box achievement-text ">achievements for OZ</h2>
-                                    <p className="p-text-box">
-                                    {configItem.value}
-                                    </p>
+                                     <ParagraphBlack titleBox={configItem.value}/>
+                                     <DescriptionBlack descBlack={configItem.value}/>    
                                      <Buttons href="/community/newsfeed"> Explore</Buttons>
                                   </div>
                                 </div>
@@ -54,4 +53,4 @@ const RightContentFB = (props) => {
     );
 };
 
-export default RightContentFB;
+export default React.memo(RightContentFB) ;

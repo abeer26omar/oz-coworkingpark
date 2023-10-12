@@ -16,4 +16,4 @@ useEffect(()=>{
     );
 };
 
-export default Booking;
+export default React.memo(Booking);

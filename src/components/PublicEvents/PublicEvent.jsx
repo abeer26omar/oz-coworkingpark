@@ -3,12 +3,10 @@ import "./PublicEvent.css";
 import Slider from "react-slick";
 import PublicEventList from "./PublicEventList";
 import {EventsData} from "../../Data/EventsData";
-
+import HeadFeature from "../UI/HeadFeature";
+import ParagraphBlack from "../UI/ParagraphBlack";
+import DescriptionBlack from "../UI/DescriptionBlack";
 const PublicEvent = (props) => {
-// console.log(props.configData)
-
-    // const [eventList, setEventList] = useState([]);
-// const  isMobile = window.innerWidth <=768;
     const settings = {
         dots: false,
         infinite: true,
@@ -46,8 +44,6 @@ const PublicEvent = (props) => {
                     slidesToScroll: 1,
                     speed: 3000,
                     dots: false,
-                    // className:'z'
-
                 },
             },
         ],
@@ -58,37 +54,29 @@ const PublicEvent = (props) => {
                 <div className="container-fluid">
                     <div className="row">
                        {props.configData ? props.configData.map((configItem , index)=>(
-                                <React.Fragment key={index}> 
-                    
+                                <React.Fragment key={index}>                     
                         <div className="col-lg-12">
                             {configItem.key === "home_page_event_title" && 
                              <div className="head-content-sec">
-                                <h2 className="h2-text">{configItem.value}</h2>
+                                <HeadFeature HeadFeature={configItem.value}/>                              
                              </div> }     
-                        </div>
-               
+                        </div>               
                                 </React.Fragment>
                             )):''}
-
                         <div className=" border-of-section ">
                             {props.configData ? props.configData.map((configItem , index)=>(
                                 <React.Fragment key={index}>
                             <div className="col-md-12 col-lg-12 col-sm-4 col-xs-6 m-auto ">
-                               {configItem.key === "home_page_event_description"&& 
-                            //    <div className="box-content  d-flex">
+                               {configItem.key === "home_page_event_description"&&                            
                                     <div className="row p-5 justify-content-between align-items-center">
                                         <div className=" col-sm-12 col-lg-4">
-                                            <h2 className="h2-text-box">WHAT'S ON events </h2>
+                                            <ParagraphBlack titleBox={configItem.value}/>
                                         </div>
-                                        <div className=" col-sm-12 col-lg-8  m-auto">
-                                            <p className="p-text-box">
-                                            {configItem.value}
-                                            </p>
-                                        </div>
-                                    {/* </div> */}
+                                        <div className=" col-sm-12 col-lg-8  m-auto">                                        
+                                           <DescriptionBlack descBlack={configItem.value}/>                    
+                                        </div>                                 
                                 </div>}
-                            </div>
-                            {/* </div> */}
+                            </div>                         
                                 </React.Fragment>                                
                             )):''}
                             <div className="col-lg-12 ">
@@ -110,11 +98,11 @@ const PublicEvent = (props) => {
                                 </Slider>
                             </div>
                         </div>
-                        </div>
                     </div>
+                </div>
             </section>
         </>
     );
 };
 
-export default PublicEvent;
+export default React.memo(PublicEvent) ;

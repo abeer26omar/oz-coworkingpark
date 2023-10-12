@@ -2,7 +2,10 @@ import React from "react";
 import "./Content.css";
 import Buttons from "../../Buttons/Buttons";
 import Media from "../../Media/Media";
-import vision from "../../../assets/images/vision.png";
+import HeadFeature from "../../UI/HeadFeature";
+import ParagraphBlack from "../../UI/ParagraphBlack";
+import DescriptionBlack from "../../UI/DescriptionBlack";
+// import vision from "../../../assets/images/vision.png";
 const RightContentNewFeed = (props) => {
     return (
         <>
@@ -15,7 +18,7 @@ const RightContentNewFeed = (props) => {
                         <div className="col-lg-12">
                             {configItem.key === "home_page_newsfeed_title" && 
                              <div className="head-content-sec">
-                                <h2 className="h2-text">{configItem.value}</h2>
+                                <HeadFeature HeadFeature={configItem.value}/>                              
                              </div> }     
                         </div>
                     </div>
@@ -36,11 +39,9 @@ const RightContentNewFeed = (props) => {
                             {configItem.key === "home_page_newsfeed_description" &&
                                 <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto ">
                                   <div className="box-content px-60">
-                                    <h2 className="h2-text-box achievement-text ">achievements for OZ</h2>
-                                    <p className="p-text-box">
-                                    {configItem.value}
-                                    </p>
-                                     <Buttons href="/community/newsfeed"> Explore</Buttons>
+                                      <ParagraphBlack titleBox={configItem.value}/>
+                                      <DescriptionBlack descBlack={configItem.value}/>                                  
+                                      <Buttons href="/community/newsfeed"> Explore</Buttons>
                                   </div>
                                 </div>
                              }
@@ -53,4 +54,4 @@ const RightContentNewFeed = (props) => {
     );
 };
 
-export default RightContentNewFeed;
+export default React.memo(RightContentNewFeed);

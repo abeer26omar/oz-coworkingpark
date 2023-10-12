@@ -38,6 +38,7 @@ a {
     --semantic-color1: #07c669;
     --semantic-color2: #cb0a05;
     --Head_color: #f0f1f4;
+    --white-color:#fff;
     /*******************************************/
     /*******************************************/
 
@@ -265,8 +266,6 @@ a {
 
 .form__group {
     position: relative;
-    /*padding: 15px 0 0;*/
-    /*margin: 30px 0;*/
     padding: 20px 0;
     width: 100%;
 
@@ -278,7 +277,6 @@ a {
     border: 0;
     border-bottom: 1px solid #BDBDBD;
     outline: 0;
-    /*font-size: 1.3rem;*/
     color: var(--primary-color);
     padding: 15px 0 10px 14px;
     background: transparent;
@@ -314,7 +312,6 @@ a {
     padding: 15px 0 10px 14px;
     font-weight: 700;
     border-width: 1px;
-    /*border-image: linear-gradient(to right, #11998e, #38ef7d);*/
     border-image-slice: 1;
     color: var(--primary-color);
 }
@@ -418,12 +415,6 @@ a {
 
 }
 
-.head-content-left-shape {
-    /*margin-left: -3rem;*/
-    /*margin-top: 5rem;*/
-
-}
-
 .head-content-left-shape .text-shape {
     position: absolute;
     left: 0;
@@ -446,13 +437,8 @@ a {
 /*slider*/
 .slider {
     width: 90%;
-    /*margin: 100px auto;*/
     margin: 0 auto;
 }
-
-/* .slick-slide {
-    margin: 0 20px;
-} */
 
 .slick-slide img {
     width: 100%;
@@ -494,11 +480,7 @@ a {
 }
 
 .slick-arrow {
-    /*background-color: whitesmoke !important;*/
     padding: 30px;
-}
-
-.slick-next {
 }
 
 .slick-prev {
@@ -519,18 +501,13 @@ a {
     color: black;
     font-size: 50px;
     font-weight: bold;
-    /*position: absolute;*/
-    /*top: 7px !important;*/
-    /*left: 15px;*/
 }
 
 .slick-next::before {
     color: black;
     font-size: 50px;
     font-weight: bold;
-    /*position: absolute;*/
-    /*top: 7px;*/
-    /*right: 15px;*/
+
 }
 
 .slick-arrow {
@@ -663,7 +640,7 @@ a {
     font-size: var(--font-size-16);
     font-style: normal;
     font-weight: 400;
-    line-height: 130%; /* 20.8px */
+    line-height: 130%; 
     opacity: 0.7;
     margin-bottom: 16px;
 }
@@ -694,17 +671,11 @@ a {
     margin-top: 40px !important;
     margin-bottom: 40px !important;
 }
-/*Media Query Test*/
-/* 
-@media (min-width: 1440px) and (max-width: 2560px) {
-    .links-margin {
-        margin: auto 42px;
-    }
 
-    .head-content-left-shape .text-shape {
-        position: absolute;
-        left: 0;
-        top: 0;
-        transform: translate(-240px, 25px);
+@media screen and (max-width:575px) {
+    .m_b_center{
+        margin-top: 48px !important;
     }
-} */
+    
+}
+

@@ -4,7 +4,9 @@ import Slider from "react-slick";
 import LocationsList from "./LocationsList";
 import Buttons from "../Buttons/Buttons";
 import axios from "axios";
-
+import HeadFeature from '../UI/HeadFeature';
+import ParagraphBlack from '../UI/ParagraphBlack';
+import DescriptionBlack from '../UI/DescriptionBlack';
 const Locations = (props) => {
     const [locations, setLocations] = useState([]);
     const [response, setResponse] = useState('');
@@ -38,26 +40,29 @@ const Locations = (props) => {
         <>
             <section className="locations">
                 <div className="container-fluid">
+                        {props.configData ? props.configData.map((configItem , index)=>(
+                                <React.Fragment key={index}> 
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="head-content-sec">
-                                <h2 className="h2-text">Explore Houses</h2>
-
-                            </div>
-
+                            {configItem.key === "home_page_location_title" && 
+                             <div className="head-content-sec">
+                                <HeadFeature HeadFeature={configItem.value}/>                              
+                             </div> }     
                         </div>
                     </div>
+                                </React.Fragment>
+                            )):''}
                             <div className="row border-of-section">
                                 <div className="col-md-4 col-12 m-auto ">
                                     <div className="box-content px-60">
                                     {props.configData.map((configItem, index) => (
                                         <React.Fragment key={index}>
                                             {configItem.key === 'home_page_location_title' && (
-                                                <h2 className="h2-text-box">{configItem.value}</h2>
-                                            )}
+                                                 <ParagraphBlack titleBox={configItem.value}/>                                        
+                                                 )}
                                             {configItem.key === 'home_page_location_description' && (
-                                                <p className="p-text-box">{configItem.value}</p>
-                                            )}                                   
+                                                 <DescriptionBlack descBlack={configItem.value}/>    
+                                                )}                                   
                                         </React.Fragment>
                                     ))}
                                         <Buttons
@@ -80,9 +85,7 @@ const Locations = (props) => {
                                     {locations.length === 0 && <p className=''>theres is no partners yet!!</p>}
                                     {response !== '' && <p className={`mt-2 mb-0`}>{response}</p>}
                                 </div>
-
                             </div>
-
                 </div>
             </section>
 
@@ -90,4 +93,4 @@ const Locations = (props) => {
     );
 };
 
-export default Locations;
+export default React.memo( Locations);

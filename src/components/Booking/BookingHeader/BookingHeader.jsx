@@ -26,7 +26,6 @@ const BookingHeader = () => {
 
                 </Container>
             </Navbar>
-
             <div className="box community-header">
                 <div className="group-wrapper">
                     <div className="group">
@@ -47,4 +46,4 @@ const BookingHeader = () => {
     );
 };
 
-export default BookingHeader;
+export default React.memo(BookingHeader);

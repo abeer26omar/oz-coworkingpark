@@ -31,14 +31,6 @@
     margin-bottom: 48px;
 }
 /* ///description module// */
-
-/*.button-outLine:hover {*/
-/*    cursor: pointer;*/
-/*    background-color: var(--neturals-color2);*/
-/*    color: var(--primary-color);*/
-/*}*/
-
-
 .bg-white {
     background-color: #F0F2F4;
     padding: 140px 0;
@@ -69,16 +61,6 @@
     margin-bottom: 48px;
 }
 
-/*.button-outLine {*/
-/*    background-color: var(--primary-color);*/
-/*    color: var(--neturals-color2);*/
-/*}*/
-
-/*.button-outLine:hover {*/
-/*    cursor: pointer;*/
-/*    background-color: var(--neturals-color2);*/
-/*    color: var(--primary-color);*/
-/*}*/
 .buttons {
     text-transform: uppercase;
 }
@@ -98,3 +80,9 @@
     background-color: var(--primary-color);
 }
 
+@media screen and (max-width:575px) {
+    .monoBlock {
+            padding: 80px 0;
+        }
+    
+}

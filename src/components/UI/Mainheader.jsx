@@ -8,4 +8,4 @@ function Mainheader(props) {
   )
 }
 
-export default Mainheader
+export default React.memo(Mainheader);

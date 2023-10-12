@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Paragraph from '../../UI/Paragraph';
 import Mainheader from '../../UI/Mainheader'
 import Description from '../../UI/Description';
+import BoxHeader from '../../UI/DivUi/BoxHeader';
 const HomeHeader = (props) => {
     const [show, setShow] = useState(false);
     const [fullscreen, setFullscreen] = useState(true);
@@ -101,9 +102,9 @@ const HomeHeader = (props) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </>
     );
 };
 
-export default HomeHeader;
+export default React.memo( HomeHeader);

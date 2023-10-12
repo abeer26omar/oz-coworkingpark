@@ -1,6 +1,7 @@
 import React from "react";
 import Buttons from "../Buttons/Buttons";
 import Description from "../UI/Description";
+import Paragraph from "../UI/Paragraph";
 const  MonoBlockTitle = (props) => {
     console.log(props.configData)
 return(<>
@@ -9,11 +10,14 @@ return(<>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="content-block">
+                            <div className="content-block text-center">
                                 {props.configData ? props.configData.map((configItem, index) => (
                                     <React.Fragment key={index}>
-                                        {configItem.key === 'home_page_mono_block_title' && <h1 className="text-h1">{configItem.value}</h1>}
-                                        {configItem.key === 'home_page_mono_block_description' && <Description className={'m_b_center'} desc={configItem.value}/>}
+                                        {configItem.key === 'home_page_mono_block_title' &&
+                                     <Paragraph title={configItem.value}/>
+                                         }                                  
+                                        {configItem.key === 'home_page_mono_block_description' &&
+                                         <Description className={'m_b_center'} desc={configItem.value}/>}
                                     </React.Fragment>
                                 )):''}
                             </div>
@@ -29,4 +33,4 @@ return(<>
             </section>
             </>)
 }
-export default MonoBlockTitle;
+export default React.memo(MonoBlockTitle) ;

@@ -17,23 +17,22 @@
 }
 
 .bookbottom__li * {
-    color: #fff;
-
+    color:var(--white-color);
     font-family: Couture;
-    font-size: 20px;
+    font-size: var(--font-size-20);
     font-style: normal;
-    font-weight: 700;
-    line-height: 120%; /* 24px */
+    font-weight: var(--font-weight-bold);
+    line-height: 120%; 
 
 }
 
 .reservebutton {
-    color: #FFF;
+    color: var(--white-color);
     font-family: Couture;
-    font-size: 32px;
+    font-size: var(--font-size-32);
     font-style: normal;
-    font-weight: 700;
-    line-height: 120%; /* 38.4px */
+    font-weight: var(--font-weight-bold);
+    line-height: 120%; 
     background: transparent;
     border: 0;
 }
@@ -60,7 +59,7 @@ bookbottom__ul img {
 .bookbottom__form input[type="email"]::placeholder,
 .bookbottom__form input[type="password"]::placeholder,
 .bookbottom__form textarea::placeholder {
-    color: #fff;
+    color: var(--white-color);
     background: transparent;
     border: 0;
     opacity: 1;
@@ -75,7 +74,7 @@ bookbottom__ul img {
     border: none;
     outline: none;
     background-color: transparent;
-    color: #fff;
+    color: var(--white-color);
 }
 
 .bookbottom__form input[type="text"]:focus,
@@ -94,7 +93,7 @@ bookbottom__ul img {
 }
 
 .select-date-costume .react-datepicker__header {
-    background-color: #fff !important;
+    background-color: var(--white-color)!important;
     border-bottom: 0;
     padding: 0px 0;
 }
@@ -122,9 +121,6 @@ bookbottom__ul img {
     margin-left: 34px;
 }
 
-.select-date-costume .react-datepicker__month {
-    /*margin: 32px;*/
-}
 
 .select-date-costume .react-datepicker__day-name {
     color: var(--secondary-color2) !important;
@@ -134,9 +130,7 @@ bookbottom__ul img {
     font-style: normal;
     font-weight: var(--font-weight-regular);
     line-height: 120%; /* 15.6px */
-    /*padding: 22px 34px;*/
     border-bottom: 0;
-    /*margin-right: 16px;*/
     margin: 12px;
 }
 
@@ -147,8 +141,6 @@ bookbottom__ul img {
 .select-date-costume .react-datepicker__day-names {
     text-align: start;
     margin-bottom: 0;
-    /*margin-left: 34px;*/
-
 }
 
 .select-date-costume .react-datepicker__navigation--next {
@@ -177,10 +169,9 @@ bookbottom__ul img {
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 130%; /* 20.8px */
+    line-height: 130%; 
     line-height: 2;
     text-align: center;
-    /*margin: 15px 12px;*/
     width: 2.8rem;
     height: 2rem;
 }
@@ -221,7 +212,6 @@ bookbottom__ul img {
 }
 
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item {
-    /*height: auto !important;*/
     padding: 0;
     white-space: nowrap;
     color: var(--primary-color);

@@ -69,8 +69,6 @@ const CommunityHeader = () => {
                                 <Paragraph title={'Community'}/>
                                 <Description className={'my-40 w-50'} desc={' Lorem ipsum dolor consectetuer Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ame ,'}/> 
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -80,4 +78,4 @@ const CommunityHeader = () => {
     );
 };
 
-export default CommunityHeader;
+export default React.memo(CommunityHeader);

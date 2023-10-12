@@ -54,4 +54,4 @@ const getComponentValue = DataLocation.getComponentValue
     );
 };
 
-export default Home;
+export default React.memo(Home);

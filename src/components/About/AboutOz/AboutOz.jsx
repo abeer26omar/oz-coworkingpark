@@ -10,8 +10,6 @@ import about6 from "../../../assets/images/about/about6.png";
 import Media from "../../Media/Media";
 import { useEffect, useState } from 'react';
 import axios from "axios";
-
-
 const AboutOz = () => {
     const [amenities, setamenities] = useState([]);
     useEffect(()=>{
@@ -56,7 +54,7 @@ const AboutOz = () => {
                                         fill="white"/>
                                 </svg>
 
-                                <h2 className="text-h2">“Creativity requires the courage to let go of certainties”</h2>
+                                <h2 className="text-uppercase">“Creativity requires the courage to let go of certainties”</h2>
                             </div>
                         </div>
                     </div>

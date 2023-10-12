@@ -31,7 +31,7 @@ const LeftContent = (props) => {
                                   <div className="box-content px-60 ">
                                      <ParagraphBlack titleBox={configItem.value}/>
                                      <DescriptionBlack descBlack={configItem.value}/>
-                                <Buttons href="#"> Explore</Buttons>
+                                     <Buttons href="#"> Explore</Buttons>
                                   </div>
                                 </div>}
                             {configItem.key === "home_page_about_us_image" &&
@@ -52,4 +52,4 @@ const LeftContent = (props) => {
     );
 };
 
-export default LeftContent;
+export default React.memo(LeftContent) ;
