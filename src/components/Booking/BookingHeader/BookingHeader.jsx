@@ -1,11 +1,13 @@
 import React from 'react';
 import Navbar from "react-bootstrap/Navbar";
 import {Container} from "react-bootstrap";
-import booking from "../../../assets/images/videos/community.mp4";
-import './BookinHeader.css'
+import booking from "../../../assets/images/videos/book.mp4";
+import './BookinHeader.css';
+import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
+import SectionHeader from '../../UI/SectionHeader';
 import Paragraph from '../../UI/Paragraph';
 
-const BookingHeader = () => {
+const BookingHeader = (props) => {
     return (
         <>
             <Navbar expand="lg" className="bg-body-tertiary navigator">
@@ -25,7 +27,7 @@ const BookingHeader = () => {
 
                 </Container>
             </Navbar>
-            <div className="box community-header">
+            {/* <div className="box community-header">
                 <div className="group-wrapper">
                     <div className="group">
                         <div className="overlap-group">
@@ -42,7 +44,10 @@ const BookingHeader = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
+            <MainHeaderWrapper configData={props.configData} video={booking}>
+                <SectionHeader configData={props.configData} />
+            </MainHeaderWrapper>
         </>
     );
 };

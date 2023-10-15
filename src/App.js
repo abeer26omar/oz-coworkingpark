@@ -69,7 +69,7 @@ function App() {
     const router = createBrowserRouter([
       { path:'/', 
         element: <RootLayout />,
-        loader: {TokenLoader},
+        loader: TokenLoader,
         id: 'root',
         // errorElement: <Error />,
         children: [

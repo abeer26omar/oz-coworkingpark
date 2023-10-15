@@ -3,7 +3,6 @@ import React from "react";
 import Button from "../UI/Button";
 import Paragraph from "../UI/Paragraph";
 const  MonoBlockMember = (props) => {
-    console.log(props.configData);
     return(
         <>
             <section className={`monoBlock bgBlack`}>

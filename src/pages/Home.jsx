@@ -11,13 +11,15 @@ import MonoBlockMember from '../components/MonoBlocks/MonoBlockMember';
 import RightContentFB from '../components/Home/ContentComponent/RightContentFB';
 import RightContentNewFeed from '../components/Home/ContentComponent/RightContentNewFeed';
 import { useData } from '../apis/auth_api/Createdata';
+import headVideo from '../assets/images/videos/header.mp4';
+
 const Home = () => {
 const DataLocation = useData();
 const getComponentValue = DataLocation.getComponentValue
 
     return (
         <>
-            <MainHeaderWrapper configData={getComponentValue('header')}>
+            <MainHeaderWrapper configData={getComponentValue('header')} video={headVideo}>
                 <SectionHeader configData={getComponentValue('header')} />
             </MainHeaderWrapper>
             <MonoBlockTitle configData = {getComponentValue("mono_block")}/>

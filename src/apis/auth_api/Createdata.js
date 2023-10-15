@@ -17,7 +17,6 @@ const [error, setError] = useState(null);
             url: `${process.env.REACT_APP_API_CONFIG_URL}/api/config?page=${page_name}`
         };
        const response = await axios(config)
-            console.log(response.data.data)
             return response.data.data;
     
     }catch(error){
