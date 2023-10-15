@@ -2,7 +2,7 @@ import React from 'react';
 import Card from "react-bootstrap/Card";
 import favs from "../../../assets/images/icons/heart.svg";
 import Media from "../../Media/Media";
-import Buttons from "../../Buttons/Buttons";
+import Button from "../../UI/Button";
 
 const BookingSpaceList = ({id, img, text, price, title, options}) => {
     return (
@@ -30,7 +30,7 @@ const BookingSpaceList = ({id, img, text, price, title, options}) => {
                     <div
                         className="d-flex justify-content-between align-items-center card-footer">
                         <span className="price-hour">{price} / Hour</span>
-                        <Buttons href="/bookingDetails">Book Now</Buttons>
+                        <Button href="/bookingDetails">Book Now</Button>
                     </div>
 
                 </Card.Body>

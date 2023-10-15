@@ -1,10 +1,10 @@
 /**************Small Footer Style ***********/
 footer {
-    border-top: 1.5px solid #BDBDBD;
+    border-top: 1.5px solid var(--secondary-color2);
 }
 
 .footer-text {
-    font-family: questrial, sans-serif;
+    font-family: var(--questrial-font);
     font-style: normal;
     font-weight: 400;
     font-size: var(--font-size-11);
@@ -20,7 +20,7 @@ footer {
 }
 
 footer a {
-    font-family: questrial, sans-serif;
+    font-family: var(--questrial-font);
     font-style: normal;
     font-weight: var(--font-weight-bold);
     font-size: var(--font-size-18);
@@ -41,7 +41,7 @@ footer a {
 }
 
 .footer-single-col p {
-    font-family: questrial, sans-serif;
+    font-family: var(--questrial-font);
     font-style: normal;
     font-weight: var(--font-weight-regular);
     font-size: var(--font-size-16);
@@ -50,7 +50,7 @@ footer a {
 }
 
 .footer-single-col span {
-    font-family: questrial, sans-serif;
+    font-family: var(--questrial-font);
     font-style: normal;
     font-weight: var(--font-weight-regular);
     font-size: var(--font-size-13);
@@ -62,28 +62,24 @@ footer a {
     font-size: 12px;
 }
 
-.footer-section .subscribe {
-    border: none;
-}
-
 .footer-section h3 {
-    font-family: questrial, sans-serif;
+    font-family: var(--questrial-font);
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
-    color: #FFFFFF;
+    color: var(--white-color);
 }
 
 .footer-section ul a {
-    font-family: questrial, sans-serif;
+    font-family: var(--questrial-font);
 
 }
 
 .footer-section  .links-footer {
     color: var(--neturals-color2);
     text-align: center;
-    font-family: questrial, sans-serif;
+    font-family: var(--questrial-font);
     font-weight: 400;
     font-size: 14px;
 }
@@ -109,7 +105,7 @@ footer a {
 
 .footer-single-col .list-unstyled {
     line-height: 40px;
-    font-family: questrial, sans-serif;
+    font-family: var(--questrial-font);
 }
 
 .social-links {
@@ -118,90 +114,12 @@ footer a {
 .links-footer{
     padding: 0;
 }
-
-@media screen and (max-width:575px) {
-.footer-single-col {
-    width: 200px;
-    margin: 50px auto;
-}
-.footer-links {
-    text-align: center;
-    margin: 20px 0 0 0;
-}    
-.footer-section .links-derictions a {
-    margin: 0;
-    margin-top: 20px;
-    font-size: 16px;
-}    
-.border-footer {
-    display: none;
-}    
-.footer-social {
-    margin: 50px auto;
-}
-.social-links .media-link {
-    padding: 0px 10px ;
-}
-.links-booking {
-    flex-direction: column;
-    justify-content: unset;
-}    
-.flex-end-mobile {
-    align-items: unset;
-}    
-.flex-start-mobile {
-    align-items: unset;
-}
-.footer-section .links-footer {
-     margin: 10px 0;
- }
-    
-}
-
-@media screen and (min-width:575px) and (max-width:991px) {
-.footer-single{
-     display: flex;
-     justify-content: center;
-     margin: 50px auto;
-}
-
-.footer-links{
-    align-items: center;
-    margin: 20px 0 0 0;
-}
-.footer-section .links-derictions a {
-    margin: 0;
-    margin-top: 20px ;
-    font-size: 16px;
-}
-.border-footer{
-    display: none;
-}
-.footer-social{
-    margin: 20px auto;
-}
-.social-links{
-    padding: 0px 0px 25px 35px;
-}
-.links-booking {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
- 
-}
-.footer-section .links-footer {
-    margin: 10px 0;
-    padding: 0;
- }
-}
-
-@media screen and (min-width:991px) and (max-width:1200px) {
-.links-booking {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.links-footer{
-    margin: 10px auto;
-}    
+@media screen and (max-width: 991.5px) {
+    .footer-social svg{
+        display: none;
+    }
+    .footer-social{
+        border-top: 1.5px solid var(--secondary-color2);
+        padding: 1rem 0;
+    }
 }

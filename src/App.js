@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "../src/assets/fonts/golden-hopes/golden-hopes.otf";
-import Header from "./components/Header/Navbar/Header";
-import Footer from "./components/Footer/Footer";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import RootLayout from './pages/RootLayout';
 import Membership from "./pages/Membership";
 import Login from "./pages/Login";
 import {Route, Routes, useLocation} from "react-router-dom";
@@ -30,47 +30,78 @@ import About from "./pages/About";
 import Profile from "./pages/Profile";
 import MemberPackage from "./components/Membership/MembershipTypes/MemberPackage/MemberPackage";
 import { DataProvider } from "./apis/auth_api/Createdata";
+import { TokenLoader } from './apis/auth_api/LoginApi';
 
-const StyledBody = styled.body`
-  background-color: ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
-    isGalleryRoute || isLimitedRoute || isAboutRoute ? '#000' : 'initial'};
-`;
+// const StyledBody = styled.body`
+//   background-color: ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
+//     isGalleryRoute || isLimitedRoute || isAboutRoute ? '#000' : 'initial'};
+// `;
 
-const AppContainer = styled.nav`
-  /* Default styles for the header */
+// const AppContainer = styled.nav`
 
-  //.navbar {
-  //  background-color: blue;
-  //  background: red;
-  //}
+//   //.navbar {
+//   //  background-color: blue;
+//   //  background: red;
+//   //}
 
-  /* Styles for the header in the gallery route */
-  ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
-    (isGalleryRoute || isLimitedRoute || isAboutRoute) &&
-    `  
-      html, body {
-        background-color: #000 ;
-      }
-    .navbar,.nav-mobile {
-        background:#000 !important;
-    }
-    .nav-link{ 
-        color:#fff;
-    }
-    .navbar-toggler{
-    background-color:#fff;
-  `}
-`;
+//   ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
+//     (isGalleryRoute || isLimitedRoute || isAboutRoute) &&
+//     `  
+//       html, body {
+//         background-color: #000 ;
+//       }
+//     .navbar,.nav-mobile {
+//         background:#000 !important;
+//     }
+//     .nav-link{ 
+//         color:#fff;
+//     }
+//     .navbar-toggler{
+//     background-color:#fff;
+//   `}
+// `;
 
 function App() {
-    const location = useLocation();
-    const isGalleryRoute = location.pathname === '/galleryshow';
-    const isLimitedRoute = location.pathname === '/limited';
-    const isAboutRoute = location.pathname === '/about';
-
+    // const location = useLocation();
+    // const isGalleryRoute = location.pathname === '/galleryshow';
+    // const isLimitedRoute = location.pathname === '/limited';
+    // const isAboutRoute = location.pathname === '/about';
+    const router = createBrowserRouter([
+      { path:'/', 
+        element: <RootLayout />,
+        loader: {TokenLoader},
+        id: 'root',
+        // errorElement: <Error />,
+        children: [
+          { index: true, element: <Home />},
+          { path:'about', element: <About />},
+          { path:'joinus', element: <Joinus />},
+          { path:'contactus', element: <ContactUs />},
+          { path:'profile', element: <Profile />},
+          { path:'login', element: <Login />},
+          { path:'membership', element: <Membership />}, 
+          { path:'membership/:id', element: <MembershipOptions />},
+          { path:'singleMember/:id', element: <MemberPackage />},
+          { path:'community', element: <Community />},
+          { path:'community/events', element: <CommunityEventsExplore />},
+          { path:'events/communityEventsDetails', element: <CommunityEventsDetails />},
+          { path:'community/newsfeed', element: <NewsFeed />},
+          { path:'community/newsfeed/singleFeed', element: <SingleNewFeed />},
+          { path:'private', element: <PrivateEvents />},
+          { path:'houses', element: <Houses />},
+          { path:'houses/:id', element: <HouseDetails />},
+          { path:'booking', element: <Booking />},
+          { path:'bookingDetails', element: <BookingDetails />},
+          { path:'bookingDetails/bookNow', element: <BookingSummary />},
+          { path:'galleryshow', element: <Gallery />},
+        ]}
+    ]);
     return (
-        <div className="App">
-          <DataProvider>
+      <>
+        <RouterProvider router={router}/>
+
+         {/* <div className="App"> */}
+          {/* <DataProvider>
             <StyledBody isGalleryRoute={isGalleryRoute}
                         isLimitedRoute={isLimitedRoute}
                         isAboutRoute={isAboutRoute}>
@@ -79,58 +110,20 @@ function App() {
                               isAboutRoute={isAboutRoute}>
                     <ScrollToTop/>
 
-                    <Header className="navbar" showBlackNav={isGalleryRoute || isLimitedRoute || isAboutRoute}/>
+                    <Header  
+                      className="navbar" 
+                      showBlackNav={isGalleryRoute || isLimitedRoute || isAboutRoute}
+                      isAuthenticated={GetAuthToken}/> */}
 
-                    <Routes>
-                        {/* Start Single Pages Routes */}
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="/about" element={<About/>}/>
-                        <Route path="/joinus" element={<Joinus/>}/>
-                        <Route path="/contactus" element={<ContactUs/>}/>
-                        <Route path="/profile" element={<Profile/>}/>
-                        {/* End Single Pages Routes */}
-                        {/* Start Authentication Routes */}
-                        <Route path="/login" element={<Login/>}/>
-                        {/* END Authentication Routes */}
-                        {/* Start Membership Routes */}
-                        <Route path="/membership" element={<Membership/>}/>
-                        {/*<Route path="/membershipDetailsTest" element={<MemberDetails/>}/>*/}
-                        {/*<Route path="/limited" element={<MemberPackage/>}/>*/}
-
-
-                        <Route path="/membership/:id" element={<MembershipOptions/>}/>
-                        <Route path="/singleMember/:id" element={<MemberPackage/>}/>
-
-                        {/*<Route path="/singleMember/:id" element={<MembershipSingleOption/>}/>*/}
-                        {/* End Membership Routes */}
-                        {/* Start Community Routes */}
-                        <Route path="/community" element={<Community/>}/>
-                        <Route path="/community/events" element={<CommunityEventsExplore/>}/>
-                        <Route path="/events/communityEventsDetails" element={<CommunityEventsDetails/>}/>
-                        <Route path="/community/newsfeed" element={<NewsFeed/>}/>
-                        <Route path="/community/newsfeed/singleFeed" element={<SingleNewFeed/>}/>
-                        {/* End Community Routes */}
-                        {/* Start Private Events Routes */}
-                        <Route path="/private" element={<PrivateEvents/>}/>
-                        {/* End Private Events Routes */}
-                        {/* Start Houses Locations Routes */}
-                        <Route path="/houses" element={<Houses/>}/>
-                        <Route path="/houses/:id" element={<HouseDetails/>}/>
-                        {/* End Houses Locations Routes */}
-                        {/* Start Booking Routes */}
-                        <Route path="/booking" element={<Booking/>}/>
-                        <Route path="/bookingDetails" element={<BookingDetails/>}/>
-                        <Route path="/bookingDetails/bookNow" element={<BookingSummary/>}/>
-                        {/* End Booking Routes */}
-                        {/* Start Gallery  Routes */}
-                        <Route path="/galleryshow" element={<Gallery/>}/>
-                        {/* End Gallery Routes */}
-                    </Routes>
+                    {/* <Routes> */}
+                        
+                    {/* </Routes
                     <Footer/>
                 </AppContainer>
             </StyledBody>
-            </DataProvider>
-        </div>
+            </DataProvider> */}
+        {/* </div> */}
+      </>
     );
 }
 

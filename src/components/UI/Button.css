@@ -1,0 +1,104 @@
+.btn{
+    font-family: var(--questrial-font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.25rem;
+    border-radius: 0;
+    padding: 1rem 3rem;
+    box-shadow: inset 0 0 0 0 #fafafc;
+    transition: all .3s ease;
+    text-transform: capitalize;
+}
+
+.btn_outline{
+    color: var(--neturals-color1);
+    font-size: var(--font-size-16);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 120%;
+    white-space: nowrap;
+    text-align: center;
+    border: 1px solid var(--neturals-color1);
+}
+.btn_outline:hover{
+    background-color: var(--neturals-color2);
+    color: var(--primary-color);
+}
+.play-modal:hover p {
+    border-bottom: 1px solid var(--white-color);
+} 
+.btn_outline_black {
+    background-color: var(--neturals-color1);
+    border: 1px solid var(--primary-color);    
+    color: var(--primary-color);
+    font-size: var(--font-size-16);
+    font-weight: 600;
+    line-height: 1.25;
+    transition: all 250ms;
+}
+
+.btn_outline_black:hover,
+.btn_outline_black:focus {
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+}
+
+.btn_outline_black:hover {
+    transform: translateY(-1px);
+}
+
+.btn_outline_black:active {
+    background-color: #F0F0F1;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
+}
+/* Media Query */
+@media screen and (max-width: 575px) {
+    .btn{
+        padding: 1rem 1.5rem;
+    }
+}
+@media screen and (max-width: 375px) {
+    .btn{
+        padding: 1rem;
+    }
+} 
+
+
+.button-outLine {
+    border: 1px solid;
+    border-color: var(--neturals-color2);
+    color: #fff;
+    margin: auto 32px;
+    height: 48px;
+    width: 192px;
+    font-family: Questrial;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%;
+    padding: 14px;
+}
+
+.button-outLine:hover {
+    cursor: pointer;
+    background-color: var(--neturals-color2);
+    color: var(--primary-color);
+}
+
+.btn-bg-white {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    margin: auto;
+    border-radius: 0;
+}
+
+.btn-bg-white:hover {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--neturals-color2);
+}

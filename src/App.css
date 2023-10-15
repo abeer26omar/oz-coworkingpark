@@ -17,9 +17,8 @@
 html, body {
     background-color: var(--neturals-color1);
 }
-
 .body-dark {
-    background-color: #000;
+    background-color: var(--black-color);
 
 }
 
@@ -28,29 +27,32 @@ a {
 }
 
 :root {
-    /***************Colors*******************/
+/***************Colors*******************/
     --primary-color: #000000;
     --secondary-color1: #0047bb;
     --secondary-color2: #bdbdbd;
     --accent-color: #d0df00;
+    --color-yellow: #d0df00;
     --neturals-color1: #F0F2F4;
     --neturals-color2: #ffffff;
     --semantic-color1: #07c669;
     --semantic-color2: #cb0a05;
     --Head_color: #f0f1f4;
     --white-color:#fff;
-    /*******************************************/
-    /*******************************************/
+    --black-color: #000;
 
-    /***************Font Size*******************/
+/***************Fonts*******************/
+    --questrial-font: 'questrial';
+    --couture-font: 'Couture';
+    --goldenHopes-font: 'goldenHopes';
     --font-size-94: 94px;
-    --font-size-83: 83px;
+    --font-size-83: 5.1875rem;
     --font-size-74: 74px;
-    --font-size-66: 66px;
+    --font-size-66: 4rem;
     --font-size-58: 58px;
-    --font-size-52: 52px;
+    --font-size-52: 3.25rem;
     --font-size-46: 46px;
-    --font-size-41: 41px;
+    --font-size-41: 2.56rem;
     --font-size-36: 36px;
     --font-size-32: 32px;
     --font-size-29: 29px;
@@ -65,14 +67,10 @@ a {
     --font-size-10: 10px;
     --font-size-9: 9px;
     --font-size-8: 8px;
-    /*******************************************/
-    /*******************************************/
 
-    /****************Font Weight************* */
+/****************Font Weight************* */
     --font-weight-bold: 700;
     --font-weight-regular: 400;
-    /*******************************************/
-    /*******************************************/
 
 }
 
@@ -92,9 +90,6 @@ a {
     font-family: questrial;
     src: url(assets/fonts/questrial/questrial-regular.ttf);
 }
-
-/*******************************************/
-/*******************************************/
 
 /*******************Padding Size************************/
 .p-60 {
@@ -123,107 +118,11 @@ a {
     margin: 35px 0;
 }
 
-/*******************************************/
-
-/******************Buttons*********************************/
-.btn {
-    --bs-btn-border-radius: 0;
-
-}
 /* nav-tabs */
 .nav-tabs,
 .btn:active {
     border: none !important;
 }
-
-/*outLine Button*/
-.button-one-outline {
-    align-items: center;
-    background-color: var(--neturals-color1);
-    border: 1px solid #000000;;
-    border-radius: .25rem;
-    /*box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;*/
-    box-sizing: border-box;
-    color: var(--primary-color);
-    cursor: pointer;
-    display: inline-flex;
-    font-family: questrial, sans-serif;
-    font-size: var(--font-size-16);
-    font-weight: 600;
-    justify-content: center;
-    line-height: 1.25;
-    margin: 0;
-    /*min-height: 3rem;*/
-    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-    position: relative;
-    text-decoration: none;
-    transition: all 250ms;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: baseline;
-    width: 144px;
-    height: 40px;
-}
-
-.button-one-outline:hover,
-.button-one-outline:focus {
-    /*border-color: rgba(0, 0, 0, 0.15);*/
-    /*box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;*/
-    /*color: rgba(0, 0, 0, 0.65);*/
-    background-color: var(--primary-color);
-    color: #FFFFFF;
-}
-
-.button-one-outline:hover {
-    transform: translateY(-1px);
-}
-
-.button-one-outline:active {
-    background-color: #F0F0F1;
-    border-color: rgba(0, 0, 0, 0.15);
-    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
-    color: rgba(0, 0, 0, 0.65);
-    transform: translateY(0);
-}
-
-.button-outLine {
-    border: 1px solid;
-    border-color: var(--neturals-color2);
-    color: #fff;
-    margin: auto 32px;
-    height: 48px;
-    width: 192px;
-    font-family: Questrial;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 130%;
-    padding: 14px;
-}
-
-.button-outLine:hover {
-    cursor: pointer;
-    background-color: var(--neturals-color2);
-    color: var(--primary-color);
-}
-
-.btn-bg-white {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-    margin: auto;
-    border-radius: 0;
-}
-
-.btn-bg-white:hover {
-    cursor: pointer;
-    background-color: var(--primary-color);
-    color: var(--neturals-color2);
-}
-
-/******************************************/
-/******************************************/
-
 /*********************hr*******************/
 
 .footer-hr {
@@ -232,7 +131,7 @@ a {
 }
 
 .footer-hr2 {
-    border: 1px solid #FFFFFF !important;
+    border: 1px solid var(--white-color) !important;
 
 }
 
@@ -242,12 +141,12 @@ a {
 /****************** Form Fields ****************/
 
 .form-card {
-    background-color: #FFFFFF !important;
+    background-color: var(--white-color) !important;
     box-shadow: rgba(0, 0, 0, 0.02) 0 1px 2px, rgba(0, 0, 0, 0.02) 0 2px 4px, rgba(0, 0, 0, 0.02) 0 4px 8px, rgba(0, 0, 0, 0.02) 0 8px 16px, rgba(0, 0, 0, 0.02) 0 16px 32px, rgba(0, 0, 0, 0.02) 0 32px 64px;
 }
 
 .form-card .head-content .hand-write {
-    font-family: goldenHopes, sans-serif;
+    font-family: var(--goldenHopes-font);
     font-size: var(--font-size-52);
     font-weight: var(--font-weight-regular);
     line-height: 62px;
@@ -256,7 +155,7 @@ a {
 }
 
 .form-card .head-content .bold-head {
-    font-family: couture, sans-serife, serif;
+    font-family: var(--couture-font);
     font-size: var(--font-size-26);
     font-weight: var(--font-weight-bold);
     line-height: 31px;
@@ -272,10 +171,10 @@ a {
 }
 
 .form__field {
-    font-family: questrial, sans-serif;
+    font-family: var(--questrial-font);
     width: 100%;
     border: 0;
-    border-bottom: 1px solid #BDBDBD;
+    border-bottom: 1px solid var(--secondary-color2);
     outline: 0;
     color: var(--primary-color);
     padding: 15px 0 10px 14px;
@@ -299,7 +198,7 @@ a {
     display: block;
     transition: 0.2s;
     color: var(--primary-color);
-    font-family: couture, sans-serif;
+    font-family: var(--couture-font);
     font-size: var(--font-size-16);
     font-weight: var(--font-weight-regular);
     line-height: 19px;
@@ -336,7 +235,7 @@ a {
 }
 
 .form-check-label {
-    font-family: couture, sans-serif;
+    font-family: var(--couture-font);
     font-size: 10px;
     font-weight: var(--font-weight-regular);
     line-height: 12px;
@@ -345,7 +244,7 @@ a {
 }
 
 .forget_password {
-    font-family: couture, sans-serif;
+    font-family: var(--couture-font);
     font-size: 10px;
     font-weight: var(--font-weight-regular);
     line-height: 12px;
@@ -373,12 +272,9 @@ a {
     border-color: var(--semantic-color2);
 }
 
-/******************************************************/
-/******************************************************/
-
 /**************************Headers****************************/
 .hand-write {
-    font-family: goldenHopes, sans-serif;
+    font-family: var(--goldenHopes-font);
     font-size: var(--font-size-52);
     font-weight: var(--font-weight-regular);
     line-height: 62px;
@@ -387,7 +283,7 @@ a {
 }
 
 .bold-head {
-    font-family: couture, sans-serife, serif;
+    font-family: var(--couture-font);
     font-size: var(--font-size-26);
     font-weight: var(--font-weight-bold);
     line-height: 31px;
@@ -396,7 +292,7 @@ a {
 }
 
 .large-head {
-    font-family: couture, sans-serife, serif;
+    font-family: var(--couture-font);
     font-size: var(--font-size-66);
     font-weight: var(--font-weight-bold);
     line-height: 49px;
@@ -405,7 +301,7 @@ a {
 }
 
 .text-content {
-    font-family: questrial, sans-serif;
+    font-family: var(--questrial-font);
     font-size: var(--font-size-16);
     font-weight: var(--font-weight-regular);
     line-height: 21px;
@@ -426,12 +322,6 @@ a {
 .head-content-left-shape .bold-head {
     line-height: 2;
 }
-
-/*************************************************************************/
-/*************************************************************************/
-
-/***********************Sliders******************************************/
-/*slider*/
 
 /***********************Sliders******************************************/
 /*slider*/
@@ -460,7 +350,7 @@ a {
 
 .slick-prev:before,
 .slick-next:before {
-    color: black;
+    color: var(--black-color);
     font-size: 35px !important;
 }
 
@@ -489,22 +379,22 @@ a {
 
 .slick-next:hover {
     box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
-    background-color: #FFFFFF;
+    background-color: var(--white-color);
 }
 
 .slick-prev:hover {
     box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
-    background-color: #FFFFFF;
+    background-color: var(--white-color);
 }
 
 .slick-prev::before {
-    color: black;
+    color: var(--black-color);
     font-size: 50px;
     font-weight: bold;
 }
 
 .slick-next::before {
-    color: black;
+    color: var(--white-color);
     font-size: 50px;
     font-weight: bold;
 
@@ -512,7 +402,7 @@ a {
 
 .slick-arrow {
     border-radius: 50%;
-    background-color: #FFFFFF !important;
+    background-color: var(--white-color) !important;
     width: 60px !important;
     height: 60px !important;
 }
@@ -543,9 +433,9 @@ a {
 /*End*/
 /*11-Borders*/
 .border-of-section {
-    border-top: 1.5px solid #BDBDBD;
-    border-bottom: 1.5px solid #BDBDBD;
-    background: #F0F2F4;
+    border-top: 1.5px solid var(--secondary-color2);
+    border-bottom: 1.5px solid var(--secondary-color2);
+    background: var(--neturals-color1);
 }
 
 .border-left {
@@ -563,14 +453,14 @@ a {
 /*End*/
 /*Common Classes*/
 .head-of-section {
-    border-top: 1.5px solid #BDBDBD;
-    background: #F0F2F4;
+    border-top: 1.5px solid var(--secondary-color2);
+    background: var(--neturals-color1);
     margin-top: 35px;
 }
 
 .h2-text {
     color: var(--primary-color);
-    font-family: goldenHopes;
+    font-family: var(--goldenHopes-font);
     font-size: var(--font-size-83);
     font-style: normal;
     font-weight: var(--font-weight-regular);
@@ -587,22 +477,20 @@ a {
 
 .box-content .h2-text-box {
     color: var(--primary-color);
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: var(--font-size-52);
     font-style: normal;
     font-weight: var(--font-weight-regular);
     letter-spacing: 0;
     line-height: 120%;
-    /*white-space: nowrap;*/
     margin-bottom: 16px;
 }
 
 .box-content .p-text-box {
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: var(--font-size-16);
     font-style: normal;
     font-weight: var(--font-weight-regular);
-    
     color: var(--primary-color);
     letter-spacing: 0;
     line-height: 130%;
@@ -626,7 +514,7 @@ a {
 }
 
 .slider-card .card-title {
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: var(--font-size-26);
     font-style: normal;
     font-weight: var(--font-weight-bold);
@@ -636,7 +524,7 @@ a {
 
 .slider-card .card-text {
     color: var(--primary-color);
-    font-family: Questrial;
+    font-family: (--questrial-font);
     font-size: var(--font-size-16);
     font-style: normal;
     font-weight: 400;
@@ -653,7 +541,7 @@ a {
 .slider-card .card-category {
     color: var(--primary-color);
     text-align: center;
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: 10px;
     font-style: normal;
     font-weight: var(--font-weight-regular);

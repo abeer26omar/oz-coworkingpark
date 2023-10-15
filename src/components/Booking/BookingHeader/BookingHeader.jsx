@@ -4,7 +4,6 @@ import {Container} from "react-bootstrap";
 import booking from "../../../assets/images/videos/community.mp4";
 import './BookinHeader.css'
 import Paragraph from '../../UI/Paragraph';
-import Description from '../../UI/Description';
 
 const BookingHeader = () => {
     return (
@@ -35,8 +34,10 @@ const BookingHeader = () => {
                             </div>
                             <video className="img" alt="Group" src={booking} autoPlay muted loop/>
                             <div className="group-2">
-                                <Paragraph title={'Booking'}/>                                 
-                                <Description className={'my-40 w-50'} desc={ 'Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,'}/>
+                                <Paragraph>{'Booking'}</Paragraph>                                 
+                                <Paragraph className={'my-40 w-50'}>
+                                    { 'Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,'}
+                                </Paragraph>
                             </div>
                         </div>
                     </div>

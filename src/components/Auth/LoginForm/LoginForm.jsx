@@ -26,7 +26,6 @@ const LoginForm = () => {
     // };
     return (
         <>
-            {/*// <!--Start Login Section-->*/}
             <section className="login my-5">
                 <div className="position-relative">
                     <Media
@@ -45,63 +44,6 @@ const LoginForm = () => {
                                     <h1 className="hand-write">Welcome</h1>
                                     <h3 className="bold-head">Please Sign in</h3>
                                 </div>
-                                {/* <Form onSubmit={handleSubmit}>
-                                    <div className="form__group field my-3 group-check">
-                                        <label htmlFor="email" className="form__label">
-                                            Email
-                                        </label>
-                                        <input
-                                            type="text"
-                                            className="form__field"
-                                            placeholder="Enter Your Email"
-                                            name="username"
-                                            value={credentials.username}
-                                            onChange={handleInputChange}
-                                        />
-                                    </div>
-                                    <div className="form__group field my-3">
-                                        <label htmlFor="password" className="form__label">
-                                            Password
-                                        </label>
-                                        <input
-                                            type="password"
-                                            className="form__field"
-                                            placeholder="Enter Your Password"
-                                            name="password"
-                                            value={credentials.password}
-                                            onChange={handleInputChange}
-                                        />
-                                    </div>
-                                    <div className="d-flex justify-content-between my-3">
-                                        <div className="form-check">
-                                            <input
-                                                type="checkbox"
-                                                className="form-check-input "
-                                                id="exampleCheck1"
-                                            />
-                                            <label
-                                                className="form-check-label"
-                                                htmlFor="exampleCheck1"
-                                            >
-                                                Keep me logged in
-                                            </label>
-                                        </div>
-                                        <div className="">
-                                            <a className="forget_password" href="#">
-                                                Forget your password?
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <div className="d-flex justify-content-center py-3">
-                                        <button
-                                            type="submit"
-                                            className="button-one-outline btn-bg-white "
-                                        >
-                                            Login
-                                        </button>
-                                    </div>
-                                </Form> */}
                                 <Form />
                                 <div className="py-3 log-social text-center">
                                     <a
@@ -131,7 +73,6 @@ const LoginForm = () => {
                     </Row>
                 </Container>
             </section>
-            {/*// <!--End Login Section-->*/}
         </>
     );
 };

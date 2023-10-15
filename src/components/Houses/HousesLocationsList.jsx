@@ -1,6 +1,6 @@
 import React from 'react';
 import Media from "../Media/Media";
-import Buttons from "../Buttons/Buttons";
+import Button from "../UI/Button";
 
 const HousesLocationsList = ({id, address, title, main_image}) => {
     return (
@@ -13,11 +13,11 @@ const HousesLocationsList = ({id, address, title, main_image}) => {
                         <span className="government">{address}</span>
                     </div>
                     <div className="btn-explore">
-                        <Buttons 
+                        <Button 
                             tagType='link'
                             className="btn button-outLine btn-bg-white"
                             to={`/houses/${id}`}
-                        >Explore</Buttons>
+                        >Explore</Button>
                     </div>
                 </div>
                 <Media

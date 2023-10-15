@@ -10,7 +10,7 @@
     
 }
 .main_header{
-    color: #d0df00;
+    color: var(--color-yellow);
     font-family: goldenHopes;
     font-size: var(--font-size-66);
     font-style: normal;
@@ -19,22 +19,30 @@
     line-height: 120%;
     margin: 0;
 }
-.description{
+.white_monoBlock_title{
+    color: var(--white-color);
+    text-align: center;
+    font-family: var(--couture-font);
+    font-size: 4.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; /* 4.95rem */
+}
+.description,
+.monoBlock_description{
     color: var(--neturals-color1);
     font-size: var(--font-size-16);
     font-weight: var(--font-weight-regular);
     margin: 10px 0;
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     line-height: 130%;
- 
 }
 .head_feature{
     color: var(--primary-color);
-    font-family: goldenHopes;
+    font-family: var(--goldenHopes-font);
     font-size: var(--font-size-83);
     font-style: normal;
     font-weight: var(--font-weight-regular);
-    left: 0;
     letter-spacing: 0;
     line-height: 120%;
     text-align: center;
@@ -46,7 +54,7 @@
 }
 .paragraph_black{
     color: var(--primary-color);
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: var(--font-size-52);
     font-style: normal;
     font-weight: var(--font-weight-regular);
@@ -55,11 +63,10 @@
 }
 
 .description_black{    
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: var(--font-size-16);
     font-style: normal;
     font-weight: var(--font-weight-regular);
-    
     color: var(--primary-color);
     letter-spacing: 0;
     line-height: 130%;
@@ -68,29 +75,36 @@
     margin-bottom: 32px;
         
 }
-
-
-@media screen and (max-width:575px) {
-.head_paragraph,
-.paragraph_black,
-.head_feature,
-.main_header {
-     font-size: var(--font-size-20) !important;
+.text-wrapper-4 {
+    color: var(--white-color);
+    font-family: var(--questrial-font);
+    font-size: var(--font-size-16);
+    font-style: normal;
+    font-weight: var(--font-weight-regular);
+    letter-spacing: 0;
+    line-height: 120%;
+    white-space: nowrap;
 }
-
-.description_black {
-    font-size: var(--font-size-16) !important;
+@media screen and (max-width: 1200px) {
+    .paragraph_black{
+        font-size: var(--font-size-41);
+    }
 }
-
+@media screen and (max-width: 1024px) {
+    .paragraph_black{
+        font-size: var(--font-size-32);
+    }
+    .description_black{
+        font-size: var(--font-size-24);
+    }
 }
-@media screen and (max-width:1200px) {
-.head_paragraph,
-.paragraph_black,
-.head_feature,
-.main_header{
-    font-size: var(--font-size-36);
+@media screen and (max-width: 992px) {
+    .white_monoBlock_title{
+        font-size: 3.125rem;
+    }
 }
-.description_black{
-    font-size: var(--font-size-24);
-}
+@media screen and (max-width: 575px) {
+    .head_feature{
+        font-size: var(--font-size-66);
+    }
 }

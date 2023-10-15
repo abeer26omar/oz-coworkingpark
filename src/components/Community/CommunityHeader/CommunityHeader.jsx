@@ -5,7 +5,6 @@ import Navbar from "react-bootstrap/Navbar";
 import {Container, Nav} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
 import Paragraph from '../../UI/Paragraph';
-import Description from '../../UI/Description';
 
 const CommunityHeader = () => {
     const navLinks = () => {
@@ -66,8 +65,10 @@ const CommunityHeader = () => {
                             </div>
                             <video className="img" alt="Group" src={community} autoPlay muted loop/>
                             <div className="group-2">
-                                <Paragraph title={'Community'}/>
-                                <Description className={'my-40 w-50'} desc={' Lorem ipsum dolor consectetuer Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ame ,'}/> 
+                                <Paragraph>{'Community'}</Paragraph>
+                                <Paragraph className={'my-40 w-50'}>
+                                    {' Lorem ipsum dolor consectetuer Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ame ,'}
+                                </Paragraph>
                             </div>
                         </div>
                     </div>

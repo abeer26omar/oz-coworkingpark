@@ -1,13 +1,12 @@
 
 import React from "react";
-import Buttons from "../Buttons/Buttons";
-import Description from "../UI/Description";
+import Button from "../UI/Button";
 import Paragraph from "../UI/Paragraph";
 const  MonoBlockMember = (props) => {
-    console.log(props.configData)
-return(<>
-
-   <section className={`monoBlock bgBlack`}>
+    console.log(props.configData);
+    return(
+        <>
+            <section className={`monoBlock bgBlack`}>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -15,23 +14,27 @@ return(<>
                                 {props.configData ? props.configData.map((configItem, index) => (
                                     <React.Fragment key={index}>
                                         {configItem.key === 'home_page_membership_title' && 
-                                     <Paragraph title={configItem.value}/>
+                                            <Paragraph className='white_monoBlock_title'>{configItem.value}</Paragraph>
                                         }
-                                        {configItem.key === 'home_page_membership_title' &&
-                                         <Description className={'m_b_center'} desc={configItem.value}/>}
+                                        {configItem.key === 'home_page_membership_description' &&
+                                            <Paragraph className={'m_b_center monoBlock_description w-75 mx-auto'}>{configItem.value}</Paragraph>
+                                        }
                                     </React.Fragment>
                                 )):''}
                             </div>
-                            <div
-                                className="buttons d-lg-flex d-md-flex d-sm-block my-3 justify-content-center align-items-center text-center">
-                                    <Buttons tagType = 'link' className={`btn button-outLine`}>
-                                        Become  a Member
-                                    </Buttons>
-                            </div>
+                        <div
+                            className="buttons d-lg-flex d-md-flex d-sm-block my-3 justify-content-center align-items-center text-center">
+                                <Button 
+                                    tagType = 'link' 
+                                    className={`btn button-outLine`}>
+                                    Become  a Member
+                                </Button>
                         </div>
                     </div>
                 </div>
-    </section>
-            </>)
+            </div>
+            </section>
+        </>
+    );
 }
 export default React.memo(MonoBlockMember) ;

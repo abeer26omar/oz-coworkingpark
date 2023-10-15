@@ -2,8 +2,9 @@ import './NewsLetter.css';
 import axios from "axios";
 import { Formik } from 'formik';
 import * as Yup from "yup";
-import Buttons from '../Buttons/Buttons';
+import Button from '../UI/Button';
 import { useState } from 'react';
+import Paragraph from '../UI/Paragraph';
 const NewsLetter = () => {
     const [response, setResponse] = useState('')
     const getNewsLetter = async (values)=>{
@@ -32,7 +33,7 @@ const NewsLetter = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="content-block">
-                                <h1 className="text-h1">Join NewsLetter</h1>
+                                <Paragraph className="white_monoBlock_title">Join NewsLetter</Paragraph>
                             </div>
                             <Formik 
                                 initialValues={
@@ -55,9 +56,8 @@ const NewsLetter = () => {
                                         errors,
                                         handleChange,
                                         handleBlur,
-                                        handleSubmit,
-                                        handleReset
-                                        } = props;
+                                        handleSubmit
+                                    } = props;
                                     return (
                                         <form className="row g-3" onSubmit={handleSubmit}>
                                             <div className="form__group flex-column align-items-center field">
@@ -79,7 +79,10 @@ const NewsLetter = () => {
                                                 {response && <p className={`text-white mt-2 mb-0`}>{response}</p>}
                                             </div>
                                             <div className="buttons d-flex justify-content-center align-items-center">
-                                                <Buttons tagType='button' type="submit" className="button-one-outline btn-bg-white">Subscribe</Buttons>
+                                                <Button 
+                                                    tagType='button' 
+                                                    type="submit" 
+                                                    className="button-outLine">Subscribe</Button>
                                             </div>
                                         </form>
                                     )}}

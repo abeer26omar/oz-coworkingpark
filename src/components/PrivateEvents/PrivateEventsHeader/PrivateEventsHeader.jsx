@@ -6,7 +6,6 @@ import prevent from "../../../assets/images/videos/prevent.mp4";
 import './PrivateEventsHeader.css';
 import {PrivateEventsData} from "../../../Data/PrivateEventsData";
 import Paragraph from '../../UI/Paragraph';
-import Description from '../../UI/Description';
 const PrivateEventsHeader = () => {
     return (
         <>
@@ -60,9 +59,11 @@ const PrivateEventsHeader = () => {
                             <video className="img" alt="Group" src={prevent} autoPlay muted loop/>
                             <div className="group-2">
                                 <h1 className="an-innovative-co">
-                                    <Paragraph title={'Private Events'}/>
+                                    <Paragraph>{'Private Events'}</Paragraph>
                                 </h1>
-                                <Description className={'my-40 w-50'} desc={' Lorem ipsum dolor consectetuer Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ame ,'}/>   
+                                <Paragraph className={'my-40 w-50'}>
+                                    {' Lorem ipsum dolor consectetuer Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ame ,'}
+                                </Paragraph>   
                                
                             </div>
 

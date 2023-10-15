@@ -41,14 +41,14 @@ const Partners = () => {
                 }
             },
             {
-                breakpoint: 575,
+                breakpoint: 576,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
                 }
             },
             {
-                breakpoint: 425,
+                breakpoint: 426,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,

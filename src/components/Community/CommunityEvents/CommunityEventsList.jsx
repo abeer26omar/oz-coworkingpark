@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Media from "../../Media/Media";
-import Buttons from "../../Buttons/Buttons";
+import Button from "../../UI/Button";
 
 const CommunityEventsList = ({id, text, title, img, linkText}) => {
     return (
@@ -12,7 +12,7 @@ const CommunityEventsList = ({id, text, title, img, linkText}) => {
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>{text}</Card.Text>
-                    <Buttons href="#">{linkText}</Buttons>
+                    <Button href="#">{linkText}</Button>
                 </Card.Body>
             </Card>
         </>

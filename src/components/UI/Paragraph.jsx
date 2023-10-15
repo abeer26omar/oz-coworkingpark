@@ -1,9 +1,9 @@
 import React from 'react';
-import Style from './Paragraph.module.css';
+import './Paragraph.css';
 function Paragraph(props) {
   return (
     <>
-     <p className= {`${props.className} ${Style.head_paragraph}`} >{props.title}</p> 
+     <p className= {`${props.className}`}>{props.children}</p> 
     </>
   )    
 }

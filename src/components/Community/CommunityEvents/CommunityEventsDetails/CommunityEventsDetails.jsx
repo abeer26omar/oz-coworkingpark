@@ -9,7 +9,7 @@ import user from "../../../../assets/images/icons/user.svg";
 import './CommunityEventsDetails.css';
 import Slider from "react-slick";
 import Media from "../../../Media/Media";
-import Buttons from "../../../Buttons/Buttons";
+import Button from "../../../UI/Button";
 
 const CommunityEventsDetails = () => {
     const settings = {
@@ -105,9 +105,9 @@ const CommunityEventsDetails = () => {
                                     </div>
 
                                 </div>
-                                <Buttons href="#">
+                                <Button href="#">
                                     Explore
-                                </Buttons>
+                                </Button>
                             </div>
                         </div>
 
@@ -165,8 +165,8 @@ const CommunityEventsDetails = () => {
                             </div>
 
                             <div className="cards-event-buttons text-center">
-                                <Buttons href='#'>Attend</Buttons>
-                                <Buttons href='#' className="share-button">
+                                <Button href='#'>Attend</Button>
+                                <Button href='#' className="share-button">
                                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <g filter="url(#filter0_b_3532_22581)">
@@ -199,7 +199,7 @@ const CommunityEventsDetails = () => {
                                             </filter>
                                         </defs>
                                     </svg>
-                                </Buttons>
+                                </Button>
                                 <a className="share-button">
                                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">

@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Media from "../Media/Media";
-import Buttons from "../Buttons/Buttons";
+import Button from "../UI/Button";
 
 const PublicEventList = ({id, text, title, img}) => {
     return (
@@ -11,8 +11,8 @@ const PublicEventList = ({id, text, title, img}) => {
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>{text}</Card.Text>
-                    <Buttons href={"/events/communityEventsDetails"} className=" btn-bg-white">Public
-                        Event</Buttons>
+                    <Button to={"/events/communityEventsDetails"} className=" btn-bg-white">Public
+                        Event</Button>
                 </Card.Body>
             </Card>
         </>

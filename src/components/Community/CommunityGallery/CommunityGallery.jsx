@@ -1,7 +1,7 @@
 import React from "react";
 import gallery from "../../../assets/images/gallery.png";
 import Media from "../../Media/Media";
-import Buttons from "../../Buttons/Buttons";
+import Button from "../../UI/Button";
 
 const CommunityGallery = () => {
     return (
@@ -20,9 +20,9 @@ const CommunityGallery = () => {
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem ipsum dolor sit amet, consectetur dipiscing eliteiusmod
                                 </p>
-                                <Buttons href="/galleryshow" tagType = 'link'>
+                                <Button href="/galleryshow" tagType = 'link'>
                                     Explore
-                                </Buttons>
+                                </Button>
                             </div>
                         </div>
                         <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left ">

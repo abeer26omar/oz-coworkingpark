@@ -11,7 +11,8 @@ const Form = (props)=>{
         try {
             const result = await Login(values.email, values.password);
             console.log(result);
-            // navigate("/membership");
+            window.sessionStorage.setItem("TokenOZ", result.access_token);
+            navigate('/membership');
         } catch (error) {
             console.log(error);
         }

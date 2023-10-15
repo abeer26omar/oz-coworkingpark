@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { redirect } from 'react-router-dom';
 
 export const Login = async (email, password) => {
     try {
@@ -16,7 +17,17 @@ export const Login = async (email, password) => {
         const response = await axios(config);
         return response.data.data;
     } catch (error) {
-        console.error(error);
-        throw new Error('Login failed');
+        return error;
     }
 };
+export const GetAuthToken = () => {
+    const TokenOZ = window.sessionStorage.getItem("TokenOZ");
+    return TokenOZ;
+}
+export const TokenLoader = ()=>{
+    const token = GetAuthToken();
+    if (!token) {
+        // return redirect('/auth');
+    }
+  return null;
+}

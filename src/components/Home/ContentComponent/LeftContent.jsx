@@ -1,50 +1,43 @@
 import React from "react";
 import "./Content.css";
-// import vision from "../../../assets/images/vision.png";
-import Buttons from "../../Buttons/Buttons";
+import Button from "../../UI/Button";
 import Media from "../../Media/Media";
-import HeadFeature from "../../UI/HeadFeature";
-import ParagraphBlack from "../../UI/ParagraphBlack";
-import DescriptionBlack from "../../UI/DescriptionBlack";
+import Paragraph from "../../UI/Paragraph";
 const LeftContent = (props) => {
       return (
         <>
-            <section className=" head-of-section">
+            <section className="head-of-section">
                 <div className="container-fluid">
-                            {props.configData ? props.configData.map((configItem , index)=>(
-                                <React.Fragment key={index}> 
                     <div className="row">
                         <div className="col-lg-12">
-                            {configItem.key === "home_page_about_us_title" && 
-                             <div className="head-content-sec">
-                                <HeadFeature HeadFeature={configItem.value}/>                              
-                             </div> }     
+                            <div className="head-content-sec">
+                                <Paragraph className='head_feature'>{'Our Vision'}</Paragraph>                              
+                            </div>    
                         </div>
                     </div>
-                                </React.Fragment>
-                            )):''}
-                  <div className="row border-of-section ">
-                     {props.configData ? props.configData.map((configItem , index)=>(
-                        <React.Fragment key={index}>
-                             {configItem.key === "home_page_about_us_description" && 
-                                <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto">
-                                  <div className="box-content px-60 ">
-                                     <ParagraphBlack titleBox={configItem.value}/>
-                                     <DescriptionBlack descBlack={configItem.value}/>
-                                     <Buttons href="#"> Explore</Buttons>
-                                  </div>
-                                </div>}
-                            {configItem.key === "home_page_about_us_image" &&
-                                <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6   border-left">
-                                    <Media type="img"
-                                           className="image-box w-100"
-                                           src={configItem.value}
-                                           alt="Our OZ Vision"
-                                    />
-                                </div> }
-                       </React.Fragment>
-                            )):''}
-                       
+                        <div className="row border-of-section ">
+                            <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto">
+                                <div className="box-content px-4">
+                                    {props.configData ? props.configData.map((configItem , index)=>(
+                                        <React.Fragment key={index}>
+                                            {configItem.key === "home_page_about_us_title" &&  <Paragraph className='paragraph_black'>{configItem.value}</Paragraph>}
+                                            {configItem.key === "home_page_about_us_description" && <Paragraph className='description_black'>{configItem.value}</Paragraph>}
+                                        </React.Fragment>
+                                    )):''}
+                                    <Button tagType='link' className='btn_outline_black'>Our Vision</Button>
+                                </div>
+                            </div>
+                            {props.configData ? props.configData.map((configItem , index)=>(
+                                <React.Fragment key={index}>
+                                {configItem.key === "home_page_about_us_image" &&
+                                    <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-left">
+                                        <Media type="img"
+                                            className="image-box w-100"
+                                            src={configItem.value}
+                                            alt="Our OZ Vision"
+                                        />
+                                    </div> }
+                                </React.Fragment>  )):''}
                   </div>
                 </div>
             </section>
