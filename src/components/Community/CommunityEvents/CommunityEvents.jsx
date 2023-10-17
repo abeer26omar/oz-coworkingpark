@@ -3,8 +3,10 @@ import Slider from "react-slick";
 import {EventsData} from "../../../Data/EventsData";
 import CommunityEventsList from "./CommunityEventsList";
 import {NavLink} from "react-router-dom";
+import Paragraph from "../../UI/Paragraph";
 
-const CommunityEvents = () => {
+const CommunityEvents = (props) => {
+
     const settings = {
         dots: false,
         infinite: true,
@@ -12,11 +14,11 @@ const CommunityEvents = () => {
         slidesToScroll: 1,
         arrows: false,
         autoplay: true,
-        speed: 1500,
-        autoplaySpeed: 1500,
+        speed: 2000,
+        autoplaySpeed: 2000,
         ease: "linear",
         lazyLoad: true,
-        adaptiveHeight: true,
+        // adaptiveHeight: true,
         responsive: [
             {
                 breakpoint: 1024,
@@ -48,37 +50,36 @@ const CommunityEvents = () => {
         <>
             <section id="community-events" className="events">
                 <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="head-content-sec">
-                                <h2 className="h2-text">Community Events</h2>
-                            </div>
-                        </div>
-
-                        <div className=" border-of-section ">
-                            <div className="col-md-12 col-lg-12 col-sm-4 col-xs-6 m-auto ">
+                        <div className="  ">
+                            <div className="col-md-12 col-lg-12 col-sm-12 col-xs-6 m-auto ">
                                 <div className="box-content px-60 d-flex justify-content-between align-items-center">
                                     <div className="row">
+                                    {props.configData ? props.configData.map((configItem, index) => (
+                                    <React.Fragment key={index}>
+                                        {configItem.key === "community_page_event_title" && 
                                         <div className="col-lg-4 col-sm-12">
-                                            <h2 className="h2-text-box">WHAT'S ON events </h2>
+                                            <Paragraph className='white_monoBlock_title black'>{configItem.value}</Paragraph>
                                         </div>
+                                        }
+                                        {configItem.key === "community_page_event_description" &&
                                         <div className="col-lg-8 col-sm-12 m-auto">
                                             <div className="d-lg-flex d-sm-block align-items-center">
-                                                <p className="p-text-box">
-                                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit
-                                                    eiusmod Lorem ipsum dolor sit amet,consectetur dipiscing
-                                                    elit Lorem ipsum dolor sit amet, consectetur
-                                                </p>
-                                                <NavLink to={"/community/events"}
-                                                         className="btn button-outLine btn-bg-white mx-3">Explore</NavLink>
+                                            <Paragraph className={'m_b_center monoBlock_description w-75 mx-auto black'}>{configItem.value}</Paragraph>
+                                               <NavLink to={"/community/events"}
+                                                className="btn button-outLine btn-bg-white mx-3">Explore</NavLink>
                                             </div>
                                         </div>
+                                        }
+                                    </React.Fragment>
+                                )):''}
+                                
+                        
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="col-lg-12">
-                                <Slider {...settings}>
+                            <div className="col-lg-12  col-sm-12">
+                                <Slider {...settings} className="home-events">
                                     {EventsData.map((events, index) => {
                                         const {id, title, img, text, linkText} = events;
 
@@ -97,7 +98,6 @@ const CommunityEvents = () => {
                                 </Slider>
                             </div>
                         </div>
-                    </div>
                 </div>
             </section>
         </>
