@@ -26,14 +26,14 @@ const CommunityNews = (props) => {
                     <div className="row"></div>
                     <div className="row border-of-section ">
                         <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto ">
-                            <div className="box-content px-60 ">
+                            <div className="box-content px-60  flex-box-start">
                                     {props.configData ? props.configData.map((configItem, index) => (
                                     <React.Fragment key={index}>
                                         {configItem.key === "community_page_newsfeed_title" && 
-                                            <Paragraph className='white_monoBlock_title black'>{configItem.value}</Paragraph>
+                                            <Paragraph className='white_monoBlock_title black '>{configItem.value}</Paragraph>
                                         }
                                         {configItem.key === "community_page_newsfeed_description" &&
-                                            <Paragraph className={'m_b_center monoBlock_description black'}>{configItem.value}</Paragraph>
+                                            <Paragraph className={' mb-5 monoBlock_description black'}>{configItem.value}</Paragraph>
                                         }
                                     </React.Fragment>
                                 )):''}

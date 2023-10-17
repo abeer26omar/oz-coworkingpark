@@ -9,6 +9,7 @@ const [data , setData] = useState([]);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
 // const DataLocation = useData();
+// const page_name = '';
  const config = async(page_name)=>{
  
     try{
@@ -26,7 +27,7 @@ const [error, setError] = useState(null);
 
 }
 useEffect(()=>{
-    config('home').then(res =>{
+    config('').then(res =>{
         setData(res)
         setLoading(false)
     })

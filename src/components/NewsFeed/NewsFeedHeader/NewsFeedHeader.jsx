@@ -6,8 +6,21 @@ import {Container, Nav} from "react-bootstrap";
 import Media from "../../Media/Media";
 import Paragraph from "../../UI/Paragraph";
 import MainHeaderWrapper from "../../UI/MainHeaderWrapper";
-
+import { useData } from "../../../apis/auth_api/Createdata";
+import { useState ,useEffect } from "react";
 const NewsFeedHeader = (props) => {
+const DataLocation = useData();
+const page_home = DataLocation.config('community')
+const [data , setData] = useState([page_home]);
+ useEffect(()=>{
+        page_home.then(res =>{
+            setData(res)
+            console.log(res);
+        })
+        .catch(err =>{
+         
+        })
+    },[]);
     return (
         <>
             <Navbar expand="lg" className="bg-body-tertiary navigator-feed">
@@ -69,49 +82,15 @@ const NewsFeedHeader = (props) => {
                 </Container>
             </Navbar>
 
-            {/* <div className="box news-header">
-                <div className="group-wrapper">
-                    <div className="group">
-                        <div className="overlap-group">
-                            <div className="rectangle-wrapper">
-                                <div className="rectangle"/>
-                            </div>
-                            <Media
-                                type="img"
-                                className="img"
-                                alt="Group"
-                                src={newsfeed}
-                                autoPlay
-                                muted
-                                loop
-                            />
-                            <div className="group-2">
-                                <h1 className="an-innovative-co position-relative">
-                                    <span className="text-wrapper head-co">Community</span>
-                                    <span className="text-wrapper-2">News feed</span>
-                                </h1>
-                                <p className="p">
-                                    Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit
-                                    amet, consectetuerLorem ipsum dolor sit amet,
-                                    consectetuerLorem ipsum dolor sit amet, Lorem ipsum dolor sit
-                                    amet, consectetuerLorem ipsum dolor sit amet,
-                                    consectetuerLorem ipsum dolor sit amet, consectetuerLorem
-                                    ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-            <MainHeaderWrapper configData={props.configData} image={'//api'}>
-                <div className={`container-fluid px-70`}>
+            <MainHeaderWrapper configData={data} image={newsfeed}>
+                <div className={`container-fluid px-70 py-5`}>
                     <div className='col-md-6 col-12'>
-                        {props.configData ? props.configData.map((configItem, index) => (
+                        { data? data.map((configItem, index) => (
                             <React.Fragment key={index}>
-                                {configItem.key === 'booking_page_title' && (
+                                {configItem.key === "community_page_newsfeed_title" && (
                                     <Paragraph className='head_paragraph mb-3'>{configItem.value}</Paragraph>
                                 )}
-                                {configItem.key === 'booking_page_description' && (
+                                {configItem.key === "community_page_newsfeed_description" && (
                                     <Paragraph className='description mb-0'>{configItem.value}</Paragraph>
                                 )}
                             </React.Fragment>

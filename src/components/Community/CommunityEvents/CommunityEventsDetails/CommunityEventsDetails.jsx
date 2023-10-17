@@ -111,12 +111,12 @@ const CommunityEventsDetails = () => {
                             </div>
                         </div>
 
-                        <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6  m-auto ">
+                        <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6  m-auto  ">
                             <Slider {...settings}>
-                                <div>
+                                <div className=''>
                                     <Media
                                         type="img"
-                                        className="image-box w-100"
+                                        className="image-box w-100 "
                                         src={aminites}
                                         alt="Our OZ Vision"
                                     />

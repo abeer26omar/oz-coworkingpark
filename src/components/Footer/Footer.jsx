@@ -6,21 +6,40 @@ import twitterWhite from "../../assets/images/icons/twitterWhite.png";
 import linkedinWhite from "../../assets/images/icons/insta.png";
 import Media from "../Media/Media";
 import { Link } from "react-router-dom";
+import { useState , useEffect } from "react";
+import axios from "axios";
 
+ const config = async(page_name)=>{
+ 
+    try{
+        const config = {
+            method: 'get',
+            url: `${process.env.REACT_APP_API_CONFIG_URL}/api/config?page=${page_name}`
+        };
+       const response = await axios(config)
+            return response.data.data;
+    
+    }catch(error){
+        console.error(error);
+    }
+
+
+}
 const Footer = () => {
-    // const [data , setData] = useState([]);
-    // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
-    // useEffect(()=>{
-    //     config('social').then(res =>{
-    //         setData(res)
-    //         setLoading(false)
-    //     })
-    //     .catch(err =>{
-    //         setError(err)
-    //         setLoading(false)
-    //     })
-    // },[]);
+    const [data , setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    useEffect(()=>{
+        config('social').then(res =>{
+            setData(res)
+            setLoading(false)
+         
+        })
+        .catch(err =>{
+            setError(err)
+            setLoading(false)
+        })
+    },[]);
     return (
         <>
         <footer className="footer-section container-fluid">
@@ -57,33 +76,44 @@ const Footer = () => {
                 </div>
                 <div className="col-xl-2 col-lg-4 col-md-12">
                     <div className="footer-social">
-                        <div className="d-flex justify-content-center align-items-center ">                                                 
+                        <div className="d-flex justify-content-center align-items-center ">  
                             <svg xmlns="http://www.w3.org/2000/svg" width="2" height="170" viewBox="0 0 2 170" fill="none">
                                 <path d="M1 0L1.00001 170" stroke="#BDBDBD" stroke-width="1.5"/>
                             </svg>
                             <div className="social-links d-flex align-items-center">
-                                <a className="media-link" href="#" target="_blank">
+                        {data.map((configItem , index)=>(
+                            <React.Fragment key={index}>
+                                {configItem.key === "facebook_url" && 
+                                   <a className="media-link" href={configItem.value} target="_blank">
                                     <Media
                                         type="img" 
-                                        src={facebookWhite} 
+                                        src={ facebookWhite} 
                                         alt="facebook"
                                     />
                                 </a>
-                                <a className="media-link" href="#" target="_blank">
+                                }
+                                {configItem.key === "instagram_url" &&
+                                <a className="media-link" href={configItem.value} target="_blank">
                                     <Media
                                         type="img" 
-                                        src={twitterWhite} 
+                                         src={twitterWhite} 
                                         alt="twitter"
                                     />
                                 </a>
-                                       <a className="media-link" href="#" target="_blank">
+                                }
+                                     { configItem.key === "twitter_url" &&
+                                      <a className="media-link" href={configItem.value} target="_blank">
                                             <Media
                                                 type="img" 
                                                 src={linkedinWhite} 
                                                 alt="linkedin"
                                             />
                                        </a>
-                                   </div>
+                                       }
+                            </React.Fragment>
+                        ))}                                               
+                             
+                             </div>
                               </div>
                     </div>
                 </div>

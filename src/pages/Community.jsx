@@ -10,28 +10,25 @@ import { config } from '../apis/config';
 import { useEffect ,useState } from 'react';
 import MonoBlockCommunity from "../components/Community/CommunityNewsFeed/MonoBlockCommunity";
 import JoinCommuinty from "../components/Community/JoinCommuinty/JoinCommuinty";
+import { useData } from "../apis/auth_api/Createdata";
 const Community = () => {
-    const [data , setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+     const DataLocation = useData();
+     const page_home = DataLocation.config('community')
+    const getComponentValue = DataLocation.getComponentValue;
+    const [data , setData] = useState([page_home]);
 
     useEffect(()=>{
-        config('community').then(res =>{
+        page_home.then(res =>{
             setData(res)
-            setLoading(false)
         })
         .catch(err =>{
-            setError(err)
-            setLoading(false)
+         
         })
     },[]);
-    const getComponentValue = (param) => {
-        const matchingItems = data.filter(ele => ele.key.match(param));
-        return matchingItems;
-    };
+  
     return (
         <>
-            <CommunityHeader configData={data}/>
+            <CommunityHeader configData= {data}/>
             <MonoBlockCommunity />
             <CommunityNews configData={getComponentValue('newsfeed')}/>
             <CommunityEvents configData={getComponentValue('event')}/>

@@ -14,8 +14,9 @@ import { useData } from '../apis/auth_api/Createdata';
 import headVideo from '../assets/images/videos/header.mp4';
 
 const Home = () => {
-const DataLocation = useData();
-const getComponentValue = DataLocation.getComponentValue
+    const DataLocation = useData();
+    const getComponentValue = DataLocation.getComponentValue
+    const page_home = DataLocation.config('home')
 
     return (
         <>

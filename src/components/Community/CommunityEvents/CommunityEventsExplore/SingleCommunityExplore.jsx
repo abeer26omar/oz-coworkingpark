@@ -6,6 +6,7 @@ import time from "../../../../assets/images/icons/alarm-event.svg";
 import './CommunityEventsExplore.css';
 import favs from "../../../../assets/images/icons/heart.svg";
 import {Link} from "react-router-dom";
+import Button from '../../../UI/Button';
 
 const SingleCommunityExplore = ({id, img, title, text, category, linkText, day, host, clock}) => {
     return (
@@ -13,7 +14,8 @@ const SingleCommunityExplore = ({id, img, title, text, category, linkText, day, 
             <Card className="slider-card" key={id}>
                 <div className="position-relative">
                     <Card.Img variant="top" src={img} className="rounded-0" title={title}/>
-                    <img src={favs} alt={title} className="fav-event"/>
+                    {/* <img src={favs} alt={title} className="fav-event"/> */}
+                    <Button tagType='link'><img src={favs} alt="fav" className="fav-event"/></Button>
                 </div>
 
                 <Card.Body>
