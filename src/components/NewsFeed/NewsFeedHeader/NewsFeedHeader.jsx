@@ -4,9 +4,10 @@ import newsfeed from "../../../assets/images/newsfeed.png";
 import Navbar from "react-bootstrap/Navbar";
 import {Container, Nav} from "react-bootstrap";
 import Media from "../../Media/Media";
+import Paragraph from "../../UI/Paragraph";
+import MainHeaderWrapper from "../../UI/MainHeaderWrapper";
 
-
-const NewsFeedHeader = () => {
+const NewsFeedHeader = (props) => {
     return (
         <>
             <Navbar expand="lg" className="bg-body-tertiary navigator-feed">
@@ -68,7 +69,7 @@ const NewsFeedHeader = () => {
                 </Container>
             </Navbar>
 
-            <div className="box news-header">
+            {/* <div className="box news-header">
                 <div className="group-wrapper">
                     <div className="group">
                         <div className="overlap-group">
@@ -101,7 +102,23 @@ const NewsFeedHeader = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
+            <MainHeaderWrapper configData={props.configData} image={'//api'}>
+                <div className={`container-fluid px-70`}>
+                    <div className='col-md-6 col-12'>
+                        {props.configData ? props.configData.map((configItem, index) => (
+                            <React.Fragment key={index}>
+                                {configItem.key === 'booking_page_title' && (
+                                    <Paragraph className='head_paragraph mb-3'>{configItem.value}</Paragraph>
+                                )}
+                                {configItem.key === 'booking_page_description' && (
+                                    <Paragraph className='description mb-0'>{configItem.value}</Paragraph>
+                                )}
+                            </React.Fragment>
+                        )): ''}
+                    </div>
+                </div>
+            </MainHeaderWrapper>
         </>
     );
 };

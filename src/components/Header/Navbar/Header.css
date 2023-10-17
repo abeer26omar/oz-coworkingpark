@@ -1,4 +1,7 @@
 /**************Header Style***********/
+.border_bottom{
+    border-bottom: 0.75px solid var(--secondary-color2);
+}
 .navbar {
     padding: 0;
 }
@@ -84,9 +87,9 @@
     height:2rem;
 }
 .line-nav{
-    margin: auto ;
+    margin: -7px auto;
     width: 1rem;
-    height: 5rem;
+    height: 5.813rem;
 }
 /*END*/
 @media screen and (max-width: 575.5px) {
@@ -111,4 +114,9 @@
     .logo {
         width: 8rem;
     }    
+}
+@media screen and (max-width: 320px) {
+    .dis-none{
+        display: none !important;
+    }
 }

@@ -138,9 +138,9 @@ const Header = ({showBlackNav}) => {
                         </div>
                 </div>
             </Navbar> */}
-            <div className="container-fluid py-3">
+            <div className="container-fluid py-2 border_bottom">
                 <nav className={`navbar navbar-expand-xl justify-content-between`}>
-                    <NavLink className="navbar-brand d-block-md me-0" to={'/'}>
+                    <NavLink className="navbar-brand d-block-md me-0 p-0" to={'/'}>
                         <Media type="img" src={logoImage} className="logo" alt={logoImage} width='100%'/>
                     </NavLink>
                     <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
@@ -229,7 +229,7 @@ const Header = ({showBlackNav}) => {
                               className="margin-links user-icon"/>
                         </NavLink>)}
                         <Media type="img" src={listIcon}/>
-                        <div className="d-flex justify-content-evenly align-items-center">
+                        <div className="d-flex justify-content-evenly align-items-center dis-none">
                             <svg
                                 className="line-nav"
                                 viewBox="0 0 2 96"
@@ -239,7 +239,7 @@ const Header = ({showBlackNav}) => {
                                 <path d="M1 0L1 96" stroke="#BDBDBD"/>
                             </svg>
                             <svg
-                                className="circle-nav mx-1"
+                                className="circle-nav mx-sm-3 mx-1"
                                 viewBox="0 0 32 32"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"

@@ -2,7 +2,10 @@
     background-color: red;
 
 }
-
+.img_block span img{
+    object-fit: fill;
+    object-position: center;
+}
 .amenities-box {
     text-align: center;
     margin: auto 16px;
@@ -34,9 +37,6 @@
     color: var(--neturals-color2);
 }
 
-.fab .h2-text-box {
-
-}
 
 .box-content .achievement-text {
     font-size: 42px;

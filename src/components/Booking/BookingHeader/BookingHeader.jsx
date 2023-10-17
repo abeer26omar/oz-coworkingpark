@@ -4,15 +4,14 @@ import {Container} from "react-bootstrap";
 import booking from "../../../assets/images/videos/book.mp4";
 import './BookinHeader.css';
 import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
-import SectionHeader from '../../UI/SectionHeader';
 import Paragraph from '../../UI/Paragraph';
 
 const BookingHeader = (props) => {
     return (
         <>
             <Navbar expand="lg" className="bg-body-tertiary navigator">
-                <Container fluid>
-                    <Navbar.Brand className="title-name" href="#home">
+                <Container fluid className='justify-content-start'>
+                    <Navbar.Brand className="title-name" to={'/booking'}>
                         Booking
                     </Navbar.Brand>
                     <svg
@@ -27,26 +26,21 @@ const BookingHeader = (props) => {
 
                 </Container>
             </Navbar>
-            {/* <div className="box community-header">
-                <div className="group-wrapper">
-                    <div className="group">
-                        <div className="overlap-group">
-                            <div className="rectangle-wrapper">
-                                <div className="rectangle"/>
-                            </div>
-                            <video className="img" alt="Group" src={booking} autoPlay muted loop/>
-                            <div className="group-2">
-                                <Paragraph>{'Booking'}</Paragraph>                                 
-                                <Paragraph className={'my-40 w-50'}>
-                                    { 'Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,'}
-                                </Paragraph>
-                            </div>
-                        </div>
+            <MainHeaderWrapper configData={props.configData} video={booking}>
+                <div className={`container-fluid px-70`}>
+                    <div className='col-md-6 col-12'>
+                        {props.configData ? props.configData.map((configItem, index) => (
+                            <React.Fragment key={index}>
+                                {configItem.key === 'booking_page_title' && (
+                                    <Paragraph className='head_paragraph mb-3'>{configItem.value}</Paragraph>
+                                )}
+                                {configItem.key === 'booking_page_description' && (
+                                    <Paragraph className='description mb-0'>{configItem.value}</Paragraph>
+                                )}
+                            </React.Fragment>
+                        )): ''}
                     </div>
                 </div>
-            </div> */}
-            <MainHeaderWrapper configData={props.configData} video={booking}>
-                <SectionHeader configData={props.configData} />
             </MainHeaderWrapper>
         </>
     );

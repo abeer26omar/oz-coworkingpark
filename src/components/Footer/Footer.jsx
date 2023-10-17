@@ -8,14 +8,27 @@ import Media from "../Media/Media";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+    // const [data , setData] = useState([]);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
+    // useEffect(()=>{
+    //     config('social').then(res =>{
+    //         setData(res)
+    //         setLoading(false)
+    //     })
+    //     .catch(err =>{
+    //         setError(err)
+    //         setLoading(false)
+    //     })
+    // },[]);
     return (
         <>
         <footer className="footer-section container-fluid">
             <div className="row align-items-center">
                 <div className="col-xl-10 col-lg-8 col-md-12">
-                    <div className="row align-items-center py-lg-0 py-4">
+                    <div className="row align-items-center justify-content-between py-lg-0 py-4">
                         <div className="col-xl-2 col-lg-3 col-md-3">
-                            <div className="footer-single-col d-flex justify-content-center ">
+                            <div className="footer-single-col d-flex justify-content-center">
                                 <Media
                                     type="img"
                                     src={logoWhite}
@@ -24,19 +37,19 @@ const Footer = () => {
                                 />
                             </div>
                         </div>
-                        <div className="col-xl-10 col-lg-9 col-md-9 py-sm-0 py-5">              
+                        <div className="col-xxl-8 col-xl-10 col-lg-9 col-md-9 py-sm-0 py-5">              
                             <div className="row g-3">
-                                <div className="col-xl-6 col-lg-12 d-flex justify-content-center align-items-center">
+                                <div className="col-xl-6 col-lg-12 d-flex justify-content-between align-items-center sm-wrap">
                                     <Link to='/booking' className="links-footer">Booking</Link>
                                     <Link to='/membership' className="links-footer">Membership</Link>
-                                    <Link to='/community' className="links-footer">  Community </Link>
-                                    <Link to="/community/events" className="links-footer"> Events</Link> 
+                                    <Link to='/community' className="links-footer">Community</Link>
+                                    <Link to="/community/events" className="links-footer">Events</Link> 
                                 </div> 
-                                <div className="col-xl-6 col-lg-12 d-flex justify-content-center align-items-center">
-                                    <Link to='/' className="links-footer">FAQs  </Link>
-                                    <Link to='/' className="links-footer" > Privacy Policy</Link>
-                                    <Link to='/' className="links-footer" >Term&conditions</Link>
-                                    <Link to='/' className="links-footer" >Site Map</Link>
+                                <div className="col-xl-6 col-lg-12 d-flex justify-content-between align-items-center sm-wrap">
+                                    <Link to='/' className="links-footer">FAQs</Link>
+                                    <Link to='/' className="links-footer">Privacy Policy</Link>
+                                    <Link to='/' className="links-footer">Term&conditions</Link>
+                                    <Link to='/' className="links-footer">Site Map</Link>
                                 </div> 
                             </div>                   
                         </div>

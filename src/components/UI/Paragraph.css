@@ -85,9 +85,14 @@
     line-height: 120%;
     white-space: nowrap;
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1440px) {
     .paragraph_black{
         font-size: var(--font-size-41);
+    }
+}
+@media screen and (max-width: 1200px) {
+    .paragraph_black{
+        font-size: var(--font-size-36);
     }
 }
 @media screen and (max-width: 1024px) {
@@ -106,5 +111,15 @@
 @media screen and (max-width: 575px) {
     .head_feature{
         font-size: var(--font-size-66);
+    }
+}
+@media screen and (max-width: 390px) {
+    .head_paragraph{
+        font-size: var(--font-size-41);
+    }
+}
+@media screen and (max-width: 320px) {
+    .white_monoBlock_title{
+        font-size: var(--font-size-41);
     }
 }

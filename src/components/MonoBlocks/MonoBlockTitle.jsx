@@ -15,7 +15,7 @@ const  MonoBlockTitle = (props) => {
                                             <Paragraph className='white_monoBlock_title'>{configItem.value}</Paragraph>
                                         }                                  
                                         {configItem.key === 'home_page_mono_block_description' &&
-                                            <Paragraph className={'m_b_center monoBlock_description'}>{configItem.value}</Paragraph>
+                                            <Paragraph className={'m_b_center monoBlock_description w-75 mx-auto'}>{configItem.value}</Paragraph>
                                         }
                                     </React.Fragment>
                                 )):''}

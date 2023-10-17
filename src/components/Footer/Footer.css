@@ -123,3 +123,8 @@ footer a {
         padding: 1rem 0;
     }
 }
+@media screen and (max-width: 320px) {
+    .sm-wrap{
+        flex-wrap: wrap;
+    }
+}

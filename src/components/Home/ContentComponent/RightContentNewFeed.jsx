@@ -19,7 +19,7 @@ const RightContentNewFeed = (props) => {
                         {props.configData ? props.configData.map((configItem , index)=>(
                             <React.Fragment key={index}>
                                 {configItem.key === "home_page_newsfeed_image" &&
-                                    <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-right">
+                                    <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-right img_block">
                                         <Media type="img"
                                             className="image-box w-100"
                                             src={configItem.value}

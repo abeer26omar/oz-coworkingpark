@@ -168,55 +168,7 @@ const BookingSpace = () => {
                                         <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
                                     </svg>
                                 </div>
-                                <div className="col-lg-2">
-                                    <span className="space-name">Meeting Room</span>
-                                    <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                    </svg>
-                                </div>
-                                <div className="col-lg-2">
-                                    <span className="space-name">Meeting Room</span>
-                                    <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                    </svg>
-                                </div>
-                                <div className="col-lg-2">
-                                    <span className="space-name">Meeting Room</span>
-                                    <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                    </svg>
-                                </div>
-                                <div className="col-lg-2">
-                                    <span className="space-name">Meeting Room</span>
-                                    <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                    </svg>
-                                </div>
-                                <div className="col-lg-2">
-                                    <span className="space-name">Meeting Room</span>
-                                    <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                    </svg>
-                                </div>
-                                <div className="col-lg-2">
-                                    <span className="space-name">Meeting Room</span>
-                                    <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                    </svg>
-                                </div>
-                                <div className="col-lg-2">
-                                    <span className="space-name">Meeting Room</span>
-                                    <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                    </svg>
-                                </div>
+                                
                             </Slider>
                         </div>
                         <div className="row border-top border-bottom booking-space-margin">

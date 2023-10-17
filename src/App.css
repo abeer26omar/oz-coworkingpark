@@ -107,7 +107,19 @@ a {
 .px-60 {
     padding: 0 60px;
 }
-
+.px-70{
+    padding: 0 4.375rem;
+}
+@media screen and (max-width: 575px) {
+    .px-70{
+        padding: 0 2.375rem;
+    }
+}
+@media screen and (max-width: 375px) {
+    .px-70{
+        padding: 0px 1.375rem;
+    }
+}
 /*******************************************/
 .head_color{
     color: var(--Head_color);
@@ -137,7 +149,10 @@ a {
 
 /*******************************************/
 /*******************************************/
-
+.img_block > span{
+    width: 100%;
+    height: auto !important;
+}
 /****************** Form Fields ****************/
 
 .form-card {
