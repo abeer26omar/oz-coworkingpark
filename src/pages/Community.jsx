@@ -4,29 +4,41 @@ import CommunityNews from "../components/Community/CommunityNewsFeed/CommunityNe
 import CommunityEvents from "../components/Community/CommunityEvents/CommunityEvents";
 import CommunityGallery from "../components/Community/CommunityGallery/CommunityGallery";
 import NewsLetter from "../components/NewsLetter/NewsLetter";
+// import MonoBlock
 import MonoBlock from "../components/MonoBlocks/MonoBlock";
 import { config } from '../apis/config';
 import { useEffect ,useState } from 'react';
+import MonoBlockCommunity from "../components/Community/CommunityNewsFeed/MonoBlockCommunity";
+import JoinCommuinty from "../components/Community/JoinCommuinty/JoinCommuinty";
 const Community = () => {
-    const [data , setData] = useState([])
-useEffect(()=>{
-    setData(config('community'))
-},[])
+    const [data , setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(()=>{
+        config('community').then(res =>{
+            setData(res)
+            setLoading(false)
+            console.log(data)
+        })
+        .catch(err =>{
+            setError(err)
+            setLoading(false)
+        })
+    },[]);
+    const getComponentValue = (param) => {
+        const matchingItems = data.filter(ele => ele.key.match(param));
+        return matchingItems;
+    };
     return (
         <>
-            <CommunityHeader/>
-            <MonoBlock title="where like-minded people meet"/>
-            <CommunityNews/>
-            <CommunityEvents/>
-            <CommunityGallery/>
-            <MonoBlock className="bg-white  " title="JOIN OUR COMMUNITY" desc=" Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod"
-                       link={[{className: "btn-bg-white", label: "Connect"}]} numberOfLinksToShow={1}
-            />
-            <NewsLetter/>
+            <CommunityHeader configData={data}/>
+            <MonoBlockCommunity />
+            <CommunityNews configData={getComponentValue('newsfeed')}/>
+            <CommunityEvents configData={getComponentValue('event')}/>
+            <CommunityGallery configData={getComponentValue("gallery")}/>
+            <JoinCommuinty  configData={getComponentValue("footer")}/>
+   
         </>
     );
 };

@@ -24,3 +24,9 @@
     margin: 0;
     right: 0;
 }
+.news-feed .slick-slide {
+    padding: 0 1rem;
+}
+.black{
+    color:var(--primary-color) !important;
+}
