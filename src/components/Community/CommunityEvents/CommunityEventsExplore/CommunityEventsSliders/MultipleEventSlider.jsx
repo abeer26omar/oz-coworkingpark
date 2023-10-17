@@ -26,13 +26,7 @@ const MultipleEventSlider = () => {
         adaptiveHeight: false,
 
 
-        // adaptiveHeight: true,
-        beforeChange: function (currentSlide, nextSlide) {
-            console.log("before change", currentSlide, nextSlide);
-        },
-        afterChange: function (currentSlide) {
-            console.log("after change", currentSlide);
-        }
+    
     };
 
     return (

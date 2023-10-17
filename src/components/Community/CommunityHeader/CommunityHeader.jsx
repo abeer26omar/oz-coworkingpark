@@ -9,10 +9,8 @@ import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
 import SectionHeader from '../../UI/SectionHeader';
 
 const CommunityHeader = (props) => {
-    const navLinks = () => {
 
-
-    }
+  console.log(props.configItem)
     return (
         <>
             <Navbar expand="lg" className="bg-body-tertiary navigator">
@@ -78,7 +76,7 @@ const CommunityHeader = (props) => {
             </div> */}
             <MainHeaderWrapper configData={props.configData} video={community}>
                 {/* <SectionHeader configData={props.configData} /> */}
-                <div className={`container-fluid px-70`}>
+                <div className={`container-fluid px-70 py-5`}>
                     <div className='col-md-6 col-12'>
                         {props.configData ? props.configData.map((configItem, index) => (
                             <React.Fragment key={index}>

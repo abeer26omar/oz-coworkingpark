@@ -14,7 +14,7 @@ const CommunityGallery = (props) => {
                              {props.configData ? props.configData.map((configItem, index) => (
                                     <React.Fragment key={index}>
                                         {configItem.key === "community_page_gallery_image" && 
-                                        <div className="col-md-8 col-lg-8 col-sm-12 col-xs-6 border-right">
+                                        <div className="col-md-8 col-lg-8 col-sm-12 col-xs-6 border-right  img_block">
                                               <Media
                                                type="img"
                                                className="image-box w-100"
@@ -26,7 +26,7 @@ const CommunityGallery = (props) => {
                                     </React.Fragment>
                                         )):''}
                                         <div  className="col-md-4 col-lg-4 col-sm-12 col-xs-6 m-auto "> 
-                                            <div className="box-content px-60" >
+                                            <div className="box-content px-60 flex-box-start" >
                                         {props.configData ? props.configData.map((configItem , index)=>(
                                             <React.Fragment key={index}>
                                                 
@@ -35,7 +35,7 @@ const CommunityGallery = (props) => {
                                                 {configItem.value}</Paragraph>
                                                     }
                                                      {configItem.key === "community_page_gallery_description"&&
-                                                <Paragraph className='m_b_center monoBlock_description w-75 mx-auto black'>
+                                                <Paragraph className='mb-5 monoBlock_description  black'>
                                                 {configItem.value}</Paragraph>
                                                     }                                           
                                             </React.Fragment>
