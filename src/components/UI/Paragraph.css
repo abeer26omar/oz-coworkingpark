@@ -85,6 +85,25 @@
     line-height: 120%;
     white-space: nowrap;
 }
+.text-one {
+    color: var(--accent-color);
+    font-family: var(--goldenHopes-font);
+    font-size: var(--font-size-58);
+    font-style: normal;
+    font-weight: var(--font-weight-regular);
+    line-height: 120%;
+    text-align: center;
+}
+.text-two {
+    color: var(--white-color);
+    font-family: var(--couture-font);
+    font-size: var(--font-size-74);
+    font-style: normal;
+    font-weight: var(--font-weight-bold);
+    line-height: 120%;
+    text-align: center;
+}
+
 @media screen and (max-width: 1440px) {
     .paragraph_black{
         font-size: var(--font-size-41);

@@ -7,7 +7,11 @@ const MainHeaderWrapper = (props)=>{
         <div className={`position-relative`}>
             <div className={`${classes.header_bg}`}>
                 {props.video && <video className={`${classes.video_bg}`} alt="Group" src={props.video} autoPlay muted loop />}
-                {props.image && <Media type = 'img' alt="Group" src={props.image} className={`${classes.video_bg}`} />}
+                {props.image && <div style={
+                    {
+                        backgroundImage: `url(${props.image})`
+                    }  
+                } className={`${classes.img_bg}`}></div>}
                 {/* {props.configData &&
                 props.configData.map((configItem, index) => {
                     if (configItem.key.includes('video')) {

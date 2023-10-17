@@ -3,44 +3,19 @@ import community from "../../../../assets/images/bookings/bookingdetails.png";
 import '../BookingDetails.css';
 import BookingForm from "./BookingForm";
 import Media from "../../../Media/Media";
-
+import MainHeaderWrapper from '../../../UI/MainHeaderWrapper';
+import Paragraph from '../../../UI/Paragraph';
 
 const BookingDetailsHeader = () => {
     return (
         <>
-            <header>
-                <div className="booking-details-header">
-                    <div className="box ">
-
-                        <div className="group-wrapper">
-                            <div className="group">
-                                <div className="overlap-group">
-                                    <div className="rectangle-wrapper">
-                                        <div className="rectangle"/>
-                                    </div>
-                                    <Media
-                                        type="img" className="img" alt="Group" src={community}/>
-                                    <div className="">
-                                        <span className="text-one">Booking </span>
-                                    </div>
-                                    <div className="">
-                                        <span className="text-two">Meeting room 01 </span>
-                                    </div>
-
-
-                                    <div className="box-book">
-                                        <BookingForm/>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
+            <MainHeaderWrapper image={community}>
+                <div className="container">
+                    <Paragraph className="text-one">Booking </Paragraph>
+                    <Paragraph className="text-two">Meeting room 01 </Paragraph>
                 </div>
-
-            </header>
+                <BookingForm/>
+            </MainHeaderWrapper>
         </>
     );
 };

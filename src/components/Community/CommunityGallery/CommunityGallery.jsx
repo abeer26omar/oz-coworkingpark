@@ -14,7 +14,7 @@ const CommunityGallery = (props) => {
                              {props.configData ? props.configData.map((configItem, index) => (
                                     <React.Fragment key={index}>
                                         {configItem.key === "community_page_gallery_image" && 
-                                        <div className="col-md-8 col-lg-8 col-sm-12 col-xs-6 border-right">
+                                        <div className="col-md-8 col-lg-8 col-sm-12 col-xs-6 border-right img_block">
                                               <Media
                                                type="img"
                                                className="image-box w-100"
@@ -35,13 +35,13 @@ const CommunityGallery = (props) => {
                                                 {configItem.value}</Paragraph>
                                                     }
                                                      {configItem.key === "community_page_gallery_description"&&
-                                                <Paragraph className='m_b_center monoBlock_description w-75 mx-auto black'>
+                                                <Paragraph className='m_b_center monoBlock_description black'>
                                                 {configItem.value}</Paragraph>
                                                     }                                           
                                             </React.Fragment>
                                         )):''}
                                           <NavLink to={"/community/galleryshow"}
-                                          className="btn button-outLine btn-bg-white mx-3">Explore</NavLink>  
+                                          className="btn button-outLine btn-bg-white">Explore</NavLink>  
                                             </div>
                                         </div>                       
                     </div>

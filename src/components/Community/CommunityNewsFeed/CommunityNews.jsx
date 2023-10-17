@@ -33,12 +33,12 @@ const CommunityNews = (props) => {
                                             <Paragraph className='white_monoBlock_title black'>{configItem.value}</Paragraph>
                                         }
                                         {configItem.key === "community_page_newsfeed_description" &&
-                                            <Paragraph className={'m_b_center monoBlock_description w-75 mx-auto black'}>{configItem.value}</Paragraph>
+                                            <Paragraph className={'m_b_center monoBlock_description black'}>{configItem.value}</Paragraph>
                                         }
                                     </React.Fragment>
                                 )):''}
                                   <NavLink to={"/community/newsfeed"}
-                                    className="btn button-outLine btn-bg-white mx-3">Explore</NavLink>
+                                    className="btn button-outLine btn-bg-white">Explore</NavLink>
                             </div>
                         </div>
                         <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-left ">

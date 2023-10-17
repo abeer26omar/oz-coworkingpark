@@ -12,7 +12,7 @@ const BookingSpaceList = ({id, img, text, price, title, options}) => {
                 <div className="position-relative">
                     <Media type="img" src={img} class="card-img-top rounded-0" title="desk room"/>
 
-                    <img src={favs} alt="fav" className="fav-event"/>
+                    <Button tagType='link' className="fav-event"><img src={favs} alt="fav" width='40px' height='40px' /></Button>
 
 
                 </div>
@@ -22,7 +22,7 @@ const BookingSpaceList = ({id, img, text, price, title, options}) => {
                     <ul className="list-options ">
                         {options.map((single, index) => {
                             return (
-                                <li className="list-option-item">{single.name}</li>
+                                <li className="list-option-item" key={index}>{single.name}</li>
                             )
                         })}
                     </ul>
@@ -30,7 +30,7 @@ const BookingSpaceList = ({id, img, text, price, title, options}) => {
                     <div
                         className="d-flex justify-content-between align-items-center card-footer">
                         <span className="price-hour">{price} / Hour</span>
-                        <Button href="/bookingDetails">Book Now</Button>
+                        <Button to={"/bookingDetails"} tagType='link' className='btn_outline_black' >Book Now</Button>
                     </div>
 
                 </Card.Body>

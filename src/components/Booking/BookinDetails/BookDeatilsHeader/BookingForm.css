@@ -364,3 +364,8 @@ bookbottom__ul img {
 
     width: 110%;
 }
+@media screen and (max-width: 768px) {
+    .bookbottom__ul{
+        flex-direction: column;
+    }
+}

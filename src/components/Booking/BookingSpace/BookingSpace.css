@@ -144,16 +144,13 @@
 }
 
 .booking-space .btn-cards-more {
-    display: flex;
-    margin: auto;
     color: var(--primary-color);
     font-family: Couture;
     font-size: var(--font-size-13);
     font-style: normal;
     font-weight: var(--font-weight-regular);
-    line-height: 120%; /* 15.6px */
+    line-height: 120%;
     text-decoration: none;
-    margin: auto;
 }
 
 .booking-space .btn-cards-more img {
@@ -161,10 +158,9 @@
 }
 
 .booking-space .fav-event {
-    width: 40px;
-    height: 40px;
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 3%;
+    top: 3%;
     cursor: pointer;
+    padding: 0;
 }

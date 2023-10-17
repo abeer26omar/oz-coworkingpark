@@ -10,8 +10,8 @@ const SpaceDetails = () => {
         <>
             <section className="space-details">
                 <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-lg-6 col-md-6 col-sm-12 border-right">
+                    <div className="row p-2">
+                        <div className="col-lg-6 col-12 p-2 border-right">
                             <div className="space-description">
                                 <h2 className="h2-description">
                                     Space Description
@@ -41,7 +41,7 @@ const SpaceDetails = () => {
                             </div>
 
                         </div>
-                        <div className="col-lg-6 col-md-6 col-sm-12 m-sm-auto">
+                        <div className="col-lg-6 col-12 p-2 m-sm-auto">
                             <div className="space-price">
                                 <h2 className="h2-description">
                                     Price

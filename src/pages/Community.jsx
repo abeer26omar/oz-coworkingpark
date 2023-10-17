@@ -19,7 +19,6 @@ const Community = () => {
         config('community').then(res =>{
             setData(res)
             setLoading(false)
-            console.log(data)
         })
         .catch(err =>{
             setError(err)

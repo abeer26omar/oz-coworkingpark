@@ -181,7 +181,7 @@ a {
 .form__group {
     position: relative;
     padding: 20px 0;
-    width: 100%;
+    /* width: 100%; */
 
 }
 
@@ -464,7 +464,12 @@ a {
 .border-bottom {
     border-bottom: 1.5px solid var(--secondary-color2);
 }
-
+@media screen and (max-width: 991.5px) {
+    .space-details .border-right {
+        border-right: none;
+        border-bottom: 1.5px solid var(--secondary-color2)
+    }
+}
 /*End*/
 /*Common Classes*/
 .head-of-section {

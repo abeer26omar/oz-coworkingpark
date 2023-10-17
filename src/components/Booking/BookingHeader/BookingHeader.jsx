@@ -27,7 +27,7 @@ const BookingHeader = (props) => {
                 </Container>
             </Navbar>
             <MainHeaderWrapper configData={props.configData} video={booking}>
-                <div className={`container-fluid px-70`}>
+                <div className={`container-fluid px-70 py-5`}>
                     <div className='col-md-6 col-12'>
                         {props.configData ? props.configData.map((configItem, index) => (
                             <React.Fragment key={index}>

@@ -3,13 +3,12 @@ import './BookingSpace.css'
 import Slider from "react-slick";
 import filtericons from "../../../assets/images/icons/filtericon.svg";
 import {BookingsData} from "../../../Data/BookingsData";
-import Button from "react-bootstrap/Button";
 import bottom_arrow from "../../../assets/images/icons/bookbottom.svg";
 import LastBooking from "../LastBooking/LastBooking";
 import BookingFilter from "../BookingFilter/BookingFilter";
 import BookingSpaceList from "./BookingSpaceList";
 import Media from "../../Media/Media";
-
+import Button from '../../UI/Button';
 const BookingSpace = () => {
         const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -35,10 +34,15 @@ const BookingSpace = () => {
                 {
                     breakpoint: 1024,
                     settings: {
-                        // slidesToShow: 3,
-                        // slidesToScroll: 3,
-                        // infinite: true,
-                        // dots: true
+                        slidesToShow: 6,
+                        slidesToScroll: 6,
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 4,
                     }
                 },
                 {
@@ -46,7 +50,6 @@ const BookingSpace = () => {
                     settings: {
                         slidesToShow: 2,
                         slidesToScroll: 2,
-                        initialSlide: 2
                     }
                 },
                 {
@@ -154,21 +157,6 @@ const BookingSpace = () => {
                                     </div>
 
                                 </div>
-                                <div className="col-lg-2">
-                                    <span className="space-name">Meeting Room</span>
-                                    <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                    </svg>
-                                </div>
-                                <div className="col-lg-2">
-                                    <span className="space-name">Meeting Room</span>
-                                    <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                    </svg>
-                                </div>
-                                
                             </Slider>
                         </div>
                         <div className="row border-top border-bottom booking-space-margin">
@@ -208,8 +196,8 @@ const BookingSpace = () => {
 
                             </div>
                             {cards.length < BookingsData.length && (
-                                <div style={{marginTop: "32px"}}>
-                                    <Button variant="link" className="btn-cards-more" onClick={handleShowMore}>Show more
+                                <div className='text-center mt-5'>
+                                    <Button tagType="link" className="btn-cards-more" onClick={handleShowMore}>Show more
                                         <Media
                                             type="img"
                                             src={bottom_arrow} alt="arrow"/> </Button>

@@ -1,6 +1,6 @@
-.space-details .space-description {
+/* .space-details .space-description {
     padding: 70px 85px;
-}
+} */
 
 .space-details .space-description .h2-description {
     color: var(--primary-color);
@@ -23,10 +23,10 @@
     line-height: 120%; /* 21.6px */
     opacity: 0.4;
 }
-
+/* 
 .space-details .catering {
     padding: 0px 85px;
-}
+} */
 
 .space-details .catering .h2-catering {
     color: var(--primary-color);
@@ -74,7 +74,7 @@
 .space-details .catering .form-check-input:focus {
     box-shadow: none;
 }
-
+/* 
 .space-details .space-price {
     padding: 70px 85px 0;
 
@@ -86,7 +86,7 @@
 
 .space-details .space-capacity {
     padding: 24px 85px;
-}
+} */
 
 .space-details .space-price, .space-facilities, .space-capacity .h2-description {
     color: var(--primary-color);

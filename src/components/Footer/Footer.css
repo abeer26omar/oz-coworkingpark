@@ -123,8 +123,9 @@ footer a {
         padding: 1rem 0;
     }
 }
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 390px) {
     .sm-wrap{
         flex-wrap: wrap;
+        justify-content: center !important;
     }
 }
