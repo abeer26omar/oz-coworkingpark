@@ -99,7 +99,7 @@
 }
 @media screen and (max-width: 426px) {
     .links-margin {
-        margin: auto .5rem;
+        margin: auto 0.3rem;
         font-weight: 600;
     }
     .user-icon {

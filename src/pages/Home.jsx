@@ -21,7 +21,7 @@ const Home = () => {
     return (
         <>
             <MainHeaderWrapper configData={getComponentValue('header')} video={headVideo}>
-                <SectionHeader configData={getComponentValue('header')} />
+                <SectionHeader configData={getComponentValue('header')} video={headVideo} />
             </MainHeaderWrapper>
             <MonoBlockTitle configData = {getComponentValue("mono_block")}/>
             <LeftContent configData = {getComponentValue("page_about")} />

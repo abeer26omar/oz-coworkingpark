@@ -3,7 +3,8 @@ import Card from "react-bootstrap/Card";
 import bookImg from "../../../assets/images/bookings/book1.png";
 import favs from "../../../assets/images/icons/heart.svg";
 import Media from "../../Media/Media";
-import './LastBooking.css'
+// import './LastBooking.css';
+
 import Button from "../../UI/Button";
 
 const LastBookingList = () => {
@@ -40,7 +41,7 @@ const LastBookingList = () => {
                         <div
                             className="d-flex justify-content-between align-items-center card-footer">
                             <span className="price-hour">125.000 / Hour</span>
-                            <Button href="#" tagType='link' className='btn_outline_black'>Book Now</Button>
+                            <Button tagType='link' className='btn_outline_black'>Book Now</Button>
                         </div>
 
                     </Card.Body>

@@ -82,7 +82,8 @@ const NewsLetter = () => {
                                                 <Button 
                                                     tagType='button' 
                                                     type="submit" 
-                                                    className="button-outLine">Subscribe</Button>
+                                                    className={`button-outLine`}>
+                                                    Subscribe</Button>
                                             </div>
                                         </form>
                                     )}}

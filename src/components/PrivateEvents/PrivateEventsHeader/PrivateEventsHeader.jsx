@@ -1,9 +1,10 @@
 import React from 'react';
 import Navbar from "react-bootstrap/Navbar";
 import {Container, Nav} from "react-bootstrap";
-import {NavLink} from "react-router-dom";
+import { Link } from 'react-scroll';
 import prevent from "../../../assets/images/videos/prevent.mp4";
 import './PrivateEventsHeader.css';
+import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
 import {PrivateEventsData} from "../../../Data/PrivateEventsData";
 import Paragraph from '../../UI/Paragraph';
 const PrivateEventsHeader = () => {
@@ -30,50 +31,41 @@ const PrivateEventsHeader = () => {
                             {PrivateEventsData.map((addevent, index) => {
                                 const {address} = addevent;
                                 return (
-                                    <NavLink className="nav-link-two links-margin" key={index}>
+                                    <Link 
+                                        className="nav-link-two links-margin" 
+                                        to={address} 
+                                        smooth={true} 
+                                        duration={100}
+                                        key={index} 
+                                    >
                                         {address}
-
-                                    </NavLink>
+                                    </Link>
                                 )
                             })}
-
-
-                            {/*<NavLink className="nav-link-two links-margin" onClick={() => {*/}
-                            {/*    window.location.href = '#community-newsfeed';*/}
-                            {/*}}>*/}
-                            {/*    El- sheikh Zayed*/}
-                            {/*</NavLink>*/}
 
                         </>
                     </Nav>
                 </Container>
             </Navbar>
 
-            <div className="box prevent-header">
-                <div className="group-wrapper">
-                    <div className="group">
-                        <div className="overlap-group">
-                            <div className="rectangle-wrapper">
-                                <div className="rectangle"/>
-                            </div>
-                            <video className="img" alt="Group" src={prevent} autoPlay muted loop/>
-                            <div className="group-2">
-                                <h1 className="an-innovative-co">
-                                    <Paragraph>{'Private Events'}</Paragraph>
-                                </h1>
-                                <Paragraph className={'my-40 w-50'}>
-                                    {' Lorem ipsum dolor consectetuer Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ame ,'}
-                                </Paragraph>   
-                               
-                            </div>
-
-
-                        </div>
+            <MainHeaderWrapper  video={prevent}>
+                <div className={`container-fluid px-70 py-5`}>
+                    <div className='col-md-6 col-12'>
+                        {/* {props.configData ? props.configData.map((configItem, index) => (
+                            <React.Fragment key={index}> */}
+                                {/* {configItem.key === 'booking_page_title' && ( */}
+                                    <Paragraph className='head_paragraph mb-3'>{'Private Events'}</Paragraph>
+                                {/* )} */}
+                                {/* {configItem.key === 'booking_page_description' && ( */}
+                                    <Paragraph className='description mb-0'>
+                                        {' Lorem ipsum dolor consectetuer Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ame ,'}
+                                    </Paragraph>
+                                {/* )} */}
+                            {/* </React.Fragment>
+                        )): ''} */}
                     </div>
                 </div>
-            </div>
-
-
+            </MainHeaderWrapper>
         </>
     );
 };

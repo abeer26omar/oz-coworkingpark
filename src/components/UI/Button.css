@@ -1,4 +1,4 @@
-.btn{
+.btn_default{
     font-family: var(--questrial-font);
     font-size: 1rem;
     font-style: normal;
@@ -6,7 +6,7 @@
     line-height: 1.25rem;
     border-radius: 0;
     padding: 1rem 3rem;
-    box-shadow: inset 0 0 0 0 #fafafc;
+    box-shadow: inset 0 0 0 0 var(--semiWhite-color);
     transition: all .3s ease;
     text-transform: capitalize;
 }
@@ -30,7 +30,7 @@
     border-bottom: 1px solid var(--white-color);
 } 
 .btn_outline_black {
-    background-color: var(--neturals-color1);
+    background-color: transparent;
     border: 1px solid var(--primary-color);    
     color: var(--primary-color);
     font-size: var(--font-size-16);
@@ -42,7 +42,7 @@
 .btn_outline_black:hover,
 .btn_outline_black:focus {
     background-color: var(--primary-color);
-    color: #FFFFFF;
+    color: var(--white-color);
 }
 
 .btn_outline_black:hover {
@@ -50,7 +50,7 @@
 }
 
 .btn_outline_black:active {
-    background-color: #F0F0F1;
+    background-color: var(--semiWhite2-color);
     border-color: rgba(0, 0, 0, 0.15);
     box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
     color: rgba(0, 0, 0, 0.65);
@@ -58,12 +58,12 @@
 }
 /* Media Query */
 @media screen and (max-width: 575px) {
-    .btn{
+    .btn_default{
         padding: 1rem 1.5rem;
     }
 }
 @media screen and (max-width: 375px) {
-    .btn{
+    .btn_default{
         padding: 1rem;
     }
 } 
@@ -72,11 +72,12 @@
 .button-outLine {
     border: 1px solid;
     border-color: var(--neturals-color2);
-    color: #fff;
+    color: var(--white-color);
     margin: auto 32px;
     height: 48px;
     width: 192px;
-    font-family: Questrial;
+    font-family: var(--questrial-font);
+    background-color: transparent;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;

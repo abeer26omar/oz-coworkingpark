@@ -33,7 +33,6 @@ const LeftContent = (props) => {
                                     <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-left img_block">
                                         <Media type="img"
                                             className="image-box w-100"
-                                            height='568px'
                                             src={configItem.value}
                                             alt="Our OZ Vision"
                                         />

@@ -80,7 +80,7 @@ const BookingForm = () => {
 
     return (
         <>
-            <div className="featured__bookbottom">
+            <div className="featured__bookbottom align-self-end col-12">
                 <div className="bookbottom">
                     <form className="bookbottom__form">
                         <input type="hidden" id="bookbottom-value-arrive" name="arrive" value="09/08/2023"/>

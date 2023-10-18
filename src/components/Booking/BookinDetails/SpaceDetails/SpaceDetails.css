@@ -4,7 +4,7 @@
 
 .space-details .space-description .h2-description {
     color: var(--primary-color);
-    font-family: Couture, serif;
+    font-family: var(--couture-font);
     font-size: var(--font-size-26);
     font-style: normal;
     font-weight: var(--font-weight-bold);
@@ -16,7 +16,7 @@
 .space-details .space-description .p-description {
     color: var(--primary-color);
     text-align: justify;
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: var(--font-size-18);
     font-style: normal;
     font-weight: var(--font-weight-regular);
@@ -30,7 +30,7 @@
 
 .space-details .catering .h2-catering {
     color: var(--primary-color);
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: var(--font-size-29);
     font-style: normal;
     font-weight: var(--font-weight-bold);
@@ -47,7 +47,7 @@
 
 .space-details .catering .form-check-label {
     color: var(--primary-color);
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: var(--font-size-16);
     font-style: normal;
     font-weight: var(--font-weight-regular);
@@ -59,16 +59,18 @@
 .space-details .catering .form-check-input {
     width: 20px;
     height: 20px;
-    border-color: transparent;
+    border-color: var(--black-color);
     margin: 0;
+    border-radius: 0;
 }
 
 .space-details .catering .form-check-input:checked {
-    background-color: #222222;
+    background-color: var(--lightBlack-color);
     border-color: transparent;
     width: 20px;
     height: 20px;
     border: 0;
+    border-radius: 0;
 }
 
 .space-details .catering .form-check-input:focus {
@@ -90,7 +92,7 @@
 
 .space-details .space-price, .space-facilities, .space-capacity .h2-description {
     color: var(--primary-color);
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: var(--font-size-26);
     font-style: normal;
     font-weight: var(--font-weight-bold);
@@ -105,7 +107,7 @@
 
 .space-details .space-price .price-list span {
     color: var(--primary-color);
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: var(--font-size-20);
     font-style: normal;
     font-weight: var(--font-weight-bold);
@@ -133,7 +135,7 @@
 
 .space-details .space-facilities .facilities-list ul li {
     color: var(--primary-color);
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: var(--font-size-14);
     font-style: normal;
     font-weight: var(--font-weight-bold);
@@ -147,10 +149,15 @@
 
 .space-details .space-capacity span {
     color: rgba(0, 0, 0, 0.40);
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: var(--font-size-18);
     font-style: normal;
     font-weight: var(--font-weight-regular);
     line-height: 120%; /* 21.6px */
     margin-top: 32px;
+}
+@media screen and (max-width: 375px) {
+    .space-details .space-facilities .facilities-list ul li{
+        margin-right: 36px;
+    }
 }

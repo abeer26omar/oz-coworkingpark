@@ -4,8 +4,8 @@ import Media from '../Media/Media';
 
 const MainHeaderWrapper = (props)=>{
     return (
-       <div className={'position-relative'}>
-            <div className={`${classes.header_bg}`}>
+       <div className={`position-relative`}>
+            <div className={`${classes.header_bg} ${props.special_flex}`}>
                 {props.video && <video className={`${classes.video_bg}`} alt="Group" src={props.video} autoPlay muted loop />}
                 {props.image && <div style={
                     {
