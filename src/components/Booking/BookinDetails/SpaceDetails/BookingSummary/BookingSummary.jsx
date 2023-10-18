@@ -78,12 +78,13 @@ const BookingSummary = () => {
     return (
         <>
             <section className="summary">
-                <div className="position-relative">
+                <div className="img_float">
                     <Media
                         type="img"
                         src={shape}
-                        alt="shape" className="position-absolute"
-                        style={{top: "125px", right: "0", width: "100px"}}/></div>
+                        alt="shape" 
+                        className=""/>
+                </div>
                 <div className="container">
 
                     <Tab.Container activeKey={steps[activeStep]?.key} onSelect={handleTabSelect}>

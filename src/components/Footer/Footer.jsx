@@ -38,8 +38,8 @@ const Footer = () => {
         .catch(err =>{
             setError(err)
             setLoading(false)
-        })
-    },[]);
+        })
+    },[]);
     return (
         <>
         <footer className="footer-section container-fluid">
@@ -56,20 +56,20 @@ const Footer = () => {
                                 />
                             </div>
                         </div>
-                        <div className="col-xxl-8 col-xl-10 col-lg-9 col-md-9 py-sm-0 py-5">              
-                            <div className="row g-3">
-                                <div className="col-xl-6 col-lg-12 d-flex justify-content-between align-items-center sm-wrap">
+                        <div className="col-xxl-9 col-xl-10 col-lg-9 col-md-9 py-sm-0 py-5">              
+                            <div className=''>
+                                <div className="d-flex justify-content-center align-items-center flex-wrap">
                                     <Link to='/booking' className="links-footer">Booking</Link>
                                     <Link to='/membership' className="links-footer">Membership</Link>
                                     <Link to='/community' className="links-footer">Community</Link>
                                     <Link to="/community/events" className="links-footer">Events</Link> 
-                                </div> 
-                                <div className="col-xl-6 col-lg-12 d-flex justify-content-between align-items-center sm-wrap">
                                     <Link to='/' className="links-footer">FAQs</Link>
                                     <Link to='/' className="links-footer">Privacy Policy</Link>
                                     <Link to='/' className="links-footer">Term&conditions</Link>
                                     <Link to='/' className="links-footer">Site Map</Link>
                                 </div> 
+                                {/* <div className="col-xl-6 col-lg-12 d-flex justify-content-between align-items-center sm-wrap">
+                                </div>  */}
                             </div>                   
                         </div>
                     </div>

@@ -1,7 +1,11 @@
 .summary {
     padding-bottom: 96px;
+    position: relative;
 }
-
+.img_float{
+    position: absolute;
+    right: 0%;
+}
 .summary .nav {
     justify-content: center;
     border: 0;

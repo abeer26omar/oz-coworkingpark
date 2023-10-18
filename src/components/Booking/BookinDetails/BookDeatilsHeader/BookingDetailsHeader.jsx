@@ -9,12 +9,14 @@ import Paragraph from '../../../UI/Paragraph';
 const BookingDetailsHeader = () => {
     return (
         <>
-            <MainHeaderWrapper image={community}>
+            <MainHeaderWrapper image={community} special_flex={`justify-content-center`}>
                 <div className="container">
-                    <Paragraph className="text-one">Booking </Paragraph>
+                    <Paragraph className="text-one" >Booking </Paragraph>
                     <Paragraph className="text-two">Meeting room 01 </Paragraph>
                 </div>
-                <BookingForm/>
+                <div className='d-flex h-100'>
+                    <BookingForm />
+                </div>
             </MainHeaderWrapper>
         </>
     );

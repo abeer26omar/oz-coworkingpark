@@ -6,7 +6,7 @@ import { useEffect ,useState } from 'react';
 const Gallery = () => {
     const [data , setData] = useState([])
 useEffect(()=>{
-    setData(config('gallery '))
+    setData(config('gallery'))
 },[])
     return (
         <>

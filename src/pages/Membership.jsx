@@ -13,7 +13,7 @@ const DataLocation = useData();
 const getComponentValue = DataLocation.getComponentValue
     const [data , setData] = useState([])
 useEffect(()=>{
-    setData(config('membership '))
+    setData(config('membership'))
 },[])
     return (
         <>

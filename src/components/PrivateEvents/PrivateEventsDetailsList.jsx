@@ -1,6 +1,8 @@
 import React from 'react';
 import PlaceItem from "./PlaceItem";
 import {Link} from "react-router-dom";
+import Paragraph from '../UI/Paragraph';
+import Button from '../UI/Button';
 
 const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
     const isEven = index % 2 === 0;
@@ -11,13 +13,13 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
 
         return (
             <>
-                <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 border-right">
-                    <div className="box-content px-60">
-                        <h2 className="h2-text-box">{address}</h2>
-                        <p className="p-text-box">
+                <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 m-auto">
+                    <div className="box-content px-4">
+                        <Paragraph className="h2-text-box">{address}</Paragraph>
+                        <Paragraph className="p-text-box">
                             Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
                             amet, consectetur dipiscing
-                        </p>
+                        </Paragraph>
                         <ul className="places">
                             {places.map((place) => (
                                 <PlaceItem
@@ -31,7 +33,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                             ))}
                         </ul>
                         <div className="d-flex buttons-group">
-                            <Link to="/joinus" className="btn button-outLine btn-bg-white">inquire</Link>
+                            <Button to="/joinus" className="btn button-outLine btn-bg-white" tagType='link'>inquire</Button>
                             <a href="#" className="btn button-outLine btn-bg-white btn-pdf">Download PDF</a>
 
                         </div>
@@ -39,7 +41,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                     </div>
 
                 </div>
-                <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 m-auto">
+                <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 m-auto border-left">
                     <figure className="">
                         <img
                             id={`image-place-${id}`}
@@ -54,7 +56,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
     } else {
         return (
             <>
-                <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 m-auto">
+                <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 m-auto border-right">
                     <figure className="">
                         <img
                             id={`image-place-${id}`}
@@ -64,13 +66,13 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                         />
                     </figure>
                 </div>
-                <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 border-left">
-                    <div className="box-content px-60">
-                        <h2 className="h2-text-box">{address}</h2>
-                        <p className="p-text-box">
+                <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 m-auto">
+                    <div className="box-content px-4">
+                        <Paragraph className="h2-text-box">{address}</Paragraph>
+                        <Paragraph className="p-text-box">
                             Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
                             amet, consectetur dipiscing
-                        </p>
+                        </Paragraph>
                         <ul className="places">
                             {places.map((place) => (
                                 <PlaceItem
@@ -84,7 +86,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                             ))}
                         </ul>
                         <div className="d-flex buttons-group">
-                            <Link to="/joinus" className="btn button-outLine btn-bg-white">inquire</Link>
+                            <Button to="/joinus" className="btn button-outLine btn-bg-white" tagType='link'>inquire</Button>
                             <a href="#" className="btn button-outLine btn-bg-white btn-pdf">Download PDF</a>
 
                         </div>

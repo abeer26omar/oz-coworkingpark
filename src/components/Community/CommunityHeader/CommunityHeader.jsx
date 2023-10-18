@@ -3,14 +3,13 @@ import community from "../../../assets/images/videos/community.mp4";
 import './CommunityHeader.css';
 import Navbar from "react-bootstrap/Navbar";
 import {Container, Nav} from "react-bootstrap";
-import {NavLink} from "react-router-dom";
+import { Link } from 'react-scroll';
 import Paragraph from '../../UI/Paragraph';
 import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
 import SectionHeader from '../../UI/SectionHeader';
 
 const CommunityHeader = (props) => {
 
-  console.log(props.configItem)
     return (
         <>
             <Navbar expand="lg" className="bg-body-tertiary navigator">
@@ -29,51 +28,34 @@ const CommunityHeader = (props) => {
                     </svg>
                     <Nav className="ms-auto nav-head">
                         <>
-                            <NavLink className="nav-link-two links-margin" onClick={() => {
-                                window.location.href = '#community-newsfeed';
-                            }}>
-                                News Feed
-                            </NavLink>
-                            <NavLink className="nav-link-two  links-margin"
-                                     onClick={() => {
-                                         window.location.href = '#community-events';
-                                     }}
-                                     smooth={true}
-                                     smoothScrollTimeout={1000}
+                            <Link 
+                                className="nav-link-two links-margin" 
+                                to={'community-newsfeed'} 
+                                smooth={true} 
+                                duration={100}
                             >
-                                Events
-                            </NavLink>
-                            <NavLink className="nav-link-two links-margin"
-                                     onClick={() => {
-                                         window.location.href = '#community-gallery';
-                                     }
-                                     }
+                                {'News Feed'}
+                            </Link>
+                            <Link 
+                                className="nav-link-two links-margin" 
+                                to={'community-events'} 
+                                smooth={true} 
+                                duration={100}
                             >
-                                Gallery
-                            </NavLink>
+                                {'Events'}
+                            </Link>
+                            <Link 
+                                className="nav-link-two links-margin" 
+                                to={'community-gallery'} 
+                                smooth={true} 
+                                duration={100}
+                            >
+                                {'Gallery'}
+                            </Link>
                         </>
                     </Nav>
                 </Container>
             </Navbar>
-{/* 
-            <div className="box community-header">
-                <div className="group-wrapper">
-                    <div className="group">
-                        <div className="overlap-group">
-                            <div className="rectangle-wrapper">
-                                <div className="rectangle"/>
-                            </div>
-                            <video className="img" alt="Group" src={community} autoPlay muted loop/>
-                            <div className="group-2">
-                                <Paragraph>{'Community'}</Paragraph>
-                                <Paragraph className={'my-40 w-50'}>
-                                    {' Lorem ipsum dolor consectetuer Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ame ,'}
-                                </Paragraph>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
             <MainHeaderWrapper configData={props.configData} video={community}>
                 {/* <SectionHeader configData={props.configData} /> */}
                 <div className={`container-fluid px-70 py-5`}>
@@ -89,7 +71,7 @@ const CommunityHeader = (props) => {
                             </React.Fragment>
                         )): ''}
                     </div>
-                </div>
+                </div>
             </MainHeaderWrapper>
 
         </>

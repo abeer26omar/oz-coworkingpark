@@ -35,7 +35,8 @@
 
 .gallery-show .active {
     border: 0;
-    border-bottom: 2px solid #fff !important;
+    border-bottom: 2px solid var(--white-color) !important;
+    border-radius: 0;
 }
 
 .gallery-item img {
