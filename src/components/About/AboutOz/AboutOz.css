@@ -17,25 +17,6 @@
     margin-bottom: 60px;
 }
 
-.about-section .box-content .h2-text-box {
-    color: var(--white-color);
-    font-family: Couture;
-    font-size: var(--font-size-46);
-    font-style: normal;
-    font-weight: var(--font-weight-bold);
-    line-height: 120%; 
-    margin-top: 40px;
-}
-
-.about-section .box-content span {
-    color: var(--Head_color);
-    font-family: Questrial;
-    font-size: var(--font-size-36);
-    font-style: normal;
-    font-weight: var(--font-weight-regular);
-    line-height: 120%; 
-}
-
 .about-section .p-text-box {
     color: var(--white-color);
 }

@@ -6,7 +6,7 @@ const MainHeaderWrapper = (props)=>{
     return (
        <div className={`position-relative`}>
             <div className={`${classes.header_bg} ${props.special_flex}`}>
-                {props.video && <video className={`${classes.video_bg}`} alt="Group" src={props.video} autoPlay muted loop />}
+                {props.video && <video className={`${classes.video_bg}`} alt="oz video" src={props.video} autoPlay muted loop />}
                 {props.image && <div style={
                     {
                         backgroundImage: `url(${props.image})`

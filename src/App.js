@@ -27,7 +27,7 @@ import About from "./pages/About";
 import Profile from "./pages/Profile";
 import MemberPackage from "./components/Membership/MembershipTypes/MemberPackage/MemberPackage";
 import { TokenLoader } from './apis/auth_api/LoginApi';
-
+import Register from './components/Auth/LoginForm/Register';
 
 
 function App() {
@@ -45,6 +45,7 @@ function App() {
           { path:'contactus', element: <ContactUs />},
           { path:'profile', element: <Profile />},
           { path:'login', element: <Login />},
+          { path:'register', element: <Register />},
           { path:'membership', element: <Membership />}, 
           { path:'membership/:id', element: <MembershipOptions />},
           { path:'singleMember/:id', element: <MemberPackage />},

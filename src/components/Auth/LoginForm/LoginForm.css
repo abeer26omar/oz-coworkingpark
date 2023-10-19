@@ -1,11 +1,37 @@
 /*LOGIN FORM STYLE*/
-.login-card form {
+.login-card {
     padding: 0 75px;
 }
 
 .login .btn-bg-white {
-    background-color: #FFFFFF;
+    background-color: var(--color-white);
     border-radius: 0;
 }
-
+.login-card .form-check-input {
+    width: 20px;
+    height: 20px;
+    border-color: var(--black-color);
+    border-width: 2px;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+.login-card .form-check-input:checked {
+    background-color: var(--lightBlack-color);
+    border-color: transparent;
+    width: 20px;
+    height: 20px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+.login-card .form-check-label{
+    color: var(--black-color);
+    font-family: var(--couture-font);
+    font-size: 0.625rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+.otp-input-root{}
 /*END*/

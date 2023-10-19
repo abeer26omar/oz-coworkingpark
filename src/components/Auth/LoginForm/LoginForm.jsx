@@ -6,6 +6,8 @@ import google from "../../../assets/images/icons/Google.svg";
 import linkedin from "../../../assets/images/icons/linkedin.svg";
 import Media from "../../Media/Media";
 import Form from './Form';
+import Paragraph from "../../UI/Paragraph";
+import Button from "../../UI/Button";
 
 const LoginForm = () => {
 
@@ -39,10 +41,10 @@ const LoginForm = () => {
                 <Container>
                     <Row className="justify-content-center">
                         <Col lg={6}>
-                            <div className="login-card form-card py-3 py-3">
+                            <div className="login-card form-card py-3">
                                 <div className="head-content text-center pb-3">
-                                    <h1 className="hand-write">Welcome</h1>
-                                    <h3 className="bold-head">Please Sign in</h3>
+                                    <Paragraph className="hand-write">Welcome</Paragraph>
+                                    <Paragraph className="bold-head">Please Sign in</Paragraph>
                                 </div>
                                 <Form />
                                 <div className="py-3 log-social text-center">
@@ -54,6 +56,7 @@ const LoginForm = () => {
                                             type="img" src={facebook} alt="Facebook"/>
                                     </a>
                                     <a
+                                        className="mx-4"
                                         href="src/components/Auth/Login/LoginForm#"
                                         target="_blank"
                                     >
@@ -67,6 +70,11 @@ const LoginForm = () => {
                                         <Media
                                             type="img" src={linkedin} alt="LinkedIn"/>
                                     </a>
+                                </div>
+                                <div className="text-center py-4">
+                                    <Paragraph className='authFooter_copyright auth_desc mb-0'>Don't have an account?
+                                        <Button className='p-0 signup_title' tagType='link' to={'/register'}>Sign Up here</Button>
+                                    </Paragraph>
                                 </div>
                             </div>
                         </Col>

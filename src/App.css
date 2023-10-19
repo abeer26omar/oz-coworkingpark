@@ -93,7 +93,10 @@ a {
     font-family: questrial;
     src: url(assets/fonts/questrial/questrial-regular.ttf);
 }
-
+/*  */
+.font-2{
+    font-size: var(--font-size-41) !important;
+}
 /*******************Padding Size************************/
 .p-60 {
     padding: 60px 0;

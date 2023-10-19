@@ -7,28 +7,13 @@ import linkedinWhite from "../../assets/images/icons/insta.png";
 import Media from "../Media/Media";
 import { Link } from "react-router-dom";
 import { useState , useEffect } from "react";
-import axios from "axios";
+import { config } from '../../apis/config';
 
- const config = async(page_name)=>{
- 
-    try{
-        const config = {
-            method: 'get',
-            url: `${process.env.REACT_APP_API_CONFIG_URL}/api/config?page=${page_name}`
-        };
-       const response = await axios(config)
-            return response.data.data;
-    
-    }catch(error){
-        console.error(error);
-    }
-
-
-}
 const Footer = () => {
     const [data , setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
     useEffect(()=>{
         config('social').then(res =>{
             setData(res)
