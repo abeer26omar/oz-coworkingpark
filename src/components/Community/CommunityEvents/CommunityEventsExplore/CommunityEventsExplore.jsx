@@ -65,8 +65,8 @@ const CommunityEventsExplore = () => {
                                     consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing
                                     elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod</p>
                             </div>
-                            <div className="buttons d-flex justify-content-center align-items-center"><
-                                a href="#" className="btn button-outLine btn-bg-white">Become a Member</a>
+                            <div className="buttons d-flex justify-content-center align-items-center">
+                                <a href="#" className="btn button-outLine btn-bg-white">Become a Member</a>
                             </div>
                         </div>
                     </div>

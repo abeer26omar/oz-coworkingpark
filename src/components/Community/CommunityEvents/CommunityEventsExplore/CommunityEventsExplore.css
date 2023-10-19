@@ -1,35 +1,3 @@
-/*.com-events {*/
-/*    background-image: none;*/
-/*}*/
-
-/*.com-events .text-wrapper {*/
-/*    position: absolute;*/
-/*    left: 400px;*/
-/*    top: -65px;*/
-/*}*/
-
-/*.com-events .text-wrapper-2 {*/
-/*    font-size: var(--font-size-94);*/
-/*    margin-bottom: 32px !important;*/
-/*}*/
-
-/*.com-events .p {*/
-/*    line-height: 1.5;*/
-/*    !*margin-top: 32px;*!*/
-/*    text-align: justify;*/
-/*    width: 80%;*/
-/*}*/
-
-/*.com-events .group-2 {*/
-/*    width: 100%;*/
-/*    left: 14%;*/
-/*    transform: translate(0, 0px);*/
-/*}*/
-
-/*.com-events .an-innovative-co {*/
-/*    width: 80%;*/
-/*}*/
-
 .events-show {
     margin: 32px 0;
 
@@ -55,7 +23,7 @@
 }
 
 .events-show .single-event-slider .cards-event-buttons .button-outLine {
-    width: 85%;
+    width: 80%;
 }
 
 .events-show .single-event-slider .card-img-top {

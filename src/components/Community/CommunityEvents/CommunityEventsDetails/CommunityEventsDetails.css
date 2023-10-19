@@ -78,3 +78,9 @@
 .gallery-show {
     padding: 60px 0;
 }
+
+.vector{
+    position: absolute;
+    left: -70px;
+        
+}

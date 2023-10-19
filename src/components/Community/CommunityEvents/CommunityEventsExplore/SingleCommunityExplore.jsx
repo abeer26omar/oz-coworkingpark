@@ -14,7 +14,6 @@ const SingleCommunityExplore = ({id, img, title, text, category, linkText, day, 
             <Card className="slider-card" key={id}>
                 <div className="position-relative">
                     <Card.Img variant="top" src={img} className="rounded-0" title={title}/>
-                    {/* <img src={favs} alt={title} className="fav-event"/> */}
                     <Button tagType='link'><img src={favs} alt="fav" className="fav-event"/></Button>
                 </div>
 
