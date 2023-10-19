@@ -166,7 +166,7 @@ const MembershipTypes = (props) => {
                 <Container fluid>
                     <Row>
                         <div className="col-lg-12 border-bottom border-top ">
-                            <div className="head-content-sec">
+                            <div className="head-content-sec text-center">
                                 <h2 className="h2-text">{props.headTitle}</h2>
                             </div>
                         </div>

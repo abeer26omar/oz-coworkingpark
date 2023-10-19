@@ -1,12 +1,10 @@
 .prevent-header {
     background-image: none;
 }
-
-.prevent-header .text-wrapper-2 {
-    /* font-size: var(--font-size-94); */
-    /*margin-bottom: 32px !important;*/
+.nav-link-two{
+    color: var(--black-color);
+    cursor: pointer;
 }
-
 .prevent-header .p {
     line-height: 1.5;
     text-align: justify;

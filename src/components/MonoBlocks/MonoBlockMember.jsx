@@ -25,7 +25,7 @@ const  MonoBlockMember = (props) => {
                             className="buttons d-lg-flex d-md-flex d-sm-block my-3 justify-content-center align-items-center text-center">
                                 <Button 
                                     tagType = 'link' 
-                                    className={`btn button-outLine`}>
+                                    className={`button-outLine`}>
                                     Become  a Member
                                 </Button>
                         </div>

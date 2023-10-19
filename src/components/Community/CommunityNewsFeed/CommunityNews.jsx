@@ -2,6 +2,7 @@ import React from "react";
 import "./CommunityNewsFeed.css";
 import Slider from "react-slick";
 import CommunityNewsList from "./CommunityNewsList";
+import { Element } from "react-scroll";
 import {newsData} from "../../../Data/NewsData";
 import { NavLink } from "react-router-dom";
 import Paragraph from "../../UI/Paragraph";
@@ -21,7 +22,8 @@ const CommunityNews = (props) => {
 
     return (
         <>
-            <section id="community-newsfeed" className="news-feed">
+        <Element name="community-newsfeed">
+            <section  className="news-feed">
                 <div className="container-fluid">
                     <div className="row"></div>
                     <div className="row border-of-section ">
@@ -56,6 +58,7 @@ const CommunityNews = (props) => {
                     </div>
                 </div>
             </section>
+        </Element>
         </>
     );
 };

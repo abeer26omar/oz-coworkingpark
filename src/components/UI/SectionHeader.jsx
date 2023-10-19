@@ -1,8 +1,8 @@
 import React , { useState } from 'react';
 import Paragraph from './Paragraph';
 import Button from './Button';
-import Modal from 'react-bootstrap/Modal';
 import classes from './MainHeaderWrapper.module.css';
+import ModalVideo from './ModalVideo';
 const SectionHeader = (props)=>{
     const [show, setShow] = useState(false);
     const [fullscreen, setFullscreen] = useState(true);
@@ -51,24 +51,11 @@ const SectionHeader = (props)=>{
                         </Button>
                     </div>
                 </div>
-                <Modal
+                <ModalVideo 
                     show={show}
                     fullscreen={fullscreen}
-                    onHide={handleClose}
-                    backdrop="static"
-                    keyboard={false}
-                    backdropClassName="custom-backdrop">
-                        <Modal.Header closeButton className={classes.custom_header}></Modal.Header>
-                        <Modal.Body className={`${classes.custom_body}`}>
-                            {props.configData ? props.configData.map((configItem, index) => (
-                                <React.Fragment key={index}>
-                                    {configItem.key === 'home_page_header_video' && (
-                                        <video className={`${classes.video_bg}`} alt="Group" src={configItem.value} autoPlay muted loop/>
-                                    )}
-                                </React.Fragment>
-                            )): ''}
-                        </Modal.Body>
-                </Modal>
+                    handleClose={handleClose}
+                    video={props.video} />
             </div>
         </>
     );

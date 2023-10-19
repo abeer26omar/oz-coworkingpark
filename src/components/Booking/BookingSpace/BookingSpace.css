@@ -4,12 +4,11 @@
 
 .booking-space .space-name {
     color: var(--secondary-color2);
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: var(--font-size-16);
     font-style: normal;
     font-weight: var(--font-weight-regular);
-    line-height: 120%; /* 24px */
-    /*padding-right: 32px;*/
+    line-height: 120%; 
     margin: auto;
     text-transform: capitalize;
 }
@@ -45,11 +44,11 @@
 
 .booking-space .book-title {
     color: var(--primary-color);
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: var(--font-size-52);
     font-style: normal;
     font-weight: var(--font-weight-bold);
-    line-height: 120%; /* 62.4px */
+    line-height: 120%;
     padding: 8px 32px;
 
 }
@@ -80,11 +79,11 @@
 
 .booking-space .book-card .card-title {
     color: var(--primary-color);
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: var(--font-size-26);
     font-style: normal;
     font-weight: var(--font-weight-bold);
-    line-height: 120%; /* 31.2px */
+    line-height: 120%;
 }
 
 .booking-space .book-card .list-options {
@@ -96,18 +95,18 @@
 
 .booking-space .book-card .list-options .list-option-item {
     color: var(--secondary-color2);
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: var(--font-size-16);
     font-style: normal;
     font-weight: var(--font-weight-regular);
-    line-height: 130%; /* 20.8px */
+    line-height: 130%;
     margin: auto 20px;
 }
 
 .booking-space .book-card .card-text {
     color: rgba(0, 0, 0, 0.40);
     text-align: justify;
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: var(--font-size-13);
     font-style: normal;
     font-weight: var(--font-weight-regular);
@@ -131,7 +130,7 @@
 
 .booking-space .book-card .price-hour {
     color: var(--primary-color);
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: var(--font-size-20);
     font-style: normal;
     font-weight: var(--font-weight-bold);
@@ -145,7 +144,7 @@
 
 .booking-space .btn-cards-more {
     color: var(--primary-color);
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: var(--font-size-13);
     font-style: normal;
     font-weight: var(--font-weight-regular);
@@ -163,4 +162,24 @@
     top: 3%;
     cursor: pointer;
     padding: 0;
+}
+@media screen and (max-width: 1024px) {
+    .booking-space .book-card .price-hour {
+        font-size: var(--font-size-18);
+    }
+}
+@media screen and (max-width: 1024px) and (min-width: 992px){
+    .book-card .btn_outline_black{
+        padding: 1rem;
+    }
+}
+@media screen and (max-width: 768px) and (min-width: 575px) {
+    .book-card .btn_outline_black{
+        padding: 1rem 2rem;
+    }
+}
+@media screen and (max-width: 768px) {
+    .booking-space .book-card .price-hour {
+        font-size: var(--font-size-16);
+    }
 }

@@ -165,13 +165,15 @@ const BookingSpace = () => {
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-12  text-end  m-auto">
                                 <div className="btn-spaces-filter">
-                                    <button href="#" className="btn button-outLine btn-bg-white btn-filter"
-                                            onClick={toggleFilter}
+                                    <Button 
+                                        tagType='link' 
+                                        className="button-outLine px-4 btn-bg-white btn-filter"
+                                        onClick={toggleFilter}
                                     >
                                         <Media
                                             type="img" src={filtericons} alt="filter icon" className="icon-filter"/>
                                         Filter
-                                    </button>
+                                    </Button>
                                 </div>
 
                             </div>
