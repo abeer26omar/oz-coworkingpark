@@ -138,6 +138,36 @@
     text-align: justify;
     margin-bottom: 32px;
 }
+.text_desc_black {
+    color: var(--white-color);
+    font-family: var(--couture-font);
+    font-size: var(--font-size-46);
+    font-style: normal;
+    font-weight: var(--font-weight-bold);
+    line-height: 120%; 
+    margin-top: 40px;
+}
+.small_title_white{
+    color: var(--Head_color);
+    font-family: var(--questrial-font);
+    font-size: var(--font-size-36);
+    font-style: normal;
+    font-weight: var(--font-weight-regular);
+    line-height: 120%; 
+}
+.authFooter_copyright{
+    color: var(--secondary-color2);
+    font-family: var(--couture-font);
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+.auth_desc{
+    font-family: var(--questrial-font);
+    font-size: 1rem;
+}
+
 @media screen and (max-width: 1440px) {
     .paragraph_black{
         font-size: var(--font-size-41);

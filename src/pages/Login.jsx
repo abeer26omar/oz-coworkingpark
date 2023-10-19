@@ -7,9 +7,6 @@ const Login = () => {
     return (
         <>
             <LoginForm/>
-            {/*<Users/>*/}
-            {/*<MemberApi/>*/}
-            {/*<TestApi/>*/}
         </>
     );
 };

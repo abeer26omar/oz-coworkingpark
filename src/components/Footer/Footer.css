@@ -115,6 +115,10 @@ footer a {
 .links-footer{
     padding: 0;
 }
+.py_2{
+    padding-top: 2.25rem;
+    padding-bottom: 2.25rem;
+}
 @media screen and (max-width: 991.5px) {
     .footer-social svg{
         display: none;
