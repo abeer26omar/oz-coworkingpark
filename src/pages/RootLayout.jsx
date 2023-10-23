@@ -5,12 +5,17 @@ import ScrollToTop from "../ScrollToTop";
 
 import Header from "../components/Header/Navbar/Header";
 import Footer from "../components/Footer/Footer";
+import FooterAuth from '../components/Footer/FooterAuth';
 
 const RootLayout = ()=>{
     const location = useLocation();
     const isGalleryRoute = location.pathname === '/community/galleryshow';
     const isLimitedRoute = location.pathname === '/limited';
     const isAboutRoute = location.pathname === '/about';
+    const AuthRoutes = location.pathname === '/login' || 
+        location.pathname === '/contactus' || 
+        location.pathname === '/joinus' || 
+        location.pathname === '/register';
 
     const StyledBody = styled.body`
         background-color: ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
@@ -55,7 +60,8 @@ const RootLayout = ()=>{
                             showBlackNav={isGalleryRoute || isLimitedRoute || isAboutRoute}
                         />
                             <Outlet />
-                        <Footer />
+                        {!AuthRoutes && <Footer />}
+                        {AuthRoutes && <FooterAuth />}
                     </AppContainer>
                 </StyledBody>
             </DataProvider>

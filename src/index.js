@@ -8,7 +8,6 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import './index.css';
 import './assets/css/mediaQuery.css';
 
-// import {BrowserRouter} from "react-router-dom";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

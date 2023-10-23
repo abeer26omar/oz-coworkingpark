@@ -56,18 +56,6 @@
     color: rgba(0, 0, 0, 0.65);
     transform: translateY(0);
 }
-/* Media Query */
-@media screen and (max-width: 575px) {
-    .btn_default{
-        padding: 1rem 1.5rem;
-    }
-}
-@media screen and (max-width: 375px) {
-    .btn_default{
-        padding: 1rem;
-    }
-} 
-
 
 .button-outLine {
     border: 1px solid;
@@ -103,3 +91,49 @@
     background-color: var(--primary-color);
     color: var(--neturals-color2);
 }
+.authFooter_link{
+    font-family: var(--couture-font);
+    font-size: 0.8125rem;
+    color: var(--secondary-color2);
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; 
+    padding: 0;
+}
+.authFooter_link:hover{
+    color: var(--lightBlack-color);
+}
+.auth_btn_padding{
+    padding: .62rem 3.12rem;
+}
+.signup_title{
+    font-family: var(--couture-font);
+    color: var(--lightBlack-color);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    text-transform: uppercase;
+}
+.signup_title:hover{
+    color: var(--black-color);
+}
+.forgetPassText{
+    color: var(--black-color);
+    font-family: var(--couture-font);
+    font-size: 0.625rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+/* Media Query */
+@media screen and (max-width: 575px) {
+    .btn_default{
+        padding: 1rem 1.5rem;
+    }
+}
+@media screen and (max-width: 375px) {
+    .btn_default{
+        padding: 1rem;
+    }
+} 

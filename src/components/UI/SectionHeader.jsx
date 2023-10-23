@@ -8,6 +8,7 @@ const SectionHeader = (props)=>{
     const [fullscreen, setFullscreen] = useState(true);
     
     const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
 
     const handleShow = () => {
         setFullscreen(true);
@@ -51,12 +52,12 @@ const SectionHeader = (props)=>{
                         </Button>
                     </div>
                 </div>
+            </div>
                 <ModalVideo 
                     show={show}
                     fullscreen={fullscreen}
                     handleClose={handleClose}
                     video={props.video} />
-            </div>
         </>
     );
 }
