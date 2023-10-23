@@ -66,7 +66,7 @@ const CommunityEvents = (props) => {
                                             {configItem.key === "community_page_event_description" &&
                                             <div className="col-lg-8 col-sm-12 m-auto">
                                                 <div className="d-lg-flex d-sm-block align-items-center">
-                                                <Paragraph className={'m_b_center monoBlock_description w-75 mx-auto black'}>{configItem.value}</Paragraph>
+                                                <Paragraph className={' monoBlock_description w-75 mx-auto black'}>{configItem.value}</Paragraph>
                                                 <NavLink to={"/community/events"}
                                                     className="btn button-outLine btn-bg-white mx-3">Explore</NavLink>
                                                 </div>

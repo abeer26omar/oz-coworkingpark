@@ -40,7 +40,7 @@ const CommunityNews = (props) => {
                                     </React.Fragment>
                                 )):''}
                                   <NavLink to={"/community/newsfeed"}
-                                    className="btn button-outLine btn-bg-white">Explore</NavLink>
+                                    className="btn button-outLine btn-bg-white mx-0">Explore</NavLink>
                             </div>
                         </div>
                         <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-left ">

@@ -172,7 +172,7 @@ const CommunityEventsDetails = () => {
                             <div className="cards-event-buttons text-center">
                                 {/* <Button href='#'>Attend</Button> */}
                                    <NavLink to={"/events/communityEventsDetails"}
-                                    className="btn button-outLine btn-bg-white mx-2">Attend</NavLink>
+                                    className="btn button-outLine btn-bg-white mx-2 attend-btn">Attend</NavLink>
                                 <Button href='#' className="share-button">
                                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">

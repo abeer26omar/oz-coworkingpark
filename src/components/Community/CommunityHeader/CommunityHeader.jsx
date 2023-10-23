@@ -6,17 +6,24 @@ import {Container, Nav} from "react-bootstrap";
 import { Link } from 'react-scroll';
 import Paragraph from '../../UI/Paragraph';
 import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
-import SectionHeader from '../../UI/SectionHeader';
-
 const CommunityHeader = (props) => {
-
+console.log(props.configData)
     return (
         <>
             <Navbar expand="lg" className="bg-body-tertiary navigator">
                 <Container fluid>
-                    <Navbar.Brand className="title-name" href="#home">
-                        Community
-                    </Navbar.Brand>
+                            {props.configData ? props.configData.map((configItem, index) => (
+                            <React.Fragment key={index}>
+                                {configItem.key === 'community_page_header_main_title' && (
+                                       <Navbar.Brand className="title-name" href="#home">
+                                           {configItem.value}
+                                       </Navbar.Brand>
+                                   
+                                )}
+                              
+                            </React.Fragment>
+                        )): ''}
+                 
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="2"
@@ -62,7 +69,7 @@ const CommunityHeader = (props) => {
                     <div className='col-md-6 col-12'>
                         {props.configData ? props.configData.map((configItem, index) => (
                             <React.Fragment key={index}>
-                                {configItem.key === 'community_page_header_main_title' && (
+                                {configItem.key === 'community_page_header_sub_title' && (
                                     <Paragraph className='head_paragraph mb-3'>{configItem.value}</Paragraph>
                                 )}
                                 {configItem.key === 'community_page_header_description' && (

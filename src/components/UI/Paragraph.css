@@ -155,10 +155,13 @@
     .description_black{
         font-size: var(--font-size-24);
     }
+    .white_monoBlock_title {
+    font-size: var(--font-size-41);
+    }
 }
 @media screen and (max-width: 992px) {
     .white_monoBlock_title{
-        font-size: 3.125rem;
+        font-size: 1.5rem;
     }
 }
 @media screen and (max-width: 575px) {
@@ -168,11 +171,11 @@
 }
 @media screen and (max-width: 390px) {
     .head_paragraph{
-        font-size: var(--font-size-41);
+        font-size: var(--font-size-23);
     }
 }
 @media screen and (max-width: 320px) {
     .white_monoBlock_title{
-        font-size: var(--font-size-41);
+        font-size: var(--font-size-23);
     }
 }

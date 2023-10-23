@@ -53,12 +53,13 @@ const CommunityEventsExplore = () => {
                 </div>
             </section>
 
-            <section className="monoBlock monoBlock-white">
+            <section className="monoBlock bg-white">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="content-block"><h1 className="text-h1">I'LL BE AT OZ </h1>
-                                <p className="text-p">
+                            <div className="content-block text-center">
+                                <h1 className="white_monoBlock_title black mb-4">I'LL BE AT OZ </h1>
+                                <p className="m_b_center monoBlock_description w-75 mx-auto black">
                                     Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
                                     Lorem
                                     ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet,

@@ -42,7 +42,7 @@ const CommunityGallery = (props) => {
                                                 </React.Fragment>
                                             )):''}
                                             <NavLink to={"/community/galleryshow"}
-                                            className="btn button-outLine btn-bg-white">Explore</NavLink>  
+                                            className="btn button-outLine btn-bg-white mx-0">Explore</NavLink>  
                                                 </div>
                                             </div>                       
                         </div>

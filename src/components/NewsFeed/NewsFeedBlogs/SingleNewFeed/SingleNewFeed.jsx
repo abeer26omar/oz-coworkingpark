@@ -15,7 +15,7 @@ const SingleNewFeed = () => {
             <div className="position-relative">
                 <img
                     src={vector}
-                    alt="shape" className="position-absolute "
+                    alt="shape" className="position-absolute  vector-news"
                     style={{top: "115px", right: "0", width: "100px"}}
                 />
             </div>
@@ -71,7 +71,7 @@ const SingleNewFeed = () => {
                                 <img src={headNews} alt="" className="details-image"/>
                             </div>
                         </div>
-                        <div className="col-lg-8 border-right ">
+                        <div className="col-lg-7 border-right ">
                             <div className="box-details border-bottom">
                                 <h3>
                                     The artist and designer Rogan Gregory is something of an enigma, or perhaps a
@@ -90,11 +90,19 @@ const SingleNewFeed = () => {
                                 </p>
                             </div>
                             <div className="box-details border-bottom">
-                                <div
-                                    className="d-lg-flex justify-content-between align-items-center d-sm-block m-sm-auto ">
+                                <div className='row m-auto'>
+                                    <div className='col-xl-6  col-sm-12'>
+                                    <img className='w-100 pb-2' src={blog1}/>
+                                    </div>
+                                     <div className='col-xl-6 col-sm-12 pb-2'>
+                                    <img className='w-100' src={blog2}/>
+                                    </div>
+                                </div>
+                                {/* <div
+                                    className="d-lg-flex justify-content-around align-items-center d-sm-block m-sm-auto ">
                                     <img src={blog1}/>
                                     <img src={blog2}/>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="box-details border-bottom">
                                 <p>
@@ -108,11 +116,11 @@ const SingleNewFeed = () => {
                                     eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit Lorem ipsum dolor sit
                                     amet, consectetur dipiscing elit eiusmod
                                 </p>
-                                <a href="#" className="btn button-outLine btn-bg-white ">Our Vision</a>
+                                <a href="#" className="btn button-outLine btn-bg-white ">Share</a>
                             </div>
 
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-lg-5">
                             <div className="box-details ">
                                 <h3>
                                     Articles Related
@@ -122,12 +130,11 @@ const SingleNewFeed = () => {
                                         <Card className="Card-news">
                                             <Card.Img variant="top" src={imageone} className="rounded-0 " title="art"
                                                       loading="lazy"/>
-                                            <Card.Body>
+                                            <Card.Body className='mb-4'>
                                                 <span className="feed-category">Art</span>
                                                 <Card.Title>Lorem ipsum</Card.Title>
                                                 <Card.Text>Lorem ipsum dolor sit amet, consectetur dipiscing elit
                                                     eiusmod</Card.Text>
-                                                {/*<a className="btn button-outLine btn-bg-white">{linkText}</a>*/}
                                             </Card.Body>
                                         </Card>
                                     </NavLink>
@@ -136,7 +143,7 @@ const SingleNewFeed = () => {
                                         <Card className="Card-news">
                                             <Card.Img variant="top" src={imageone} className="rounded-0 " title="art"
                                                       loading="lazy"/>
-                                            <Card.Body>
+                                            <Card.Body className='mb-4'>
                                                 <span className="feed-category">Art</span>
                                                 <Card.Title>Lorem ipsum</Card.Title>
                                                 <Card.Text>Lorem ipsum dolor sit amet, consectetur dipiscing elit
@@ -149,7 +156,7 @@ const SingleNewFeed = () => {
                                         <Card className="Card-news">
                                             <Card.Img variant="top" src={imageone} className="rounded-0 " title="art"
                                                       loading="lazy"/>
-                                            <Card.Body>
+                                            <Card.Body className='mb-4'>
                                                 <span className="feed-category">Art</span>
                                                 <Card.Title>Lorem ipsum</Card.Title>
                                                 <Card.Text>Lorem ipsum dolor sit amet, consectetur dipiscing elit

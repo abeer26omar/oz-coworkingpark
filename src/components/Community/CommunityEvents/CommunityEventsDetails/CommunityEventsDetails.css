@@ -84,3 +84,9 @@
     left: -70px;
         
 }
+@media screen and (max-width:599px) {
+    .attend-btn{
+        width: 145px;
+    }
+    
+}

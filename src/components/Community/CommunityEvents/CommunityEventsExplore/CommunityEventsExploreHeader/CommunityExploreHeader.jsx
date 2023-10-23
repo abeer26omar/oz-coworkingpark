@@ -26,6 +26,7 @@ const [data , setData] = useState([page_home]);
                   <MainHeaderWrapper configData={data} image={party}>
                 <div className={`container-fluid px-70 py-5`}>
                     <div className='col-md-6 col-12'>
+                        <p class="main_header mb-0">Initiating</p>
                         { data? data.map((configItem, index) => (
                             <React.Fragment key={index}>
                                 {configItem.key === "community_page_event_title" && (

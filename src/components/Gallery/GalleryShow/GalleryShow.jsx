@@ -79,16 +79,17 @@ const GalleryShow = () => {
                                 })
                             }
                         </div>
+                        <div className='container'>
                             <ResponsiveMasonry
                                 columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}>
                                 <Masonry columnsCount={3} gutter="30px">
                                     {galleryData[activeTab] ? galleryData[activeTab].map((gallery) => {
                                         const {image, id, category, text, date, title} = gallery;
                                         return (
-                                            <div key={id} className={`gallery-item ${category}`}>
-                                                <div className="position-relative">
+                                            <div key={id} className={`gallery-item mx-auto ${category}`}>
+                                                <div className="position-relative m-auto">
                                                     <Media
-                                                        type="img" src={gallery.image} alt={`Gallery Item ${id}`}/>
+                                                        type="img" className="w-100" src={gallery.image} alt={`Gallery Item ${id}`}/>
                                                     <div className="gallery-description">
                                                         <h3>{title}</h3>
                                                         <span>{date}</span>
@@ -100,6 +101,7 @@ const GalleryShow = () => {
                                 </Masonry>
 
                             </ResponsiveMasonry>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -85,7 +85,14 @@ const [data , setData] = useState([page_home]);
             <MainHeaderWrapper configData={data} image={newsfeed}>
                 <div className={`container-fluid px-70 py-5`}>
                     <div className='col-md-6 col-12'>
-                        { data? data.map((configItem, index) => (
+                        <p class="main_header mb-0">Community</p>
+                                    <Paragraph className='head_paragraph mb-3'>News Feed</Paragraph>
+                                    <Paragraph className='description mb-0'>
+                                        Stay updated with all the latest happenings inside OZ, including community members' achievements and more. We believe in celebrating the success stories of our vibrant community, and this section serves as a platform to showcase the incredible accomplishments of our members. From ground-breaking projects to innovative collaborations, you'll have a front-row seat to the inspiring journeys taking place within OZ.
+                                    </Paragraph>
+
+
+                        {/* { data? data.map((configItem, index) => (
                             <React.Fragment key={index}>
                                 {configItem.key === "community_page_newsfeed_title" && (
                                     <Paragraph className='head_paragraph mb-3'>{configItem.value}</Paragraph>
@@ -94,7 +101,7 @@ const [data , setData] = useState([page_home]);
                                     <Paragraph className='description mb-0'>{configItem.value}</Paragraph>
                                 )}
                             </React.Fragment>
-                        )): ''}
+                        )): ''} */}
                     </div>
                 </div>
             </MainHeaderWrapper>

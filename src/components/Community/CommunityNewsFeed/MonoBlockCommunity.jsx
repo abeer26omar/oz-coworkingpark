@@ -13,17 +13,11 @@ const  MonoBlockCommunity = (props) => {
                         <div className="col-lg-12">
                             <div className="content-block text-center">
                                 <Paragraph className='white_monoBlock_title'>
-                                    where like-minded people meet
+                                  Initiating a New Workstyle for Visionaries, Innovators & Thought-leaders in an Exclusive Members-Only haven, disrupting traditional spaces to Bridge the Gap between Work & Life.
+
                                 </Paragraph>
                             </div>
-                        <div
-                            className="buttons d-lg-flex d-md-flex d-sm-block my-3 justify-content-center align-items-center text-center">
-                                {/* <Button 
-                                    tagType = 'link' 
-                                    className={`btn button-outLine`}>
-                                    Become  a Member
-                                </Button> */}
-                        </div>
+                     
                     </div>
                 </div>
             </div>
