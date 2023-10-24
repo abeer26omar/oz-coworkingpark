@@ -32,7 +32,7 @@ const CommunityNews = (props) => {
                                     {props.configData ? props.configData.map((configItem, index) => (
                                     <React.Fragment key={index}>
                                         {configItem.key === "community_page_newsfeed_title" && 
-                                            <Paragraph className='white_monoBlock_title black '>{configItem.value}</Paragraph>
+                                            <Paragraph className='paragraph_black black '>{configItem.value}</Paragraph>
                                         }
                                         {configItem.key === "community_page_newsfeed_description" &&
                                             <Paragraph className={' mb-5 monoBlock_description black'}>{configItem.value}</Paragraph>

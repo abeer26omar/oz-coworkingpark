@@ -32,7 +32,7 @@ const CommunityGallery = (props) => {
                                                 <React.Fragment key={index}>
                                                     
                                                     {configItem.key === "community_page_gallery_title"&&
-                                                    <Paragraph className='white_monoBlock_title black'>
+                                                    <Paragraph className='paragraph_black black'>
                                                     {configItem.value}</Paragraph>
                                                         }
                                                         {configItem.key === "community_page_gallery_description"&&
