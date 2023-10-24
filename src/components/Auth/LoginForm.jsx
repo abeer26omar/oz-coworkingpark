@@ -1,26 +1,30 @@
 import { useState } from 'react'
 import { Formik } from 'formik';
 import * as Yup from "yup";
-import { Login } from "../../../apis/auth_api/LoginApi";
+import { Login } from "../../apis/auth_api/LoginApi";
 import { useNavigate } from "react-router-dom";
-import Button  from '../../UI/Button';
+import Button  from '../UI/Button';
 import ModalOTP from './ModalOTP';
+import SweetAlert2 from 'react-sweetalert2';
 
-const Form = (props)=>{
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
+const LoginForm = (props)=>{
     const navigate = useNavigate();
+    const [swalProps, setSwalProps] = useState({});
+
     const handleSubmit = async (values) => {
         try {
             const result = await Login(values.email, values.password);
-            console.log(result);
             window.sessionStorage.setItem("TokenOZ", result.access_token);
-            setShow(true);
+            console.log(result);
         } catch (error) {
-            console.log(error);
+            setSwalProps({
+                show: true,
+                icon: 'error',
+                title: error.response.data.status,
+                text: error.response.data.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
     }
     return (
@@ -108,13 +112,10 @@ const Form = (props)=>{
                 </form>
             )}}
             </Formik>
-            <Button className='p-0 signup_title' tagType='link' onClick={handleShow}>open otp</Button>
-            <ModalOTP 
-                show={show}
-                onHide={handleClose}/>
+            <SweetAlert2 {...swalProps} />
         </>
     )
 }
-export default Form;
+export default LoginForm;
 
 
