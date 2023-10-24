@@ -1,8 +1,7 @@
 import React from 'react';
-import './MembershipTypes.css';
 import Media from "../../Media/Media";
-import {Link} from "react-router-dom";
-
+import Button from '../../UI/Button';
+import Paragraph from '../../UI/Paragraph';
 const MembershipTypesList = ({id, logo, name, description, img}) => {
 
     return (
@@ -11,11 +10,12 @@ const MembershipTypesList = ({id, logo, name, description, img}) => {
                 <Media
                     type="img" src={logo} className="card-img-top" alt={name}/>
                 <div className="card-body">
-                    <h5 className="card-title ">{name}</h5>
-                    {/*<p className="text-muted">{description}</p>*/}
-                    <Link to={`/membership/${id}`} name={name}
-                          className="btn button-outLine btn-bg-white">{name}</Link>
-                    {/*<Buttons href='/membershipDetailsTest' name={name}>{name}</Buttons>*/}
+                    <Paragraph className="card-title">{name}</Paragraph>
+                    <Button
+                        tagType='link' 
+                        to={`/membership/${id}`} 
+                        name={name}
+                        className="btn button-outLine btn-bg-white">{'Find out more'}</Button>
                 </div>
             </div>
         </>

@@ -11,7 +11,7 @@
 .nav-mob{
     display: flex;
 }
-.nav-link{
+.main_header .nav-link{
     color: var(--primary-color);
     font-family: var(--couture-font);
     font-size: 0.8125rem;
@@ -28,13 +28,13 @@
     text-transform: capitalize;
 }
 } */
-.nav-link:hover {
+.main_header .nav-link:hover {
     cursor: pointer;
     transition: 1s;
     transform: scale(1.2);
     color: var(--primary-color);
 }
-.nav-item .active {
+.main_header .nav-item .active {
     color: var(--primary-color);
     border-bottom: 1px solid var(--primary-color);
 }

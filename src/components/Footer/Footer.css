@@ -128,9 +128,18 @@ footer a {
         padding: 1rem 0;
     }
 }
+@media screen and (max-width: 575.5px) {
+    .auth_footer .d-flex{
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+    }
+}
 @media screen and (max-width: 390px) {
     .sm-wrap{
         flex-wrap: wrap;
         justify-content: center !important;
+    }
+    .authFooter_link{
+        margin: 0;
     }
 }

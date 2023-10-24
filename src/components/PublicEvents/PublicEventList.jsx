@@ -11,7 +11,10 @@ const PublicEventList = ({id, text, title, img}) => {
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>{text}</Card.Text>
-                    <Button to={"/events/communityEventsDetails"} className=" btn-bg-white">Public
+                    <Button 
+                        to={"/events/communityEventsDetails"} 
+                        className="btn_outline_black"
+                        tagType='link'>Public
                         Event</Button>
                 </Card.Body>
             </Card>
