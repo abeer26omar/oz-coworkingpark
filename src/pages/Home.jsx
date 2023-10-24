@@ -16,6 +16,8 @@ import HomeMembership from '../components/Home/HomeMembership';
 import OurSpaces from '../components/Home/OurSpaces';
 import OZAmenities from '../components/Home/OZAmenities';
 import ExploreOZ from '../components/Home/ExploreOZ';
+import ZeeStudio from '../components/Home/ZeeStudio';
+import OZKnowledge from '../components/Home/OZKnowledge';
 const Home = () => {
     const DataLocation = useData();
     const getComponentValue = DataLocation.getComponentValue
@@ -34,10 +36,12 @@ const Home = () => {
             <OZAmenities />
             <ExploreOZ />
             <PublicEvent configData={getComponentValue("page_event")}/>
-            <Locations configData={getComponentValue('page_location')}/>
+            <ZeeStudio configData={getComponentValue('')}/>
+            <OZKnowledge  configData={getComponentValue("")} />
             <RightContentFB configData={getComponentValue("page_fb")} />
             <MonoBlockMember configData={getComponentValue("page_membership")}/>
             <Partners/>
+            <Locations configData={getComponentValue('page_location')}/>
             <NewsLetter/>
         </>
     );

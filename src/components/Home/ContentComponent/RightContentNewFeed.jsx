@@ -6,7 +6,7 @@ import Paragraph from "../../UI/Paragraph";
 const RightContentNewFeed = (props) => {
     return (
         <>
-            <section className="head-of-section">
+            <section className="">
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-lg-12">

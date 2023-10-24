@@ -1,1 +1,21 @@
-.ExploreOz{}
+.ExploreOz .book-oz span ,
+.ExploreOz .book-oz .img-book{
+    width: 100%;
+    height: auto;
+}
+
+.ExploreOz .explore_link{
+    color: black;
+    display:inline-block;
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+.ExploreOz .nav-pills .nav-link.active{
+    color: #fff;
+    background-color: black;
+    border-radius: 0 !important;
+    padding-right: 50px;
+
+
+}

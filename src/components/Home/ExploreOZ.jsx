@@ -11,7 +11,7 @@ import './ExploreOz.css';
 const ExploreOZ = (props) => {
     return (
         <>
-            <section className="head-of-section ExploreOz">
+            <section className=" ExploreOz">
                 <div className="container-fluid">
                     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                         <div className="row">
@@ -21,28 +21,32 @@ const ExploreOZ = (props) => {
                                 </div>    
                             </div>
                         </div>
-                        <div className="row border-of-section ">
-                            <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-right img_block">
+                        <div className="row border-of-section book-oz">
+                            <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-right text-center">
                                 <Tab.Content animation>
                                     <Tab.Pane eventKey="first">
                                         <Media
                                             src={mediaOZ_1}
-                                            type='img' />
+                                            type='img'
+                                            className="p-4 img-book" />
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="second">
                                         <Media
                                             src={mediaOZ_2}
-                                            type='img' />
+                                            type='img'
+                                            className="p-4 img-book" />
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="third">
                                         <Media
                                             src={mediaOZ_3}
-                                            type='img' />
+                                            type='img'
+                                            className="p-4 img-book" />
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="fourth">
                                         <Media
                                             src={mediaOZ_4}
-                                            type='img' />
+                                            type='img'
+                                            className="p-4 img-book" />
                                     </Tab.Pane>
                                 </Tab.Content>
                             {/* {props.configData ? props.configData.map((configItem , index)=>(
@@ -62,16 +66,16 @@ const ExploreOZ = (props) => {
                                     <Paragraph className='paragraph_black'>{'Book your space'}</Paragraph>
                                     <Nav variant="pills" className="flex-column py-4">
                                         <Nav.Item>
-                                            <Nav.Link eventKey="first">Markers Room</Nav.Link>
+                                            <Nav.Link className="explore_link" eventKey="first">Markers Room</Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item>
-                                            <Nav.Link eventKey="second">Photography Studio</Nav.Link>
+                                            <Nav.Link className="explore_link" eventKey="second">Photography Studio</Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item>
-                                            <Nav.Link eventKey="third">Arts & Music School</Nav.Link>
+                                            <Nav.Link className="explore_link border-none" eventKey="third">Arts & Music School</Nav.Link>
                                         </Nav.Item>
                                         <Nav.Item>
-                                            <Nav.Link eventKey="fourth">Auditorium</Nav.Link>
+                                            <Nav.Link className="explore_link" eventKey="fourth">Auditorium</Nav.Link>
                                         </Nav.Item>
                                     </Nav>
                                     {/* {props.configData ? props.configData.map((configItem , index)=>(
@@ -80,7 +84,7 @@ const ExploreOZ = (props) => {
                                             {configItem.key === "home_page_newsfeed_description" && <Paragraph className='description_black'>{configItem.value}</Paragraph>}
                                         </React.Fragment>
                                     )):''} */}
-                                    <Button tagType='link' className='btn_outline_black'>Our Vision</Button>
+                                    <Button tagType='link' className='btn_outline_black'>Explore More</Button>
                                 </div>
                             </div>
                         </div>

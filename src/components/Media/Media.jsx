@@ -17,7 +17,7 @@ const Media = (props) => {
                 />
             }
             {props.type === 'video' &&
-                <video src={props.src} alt={props.alt} loading="lazy" width="750" height="500" controls/>}
+                <video src={props.src} alt={props.alt} loading="lazy" width={props.width} height={props.height} controls={props.controls} autoPlay={props.autoPlay} />}
         </>
     );
 };

@@ -46,6 +46,20 @@ const Locations = (props) => {
                         </div>
                     </div>
                     <div className="row border-of-section">
+                         <div className="col-md-8 col-12 border-right ">
+                                    <Slider {...settings}>
+                                        {locations.length !== 0 && locations.map((location, index) => {
+                                            const {id, address, main_image, title} = location;
+                                            return (
+                                                <div key={index}>
+                                                    <LocationsList id={id} address={address} img={main_image} title={title}/>
+                                                </div>
+                                            )
+                                        })}
+                                    </Slider>
+                                    {locations.length === 0 && <p className=''>theres is no partners yet!!</p>}
+                                    {response !== '' && <p className={`mt-2 mb-0`}>{response}</p>}
+                                </div>
                         <div className="col-md-4 col-12 m-auto ">
                             <div className="box-content px-60">
                                 {props.configData ? props.configData.map((configItem, index) => (
@@ -63,21 +77,8 @@ const Locations = (props) => {
                                         className="btn button-outLine btn-bg-white"
                                         to={'/houses'}>our houses</Buttons>
                                     </div>
-                                </div>
-                                <div className="col-md-8 col-12 border-left ">
-                                    <Slider {...settings}>
-                                        {locations.length !== 0 && locations.map((location, index) => {
-                                            const {id, address, main_image, title} = location;
-                                            return (
-                                                <div key={index}>
-                                                    <LocationsList id={id} address={address} img={main_image} title={title}/>
-                                                </div>
-                                            )
-                                        })}
-                                    </Slider>
-                                    {locations.length === 0 && <p className=''>theres is no partners yet!!</p>}
-                                    {response !== '' && <p className={`mt-2 mb-0`}>{response}</p>}
-                                </div>
+                         </div>
+                               
                             </div>
                 </div>
             </section>
