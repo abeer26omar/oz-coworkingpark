@@ -24,7 +24,7 @@ const LeftContent = (props) => {
                                             {configItem.key === "home_page_about_us_description" && <Paragraph className='description_black'>{configItem.value}</Paragraph>}
                                         </React.Fragment>
                                     )):''}
-                                    <Button tagType='link' className='btn_outline_black'>Our Vision</Button>
+                                    <Button tagType='link' className='btn_outline_black' to={'/about'}>Our Vision</Button>
                                 </div>
                             </div>
                             {props.configData ? props.configData.map((configItem , index)=>(
@@ -37,7 +37,7 @@ const LeftContent = (props) => {
                                             alt="Our OZ Vision"
                                         />
                                     </div> }
-                                </React.Fragment>  )):''}
+                            </React.Fragment>  )):''}
                   </div>
                 </div>
             </section>

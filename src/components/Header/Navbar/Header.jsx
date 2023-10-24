@@ -20,7 +20,7 @@ const Header = ({showBlackNav}) => {
     const listIcon = showBlackNav ? listWhite : listBlack;
     const [Close , setClose] = useState(true);
     const token = useRouteLoaderData('root');
-    console.log(token);
+    // console.log(token);
     return (
         <>
             {/* <Navbar className="position-relative" expand="lg" sticky="top">
@@ -138,7 +138,7 @@ const Header = ({showBlackNav}) => {
                         </div>
                 </div>
             </Navbar> */}
-            <div className="container-fluid py-2 border_bottom">
+            <div className="container-fluid py-2 border_bottom main_header">
                 <nav className={`navbar navbar-expand-xl justify-content-between`}>
                     <NavLink className="navbar-brand d-block-md me-0 p-0" to={'/'}>
                         <Media type="img" src={logoImage} className="logo" alt={logoImage} width='100%'/>
@@ -153,24 +153,6 @@ const Header = ({showBlackNav}) => {
                                 //     fontWeight: isActive ? 800 : 400
                                 // })} 
                                 to={'/booking'}><span>booking</span></NavLink>
-                            </li>
-                            <li className="nav-item px-3">
-                                <NavLink className={`nav-link px-0`}
-                                // style={({ isActive }) => ({
-                                //     color: isActive ? `${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : `${isStrickyFixed ? '#000000' : '#F4F7FE'}`,
-                                //     borderBottom: isActive ? `2px solid ${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : 'none',
-                                //     fontWeight: isActive ? 800 : 400
-                                // })}
-                                to={'/about'}><span>about OZ</span></NavLink>
-                            </li>
-                            <li className="nav-item px-3">
-                                <NavLink className={`nav-link px-0`} 
-                                // style={({ isActive }) => ({
-                                //     color: isActive ? `${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : `${isStrickyFixed ? '#000000' : '#F4F7FE'}`,
-                                //     borderBottom: isActive ? `2px solid ${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : 'none',
-                                //     fontWeight: isActive ? 800 : 400
-                                // })}
-                                to={'/community'}><span>community</span></NavLink>
                             </li>
                             <li className="nav-item px-3">
                                 <NavLink className={`nav-link px-0`} 
@@ -189,6 +171,25 @@ const Header = ({showBlackNav}) => {
                                 //     fontWeight: isActive ? 800 : 400
                                 // })}
                                 to={'/private'}><span>private events</span></NavLink>
+                            </li>
+                            
+                            <li className="nav-item px-3">
+                                <NavLink className={`nav-link px-0`} 
+                                // style={({ isActive }) => ({
+                                //     color: isActive ? `${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : `${isStrickyFixed ? '#000000' : '#F4F7FE'}`,
+                                //     borderBottom: isActive ? `2px solid ${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : 'none',
+                                //     fontWeight: isActive ? 800 : 400
+                                // })}
+                                to={'/community'}><span>community</span></NavLink>
+                            </li>
+                            <li className="nav-item px-3">
+                                <NavLink className={`nav-link px-0`}
+                                // style={({ isActive }) => ({
+                                //     color: isActive ? `${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : `${isStrickyFixed ? '#000000' : '#F4F7FE'}`,
+                                //     borderBottom: isActive ? `2px solid ${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : 'none',
+                                //     fontWeight: isActive ? 800 : 400
+                                // })}
+                                to={'/about'}><span>events</span></NavLink>
                             </li>
                         </ul>
                     </div>

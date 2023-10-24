@@ -4,7 +4,7 @@ import "../src/assets/fonts/golden-hopes/golden-hopes.otf";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import RootLayout from './pages/RootLayout';
 import Membership from "./pages/Membership";
-import Login from "./pages/Login";
+import Login from "./components/Auth/Login";
 import ContactUs from "./pages/ContactUS";
 import MembershipOptions from "./components/Membership/MembershipOptions/MembershipOptions";
 import Joinus from "./components/Forms/JoinUS/Joinus";
@@ -27,8 +27,8 @@ import About from "./pages/About";
 import Profile from "./pages/Profile";
 import MemberPackage from "./components/Membership/MembershipTypes/MemberPackage/MemberPackage";
 import { TokenLoader } from './apis/auth_api/LoginApi';
-import Register from './components/Auth/LoginForm/Register';
-
+import Register from './components/Auth/Register';
+import ForgetPass from './components/Auth/ForgetPass';
 
 function App() {
 
@@ -46,6 +46,7 @@ function App() {
           { path:'profile', element: <Profile />},
           { path:'login', element: <Login />},
           { path:'register', element: <Register />},
+          { path:'forgetpass', element: <ForgetPass />},
           { path:'membership', element: <Membership />}, 
           { path:'membership/:id', element: <MembershipOptions />},
           { path:'singleMember/:id', element: <MemberPackage />},

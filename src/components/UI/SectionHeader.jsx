@@ -8,7 +8,6 @@ const SectionHeader = (props)=>{
     const [fullscreen, setFullscreen] = useState(true);
     
     const handleClose = () => setShow(false);
-    // const handleShow = () => setShow(true);
 
     const handleShow = () => {
         setFullscreen(true);
@@ -32,7 +31,7 @@ const SectionHeader = (props)=>{
                         </React.Fragment>
                     )): ''}
                     <div className="mt-5 d-flex align-items-center">
-                        <Button tagType='link' className="btn btn_outline me-2">Explore More</Button>
+                        <Button tagType='link' className="btn btn_outline me-2" to={'/about'}>Explore More</Button>
                         <Button tagType='link' onClick={handleShow} className="play-modal d-flex align-items-center">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g filter="url(#filter0_b_2905_25554)">
@@ -48,7 +47,7 @@ const SectionHeader = (props)=>{
                                     </filter>
                                 </defs>
                             </svg>
-                            <Paragraph className="text-wrapper-4 mx-2 mb-0">Play Video</Paragraph>
+                            <Paragraph className="text-wrapper-4 mx-2 mb-0">Play Video</Paragraph> 
                         </Button>
                     </div>
                 </div>

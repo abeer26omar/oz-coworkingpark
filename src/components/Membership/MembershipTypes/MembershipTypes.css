@@ -1,3 +1,24 @@
+.membership-types .card-body {
+    background: #FFFFFF;
+    /*box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);*/
+    box-shadow: none;
+}
+
+.membership-types .card-title {
+    font-family: couture, sans-serif;
+    font-style: normal;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-26);
+    line-height: 120%;
+    color: var(--primary-color);
+}
+
+.membership-types .card {
+    background: #FFFFFF;
+    /*box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);*/
+    border: none;
+}
+
 .membership-types .card-img-top {
     height: 300px;
 }

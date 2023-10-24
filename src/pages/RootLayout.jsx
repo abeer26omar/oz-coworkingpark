@@ -15,7 +15,8 @@ const RootLayout = ()=>{
     const AuthRoutes = location.pathname === '/login' || 
         location.pathname === '/contactus' || 
         location.pathname === '/joinus' || 
-        location.pathname === '/register';
+        location.pathname === '/register' || 
+        location.pathname === '/forgetpass';
 
     const StyledBody = styled.body`
         background-color: ${({isGalleryRoute, isLimitedRoute, isAboutRoute}) =>
@@ -45,7 +46,7 @@ const RootLayout = ()=>{
     return(
         <>
             <DataProvider>
-                <StyledBody 
+                {/* <StyledBody 
                     isGalleryRoute={isGalleryRoute}
                     isLimitedRoute={isLimitedRoute}
                     isAboutRoute={isAboutRoute}>
@@ -53,7 +54,7 @@ const RootLayout = ()=>{
                     <AppContainer 
                         isGalleryRoute={isGalleryRoute} 
                         isLimitedRoute={isLimitedRoute}
-                        isAboutRoute={isAboutRoute}>
+                        isAboutRoute={isAboutRoute}> */}
                     <ScrollToTop/>
                         <Header 
                             className="navbar" 
@@ -62,8 +63,8 @@ const RootLayout = ()=>{
                             <Outlet />
                         {!AuthRoutes && <Footer />}
                         {AuthRoutes && <FooterAuth />}
-                    </AppContainer>
-                </StyledBody>
+                    {/* </AppContainer>
+                </StyledBody> */}
             </DataProvider>
         </>
     )

@@ -12,7 +12,10 @@ import RightContentFB from '../components/Home/ContentComponent/RightContentFB';
 import RightContentNewFeed from '../components/Home/ContentComponent/RightContentNewFeed';
 import { useData } from '../apis/auth_api/Createdata';
 import headVideo from '../assets/images/videos/header.mp4';
-
+import HomeMembership from '../components/Home/HomeMembership';
+import OurSpaces from '../components/Home/OurSpaces';
+import OZAmenities from '../components/Home/OZAmenities';
+import ExploreOZ from '../components/Home/ExploreOZ';
 const Home = () => {
     const DataLocation = useData();
     const getComponentValue = DataLocation.getComponentValue
@@ -26,6 +29,10 @@ const Home = () => {
             <MonoBlockTitle configData = {getComponentValue("mono_block")}/>
             <LeftContent configData = {getComponentValue("page_about")} />
             <RightContentNewFeed configData = {getComponentValue("page_newsfeed")} />
+            <HomeMembership />
+            <OurSpaces />
+            <OZAmenities />
+            <ExploreOZ />
             <PublicEvent configData={getComponentValue("page_event")}/>
             <Locations configData={getComponentValue('page_location')}/>
             <RightContentFB configData={getComponentValue("page_fb")} />
