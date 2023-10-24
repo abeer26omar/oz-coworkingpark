@@ -7,13 +7,9 @@ import Paragraph from "../UI/Paragraph";
 const PublicEvent = (props) => {
     const settings = {
         dots: false,
-        infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,
         arrows: false,
-        autoplay: true,
-        speed: 2000,
-        autoplaySpeed: 2000,
         cssEase: "linear",
         lazyLoad: false,
         responsive: [
@@ -29,7 +25,6 @@ const PublicEvent = (props) => {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
-                    initialSlide: 2,
                 },
             },
             {
