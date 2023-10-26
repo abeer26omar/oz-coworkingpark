@@ -2,13 +2,9 @@ import React, {useEffect, useState ,useRef} from 'react';
 import Slider from "react-slick";
 import Paragraph from '../UI/Paragraph';
 import {amenitiesList} from '../../Data/AmenitiesList';
-import Media from '../Media/Media';
-
-
+import HoverVideoPlayer from "react-hover-video-player";
 const AmenitiesList = (props) => {
-
-
-    const [AmenitiesList, setAmenitiesList] = useState(amenitiesList)
+const [AmenitiesList, setAmenitiesList] = useState(amenitiesList)
     const settings = {
         dots: false,
         arrows: true,
@@ -64,26 +60,40 @@ const AmenitiesList = (props) => {
     };
     return (
         <>
-        <Slider {...settings}>
-            {AmenitiesList && AmenitiesList.map((AmenitiesList, index) => {
-                const {id,title, video} = AmenitiesList;
-                return (
-                    <div className="col-lg-12 d-flex justify-content-center amenitiy_item" key={index}>
-                        <div className='position-relative'>
-                            <Media key={id}
-                                width='100%'
-                                height='400px'
-                                type='video'
-                                src={video}
-                                autoPlay="true"  muted />
-                            <div className='content_overlay'>
+        <div className='row'>
+        {AmenitiesList && AmenitiesList.map((AmenitiesList, index) =>{
+               const {id,title, video} = AmenitiesList;
+               return(
+                <div className='col-xl-2 oz_service ' key={index} >
+                       <HoverVideoPlayer
+                          videoSrc={video}
+                          overlayTransitionDuration={1000}
+                          hoverOverlay={
+                         <div className=''
+                         style={{
+                        backgroundColor: "#00000070",
+                        position: "absolute",
+                        top: "0",
+                        left: "0",
+                        width: "100%",
+                        height: "100%",
+                         display: "flex",
+                         justifyContent: "center",
+                        alignItems: "center",
+                        transition:".7s"
+                         }}                         
+                         >
                                 <Paragraph className='overlay_p'>{title}</Paragraph>
-                            </div>
-                        </div>
-                    </div>
-                );
-            })}
-        </Slider>
+                            </div>               
+                                    }
+                                    
+ 
+                         />
+                </div>
+
+               )
+        })}
+        </div>
         {!AmenitiesList && <Paragraph>there is no Amenities to display</Paragraph>}
         </>
     );
