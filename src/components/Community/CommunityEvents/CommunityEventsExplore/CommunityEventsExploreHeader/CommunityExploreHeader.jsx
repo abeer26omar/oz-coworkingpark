@@ -1,7 +1,7 @@
 import React from 'react';
 import party from "../../../../../assets/images/party.png";
 import './CommunityExploreHeader.css';
-import { useData } from '../../../../../apis/auth_api/Createdata';
+import { useData } from '../../../../../apis/context/Createdata';
 import { useEffect ,useState } from 'react';
 import MainHeaderWrapper from '../../../../UI/MainHeaderWrapper';
 import Paragraph from '../../../../UI/Paragraph';

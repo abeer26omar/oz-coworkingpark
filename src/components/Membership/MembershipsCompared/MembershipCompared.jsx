@@ -3,7 +3,7 @@ import {useNavigate, useParams} from 'react-router-dom';
 import check from '../../../assets/images/icons/twemoji_check-mark.svg';
 import './MembershipCompared.css';
 import Media from '../../Media/Media';
-import {getMembershipOptions} from '../../../apis/Api';
+import {getMembershipOptions} from '../../../apis/MembershipApi';
 
 const MembershipCompared = (key, value) => {
     const [listMembershipsTypes, setListMembershipsTypes] = useState([]);
@@ -18,7 +18,7 @@ const MembershipCompared = (key, value) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await getMembershipOptions();
+                const result = await getMembershipOptions(id);
                 setListMembershipsTypes(result);
             } catch (error) {
                 console.log(error);

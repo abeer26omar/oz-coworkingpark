@@ -10,7 +10,7 @@ import { config } from '../apis/config';
 import { useEffect ,useState } from 'react';
 import MonoBlockCommunity from "../components/Community/CommunityNewsFeed/MonoBlockCommunity";
 import JoinCommuinty from "../components/Community/JoinCommuinty/JoinCommuinty";
-import { useData } from "../apis/auth_api/Createdata";
+import { useData } from "../apis/context/Createdata";
 const Community = () => {
      const DataLocation = useData();
      const page_home = DataLocation.config('community')

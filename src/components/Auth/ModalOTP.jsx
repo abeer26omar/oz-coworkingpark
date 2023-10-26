@@ -4,7 +4,7 @@ import Paragraph from  '../UI/Paragraph';
 import Button from '../UI/Button';
 import OTPInput from "otp-input-react";
 import SweetAlert2 from 'react-sweetalert2';
-import { ResendOtp, ConfirmOTP } from '../../apis/auth_api/LoginApi';
+import { ResendOtp, ConfirmOTP } from '../../apis/AuthApi';
 import './Auth.css';
 
 const ModalOTP = (props) => {

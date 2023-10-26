@@ -31,7 +31,6 @@
 .main_header .nav-link:hover {
     cursor: pointer;
     transition: 1s;
-    transform: scale(1.2);
     color: var(--primary-color);
 }
 .main_header .nav-item .active {

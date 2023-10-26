@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "../src/assets/fonts/golden-hopes/golden-hopes.otf";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import RootLayout from './pages/RootLayout';
 import Membership from "./pages/Membership";
@@ -26,7 +27,7 @@ import Gallery from "./pages/Gallery";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import MemberPackage from "./components/Membership/MembershipTypes/MemberPackage/MemberPackage";
-import { TokenLoader } from './apis/auth_api/LoginApi';
+import { TokenLoader } from './apis/AuthApi';
 import Register from './components/Auth/Register';
 import ForgetPass from './components/Auth/ForgetPass';
 
@@ -64,9 +65,12 @@ function App() {
           { path:'community/galleryshow', element: <Gallery />},
         ]}
     ]);
+    const queryClient = new QueryClient();
     return (
       <>
+      <QueryClientProvider client={queryClient}>
         <RouterProvider router={router}/>
+      </QueryClientProvider>
       </>
     );
 }

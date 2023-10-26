@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import vector from "../../../assets/images/Vector.png";
 import {Col, Container, Row} from "react-bootstrap";
 import "./Contactus.css";
-import {inquiry} from "../../../apis/Api";
+import {inquiry} from "../../../apis/MembershipApi";
 import Media from "../../Media/Media";
 
 const Contactus = () => {

@@ -10,7 +10,7 @@ import MonoBlockTitle from '../components/MonoBlocks/MonoBlockTitle';
 import MonoBlockMember from '../components/MonoBlocks/MonoBlockMember';
 import RightContentFB from '../components/Home/ContentComponent/RightContentFB';
 import RightContentNewFeed from '../components/Home/ContentComponent/RightContentNewFeed';
-import { useData } from '../apis/auth_api/Createdata';
+import { useData } from '../apis/context/Createdata';
 import headVideo from '../assets/images/videos/header.mp4';
 import HomeMembership from '../components/Home/HomeMembership';
 import OurSpaces from '../components/Home/OurSpaces';
@@ -40,7 +40,7 @@ const Home = () => {
             <OZKnowledge  configData={getComponentValue("")} />
             <RightContentFB configData={getComponentValue("page_fb")} />
             <MonoBlockMember configData={getComponentValue("page_membership")}/>
-            <Partners/>
+            {/* <Partners/> */}
             <Locations configData={getComponentValue('page_location')}/>
             <NewsLetter/>
         </>

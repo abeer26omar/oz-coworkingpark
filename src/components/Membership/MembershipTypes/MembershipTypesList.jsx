@@ -1,21 +1,21 @@
 import React from 'react';
 import Media from "../../Media/Media";
 import Button from '../../UI/Button';
-import Paragraph from '../../UI/Paragraph';
-const MembershipTypesList = ({id, logo, name, description, img}) => {
+
+const MembershipTypesList = ({id, image, name, link}) => {
 
     return (
         <>
-            <div className="card my-2 h-100">
+            <div className="card my-2 h-100 text-start">
                 <Media
-                    type="img" src={logo} className="card-img-top" alt={name}/>
+                    type="img" src={image} className="card-img-top" alt={name}/>
                 <div className="card-body">
-                    <Paragraph className="card-title">{name}</Paragraph>
+                    <h1 className="card-title">{name}</h1>
                     <Button
                         tagType='link' 
                         to={`/membership/${id}`} 
                         name={name}
-                        className="btn button-outLine btn-bg-white">{'Find out more'}</Button>
+                        className="btn button-outLine btn-bg-white">{link}</Button>
                 </div>
             </div>
         </>

@@ -11,7 +11,7 @@ const RightContentFB = (props) => {
                     <div className="row">
                         <div className="col-lg-12">
                              <div className="head-content-sec">
-                                    <Paragraph className='head_feature'>{'F&B'}</Paragraph>                              
+                                    <Paragraph className='head_feature'>{'OZY\'s'}</Paragraph>                              
                              </div> 
                         </div>
                     </div>
@@ -21,7 +21,7 @@ const RightContentFB = (props) => {
                                 {props.configData ? props.configData.map((configItem , index)=>(
                                     <React.Fragment key={index}>
                                         {configItem.key === "home_page_fb_title" && <Paragraph className='paragraph_black'>{configItem.value}</Paragraph>}
-                                        {configItem.key === "home_page_fb_description" && <Paragraph className='description_black'>{configItem.value}</Paragraph>}    
+                                        {configItem.key === "home_page_fb_description" && <Paragraph className='description_black'>{'From delicious breakfasts that kick-start your engine, indulgent coffee breaks, perfected by energising bites to freshly prepared meals where impeccable service comes alive, OZ promises a culinary affair, guaranteeing to generate your body and mind.'}</Paragraph>}    
                                     </React.Fragment>
                                 )):''}
                                 <Button 

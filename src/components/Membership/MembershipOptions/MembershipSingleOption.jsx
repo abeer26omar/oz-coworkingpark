@@ -16,7 +16,7 @@ const MembershipSingleOption = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await getMembershipOptions();
+            const result = await getMembershipOptions(id);
             setSingleOption(result);
             console.log(result);
         };

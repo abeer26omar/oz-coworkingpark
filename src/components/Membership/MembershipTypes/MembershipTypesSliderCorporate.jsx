@@ -76,17 +76,16 @@ const MembershipTypesSliderCorporate = (props) => {
         <>
         <Slider {...settings}>
             {listMembershipsTypes && listMembershipsTypes.map((listMembershipType, index) => {
-                const {id, name, logo, link, description, img} = listMembershipType;
+                const {id, name, link, description, img} = listMembershipType;
                 return (
                     <div className="row" key={index}>
                         <div className="col-lg-12">
                             <MembershipTypesList
                                 id={id}
                                 name={name}
-                                logo={img}
                                 link={link}
                                 description={description}
-                                img={img}
+                                image={img}
                             />
                         </div>
                     </div>

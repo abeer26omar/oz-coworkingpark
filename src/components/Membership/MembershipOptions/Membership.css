@@ -62,3 +62,101 @@
 .description-membership {
     margin-top: 80px;
 }
+.membershipOptionsList .card{
+    border: 1px solid #0005;
+    background-color: var(--neturals-color1);
+    max-width: 26.0625rem;
+}
+.membershipOptionsList .card-header,
+.membershipOptionsList .card-footer{
+    background-color: transparent;
+    padding: .8rem 1.5rem;
+    border: none;
+}
+.membershipOptionsList .card-header span{
+    color: var(--secondary-color2);
+    font-family: var(--couture-font);
+    font-size: 1.4375rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    text-transform: uppercase;
+}
+.membershipOptionsList .card-header h1{
+    color: var(--black-color);
+    font-family: var(--couture-font);
+    font-size: 2.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+.membershipOptionsList .card-header p{
+    color: var(--black-color);
+    font-family: var(--couture-font);
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    text-transform: uppercase;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #0005;
+}
+.membershipOptionsList .card-header p span{
+    color: var(--secondary-color2);
+    font-family: var(--questrial-font);
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; 
+    text-transform: uppercase;
+}
+.membershipOptionsList .card-body{
+    padding: .8rem 1.5rem;
+}
+.membershipOptionsList .card-body p{
+    color: var(--black-color);
+    font-family: var(--couture-font);
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    text-transform: uppercase;
+}
+.membershipOptionsList .card ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #0005;
+}
+.membershipOptionsList .card ul li {
+    padding: 0.75rem 0;
+    display: flex;
+}
+.membershipOptionsList .card ul li span{
+    color: var(--black-color);
+    font-family: var(--questrial-font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+}
+.membershipOptionsList .card-footer .amenity_title{
+    color: var(--black-color);
+    text-align: center;
+    font-family: var(--couture-font);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+@media screen and (max-width: 1024px) {
+    .membershipOptionsList{
+        margin: 20px;
+    }
+}
+@media screen and (max-width: 575px) {
+    .membershipOptionsList{
+        margin: 16px;
+    }
+}

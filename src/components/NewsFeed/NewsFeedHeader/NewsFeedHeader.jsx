@@ -6,7 +6,7 @@ import {Container, Nav} from "react-bootstrap";
 import Media from "../../Media/Media";
 import Paragraph from "../../UI/Paragraph";
 import MainHeaderWrapper from "../../UI/MainHeaderWrapper";
-import { useData } from "../../../apis/auth_api/Createdata";
+import { useData } from "../../../apis/context/Createdata";
 import { useState ,useEffect } from "react";
 const NewsFeedHeader = (props) => {
 const DataLocation = useData();

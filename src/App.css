@@ -113,6 +113,12 @@ a {
 .px-60 {
     padding: 0 60px;
 }
+.py-70 {
+    padding: 4.375rem 0;
+}
+.pt-70 {
+    padding: 4.375rem 0 0 0;
+}
 .px-70{
     padding: 0 4.375rem;
 }

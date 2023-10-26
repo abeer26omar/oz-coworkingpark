@@ -1,3 +1,6 @@
+.individual_slider .slick-list{
+    text-align: center;
+}
 .membership-types .card-body {
     background: #FFFFFF;
     /*box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);*/
@@ -17,6 +20,7 @@
     background: #FFFFFF;
     /*box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);*/
     border: none;
+    max-width: 500px;
 }
 
 .membership-types .card-img-top {
@@ -24,7 +28,7 @@
 }
 
 .membership-types .card-title {
-    margin: 46px auto;
+    margin: 30px auto;
 }
 
 .membership-types .btn {

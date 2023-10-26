@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Formik } from 'formik';
 import * as Yup from "yup";
-import { Register } from "../../apis/auth_api/LoginApi";
+import { Register } from "../../apis/AuthApi";
 import { useNavigate } from "react-router-dom";
 import Button  from '../UI/Button';
 import ModalOTP from './ModalOTP';

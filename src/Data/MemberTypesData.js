@@ -5,39 +5,21 @@ import card3 from '../assets/images/card3.png'
 export const memberTypes = [
     {
         id:1,
-        name: "Individual",
+        name: "coworking",
         img:  card1,
-        // link:
+        link: 'Find out more'
         
     },
     {
         id:2,
-        name: "Startup",
-        img:  card2
-        // link:
+        name: "open workspace",
+        img:  card2,
+        link: 'Find out more'
     },
     {
         id:3,
-        name: "Corporate Bundle",
-        img:  card3
-        // link:
-    },
-    {
-        id:1,
-        name: "Individual",
-        img:  card1
-        // link:
-    },
-    {
-        id:2,
-        name: "Startup",
-        img:  card2
-        // link:
-    },
-    {
-        id:3,
-        name: "Corporate Bundle",
-        img:  card3
-        // link:
-    },
+        name: "studios",
+        img:  card3,
+        link: 'Find out more'
+    }
 ];

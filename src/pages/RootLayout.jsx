@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { DataProvider } from '../apis/auth_api/Createdata';
+import { DataProvider } from '../apis/context/Createdata';
 import styled from 'styled-components';
 import ScrollToTop from "../ScrollToTop";
 

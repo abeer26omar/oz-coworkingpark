@@ -18,7 +18,6 @@ const Footer = () => {
         config('social').then(res =>{
             setData(res)
             setLoading(false)
-            console.log(res);
          
         })
         .catch(err =>{

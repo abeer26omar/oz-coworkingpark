@@ -20,7 +20,8 @@ const ZeeStudio = (props) => {
                             <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto">
                                 <div className="box-content px-4">
                                       <Paragraph className='paragraph_black'>Zee Studio</Paragraph>
-                                       <Paragraph className='description_black'>Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod </Paragraph>
+                                       <Paragraph className='description_black'>Z Studio is smartly designed to ignite your professionals’ inner athlete, thanks to a state-of-the-art fitness zone and outdoor track that captures an indoor/outdoor philosophy for constant recreation.
+The facility is mindfully designed to take in sweeping views of verdant landscapes while inviting long intervals of natural daylight. The Fitness Zone offers a full-host of sessions spanning yoga, pilates, high-intensity training, as well as Cross Fit programs. All offerings and nutrition programs are tailored to individual needs without interrupting work schedules.</Paragraph>
                                     {/* {props.configData ? props.configData.map((configItem , index)=>(
                                         <React.Fragment key={index}>
                                             {configItem.key === "home_page_about_us_title" &&  <Paragraph className='paragraph_black'>{configItem.value}</Paragraph>}

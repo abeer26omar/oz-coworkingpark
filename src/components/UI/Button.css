@@ -9,6 +9,7 @@
     box-shadow: inset 0 0 0 0 var(--semiWhite-color);
     transition: all .3s ease;
     text-transform: capitalize;
+    display: inline-block;
 }
 
 .btn_outline{
@@ -125,6 +126,17 @@
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
+}
+.ex_link{
+    display: block;
+    padding: 0;
+    color: var(--secondary-color2);
+    font-family: var(--questrial-font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%;
+    text-decoration: underline;
 }
 /* Media Query */
 @media screen and (max-width: 575px) {

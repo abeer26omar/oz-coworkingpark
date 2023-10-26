@@ -4,7 +4,9 @@ import Paragraph from '../UI/Paragraph';
 import {amenitiesList} from '../../Data/AmenitiesList';
 import HoverVideoPlayer from "react-hover-video-player";
 const AmenitiesList = (props) => {
-const [AmenitiesList, setAmenitiesList] = useState(amenitiesList)
+
+
+    const [AmenitiesList, setAmenitiesList] = useState(amenitiesList)
     const settings = {
         dots: false,
         arrows: true,
@@ -68,6 +70,7 @@ const [AmenitiesList, setAmenitiesList] = useState(amenitiesList)
                        <HoverVideoPlayer
                           videoSrc={video}
                           overlayTransitionDuration={1000}
+                          restartOnPaused
                           hoverOverlay={
                          <div className=''
                          style={{
