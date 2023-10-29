@@ -90,6 +90,77 @@
     width: 1rem;
     height: 5.813rem;
 }
+.dropdown{
+    position: relative;
+}
+.dropdown-nav {
+    opacity: 0;
+    display: none;
+    transform: translateY(-4rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 25;
+    background: var(--Head_color);
+    top: 95px;
+    width: 180px;
+    transition: 0.3s ease;  
+}
+.drop_event{
+    color: black;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 3.6;
+    font-family: Questrial;
+    padding: 0 25px;
+    cursor: pointer;
+
+}
+
+.dropdown:hover .dropdown-nav{ 
+        opacity: 1;
+        display: block;
+        /* transform: translateY(0); */
+        /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); */
+    
+}
+.dropdown-nav-user{
+    opacity: 0;
+        display: none;
+        transform: translateY(-4rem);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        z-index: 25;
+        background: var(--Head_color);
+        top: 145px;
+        right: 0;
+        width: 180px;
+        transition: 0.3s ease;
+}
+.dropdown-nav-user.hide {
+    opacity: 1;
+    display: block;
+
+}
+.close-drop{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    font-family: Questrial;
+}
+.border-dropdown{
+    border-bottom: 1px solid #00000030;
+}
+.dropdown-socail{
+        display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 20px;
+        
+}
 /*END*/
 @media screen and (max-width: 575.5px) {
     .logo{
