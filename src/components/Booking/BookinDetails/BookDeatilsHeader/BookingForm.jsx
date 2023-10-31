@@ -1,20 +1,32 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import callenderbook from '../../../../assets/images/icons/calender-book.svg';
 import alarmbook from '../../../../assets/images/icons/alarmbook.svg';
 import people from '../../../../assets/images/icons/people.svg';
 import "react-datepicker/dist/react-datepicker.css";
-
+import RequestFormModal from '../../BookingSpace/RequestFormModal';
 import './BookingForm.css'
 import DatePicker from "react-datepicker";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import Media from "../../../Media/Media";
+import Button from '../../../UI/Button';
 
-const BookingForm = () => {
+const BookingForm = (props) => {
     const [startDate, setStartDate] = useState(null);
     const [selectedStartTime, setSelectedStartTime] = useState(null);
     const [selectedEndTime, setSelectedEndTime] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
+    const [bookingDetails, setBookingDetails] = useState(false);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const navigate = useNavigate();
 
+
+    useEffect(()=>{
+        if(props.space_redirect === '/bookingDetails'){
+            setBookingDetails(true)
+        }
+    },[])
 
     const handleDateChange = (date) => {
         setStartDate(date);
@@ -55,7 +67,9 @@ const BookingForm = () => {
     // body.addEventListener("click", closeSelectGuest);
     const increment = (event) => {
         event.preventDefault();
-        setCounter(counter + 1)
+        if(counter < 6){
+            setCounter(counter + 1)
+        }
     }
 
     // const decrement = (event) => {
@@ -77,10 +91,31 @@ const BookingForm = () => {
         setCounter(initialCount);
     };
 
-
+const saveBookingData = (e)=>{
+    e.preventDefault();
+    if(bookingDetails){
+        navigate('/bookingDetails/bookNow')
+        const bookingData = {
+            date: startDate,
+            time: {
+                start: selectedStartTime,
+                end: selectedEndTime
+            },
+            numberOfPeople: counter,
+            spaceDetails: props.space_details
+        }
+        window.sessionStorage.setItem("BookingDetails", JSON.stringify(bookingData));
+    } else{
+        handleShow()
+    }
+}
     return (
         <>
-            <div className="featured__bookbottom align-self-end col-12">
+            <div className="featured__bookbottom align-self-end col-12" style={{
+                position: 'absolute',
+                bottom: '0',
+                zIndex: '99'
+            }}>
                 <div className="bookbottom">
                     <form className="bookbottom__form">
                         <input type="hidden" id="bookbottom-value-arrive" name="arrive" value="09/08/2023"/>
@@ -90,7 +125,9 @@ const BookingForm = () => {
                         <input type="hidden" id="bookbottom-value-adult" name="adult" value="1"/>
                         <ul className="bookbottom__ul">
 
-                            <li className="bookbottom__li bookbottom__li--icon bookbottom__li--icon-guests">
+                            { bookingDetails && 
+                                <>
+                                <li className="bookbottom__li bookbottom__li--icon bookbottom__li--icon-guests">
                                 <div className="bookbottom__guesticon">
                                     <Media
                                         type="img"
@@ -103,7 +140,9 @@ const BookingForm = () => {
                             <li className="bookbottom__li bookbottom__li--select bookbottom__li--select-guests">
                                 <div className="bookbottom__select position-relative">
                                     {/*<div className="bookbottom__select-text">Total Guests</div>*/}
-                                    <button className="button-select-guest" onClick={openSelectGuest}>
+                                    <button className="button-select-guest" onClick={openSelectGuest} style={{
+                                        cursor: 'pointer'
+                                    }}>
                                         {counter !== null && counter != 0 ? `${counter} persons` : "Number of People"}
                                     </button>
 
@@ -119,6 +158,9 @@ const BookingForm = () => {
                                     )}
                                 </div>
                             </li>
+                                </>
+                            
+                           }
 
                             <li className="bookbottom__li bookbottom__li--icon bookbottom__li--icon-datepicker">
                                 <div className="bookbottom__calicon">
@@ -140,6 +182,8 @@ const BookingForm = () => {
                                 />
 
                             </li>
+                            {bookingDetails && 
+                                <>
                             <li className="bookbottom__li bookbottom__li--icon">
                                 <div className="bookbottom__roomicon">
                                     <Media
@@ -155,9 +199,8 @@ const BookingForm = () => {
                                             {/*<button onClick={handleButtonClick}>Open Date Pickers</button>*/}
                                             <div className="time-container">
                                                 {selectedEndTime ? (
-                                                    <div>
-                                                        <div className="d-flex justify-content-center">
-                                                            <p>
+                                                        <div className="d-flex justify-content-evenly align-items-center">
+                                                            <p className='mb-0'>
                                                                 <DatePicker
                                                                     // selected={selectedStartTime}
                                                                     onChange={handleStartTimeChange}
@@ -176,12 +219,11 @@ const BookingForm = () => {
                                                                 >
                                                                 </DatePicker>
                                                             </p>
-                                                            <p className="mx-3">-</p>
-                                                            <p className="place-text">{selectedEndTime.toLocaleTimeString()}</p>
+                                                            <p className="mb-0 mx-2">-</p>
+                                                            <p className="place-text mb-0">{selectedEndTime.toLocaleTimeString()}</p>
                                                         </div>
 
 
-                                                    </div>
                                                 ) : (
                                                     <div>
                                                         <DatePicker
@@ -230,10 +272,15 @@ const BookingForm = () => {
                                 </div>
 
                             </li>
+                            </>
+                           }
 
                             <li className="bookbottom__li bookbottom__li--submit">
                                 <div className="btnlinks">
-                                    <NavLink to="/bookingDetails/bookNow" className="reservebutton">Book Now</NavLink>
+                                    <Button 
+                                        className="reservebutton" 
+                                        tagType='link'
+                                        onClick={saveBookingData}>Book Now</Button>
                                     {/*<input type="submit" value="" className="reservebutton"/>*/}
                                 </div>
                             </li>
@@ -241,7 +288,9 @@ const BookingForm = () => {
                     </form>
                 </div>
             </div>
-
+            <RequestFormModal 
+                show={show}
+                handleClose={handleClose}/>
         </>
     );
 };

@@ -60,7 +60,7 @@ function App() {
           { path:'houses', element: <Houses />},
           { path:'houses/:id', element: <HouseDetails />},
           { path:'booking', element: <Booking />},
-          { path:'bookingDetails', element: <BookingDetails />},
+          { path:'bookingDetails/:space/:id', element: <BookingDetails />},
           { path:'bookingDetails/bookNow', element: <BookingSummary />},
           { path:'community/galleryshow', element: <Gallery />},
         ]}

@@ -332,6 +332,7 @@ export const IndividualTypesList = [
                 ],
                 link: 'Explore More',
                 discount: '5% Discount',
+                image: theSocial_image
             },
             {
                 id: 2,
@@ -583,7 +584,9 @@ export const IndividualTypesList = [
                     }
                 ],
                 link: 'Explore More',
-                discount: '10% Discount'
+                discount: '10% Discount',
+                image: theSocial_image
+
             },
             {
                 id: 3,
@@ -836,6 +839,8 @@ export const IndividualTypesList = [
                 ],
                 link: 'Explore More',
                 discount: '15% Discount',
+                image: theSocial_image
+
             }
         ],
         image: theSocial_image
@@ -1121,6 +1126,7 @@ export const IndividualSocialTypes = [
         ],
         link: 'Explore More',
         discount: '5% Discount',
+        description: 'Craving flexibility? Social membership is designed to offer individuals with the flexibility they crave in how they live, work, connect, and gather. It\'s the ideal solution for freelancers and those seeking to break free from the confines of traditional workspaces. By joining our community, they gain access to a huge network of like-minded individuals, fostering growth and collaboration. At OZ, we invite you all members to enjoy access to all communal and social spaces, may book conference rooms, and are invited to join our cultural programming events.'
     },
     {
         id: '2',
@@ -1400,7 +1406,9 @@ export const IndividualSocialTypes = [
             }
         ],
         link: 'Explore More',
-        discount: '10% Discount'
+        discount: '10% Discount',
+        description: 'Craving flexibility? Social membership is designed to offer individuals with the flexibility they crave in how they live, work, connect, and gather. It\'s the ideal solution for freelancers and those seeking to break free from the confines of traditional workspaces. By joining our community, they gain access to a huge network of like-minded individuals, fostering growth and collaboration. At OZ, we invite you all members to enjoy access to all communal and social spaces, may book conference rooms, and are invited to join our cultural programming events.'
+
     },
     {
         id: '3',
@@ -1681,5 +1689,6 @@ export const IndividualSocialTypes = [
         ],
         link: 'Explore More',
         discount: '15% Discount',
+        description: 'Craving flexibility? Social membership is designed to offer individuals with the flexibility they crave in how they live, work, connect, and gather. It\'s the ideal solution for freelancers and those seeking to break free from the confines of traditional workspaces. By joining our community, they gain access to a huge network of like-minded individuals, fostering growth and collaboration. At OZ, we invite you all members to enjoy access to all communal and social spaces, may book conference rooms, and are invited to join our cultural programming events.'
     }
 ]

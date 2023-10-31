@@ -11,6 +11,8 @@ import { useEffect ,useState } from 'react';
 import MonoBlockCommunity from "../components/Community/CommunityNewsFeed/MonoBlockCommunity";
 import JoinCommuinty from "../components/Community/JoinCommuinty/JoinCommuinty";
 import { useData } from "../apis/context/Createdata";
+import { Element } from "react-scroll";
+
 const Community = () => {
      const DataLocation = useData();
      const page_home = DataLocation.config('community')

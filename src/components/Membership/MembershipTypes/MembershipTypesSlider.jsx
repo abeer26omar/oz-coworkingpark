@@ -13,14 +13,13 @@ const MembershipTypesSlider = () => {
     const settings = {
         dots: false,
         arrows: true,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         infinite: true,
         centerMode: true,
-        centerPadding: '60px',
         responsive: [
             {
-                breakpoint: 1440,
+                breakpoint: 1500,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 1,
@@ -71,17 +70,16 @@ const MembershipTypesSlider = () => {
             {MembershipIndividualsTypes && MembershipIndividualsTypes.map((listMembershipType, index) => {
                 const {id, name, logo, link, description, image} = listMembershipType;
                 return (
-                    <div className="row" key={index}>
-                        <div className="col-lg-12">
-                            <MembershipTypesList
-                                id={id}
-                                name={name}
-                                logo={logo}
-                                link={link}
-                                description={description}
-                                image={image}
-                            />
-                        </div>
+                    <div className='px-3'>
+                        <MembershipTypesList
+                            key={index}
+                            id={id}
+                            name={name}
+                            logo={logo}
+                            link={link}
+                            description={description}
+                            image={image}
+                        />
                     </div>
                 );
             })}

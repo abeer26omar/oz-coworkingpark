@@ -24,14 +24,14 @@ const OurSpaces = ()=>{
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="head-content-sec">
-                                    <Paragraph className='head_feature'>{'Our Spaces'}</Paragraph>                              
+                                    <Paragraph className='head_feature'>{'Our Workspaces'}</Paragraph>                              
                                 </div>
                             </div>
                         </div>
                         <div className="row border-of-section">
                             <div className="col-md-4 col-12 m-auto ">
                                 <div className="box-content px-60">
-                                    <Paragraph className='paragraph_black'>{'co-working'}</Paragraph>
+                                    <Paragraph className='paragraph_black'>{'Our Workspaces'}</Paragraph>
                                     <Paragraph className='description_black'>{"Within OZ, you'll discover a wide range of workspaces designed with your preferences in mind. Whether you prefer a flexible spot amidst a bustling community, a dedicated space to call your own, or step into a quiet and personalised environment inside your very own private studio. We have the perfect workspace for you all within the stimulating backdrop of a vibrant community of like-minded professionals."}</Paragraph>                                            
                                     {/* {props.configData ? props.configData.map((configItem, index) => (
                                         <React.Fragment key={index}>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Nav, Tab} from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import './BookingSummary.css';
@@ -15,8 +15,16 @@ import shape from "../../../../../assets/images/VectorRight.png";
 import cash from '../../../../../assets/images/icons/Cash.svg';
 import wallet from '../../../../../assets/images/icons/Credit.svg';
 import Media from "../../../../Media/Media";
+import { addYears, formatWithOptions } from 'date-fns/fp'
+import { eo } from 'date-fns/locale'
 
 const BookingSummary = () => {
+    const [bookingData, setBookingData] = useState();
+    const [date, setDate] = useState();
+    useEffect(()=>{
+        setBookingData(JSON.parse(window.sessionStorage.getItem("BookingDetails")))
+    },[]);
+
     const steps = [
         {key: 'summary', label: 'Summary Booking'},
         {key: 'payment', label: 'Payment Method'},

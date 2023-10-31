@@ -20,7 +20,7 @@
     background: #FFFFFF;
     /*box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);*/
     border: none;
-    max-width: 500px;
+    /* max-width: 500px; */
 }
 
 .membership-types .card-img-top {

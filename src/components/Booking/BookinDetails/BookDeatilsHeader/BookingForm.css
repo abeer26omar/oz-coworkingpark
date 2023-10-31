@@ -25,7 +25,9 @@
     line-height: 120%; 
 
 }
-
+.bookbottom__datetitle{
+    cursor: pointer;
+}
 .reservebutton {
     color: var(--white-color);
     font-family: Couture;
@@ -35,8 +37,11 @@
     line-height: 120%; 
     background: transparent;
     border: 0;
+    transition: .3s all ease;
 }
-
+.reservebutton:hover{
+    color: var(--white-color);
+}
 bookbottom__ul img {
     width: 100%;
 }
@@ -268,6 +273,7 @@ bookbottom__ul img {
     border: 0;
     background-color: transparent;
     width: 100%;
+    cursor: pointer;
 }
 
 .select-date-costume {

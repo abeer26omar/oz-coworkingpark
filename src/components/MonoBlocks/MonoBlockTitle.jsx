@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "../UI/Button";
 import Paragraph from "../UI/Paragraph";
+import { Link } from 'react-scroll';
+
 const  MonoBlockTitle = (props) => {
     return (
         <>
@@ -22,7 +24,7 @@ const  MonoBlockTitle = (props) => {
                             </div>
                             <div className="buttons d-lg-flex d-md-flex d-sm-block my-3 justify-content-center align-items-center text-center">
                                 <Button tagType = 'link' className={`btn button-outLine`} to={'/booking'}>Booking</Button>
-                                <Button tagType = 'link' className={`btn button-outLine`} to={'/booking'}>events</Button>
+                                <Button tagType = 'link' className={`btn button-outLine`} to={'/community'}>events</Button>
                                 <Button tagType = 'link' className={`btn button-outLine`} to={'/membership'}>memberships</Button>
                             </div>
                         </div>

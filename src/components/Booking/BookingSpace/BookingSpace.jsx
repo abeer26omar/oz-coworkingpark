@@ -1,24 +1,18 @@
 import React, {useState} from 'react';
 import './BookingSpace.css'
 import Slider from "react-slick";
-import filtericons from "../../../assets/images/icons/filtericon.svg";
-import {BookingsData} from "../../../Data/BookingsData";
-import bottom_arrow from "../../../assets/images/icons/bookbottom.svg";
+import {Places}  from '../../../Data/GroupingPlaces';
 import LastBooking from "../LastBooking/LastBooking";
-import BookingFilter from "../BookingFilter/BookingFilter";
-import BookingSpaceList from "./BookingSpaceList";
-import Media from "../../Media/Media";
-import Button from '../../UI/Button';
-const BookingSpace = () => {
-        const [isFilterOpen, setIsFilterOpen] = useState(false);
+import BookingSpacesTypes from './BookingSpacesTypes';
 
-        const toggleFilter = () => {
-            setIsFilterOpen(!isFilterOpen);
-        };
-        const [cards, setCards] = useState(BookingsData.slice(0, 3));
-        const handleShowMore = () => {
-            const newCards = [...cards, ...BookingsData.slice(cards.length, cards.length + 3)];
-            setCards(newCards);
+const BookingSpace = () => {
+        const [bookingPlaces, setBookingPlaces] = useState(Places);
+        const [placeProperties, setplaceProperties] = useState(Places[0]);
+
+
+        const changeSpace = (place) => {
+            // e.preventDefault();
+            setplaceProperties(place)
         };
 
         let settings = {
@@ -26,7 +20,7 @@ const BookingSpace = () => {
             arrows: true,
             infinite: false,
             speed: 500,
-            slidesToShow: 8,
+            slidesToShow: 5,
             slidesToScroll: 1,
             align: 'center',
             lazyLoad: true,
@@ -34,22 +28,22 @@ const BookingSpace = () => {
                 {
                     breakpoint: 1024,
                     settings: {
-                        slidesToShow: 6,
-                        slidesToScroll: 6,
+                        slidesToShow: 4,
+                        slidesToScroll: 1,
                     }
                 },
                 {
                     breakpoint: 768,
                     settings: {
-                        slidesToShow: 4,
-                        slidesToScroll: 4,
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
                     }
                 },
                 {
                     breakpoint: 600,
                     settings: {
                         slidesToShow: 2,
-                        slidesToScroll: 2,
+                        slidesToScroll: 1,
                     }
                 },
                 {
@@ -67,146 +61,22 @@ const BookingSpace = () => {
                     <div className="container-fluid">
                         <div className="row">
                             <Slider {...settings}>
-                                <div className="col-lg-2">
-                                    <div className="d-flex justify-content-center align-items-center">
-                                        <span className="space-name">Meeting Room</span>
-                                        <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div className="col-lg-2">
-                                    <div className="d-flex justify-content-center align-items-center">
-                                        <span className="space-name">Meeting Room</span>
-                                        <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div className="col-lg-2">
-                                    <div className="d-flex justify-content-center align-items-center">
-                                        <span className="space-name">Meeting Room</span>
-                                        <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div className="col-lg-2">
-                                    <div className="d-flex justify-content-center align-items-center">
-                                        <span className="space-name">Meeting Room</span>
-                                        <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div className="col-lg-2">
-                                    <div className="d-flex justify-content-center align-items-center">
-                                        <span className="space-name">Meeting Room</span>
-                                        <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div className="col-lg-2">
-                                    <div className="d-flex justify-content-center align-items-center">
-                                        <span className="space-name">Meeting Room</span>
-                                        <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div className="col-lg-2">
-                                    <div className="d-flex justify-content-center align-items-center">
-                                        <span className="space-name">Meeting Room</span>
-                                        <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div className="col-lg-2">
-                                    <div className="d-flex justify-content-center align-items-center">
-                                        <span className="space-name">Meeting Room</span>
-                                        <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                                <div className="col-lg-2">
-                                    <div className="d-flex justify-content-center align-items-center">
-                                        <span className="space-name">Meeting Room</span>
-                                        <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                            </Slider>
-                        </div>
-                        <div className="row border-top border-bottom booking-space-margin">
-                            <div className="col-lg-6 col-md-6 col-sm-12 border-right">
-                                <h2 className="book-title">Meeting Room</h2>
-                            </div>
-                            <div className="col-lg-6 col-md-6 col-sm-12  text-end  m-auto">
-                                <div className="btn-spaces-filter">
-                                    <Button 
-                                        tagType='link' 
-                                        className="button-outLine px-4 btn-bg-white btn-filter"
-                                        onClick={toggleFilter}
-                                    >
-                                        <Media
-                                            type="img" src={filtericons} alt="filter icon" className="icon-filter"/>
-                                        Filter
-                                    </Button>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div className="filter border-top border-bottom">
-                            <BookingFilter isOpen={isFilterOpen}/>
-                        </div>
-                        <div className="booking-section border-top border-bottom">
-                            <div className="row">
-                                {cards.map((book, index) => {
-                                    const {id, img, title, text, options, price} = book;
+                                {bookingPlaces.map((place, index)=>{
                                     return (
-                                        <>
-                                            <div className="col-lg-4 col-md-6 col-sm-12" key={index}>
-                                                <BookingSpaceList id={id} img={img} title={title} text={text}
-                                                                  options={options} price={price}/>
+                                        <div className="col-lg-2" key={index}>
+                                            <div className="d-flex justify-content-between align-items-center" onClick={()=>{changeSpace(place)}}>
+                                                    <span className="space-name">{place.title}</span>
+                                                    <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
+                                                    </svg>
                                             </div>
-                                        </>
+                                        </div>
                                     )
                                 })}
-
-
-                            </div>
-                            {cards.length < BookingsData.length && (
-                                <div className='text-center mt-5'>
-                                    <Button tagType="link" className="btn-cards-more" onClick={handleShowMore}>Show more
-                                        <Media
-                                            type="img"
-                                            src={bottom_arrow} alt="arrow"/> </Button>
-                                </div>
-                            )}
-
+                            </Slider>
                         </div>
+                        <BookingSpacesTypes space={placeProperties}/>
                     </div>
                 </section>
 

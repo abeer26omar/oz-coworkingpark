@@ -6,10 +6,11 @@ import printer from '../../../../assets/images/icons/print.png';
 import Media from "../../../Media/Media";
 import Paragraph from '../../../UI/Paragraph';
 
-const SpaceDetails = () => {
+const SpaceDetails = (props) => {
+
     return (
         <>
-            <section className="space-details">
+           <section className="space-details">
                 <div className="container-fluid">
                     <div className="row p-3">
                         <div className="col-lg-6 col-12 p-sm-5 p-3 border-right">
@@ -18,20 +19,12 @@ const SpaceDetails = () => {
                                     Space Description
                                 </Paragraph>
                                 <Paragraph className="p-description">
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem
-                                    ipsum dolor sit amet, consectetur dipiscing elit eiusmod ipsum dolor sit amet,
-                                    dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit
-                                    eiusmod Lorem ipsum dolor sit a elit eiusmod Lorem ipsum dolor sit amet, consectetur
-                                    di consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur
-                                    dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectet ipsum dolor sit amet,
-                                    consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing
-                                    elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit Lorem ipsum
-                                    dolor sit amet, consectetur dipiscing elit eiusmod
+                                    {props.space_details.description}
                                 </Paragraph>
                             </div>
                             <div className="catering">
                                 <Paragraph className="h2-catering">
-                                    Catering
+                                    Services
                                 </Paragraph>
                                 <div className="form-check">
                                     <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
@@ -48,8 +41,7 @@ const SpaceDetails = () => {
                                     Price
                                 </Paragraph>
                                 <div className="price-list">
-                                    <span className=""><del className="discount-price">25 EGP / Hour</del></span>
-                                    <span>125.000 / Hour</span>
+                                    <span>{props.space_details.price} / Hour</span>
                                 </div>
                             </div>
                             <div className="space-facilities mb-5">
@@ -58,21 +50,17 @@ const SpaceDetails = () => {
                                 </Paragraph>
                                 <div className="facilities-list">
                                     <ul>
-                                        <li>
-                                            <Media
-                                                type="img" src={wifi}/>
-                                            wifi
-                                        </li>
-                                        <li>
-                                            <Media
-                                                type="img" src={chair}/>
-                                            Chairs
-                                        </li>
-                                        <li>
-                                            <Media
-                                                type="img" src={printer}/>
-                                            Printer
-                                        </li>
+                                        {
+                                            props.space_details.amenities.slice(0,3).map((amenity,index)=>{
+                                                return (
+                                                    <li className='' key={index}>
+                                                        <Media
+                                                            type="img" src={wifi}/>
+                                                        {amenity.name}
+                                                    </li>
+                                                )
+                                            })
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -80,7 +68,7 @@ const SpaceDetails = () => {
                                 <Paragraph className="h2-description">
                                     capacity
                                 </Paragraph>
-                                <span>6 Persons</span>
+                                <span>{props.space_details.capacity} Persons</span>
                             </div>
 
                         </div>

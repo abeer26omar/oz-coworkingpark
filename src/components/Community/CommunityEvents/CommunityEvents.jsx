@@ -54,7 +54,7 @@ const CommunityEvents = (props) => {
                     <div className="container-fluid">
                             <div className="  ">
                                 <div className="col-md-12 col-lg-12 col-sm-12 col-xs-6 m-auto ">
-                                    <div className="box-content px-60 d-flex justify-content-between align-items-center">
+                                    <div className="box-content d-flex justify-content-between align-items-center">
                                         <div className="row">
                                         {props.configData ? props.configData.map((configItem, index) => (
                                         <React.Fragment key={index}>

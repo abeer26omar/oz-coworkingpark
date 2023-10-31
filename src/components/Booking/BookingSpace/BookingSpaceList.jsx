@@ -4,7 +4,7 @@ import favs from "../../../assets/images/icons/heart.svg";
 import Media from "../../Media/Media";
 import Button from "../../UI/Button";
 
-const BookingSpaceList = ({id, img, text, price, title, options}) => {
+const BookingSpaceList = ({id, img, description, price, name, amenities, place_type}) => {
     return (
         <>
             <Card className="book-card" key={id}>
@@ -17,20 +17,20 @@ const BookingSpaceList = ({id, img, text, price, title, options}) => {
 
                 </div>
                 <Card.Body>
-                    <Card.Title>{title}</Card.Title>
+                    <Card.Title>{name}</Card.Title>
 
                     <ul className="list-options ">
-                        {options.map((single, index) => {
+                        {amenities.slice(0, 3).map((single, index) => {
                             return (
                                 <li className="list-option-item" key={index}>{single.name}</li>
                             )
                         })}
                     </ul>
-                    <Card.Text>{text}</Card.Text>
+                    <Card.Text>{description}</Card.Text>
                     <div
                         className="d-flex justify-content-between align-items-center card-footer">
                         <span className="price-hour">{price} / Hour</span>
-                        <Button to={"/bookingDetails"} tagType='link' className='btn_outline_black' >Book Now</Button>
+                        <Button to={`/bookingDetails/${place_type}/${id}`} tagType='link' className='btn_outline_black'>Book Now</Button>
                     </div>
 
                 </Card.Body>

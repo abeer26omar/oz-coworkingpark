@@ -6,18 +6,23 @@ import Media from "../../../Media/Media";
 import MainHeaderWrapper from '../../../UI/MainHeaderWrapper';
 import Paragraph from '../../../UI/Paragraph';
 
-const BookingDetailsHeader = () => {
+const BookingDetailsHeader = (props) => {
     return (
         <>
-            <MainHeaderWrapper image={community} special_flex={`justify-content-center`}>
-                <div className="container">
-                    <Paragraph className="text-one" >Booking </Paragraph>
-                    <Paragraph className="text-two">Meeting room 01 </Paragraph>
-                </div>
-                <div className='d-flex h-100'>
-                    <BookingForm />
-                </div>
-            </MainHeaderWrapper>
+        {
+                    <div className='position-relative'>
+                        <MainHeaderWrapper image={community} special_flex={`justify-content-md-center justify-content-start`}>
+                            <div className="container">
+                                <Paragraph className="text-one">Booking </Paragraph>
+                                <Paragraph className="text-two">{props.space_details.name}</Paragraph>
+                            </div>
+                            <div className='d-flex h-100'>
+                            </div>
+                        </MainHeaderWrapper>
+                        <BookingForm space_details={props.space_details} space_redirect={props.space_redirect}/>
+                    </div>
+               
+        }
         </>
     );
 };

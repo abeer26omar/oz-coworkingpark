@@ -36,8 +36,17 @@ export const amenitiesList = [
     },
         {
         id: 6,
-         title: "Innovation Capsule",
-        video: Video_3,
-    
+        title: "Perks",
+        video: Video_6,
     },
+    {
+        id: 7,
+        title: "Perks",
+        video: Video_6,
+    },
+    {
+        id: 8,
+        title: "Perks",
+        video: Video_6,
+    }
 ];

@@ -484,6 +484,22 @@ a {
 }
 /*End*/
 /*Common Classes*/
+.AmenitiesList_videos video{
+    height: 400px !important;
+}
+.AmenitiesList_videos .home-events .slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+/* @media screen and (min-width: 1440px){
+    .AmenitiesList_videos .home-events .slick-slide {
+        width: 250px !important;
+    }
+} */
+
 .head-of-section {
     border-top: 1.5px solid var(--secondary-color2);
     background: var(--neturals-color1);

@@ -10,7 +10,8 @@ import { IndividualSocialTypes } from '../../../../Data/IndividualsTypesData';
 import MainHeaderWrapper from '../../../UI/MainHeaderWrapper';
 import Paragraph from '../../../UI/Paragraph';
 import Button from '../../../UI/Button';
-
+import classes from '../../../UI/MainHeaderWrapper.module.css';
+import optionImage from '../../../../assets/images/membership/Rectangle.png'
 const MemberPackage = () => {
     const {id} = useParams();
 
@@ -21,14 +22,28 @@ const MemberPackage = () => {
                 if(option.id === id){
                     return (
                         <>
-                            <MainHeaderWrapper image={option.image} key={index}>
+                        <div className={`position-relative`}>
+                            <div className={`${classes.header_bg}`}>
+                                <div 
+                                style={
+                                    {
+                                        backgroundImage: `url(${optionImage})`
+                                    }}
+                                className={`${classes.img_bg}`}>
+                                </div>
+                              
+                                <div className={'position-relative py-5'} style={{
+                                    zIndex: 99
+                                }}>
                                 <div className="container-fluid px-70 py-5">
                                     <div className="col-md-6 col-12">
                                         <h1 className="main_header mb-0">{'Individual'}</h1>
                                         <h2 className="head_paragraph mb-3">{option.name}</h2>
                                     </div>
                                 </div>
-                            </MainHeaderWrapper>   
+                            </div>
+                            </div>
+                        </div>
                             <section className="at_oz">
                                 <div className="container-fluid">
                                     <div className="row justify-content-between">
@@ -36,12 +51,7 @@ const MemberPackage = () => {
                                             <div className="box-content px-60">
                                                 <h2 className="h2-text-box">I'LL BE AT OZ</h2>
                                                     <p className="p-text-box">
-                                                            Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,
-                                                            consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,
-                                                            Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,
-                                                            consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,
-                                                            Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,
-                                                            consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet, L
+                                                            {option.description}
                                                         </p>
                                                         <Button 
                                                             tagType='link'

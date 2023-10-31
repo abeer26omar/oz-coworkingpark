@@ -15,7 +15,7 @@ const OZAmenities = (props) => {
                             </div> 
                         </div>               
                             {/*  */}
-                        <div className="border-of-section px-100">
+                        <div className="border-of-section">
                             <div className="row p-5 justify-content-between align-items-center">
                                 <Paragraph className='paragraph_black'>{'The benefits'}</Paragraph>
                                 <Paragraph className='description_black w-75'>{"We offer a wide range of amenities to support our members' personal and professional growth. Our approach focuses on creating a collaborative environment that fosters creativity and innovation. Whether you prefer a quiet workspace or a collaborative area, we have the perfect space for you. With high-speed internet and state-of-the-art facilities, you can stay connected and productive. We also provide well-equipped meeting rooms, workshops, networking and learning opportunities to enhance your skills and expand your professional network."}</Paragraph>

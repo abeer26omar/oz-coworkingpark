@@ -9,11 +9,18 @@ const AmenitiesList = (props) => {
     const [AmenitiesList, setAmenitiesList] = useState(amenitiesList)
     const settings = {
         dots: false,
-        arrows: true,
-        slidesToShow: 6,
+        arrows: false,
+        slidesToShow: 7,
         slidesToScroll: 1,
         autoplay: false,
         responsive: [
+            {
+                breakpoint: 1500,
+                settings: {
+                    slidesToShow: 6,
+                    slidesToScroll: 1,
+                }
+            },
             {
                 breakpoint: 1200,
                 settings: {
@@ -22,7 +29,7 @@ const AmenitiesList = (props) => {
                 }
             },
             {
-                breakpoint: 992,
+                breakpoint: 1024,
                 settings: {
                     slidesToShow: 4,
                     slidesToScroll: 1,
@@ -62,40 +69,41 @@ const AmenitiesList = (props) => {
     };
     return (
         <>
-        <div className='row m-auto text-center'>
-        {AmenitiesList && AmenitiesList.map((AmenitiesList, index) =>{
-               const {id,title, video} = AmenitiesList;
-               return(
-                <div className='col-xl-2 oz_service ' key={index} >
-                       <HoverVideoPlayer
-                          videoSrc={video}
-                          overlayTransitionDuration={1000}
-                          restartOnPaused
-                          hoverOverlay={
-                         <div className=''
-                         style={{
-                        backgroundColor: "#00000070",
-                        position: "absolute",
-                        top: "0",
-                        left: "0",
-                        width: "100%",
-                        height: "100%",
-                         display: "flex",
-                         justifyContent: "center",
-                        alignItems: "center",
-                        transition:".7s"
-                         }}                         
-                         >
-                                <Paragraph className='overlay_p'>{title}</Paragraph>
-                            </div>               
-                                    }
-                                    
- 
-                         />
-                </div>
+        <div className="col-lg-12 AmenitiesList_videos">
+            <Slider {...settings} className="home-events">
+                {AmenitiesList && AmenitiesList.map((AmenitiesList, index) =>{
+                    const {id,title, video} = AmenitiesList;
+                    return(
+                            <HoverVideoPlayer
+                                    key={index}
+                                    videoSrc={video}
+                                    overlayTransitionDuration={1000}
+                                    restartOnPaused
+                                    hoverOverlay={
+                                    <div className=''
+                                    style={{
+                                    backgroundColor: "#00000070",
+                                    position: "absolute",
+                                    top: "0",
+                                    left: "0",
+                                    width: "100%",
+                                    height: "100%",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    transition:".7s"
+                                    }}                         
+                                    >
+                                            <Paragraph className='overlay_p'>{title}</Paragraph>
+                                        </div>               
+                                                }
+                                                
+            
 
-               )
-        })}
+                                                />
+                    )
+                })}
+            </Slider>
         </div>
         {!AmenitiesList && <Paragraph>there is no Amenities to display</Paragraph>}
         </>
