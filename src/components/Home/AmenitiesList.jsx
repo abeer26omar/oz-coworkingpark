@@ -62,7 +62,7 @@ const AmenitiesList = (props) => {
     };
     return (
         <>
-        <div className='row'>
+        <div className='row m-auto text-center'>
         {AmenitiesList && AmenitiesList.map((AmenitiesList, index) =>{
                const {id,title, video} = AmenitiesList;
                return(

@@ -22,30 +22,31 @@ const ExploreOZ = (props) => {
                             </div>
                         </div>
                         <div className="row border-of-section book-oz">
+                          
                             <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-right text-center">
                                 <Tab.Content animation>
                                     <Tab.Pane eventKey="first">
-                                        <Media
+                                        <img
                                             src={mediaOZ_1}
-                                            type='img'
+                                            alt='img'
                                             className="p-4 img-book" />
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="second">
-                                        <Media
+                                        <img
                                             src={mediaOZ_2}
-                                            type='img'
+                                            alt='img'
                                             className="p-4 img-book" />
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="third">
-                                        <Media
+                                        <img
                                             src={mediaOZ_3}
-                                            type='img'
+                                            alt='img'
                                             className="p-4 img-book" />
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="fourth">
-                                        <Media
+                                        <img
                                             src={mediaOZ_4}
-                                            type='img'
+                                            alt='img'
                                             className="p-4 img-book" />
                                     </Tab.Pane>
                                 </Tab.Content>
@@ -78,12 +79,6 @@ const ExploreOZ = (props) => {
                                             <Nav.Link className="explore_link" eventKey="fourth">Auditorium</Nav.Link>
                                         </Nav.Item>
                                     </Nav>
-                                    {/* {props.configData ? props.configData.map((configItem , index)=>(
-                                        <React.Fragment key={index}>
-                                            {configItem.key === "home_page_newsfeed_title" &&  <Paragraph className='paragraph_black'>{configItem.value}</Paragraph>}
-                                            {configItem.key === "home_page_newsfeed_description" && <Paragraph className='description_black'>{configItem.value}</Paragraph>}
-                                        </React.Fragment>
-                                    )):''} */}
                                     <Button tagType='link' className='btn_outline_black'>Explore More</Button>
                                 </div>
                             </div>

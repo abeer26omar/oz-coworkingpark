@@ -46,7 +46,55 @@
     font-weight: var(--font-weight-bold);
     line-height: 120%;
 }
-
+.mission{
+    width: 75%;
+    margin: auto;
+}
+.flex-end{
+    display: flex;
+    justify-content: end;
+    margin-top: 75px;
+        
+}
+.img-small-top{
+    position: absolute;
+    right: 310px;
+    top: -110px;
+}
+.event-end{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 0 60px;
+}
+.food{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 340px 0 ;
+}
+.food-1{
+    bottom:-247px ;
+    position: absolute;
+    left:500px ;
+}
+.food-2{
+    position: absolute;
+    bottom:-385px;
+    left: 60px;
+}
+.food-3{
+    position: absolute;
+    bottom: -850px;
+    left: 215px;    
+}
+.food-4{
+    position: absolute;
+    bottom: -815px;
+    left: 955px;
+        
+}
 @media screen and (max-width:575px) {
 .about-section .img-fixed {
         margin-right: 0;

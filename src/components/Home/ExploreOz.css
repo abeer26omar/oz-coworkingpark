@@ -1,7 +1,13 @@
 .ExploreOz .book-oz span ,
-.ExploreOz .book-oz .img-book{
-    width: 100%;
+.ExploreOz .book-oz {
     height: auto;
+}
+.img-book{
+    width: 100%;    
+    display: block;
+}
+.img-book.none{
+    display: none;
 }
 
 .ExploreOz .explore_link{

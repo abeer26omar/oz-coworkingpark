@@ -58,7 +58,7 @@ const PrivateEventsHeader = () => {
                                 {/* )} */}
                                 {/* {configItem.key === 'booking_page_description' && ( */}
                                     <Paragraph className='description mb-0'>
-                                        {' Lorem ipsum dolor consectetuer Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ameLorem ipsum dolor sit amet consectetuer Lorem ipsum dolor sit ame ,'}
+                                        {` Welcome to the vibrant world of OZ, where creativity thrives, and connections are made. Nestled in the heart of the city, OZ offers a range of versatile venues for rent, perfect for hosting a wide variety of events. Whether you're planning a corporate conference, a product launch, a networking event, or a social gathering, our venues are designed to meet your every need. With state-of-the-art facilities, flexible spaces, and a dynamic atmosphere, our coworking park provides the ideal backdrop for a successful and memorable event,`}
                                     </Paragraph>
                                 {/* )} */}
                             {/* </React.Fragment>

@@ -14,17 +14,21 @@ import close from '../../../assets/images/close.svg'
 import twitter from '../../../assets/images/icons/twitter_nav.svg'
 import facebook from '../../../assets/images/icons/face_nav.svg'
 import instagram from '../../../assets/images/icons/insta_nav.svg'
-
+import Up from '../../../assets/images/icons/up-down.svg'
+import LoginNav from "./LoginNav";
+import Inqure from "./Inqure";
 // import {AiOutlineClose} from 'react-icons/ai';
 // import {AiOutlineBars} from 'react-icons/ai';
 const Header = ({showBlackNav}) => {
     const [Open , SetOpen] = useState(true);
-    const [OpenUser , SetOpenUser] = useState(true);
     const [showBasic, setShowBasic] = useState(false);
     const logoImage = showBlackNav ? galleryLogo : logo;
     const userIcon = showBlackNav ? userwhite : userblack;
     const listIcon = showBlackNav ? listWhite : listBlack;
     const [Close , setClose] = useState(true);
+    const [OpenUser , SetOpenUser] = useState(true);
+    const [explore , setexplore] = useState(true);
+    const [location , setlocation] = useState(true)
     const token = useRouteLoaderData('root');
     // console.log(token);
     return (
@@ -44,11 +48,11 @@ const Header = ({showBlackNav}) => {
                                 //     fontWeight: isActive ? 800 : 400
                                 // })} 
                                 to={'/booking'}><span>booking</span></NavLink>
-                                  <ul class="dropdown-nav">
+                                  {/* <ul class="dropdown-nav">
 				                	<li className="drop_event">MR</li>
 				                	<li className="drop_event"> Spaces</li>
 					                <li className="drop_event">Office </li>
-			                	</ul>
+			                	</ul> */}
                             </li>
                             <li className="nav-item px-3  dropdown">
                                 <NavLink className={`nav-link px-0`} 
@@ -58,12 +62,12 @@ const Header = ({showBlackNav}) => {
                                 //     fontWeight: isActive ? 800 : 400
                                 // })}
                                 to={'/membership'}><span>membership</span></NavLink>
-                                 <ul class="dropdown-nav">
+                                 {/* <ul class="dropdown-nav">
 				                	<li className="drop_event"> The Social</li>
 				                	<li className="drop_event"> The Native</li>
 					                <li className="drop_event"> The Studio </li>
 					                <li className="drop_event"> Virtual </li>
-			                	</ul>
+			                	</ul> */}
                             </li>
                             <li className="nav-item px-3 dropdown">
                                 <NavLink className={`nav-link px-0`} 
@@ -83,14 +87,14 @@ const Header = ({showBlackNav}) => {
                                 //     fontWeight: isActive ? 800 : 400
                                 // })}
                                 to={'/community'}><span>community</span></NavLink>
-                                 <ul class="dropdown-nav">
+                                 {/* <ul class="dropdown-nav">
 				                	<li className="drop_event"> Community Newsfeed</li>
 				                	<li className="drop_event"> Community Events</li>
 					                <li className="drop_event"> Gallery </li>
 
-			                	</ul>
+			                	</ul> */}
                             </li>
-                            <li className="nav-item px-3 dropdown">
+                            {/* <li className="nav-item px-3 dropdown">
                                 <NavLink className={`nav-link px-0`}
                                 // style={({ isActive }) => ({
                                 //     color: isActive ? `${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : `${isStrickyFixed ? '#000000' : '#F4F7FE'}`,
@@ -103,61 +107,48 @@ const Header = ({showBlackNav}) => {
 					                <li className="drop_event"> Upcoming Events </li>
 			                	</ul>
                             </li>
-                            
+                             */}
                         </ul>
                         
                     </div>
                     <div className="d-flex justify-content-end align-items-center ">
-                        <div className="d-flex justify-content-between">
-                            <NavLink
-                                onClick={()=>SetOpen(!Open)}
-                                    className="nav-link links-margin"
-                                    to={"/contactus"}
-                                >
-                                    inquire
-                            </NavLink>
-                                <svg
-                                        width="2"
-                                        height="34"
-                                        viewBox="0 0 2 34"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M1 0L0.999999 34"
-                                            stroke="black"
-                                            stroke-width="0.5"
-                                            className="log-border  "
-                                        />
-                                </svg>
-                            {!token && (<NavLink
-                                onClick={()=>SetOpen(!Open)}
-                                    className="nav-link links-margin"
-                                    to={"/login"}
-                                >
-                                    Login
-                            </NavLink>)}
-                        </div>
+                        {/* <LoginNav/> */}
+                        <Inqure/>
+                       
                         {token && (<NavLink onClick={()=>SetOpen(!Open)} 
                             to="/profile">
                              <Media type="img" src={userIcon}
                               className="margin-links user-icon"/>
                         </NavLink>)}
-                        <li onClick={()=>SetOpenUser(!OpenUser)} className="dropdown"
-                        >
-                        <img type="img" src={listIcon}/>
+                        <div  className="" >
+                        <img onClick={()=>SetOpenUser(!OpenUser)} type="img" src={listIcon}/>
                          <ul className={OpenUser ? 'dropdown-nav-user': 'dropdown-nav-user hide'}>
                                     <div className="close-drop border-dropdown"> 
                                         <p className="drop_event m-0">close</p>
                                         <img onClick={()=>SetOpenUser(!OpenUser)}  src={close}/>
                                     </div>
-				                	<li className="drop_event border-dropdown">Explore</li>
-				                	<li className="drop_event border-dropdown"> About OZ</li>
-					                <li className="drop_event border-dropdown">Report an issue</li>
-				                	<li className="drop_event border-dropdown">Favorite</li>
-				                	<li className="drop_event border-dropdown"> Rewards</li>
-					                <li className="drop_event border-dropdown">Al-sheikh Zayed</li>
-					                <li className="drop_event border-dropdown">Talent Market</li>
+				                	<li className="drop_event border-dropdown" onClick={()=>setexplore(!explore)}>Explore
+                                    <img className={ explore ?"px-2 up_down" : "px-2 up_down up"} src={Up} alt="Up"/>
+                                    <ul className={explore ?  "p-0 list-unstyled dropdown-explore":  "p-0 list-unstyled dropdown-explore show-ex"}>
+                                        <li className="">Membership</li>
+                                        <li className="">Spaces</li>
+
+                                    </ul>
+                                    
+                                    </li>
+				                	<li className="drop_event border-dropdown" onClick={()=>SetOpenUser(!OpenUser)}> About OZ</li>
+					                <li className="drop_event border-dropdown" onClick={()=>SetOpenUser(!OpenUser)}>Report an issue</li>
+				                	<li className="drop_event border-dropdown" onClick={()=>SetOpenUser(!OpenUser)}> Rewards</li>
+                                    <li className="drop_event border-dropdown" onClick={()=>setlocation(!location)}>Al-sheikh Zayed
+                                    <img className={ location ? "px-2 up" : "px-2 up down "} src={Up} alt="Up"/>
+                                    <ul className={location ?  "p-0 list-unstyled dropdown-location":  "p-0 list-unstyled dropdown-location show-location"}>
+                                        <li className="">Membership</li>
+                                        <li className="">Spaces</li>
+
+                                    </ul>
+                                    
+                                    </li>
+					                <li className="drop_event border-dropdown" onClick={()=>SetOpenUser(!OpenUser)}>Talent Market</li>
                                     <div className="dropdown-socail">
                                         <img alt="facebook" src={facebook}/>
                                         <img alt="instagram" src={instagram}/>
@@ -165,7 +156,7 @@ const Header = ({showBlackNav}) => {
                                      </div>			                	
 			             </ul>
 
-                        </li>
+                        </div>
                         <div className="d-flex justify-content-evenly align-items-center dis-none">
                             <svg
                                 className="line-nav"

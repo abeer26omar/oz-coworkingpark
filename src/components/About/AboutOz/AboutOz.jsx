@@ -1,12 +1,23 @@
 import React from 'react';
 import './AboutOz.css';
 import vector from "../../../assets/images/VectorRight.png";
-import aboutone from "../../../assets/images/about/aboutone.png";
-import aboutwo from "../../../assets/images/about/abouttwo.png";
+import about1 from "../../../assets/images/about/about5.png";
+import about2 from "../../../assets/images/about/about3.png";
 import about3 from "../../../assets/images/about/about4.png";
-import about4 from "../../../assets/images/about/about3.png";
-import about5 from "../../../assets/images/about/about5.png";
-import about6 from "../../../assets/images/about/about6.png";
+import about4 from "../../../assets/images/about/teams-1.png";
+import about5 from "../../../assets/images/about/teams-2.png";
+import about6 from "../../../assets/images/about/site-about.png";
+import about7 from "../../../assets/images/about/about6.png";
+import about8 from "../../../assets/images/about/food (3).png";
+import about9 from "../../../assets/images/about/food (2).png";
+import about10 from "../../../assets/images/about/food (4).png";
+import about11 from "../../../assets/images/about/food (5).png";
+import about12 from "../../../assets/images/about/food (1).png";
+
+
+
+
+
 import Media from "../../Media/Media";
 import { useEffect, useState } from 'react';
 import axios from "axios";
@@ -34,6 +45,7 @@ const AboutOz = (props) => {
                 <div className="position-relative mb-5">
                     <div className='img_float'>
                         <Media
+                        className='opacity-50'
                             type="img" 
                             src={vector} 
                             alt="shape"/>
@@ -56,13 +68,16 @@ const AboutOz = (props) => {
                                         d="M71.9995 30.7011V39.2348H40.4453V31.3616L58.7646 9.30083H40.6242V0.740723H71.5396V8.79885L53.0925 30.7011H71.9995Z"
                                         fill="white"/>
                                 </svg>
-                                {props.configData ? props.configData.map((configItem, index) => (
+                                <Paragraph className="head_paragraph text-uppercase font-2">“Creativity requires the courage to let go of certainties”
+                                 </Paragraph>
+
+                                {/* {props.configData ? props.configData.map((configItem, index) => (
                                     <React.Fragment key={index}>
                                         {configItem.key === 'about_us_page_header_sub_description' && (
                                             <Paragraph className="head_paragraph text-uppercase font-2">“{configItem.value}”</Paragraph>
                                         )}
                                     </React.Fragment>
-                                )): ''}
+                                )): ''} */}
                             </div>
                         </div>
                     </div>
@@ -71,9 +86,8 @@ const AboutOz = (props) => {
 
             <section className="about-section body-dark">
                 <div className="container-fluid">
-
                     <div className="row ">
-                        <div className="col-md-6 col-lg-6 col-sm-6 col-xs-6 box-content-black ps-0">
+                        <div className="col-md-6 col-lg-5 col-sm-6 col-xs-6 box-content-black px-0">
                             {props.configData ? props.configData.map((configItem, index) => (
                                 <React.Fragment key={index}>
                                     {configItem.key === 'about_us_page_our_vision_image' && (
@@ -89,8 +103,10 @@ const AboutOz = (props) => {
                             
                         </div>
 
-                        <div className="col-md-6 col-lg-6 col-sm-6 col-xs-6 box-content-black m-auto ps-0">
-                            <div className="box-content ">
+                        <div className="col-md-6 col-lg-7 col-sm-6 col-xs-6 box-content-black m-auto ms-auto ps-0">
+                            <Paragraph className="small_title_white">Home of New Ideas</Paragraph>
+                            <Paragraph className="text_desc_black">Oz will help you find the right people</Paragraph>
+                            {/* <div className="box-content ">
                                 {props.configData ? props.configData.map((configItem, index) => (
                                     <React.Fragment key={index}>
                                         {configItem.key === 'about_us_page_new_idea_title' && (
@@ -101,13 +117,18 @@ const AboutOz = (props) => {
                                         )}
                                     </React.Fragment>
                                 )): ''}
-                            </div>
+                            </div> */}
                         </div>
 
 
-                        <div className="col-md-6 col-lg-6 col-sm-6 col-xs-6 box-content-black m-auto ">
+                        <div className="col-md-6 col-lg-7 col-sm-6 col-xs-6 box-content-black m-auto ">
                             <div className="box-content">
-                                {props.configData ? props.configData.map((configItem, index) => (
+                            <Paragraph className="text_desc_black">Our vision</Paragraph>
+                             <Paragraph className="p-text-box">Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod 
+                             </Paragraph>
+
+
+                                {/* {props.configData ? props.configData.map((configItem, index) => (
                                     <React.Fragment key={index}>
                                         {configItem.key === 'about_us_page_our_vision_title' && (
                                             <Paragraph className="text_desc_black">{configItem.value}</Paragraph>
@@ -116,10 +137,10 @@ const AboutOz = (props) => {
                                             <Paragraph className="p-text-box">{configItem.value}</Paragraph>
                                         )}
                                     </React.Fragment>
-                                )): ''}
+                                )): ''} */}
                             </div>
                         </div>
-                        <div className="col-md-6 col-lg-6 col-sm-6 col-xs-6 box-content-black">
+                        <div className="col-md-6 col-lg-5 col-sm-6 col-xs-6 box-content-black">
                             {props.configData ? props.configData.map((configItem, index) => (
                                 <React.Fragment key={index}>
                                     {configItem.key === 'about_us_page_our_vision_image' && (
@@ -133,9 +154,11 @@ const AboutOz = (props) => {
                                 </React.Fragment>
                             )): ''}
                         </div>
+                       
 
 
-                        <div className="col-md-8 col-lg-8 col-sm-8 col-xs-8 box-content-black  ">
+
+                        {/* <div className="col-md-8 col-lg-8 col-sm-8 col-xs-8 box-content-black  ">
                             <div className="box-content ">
                                 <div className=" d-lg-flex  d-md-flex d-sm-block justify-content-center ">
                                     {props.configData ? props.configData.map((configItem, index) => (
@@ -187,8 +210,6 @@ const AboutOz = (props) => {
                                 </React.Fragment>
                             )): ''}
                         </div>
-
-
                         <div className="col-md-6 col-lg-6 col-sm-4 col-xs-6 box-content-black   ">
                             <div className="box-content     ">
                                 <div className="d-block justify-content-center ">
@@ -238,9 +259,121 @@ const AboutOz = (props) => {
                                     )}
                                 </React.Fragment>
                             )): ''}                          
+                        </div> */}
+
+                    </div>
+                    <div className='row py-5'>
+                         <div className='col-lg-6 '>
+                            <div className='mission'>
+                               <Paragraph className="text_desc_black">Our Mission</Paragraph>
+                                <Paragraph className="p-text-box">Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod 
+                                </Paragraph>
+                            </div>
+                                  <Media
+                                    type="img"
+                                    // className="img-fixed"
+                                    src={about6}
+                                    alt={'img'}
+                                />
+
+
+                        </div>
+                        <div className='col-6 position-relative flex-end p-60 '>
+                                   <Media
+                                    type="img"
+                                    src={about5}
+                                    alt={'img'}
+                                />
+                                     <Media
+                                    type="img"
+                                      className="img-small-top"
+                                    src={about4}
+                                    alt={'img'}
+                                />
+
+                        </div>
+                    </div>
+                    <div className='row p-5'>
+                         <div className='col-lg-7 d-flex'>
+                                    <Media
+                                    type="img"
+                                    src={about3}
+                                    alt={'img'}
+                                />
+                            <div className='px-40'>
+                                <Paragraph className="text_desc_black mt-0">Community </Paragraph>
+                                <Paragraph className="p-text-box">Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit 
+                                </Paragraph>
+
+                            </div>
+                        </div>
+                        <div className='col-lg-5 flex-end '>
+                                  <Media
+                                    type="img"
+                                    src={about2}
+                                    alt={'img'}
+                                />
+                        </div>
+                    </div>
+                    <div className='row py-5'>
+                        <div className='col-xl-5 event-end'>
+                            <div className="p-60">
+                                <Paragraph className="text_desc_black mt-0">Events </Paragraph>
+                                <Paragraph className="p-text-box">Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit 
+                                </Paragraph>
+                            </div>
+                               <Media
+                                type="img"
+                                src={about1}
+                                 alt={'img'}
+                                />
+                        </div>
+                        <div className='col-xl-7 flex-end'>
+                              <Media
+                                type="img"
+                                src={about7}
+                                 alt={'img'}
+                                />
                         </div>
 
                     </div>
+                    {/* <div className='position-relative py-5'>
+                         <Media
+                                type="img"
+                                className='food-1'
+                                src={about8}
+                                 alt={'img'}
+                                />
+                                 <Media
+                                type="img"
+                                className='food-2'
+                                src={about9}
+                                 alt={'img'}
+                                /> 
+                                <Media
+                                type="img"
+                                className='food-3'
+                                src={about10}
+                                 alt={'img'}
+                                /> 
+                                <Media
+                                type="img"
+                                className='food-4'
+                                src={about11}
+                                 alt={'img'}
+                                /> 
+                                <Media
+                                type="img"
+                                className='food-5'
+                                src={about12}
+                                 alt={'img'}
+                                />
+                                 <div className='food'>
+                             <Paragraph className="text_desc_black mt-0">Food & Drink </Paragraph>
+                                <Paragraph className="p-text-box  w-25 text-center">Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit 
+                                </Paragraph>
+                        </div>
+                    </div> */}
                 </div>
             </section>
 
