@@ -4,11 +4,19 @@ import Booking from '../../../assets/images/icons/booking-profile.svg';
 import Event from '../../../assets/images/icons/event-profile.svg';
 import Plan from '../../../assets/images/icons/plan-profile.svg';
 import Logout from '../../../assets/images/icons/logout.svg';
+import N_1 from '../../../assets/images/n-1.svg';
+import N_2 from '../../../assets/images/n-2.svg';
+import N_3 from '../../../assets/images/n-3.svg';
 import Media from '../../Media/Media';
+import { useState } from 'react';
 
 
 
 const LoginNav = ()=>{
+    const [mark , setmark] = useState(true)
+    const handleMark = ()=>{
+       setmark(!true)
+    }
     return(<>
         <div className='Notifications'>   
         <div className='box_Notifications'>
@@ -18,20 +26,65 @@ const LoginNav = ()=>{
             </div>
             <div>
                 <ul className='ul_mark'>
-                    <li className='notification_mark'>All</li>
+                    {/* <li onClick={han} className='notification_mark'>All</li> */}
                     <li className='notification_mark'>Events</li>
                     <li className='notification_mark'>Invitation</li>
                 </ul>
             </div>
         </div>
         <div>
-            <ul>
-                <li>ttt</li>
-                <li>ttt</li>
-                <li>ttt</li>
-                <li>ttt</li>
-                <li>ttt</li>
-                <li>ttt</li>
+            <ul className='ul_notifications'>
+                <li className="border-dropdown d-flex  px-4">
+                <Media type={'img'} className='rounded-circle ' alt='profile' src={N_1}/>
+                <div className='info_profile  mt-4 ms-4'> 
+                    <Paragraph className='profile_notifications'>Reminder: Meeting Room 01 has 10 minutes left</Paragraph>
+                    <Paragraph className='email' alt='#/'>Today at 9:42 AM</Paragraph>
+                </div>
+                </li>
+                 <li className="border-dropdown d-flex  px-4">
+                <Media type={'img'} className='rounded-circle' alt='profile' src={N_2}/>
+                <div className='info_profile mt-4 ms-4'> 
+                    <Paragraph className='profile_notifications'>Meeting room Booking</Paragraph>
+                    <Paragraph className='email' alt='#/'>Wants to edit the file Dynabike</Paragraph>
+                    <Paragraph className='email' alt='#/'>Today at 9:42 AM</Paragraph>
+
+                </div>
+                </li>
+                 <li className="border-dropdown d-flex  px-4">
+                <Media type={'img'} className='rounded-circle' alt='profile' src={N_3}/>
+                <div className='info_profile mt-4 ms-4'> 
+                    <Paragraph className='profile_notifications'>Multi Purpose area event</Paragraph>
+                    {/* <Paragraph className='email' alt='#/'></Paragraph> */}
+                    <Paragraph className='email' alt='#/'>Today at 9:42 AM</Paragraph>
+                </div>
+                </li>
+                  <li className="border-dropdown d-flex  px-4">
+                <Media type={'img'} className='rounded-circle' alt='profile' src={N_2}/>
+                <div className='info_profile mt-4 ms-4'> 
+                    <Paragraph className='profile_notifications'>Meeting room Booking</Paragraph>
+                    <Paragraph className='email' alt='#/'>Wants to edit the file Dynabike</Paragraph>
+                    <Paragraph className='email' alt='#/'>Today at 9:42 AM</Paragraph>
+
+                </div>
+                </li>  <li className="border-dropdown d-flex  px-4">
+                <Media type={'img'} className='rounded-circle' alt='profile' src={N_2}/>
+                <div className='info_profile mt-4 ms-4'> 
+                    <Paragraph className='profile_notifications'>Meeting room Booking</Paragraph>
+                    <Paragraph className='email' alt='#/'>Wants to edit the file Dynabike</Paragraph>
+                    <Paragraph className='email' alt='#/'>Today at 9:42 AM</Paragraph>
+
+                </div>
+                </li>
+                <li className=" d-flex  px-4">
+                <Media type={'img'} className='rounded-circle' alt='profile' src={N_3}/>
+                <div className='info_profile mt-4 ms-4'> 
+                    <Paragraph className='profile_notifications'>Multi Purpose area event</Paragraph>
+                    {/* <Paragraph className='email' alt='#/'></Paragraph> */}
+                    <Paragraph className='email' alt='#/'>Today at 9:42 AM</Paragraph>
+                </div>
+                </li>
+              
+                
             </ul>
         </div>
         </div>
