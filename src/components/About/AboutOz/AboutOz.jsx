@@ -13,15 +13,13 @@ import about9 from "../../../assets/images/about/food (2).png";
 import about10 from "../../../assets/images/about/food (4).png";
 import about11 from "../../../assets/images/about/food (5).png";
 import about12 from "../../../assets/images/about/food (1).png";
-
-
-
-
-
+import about13 from "../../../assets/images/about/c-meeet.png";
+import AboutozFooter from './AboutozFooter';
 import Media from "../../Media/Media";
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import Paragraph from '../../UI/Paragraph';
+
 const AboutOz = (props) => {
     const [amenities, setamenities] = useState([]);
     useEffect(()=>{
@@ -337,43 +335,68 @@ const AboutOz = (props) => {
                         </div>
 
                     </div>
-                    {/* <div className='position-relative py-5'>
+                    <div className='position-relative py-5'>
                          <Media
-                                type="img"
+                        type="img"
                                 className='food-1'
                                 src={about8}
-                                 alt={'img'}
-                                />
-                                 <Media
-                                type="img"
+                         alt={'img'}
+                        />
+                         <Media
+                         type="img"
                                 className='food-2'
                                 src={about9}
-                                 alt={'img'}
-                                /> 
-                                <Media
-                                type="img"
-                                className='food-3'
-                                src={about10}
-                                 alt={'img'}
-                                /> 
-                                <Media
-                                type="img"
-                                className='food-4'
-                                src={about11}
-                                 alt={'img'}
-                                /> 
-                                <Media
-                                type="img"
-                                className='food-5'
-                                src={about12}
-                                 alt={'img'}
-                                />
+                          alt={'img'}
+                         /> 
+                         <Media
+                         type="img"
+                         className='food-3'
+                         src={about10}
+                          alt={'img'}
+                         /> 
+                         <Media
+                         type="img"
+                         className='food-4'
+                         src={about11}
+                          alt={'img'}
+                         /> 
+                         <Media
+                         type="img"
+                         className='food-5'
+                         src={about12}
+                          alt={'img'}
+                         />
                                  <div className='food'>
                              <Paragraph className="text_desc_black mt-0">Food & Drink </Paragraph>
-                                <Paragraph className="p-text-box  w-25 text-center">Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit 
+                                <Paragraph className="p-text-box  w-25 text-center">
+                                    Personalized Hospitality That Knows You by Name
                                 </Paragraph>
                         </div>
-                    </div> */}
+                    </div>
+                    <div className='row py-5'>
+                        <div className='col-xl-5'>
+                         <Media
+                         type="img"
+                        className=''
+                        src={about13}
+                          alt={'img'}
+                         />
+                        </div>
+                        <div className='col-md-6 col-lg-7 col-sm-6 col-xs-6 box-content-black m-auto '>
+                           
+                                <Paragraph className="text_desc_black mt-0">Oz DnA </Paragraph>
+                                <Paragraph className="p-text-box">
+                                    Learning: We’re a community that is built around learning experiences, sharing knowledge, and challenging each other to learn more.
+                                    Authentic: We celebrate new ideas, accept failure as a part of the creative process and look for newness in every step of our journey together.
+                                    Inclusive: Everyone has a place in our community, and everyone has a role to play.
+                                    Making: Making is the application of Knowledge. Makers are builders of success, they’re positive & Active people.
+                                    Sharing: Sharing respects Individuality and the uniqueness of each one, however it celebrates being part of a supportive system.
+
+                                    Wellness: we encourage each one to have a balanced life and be aware of his Mind, Body & Soul Wellness.
+
+                                </Paragraph>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -411,6 +434,7 @@ const AboutOz = (props) => {
                     </div>
                 </div>
             </section>
+            <AboutozFooter/>
 
 
         </>

@@ -72,27 +72,33 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 340px 0 ;
+    margin: 400px 0 ;
 }
 .food-1{
-    bottom:-247px ;
+    bottom:-305px ;
     position: absolute;
     left:500px ;
 }
 .food-2{
     position: absolute;
-    bottom:-385px;
+    bottom:-465px;
     left: 60px;
 }
 .food-3{
     position: absolute;
-    bottom: -850px;
+    bottom: -910px;
     left: 215px;    
 }
 .food-4{
     position: absolute;
-    bottom: -815px;
+    bottom: -875px;
     left: 955px;
+        
+}
+.food-5{
+    position: absolute;
+    left: 1225px;
+    bottom: -730px;
         
 }
 @media screen and (max-width:575px) {
