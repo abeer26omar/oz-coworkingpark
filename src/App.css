@@ -17,11 +17,25 @@
 html, body {
     background-color: var(--neturals-color1);
 }
-.body-dark {
-    background-color: var(--black-color);
-
+.body_light {
+    background-color: var(--neturals-color1);
 }
-
+.body_dark {
+    background-color: var(--black-color);
+}
+.body_dark .navbar,
+.body_dark .nav-mobile {
+    background:#000 !important;
+}
+.body_dark .border_bottom{
+    border-bottom: none
+}
+.body_dark .navbar .nav-link{ 
+    color:#fff;
+}
+.body_dark .navbar .navbar-toggler{
+    background-color:#fff;
+}
 a {
     text-decoration: none;
 }

@@ -1081,13 +1081,13 @@ export const IndividualSocialTypes = [
                 icon_white: Classrooms_white,
                 key: 'Classrooms'
             },
-            {
-                id: 22,
-                name: 'OZY\'s Deli: A Glocal Gastronomic Goodness',
-                icon: '',
-                icon_white: OZYi_white,
-                key: 'OZY\'s Deli'
-            },
+            // {
+            //     id: 22,
+            //     name: 'OZY\'s Deli: A Glocal Gastronomic Goodness',
+            //     icon: OZYi_white,
+            //     icon_white: OZYi_white,
+            //     key: 'OZY\'s Deli'
+            // },
             {
                 id: 23,
                 name: 'Auditorium',
@@ -1362,13 +1362,13 @@ export const IndividualSocialTypes = [
                 icon_white: Classrooms_white,
                 key: 'Classrooms'
             },
-            {
-                id: 22,
-                name: 'OZY\'s Deli: A Glocal Gastronomic Goodness',
-                icon: '',
-                icon_white: OZYi_white,
-                key: 'OZY\'s Deli'
-            },
+            // {
+            //     id: 22,
+            //     name: 'OZY\'s Deli: A Glocal Gastronomic Goodness',
+            //     icon: OZYi_white,
+            //     icon_white: OZYi_white,
+            //     key: 'OZY\'s Deli'
+            // },
             {
                 id: 23,
                 name: 'Auditorium',
@@ -1644,13 +1644,13 @@ export const IndividualSocialTypes = [
                 icon_white: Classrooms_white,
                 key: 'Classrooms'
             },
-            {
-                id: 22,
-                name: 'OZY\'s Deli: A Glocal Gastronomic Goodness',
-                icon: '',
-                icon_white: OZYi_white,
-                key: 'OZY\'s Deli'
-            },
+            // {
+            //     id: 22,
+            //     name: 'OZY\'s Deli: A Glocal Gastronomic Goodness',
+            //     icon: OZYi_white,
+            //     icon_white: OZYi_white,
+            //     key: 'OZY\'s Deli'
+            // },
             {
                 id: 23,
                 name: 'Auditorium',

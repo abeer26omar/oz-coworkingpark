@@ -36,63 +36,55 @@ const Header = ({showBlackNav}) => {
             <div className="container-fluid py-2 border_bottom main_header">
                 <nav className={`navbar navbar-expand-xl justify-content-between`}>
                     <NavLink className="navbar-brand d-block-md me-0 p-0" to={'/'}>
-                        <Media type="img" src={logoImage} className="logo" alt={logoImage} width='100%'/>
+                        <img type="img" src={logoImage} className="logo" alt={logoImage} width='100%'/>
                     </NavLink>
                     <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
                         <ul className="nav">
                             <li className="nav-item px-3  dropdown">
                                 <NavLink className={`nav-link px-0`} 
-                                // style={({ isActive }) => ({
-                                //     color: isActive ? `${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : `${isStrickyFixed ? '#000000' : '#F4F7FE'}`,
-                                //     borderBottom: isActive ? `2px solid ${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : 'none',
-                                //     fontWeight: isActive ? 800 : 400
-                                // })} 
+                                style={({ isActive }) => ({
+                                    borderBottom: isActive ? `2px solid black` : 'none',
+                                })} 
                                 to={'/booking'}><span>booking</span></NavLink>
-                                  {/* <ul class="dropdown-nav">
+                                <ul class="dropdown-nav">
 				                	<li className="drop_event">MR</li>
 				                	<li className="drop_event"> Spaces</li>
 					                <li className="drop_event">Office </li>
-			                	</ul> */}
+			                	</ul>
                             </li>
                             <li className="nav-item px-3  dropdown">
                                 <NavLink className={`nav-link px-0`} 
-                                // style={({ isActive }) => ({
-                                //     color: isActive ? `${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : `${isStrickyFixed ? '#000000' : '#F4F7FE'}`,
-                                //     borderBottom: isActive ? `2px solid ${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : 'none',
-                                //     fontWeight: isActive ? 800 : 400
-                                // })}
+                                style={({ isActive }) => ({
+                                    borderBottom: isActive ? `2px solid black` : 'none',
+                                })}
                                 to={'/membership'}><span>membership</span></NavLink>
-                                 {/* <ul class="dropdown-nav">
+                                <ul class="dropdown-nav">
 				                	<li className="drop_event"> The Social</li>
 				                	<li className="drop_event"> The Native</li>
 					                <li className="drop_event"> The Studio </li>
 					                <li className="drop_event"> Virtual </li>
-			                	</ul> */}
+			                	</ul>
                             </li>
                             <li className="nav-item px-3 dropdown">
                                 <NavLink className={`nav-link px-0`} 
-                                // style={({ isActive }) => ({
-                                //     color: isActive ? `${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : `${isStrickyFixed ? '#000000' : '#F4F7FE'}`,
-                                //     borderBottom: isActive ? `2px solid ${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : 'none',
-                                //     fontWeight: isActive ? 800 : 400
-                                // })}
+                                style={({ isActive }) => ({
+                                    borderBottom: isActive ? `2px solid black` : 'none',
+                                })}
                                 to={'/private'}><span>private events</span></NavLink>
                             </li>
                             
                             <li className="nav-item px-3 dropdown">
                                 <NavLink className={`nav-link px-0`} 
-                                // style={({ isActive }) => ({
-                                //     color: isActive ? `${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : `${isStrickyFixed ? '#000000' : '#F4F7FE'}`,
-                                //     borderBottom: isActive ? `2px solid ${isStrickyFixed ? '#2C60F2' : '#69DEEF'}` : 'none',
-                                //     fontWeight: isActive ? 800 : 400
-                                // })}
+                                style={({ isActive }) => ({
+                                    borderBottom: isActive ? `2px solid black` : 'none',
+                                })}
                                 to={'/community'}><span>community</span></NavLink>
-                                 {/* <ul class="dropdown-nav">
+                                <ul class="dropdown-nav">
 				                	<li className="drop_event"> Community Newsfeed</li>
 				                	<li className="drop_event"> Community Events</li>
 					                <li className="drop_event"> Gallery </li>
 
-			                	</ul> */}
+			                	</ul>
                             </li>
                             {/* <li className="nav-item px-3 dropdown">
                                 <NavLink className={`nav-link px-0`}
@@ -117,7 +109,7 @@ const Header = ({showBlackNav}) => {
                        
                         {token && (<NavLink onClick={()=>SetOpen(!Open)} 
                             to="/profile">
-                             <Media type="img" src={userIcon}
+                             <img type="img" src={userIcon}
                               className="margin-links user-icon"/>
                         </NavLink>)}
                         <div  className="" >
@@ -172,7 +164,7 @@ const Header = ({showBlackNav}) => {
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                             >
-                                <circle opacity="0.5" cx="16" cy="16" r="16" fill="#D0DF00"/>
+                                <circle cx="16" cy="16" r="16" fill="#D0DF00"/>
                             </svg>
                         </div>
                     </div>

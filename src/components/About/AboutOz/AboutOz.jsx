@@ -122,7 +122,8 @@ const AboutOz = (props) => {
                         <div className="col-md-6 col-lg-7 col-sm-6 col-xs-6 box-content-black m-auto ">
                             <div className="box-content">
                             <Paragraph className="text_desc_black">Our vision</Paragraph>
-                             <Paragraph className="p-text-box">Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod 
+                             <Paragraph className="p-text-box">
+                             Our vision is to revolutionize the workspace experience by offering a hybrid space that maximizes efficiency, embraces life-work-joy fusion, and celebrates the value of time. We aspire to go beyond the traditional work-life balance and create an environment where individuals can seamlessly alternate between their passions, work, learning and personal pursuits. By integrating talents, nurturing growth, and providing unwavering support, we aim to empower dreams, realize visions, and create exceptional human experiences at every touchpoint. 
                              </Paragraph>
 
 
@@ -264,7 +265,8 @@ const AboutOz = (props) => {
                          <div className='col-lg-6 '>
                             <div className='mission'>
                                <Paragraph className="text_desc_black">Our Mission</Paragraph>
-                                <Paragraph className="p-text-box">Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod 
+                                <Paragraph className="p-text-box mb-5">
+                                Our mission at OZ is to reimagine the future of work by providing a transformative and disruptive workspace concept, it is to initiate a new workstyle. We aim to create an ecosystem where rising entrepreneurs, scaling startups, and established corporations come together to grow beyond their potential. Through a fusion of prop-tech enablement, personalized hospitality, and a focus on continuous learning, we forge lasting human connections and empower our community to thrive.
                                 </Paragraph>
                             </div>
                                   <Media
@@ -300,7 +302,9 @@ const AboutOz = (props) => {
                                 />
                             <div className='px-40'>
                                 <Paragraph className="text_desc_black mt-0">Community </Paragraph>
-                                <Paragraph className="p-text-box">Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit 
+                                <Paragraph className="p-text-box">A Diverse community as expansive as Your imagination
+                                        OZ kickstarts a universal conversation that connects progressive minds by expanding
+                                        possibilities through a supportive community that celebrates continuous learning and enjoyment in equal measure.
                                 </Paragraph>
 
                             </div>

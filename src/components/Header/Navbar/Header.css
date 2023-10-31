@@ -28,7 +28,7 @@
     text-transform: capitalize;
 }
 } */
-.main_header .nav-link:hover {
+/* .main_header .nav-link:hover {
     cursor: pointer;
     transition: 1s;
     color: var(--primary-color);
@@ -36,7 +36,7 @@
 .main_header .nav-item .active {
     color: var(--primary-color);
     border-bottom: 1px solid var(--primary-color);
-}
+} */
 
 .log-border {
     stroke-width: 0.5px;
