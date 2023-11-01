@@ -273,12 +273,12 @@
 .notification_mark{
     font-size: 11px;
     color: #BDBDBD;
-    /* color: var(--black-color); */
     font-style: normal;
     font-weight: 500;
     line-height: 2;
     font-family: var(--questrial-font);
     margin: 0 20px;
+    cursor: pointer;
 
 }
 .notification_mark.activity{
