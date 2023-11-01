@@ -13,9 +13,9 @@ import { useState } from 'react';
 
 
 const LoginNav = ()=>{
-    const [mark , setmark] = useState(true)
-    const handleMark = ()=>{
-       setmark(!true)
+    const [mark , setmark] = useState("All")
+    const handleMark = (name)=>{
+       setmark(name)
     }
     return(<>
         <div className='Notifications'>   
@@ -26,9 +26,9 @@ const LoginNav = ()=>{
             </div>
             <div>
                 <ul className='ul_mark'>
-                    {/* <li onClick={han} className='notification_mark'>All</li> */}
-                    <li className='notification_mark'>Events</li>
-                    <li className='notification_mark'>Invitation</li>
+                    <li onClick={()=>handleMark("All")} className={ mark === "All" ? 'notification_mark activity' :"notification_mark "}>All</li>
+                    <li onClick={()=>handleMark("Event")} className={ mark === "Event" ? 'notification_mark activity' :"notification_mark "}>Events</li>
+                    <li onClick={()=>handleMark("Invitation")} className={ mark === "Invitation" ? 'notification_mark activity' :"notification_mark"}>Invitation</li>
                 </ul>
             </div>
         </div>
