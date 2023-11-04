@@ -1,25 +1,36 @@
 import { useState } from 'react'
 import { Formik } from 'formik';
 import * as Yup from "yup";
-import { ForgetPass } from "../../apis/AuthApi";
-import { useNavigate } from "react-router-dom";
+import { ForgetPass, ResetPasswordOtp } from "../../apis/AuthApi";
 import Button  from '../UI/Button';
-import ModalOTP from './ModalOTP';
+import Paragraph from "../UI/Paragraph";
+import SweetAlert2 from 'react-sweetalert2';
+import ForgetPassOTPModal from './ForgetPassOTPModal';
 
-const ForgetPassForm = (props)=>{
+const ForgetPassForm = ()=>{
+
+    const [email, setEmail] = useState('');
     const [show, setShow] = useState(false);
-
+    const [swalProps, setSwalProps] = useState({});
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
-    const navigate = useNavigate();
     const handleSubmit = async (values) => {
         try {
             const result = await ForgetPass(values.email);
-            console.log(result);
-            setShow(true);
+            const reset = await ResetPasswordOtp(values.email);
+            if(reset){
+                setShow(true);
+                setEmail(values.email);
+            }
         } catch (error) {
-            console.log(error);
+            setSwalProps({
+                show: true,
+                icon: 'error',
+                title: error.response.data.status,
+                text: error.response.data.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
     }
     return (
@@ -42,15 +53,16 @@ const ForgetPassForm = (props)=>{
                 values,
                 touched,
                 errors,
-                dirty,
-                isSubmitting,
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                handleReset
                 } = props;
             return (
                 <form className="row g-3" onSubmit={handleSubmit}>
+                    <div className="head-content text-center py-4">
+                        <Paragraph className="hand-write">Forget Password ,</Paragraph>
+                        <Paragraph className="bold-head">Enter your email</Paragraph>
+                    </div>
                     <div className="form__group field my-3 group-check">
                         <label htmlFor="email" className="form__label">Email</label>
                         <input 
@@ -78,10 +90,12 @@ const ForgetPassForm = (props)=>{
                 </form>
             )}}
             </Formik>
-            <Button className='p-0 signup_title' tagType='link' onClick={handleShow}>open otp</Button>
-            <ModalOTP 
+            <ForgetPassOTPModal 
                 show={show}
-                onHide={handleClose}/>
+                onHide={handleClose}
+                email={email}/>
+
+            <SweetAlert2 {...swalProps} />
         </>
     )
 }

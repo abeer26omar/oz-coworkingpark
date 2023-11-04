@@ -27,9 +27,10 @@ import Gallery from "./pages/Gallery";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import MemberPackage from "./components/Membership/MembershipTypes/MemberPackage/MemberPackage";
-import { TokenLoader } from './apis/AuthApi';
+import { TokenLoader, checkAuthLoader } from './apis/AuthApi';
 import Register from './components/Auth/Register';
 import ForgetPass from './components/Auth/ForgetPass';
+import NewPassword from './components/Auth/NewPassword';
 
 function App() {
 
@@ -48,7 +49,8 @@ function App() {
           { path:'login', element: <Login />},
           { path:'register', element: <Register />},
           { path:'forgetpass', element: <ForgetPass />},
-          { path:'membership', element: <Membership />}, 
+          { path:'newpassword', element: <NewPassword />},
+          { path:'membership', element: <Membership />, loader: checkAuthLoader}, 
           { path:'membership/:id', element: <MembershipOptions />},
           { path:'singleMember/:id', element: <MemberPackage />},
           { path:'community', element: <Community />},

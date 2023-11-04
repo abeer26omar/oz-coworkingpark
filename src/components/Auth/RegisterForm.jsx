@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { Register } from "../../apis/AuthApi";
 import { useNavigate } from "react-router-dom";
 import Button  from '../UI/Button';
-import ModalOTP from './ModalOTP';
+import RegisterOTPModal from './RegisterOTPModal';
 import SweetAlert2 from 'react-sweetalert2';
 
 const RegisterForm = ()=>{
@@ -26,9 +26,7 @@ const RegisterForm = ()=>{
                 values.confirm_password);
             setShow(true);
             setEmail(values.email);
-            console.log(result);
         } catch (error) {
-            console.log(error.response.data);
             setSwalProps({
                 show: true,
                 icon: 'error',
@@ -72,12 +70,9 @@ const RegisterForm = ()=>{
                 values,
                 touched,
                 errors,
-                dirty,
-                isSubmitting,
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                handleReset
                 } = props;
             return (
                 <form className="row g-3" onSubmit={handleSubmit}>
@@ -188,7 +183,7 @@ const RegisterForm = ()=>{
                                 ? "form__field is-invalid"
                                 : "form__field"
                             }
-                            placeholder="Enter Your Email"
+                            placeholder="Enter Your Password"
                             name="password"
                             value={values.password}
                             onChange={handleChange}
@@ -223,7 +218,7 @@ const RegisterForm = ()=>{
                 </form>
             )}}
             </Formik>
-            <ModalOTP 
+            <RegisterOTPModal 
                 show={show}
                 onHide={handleClose}
                 email={email}/>

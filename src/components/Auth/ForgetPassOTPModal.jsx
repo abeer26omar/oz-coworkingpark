@@ -1,32 +1,27 @@
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import {useNavigate} from 'react-router-dom';
 import Paragraph from  '../UI/Paragraph';
 import Button from '../UI/Button';
-import OTPInput from "otp-input-react";
+import OTPInput, { ResendOTP } from "otp-input-react";
 import SweetAlert2 from 'react-sweetalert2';
 import { ResendOtp, ConfirmOTP } from '../../apis/AuthApi';
 import './Auth.css';
 
-const ModalOTP = (props) => {
+const ForgetPassOTPModal = (props) => {
     const [OTP, setOTP] = useState('');
-    const [show, setShow] = useState(props.show);
     const [swalProps, setSwalProps] = useState({});
-    const handleClose = () => {setShow(false)};
-    
+    const [response, setResponse] = useState('');
+    const [responseType, setResponseType] = useState();
+    const navigate = useNavigate();
+
     const Confirm_OTP = async () => {
         try {
-            const result = await ConfirmOTP(OTP, props.email);
-            window.sessionStorage.setItem("TokenOZ", result.access_token);
-            window.sessionStorage.setItem("userIdOZ", result.user_id);
-            window.sessionStorage.setItem("activeUserOZ", result.active);
-            setShow(false)
-            // setSwalProps({
-            //     show: true,
-            //     title: 'Basic Usage',
-            //     text: 'Hello World',
-            // });
+            const result = await ConfirmOTP(OTP, props.email, 'forgot_password');
+            sessionStorage.setItem("emailuseroz", props.email);
+            sessionStorage.setItem("otpuseroz", OTP);
+            navigate('/newpassword');
         } catch (error) {
-            setShow(false);
             setSwalProps({
                 show: true,
                 icon: 'error',
@@ -35,22 +30,41 @@ const ModalOTP = (props) => {
                 showConfirmButton: false,
                 timer: 1500
             });
+            setResponseType(false);
+            setResponse(error.response.data.message);
         }
     }
     const Resend_Otp = async () => {
-        // try {
-        //     const result = await ResendOtp(OTP, props.email);
-        //     console.log(result);
-        //     // window.sessionStorage.setItem("TokenOZ", result.access_token);
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        try{
+            const result = await ResendOtp(props.email);
+            setSwalProps({
+                show: true,
+                icon: 'success',
+                title: 'success',
+                text: 'send successfully',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setResponseType(true);
+            setResponse('success')
+        } catch (error) {
+            setSwalProps({
+                show: true,
+                icon: 'error',
+                title: error.response.data.status,
+                text: error.response.data.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setResponseType(false);
+            setResponse(error.response.data.message)
+        }
     }
     return (
         <>
             <Modal
                 show={props.show}
-                onHide={props.handleClose}
+                onHide={props.onHide}
                 backdrop="static"
                 keyboard={false}
                 backdropClassName="custom-backdrop"
@@ -69,15 +83,19 @@ const ModalOTP = (props) => {
                             className='otp_container'
                         />
                         <div className="text-center py-4">
-                            <Paragraph className='authFooter_copyright auth_desc mb-0'>Don't receive code?
-                                <Button className='p-0 otp_resend' tagType='link' onClick={Resend_Otp}>Re-send</Button>
+                            <Paragraph className='d-flex justify-content-center align-items-center authFooter_copyright auth_desc mb-0'>Don't receive code?
+                                <ResendOTP 
+                                    className='p-0 otp_resend' 
+                                    onResendClick={Resend_Otp} 
+                                    maxTime='60'>Re-send</ResendOTP>
                             </Paragraph>
                         </div>
+                        <Paragraph className={`text-center mb-0 ${responseType ? 'text-success' : 'text-danger'}`}>{response}</Paragraph>
                         <div className="text-center py-4">
                             <Button    
                                 tagType='link'
                                 onClick={Confirm_OTP} 
-                                className='btn btn_outline_black w-75 py-2'>Login</Button>
+                                className='btn btn_outline_black w-75 py-2'>Confirm</Button>
                         </div>
                     </Modal.Body>
             </Modal>
@@ -86,4 +104,4 @@ const ModalOTP = (props) => {
     )
 
 }
-export default ModalOTP;
+export default ForgetPassOTPModal;

@@ -1,7 +1,7 @@
 import "./Auth.css";
 import vector from "../../assets/images/Vector.png";
-import ForgetPassForm from './ForgetPassForm';
-const ForgetPass = () => {
+import NewPasswordForm from './NewPasswordForm';
+const NewPassword = () => {
     return (
         <>
             <section className="login auth my-5">
@@ -17,7 +17,7 @@ const ForgetPass = () => {
                     <div className="row justify-content-center">
                         <div className="col-lg-6">
                             <div className="login-card form-card py-4">
-                                <ForgetPassForm />                               
+                                <NewPasswordForm />                               
                             </div>
                         </div>
                     </div>
@@ -26,4 +26,4 @@ const ForgetPass = () => {
         </>
     );
 }
-export default ForgetPass;
+export default NewPassword;

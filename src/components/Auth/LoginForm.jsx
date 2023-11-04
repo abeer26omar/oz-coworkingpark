@@ -4,18 +4,19 @@ import * as Yup from "yup";
 import { Login } from "../../apis/AuthApi";
 import { useNavigate } from "react-router-dom";
 import Button  from '../UI/Button';
-import ModalOTP from './ModalOTP';
 import SweetAlert2 from 'react-sweetalert2';
 
-const LoginForm = (props)=>{
+const LoginForm = ()=>{
     const navigate = useNavigate();
     const [swalProps, setSwalProps] = useState({});
-
     const handleSubmit = async (values) => {
         try {
             const result = await Login(values.email, values.password);
-            window.sessionStorage.setItem("TokenOZ", result.access_token);
-            console.log(result);
+            sessionStorage.setItem("TokenOZ", result.access_token);
+            navigate('/');
+            setTimeout(()=>{
+                window.location.reload();
+            },0);
         } catch (error) {
             setSwalProps({
                 show: true,
@@ -49,13 +50,10 @@ const LoginForm = (props)=>{
                 values,
                 touched,
                 errors,
-                dirty,
-                isSubmitting,
                 handleChange,
                 handleBlur,
-                handleSubmit,
-                handleReset
-                } = props;
+                handleSubmit
+            } = props;
             return (
                 <form className="row g-3" onSubmit={handleSubmit}>
                     <div className="form__group field my-3 group-check">

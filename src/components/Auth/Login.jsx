@@ -3,7 +3,6 @@ import vector from "../../assets/images/Vector.png";
 import facebook from "../../assets/images/icons/Facebook.svg";
 import google from "../../assets/images/icons/Google.svg";
 import linkedin from "../../assets/images/icons/linkedin.svg";
-import Media from "../Media/Media";
 import LoginForm from './LoginForm';
 import Paragraph from "../UI/Paragraph";
 import Button from "../UI/Button";
@@ -15,7 +14,7 @@ const Login = () => {
             <section className="login auth my-5">
                 <div className="position-relative">
                     <div className='img_float'>
-                        <Media
+                        <img
                             type="img" 
                             src={vector} 
                             alt="shape"/>
@@ -35,7 +34,7 @@ const Login = () => {
                                             href="src/components/Auth/Login/LoginForm#"
                                             target="_blank"
                                         >
-                                            <Media
+                                            <img
                                                 type="img" src={facebook} alt="Facebook"/>
                                         </a>
                                         <a
@@ -43,14 +42,14 @@ const Login = () => {
                                             href="src/components/Auth/Login/LoginForm#"
                                             target="_blank"
                                         >
-                                            <Media
+                                            <img
                                                 type="img" src={google} alt="Google"/>
                                         </a>
                                         <a
                                             href="src/components/Auth/Login/LoginForm#"
                                             target="_blank"
                                         >
-                                            <Media
+                                            <img
                                                 type="img" src={linkedin} alt="LinkedIn"/>
                                         </a>
                                 </div>

@@ -76,7 +76,23 @@
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
+    flex-direction: row-reverse;
 }
+.otp_resend button{
+    background: none;
+    border: none;
+    color: var(--color-yellow);
+    font-family: var(--couture-font);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+.otp_resend button:disabled{
+    cursor: not-allowed;
+
+}
+
 @media screen and (max-width: 575px) {
     .login-card {
         padding: 0px;
