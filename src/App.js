@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle"
 import "./App.css";
 import "../src/assets/fonts/golden-hopes/golden-hopes.otf";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
