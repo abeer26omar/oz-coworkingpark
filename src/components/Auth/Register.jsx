@@ -55,12 +55,8 @@ const Register = () => {
                             </div>
                             <div className="col-lg-6">
                                 <div className="form-card py-3">
-                                    <RegisterForm />
-                                    <div className="py-3 log-social text-center">
-                                        {/* <Button>
-                                            <Media
-                                                type="img" src={facebook} alt="Facebook"/>
-                                        </Button> */}
+                                    <RegisterForm provider={provider} profile={profile} />
+                                    <div className="py-3 log-social d-flex justify-content-center">
                                         <LoginSocialFacebook
                                             appId={process.env.REACT_APP_FB_APP_ID || ''}
                                             onLoginStart={onLoginStart}
@@ -89,13 +85,20 @@ const Register = () => {
                                         >
                                             <img src={google} alt="Google"/>
                                         </LoginSocialGoogle>
-                                        <a
-                                            href="src/components/Auth/Login/LoginForm#"
-                                            target="_blank"
+                                        <LoginSocialLinkedin
+                                            client_id={'77kx7wk728z6ww'}
+                                            client_secret={'qAS0CnCJKVvEbMgh'}
+                                            onResolve={({ provider, data }) => {
+                                            setProvider(provider)
+                                            setProfile(data);
+                                            console.log(data);
+                                            }}
+                                            onReject={(err) => {
+                                            console.log(err)
+                                            }}
                                         >
-                                            <Media
-                                                type="img" src={linkedin} alt="LinkedIn"/>
-                                        </a>
+                                            <img src={linkedin} alt="LinkedIn"/>
+                                        </LoginSocialLinkedin>
                                     </div>
                                     <div className="text-center py-4">
                                         <Paragraph className='authFooter_copyright auth_desc mb-0'>Do you already have an account?

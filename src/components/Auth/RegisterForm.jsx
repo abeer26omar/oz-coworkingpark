@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Formik } from 'formik';
 import * as Yup from "yup";
 import { Register } from "../../apis/AuthApi";
@@ -7,14 +7,40 @@ import Button  from '../UI/Button';
 import RegisterOTPModal from './RegisterOTPModal';
 import SweetAlert2 from 'react-sweetalert2';
 
-const RegisterForm = ()=>{
+const RegisterForm = ({provider, profile})=>{
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState('');
-
+    const [userInfo, setUSerInfo] = useState({});
     const handleClose = () => setShow(false);
     const [swalProps, setSwalProps] = useState({});
-
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(provider === 'google'){
+            setUSerInfo({ 
+                first_name: profile.given_name,
+                last_name: profile.family_name,
+                email: profile.email,
+                phone: '',
+                user_type: '',
+                password: '',
+                confirm_password: ''
+            });
+        }else if(provider === 'facebook'){
+            setUSerInfo({ 
+                first_name: profile.first_name,
+                last_name: profile.last_name,
+                email: profile.email,
+                phone: '',
+                user_type: '',
+                password: '',
+                confirm_password: ''
+            });
+        }else{
+
+        }
+    },[profile, provider]);
+
     const handleSubmit = async (values) => {
         try {
             const result = await Register(values.first_name, 
@@ -39,18 +65,17 @@ const RegisterForm = ()=>{
     }
     return (
         <>
+        {console.log(profile, provider)}
             <Formik 
-                initialValues={
-                    { 
-                        first_name: '',
-                        last_name: '',
-                        email: '',
-                        phone: '',
-                        user_type: '',
-                        password: '',
-                        confirm_password: ''
-                    }
-                }
+                initialValues = {userInfo || {
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    phone: '',
+                    user_type: '',
+                    password: '',
+                    confirm_password: ''
+                }}
                 onSubmit={async values => {
                     await new Promise(resolve => setTimeout(resolve, 0));
                     handleSubmit(values);
@@ -64,7 +89,8 @@ const RegisterForm = ()=>{
                     password: Yup.string().required('Required'),
                     confirm_password: Yup.string().required('Required')
                     .oneOf([Yup.ref('password'), null], 'Passwords must match')
-                })}>
+                })}
+                enableReinitialize>
             {props => {
                 const {
                 values,
