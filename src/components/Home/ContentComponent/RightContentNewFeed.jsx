@@ -3,6 +3,7 @@ import "./Content.css";
 import Button from "../../UI/Button";
 import Media from "../../Media/Media";
 import Paragraph from "../../UI/Paragraph";
+import vector from '../../../assets/images/vectorRight.svg'
 const RightContentNewFeed = (props) => {
     return (
         <>
@@ -29,8 +30,9 @@ const RightContentNewFeed = (props) => {
                                 }
                             </React.Fragment>  
                         )):''}
-                        <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto">
-                            <div className="box-content px-4">
+                        <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto ">
+                            <div className="box-content px-4 position-relative">
+                            <Media type='img' src={vector} className='img_content_right'/>
                                 {props.configData ? props.configData.map((configItem , index)=>(
                                     <React.Fragment key={index}>
                                         {configItem.key === "home_page_newsfeed_title" &&  <Paragraph className='paragraph_black'>{configItem.value}</Paragraph>}

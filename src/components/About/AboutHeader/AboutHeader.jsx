@@ -2,32 +2,41 @@ import React from 'react';
 import about from "../../../assets/images/about/aboutHeader.png";
 import Media from "../../Media/Media";
 import Paragraph from '../../UI/Paragraph';
-import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
+import classess from '../../UI/MainHeaderWrapper.module.css';
 const AboutHeader = (props) => {
-    const image = props.configData ? props.configData.map((configItem, index) => {
-        if (configItem.key === 'about_us_page_image')
-        {
-            return configItem.value
-        }
-    }) : about;
     return (
         <>
-            <MainHeaderWrapper configData={props.configData} image={image} special_flex={`justify-content-center`}>
-                <div className={`container-fluid px-70 py-5 text-center`}>
-                    <div className='col-xl-6 col-lg-10 col-12 mx-auto'>
-                        {props.configData ? props.configData.map((configItem, index) => (
-                            <React.Fragment key={index}>
-                                {configItem.key === 'about_us_page_header_title' && (
-                                    <Paragraph className='head_paragraph mb-3'>{configItem.value}</Paragraph>
-                                )}
-                                {configItem.key === 'about_us_page_header_main_description' && (
-                                    <Paragraph className='description mb-0'>{configItem.value}</Paragraph>
-                                )}
-                            </React.Fragment>
-                        )): ''}
+            <div className={`position-relative`}>
+                <div className={`${classess.header_bg} justify-content-center`}>
+                    {props.configData ? props.configData.map((configItem, index) => (
+                        <React.Fragment key={index}>
+                            {configItem.key === 'about_us_page_image' && (<div style={
+                                {
+                                    backgroundImage: `url(${configItem.value})`
+                                }
+                            } className={`${classess.img_bg}`}></div>)}
+                        </React.Fragment>
+                    )): ''}
+                    <div className={'position-relative py-5'} style={{
+                        zIndex: 99
+                    }}>
+                    <div className={`container-fluid px-70 py-5 text-center`}>
+                        <div className='col-xl-6 col-lg-10 col-12 mx-auto'>
+                            {props.configData ? props.configData.map((configItem, index) => (
+                                <React.Fragment key={index}>
+                                    {configItem.key === 'about_us_page_header_title' && (
+                                        <Paragraph className='head_paragraph mb-3'>{configItem.value}</Paragraph>
+                                    )}
+                                    {configItem.key === 'about_us_page_header_main_description' && (
+                                        <Paragraph className='description mb-0'>{configItem.value}</Paragraph>
+                                    )}
+                                </React.Fragment>
+                            )): ''}
+                        </div>
+                    </div>
                     </div>
                 </div>
-            </MainHeaderWrapper>
+            </div>
         </>
     );
 };

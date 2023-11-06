@@ -77,27 +77,27 @@
 .food-1{
     bottom:-305px ;
     position: absolute;
-    left:500px ;
+    left:675px ;
 }
 .food-2{
     position: absolute;
     bottom:-465px;
-    left: 60px;
+    left: 105px;
 }
 .food-3{
     position: absolute;
     bottom: -910px;
-    left: 215px;    
+    left: 270px;    
 }
 .food-4{
     position: absolute;
     bottom: -875px;
-    left: 955px;
+    left: 1240px;
         
 }
 .food-5{
     position: absolute;
-    left: 1225px;
+    left: 1550px;
     bottom: -730px;
         
 }

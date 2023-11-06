@@ -52,25 +52,29 @@ export const MembershipIndividualsTypes = [
         id: 1,
         name: 'THE SOCIAL',
         link: 'Find out more',
-        image: member_1
+        image: member_1,
+        description:"Welcome to our vibrant community, where social, outgoing, and communicative individuals thrive!"
     },
     {
         id: 1,
         name: 'THE NATIVE',
         link: 'Find out more',
-        image: member_2
+        image: member_2,
+        description:"Elevate your work experience with our tailored membership, offering dedicated desks in a vibrant shared workspace"
     },
     {
         id: 1,
         name: 'THE STUDIO',
         link: 'Find out more',
-        image: member_3
+        image: member_3,
+        description:"designed for dynamic professionals who value privacy and thrive on networking opportunities."
     },
     {
         id: 4,
         name: 'VIRTUAL',
         link: 'Find out more',
-        image: member_4
+        image: member_4,
+        description:"The Studio membership: Where privacy meets professionalism, and community fuels productivity"
     } 			
 ]
 export const IndividualTypesList = [

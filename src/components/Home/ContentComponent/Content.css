@@ -44,3 +44,14 @@
 .R-flex{
     flex-direction: row-reverse;
 }
+.img_content_right{
+    position: absolute;
+    left: 550px;
+    top: 300px;
+}
+.img_courses_vector{
+    position: absolute;
+    left: 550px;
+    bottom: 175px;
+    
+}

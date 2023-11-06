@@ -3,7 +3,8 @@ import React from "react";
 import Button from "../UI/Button";
 import Media from "../Media/Media";
 import Paragraph from "../UI/Paragraph";
-import Course from '../../assets/images/course.png'
+import Course from '../../assets/images/course.png';
+import Vector from '../../assets/images/vectorRight.svg';
 const OZKnowledge = (props) => {
     return (
         <>
@@ -17,8 +18,9 @@ const OZKnowledge = (props) => {
                         </div>
                     </div>
                     <div className="row R-flex border-of-section">
-                        <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto ">
-                            <div className="box-content px-4">
+                        <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto position-relative ">
+                                <Media type='img' className="img_courses_vector" src={Vector}/>
+                            <div className="box-content  px-4">
                                   <Paragraph className='paragraph_black'>Courses</Paragraph>
                                    <Paragraph className='description_black'>
                                     The OZ Knowledge program focuses on empowering individuals, start-ups, and SMEs with the knowledge and skills they need to thrive in today's dynamic world. With the aim of fostering personal and professional growth through a diverse range of learning experiences centred around wellness, making, and learning, we will cultivate a community of innovators and lifelong learners who are equipped with the tools and mindset to navigate challenges, seize opportunities, and drive positive change.
