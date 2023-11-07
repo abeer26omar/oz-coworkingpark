@@ -3,7 +3,7 @@ import userprofile from '../../../assets/images/userprofile.png'
 import './ProfileHeader.css'
 import Media from "../../Media/Media";
 
-const ProfileHeader = () => {
+const ProfileHeader = ({userInfo}) => {
     return (
         <>
             <section className="profile-header border-bottom">
@@ -14,7 +14,7 @@ const ProfileHeader = () => {
                                 <Media
                                     type="img" src={userprofile} alt="user name"/>
                                 <div className="d-block">
-                                    <h2 className="user-name">Samara Mohamed</h2>
+                                    <h2 className="user-name">{userInfo.name}</h2>
                                     <span className="job-name">Data scientist</span>
                                 </div>
                             </div>

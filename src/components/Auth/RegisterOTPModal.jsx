@@ -18,7 +18,7 @@ const RegisterOTPModal = (props) => {
     const Confirm_OTP = async () => {
         try {
             const result = await ConfirmOTP(OTP, props.email,'create_account');
-            localStorage.setItem("TokenOZ", JSON.stringify(result.access_token));
+            sessionStorage.setItem("TokenOZ", result.access_token);
             sessionStorage.setItem("userIdOZ", result.user_id);
             sessionStorage.setItem("activeUserOZ", result.active);
             navigate('/');

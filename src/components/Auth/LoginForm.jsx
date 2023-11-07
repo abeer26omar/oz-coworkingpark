@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Formik } from 'formik';
 import * as Yup from "yup";
 import { Login } from "../../apis/AuthApi";
@@ -6,13 +6,31 @@ import { useNavigate } from "react-router-dom";
 import Button  from '../UI/Button';
 import SweetAlert2 from 'react-sweetalert2';
 
-const LoginForm = ()=>{
+const LoginForm = ({profile, provider})=>{
     const navigate = useNavigate();
     const [swalProps, setSwalProps] = useState({});
+    const [userInfo, setUSerInfo] = useState({});
+
+    useEffect(()=>{
+        if(provider === 'google'){
+            setUSerInfo({ 
+                email: profile.email,
+            });
+        }else if(provider === 'facebook'){
+            setUSerInfo({ 
+                email: profile.email,
+            });
+        }else{
+
+        }
+    },[profile, provider]);
+
     const handleSubmit = async (values) => {
         try {
-            const result = await Login(values.email, values.password);
+            const result = await Login(values.email, values.password, provider);
             sessionStorage.setItem("TokenOZ", result.access_token);
+            sessionStorage.setItem("userIdOZ", result.user_id);
+            sessionStorage.setItem("activeUserOZ", result.active);
             navigate('/');
             setTimeout(()=>{
                 window.location.reload();
@@ -31,7 +49,7 @@ const LoginForm = ()=>{
     return (
         <>
             <Formik 
-                initialValues={
+                initialValues={userInfo ||
                     { 
                         email: '',
                         password: ''

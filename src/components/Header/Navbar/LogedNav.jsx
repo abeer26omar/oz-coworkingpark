@@ -12,6 +12,7 @@ import { useState ,useRef } from 'react';
 import { NavLink } from "react-router-dom";
 import userblack from '../../../assets/images/icons/userblack.svg';
 import userwhite from '../../../assets/images/icons/userwhite.svg';
+import Button from '../../UI/Button';
 
 const LogedNav = ({showBlackNav})=>{
 
@@ -51,14 +52,14 @@ const LogedNav = ({showBlackNav})=>{
                             </div>
                     </div>
                          <li className="border-dropdown d-flex  px-4">
-                            <Media type={'img'} className='rounded-circle ' alt='profile' src={N_1}/>
+                            <img className='rounded-circle ' alt='profile' src={N_1}/>
                                 <div className='info_profile  mt-4 ms-4'> 
                                     <Paragraph className='profile_notifications'>Reminder: Meeting Room 01 has 10 minutes left</Paragraph>
                                     <Paragraph className='email' alt='#/'>Today at 9:42 AM</Paragraph>
                                 </div>
                          </li>
                          <li className="border-dropdown d-flex  px-4">
-                            <Media type={'img'} className='rounded-circle' alt='profile' src={N_2}/>
+                            <img className='rounded-circle' alt='profile' src={N_2}/>
                             <div className='info_profile mt-4 ms-4'> 
                                 <Paragraph className='profile_notifications'>Meeting room Booking</Paragraph>
                                 <Paragraph className='email' alt='#/'>Wants to edit the file Dynabike</Paragraph>
@@ -66,7 +67,7 @@ const LogedNav = ({showBlackNav})=>{
                             </div>
                          </li>
                          <li className="border-dropdown d-flex  px-4">
-                            <Media type={'img'} className='rounded-circle' alt='profile' src={N_3}/>
+                            <img className='rounded-circle' alt='profile' src={N_3}/>
                             <div className='info_profile mt-4 ms-4'> 
                                 <Paragraph className='profile_notifications'>Multi Purpose area event</Paragraph>
                                 <Paragraph className='email' alt='#/'></Paragraph>
@@ -74,7 +75,7 @@ const LogedNav = ({showBlackNav})=>{
                             </div>
                          </li>
                           <li className="border-dropdown d-flex  px-4">
-                             <Media type={'img'} className='rounded-circle' alt='profile' src={N_2}/>
+                             <img className='rounded-circle' alt='profile' src={N_2}/>
                              <div className='info_profile mt-4 ms-4'> 
                                  <Paragraph className='profile_notifications'>Meeting room Booking</Paragraph>
                                  <Paragraph className='email' alt='#/'>Wants to edit the file Dynabike</Paragraph>
@@ -82,7 +83,7 @@ const LogedNav = ({showBlackNav})=>{
                              </div>
                           </li>
                           <li className="border-dropdown d-flex  px-4">
-                            <Media type={'img'} className='rounded-circle' alt='profile' src={N_2}/>
+                            <img className='rounded-circle' alt='profile' src={N_2}/>
                             <div className='info_profile mt-4 ms-4'> 
                                 <Paragraph className='profile_notifications'>Meeting room Booking</Paragraph>
                                 <Paragraph className='email' alt='#/'>Wants to edit the file Dynabike</Paragraph>
@@ -90,7 +91,7 @@ const LogedNav = ({showBlackNav})=>{
                             </div>
                         </li>
                         <li className=" d-flex  px-4">
-                            <Media type={'img'} className='rounded-circle' alt='profile' src={N_3}/>
+                            <img className='rounded-circle' alt='profile' src={N_3}/>
                             <div className='info_profile mt-4 ms-4'> 
                                 <Paragraph className='profile_notifications'>Multi Purpose area event</Paragraph>
                                 <Paragraph className='email' alt='#/'></Paragraph>
@@ -101,29 +102,29 @@ const LogedNav = ({showBlackNav})=>{
         </div> 
                <div class="dropdown">
                   <a class="" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img type="img" src={userIcon}  className="margin-links user-icon"/>
+                        <img  src={userIcon}  className="margin-links user-icon"/>
                   </a>
                       <ul class="dropdown-menu nav_profile" aria-labelledby="dropdownMenuButton1">
                            <li  className="li_img border_profile_bottom">
-                                <Media type={'img'} className='rounded-circle' alt='profile' src={Profile}/>
+                                <img className='rounded-circle' alt='profile' src={Profile}/>
                                 <div className='info_profile'> 
-                                    <Paragraph className='name_profile'>SAmara Mohamed</Paragraph>
-                                    <a className='email' alt='#/'>samarmohamed12@gmail.com</a>
+                                    <Button className='name_profile p-0' to={'/profile'} tagType='link'>Samara Mohamed</Button>
+                                    <Paragraph className='email'>samarmohamed12@gmail.com</Paragraph>
                                 </div>
-                            </li>
+                            </li> 
                              <li onClick={()=>SetOpen(!Open)} className=" li_profile">
-                              <Media type={'img'} className='px-2' src={Booking}/> My Booking
+                              <img className='px-2' src={Booking}/> My Booking
                             </li>
                             <li  onClick={()=>SetOpen(!Open)} className=" li_profile">
-                                <Media type={'img'} className='px-2' src={Event}/>    
+                                <img className='px-2' src={Event}/>    
                                  My Events
                             </li>
                             <li  onClick={()=>SetOpen(!Open)} className=" li_profile border_profile_bottom">
-                                <Media type={'img'} className='px-2' src={Plan}/>    
+                                <img className='px-2' src={Plan}/>    
                                     My plan
                             </li>
                             <li  onClick={()=>SetOpen(!Open)} className=" li_profile">
-                               <Media type={'img'} className='px-2' src={Logout}/>    
+                               <img className='px-2' src={Logout}/>    
                                 Log out
                             </li>
                       </ul>

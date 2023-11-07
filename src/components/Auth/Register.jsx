@@ -14,25 +14,9 @@ import {
     LoginSocialLinkedin
   } from 'reactjs-social-login';
 
-const REDIRECT_URI = window.location.href;
-
 const Register = () => {
-    const [provider, setProvider] = useState('')
-    const [profile, setProfile] = useState(null)
-    
-    const responseFacebook = (response) => {
-        console.log(response);
-      }
-    const onLoginStart = useCallback(() => {
-        alert('login start')
-    }, [])
-
-    const onLogoutSuccess = useCallback(() => {
-        setProfile(null)
-        setProvider('')
-        alert('logout success')
-    }, [])
-
+    const [provider, setProvider] = useState('');
+    const [profile, setProfile] = useState(null);
     return (
         <>
             <section className="contactus auth my-5">
@@ -59,7 +43,6 @@ const Register = () => {
                                     <div className="py-3 log-social d-flex justify-content-center">
                                         <LoginSocialFacebook
                                             appId={process.env.REACT_APP_FB_APP_ID || ''}
-                                            onLoginStart={onLoginStart}
                                             onResolve={({ provider, data }) => {
                                             setProvider(provider)
                                             setProfile(data)
@@ -73,7 +56,6 @@ const Register = () => {
                                         </LoginSocialFacebook>
                                         <LoginSocialGoogle
                                             client_id={'468809410339-uiq561ijnarf0duksu85jm9j6oa83bib.apps.googleusercontent.com'}
-                                            onLoginStart={onLoginStart}
                                             onResolve={({ provider, data }) => {
                                             setProvider(provider)
                                             setProfile(data);
@@ -82,16 +64,18 @@ const Register = () => {
                                             onReject={(err) => {
                                             console.log(err)
                                             }}
+                                            className="px-3"
                                         >
                                             <img src={google} alt="Google"/>
                                         </LoginSocialGoogle>
                                         <LoginSocialLinkedin
                                             client_id={'77kx7wk728z6ww'}
                                             client_secret={'qAS0CnCJKVvEbMgh'}
+                                            redirect_uri="https://macber-eg.com/rinku/app/index.php"
                                             onResolve={({ provider, data }) => {
                                             setProvider(provider)
                                             setProfile(data);
-                                            console.log(data);
+                                            console.log(data,provider);
                                             }}
                                             onReject={(err) => {
                                             console.log(err)

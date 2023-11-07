@@ -1,10 +1,9 @@
-.tabs-btns {
-    /*padding: 55px 45px 40px 70px;*/
-    padding: 55px 0;
+.nav-item {
+    padding: 20px 0;
     border-bottom: 0;
 }
 
-.tabs-btns button {
+.explore_link.nav-link {
     padding: 20px 58px 20px 24px;
     background-color: transparent;
     color: var(--secondary-color2);
@@ -12,16 +11,20 @@
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
-    line-height: 120%; /* 16.8px */
+    line-height: 120%;
+    display: flex;
+    align-items: center;
 }
 
-.tabs-btns .nav-link.active {
+.explore_link.nav-link.active {
     color: var(--primary-color);
-
     background-color: transparent;
     border: 0;
 }
-
+.explore_link.nav-link.active svg path ,
+.explore_link.nav-link.active svg circle{
+    stroke: var(--primary-color);
+}
 .tabs-btns .nav-link:focus {
     border: 0;
 }

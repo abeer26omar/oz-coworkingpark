@@ -90,7 +90,9 @@
 }
 .otp_resend button:disabled{
     cursor: not-allowed;
-
+}
+.log-social img{
+    cursor: pointer;
 }
 
 @media screen and (max-width: 575px) {

@@ -71,8 +71,8 @@ const ForgetPassOTPModal = (props) => {
                 centered>
                     <Modal.Body className={`justify-content-center align-items-center p-5`}>
                         <div className="head-content text-center pb-3">
-                            <Paragraph className="hand-write mb-0">Please,</Paragraph>
-                            <Paragraph className="bold-head">Enter the OTP</Paragraph>
+                            <h1 className="hand-write mb-0">Please,</h1>
+                            <h3 className="bold-head">Enter the OTP</h3>
                         </div>
                         <OTPInput  
                             value={OTP} 

@@ -17,11 +17,8 @@ const ForgetPassForm = ()=>{
     const handleSubmit = async (values) => {
         try {
             const result = await ForgetPass(values.email);
-            const reset = await ResetPasswordOtp(values.email);
-            if(reset){
                 setShow(true);
                 setEmail(values.email);
-            }
         } catch (error) {
             setSwalProps({
                 show: true,
@@ -60,8 +57,8 @@ const ForgetPassForm = ()=>{
             return (
                 <form className="row g-3" onSubmit={handleSubmit}>
                     <div className="head-content text-center py-4">
-                        <Paragraph className="hand-write">Forget Password ,</Paragraph>
-                        <Paragraph className="bold-head">Enter your email</Paragraph>
+                        <h1 className="hand-write">Forget Password ,</h1>
+                        <h3 className="bold-head">Enter your email</h3>
                     </div>
                     <div className="form__group field my-3 group-check">
                         <label htmlFor="email" className="form__label">Email</label>

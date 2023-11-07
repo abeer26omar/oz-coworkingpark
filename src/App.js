@@ -51,7 +51,7 @@ function App() {
           { path:'register', element: <Register />},
           { path:'forgetpass', element: <ForgetPass />},
           { path:'newpassword', element: <NewPassword />},
-          { path:'membership', element: <Membership />, loader: checkAuthLoader}, 
+          { path:'membership', element: <Membership />},  
           { path:'membership/:id', element: <MembershipOptions />},
           { path:'singleMember/:id', element: <MemberPackage />},
           { path:'community', element: <Community />},

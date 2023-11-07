@@ -65,7 +65,6 @@ const RegisterForm = ({provider, profile})=>{
     }
     return (
         <>
-        {console.log(profile, provider)}
             <Formik 
                 initialValues = {userInfo || {
                     first_name: '',
