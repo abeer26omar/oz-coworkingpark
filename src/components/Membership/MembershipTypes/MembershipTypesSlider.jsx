@@ -68,7 +68,7 @@ const MembershipTypesSlider = () => {
         <>
         <Slider {...settings} className='individual_slider'>
             {MembershipIndividualsTypes && MembershipIndividualsTypes.map((listMembershipType, index) => {
-                const {id, name, logo, link, description, image} = listMembershipType;
+                const {id, name, logo, link, description, image }  = listMembershipType;
                 return (
                     <div className='px-3'>
                         <MembershipTypesList

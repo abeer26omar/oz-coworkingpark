@@ -1,8 +1,9 @@
 import React from 'react';
 import Media from "../../Media/Media";
 import Button from '../../UI/Button';
+import Paragraph from '../../UI/Paragraph';
 
-const MembershipTypesList = ({id, image, name, link}) => {
+const MembershipTypesList = ({id, image, name, link ,description}) => {
 
     return (
         <>
@@ -10,7 +11,8 @@ const MembershipTypesList = ({id, image, name, link}) => {
                 <Media
                     type="img" src={image} className="card-img-top" alt={name}/>
                 <div className="card-body">
-                    <h1 className="card-title">{name}</h1>
+                    <Paragraph className="card-title">{name}</Paragraph>
+                    <Paragraph>{description}</Paragraph>
                     <Button
                         tagType='link' 
                         to={`/membership/${id}`} 
