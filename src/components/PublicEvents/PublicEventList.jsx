@@ -1,23 +1,80 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
+import Slider from "react-slick";
 import Card from "react-bootstrap/Card";
 import Media from "../Media/Media";
 import Button from "../UI/Button";
+import {getEventsList} from '../../apis/Events';
+import { AuthContext } from "../../apis/context/AuthTokenContext";
 
-const PublicEventList = ({id, text, title, img}) => {
+const PublicEventList = ({}) => {
+    const [eventsData, setEventsData] = useState([]);
+    const { token, UserId } = useContext(AuthContext)
+    const settings = {
+        dots: false,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        arrows: false,
+        cssEase: "linear",
+        lazyLoad: false,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                },
+            },
+            {
+                breakpoint: 769,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
+    };
+
+    useEffect(()=>{
+        getEventsList(token, UserId).then(res=>{
+            setEventsData(res)
+        }).catch(err=>{});
+    },[]);
+
     return (
         <>
-            <Card className="image-box">
-                <Media type="img" src={img} class="card-img-top rounded-0" title={title}/>
-                <Card.Body className="py-4">
-                    <Card.Title>{title}</Card.Title>
-                    <Card.Text className="py-2">{text}</Card.Text>
-                    <Button 
-                        to={"/events/communityEventsDetails"} 
-                        className="btn_outline_black "
-                        tagType='link'>Public
-                        Event</Button>
-                </Card.Body>
-            </Card>
+            <div className="col-lg-12">
+                <Slider {...settings} className="home-events">
+                    {eventsData && eventsData.map((event, index) => {
+                            return (
+                                <>
+                                    <div className="card image-box" key={index}>
+                                        <Media 
+                                            type="img" 
+                                            src={event.gallery[0].image} 
+                                            className="card-img-top rounded-0" 
+                                            alt={event.event_name} />
+
+                                        <div className="card-body py-4">
+                                            <Card.Title>{event.event_name}</Card.Title>
+                                            <Card.Text className="py-2">{event.description.slice(0,50)} ...</Card.Text>
+                                            <Button 
+                                                to={"/events/communityEventsDetails"} 
+                                                className="btn_outline_black "
+                                                tagType='link'>{event.event_type.name}</Button>
+                                        </div>
+                                    </div>
+                                </>
+                            );
+                    })}
+                </Slider>
+            </div>
         </>
     );
 };

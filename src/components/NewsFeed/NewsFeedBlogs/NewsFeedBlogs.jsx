@@ -1,35 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './NewsFeedBlog.css';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
-import {NewsFeedData} from "../../../Data/NewsFeedData";
+import Paragraph from '../../UI/Paragraph';
+import { getCommunityNewsFeed } from '../../../apis/Events';
 import NewsFeedBlogList from "./NewsFeedBlogList";
+import NewsFeedHeader from "../NewsFeedHeader/NewsFeedHeader";
 
 const NewsFeedBlogs = () => {
 
+    const [newsFeedData, setNewsFeedData] = useState([]);
+    const [error, setError] = useState('');
+    const [empty, setEmpty] = useState('');
+
+    useEffect(()=>{
+        getCommunityNewsFeed('no').then(res=>{
+            setNewsFeedData(res['posts'])
+        }).catch(err=>{})
+    },[]);
+
+    const getSearchResult = (searchResult, error, empty) => {
+        setNewsFeedData(searchResult);
+        setError(error);
+        setEmpty(empty);
+    };
 
     return (
-        <section className="feed">
-            <div className="container-fluid">
-                <ResponsiveMasonry
-                    columnsCountBreakPoints={{350: 1, 750: 2, 900: 4}}
-                >
-                    <Masonry columnsCount={4} gutter="30px" className="newsfeeds ">
+        <>
+            <NewsFeedHeader getSearchResult={getSearchResult} />
+            <section className="feed">
+                <div className="container-fluid">
+                    {empty && <Paragraph className='empty'>{empty}</Paragraph>}
+                    {error && <Paragraph className='text-danger empty'>{error}</Paragraph>}
+                    <ResponsiveMasonry
+                        columnsCountBreakPoints={{350: 1, 750: 2, 900: 4}}
+                    >
+                        <Masonry columnsCount={4} gutter="30px" className="newsfeeds ">
 
-                        {NewsFeedData.map((feed, index) => {
-                            const {id, text, title, img, linkText, category} = feed;
-                            return (
-                                <div key={index}>
-                                    <NewsFeedBlogList id={id} title={title} img={img} text={text} linkText={linkText}
-                                                      category={category}/>
-                                </div>
-                            )
-                        })}
+                            {newsFeedData && newsFeedData.map((feed, index) => {
+                                const {id, content, title, banner, category_name} = feed;
+                                return (
+                                    <div key={index}>
+                                        <NewsFeedBlogList 
+                                            id={id} 
+                                            title={title} 
+                                            img={banner} 
+                                            text={content} 
+                                            category={category_name}/>
+                                    </div>
+                                )
+                            })}
 
-                    </Masonry>
-                </ResponsiveMasonry>
-            </div>
-        </section>
-
+                        </Masonry>
+                    </ResponsiveMasonry>
+                </div>
+            </section>
+        </>
 
     )
 };

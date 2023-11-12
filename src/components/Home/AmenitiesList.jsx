@@ -15,7 +15,7 @@ const AmenitiesList = (props) => {
         autoplay: false,
         responsive: [
             {
-                breakpoint: 1500,
+                breakpoint: 2000,
                 settings: {
                     slidesToShow: 6,
                     slidesToScroll: 1,

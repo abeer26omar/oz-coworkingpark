@@ -15,6 +15,18 @@
     background-image: none;
 }
 
+.search_container{
+    border-top: 0.75px solid var(--secondary-color2);
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all ease-in-out .5s;
+}
+.search_container.show{
+    max-height: 500px;
+    opacity: 1;
+    visibility: visible;
+}
 /*.news-header .head-co {*/
 /*    text-align: center;*/
 /*    position: absolute;*/

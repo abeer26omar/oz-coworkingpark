@@ -1,24 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./CommunityNewsFeed.css";
 import Slider from "react-slick";
-import CommunityNewsList from "./CommunityNewsList";
 import { Element } from "react-scroll";
-import {newsData} from "../../../Data/NewsData";
 import { NavLink } from "react-router-dom";
 import Paragraph from "../../UI/Paragraph";
+import { getCommunityNewsFeed } from '../../../apis/Events';
+import { useState } from "react";
+import Media from "../../Media/Media";
+
 const CommunityNews = (props) => {
+
+    const [newsData, setNewsData] = useState([]);
+
     const settings = {
         dots: true,
         infinite: true,
         speed: 300,
         slidesToShow: 1,
-        // adaptiveHeight: true,
         cssEase: "linear",
         arrows: false,
         autoplay: true,
         autoplaySpeed: 3000,
         lazyLoad: true,
     };
+    
+    useEffect(()=>{
+        getCommunityNewsFeed('yes').then(res=>{
+            setNewsData(res['slider'])
+        }).catch(err=>{})
+    },[]);
 
     return (
         <>
@@ -45,11 +55,16 @@ const CommunityNews = (props) => {
                         </div>
                         <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-left ">
                             <Slider {...settings} className="news-feed">
-                                {newsData.map((news, index) => {
-                                    const {id, img} = news;
+                                {newsData && newsData.map((news, index) => {
+                                    const {id, banner} = news;
                                     return (
                                         <div key={index}>
-                                            <CommunityNewsList id={id} img={img}/>
+                                            <Media
+                                                type='img'
+                                                src={banner}
+                                                alt='img'
+                                                className="img-book"
+                                                height={'520px'} />
                                         </div>
                                     );
                                 })}

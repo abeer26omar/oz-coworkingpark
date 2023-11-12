@@ -1,36 +1,23 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import CommunityHeader from "../components/Community/CommunityHeader/CommunityHeader";
 import CommunityNews from "../components/Community/CommunityNewsFeed/CommunityNews";
 import CommunityEvents from "../components/Community/CommunityEvents/CommunityEvents";
 import CommunityGallery from "../components/Community/CommunityGallery/CommunityGallery";
-import NewsLetter from "../components/NewsLetter/NewsLetter";
-// import MonoBlock
-import MonoBlock from "../components/MonoBlocks/MonoBlock";
-import { config } from '../apis/config';
-import { useEffect ,useState } from 'react';
 import MonoBlockCommunity from "../components/Community/CommunityNewsFeed/MonoBlockCommunity";
 import JoinCommuinty from "../components/Community/JoinCommuinty/JoinCommuinty";
-import { useData } from "../apis/context/Createdata";
-import { Element } from "react-scroll";
+import { DataContext } from "../apis/context/SiteDataContext";
 
 const Community = () => {
-     const DataLocation = useData();
-     const page_home = DataLocation.config('community')
-    const getComponentValue = DataLocation.getComponentValue;
-    const [data , setData] = useState([page_home]);
+    
+    const {config, getComponentValue} = useContext(DataContext);
 
     useEffect(()=>{
-        page_home.then(res =>{
-            setData(res)
-        })
-        .catch(err =>{
-         
-        })
+        config('community')
     },[]);
-  
+
     return (
         <>
-            <CommunityHeader configData= {data}/>
+            <CommunityHeader configData={getComponentValue('header')} />
             <MonoBlockCommunity />
             <CommunityNews configData={getComponentValue('newsfeed')}/>
             <CommunityEvents configData={getComponentValue('event')}/>

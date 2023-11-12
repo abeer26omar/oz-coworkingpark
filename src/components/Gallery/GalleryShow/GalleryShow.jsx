@@ -8,21 +8,10 @@ import axios from "axios";
 const GalleryShow = () => {
 
     const [galleryData, setGalleryData] = useState([]);
-    // 
     const [activeTab, setActiveTab] = useState();
     const handleTabClick = (key) => {
         setActiveTab(key);
     };
-    // function handleCategorySelect(category) {
-    //     setSelectedCategory(category);
-
-    //     if (category === 'All') {
-    //         setFilteredGalleryData(filteredGalleryData);
-    //     } else {
-    //         const filteredData = filteredGalleryData.filter((gallery) => gallery.category === category);
-    //         setFilteredGalleryData(filteredData);
-    //     }
-    // }
     useEffect(()=>{
         const getGalleryData = async ()=>{
             try{
@@ -40,22 +29,12 @@ const GalleryShow = () => {
         }
         getGalleryData();
     },[]);
+    
     useEffect(() => {
         if (activeTab && galleryData[activeTab]) {
             console.log(galleryData[activeTab]);
         }
     }, [activeTab, galleryData]);
-    // const filterButtons = categories.map((category) => (
-    //     <button
-    //         key={category}
-    //         className={selectedCategory === category ? ' btn btn-outline btn-filter-gallery  active ' : 'btn btn-outline btn-filter-gallery'}
-    //         // onClick={() => {
-    //         //     handleCategorySelect(category);
-    //         // }}
-    //     >
-    //         {category}
-    //     </button>
-    // ));
 
     return (
         <>
@@ -69,9 +48,10 @@ const GalleryShow = () => {
                         </div>
                         <div className="filterButtons">
                             {
-                                Object.keys(galleryData).map((category) =>{
+                                Object.keys(galleryData).map((category, index) =>{
                                     return (
-                                        <button 
+                                        <button
+                                            key={index} 
                                             className={`btn btn-outline btn-filter-gallery border-0 ${category === activeTab ? 'active' : ''}`}
                                             type="button" 
                                             onClick={() => handleTabClick(category)}>{category}</button>

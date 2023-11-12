@@ -46,12 +46,21 @@
 }
 .img_content_right{
     position: absolute;
-    left: 550px;
-    top: 300px;
+    right: 0;
+    bottom: 0;
+    width: 125px;
+    padding: 0;
 }
 .img_courses_vector{
     position: absolute;
-    left: 550px;
-    bottom: 175px;
-    
+    right: 0;
+    top: 0;
+    width: 125px;
+    padding: 0;
+}
+@media screen and (max-width: 1024px) {
+    .img_content_right,
+    .img_courses_vector{
+        display: none;
+    }
 }

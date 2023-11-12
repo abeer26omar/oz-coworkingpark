@@ -6,24 +6,15 @@ import {Container, Nav} from "react-bootstrap";
 import { Link } from 'react-scroll';
 import Paragraph from '../../UI/Paragraph';
 import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
+
 const CommunityHeader = (props) => {
-console.log(props.configData)
     return (
         <>
             <Navbar expand="lg" className="bg-body-tertiary navigator">
                 <Container fluid>
-                            {props.configData ? props.configData.map((configItem, index) => (
-                            <React.Fragment key={index}>
-                                {configItem.key === 'community_page_header_main_title' && (
-                                       <Navbar.Brand className="title-name" href="#home">
-                                           {configItem.value}
-                                       </Navbar.Brand>
-                                   
-                                )}
-                              
-                            </React.Fragment>
-                        )): ''}
-                 
+                    <h1 className="title-name mb-0">
+                        community
+                    </h1>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="2"
@@ -64,11 +55,13 @@ console.log(props.configData)
                 </Container>
             </Navbar>
             <MainHeaderWrapper configData={props.configData} video={community}>
-                {/* <SectionHeader configData={props.configData} /> */}
                 <div className={`container-fluid px-70 py-5`}>
                     <div className='col-md-6 col-12'>
                         {props.configData ? props.configData.map((configItem, index) => (
                             <React.Fragment key={index}>
+                                {configItem.key === 'community_page_header_main_title' && (
+                                    <Paragraph className='head_paragraph mb-3'>{configItem.value}</Paragraph>
+                                )}
                                 {configItem.key === 'community_page_header_sub_title' && (
                                     <Paragraph className='head_paragraph mb-3'>{configItem.value}</Paragraph>
                                 )}

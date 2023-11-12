@@ -17,9 +17,9 @@ const OZKnowledge = (props) => {
                              </div> 
                         </div>
                     </div>
-                    <div className="row R-flex border-of-section">
-                        <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto position-relative ">
-                                <Media type='img' className="img_courses_vector" src={Vector}/>
+                    <div className="row R-flex border-of-section  position-relative ">
+                                <img className="img_courses_vector" src={Vector}/>
+                        <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto">
                             <div className="box-content  px-4">
                                   <Paragraph className='paragraph_black'>Courses</Paragraph>
                                    <Paragraph className='description_black'>

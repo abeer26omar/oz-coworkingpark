@@ -1,18 +1,19 @@
+import { useContext } from "react";
 import BecomeMember from "../components/Membership/BecomeMembber/BecomeMember";
 import MembershipTypes from "../components/Membership/MembershipTypes/MembershipTypes";
 import MembershipHeader from "../components/Membership/MembershipHeader/MembershipHeader";
-// import Locations from "../components/Locations/Locations";
 import Services from "../components/Membership/Services/Services";
-import { useData } from '../apis/context/Createdata';
+import { DataContext } from '../apis/context/SiteDataContext';
+
 const Membership = () => {
-const DataLocation = useData();
-const getComponentValue = DataLocation.getComponentValue;
+
+    const {config, getComponentValue} = useContext(DataContext);
+    
     return (
         <>
             <MembershipHeader/>
             <BecomeMember configData= {getComponentValue('membership_page')}/>
             <MembershipTypes />
-            {/* <Locations configData= {getComponentValue('page_location')}/> */}
             <Services/>
         </>
     );

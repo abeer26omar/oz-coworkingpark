@@ -1,41 +1,9 @@
 import React from "react";
 import "./PublicEvent.css";
-import Slider from "react-slick";
-import PublicEventList from "./PublicEventList";
-import { EventsData } from "../../Data/EventsData";
+import PublicEventList from './PublicEventList';
 import Paragraph from "../UI/Paragraph";
+
 const PublicEvent = (props) => {
-    const settings = {
-        dots: false,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        arrows: false,
-        cssEase: "linear",
-        lazyLoad: false,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                },
-            },
-            {
-                breakpoint: 769,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
-    };
     return (
         <>
             <section className="events">
@@ -46,7 +14,6 @@ const PublicEvent = (props) => {
                                 <Paragraph className='head_feature'>{'Community Events'}</Paragraph>                              
                             </div> 
                         </div>               
-                            {/*  */}
                         <div className="border-of-section">
                             <div className="row p-5 justify-content-between align-items-center">
                                 {props.configData ? props.configData.map((configItem , index)=>(
@@ -64,24 +31,7 @@ const PublicEvent = (props) => {
                                     </React.Fragment>                                
                                 )):''}
                             </div>                                 
-                            <div className="col-lg-12 ">
-                                <Slider {...settings} className="home-events">
-                                    {EventsData.map((events, index) => {
-                                        const {id, title, img, text} = events;
-
-                                        return (
-                                            <div key={index}>
-                                                <PublicEventList
-                                                    id={id}
-                                                    title={title}
-                                                    img={img}
-                                                    text={text}
-                                                />
-                                            </div>
-                                        );
-                                    })}
-                                </Slider>
-                            </div>
+                           <PublicEventList />
                         </div>
                     </div>
                 </div>

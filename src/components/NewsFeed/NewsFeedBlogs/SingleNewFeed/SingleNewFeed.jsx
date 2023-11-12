@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './SingleNewFeed.css';
 import '../NewsFeedBlog.css';
 import vector from "../../../../assets/images/VectorRight.png";
 import headNews from "../../../../assets/images/news/test.png";
 import blog2 from "../../../../assets/images/news/newsblog2.png";
 import blog1 from "../../../../assets/images/news/newsblog.png";
-import {NavLink} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
+import { getNewFeedsPost } from '../../../../apis/Events';
 import Card from "react-bootstrap/Card";
 import imageone from "../../../../assets/images/news/news1.png"
+import { useState } from 'react';
 
 const SingleNewFeed = () => {
+
+    const { id } = useParams();
+    const [post, setPost] = useState({})
+
+    useEffect(()=>{
+        getNewFeedsPost(id).then(res=>{
+            setPost(res)
+        }).catch(err=>{})
+    },[]);
+
     return (
         <>
             <div className="position-relative">
@@ -30,8 +42,8 @@ const SingleNewFeed = () => {
                                 <div className="head-news-section">
                                 <span className="news-feed-head">
                         News Feed :
-                        <h2 className="name-feed">Lorem Ipsum</h2>
-                        <span className="category-head">Category:<span className="category-name">Arts</span></span>
+                        <h2 className="name-feed">{post.title}</h2>
+                        <span className="category-head">Category:<span className="category-name">{post.category_name}</span></span>
                     </span>
 
                                 </div>
@@ -68,7 +80,7 @@ const SingleNewFeed = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="image-header">
-                                <img src={headNews} alt="" className="details-image"/>
+                                <img src={post.banner} alt="" className="details-image"/>
                             </div>
                         </div>
                         <div className="col-lg-7 border-right ">
@@ -77,17 +89,7 @@ const SingleNewFeed = () => {
                                     The artist and designer Rogan Gregory is something of an enigma, or perhaps a
                                     shape-shifter.
                                 </h3>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
-                                    amet, consectetur dipiscing elit eiusmod ipsum dolor sit amet, dipiscing elit
-                                    eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum
-                                    dolor sit a elit eiusmod Lorem ipsum dolor sit amet, consectetur di consectetur
-                                    dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit
-                                    eiusmod Lorem ipsum dolor sit amet, consectet ipsum dolor sit amet, consectetur
-                                    dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit
-                                    eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit Lorem ipsum dolor sit
-                                    amet, consectetur dipiscing elit eiusmod
-                                </p>
+                                <p>{post.content}</p>
                             </div>
                             <div className="box-details border-bottom">
                                 <div className='row m-auto'>
