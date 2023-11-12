@@ -2,27 +2,32 @@ import React from 'react';
 import './Locations.css';
 import mapPoint from '../../assets/images/icons/mapPoint.svg';
 import Media from "../Media/Media";
+import Paragraph from '../UI/Paragraph';
 
 const LocationsList = ({id, address, img, addAddress}) => {
     return (
         <>
-            <div className="" key={id}>
+            <div className="image-box " key={id}>
                 <Media
                     type="img" 
                     src={img} 
-                    className="image-box w-100"
-                    height='600px'
-                    alt={address}/>
-                <div className="d-flex justify-content-start image-box box-locations pt-3">
-                    {addAddress && <>
-                        <img
-                        src={mapPoint} className="mx-3 map-point" style={{width: "24px", height: "24px"}}
-                        alt="map"/>
-
-                        <a className="location-slider mt-auto text-underline" href={`https://www.google.com/maps/dir/${address}`} target='_blank'>{address}</a>
-                    </>}
-                </div>
-                </div>
+                    className="w-100"
+                    height = '512px'
+                    alt={address} />
+                    {addAddress && (
+                        <div className="d-flex align-items-center box-locations justify-content-end">
+                            <img
+                                src={mapPoint} 
+                                className="map-point" 
+                                style={{width: "24px", height: "24px"}}
+                                alt="map"/>
+                            <Paragraph className='map-address mb-0 mx-2'>
+                                {address}
+                            </Paragraph>
+                            <a className="location-slider " href={`https://www.google.com/maps/dir/${address}`} target='_blank'>git direction</a>
+                        </div>
+                    )}
+            </div>
         </>
     );
 };

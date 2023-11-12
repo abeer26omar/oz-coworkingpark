@@ -9,7 +9,7 @@ import CommunityHouses from "./HousesCommunityEvents/CommunityHouses";
 import Navbar from "react-bootstrap/Navbar";
 import {Container, Nav} from "react-bootstrap";
 import Media from "../../Media/Media";
-import axios from "axios";
+import { getHouseDetails } from '../../../apis/config';
 
 const HouseDetails = () => {
     const {id} = useParams();
@@ -17,20 +17,16 @@ const HouseDetails = () => {
     const [response, setResponse] = useState('');
 
     useEffect(()=>{
-        const getHouseDetails = async ()=>{
-            try{
-                const config = {
-                    method: 'get',
-                    url: `${process.env.REACT_APP_API_CONFIG_URL}/api/locations/${id}`
-                };
-                const response = await axios(config);
-                setHouseDetails(response.data.data);
-            }catch(error){
-                setResponse(error.response.data.message);
-            }
-        }
-        getHouseDetails();
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        getHouseDetails(id, signal).then(res=>{
+            setHouseDetails(res);
+        }).catch(err=>{});
+
+        return ()=>controller.abort();
     },[]);
+
     const settings = {
         dots: true,
         speed: 300,
@@ -45,9 +41,9 @@ const HouseDetails = () => {
         <>
             <Navbar expand="lg" className="bg-body-tertiary navigator">
                 <Container fluid>
-                    <p className="title-name">
+                    <h1 className="title-name mb-0">
                         {houseDetails.title}
-                    </p>
+                    </h1>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="2"
@@ -82,21 +78,21 @@ const HouseDetails = () => {
                                 Amenities
                             </NavLink>
                             <NavLink className="nav-link-two btn button-outLine btn-bg-white"
-                                     to="/inquery"
+                                     to="/contactus"
                             >
-                                Inquiry
+                                inquire
                             </NavLink>
                         </>
                     </Nav>
                 </Container>
             </Navbar>
 
-            <section className=" house-details ">
+            <section className=" locations house-details ">
                 <div className="container-fluid">
 
                     <div className="row border-of-section ">
                         <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto ">
-                            <div className="box-content px-60">
+                            <div className="box-content px-4">
                                 <h2 className="h2-text-box">{houseDetails.address}</h2>
                                 <p className="p-text-box">
                                    {houseDetails.description}
@@ -109,7 +105,7 @@ const HouseDetails = () => {
                                     const {id, path} = house;
                                     return (
                                         <div key={index}>
-                                            <LocationsList id={id} img={path}/>
+                                            <LocationsList id={id} img={path} addAddress={false} />
                                         </div>
                                     )
                                 })}
@@ -127,7 +123,7 @@ const HouseDetails = () => {
                 <div className="container-fluid">
                     <div className="row border-of-section ">
                         <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto ">
-                            <div className="box-content px-60">
+                            <div className="box-content px-4">
                                 <h2 className="h2-text-box">
                                     F&B
                                 </h2>
@@ -138,27 +134,32 @@ const HouseDetails = () => {
                             </div>
                         </div>
 
-                        <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left ">
+                        <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left img_block">
                             <Media
-                                type="img" className="image-box w-100" src={houseDetails.fb_image} alt="Our OZ Vision"/>
+                                type="img" 
+                                className="image-box w-100"
+                                height='512px'
+                                src={houseDetails.fb_image} 
+                                alt="Our OZ Vision"
+                            />
                         </div>
 
                     </div>
                 </div>
             </section>
 
-            <HouseServices/>
+            <HouseServices location_amenities={houseDetails.location_amenities} />
 
             <section className="next-compound">
                 <div className="container-fluid">
                     <div className="row ">
-                        <div className="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                            <h4 className="h4-text">
+                        <div className="col-12 text-center">
+                            <a className="h4-text" href={`https://www.google.com/maps/dir/${houseDetails.address}`} target='_blank'>
                                 <img src={mapPoint} className="mx-3 map-point"
                                      style={{width: "24px", height: "24px"}}
                                      alt="map"/>
                                 {houseDetails.title} - {houseDetails.address}
-                            </h4>
+                            </a>
 
                         </div>
 

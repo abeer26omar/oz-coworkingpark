@@ -7,11 +7,11 @@ const HousesLocationsList = ({id, address, title, main_image}) => {
         <>
 
             <div className="box-office" key={id}>
-                <div className="d-lg-flex justify-content-between align-items-center d-sm-block">
                     <div className="location-contact">
                         <h2 className="h2-text-box">{title}</h2>
-                        <span className="government">{address}</span>
                     </div>
+                <div className="d-lg-flex mb-4 justify-content-between align-items-center d-sm-block">
+                    <span className="government">{address}</span>
                     <div className="btn-explore">
                         <Button 
                             tagType='link'
@@ -25,7 +25,8 @@ const HousesLocationsList = ({id, address, title, main_image}) => {
                     src={main_image} 
                     alt="office" 
                     className="w-100 img-fit" 
-                    height='600px' />
+                    height= '512px'
+                />
             </div>
 
         </>

@@ -1,35 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from "react-bootstrap/Navbar";
+import React, { useContext, useEffect, useState } from 'react';
 import {Container} from "react-bootstrap";
 import './HousesLocations.css';
 import HousesLocationsList from "./HousesLocationsList";
-import axios from "axios";
+import { getSiteLocations } from '../../apis/config';
+import Paragraph from '../UI/Paragraph';
 
-const HousesLocations = () => {
+const HousesLocations = ({configData}) => {
     const [locations, setLocations] = useState([]);
     const [response, setResponse] = useState('');
+
     useEffect(()=>{
-        const getLocations = async ()=>{
-            try{
-                const config = {
-                    method: 'get',
-                    url: `${process.env.REACT_APP_API_CONFIG_URL}/api/locations`
-                };
-                const response = await axios(config);
-                setLocations(response.data.data);
-            }catch(error){
-                setResponse(error.response.data.message);
-            }
-        }
-        getLocations();
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        getSiteLocations(signal).then(res=>{
+            setLocations(res);
+        }).catch(err=>{});
+
+        return ()=>controller.abort();
     },[]);
+
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary navigator">
+            <div className="bg-body-tertiary navigator">
                 <Container fluid className='justify-content-start'>
-                    <p className="title-name">
+                    <div className='d-flex align-items-center'>
+                    <h1 className="title-name mb-0">
                         Houses
-                    </p>
+                    </h1>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="2"
@@ -39,13 +37,16 @@ const HousesLocations = () => {
                     >
                         <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
                     </svg>
-                    <p className="p-name">Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum
-                        dolor sit
-                        amet,
-                        consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, </p>
-
+                    {configData ? configData.map((configItem, index) => (
+                        <React.Fragment key={index}>
+                            {configItem.key === 'home_page_location_description' && (
+                                <Paragraph className="p-name ps-4 mb-0">{configItem.value}</Paragraph>    
+                            )}                                   
+                        </React.Fragment>
+                    )): ''}
+                    </div>
                 </Container>
-            </Navbar>
+            </div>
 
             <section className="locations-houses">
                 <div className="container-fluid">

@@ -13,7 +13,6 @@
     font-style: normal;
     font-weight: var(--font-weight-regular);
     line-height: 130%; /* 20.8px */
-    margin-left: 40px;
     width: 50%;
 }
 
@@ -23,15 +22,6 @@
 
 .locations-houses .box-office {
     padding: 16px;
-}
-
-.locations-houses .box-office img {
-    width: 100%;
-    padding-bottom: 32px;
-}
-
-.locations-houses .location-contact {
-    padding: 32px 0;
 }
 
 .locations-houses .location-contact .h2-text-box {

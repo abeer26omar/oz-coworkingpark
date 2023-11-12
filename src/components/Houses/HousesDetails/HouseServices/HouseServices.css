@@ -41,7 +41,7 @@
 }
 
 .features img {
-    width: 50px;
+    /* width: 50px; */
     text-align: left !important;
     margin-bottom: 24px;
 }

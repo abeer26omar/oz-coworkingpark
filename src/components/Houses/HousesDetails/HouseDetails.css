@@ -1,3 +1,11 @@
+.bg-body-tertiary .nav-head .links-margin{
+    color: #000;
+    font-family: Couture;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
 .house-details .map-point {
     display: none !important;
 }
