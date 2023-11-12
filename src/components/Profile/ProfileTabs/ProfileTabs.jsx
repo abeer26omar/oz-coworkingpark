@@ -3,15 +3,19 @@ import {Tab, Tabs, Nav} from 'react-bootstrap';
 import './ProfileTabs.css'
 import PersonalData from "../ProfileContent/Personal Data/PersonalData";
 import ChangePassword from "../ProfileContent/Change Password/ChangePassword";
+import MyBooking from '../ProfileContent/MyBooking/MyBooking';
+import MyEvents from '../ProfileContent/MyEvents/MyEvents';
+import MyPlan from '../ProfileContent/MyPlan/MyPlan';
+import Favoriates from '../ProfileContent/Favoriates/Favoriates';
 import PrivacyPolicy from "../ProfileContent/Privacy Policy/PrivacyPolicy";
 import TermsConditions from "../ProfileContent/TermsConditions/TermsConditions";
 import Media from "../../Media/Media";
 
-const ProfileTabs = () => {
+const ProfileTabs = ({userData, custom}) => {
     return (
         <>
             <Tab.Container id="left-tabs-example" defaultActiveKey="one">
-                <div className="container-fluid">
+                <div className="container-fluid profile-taps">
                     <div className="row">
                         <div className="col-md-4 col-lg-3 border-right">
                             <Nav variant="pills" className="flex-column p-5">
@@ -68,7 +72,7 @@ const ProfileTabs = () => {
                                                 <path d="M21.0009 8.50026V17.0007C21.0009 20.0009 19.5009 22.001 16.0007 22.001H8.00026C4.50008 22.001 3 20.0009 3 17.0007V8.50026C3 5.5001 4.50008 3.5 8.00026 3.5H16.0007C19.5009 3.5 21.0009 5.5001 21.0009 8.50026Z" stroke="#BDBDBD" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                 <path opacity="0.4" d="M14.9823 14.2676C14.9587 14.1923 14.9153 14.1253 14.857 14.0742C14.7987 14.0232 14.7278 13.9901 14.6524 13.9787L13.0854 13.7421L12.3833 12.2392C12.3498 12.1675 12.2976 12.107 12.2326 12.0647C12.1676 12.0224 12.0924 12 12.0157 12C11.939 12 11.8638 12.0224 11.7988 12.0647C11.7338 12.107 11.6816 12.1675 11.6481 12.2392L10.9462 13.7416L9.35264 13.9785C9.27673 13.9898 9.20542 14.0231 9.14685 14.0745C9.08828 14.1259 9.04482 14.1934 9.02143 14.2693C8.99804 14.3452 8.99567 14.4263 9.01459 14.5035C9.0335 14.5808 9.07295 14.6509 9.12841 14.7059L10.2849 15.8529L9.99336 17.4989C9.97954 17.577 9.98708 17.6575 10.0151 17.7314C10.0431 17.8052 10.0905 17.8695 10.1519 17.9167C10.2133 17.964 10.2863 17.9925 10.3624 17.9989C10.4386 18.0052 10.515 17.9893 10.5829 17.9529L12.0141 17.1842L13.4188 17.9515C13.4862 17.9884 13.5622 18.0049 13.6382 17.9992C13.7141 17.9936 13.7871 17.966 13.8488 17.9195C13.9104 17.8731 13.9584 17.8097 13.9872 17.7364C14.016 17.6632 14.0246 17.583 14.0119 17.505L13.7433 15.8529L14.8789 14.7028C14.9335 14.6475 14.9721 14.5775 14.9904 14.5006C15.0086 14.4237 15.0058 14.343 14.9823 14.2676ZM13.0195 15.4002C12.9722 15.4481 12.9367 15.5072 12.9162 15.5725C12.8957 15.6378 12.8908 15.7072 12.9018 15.7749L13.0686 16.8009L12.2059 16.3297C12.1477 16.2979 12.0829 16.2812 12.0172 16.281C11.9514 16.2807 11.8865 16.297 11.8281 16.3284L10.948 16.801L11.1287 15.7811C11.1409 15.7118 11.1364 15.6404 11.1155 15.5734C11.0946 15.5063 11.058 15.4458 11.0089 15.3971L10.3012 14.6953L11.277 14.5501C11.3432 14.5403 11.406 14.5137 11.46 14.4728C11.514 14.4318 11.5575 14.3777 11.5867 14.3152L12.0157 13.3969L12.4447 14.3152C12.4739 14.3776 12.5172 14.4316 12.5711 14.4725C12.6249 14.5134 12.6876 14.54 12.7536 14.55L13.7156 14.6952L13.0195 15.4002Z" fill="#BDBDBD"/>
                                             </svg>
-                                            <span className='ms-3'>My events</span>
+                                            <span className='ms-3'>My event</span>
                                         </Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
@@ -131,30 +135,29 @@ const ProfileTabs = () => {
                                         </Nav.Link>
                                 </Nav.Item>
                             </Nav>
-                           
                         </div>
                         <div className="col-md-8 col-lg-9">
                             <Tab.Content animation>
                                 <Tab.Pane eventKey="one">
-                                    <PersonalData />
+                                    <PersonalData userData={userData} custom={custom} />
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="two">
-                                    <ChangePassword />
+                                    <ChangePassword userData={userData}/>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="three">
-                                    <PersonalData />
+                                    <MyBooking />
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="four">
-                                    <PersonalData />
+                                    <MyEvents />
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="five">
-                                    <PersonalData />
+                                    <MyPlan />
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="six">
-                                    <PersonalData />
+                                    <Favoriates />
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="seven">
-                                    <PersonalData />
+                                    {/* <PersonalData /> */}
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="eight">
                                     <PrivacyPolicy />

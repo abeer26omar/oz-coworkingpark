@@ -1,60 +1,71 @@
 import React, {useState} from 'react';
-import {Field, Form, Formik} from 'formik';
-import Modal from 'react-bootstrap/Modal';
-import OtpInput from 'react-otp-input';
-import {Link} from "react-router-dom";
+import {Formik} from 'formik';
+import { changePassword } from '../../../../apis/User';
+import SweetAlert2 from 'react-sweetalert2';
+import * as Yup from "yup";
 
-const PasswordOtp = ({handleClose}) => {
-    const [otp, setOtp] = useState('');
-    return (
-        <Modal show={true} onHide={handleClose} keyboard={false} className="modal-otp">
-            <Modal.Body className="otp-body">
-                <h3>Please</h3>
-                <h2>Enter the OTP</h2>
-                <OtpInput
-                    inputType="tel"
-                    placeholder="Hello"
-                    containerStyle="otp-container justify-content-center"
-                    inputStyle="otpbox"
-                    value={otp}
-                    onChange={setOtp}
-                    numInputs={5}
-                    renderInput={(props) => <input {...props} />}
-                />
-                <span className="d-block text-center">Don’t receive code ?<a href="#">Re-send</a></span>
-                <Link to="/login" type="submit" className="button-one-outline btn-bg-white d-block">
-                    Login
-                </Link>
-            </Modal.Body>
-        </Modal>
-    );
-};
+const ChangePassword = ({userData}) => {
 
-const ChangePassword = () => {
-    const [showOtp, setShowOtp] = useState(false);
+    const [swalProps, setSwalProps] = useState({});
 
-    const handleShowOtp = () => setShowOtp(true);
-    const handleCloseOtp = () => setShowOtp(false);
-
+    const changePasswordInfo = async (values)=>{
+        try {
+            const result = await changePassword(values.email, values.currentPassword, values.newPassword);
+            setSwalProps({
+                show: true,
+                icon: 'success',
+                title: result.status,
+                text: result.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+            values.currentPassword = ''
+            values.newPassword = ''
+            values.confirmPassword = ''
+        } catch (error) {
+            setSwalProps({
+                show: true,
+                icon: 'error',
+                title: error.response.data.status,
+                text: error.response.data.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    }
     return (
         <>
             <Formik
                 initialValues={{
+                    email: userData ? userData.email : '',
                     currentPassword: '',
                     newPassword: '',
                     confirmPassword: '',
                 }}
                 onSubmit={async (values) => {
                     await new Promise((r) => setTimeout(r, 500));
-                    alert(JSON.stringify(values, null, 2));
-                    handleShowOtp(); // Show the OTP component after form submission
+                    changePasswordInfo(values);
                 }}
-            >
-                {({values}) => (
+                validationSchema={Yup.object().shape({
+                    currentPassword: Yup.string().required('Required'),
+                    newPassword: Yup.string().required('Required'),
+                    confirmPassword: Yup.string().required('Required')
+                    .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
+                })}
+            enableReinitialize>
+                {props => {
+                    const {
+                    values,
+                    touched,
+                    errors,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit
+                    } = props
+                    return (
                     <section className="changepass-style">
                         <div className="container">
-                            <Form className="profile-edit">
-                                {/* Form fields */}
+                            <form className="profile-edit" onSubmit={handleSubmit}>
                                 <div className="row align-items-center">
                                     <div className="col-lg-12">
                                         <div className="head-form">
@@ -63,12 +74,39 @@ const ChangePassword = () => {
                                     </div>
                                     <div className="col-lg-12">
                                         <div className="form__group field my-3">
+                                            <label htmlFor="email" className="form__label">Email</label>
+                                            <input 
+                                                id='email'
+                                                type="email"
+                                                className="form__field"
+                                                name="email"
+                                                value={values.email}
+                                                readOnly
+                                            /> 
+                                            {errors.email && touched.email && <p className='text-danger mb-0'>{errors.email}</p>}
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-12">
+                                        <div className="form__group field my-3">
                                             <label htmlFor="currentPassword"
                                                    className="form__label d-flex align-items-center justify-content-start">
                                                 Current Password
                                             </label>
-                                            <Field id="currentPassword" name="currentPassword" type="password"
-                                                   placeholder="Current Password" className="form__field" required/>
+                                            <input 
+                                                id="currentPassword" 
+                                                name="currentPassword" 
+                                                type="password"
+                                                placeholder="Current Password" 
+                                                className={
+                                                    errors.phone && touched.phone
+                                                    ? "form__field is-invalid"
+                                                    : "form__field"
+                                                }
+                                                value={values.currentPassword}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            />
+                                            {errors.currentPassword && touched.currentPassword && <p className='text-danger mb-0'>{errors.currentPassword}</p>}
                                         </div>
                                     </div>
                                     <div className="col-lg-12">
@@ -77,8 +115,21 @@ const ChangePassword = () => {
                                                    className="form__label d-flex align-items-center justify-content-start">
                                                 New Password
                                             </label>
-                                            <Field id="newPassword" name="newPassword" type="password"
-                                                   placeholder="New Password" className="form__field" required/>
+                                            <input 
+                                                id="newPassword" 
+                                                name="newPassword" 
+                                                type="password"
+                                                placeholder="new Password" 
+                                                className={
+                                                    errors.newPassword && touched.newPassword
+                                                    ? "form__field is-invalid"
+                                                    : "form__field"
+                                                }
+                                                value={values.newPassword}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            />
+                                            {errors.newPassword && touched.newPassword && <p className='text-danger mb-0'>{errors.newPassword}</p>}
                                         </div>
                                     </div>
                                     <div className="col-lg-12">
@@ -87,27 +138,36 @@ const ChangePassword = () => {
                                                    className="form__label d-flex align-items-center justify-content-start">
                                                 Confirm Password
                                             </label>
-                                            <Field id="confirmPassword" name="confirmPassword" type="password"
-                                                   placeholder="Confirm Password" className="form__field" required/>
+                                            <input 
+                                                id="confirmPassword" 
+                                                name="confirmPassword" 
+                                                type="password"
+                                                placeholder="confirm Password" 
+                                                className={
+                                                    errors.confirmPassword && touched.confirmPassword
+                                                    ? "form__field is-invalid"
+                                                    : "form__field"
+                                                }
+                                                value={values.confirmPassword}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            />
+                                            {errors.confirmPassword && touched.confirmPassword && <p className='text-danger mb-0'>{errors.confirmPassword}</p>}
                                         </div>
                                     </div>
 
                                     <div className="col-lg-12 text-center">
-                                        <button type="submit" className="button-one-outline btn-bg-white">
+                                        <button type="submit" className="btn btn_default btn_outline_black ms-3">
                                             Confirm
-                                            {showOtp && <PasswordOtp handleClose={handleCloseOtp}/>}
                                         </button>
                                     </div>
                                 </div>
-
-                            </Form>
+                            </form>
                         </div>
                     </section>
-                )}
+                )}}
             </Formik>
-
-            {/* Render the OTP component when showOtp state is true */}
-            {showOtp && <PasswordOtp handleClose={handleCloseOtp}/>}
+            <SweetAlert2 {...swalProps} />
         </>
     );
 };

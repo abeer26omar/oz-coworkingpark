@@ -1,14 +1,14 @@
 .profile-header {
-    padding-top: 60px;
+    /* padding-top: 60px;
     padding-bottom: 44px;
-    padding-left: 72px;
+    padding-left: 72px; */
 }
 
 .profile-header img {
     border-radius: 50%;
-    width: 154.8px;
-    height: 169.2px;
-    margin-right: 32px;
+    width: 150px;
+    height: 150px;
+    object-fit: fill;
 }
 
 .profile-header .user-name {

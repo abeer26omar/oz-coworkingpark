@@ -1,13 +1,33 @@
-.profile-edit {
-    margin-top: 40px;
-    margin-bottom: 80px;
-}
 
 .profile-edit .form__field {
-    margin: 12px;
+    margin: 12px 0px 0px 12px;
+}
+.profile-edit .form-control{
+    border-radius: 0;
+    box-shadow: none;
+}
+.profile-edit .form-control:focus{
+    background-color: transparent;
+    box-shadow: none;
+}
+.profile-edit .input-group-text{
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+.profile-edit .form-control:disabled,
+.profile-edit input:disabled {
+    background-color: transparent;
+    color: var(--secondary-color2);
+    font-family: Questrial;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
 }
 
-.profile-edit .head-form {
+.head-form {
     color: var(--primary-color);
     font-family: Couture;
     font-size: 29px;
@@ -146,4 +166,7 @@
 
 .otp-body {
     padding: 75px;
+}
+.input-group{
+    align-items: center;
 }
