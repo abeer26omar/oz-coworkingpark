@@ -34,6 +34,8 @@ import NewPassword from './components/Auth/NewPassword';
 import MyBookingDetails from "./components/Profile/ProfileContent/MyBooking/MyBookingDetails";
 import MyplanDetials from './components/Profile/ProfileContent/MyPlan/PlanDetails';
 import MyEventDetails from "./components/Profile/ProfileContent/MyEvents/MyEventDetilas";
+import Ozys from './components/Ozys/Ozys';
+import Amenities from './components/Amenities/Amenities';
 
 function App() {
     const router = createBrowserRouter([
@@ -69,6 +71,8 @@ function App() {
           { path:'myeventDetails/:id', element: <MyEventDetails/>},
           { path:'bookingDetails/bookNow', element: <BookingSummary />},
           { path:'community/galleryshow', element: <Gallery />},
+          { path:'ozys', element: <Ozys />},
+          { path:'amenities' ,element: <Amenities />}
         ]}
     ]);
     const queryClient = new QueryClient();

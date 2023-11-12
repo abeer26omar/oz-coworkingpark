@@ -13,6 +13,7 @@ const RootLayout = ()=>{
     const isGalleryRoute = location.pathname === '/community/galleryshow';
     const isLimitedRoute = location.pathname === '/limited';
     const isAboutRoute = location.pathname === '/about';
+    const isAmenitiesRoute = location.pathname === '/amenities';
     const AuthRoutes = location.pathname === '/login' || 
         location.pathname === '/contactus' || 
         location.pathname === '/joinus' || 
@@ -20,7 +21,7 @@ const RootLayout = ()=>{
         location.pathname === '/forgetpass';
 
         useEffect(()=>{
-            if(isGalleryRoute || isLimitedRoute || isAboutRoute){
+            if(isGalleryRoute || isLimitedRoute || isAboutRoute || isAmenitiesRoute){
                 document.body.classList.add('body_dark');
             }
             return ()=>{
@@ -35,7 +36,7 @@ const RootLayout = ()=>{
                     <SiteConfigProvider>
                         <Header 
                             className="navbar"
-                            showBlackNav={isGalleryRoute || isLimitedRoute || isAboutRoute}
+                            showBlackNav={isGalleryRoute || isLimitedRoute || isAboutRoute || isAmenitiesRoute}
                         />
                         <Outlet />
                         {!AuthRoutes && <Footer />}

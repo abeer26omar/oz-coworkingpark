@@ -16,7 +16,7 @@ const CommunityHouses = (props) => {
     }
     return (
         <>
-            <section id="community-events" className=" house-details ">
+            <section id="community-events" className="locations house-details ">
                 <div className="container-fluid">
 
                     <div className="row border-of-section ">
@@ -33,7 +33,7 @@ const CommunityHouses = (props) => {
                             </Slider>
                         </div>
                         <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto ">
-                            <div className="box-content px-60">
+                            <div className="box-content px-4">
                                 <h2 className="h2-text-box">Community Events</h2>
                                 <p className="p-text-box">
                                     {props.description}
