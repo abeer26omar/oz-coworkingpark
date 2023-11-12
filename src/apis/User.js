@@ -1,9 +1,8 @@
 import axios from 'axios';
 import FormData from 'form-data';
 
-export const getUserInfo = async () => {
-        const token = sessionStorage.getItem('TokenOZ');
-        const UserId = sessionStorage.getItem('userIdOZ');
+export const getUserInfo = async (token, UserId, signal) => {
+        
         const formData = new FormData();
         formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
         formData.append('fetch', 'user_data');
@@ -15,7 +14,143 @@ export const getUserInfo = async () => {
             data: formData,
             maxContentLength: Infinity,
             maxBodyLength: Infinity,
+            signal: signal
         };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const getInterests = async (token) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/list_interest?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const getHobbies = async (token) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/list_hobbies?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const updateUserInfo = async ({
+    gender,
+    birthday,
+    language,
+    nationality,
+    jobTitle,
+    industry,
+    city,
+    companyName,
+    howDidYouKnowUs,
+    serviceProvide,
+    about,
+    hobbies,
+    interest,
+    }) => {
+    const token = sessionStorage.getItem('TokenOZ');
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('birthday', birthday);
+    formData.append('gender', gender);
+    formData.append('about', about);
+    formData.append('language', language);
+    formData.append('working', companyName);
+    formData.append('custom[][fid_5]', jobTitle);
+    formData.append('custom[][fid_6]', industry);
+    formData.append('custom[][fid_7]', city);
+    formData.append('custom[][fid_8]', nationality);
+    formData.append('custom[][fid_9]', serviceProvide);
+    formData.append('custom[][fid_10]', howDidYouKnowUs);
+    formData.append('custom[][fid_11]', hobbies);
+    formData.append('custom[][fid_12]', interest);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/update-user-data?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+const response = await axios(config);
+    
+return response.data.data;
+};
+
+export const RequestUpdateUserInfo = async (key, old_value, new_value) => {
+
+    const token = sessionStorage.getItem('TokenOZ');
+    const formData = new FormData();
+        formData.append('server_key', process.env.REACT_APP_SERVER_KEY)
+        formData.append('key', key);
+        formData.append('old_value', old_value);
+        formData.append('new_value', new_value);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/request_profile_change?access_token=${token}`,
+        data: formData
+    };
+    const response = await axios(config);
+    return response.data.data;
+};
+
+export const changePassword = async (email, password, new_password)=>{
+    const formData = new FormData();
+        formData.append('server_key', process.env.REACT_APP_SERVER_KEY)
+        formData.append('phone_or_email', email);
+        formData.append('password', password);
+        formData.append('new_password', new_password);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/change_password`,
+        data: formData
+    };
+    const response = await axios(config);
+    return response.data.data;
+};
+
+export const getFavoriates = async (token, type, signal) => {
+        
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('type', type);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/favorites?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+        signal: signal
+    };
 
     const response = await axios(config);
         

@@ -10,3 +10,7 @@ export const config = async(page_name)=>{
     const response = await axios(config)
     return response.data.data;
 }
+
+export const getSiteSetting = async()=>{
+    
+}

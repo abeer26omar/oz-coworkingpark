@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle"
+import "bootstrap/dist/js/bootstrap.bundle";
 import "./App.css";
 import "../src/assets/fonts/golden-hopes/golden-hopes.otf";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
@@ -28,17 +28,17 @@ import Gallery from "./pages/Gallery";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
 import MemberPackage from "./components/Membership/MembershipTypes/MemberPackage/MemberPackage";
-import { TokenLoader, checkAuthLoader } from './apis/AuthApi';
 import Register from './components/Auth/Register';
 import ForgetPass from './components/Auth/ForgetPass';
 import NewPassword from './components/Auth/NewPassword';
+import MyBookingDetails from "./components/Profile/ProfileContent/MyBooking/MyBookingDetails";
+import MyplanDetials from './components/Profile/ProfileContent/MyPlan/PlanDetails';
+import MyEventDetails from "./components/Profile/ProfileContent/MyEvents/MyEventDetilas";
 
 function App() {
-
     const router = createBrowserRouter([
       { path:'/', 
         element: <RootLayout />,
-        loader: TokenLoader,
         id: 'root',
         // errorElement: <Error />,
         children: [
@@ -58,12 +58,15 @@ function App() {
           { path:'community/events', element: <CommunityEventsExplore />},
           { path:'events/communityEventsDetails', element: <CommunityEventsDetails />},
           { path:'community/newsfeed', element: <NewsFeed />},
-          { path:'community/newsfeed/singleFeed', element: <SingleNewFeed />},
+          { path:'community/newsfeed/singleFeed/:id', element: <SingleNewFeed />},
           { path:'private', element: <PrivateEvents />},
           { path:'houses', element: <Houses />},
           { path:'houses/:id', element: <HouseDetails />},
           { path:'booking', element: <Booking />},
-          { path:'bookingDetails/:space/:id', element: <BookingDetails />},
+          { path:'bookingDetails/:id', element: <BookingDetails />},
+          { path:'mybookingDetails/:id', element: <MyBookingDetails />},
+          { path:'myplanDetials/:id', element: <MyplanDetials />},
+          { path:'myeventDetails/:id', element: <MyEventDetails/>},
           { path:'bookingDetails/bookNow', element: <BookingSummary />},
           { path:'community/galleryshow', element: <Gallery />},
         ]}

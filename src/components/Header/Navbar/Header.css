@@ -79,9 +79,8 @@ nav.btn.show {
     font-style: normal;
     font-weight: var(--font-weight-bold);
     letter-spacing: 0;
-    line-height: 0;
     text-transform: uppercase;
-    padding: 38px 42px;
+    padding: 33px 42px;
 }
 .icons {
     display: none;
@@ -113,7 +112,8 @@ nav.btn.show {
     transition: 0.5s ease all;  
     box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.25);
 }
-.drop_event{
+.drop_event,
+.drop_event a{
     color: var(--black-color);
     font-size: var(--font-size-13);
     font-weight: var(--font-weight-bold);
@@ -121,7 +121,6 @@ nav.btn.show {
     font-family: var(--questrial-font);
     padding: 0 25px;
     cursor: pointer;
-
 }
 
 .dropdown:hover .dropdown-nav{ 
@@ -157,31 +156,46 @@ nav.btn.show {
     align-items: center;
     justify-content: space-around;
     padding: 20px;
-        
 }
 .dropdown-location,
 .dropdown-explore{
-    display: none;
     opacity: 0;
-    transition: 0.3s ease all;
-    transform: scaleY(0.0);
+    max-height: 0;
+    visibility: hidden;
     list-style: none;
-    padding: 0;
+    padding-left: .8rem;
+    transition: 0.3s ease-in-out all;
 }
 .dropdown-location.show-location,
 .dropdown-explore.show-ex{
-    display: block;
     opacity: 1;
-    transform: scaleY(1.1);
-    transition: 0.3s ease all;
+    max-height: 500px;
+    visibility: visible;
+    transition: 0.3s ease-in-out all;
+}
+.dropdown-explore li{
+    opacity: 0;
+    transition: 0.3s ease-in-out all;
+}
+.dropdown-explore li:hover{
+    background-color: var(--neturals-color1);
+}
+.dropdown-explore li a{
+    color: #BDBDBD;
+    font-weight: 400;
+}
+.dropdown-explore.show-ex li{
+    opacity: 1;
 }
 .up,
 .up_down{
     transform: rotateX(178deg);
+    transition: all .3s ease-in-out;
 }
 .down,
 .up_down.up {
     transform: rotateX(45deg);
+    transition: all .3s ease-in-out;
 }
 .nav_profile{
     position: absolute !important;
@@ -201,13 +215,12 @@ nav.btn.show {
     font-weight: var(--font-weight-regular);
     color: #BDBDBD;
     line-height: 1;
-        
 }
+
 .li_img{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    padding: 20px 0 ;
+    padding: 20px;
 }
 .border_profile_bottom{
     border-bottom: 1px solid #0000002e;
@@ -220,7 +233,8 @@ nav.btn.show {
 .profile_icon{
     padding: 0 25px;
 }
-.li_profile{
+.li_profile,
+.li_profile a{
     padding: 20px 10px;
     font-family: var(--questrial-font);
     font-size: var(--font-size-16);

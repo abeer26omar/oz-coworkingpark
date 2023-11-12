@@ -1,10 +1,12 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { DataProvider } from '../apis/context/Createdata';
+import { DataProvider } from '../apis/context/SiteDataContext';
 import ScrollToTop from "../ScrollToTop";
 import Header from "../components/Header/Navbar/Header";
 import Footer from "../components/Footer/Footer";
 import FooterAuth from '../components/Footer/FooterAuth';
-import { useEffect } from 'react';
+import { SiteConfigProvider } from '../apis/context/SiteConfigContext';
+import { AuthProvider } from '../apis/context/AuthTokenContext';
+import { useState , useEffect } from "react";
 
 const RootLayout = ()=>{
     const location = useLocation();
@@ -24,18 +26,23 @@ const RootLayout = ()=>{
             return ()=>{
                 document.body.classList.remove('body_dark');
             }
-        },[location])
+        },[location]);
+
     return(
-        <DataProvider>
+        <AuthProvider>
+            <DataProvider>
                 <ScrollToTop/>
-                    <Header 
-                        className="navbar" 
-                        showBlackNav={isGalleryRoute || isLimitedRoute || isAboutRoute}
-                    />
-                    <Outlet />
-                    {!AuthRoutes && <Footer />}
-                    {AuthRoutes && <FooterAuth />}
-        </DataProvider>        
+                    <SiteConfigProvider>
+                        <Header 
+                            className="navbar"
+                            showBlackNav={isGalleryRoute || isLimitedRoute || isAboutRoute}
+                        />
+                        <Outlet />
+                        {!AuthRoutes && <Footer />}
+                        {AuthRoutes && <FooterAuth />}
+                    </SiteConfigProvider>
+            </DataProvider>
+        </AuthProvider>
     )
 }
 export default RootLayout;

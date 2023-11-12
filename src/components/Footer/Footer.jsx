@@ -4,27 +4,11 @@ import logoWhite from "../../assets/images/logoWhite.svg";
 import facebookWhite from "../../assets/images/icons/facebookWhite.png";
 import twitterWhite from "../../assets/images/icons/twitterWhite.png";
 import linkedinWhite from "../../assets/images/icons/insta.png";
-import Media from "../Media/Media";
 import { Link } from "react-router-dom";
-import { useState , useEffect } from "react";
-import { config } from '../../apis/config';
 
-const Footer = () => {
-    const [data , setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
-    useEffect(()=>{
-        config('social').then(res =>{
-            setData(res)
-            setLoading(false)
-         
-        })
-        .catch(err =>{
-            setError(err)
-            setLoading(false)
-        })
-    },[]);
+const Footer = ({data}) => {
+
     return (
         <>
         <footer className="footer-section container-fluid">
@@ -33,11 +17,10 @@ const Footer = () => {
                     <div className="row align-items-center justify-content-between py-lg-0 py-4">
                         <div className="col-xl-2 col-lg-3 col-md-3">
                             <div className="footer-single-col d-flex justify-content-center">
-                                <Media
-                                    type="img"
+                                <img
                                     src={logoWhite}
                                     alt="logo"
-                                    className="img-fluid w-100"
+                                    className="img-fluid"
                                 />
                             </div>
                         </div>
@@ -66,40 +49,36 @@ const Footer = () => {
                                 <path d="M1 0L1.00001 170" stroke="#BDBDBD" stroke-width="1.5"/>
                             </svg>
                             <div className="social-links d-flex align-items-center">
-                        {data.map((configItem , index)=>(
-                            <React.Fragment key={index}>
-                                {configItem.key === "facebook_url" && 
-                                   <a className="media-link" href={configItem.value} target="_blank">
-                                    <Media
-                                        type="img" 
-                                        src={ facebookWhite} 
-                                        alt="facebook"
-                                    />
-                                </a>
-                                }
-                                {configItem.key === "instagram_url" &&
-                                <a className="media-link" href={configItem.value} target="_blank">
-                                    <Media
-                                        type="img" 
-                                         src={twitterWhite} 
-                                        alt="twitter"
-                                    />
-                                </a>
-                                }
-                                     { configItem.key === "twitter_url" &&
-                                      <a className="media-link" href={configItem.value} target="_blank">
-                                            <Media
-                                                type="img" 
-                                                src={linkedinWhite} 
-                                                alt="linkedin"
+                                {data && data.map((configItem , index)=>(
+                                    <React.Fragment key={index}>
+                                        {configItem.key === "facebook_url" && 
+                                        <a className="media-link" href={configItem.value} target="_blank">
+                                            <img
+                                                src={ facebookWhite} 
+                                                alt="facebook"
                                             />
-                                       </a>
-                                       }
-                            </React.Fragment>
-                        ))}                                               
-                             
-                             </div>
-                              </div>
+                                        </a>
+                                        }
+                                        {configItem.key === "instagram_url" &&
+                                        <a className="media-link" href={configItem.value} target="_blank">
+                                            <img
+                                                src={twitterWhite} 
+                                                alt="twitter"
+                                            />
+                                        </a>
+                                        }
+                                            { configItem.key === "twitter_url" &&
+                                            <a className="media-link" href={configItem.value} target="_blank">
+                                                    <img
+                                                        src={linkedinWhite} 
+                                                        alt="linkedin"
+                                                    />
+                                            </a>
+                                            }
+                                    </React.Fragment>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

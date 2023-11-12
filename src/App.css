@@ -142,6 +142,9 @@ a {
 .px-100{
     padding: 0 100px;
 }
+.pb-60{
+    padding-bottom: 60px;
+}
 @media screen and (max-width: 575px) {
     .px-70{
         padding: 0 1.375rem;
@@ -151,7 +154,9 @@ a {
 .head_color{
     color: var(--Head_color);
 }
-
+.color-grey{
+    color: var(--secondary-color2) !important;
+}
 /***************Margin Size ********************/
 .m-35 {
     margin: 35px 0;
@@ -160,6 +165,9 @@ a {
 /* nav-tabs */
 .nav-tabs{
     border: none !important;
+}
+.react-stars span{
+    margin: 0 .8rem;
 }
 /*********************hr*******************/
 
@@ -180,6 +188,17 @@ a {
     height: auto !important;
 }
 /****************** Form Fields ****************/
+
+.css-13cymwt-control,
+.css-13cymwt-control:focus,
+.css-13cymwt-control:hover,
+.css-t3ipsp-control,
+.css-t3ipsp-control:hover,
+.css-t3ipsp-control:focus{
+    border: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
 
 .form-card {
     background-color: var(--white-color) !important;
@@ -588,3 +607,32 @@ a {
     
 }
 
+.card{
+    border-radius: 0;
+}
+.css-1p3m7a8-multiValue {
+    border-radius: 30px !important;
+    background-color: var(--white-color) !important;
+    padding: .3rem;
+}
+.css-1p3m7a8-multiValue .css-wsp0cs-MultiValueGeneric{
+    color: var(--secondary-color2);
+    font-family: Questrial;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+.css-16xfy0z-control{
+    background-color: transparent !important;
+    border: none !important;
+}
+/* .css-1n6sfyn-MenuList{max-height:300px;overflow-y:auto;position:relative;-webkit-overflow-scrolling:touch;padding-bottom:4px;padding-top:4px;box-sizing:border-box;}
+
+select option{cursor:default;display:block;font-size:inherit;width:100%;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);background-color:#DEEBFF;color:inherit;padding:8px 12px;box-sizing:border-box;}
+
+.css-d7l1ni-option:active{background-color:#B2D4FF;}
+
+.css-10wo9uf-option{cursor:default;display:block;font-size:inherit;width:100%;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);background-color:transparent;color:inherit;padding:8px 12px;box-sizing:border-box;}
+
+.css-10wo9uf-option:active{background-color:#B2D4FF;} */
