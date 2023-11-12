@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SpaceDetails.css';
-import wifi from '../../../../assets/images/icons/wifi.png';
-import chair from '../../../../assets/images/icons/chair.png';
-import printer from '../../../../assets/images/icons/print.png';
-import Media from "../../../Media/Media";
 import Paragraph from '../../../UI/Paragraph';
+import Select from 'react-select';
 
-const SpaceDetails = (props) => {
+const SpaceDetails = ({venueDetails}) => {
+    const optionList = venueDetails.services.map(item=>{
+        return { value: item.id , label: item.name }
+    })
+    
+    const [selectedOptions, setSelectedOptions] = useState();
+    const handleChange = (data)=>{
+        setSelectedOptions(data);
+    }
 
     return (
         <>
@@ -19,18 +24,23 @@ const SpaceDetails = (props) => {
                                     Space Description
                                 </Paragraph>
                                 <Paragraph className="p-description">
-                                    {props.space_details.description}
+                                    {venueDetails.description}
                                 </Paragraph>
                             </div>
                             <div className="catering">
                                 <Paragraph className="h2-catering">
                                     Services
                                 </Paragraph>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                                    <label className="form-check-label" htmlFor="flexCheckDefault">
-                                        Breakfast a day per person
-                                    </label>
+                                <div className="col-lg-8 form__group field my-3 group-check">
+                                    <Select
+                                        options={optionList}
+                                        placeholder="Services"
+                                        className="form__field placeholderSelect"
+                                        value={selectedOptions}
+                                        onChange={handleChange}
+                                        isSearchable={true}
+                                        isMulti
+                                    />
                                 </div>
                             </div>
 
@@ -41,7 +51,7 @@ const SpaceDetails = (props) => {
                                     Price
                                 </Paragraph>
                                 <div className="price-list">
-                                    <span>{props.space_details.price} / Hour</span>
+                                    <span>{venueDetails.price} EGP / Hour</span>
                                 </div>
                             </div>
                             <div className="space-facilities mb-5">
@@ -51,12 +61,21 @@ const SpaceDetails = (props) => {
                                 <div className="facilities-list">
                                     <ul>
                                         {
-                                            props.space_details.amenities.slice(0,3).map((amenity,index)=>{
+                                            venueDetails.facilities.slice(0,3).map((service,index)=>{
                                                 return (
                                                     <li className='' key={index}>
-                                                        <Media
-                                                            type="img" src={wifi}/>
-                                                        {amenity.name}
+                                                        
+                                                        <img
+                                                            type="img" 
+                                                            src={service.logo}
+                                                            alt={service.name}
+                                                            width={'56px'}
+                                                            height={'56px'}
+                                                            style={{
+                                                                objectFit: 'scale-down'
+                                                            }}
+                                                        />
+                                                        {service.name}
                                                     </li>
                                                 )
                                             })
@@ -68,7 +87,7 @@ const SpaceDetails = (props) => {
                                 <Paragraph className="h2-description">
                                     capacity
                                 </Paragraph>
-                                <span>{props.space_details.capacity} Persons</span>
+                                <span>{venueDetails.capacity} Persons</span>
                             </div>
 
                         </div>

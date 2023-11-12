@@ -1,23 +1,16 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import BookingHeader from "../components/Booking/BookingHeader/BookingHeader";
 import BookingSpace from "../components/Booking/BookingSpace/BookingSpace";
-import { config } from '../apis/config';
-import { useEffect, useState } from 'react';
+import { DataContext } from '../apis/context/SiteDataContext';
+
 const Booking = () => {
-    const [data , setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+
+    const { config, data } = useContext(DataContext);
 
     useEffect(()=>{
-        config('booking').then(res =>{
-            setData(res)
-            setLoading(false)
-        })
-        .catch(err =>{
-            setError(err)
-            setLoading(false)
-        })
+        config('booking');
     },[]);
+
     return (
         <>
             <BookingHeader configData={data}/>

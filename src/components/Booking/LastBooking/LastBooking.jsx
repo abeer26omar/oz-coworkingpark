@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './LastBooking.css';
-import LastBookingList from "./LastBookingList";
+import { getLastBooking } from '../../../apis/Booking';
+import BookingSpaceList from '../BookingSpace/BookingSpaceList';
+import { AuthContext } from '../../../apis/context/AuthTokenContext';
 
-const LastBooking = () => {
+const LastBooking = ({placeId}) => {
+
+    const [cards, setCards] = useState([]);
+    const { token, userId } = useContext(AuthContext);
+
+    useEffect(()=>{
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        if(placeId){
+            getLastBooking(token, userId, placeId, signal).then(res=>{
+                setCards(Object.values(res))
+            }).catch(err=>{})
+        }
+        return ()=>controller.abort();
+    },[placeId]);
+    
     return (
         <>
             <section className="last-booking">
@@ -12,7 +30,23 @@ const LastBooking = () => {
                             <div className="col-lg-12">
                                 <h2 className="h2-text-box">last booking</h2>
                             </div>
-                            <LastBookingList/>
+                            {cards && cards.map((book, index) => {
+                                    return (
+                                        <>
+                                            <div className="col-lg-4 col-md-6 col-sm-12" key={index}>
+                                                <BookingSpaceList 
+                                                    id={book.venueData.id}
+                                                    place_type={book.venueData.title} 
+                                                    img={book.venueData.gallery[0]?.image}
+                                                    name={book.venueData.title} 
+                                                    description={book.venueData.description}
+                                                    amenities={book.venueData.facilities} 
+                                                    price={book.venueData.price}
+                                                    is_favorite={book.venueData.is_favorite}/>
+                                            </div>
+                                        </>
+                                    )
+                            })}
                         </div>
                     </div>
 

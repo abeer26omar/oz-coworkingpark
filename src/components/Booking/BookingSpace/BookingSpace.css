@@ -53,11 +53,6 @@
 
 }
 
-.booking-space .btn-spaces-filter {
-    padding-right: 70px;
-
-}
-
 .booking-space .btn-filter {
     text-transform: uppercase;
 }
@@ -69,6 +64,9 @@
 
 .booking-space .booking-section {
     padding: 60px 0;
+}
+.card-img-top{
+    object-fit: fill;
 }
 
 .booking-space .book-card {
