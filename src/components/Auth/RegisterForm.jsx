@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { Formik } from 'formik';
 import * as Yup from "yup";
 import { Register } from "../../apis/AuthApi";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Button  from '../UI/Button';
 import RegisterOTPModal from './RegisterOTPModal';
 import SweetAlert2 from 'react-sweetalert2';
+import { SiteConfigContext } from '../../apis/context/SiteConfigContext';
 
 const RegisterForm = ({provider, profile})=>{
     const [show, setShow] = useState(false);
@@ -14,6 +15,7 @@ const RegisterForm = ({provider, profile})=>{
     const handleClose = () => setShow(false);
     const [swalProps, setSwalProps] = useState({});
     const navigate = useNavigate();
+    const siteConfig = useContext(SiteConfigContext);
 
     useEffect(()=>{
         if(provider === 'google'){
@@ -191,10 +193,11 @@ const RegisterForm = ({provider, profile})=>{
                             onChange={handleChange}
                             onBlur={handleBlur}
                             className="form__field placeholderSelect">
-                                <option selected value=''>Enter user type</option>
-                                <option value="company">company</option>
-                                <option value="individual">individual</option>
-                                <option value="startup">startup</option>
+                                {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_4.data).map(([key, value]) => (
+                                    <option key={key} value={key}>
+                                        {value}
+                                    </option>
+                                ))}
                         </select>
                         {errors.user_type && touched.user_type && <p className='text-danger mb-0'>{errors.user_type}</p>}
                     </div>

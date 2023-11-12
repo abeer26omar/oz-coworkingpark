@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { redirect } from 'react-router-dom';
 
 export const Register = async (first_name,last_name,email,phone,user_type,password,confirm_password) => {
     const formData = new FormData();
@@ -54,9 +53,12 @@ export const Login = async (email, password, provider) => {
         formData.append('username', email);
         formData.append('password', password);
         formData.append('device_type', 'windows');
+        formData.append('social', 'true');
+
         if(provider){
             formData.append('social', true);   
         }
+        
     const config = {
         method: 'post',
         url: `${process.env.REACT_APP_API_URL}/api/auth`,
@@ -107,32 +109,18 @@ export const ForgotPasswordChange = async (email, otp, password)=>{
     return response.data.data;
 };
 
-export const getAuthToken = () => {
-    const TokenOZ = sessionStorage.getItem("TokenOZ");
-    return TokenOZ;
-};
+export const Logout = async (token) => {
 
-export const TokenLoader = ()=>{
-    const token = getAuthToken();
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
     
-    if(token){
-        return token;
-    }
-    return null;
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/delete-access-token?access_token=${token}`,
+        data: formData
+    };
+    const response = await axios(config);
+    return response.data.data;
 };
 
-export function checkAuthLoader() {
-    const token = getAuthToken();
-    
-    if (!token) {
-      return redirect('/login');
-    }
-   
-    return null;
-};
-
-export const handleFaceBookLogin = ()=>{
-
-};
-
-export const handleSocialLoginFailure = ()=>{};
+export const checkAuthLoader = async () => {};

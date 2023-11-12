@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Paragraph from  '../UI/Paragraph';
 import Button from '../UI/Button';
 import OTPInput from "otp-input-react";
 import SweetAlert2 from 'react-sweetalert2';
 import { ResendOtp, ConfirmOTP } from '../../apis/AuthApi';
+import { AuthContext } from '../../apis/context/AuthTokenContext';
 import './Auth.css';
 
 const RegisterOTPModal = (props) => {
@@ -14,15 +15,13 @@ const RegisterOTPModal = (props) => {
     const [response, setResponse] = useState('');
     const [responseType, setResponseType] = useState()
     const navigate = useNavigate();
+    const { handleLogin } = useContext(AuthContext);
 
     const Confirm_OTP = async () => {
         try {
             const result = await ConfirmOTP(OTP, props.email,'create_account');
-            sessionStorage.setItem("TokenOZ", result.access_token);
-            sessionStorage.setItem("userIdOZ", result.user_id);
-            sessionStorage.setItem("activeUserOZ", result.active);
-            navigate('/');
-            window.location.reload();
+            handleLogin(result);
+            navigate(-1);
         } catch (error) {
             setSwalProps({
                 show: true,

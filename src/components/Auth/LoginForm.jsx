@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../apis/context/AuthTokenContext';
 import { Formik } from 'formik';
 import * as Yup from "yup";
 import { Login } from "../../apis/AuthApi";
@@ -10,6 +11,7 @@ const LoginForm = ({profile, provider})=>{
     const navigate = useNavigate();
     const [swalProps, setSwalProps] = useState({});
     const [userInfo, setUSerInfo] = useState({});
+    const { handleLogin } = useContext(AuthContext);
 
     useEffect(()=>{
         if(provider === 'google'){
@@ -28,13 +30,8 @@ const LoginForm = ({profile, provider})=>{
     const handleSubmit = async (values) => {
         try {
             const result = await Login(values.email, values.password, provider);
-            sessionStorage.setItem("TokenOZ", result.access_token);
-            sessionStorage.setItem("userIdOZ", result.user_id);
-            sessionStorage.setItem("activeUserOZ", result.active);
-            navigate('/');
-            setTimeout(()=>{
-                window.location.reload();
-            },0);
+            handleLogin(result);
+            navigate(-1);
         } catch (error) {
             setSwalProps({
                 show: true,
@@ -102,7 +99,7 @@ const LoginForm = ({profile, provider})=>{
                                 ? "form__field is-invalid"
                                 : "form__field"
                             }
-                            placeholder="Enter Your Email"
+                            placeholder="Enter Your Password"
                             name="password"
                             value={values.password}
                             onChange={handleChange}
