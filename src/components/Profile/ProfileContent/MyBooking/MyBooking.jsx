@@ -54,7 +54,10 @@ const MyBooking = ()=>{
 
     return (
         <>
-            <Tab.Container id="left-tabs-example" defaultActiveKey={activeTab}>
+            <Tab.Container 
+                id="left-tabs-example" 
+                defaultActiveKey={activeTab}
+                className='py-4 px-5'>
                 <div className="container p-sm-4 p-2">
                     <div className="head-form">
                         <h2>My Booking</h2>

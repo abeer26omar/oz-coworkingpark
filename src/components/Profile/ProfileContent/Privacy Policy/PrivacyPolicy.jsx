@@ -3,7 +3,7 @@ import React from 'react';
 const PrivacyPolicy = () => {
     return (
         <>
-            <section className="profile-edit">
+            <section className="profile-edit py-4 px-5">
                 <div className="row align-items-center">
                     <div className="col-lg-12">
                         <div className="head-form">

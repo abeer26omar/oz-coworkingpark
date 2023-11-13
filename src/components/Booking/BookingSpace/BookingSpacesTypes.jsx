@@ -146,7 +146,7 @@ const BookingSpacesTypes = ({venues, placeId,spaceTitle})=>{
                                     )
                             })}
                         </div>
-                        {cards && cards.length > 3 && (
+                        {cards && cards.length < cards.length && (
                             <div className='text-center mt-5'>
                                 <Button 
                                     tagType="link" 

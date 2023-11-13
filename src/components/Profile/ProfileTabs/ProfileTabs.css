@@ -1,9 +1,9 @@
 .profile-taps .nav-item {
-    padding: 20px 0;
+    padding: 2rem 0;
     border-bottom: 0;
 }
 
-.explore_link.nav-link {
+.explore_link_profile {
     /* padding: 20px 58px 20px 24px; */
     background-color: transparent;
     color: var(--secondary-color2);
@@ -14,15 +14,16 @@
     line-height: 120%;
     display: flex;
     align-items: center;
+    text-transform: uppercase;
 }
 
-.explore_link.nav-link.active {
+.explore_link_profile.active {
     color: var(--primary-color);
     background-color: transparent;
     border: 0;
 }
-.explore_link.nav-link.active svg path ,
-.explore_link.nav-link.active svg circle{
+.explore_link_profile.active svg path ,
+.explore_link_profile.active svg circle{
     stroke: var(--primary-color);
 }
 .tabs-btns .nav-link:focus {

@@ -36,6 +36,20 @@ import MyplanDetials from './components/Profile/ProfileContent/MyPlan/PlanDetail
 import MyEventDetails from "./components/Profile/ProfileContent/MyEvents/MyEventDetilas";
 import Ozys from './components/Ozys/Ozys';
 import Amenities from './components/Amenities/Amenities';
+import PersonalData from './components/Profile/ProfileContent/Personal Data/PersonalData';
+import ChangePassword from './components/Profile/ProfileContent/Change Password/ChangePassword';
+import IssueReporting from './components/Profile/ProfileContent/IssueReporting/IssueReporting';
+import IssueType from './components/Profile/ProfileContent/IssueReporting/IssueType';
+import MyBooking from "./components/Profile/ProfileContent/MyBooking/MyBooking";
+import MyEvents from "./components/Profile/ProfileContent/MyEvents/MyEvents";
+import MyPlan from "./components/Profile/ProfileContent/MyPlan/MyPlan";
+import Favoriates from "./components/Profile/ProfileContent/Favoriates/Favoriates";
+import PrivacyPolicy from "./components/Profile/ProfileContent/Privacy Policy/PrivacyPolicy";
+import TermsConditions from "./components/Profile/ProfileContent/TermsConditions/TermsConditions";
+import SubissueType from './components/Profile/ProfileContent/IssueReporting/SubissueType';
+import AddPlacesIssueDetails from './components/Profile/ProfileContent/IssueReporting/AddPlacesIssueDetails';
+import TalentMarket from './components/Talent Market/TalentMarket';
+import AddService from './components/Talent Market/AddService';
 
 function App() {
     const router = createBrowserRouter([
@@ -48,7 +62,23 @@ function App() {
           { path:'about', element: <About />},
           { path:'joinus', element: <Joinus />},
           { path:'contactus', element: <ContactUs />},
-          { path:'profile', element: <Profile />},
+          { path:'profile', element: <Profile />,
+            id:'profile',
+            children: [
+              { index: true, element: <PersonalData />},
+              { path:'changePassword', element: <ChangePassword />},
+              { path:'mybooking', element: <MyBooking />},
+              { path:'myevents', element: <MyEvents />},
+              { path:'myplan', element: <MyPlan />},
+              { path:'favoiate', element: <Favoriates />},
+              { path:'privacypolicy', element: <PrivacyPolicy />},
+              { path:'terms&condition', element: <TermsConditions />},
+              { path:'issueReport', element: <IssueReporting />},
+              { path:'issueType', element: <IssueType />},
+              { path:'subissueType', element: <SubissueType />},
+              { path:'issueplace', element: <AddPlacesIssueDetails />}
+            ]
+          },
           { path:'login', element: <Login />},
           { path:'register', element: <Register />},
           { path:'forgetpass', element: <ForgetPass />},
@@ -72,7 +102,9 @@ function App() {
           { path:'bookingDetails/bookNow', element: <BookingSummary />},
           { path:'community/galleryshow', element: <Gallery />},
           { path:'ozys', element: <Ozys />},
-          { path:'amenities' ,element: <Amenities />}
+          { path:'amenities', element: <Amenities />},
+          { path:'talentmarket', element: <TalentMarket />},
+          { path:'addService', element: <AddService />}
         ]}
     ]);
     const queryClient = new QueryClient();

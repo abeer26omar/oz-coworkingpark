@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import userprofile from '../../../assets/images/userprofile.png';
 import './ProfileHeader.css';
 import Media from "../../Media/Media";
 
-const ProfileHeader = ({userInfo}) => {
+const ProfileHeader = () => {
+
+    const [userInfo, setUserInfo] = useState(JSON.parse(sessionStorage.getItem('userInfoDataOZ')));
+
+    useEffect(()=>{
+        setUserInfo(JSON.parse(sessionStorage.getItem('userInfoDataOZ')));
+    },[]);
+
     return (
         <>
             <section className="profile-header p-5 border-bottom">

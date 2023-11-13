@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Formik} from 'formik';
 import { changePassword } from '../../../../apis/User';
 import SweetAlert2 from 'react-sweetalert2';
@@ -7,6 +7,11 @@ import * as Yup from "yup";
 const ChangePassword = ({userData}) => {
 
     const [swalProps, setSwalProps] = useState({});
+    const [userInfo, setUserInfo] = useState(JSON.parse(sessionStorage.getItem('userInfoDataOZ')));
+
+    useEffect(()=>{
+        setUserInfo(JSON.parse(sessionStorage.getItem('userInfoDataOZ')));
+    },[]);
 
     const changePasswordInfo = async (values)=>{
         try {
@@ -37,7 +42,7 @@ const ChangePassword = ({userData}) => {
         <>
             <Formik
                 initialValues={{
-                    email: userData ? userData.email : '',
+                    email: userInfo ? userInfo.email : '',
                     currentPassword: '',
                     newPassword: '',
                     confirmPassword: '',
@@ -63,7 +68,7 @@ const ChangePassword = ({userData}) => {
                     handleSubmit
                     } = props
                     return (
-                    <section className="changepass-style">
+                    <section className="changepass-style py-4 px-5">
                         <div className="container">
                             <form className="profile-edit" onSubmit={handleSubmit}>
                                 <div className="row align-items-center">

@@ -39,7 +39,9 @@ const LogedNav = ({showBlackNav, token})=>{
     return (
         <>
             <div className="dropdown">
-                <a className="" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <a id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{
+                    cursor: 'pointer'
+                }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                         <path opacity="0.4" d="M15.8652 11.5254V14.1696" stroke="#0C0507" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"/>
                         <path d="M15.8816 8C12.9595 8 10.5932 10.3663 10.5932 13.2884V14.9559C10.5932 15.4958 10.3709 16.3057 10.093 16.7663L9.08454 18.4497C8.46518 19.4899 8.89397 20.6492 10.0374 21.0303C13.8329 22.2929 17.9382 22.2929 21.7337 21.0303C22.8057 20.673 23.2662 19.4184 22.6866 18.4497L21.6781 16.7663C21.4002 16.3057 21.1779 15.4879 21.1779 14.9559V13.2884C21.1699 10.3821 18.7878 8 15.8816 8Z" stroke={showBlackNav ? '#fff' : '#0C0507'} stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"/>
@@ -110,7 +112,9 @@ const LogedNav = ({showBlackNav, token})=>{
                 </ul>
             </div> 
             <div className="dropdown">
-                <a className="px-4" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <a className="mx-4" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{
+                    cursor: 'pointer'
+                }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z" stroke={showBlackNav ? '#fff' : 'black'} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M4.27344 18.3457C4.27344 18.3457 6.50246 15.5 12.0024 15.5C17.5024 15.5 19.7315 18.3457 19.7315 18.3457" stroke={showBlackNav ? '#fff' : 'black'} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -126,17 +130,17 @@ const LogedNav = ({showBlackNav, token})=>{
                         </div>
                     </li> 
                     <li onClick={()=>SetOpen(!Open)} className=" li_profile">
-                        <Button className='p-0' tagType='link'>
+                        <Button className='p-0' tagType='link' to={'/profile/mybooking'}>
                             <img className='px-2' src={Booking}/> My Booking
                         </Button>
                     </li>
                     <li  onClick={()=>SetOpen(!Open)} className=" li_profile">
-                        <Button className='p-0' tagType='link'>
+                        <Button className='p-0' tagType='link' to={'/profile/myevents'}>
                             <img className='px-2' src={Event}/>My Events
                         </Button>
                     </li>
                     <li  onClick={()=>SetOpen(!Open)} className=" li_profile border_profile_bottom">
-                        <Button className='p-0' tagType='link'>
+                        <Button className='p-0' tagType='link' to={'/profile/myplan'}>
                             <img className='px-2' src={Plan}/>My plan
                         </Button>
                     </li>

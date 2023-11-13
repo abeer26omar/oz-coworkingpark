@@ -9,7 +9,7 @@ const MyPlan = ()=>{
     const navigate = useNavigate();
     return (
         <>
-            <Tab.Container id="left-tabs-example" defaultActiveKey="one">
+            <Tab.Container id="left-tabs-example" defaultActiveKey="one" className='py-4 px-5'>
                 <div className="container p-4">
                     <div className="head-form">
                         <h2>My Plan</h2>

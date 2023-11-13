@@ -10,7 +10,7 @@ const MyEvents = ()=>{
     const navigate = useNavigate();
     const [data, setData] = useState();
     const [eventsData, seteventsgData] = useState([]);
-    const [activeTab, setActiveTab] = useState('Event');
+    const [activeTab, setActiveTab] = useState('upcoming');
     const { token, userId } = useContext(AuthContext);
 
     const handleTabClick = (key) => {
@@ -65,7 +65,10 @@ const MyEvents = ()=>{
 
     return (
         <>
-            <Tab.Container id="left-tabs-example" defaultActiveKey={activeTab}>
+            <Tab.Container 
+                id="left-tabs-example" 
+                defaultActiveKey={activeTab}
+                className='py-4 px-5'>
                 <div className="container p-4">
                     <div className="head-form">
                         <h2>My Events</h2>

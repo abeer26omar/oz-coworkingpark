@@ -98,7 +98,7 @@ const BookingSpace = () => {
                         </div>
                         <BookingSpacesTypes venues={venues} placeId={spaceId} spaceTitle={spaceTitle}/>
                     </div>
-                </section>
+            </section>
 
             <LastBooking placeId={spaceId}/>
         </>

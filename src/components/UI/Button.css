@@ -95,6 +95,20 @@
 .btn-bg-white:hover .fill_white{
     fill: var(--white-color);
 }
+.btn-bg-black {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-color: var(--primary-color);
+    border-radius: 0;
+}
+.btn-bg-black:hover{
+    background-color: var(--white-color);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+.btn-bg-black:hover path{
+    fill: var(--primary-color);
+}
 .authFooter_link{
     font-family: var(--couture-font);
     font-size: 0.8125rem;

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import {FieldArray, Formik,} from 'formik';
+import {FieldArray, Formik} from 'formik';
 import * as Yup from "yup";
 import nameLabel from '../../../../assets/images/icons/User Id.png';
 import emailLabel from '../../../../assets/images/icons/Mail.png';
@@ -20,24 +20,27 @@ import submit_mark from '../../../../assets/images/submit_mark.svg';
 import editProfile from '../../../../assets/images/icons/editprofile.png';
 import {ImMinus, ImPlus} from "react-icons/im";
 import '../PersonalContent.css';
-import { updateUserInfo, RequestUpdateUserInfo, getInterests, getHobbies } from '../../../../apis/User';
+import { getUserInfo, updateUserInfo, RequestUpdateUserInfo, getInterests, getHobbies } from '../../../../apis/User';
 import SweetAlert2 from 'react-sweetalert2';
 import { SiteConfigContext } from '../../../../apis/context/SiteConfigContext';
 import Button from '../../../UI/Button';
 import Select from 'react-select';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 
-const PersonalData = ({userData, custom}) => {
+const PersonalData = () => {
 
-    const asignPrevInterestsDate = ()=>{
-        if (custom) {
-            const array = custom.fid_12.split(',').map(item => item.trim());
-            return array.map((item, index) => {
-              return { value: item, label: item };
-            });
-          }
-        return [];
-    }
+    const [userInfo, setUserInfo] = useState({});
+    const [custom, setCustom] = useState({});
+
+    // const asignPrevInterestsDate = ()=>{
+    //     if (custom) {
+    //         const array = custom.fid_12.split(',').map(item => item.trim());
+    //         return array.map((item, index) => {
+    //           return { value: item, label: item };
+    //         });
+    //       }
+    //     return [];
+    // }
     const [disabled, setDisabled] = useState(true);
     const [disabledName, setDisabledName] = useState(true);
     const [disabledEmail, setDisabledEmail] = useState(true);
@@ -47,9 +50,27 @@ const PersonalData = ({userData, custom}) => {
     const [focus, setFocused] = useState(false);
     const [swalProps, setSwalProps] = useState({});
     const siteConfig = useContext(SiteConfigContext);
-    const { token } = useContext(AuthContext);
-    const [selectedInterests, setSelectedInterests] = useState(asignPrevInterestsDate());
+    const { token, userId } = useContext(AuthContext);
+    const [selectedInterests, setSelectedInterests] = useState();
     const [selectedHobbies, setSelectedHobbies] = useState(custom ? [custom.fid_11] : [""]);
+
+
+    useEffect(()=>{
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        getUserInfo(token, userId, signal).then(res=>{
+            setUserInfo(res['user_data']);
+            setCustom(res['custom']);
+            const userInfoDataOZ = {
+                name: res['user_data'].name,
+                email: res['user_data'].email,
+                avatar: res['user_data'].avatar}
+            sessionStorage.setItem('userInfoDataOZ', JSON.stringify(userInfoDataOZ))
+        }).catch(err=>{console.log(err)});
+
+        return ()=>controller.abort();
+    },[]);
 
     const handleChangeInterests = (data)=>{
         setSelectedInterests(data);
@@ -128,17 +149,17 @@ const PersonalData = ({userData, custom}) => {
         <>
             <Formik 
                 initialValues={{
-                    gender: userData ? userData.gender : '',
-                    birthday: userData ? userData.birthday : '',
-                    language: userData ? userData.language : '',
+                    gender: userInfo ? userInfo.gender : '',
+                    birthday: userInfo ? userInfo.birthday : '',
+                    language: userInfo ? userInfo.language : '',
                     nationality: custom ? custom.fid_8 : '',
                     jobTitle: custom ? custom.fid_5 : '',
                     industry: custom ? custom.fid_6 : '',
                     city: custom ? custom.fid_7 : '',
-                    companyName: userData ? userData.working : '',
+                    companyName: userInfo ? userInfo.working : '',
                     howDidYouKnowUs: custom ? custom.fid_10 : '',
                     serviceProvide: custom ? custom.fid_9 : '',
-                    about: userData ? userData.about : '',
+                    about: userInfo ? userInfo.about : '',
                     hobbies: custom ? [custom.fid_11] : [""],
                     interest: custom ? [custom.fid_12] : [""],
                 }}
@@ -161,7 +182,7 @@ const PersonalData = ({userData, custom}) => {
                     handleSubmit,
                     } = props;
                     return (
-                        <div className="container p-4">
+                        <div className="container py-4 px-5">
                             <div className="row align-items-center profile-edit">
                                 <div className="col-lg-12">
                                     <div className="head-form">
@@ -171,11 +192,11 @@ const PersonalData = ({userData, custom}) => {
                                 <div className="col-lg-6">
                                     <Formik
                                         initialValues={{
-                                            name: userData ? userData.name : '',
+                                            name: userInfo ? userInfo.name : '',
                                         }}
                                         onSubmit={async (values) => {
                                             await new Promise((r) => setTimeout(r, 500));
-                                            requestUpdateData('name', userData.name, values.name)
+                                            requestUpdateData('name', userInfo.name, values.name)
                                         }}
                                         enableReinitialize>
                                             {({ 
@@ -224,11 +245,11 @@ const PersonalData = ({userData, custom}) => {
                                 <div className="col-lg-6">
                                     <Formik
                                         initialValues={{
-                                            email: userData ? userData.email : '',
+                                            email: userInfo ? userInfo.email : '',
                                         }}
                                         onSubmit={async (values) => {
                                             await new Promise((r) => setTimeout(r, 500));
-                                            requestUpdateData('email', userData.email, values.email)
+                                            requestUpdateData('email', userInfo.email, values.email)
                                         }}
                                         enableReinitialize>
                                             {({ 
@@ -277,11 +298,11 @@ const PersonalData = ({userData, custom}) => {
                                 <div className="col-lg-6">
                                     <Formik
                                         initialValues={{
-                                            phone: userData ? userData.phone_number : '',
+                                            phone: userInfo ? userInfo.phone_number : '',
                                         }}
                                         onSubmit={async (values) => {
                                             await new Promise((r) => setTimeout(r, 500));
-                                            requestUpdateData('phone', userData.phone_number, values.phone)
+                                            requestUpdateData('phone', userInfo.phone_number, values.phone)
                                         }}
                                         enableReinitialize>
                                             {({ 

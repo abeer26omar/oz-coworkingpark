@@ -133,9 +133,9 @@ const Header = ({showBlackNav, data}) => {
                                             </ul>
                                     </li>
                                         <li className="drop_event border-dropdown"><Button 
-                                            className='p-0' tagType='link'>About OZ</Button></li>
+                                            className='p-0' tagType='link' to={'/about'}>About OZ</Button></li>
                                         <li className="drop_event border-dropdown"><Button 
-                                            className='p-0' tagType='link'>Talent Market</Button> </li>
+                                            className='p-0' tagType='link' to={'/talentmarket'}>Talent Market</Button> </li>
                                         <li className="drop_event border-dropdown"><Button 
                                             className='p-0' tagType='link'>Get Direction</Button> </li> 
                                         <li className="drop_event border-dropdown"><Button 
