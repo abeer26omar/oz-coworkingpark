@@ -328,6 +328,14 @@ nav.btn.show {
     font-family: var(--questrial-font);
     line-height: 2;
 }
+.user_name{
+    color: #000;
+    font-family: Couture;
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
 /*END*/
 @media screen and (max-width: 575.5px) {
     .logo{

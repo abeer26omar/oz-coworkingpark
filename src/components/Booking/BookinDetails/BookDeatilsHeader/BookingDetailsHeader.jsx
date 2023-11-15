@@ -9,7 +9,8 @@ import Paragraph from '../../../UI/Paragraph';
 const BookingDetailsHeader = ({venueDetails}) => {
     return (
         <>
-            <div className='position-relative'>
+        {console.log(venueDetails)}
+            {/* <div className='position-relative'>
                 <MainHeaderWrapper image={venueDetails.gallery} special_flex={`justify-content-md-center justify-content-start`}>
                     <div className="container">
                         <Paragraph className="text-one">Booking</Paragraph>
@@ -18,7 +19,7 @@ const BookingDetailsHeader = ({venueDetails}) => {
                     <div className='d-flex h-100'></div>
                 </MainHeaderWrapper>
                 <BookingForm />
-            </div>
+            </div> */}
                
         </>
     );

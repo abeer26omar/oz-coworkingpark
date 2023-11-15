@@ -11,6 +11,24 @@ export const config = async(page_name)=>{
     return response.data.data;
 }
 
+export const getBranches = async (token, signal)=>{
+    
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+
+    const config = {
+        method: 'POST',
+        url: `${process.env.REACT_APP_API_URL}/api/list_branches?access_token=${token}&skip=true`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+        signal: signal
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+};
+
 export const getSiteLocations = async (signal)=>{
 
     const config = {

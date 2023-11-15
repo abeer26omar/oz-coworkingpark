@@ -1,21 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Formik} from 'formik';
 import { changePassword } from '../../../../apis/User';
 import SweetAlert2 from 'react-sweetalert2';
 import * as Yup from "yup";
+import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 
-const ChangePassword = ({userData}) => {
+const ChangePassword = () => {
 
     const [swalProps, setSwalProps] = useState({});
-    const [userInfo, setUserInfo] = useState(JSON.parse(sessionStorage.getItem('userInfoDataOZ')));
-
-    useEffect(()=>{
-        setUserInfo(JSON.parse(sessionStorage.getItem('userInfoDataOZ')));
-    },[]);
+    const { userProfileDate } = useContext(AuthContext)
 
     const changePasswordInfo = async (values)=>{
         try {
-            const result = await changePassword(values.email, values.currentPassword, values.newPassword);
+            const result = await changePassword(userProfileDate.email, values.currentPassword, values.newPassword);
             setSwalProps({
                 show: true,
                 icon: 'success',
@@ -42,7 +39,7 @@ const ChangePassword = ({userData}) => {
         <>
             <Formik
                 initialValues={{
-                    email: userInfo ? userInfo.email : '',
+                    email: userProfileDate ? userProfileDate.email : '',
                     currentPassword: '',
                     newPassword: '',
                     confirmPassword: '',
@@ -86,7 +83,7 @@ const ChangePassword = ({userData}) => {
                                                 className="form__field"
                                                 name="email"
                                                 value={values.email}
-                                                readOnly
+                                                disabled
                                             /> 
                                             {errors.email && touched.email && <p className='text-danger mb-0'>{errors.email}</p>}
                                         </div>

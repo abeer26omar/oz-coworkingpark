@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Header.css";
 import logo from "../../../assets/images/logo.svg";
 import galleryLogo from "../../../assets/images/logoWhite.svg";
@@ -7,13 +7,26 @@ import LogedNav from "./LogedNav";
 import LoginNav from "./LoginNav";
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import Button from '../../UI/Button';
+import { getBranches } from '../../../apis/config';
 
 const Header = ({showBlackNav, data}) => {
+
     const logoImage = showBlackNav ? galleryLogo : logo;
     const [exploreBranches, setExploreBranches] = useState(true);
     const [explore , setexplore] = useState(true);
     const [openSideMenu , SetOpenSideMenu] = useState(true);
+    const [branches, setBranches] = useState([]);
     const { token } = useContext(AuthContext);
+
+    useEffect(()=>{
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        getBranches(token, signal).then(res=>{
+            setBranches(res);
+        }).catch(err=>{console.log(err)})
+        return ()=>controller.abort();
+    },[]);
 
     return (
         <>
@@ -145,23 +158,20 @@ const Header = ({showBlackNav, data}) => {
                                         <li 
                                             onClick={(e)=>{
                                                 e.stopPropagation();
-                                                setExploreBranches(!exploreBranches)
+                                                // setExploreBranches(!exploreBranches)
                                             }} 
                                             className="drop_event border-dropdown">Al-sheikh Zayed
                                             <svg className={`mx-2 up_down ${exploreBranches ? '' : 'up'}`} width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M9 5L5 1L1 5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
-                                            <ul className={`dropdown-explore ${exploreBranches ? '' :'show-ex'}`}>
-                                                <li>
-                                                    <Button 
-                                                        className='p-0'
-                                                        tagType='link'>Membership</Button>
-                                                </li>
-                                                <li>
-                                                    <Button 
-                                                        className='p-0'
-                                                        tagType='link'>Spaces</Button></li>                                        
-                                            </ul>
+                                            <select class="form-select" aria-label="Default select example">
+                                                {branches && branches.map((e, index)=>{
+                                                    console.log(e);
+                                                    (
+                                                        <option value={e.id} key={index}>{e.name}</option>
+                                                    )
+                                                })}
+                                            </select>
                                         </li>
                                         <div className="dropdown-socail p-0">
                                         {data && data.map((configItem , index)=>(

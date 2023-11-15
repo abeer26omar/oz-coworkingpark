@@ -7,7 +7,7 @@ import Logout_icon from '../../../assets/images/icons/logout.svg';
 import N_1 from '../../../assets/images/n-1.svg';
 import N_2 from '../../../assets/images/n-2.svg';
 import N_3 from '../../../assets/images/n-3.svg';
-import { useState , useContext } from 'react';
+import { useState , useContext, useEffect } from 'react';
 import { Logout } from '../../../apis/AuthApi';
 import Button from '../../UI/Button';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
@@ -23,19 +23,18 @@ const LogedNav = ({showBlackNav, token})=>{
     const handleMark = (name )=>{
         setmark(name)
     }
-    const { handleLogout } = useContext(AuthContext);
+    const { handleLogout, userProfileDate } = useContext(AuthContext);
 
     const handelLogout = async () => {
         SetOpen(!Open);
         try{
             const result = await Logout(token);
             handleLogout();
-            console.log(result);
         }catch (error){
             handleLogout();
-            console.log(error);
         }
-    }
+    };
+
     return (
         <>
             <div className="dropdown">
@@ -112,9 +111,10 @@ const LogedNav = ({showBlackNav, token})=>{
                 </ul>
             </div> 
             <div className="dropdown">
-                <a className="mx-4" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{
+                <a className="mx-4 d-flex align-items-center" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{
                     cursor: 'pointer'
                 }}>
+                    <span className='user_name me-2'>{userProfileDate.first_name}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z" stroke={showBlackNav ? '#fff' : 'black'} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M4.27344 18.3457C4.27344 18.3457 6.50246 15.5 12.0024 15.5C17.5024 15.5 19.7315 18.3457 19.7315 18.3457" stroke={showBlackNav ? '#fff' : 'black'} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -123,10 +123,10 @@ const LogedNav = ({showBlackNav, token})=>{
                 </a>
                 <ul class="dropdown-menu nav_profile" aria-labelledby="dropdownMenuButton1">
                     <li  className="li_img border_profile_bottom">
-                        <img className='rounded-circle' alt='profile' src={Profile}/>
+                        <img className='rounded-circle' alt='profile' width='80px' height='80px' src={userProfileDate.avatar || Profile}/>
                         <div className='info_profile ps-3'> 
-                            <Button className='name_profile p-0 text-start' to={'/profile'} tagType='link'>Samara Mohamed</Button>
-                            <Paragraph className='email mb-0 text-center'>samarmohamed12@gmail.com</Paragraph>
+                            <Button className='name_profile p-0 text-start' to={'/profile'} tagType='link'>{userProfileDate.name}</Button>
+                            <Paragraph className='email mb-0 text-center'>{userProfileDate.email}</Paragraph>
                         </div>
                     </li> 
                     <li onClick={()=>SetOpen(!Open)} className=" li_profile">

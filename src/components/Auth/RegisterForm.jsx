@@ -7,6 +7,7 @@ import Button  from '../UI/Button';
 import RegisterOTPModal from './RegisterOTPModal';
 import SweetAlert2 from 'react-sweetalert2';
 import { SiteConfigContext } from '../../apis/context/SiteConfigContext';
+import { AuthContext } from '../../apis/context/AuthTokenContext';
 
 const RegisterForm = ({provider, profile})=>{
     const [show, setShow] = useState(false);
@@ -16,6 +17,7 @@ const RegisterForm = ({provider, profile})=>{
     const [swalProps, setSwalProps] = useState({});
     const navigate = useNavigate();
     const siteConfig = useContext(SiteConfigContext);
+    const { handleLogin } = useContext(AuthContext);
 
     useEffect(()=>{
         if(provider === 'google'){
@@ -54,6 +56,7 @@ const RegisterForm = ({provider, profile})=>{
                 values.confirm_password);
             setShow(true);
             setEmail(values.email);
+            handleLogin(result);
         } catch (error) {
             setSwalProps({
                 show: true,
