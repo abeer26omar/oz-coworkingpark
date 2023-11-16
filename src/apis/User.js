@@ -156,3 +156,45 @@ export const getFavoriates = async (token, type, signal) => {
         
     return response.data.data;
 };
+
+export const getMyPlans = async (token, UserId, source) => {
+        
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('user_id', UserId);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/my_plans?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+        cancelToken: source.token,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const getSingleItemById = async (token, type, id, source) => {
+    
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('type', type);
+    formData.append('id', id);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/get-by-id?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+        cancelToken: source.token,
+
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};

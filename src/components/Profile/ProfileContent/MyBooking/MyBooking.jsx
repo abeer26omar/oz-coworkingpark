@@ -80,10 +80,11 @@ const MyBooking = ()=>{
                     </Nav>
                     <Tab.Content animation className='py-4'>
                         <Tab.Pane eventKey={activeTab}>
+                        {(bookingData && bookingData.length === 0) && <Paragraph className='empty'>{`there is no ${activeTab} booking`}</Paragraph> }
                         { bookingData && bookingData.map((item, index)=>{
                             return (
                                 <div className='card card_event p-3 mb-3' 
-                                    onClick={()=>{navigate(`/mybookingDetails/${item.venueData?.id}`)}} key={index}>
+                                    onClick={()=>{navigate(`/mybookingDetails/${item?.id}`)}} key={index}>
                                     <div className='row g-3 align-items-center'>
                                         <div className='col-lg-3 col-12 d-flex align-items-center'>
                                             <img src={item.venueData?.gallery[0].image} alt='event-img' width={'100%'} height={'136px'} style={{

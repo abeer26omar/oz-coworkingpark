@@ -2,18 +2,18 @@ import axios from 'axios';
 import FormData from 'form-data';
 
 
-export const getAmenitiesGroup = async (token, signal) => {
+export const getAmenitiesGroup = async (token, source) => {
     
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
 
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/get-amenitie-groups?access_token=${token}`,
+        url: `${process.env.REACT_APP_API_URL}/api/get-amenitie-groups?access_token=${token}&skip=true`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-        signal: signal
+        cancelToken: source.token
     };
 
     const response = await axios(config);
@@ -21,7 +21,7 @@ export const getAmenitiesGroup = async (token, signal) => {
     return response.data.data;
 };
 
-export const getVenues = async (token, UserId, branch_id, amenities_group_id, signal) => {
+export const getVenues = async (token, UserId, branch_id, amenities_group_id, source) => {
     
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -31,12 +31,11 @@ export const getVenues = async (token, UserId, branch_id, amenities_group_id, si
 
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/get-venues?access_token=${token}`,
+        url: `${process.env.REACT_APP_API_URL}/api/get-venues?access_token=${token}&skip=true`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-        signal: signal
-
+        cancelToken: source.token
     };
 
     const response = await axios(config);
@@ -44,7 +43,27 @@ export const getVenues = async (token, UserId, branch_id, amenities_group_id, si
     return response.data.data;
 };
 
-export const likeVenues = async (token, UserId, venue_id, signal) => {
+export const getVenueById = async (token, venue_id, source) => {
+    
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('id', venue_id);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/get_venue?access_token=${token}&skip=true`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+        cancelToken: source.token
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const likeVenues = async (token, UserId, venue_id, source) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -57,7 +76,7 @@ export const likeVenues = async (token, UserId, venue_id, signal) => {
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-        signal: signal
+        cancelToken: source.token
     };
 
     const response = await axios(config);
@@ -65,7 +84,7 @@ export const likeVenues = async (token, UserId, venue_id, signal) => {
     return response.data.data;
 };
 
-export const getLastBooking = async (token, UserId, amenitie_id, signal) => {
+export const getLastBooking = async (token, UserId, amenitie_id, source) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -78,7 +97,7 @@ export const getLastBooking = async (token, UserId, amenitie_id, signal) => {
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-        signal: signal
+        cancelToken: source.token
     };
 
     const response = await axios(config);
@@ -86,7 +105,7 @@ export const getLastBooking = async (token, UserId, amenitie_id, signal) => {
     return response.data.data;
 };
 
-export const getMyBookingList = async (token, UserId, signal) => {
+export const getMyBookingList = async (token, UserId, source) => {
         
         const formData = new FormData();
         formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -98,30 +117,8 @@ export const getMyBookingList = async (token, UserId, signal) => {
             data: formData,
             maxContentLength: Infinity,
             maxBodyLength: Infinity,
-            signal: signal
+            cancelToken: source.token
         };
-
-    const response = await axios(config);
-        
-    return response.data.data;
-};
-
-export const getSingleItemById = async (token, type, id, signal) => {
-    
-    const formData = new FormData();
-    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
-    formData.append('type', type);
-    formData.append('id', id);
-
-    const config = {
-        method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/get-by-id?access_token=${token}`,
-        data: formData,
-        maxContentLength: Infinity,
-        maxBodyLength: Infinity,
-        signal: signal
-
-    };
 
     const response = await axios(config);
         

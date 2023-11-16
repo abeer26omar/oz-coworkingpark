@@ -115,7 +115,7 @@ const MyEvents = ()=>{
                                                         <path d="M1.99805 9H21.998" stroke="#BDBDBD" stroke-width="1.25" stroke-linecap="round"/>
                                                         <path d="M1.99805 12C1.99805 8.22876 1.99805 6.34315 3.16962 5.17157C4.34119 4 6.22681 4 9.99805 4H13.998C17.7693 4 19.6549 4 20.8265 5.17157C21.998 6.34315 21.998 8.22876 21.998 12V14C21.998 17.7712 21.998 19.6569 20.8265 20.8284C19.6549 22 17.7693 22 13.998 22H9.99805C6.22681 22 4.34119 22 3.16962 20.8284C1.99805 19.6569 1.99805 17.7712 1.99805 14V12Z" stroke="black" stroke-width="1.25"/>
                                                         <path d="M17.998 16L15.998 16M15.998 16L13.998 16M15.998 16L15.998 14M15.998 16L15.998 18" stroke="black" stroke-width="1.25" stroke-linecap="round"/>
-                                                        </svg>{setDate(event?.start)}
+                                                        </svg>{event.dates && event.dates[0].check_in_date}
                                                     </li>
                                                     <li className="list-option-item d-flex align-items-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" className='me-2' width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -124,7 +124,7 @@ const MyEvents = ()=>{
                                                         <path d="M3.49805 4.49999L7.49806 2" stroke="#BDBDBD" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                                         <path d="M20.5 4.49999L16.5 2" stroke="#BDBDBD" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                                         </svg>
-                                                        {setTime(event?.start)}
+                                                        {event.dates && event.dates[0].check_in_time}
                                                     </li>
                                                     <li className="list-option-item d-flex align-items-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" className='me-2' width="24" height="24" viewBox="0 0 24 24" fill="none">

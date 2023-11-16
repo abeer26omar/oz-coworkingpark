@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import BookingDetailsHeader from "./BookDeatilsHeader/BookingDetailsHeader";
 import SpaceDetails from "./SpaceDetails/SpaceDetails";
 import { useParams } from 'react-router-dom';
-import { getSingleItemById } from '../../../apis/Booking';
+import { getSingleItemById } from '../../../apis/User';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 
 const BookingDetails = () => {

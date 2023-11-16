@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext} from 'react';
 import './BookingSpace.css'
 import Slider from "react-slick";
+import axios from 'axios';
 import LastBooking from "../LastBooking/LastBooking";
 import BookingSpacesTypes from './BookingSpacesTypes';
 import { getAmenitiesGroup, getVenues } from '../../../apis/Booking';
@@ -14,15 +15,14 @@ const BookingSpace = () => {
     const { token, userId } = useContext(AuthContext);
 
     useEffect(()=>{
-        const controller = new AbortController();
-        const signal = controller.signal;
+        const source = axios.CancelToken.source();
 
-        getAmenitiesGroup(token, signal).then(res=>{
+        getAmenitiesGroup(token, source).then(res=>{
             setBookingPlaces(res);
             changeSpace(1,res[0].id,res[0].name);
         }).catch(err=>{});
 
-        return ()=>controller.abort();
+        return ()=>source.cancel();
     },[]);
 
     const changeSpace = (branch_id, amenities_group_id, spaceTitle) => {

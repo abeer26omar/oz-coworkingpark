@@ -48,7 +48,7 @@ export const getEventsList = async (token, UserId) => {
 
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/list-events?access_token=${token}`,
+        url: `${process.env.REACT_APP_API_URL}/api/list-events?access_token=${token}&skip=true`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity

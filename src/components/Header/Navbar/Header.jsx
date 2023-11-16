@@ -24,9 +24,10 @@ const Header = ({showBlackNav, data}) => {
 
         getBranches(token, signal).then(res=>{
             setBranches(res);
-        }).catch(err=>{console.log(err)})
+        }).catch(err=>{console.log(err)});
+        
         return ()=>controller.abort();
-    },[]);
+    },[token]);
 
     return (
         <>
