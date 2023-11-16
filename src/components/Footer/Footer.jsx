@@ -31,10 +31,10 @@ const Footer = ({data}) => {
                                     <Link to='/membership' className="links-footer">Membership</Link>
                                     <Link to='/community' className="links-footer">Community</Link>
                                     <Link to="/community/events" className="links-footer">Events</Link> 
-                                    <Link to='/' className="links-footer">FAQs</Link>
+                                    <Link to='/faq' className="links-footer">FAQs</Link>
                                     <Link to='/' className="links-footer">Privacy Policy</Link>
                                     <Link to='/' className="links-footer">Term&conditions</Link>
-                                    <Link to='/' className="links-footer">Site Map</Link>
+                                    <Link to='/sitemap' className="links-footer">Site Map</Link>
                                 </div> 
                                 {/* <div className="col-xl-6 col-lg-12 d-flex justify-content-between align-items-center sm-wrap">
                                 </div>  */}

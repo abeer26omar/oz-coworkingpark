@@ -1,0 +1,58 @@
+.site_card{
+    background-color: #fff;
+    padding: 25px 20px;
+    box-shadow: 0px 16px 48px 0px rgba(0, 0, 0, 0.10);
+}
+.site_card .title_link{
+    font-family: Couture;
+        font-size: 23px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+    
+}
+.site_card .links{
+    color:  #000;    
+    font-family: Questrial;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+}
+
+.tabs_faq{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0px 4px 14px 0px rgba(65, 65, 65, 0.15);
+}
+.tabs_faq .title{
+    color: #1B2129;
+    font-family: Couture;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;        
+}
+.faq_desc{
+    color: rgba(0, 0, 0, 0.50);
+    font-family: Questrial;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    
+}
+.faq_dropdown{
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 2s ease;
+}
+.faq_dropdown.open{
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
