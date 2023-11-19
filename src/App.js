@@ -50,13 +50,14 @@ import SubissueType from './components/Profile/ProfileContent/IssueReporting/Sub
 import AddPlacesIssueDetails from './components/Profile/ProfileContent/IssueReporting/AddPlacesIssueDetails';
 import TalentMarket from './components/Talent Market/TalentMarket';
 import AddService from './components/Talent Market/AddService';
+import Error404 from './pages/Error404';
 
 function App() {
     const router = createBrowserRouter([
       { path:'/', 
         element: <RootLayout />,
         id: 'root',
-        // errorElement: <Error />,
+        errorElement: <Error404 />,
         children: [
           { index: true, element: <Home />},
           { path:'about', element: <About />},
@@ -88,7 +89,7 @@ function App() {
           { path:'singleMember/:id', element: <MemberPackage />},
           { path:'community', element: <Community />},
           { path:'community/events', element: <CommunityEventsExplore />},
-          { path:'events/communityEventsDetails', element: <CommunityEventsDetails />},
+          { path:'events/communityEventsDetails/:id', element: <CommunityEventsDetails />},
           { path:'community/newsfeed', element: <NewsFeed />},
           { path:'community/newsfeed/singleFeed/:id', element: <SingleNewFeed />},
           { path:'private', element: <PrivateEvents />},

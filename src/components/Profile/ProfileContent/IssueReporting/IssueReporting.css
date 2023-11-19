@@ -1,4 +1,5 @@
 .space-description .border-bottom{
+    padding-bottom: .5rem;
     border-bottom: 1.5px solid #BDBDBD !important;
 }
 .issue_type_box{

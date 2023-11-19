@@ -186,6 +186,15 @@
     border-color: var(--secondary-color2);
     color: var(--secondary-color2);
 }
+.terms_link{
+    color: rgba(34, 34, 34, 1);
+    font-family: Questrial;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    text-decoration: underline;
+}
 /* Media Query */
 @media screen and (max-width: 575px) {
     .btn_default{

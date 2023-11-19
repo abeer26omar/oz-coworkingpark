@@ -78,9 +78,21 @@ const Header = ({showBlackNav, data}) => {
                                 })}
                                 to={'/community'}><span>community</span></NavLink>
                                 <ul class="dropdown-nav">
-				                	<li className="drop_event"> Community Newsfeed</li>
-				                	<li className="drop_event"> Community Events</li>
-					                <li className="drop_event"> Gallery </li>
+				                	<li className="drop_event"> 
+                                        <Button tagType='link' className='p-0' to={'/community/newsfeed'}>
+                                            Community Newsfeed
+                                        </Button>
+                                    </li>
+				                	<li className="drop_event">
+                                        <Button tagType='link' className='p-0' to={'/community/events'}>
+                                            Community Events
+                                        </Button>
+                                    </li>
+					                <li className="drop_event"> 
+                                        <Button tagType='link' className='p-0' to={'/community/galleryshow'}>
+                                            Gallery
+                                        </Button>
+                                    </li>
 
 			                	</ul>
                             </li>
