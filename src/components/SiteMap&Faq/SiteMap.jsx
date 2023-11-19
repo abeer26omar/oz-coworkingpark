@@ -57,9 +57,14 @@ const links7 = [
  
  return (
    <>
+   <div className='position-relative'>
+
      <MainHeaderWrapper image={site}>
-       <Paragraph>SITE MAP</Paragraph>
+     <div className="container text-center">
+     <Paragraph className='title_head'>SITE MAP</Paragraph>
+     </div>
      </MainHeaderWrapper>
+     </div>
      <div className="container py-4">
        <div className="row">
          <div className="col-xl-3">

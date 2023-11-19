@@ -58,8 +58,30 @@
     background-color: #f5deb300;
     border: none;    
 }
+.title_head{
+    color: #FFFFFF;
+    font-family: Couture;
+    font-size: 74px;
+    font-weight: 700;
+    position: absolute;
+    line-height: 88.8px;
+    top: -500%;
+    left: 45%;
+}
 @media screen and (max-width:767px) {
 .tabs_faq .title {
     font-size: var(--font-size-11);
 }
+.title_head{
+    left: 10%;
+    font-size: 40px;
+    top: -400px;
+}
+}
+@media screen and (min-width:767px) and (max-width:991px){
+    .title_head{
+        left: 20%;
+        top: -400px;
+
+    }
 }

@@ -3,7 +3,7 @@ import MainHeaderWrapper from "../UI/MainHeaderWrapper";
 import faq from "../../assets/images/FAQ.jpg";
 import { useState } from "react";
 import Tab from "../UI/Tab";
-
+import Paragraph from "../UI/Paragraph";
 const Faq = () => {
 const [open1, setopen1] = useState(false);
 const handleClick1 = () => {
@@ -33,7 +33,13 @@ const handleClick6 = () => {
 
   return (
     <>
-      <MainHeaderWrapper image={faq}></MainHeaderWrapper>
+      <div className="position-relative">
+        <MainHeaderWrapper image={faq}>
+          <div className="container text-center">
+            <Paragraph className="title_head">FAQ</Paragraph>
+          </div>
+        </MainHeaderWrapper>
+      </div>
       <div className="container py-5 ">
         <Tab
           title={" Make real time a health improvements ?"}
