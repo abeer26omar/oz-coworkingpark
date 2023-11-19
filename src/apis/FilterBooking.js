@@ -9,7 +9,7 @@ export const getWings = async (token, signal) => {
     
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/list_wings?access_token=${token}`,
+        url: `${process.env.REACT_APP_API_URL}/api/list_wings?access_token=${token}&skip=true`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
@@ -28,7 +28,7 @@ export const getFloors = async (token, signal) => {
     
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/list_floors?access_token=${token}`,
+        url: `${process.env.REACT_APP_API_URL}/api/list_floors?access_token=${token}&skip=true`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
@@ -47,7 +47,7 @@ export const getFacilities = async (token, signal) => {
     
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/list_facilities?access_token=${token}`,
+        url: `${process.env.REACT_APP_API_URL}/api/list_facilities?access_token=${token}&skip=true`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
@@ -69,7 +69,7 @@ export const searchVenues = async (token, UserId, amenitie_id, searchText, signa
 
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/venue-search?access_token=${token}`,
+        url: `${process.env.REACT_APP_API_URL}/api/venue-search?access_token=${token}&skip=true`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
@@ -98,7 +98,7 @@ export const getFilters = async (token, UserId, branch_id, amenitie_group_id, da
 
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/filter?access_token=${token}`,
+        url: `${process.env.REACT_APP_API_URL}/api/filter?access_token=${token}&skip=true`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,

@@ -5,30 +5,38 @@ import Button from "../../UI/Button";
 import { likeVenues } from '../../../apis/Booking';
 import SweetAlert2 from 'react-sweetalert2';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
+import LoginAlert from '../../Auth/LoginAlertModal';
 
 const BookingSpaceList = ({id, img, description, price, name, amenities, is_favorite}) => {
 
     const [like, setLike] = useState(is_favorite);
+    const [show, setShow] = useState(false);
     const [swalProps, setSwalProps] = useState({});
     const { token, userId } = useContext(AuthContext);
 
-    const likeVenue = (id)=>{
-        likeVenues(token, userId, id).then(res=>{
-            if(res){
-                setLike(!like);
-            }
-        }).catch(error=>{
-            setSwalProps({
-                show: true,
-                icon: 'error',
-                title: error.response.data.status,
-                text: error.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
-            });
-        })
+    const handelHide = ()=>setShow(false);
 
-    }
+    const likeVenue = (id)=>{
+        if(token){
+            likeVenues(token, userId, id).then(res=>{
+                if(res){
+                    setLike(!like);
+                }
+            }).catch(error=>{
+                setSwalProps({
+                    show: true,
+                    icon: 'error',
+                    title: error.response.data.status,
+                    text: error.response.data.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            });
+        }else{
+            setShow(true);
+        }
+    };
+    
     return (
         <>
             <Card className="book-card" key={id}>
@@ -69,6 +77,10 @@ const BookingSpaceList = ({id, img, description, price, name, amenities, is_favo
 
             </Card>
             <SweetAlert2 {...swalProps} />
+            <LoginAlert 
+                show={show}
+                onHide={handelHide}
+            />
         </>
     );
 };

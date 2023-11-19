@@ -43,6 +43,7 @@ const CancelBookingModalConfirm = (props)=>{
             <CancelationReasonModal 
                 show={show}
                 onHide={handelClose}
+                booking_id={props.booking_id} 
             />
         </>
     );

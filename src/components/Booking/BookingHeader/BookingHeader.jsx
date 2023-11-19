@@ -9,23 +9,24 @@ import Paragraph from '../../UI/Paragraph';
 const BookingHeader = (props) => {
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary navigator">
+            <div className="bg-body-tertiary navigator">
                 <Container fluid className='justify-content-start'>
-                    <Navbar.Brand className="title-name" to={'/booking'}>
-                        Booking
-                    </Navbar.Brand>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="2"
-                        height="127"
-                        viewBox="0 0 2 127"
-                        fill="none"
-                    >
-                        <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
-                    </svg>
-
+                    <div className='d-flex'>
+                        <h1 className="title-name mb-0">
+                            Booking
+                        </h1>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="2"
+                            height="127"
+                            viewBox="0 0 2 127"
+                            fill="none"
+                        >
+                            <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
+                        </svg>
+                    </div>
                 </Container>
-            </Navbar>
+            </div>
             <MainHeaderWrapper configData={props.configData} video={booking}>
                 <div className={`container-fluid px-70 py-5`}>
                     <div className='col-md-6 col-12'>

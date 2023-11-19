@@ -19,7 +19,7 @@ const MyBookingDetails = () => {
     const [show, setShow] = useState(false);
     const [showCancelModal, setShowCancelModal] = useState(false);
     const [booking, setBooking] = useState(false);
-    const { token } = useContext(AuthContext);
+    const { token, userId } = useContext(AuthContext);
 
     const handleClose = () => setShow(false);
     const handleOpen = () => setShow(true);
@@ -34,38 +34,7 @@ const MyBookingDetails = () => {
 
         return ()=>source.cancel();
     },[token, id]);
-
-    const setDate = (roomdate)=>{
-        const dateParts = roomdate.split(/[- :]/);
-        const date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], dateParts[3], dateParts[4], dateParts[5]);
-        const optionsDay = { day: '2-digit' };
-        const optionsMonth = { month: 'short' }
-        return (
-            <>
-                <span className='mb-0 text-center'>
-                    {date.toLocaleDateString('en-US', optionsDay)}
-                
-                    {date.toLocaleDateString('en-US', optionsMonth)}
-                </span>
-            </>
-        )
-    }
-    const setTime = (roomdate)=>{
-        const dateParts = roomdate.split(/[- :]/);
-        const date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], dateParts[3], dateParts[4], dateParts[5]);
-        const options = {
-            hour12: true,
-            hour: 'numeric',
-            minute: 'numeric'
-        };
-        
-        return (
-            <span className='mb-0 text-center'>
-                {date.toLocaleTimeString(undefined, options)}
-            </span>
-        )
-    }
-
+    
     return (
         <>            
             <div className='position-relative'>
@@ -191,7 +160,8 @@ const MyBookingDetails = () => {
             />
             <CancelBookingModalConfirm
                 show={showCancelModal}
-                onHide={closeCancelModal} 
+                onHide={closeCancelModal}
+                booking_id={booking.id} 
             />
         </>
     )
