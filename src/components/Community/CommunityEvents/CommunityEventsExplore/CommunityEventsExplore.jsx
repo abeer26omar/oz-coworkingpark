@@ -1,37 +1,59 @@
-import React from 'react';
-import Navbar from "react-bootstrap/Navbar";
-import {Container, Nav} from "react-bootstrap";
+import React, {useState, useEffect, useContext} from 'react';
+import axios from 'axios';
 import './CommunityEventsExplore.css';
 import MultipleEventSlider from "./CommunityEventsSliders/MultipleEventSlider";
 import SingleEventSlider from "./CommunityEventsSliders/SingleEventSlider";
 import CommunityExploreHeader from "./CommunityEventsExploreHeader/CommunityExploreHeader";
+import { AuthContext } from '../../../../apis/context/AuthTokenContext';
+import { getEventsList } from '../../../../apis/Events';
 
 const CommunityEventsExplore = () => {
 
+    const [eventsData, setEventsData] = useState([]);
+    const { token, UserId } = useContext(AuthContext);
+
+    useEffect(()=>{
+        let isMounted = true;
+        const source = axios.CancelToken.source();
+
+        const fetchNewsFeedPosts = async () => {
+            try{
+                const res = await getEventsList(token, UserId, source);
+                if (isMounted) {
+                    setEventsData(res);
+                }
+            }catch (error){
+
+            }
+        }
+        fetchNewsFeedPosts();
+
+        return ()=>{
+            isMounted = false;
+            source.cancel();
+        };
+    },[]);
+
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary navigator-feed">
-                <Container fluid>
-                    <Navbar.Brand className="title-name" href="#home">
-                        Community events
-                    </Navbar.Brand>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="2"
-                        height="127"
-                        viewBox="0 0 2 127"
-                        fill="none"
-                    >
-                        <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
-                    </svg>
-                    <Nav className="ms-auto">
-                        <>
-
-                        </>
-                    </Nav>
-
-                </Container>
-            </Navbar>
+            <div className="bg-body-tertiary navigator-feed">
+                <div className='container-fluid'>
+                    <div className='d-flex'>
+                        <h1 className="title-name mb-0">
+                            Community events
+                        </h1>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="2"
+                            height="127"
+                            viewBox="0 0 2 127"
+                            fill="none"
+                        >
+                            <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
 
 
             <CommunityExploreHeader/>
@@ -41,12 +63,12 @@ const CommunityEventsExplore = () => {
                     <div className="row">
                         <div className="col-lg-6 single-margin ">
                             <div className="single-event-slider ">
-                                <SingleEventSlider/>
+                                <SingleEventSlider eventsData={eventsData} />
                             </div>
                         </div>
                         <div className="col-lg-6 border-left">
                             <div className="multiple-event-slider ">
-                                <MultipleEventSlider/>
+                                <MultipleEventSlider eventsData={eventsData} />
                             </div>
                         </div>
                     </div>

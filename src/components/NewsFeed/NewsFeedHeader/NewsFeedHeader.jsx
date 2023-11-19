@@ -14,22 +14,22 @@ import { searchEvents } from '../../../apis/Events';
 const NewsFeedHeader = ({getSearchResult}) => {
 
     const {config, getComponentValue} = useContext(DataContext);
-    const { token, userId } = useContext(AuthContext)
-    const [openSearch, setOpenSearch] = useState(false);
+    // const { token, userId } = useContext(AuthContext)
+    // const [openSearch, setOpenSearch] = useState(false);
     
-    const handelSearch = (event)=>{
-        searchEvents(token, userId, event.target.value).then(res=>{
-            getSearchResult(res);
-        }).catch(err=>{
-            if(err){
-            //     setError(err.response.data.message);
-            //     setEmpty('');
-            // }else{
-            //     setError('');
-            //     setEmpty('');
-            }
-        })
-    };
+    // const handelSearch = (event)=>{
+    //     searchEvents(token, userId, event.target.value).then(res=>{
+    //         getSearchResult(res);
+    //     }).catch(err=>{
+    //         if(err){
+    //         //     setError(err.response.data.message);
+    //         //     setEmpty('');
+    //         // }else{
+    //         //     setError('');
+    //         //     setEmpty('');
+    //         }
+    //     })
+    // };
 
     return (
         <>
@@ -53,7 +53,7 @@ const NewsFeedHeader = ({getSearchResult}) => {
                         <div>
                             <div className="ms-auto">
                                 <>
-                                    <svg
+                                    {/* <svg
                                         width="2"
                                         height="127"
                                         viewBox="0 0 2 127"
@@ -66,8 +66,8 @@ const NewsFeedHeader = ({getSearchResult}) => {
                                             stroke="#BDBDBD"
                                             stroke-width="1.5"
                                         />
-                                    </svg>
-                                    <Button
+                                    </svg> */}
+                                    {/* <Button
                                         tagType='link'
                                         className='p-0 m-4'
                                         onClick={()=>{setOpenSearch(!openSearch)}}>
@@ -92,14 +92,14 @@ const NewsFeedHeader = ({getSearchResult}) => {
                                                     stroke-linecap="round"
                                                 />
                                             </svg>
-                                    </Button>
+                                    </Button> */}
                                 </>
                             </div>
                         </div>
                     </div>
                 </Container>
             </div>
-            {openSearch && <div className={`bg-body-tertiary search_container navigator-feed ${openSearch ? 'show' : ''}`}>
+            {/* {openSearch && <div className={`bg-body-tertiary search_container navigator-feed ${openSearch ? 'show' : ''}`}>
                 <Container fluid>
                     <div className="d-flex justify-content-between align-items-center py-4 px-5">
                         <div className='col-6'>
@@ -114,7 +114,7 @@ const NewsFeedHeader = ({getSearchResult}) => {
                         </div>
                     </div>
                 </Container>
-            </div>}
+            </div>} */}
             <MainHeaderWrapper configData={config('')} image={newsfeed}>
                 <div className={`container-fluid px-70 py-5`}>
                     <div className='col-md-6 col-12'>

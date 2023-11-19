@@ -9,19 +9,19 @@ import {Link} from "react-router-dom";
 import Button from '../../../UI/Button';
 import ShareIcon from '../../../UI/ShareIcon';
 
-const SingleCommunityExplore = ({id, img, title, text, category, linkText, day, host, clock}) => {
+const SingleCommunityExplore = ({id, img, title, text, category, day, host, clock, img_style}) => {
     return (
         <>
             <Card className="slider-card" key={id}>
                 <div className="position-relative">
-                    <Card.Img variant="top" src={img} className="rounded-0" title={title}/>
+                    <Card.Img variant="top" src={img} className={`rounded-0 ${img_style}`} title={title}/>
                     <Button tagType='link'><img src={favs} alt="fav" className="fav-event"/></Button>
                 </div>
 
                 <Card.Body>
                     <span className="card-category">{category}</span>
                     <Card.Title className="title-explore">{title}</Card.Title>
-                    <Card.Text>{text}</Card.Text>
+                    <Card.Text>{text.slice(0,90)}...</Card.Text>
                     <div className="d-flex justify-content-start align-items-center">
                         <div className="details-event d-flex align-items-center">
                             <img src={date} alt={day}/>
@@ -37,7 +37,7 @@ const SingleCommunityExplore = ({id, img, title, text, category, linkText, day, 
                         </div>
                     </div>
                     <div className="cards-event-buttons">
-                        <Link to="/events/communityEventsDetails"
+                        <Link to={`/events/communityEventsDetails/${id}`}
                               className="btn button-outLine btn-bg-white">Attend</Link>
                         <a className="share-button">
                          <ShareIcon />
