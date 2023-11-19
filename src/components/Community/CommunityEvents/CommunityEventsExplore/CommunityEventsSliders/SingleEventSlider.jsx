@@ -1,9 +1,8 @@
 import React from 'react';
-import {CommunityEventsData} from "../../../../../Data/CommunityEventsData";
 import Slider from "react-slick";
 import SingleCommunityExplore from "../SingleCommunityExplore";
 
-const SingleEventSlider = () => {
+const SingleEventSlider = ({eventsData}) => {
     const settingsSingle = {
         dots: true,
         infinite: true,
@@ -12,8 +11,6 @@ const SingleEventSlider = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         lazyLoad: true,
-        adaptiveHeight: false,
-
         responsive: [
             {
                 breakpoint: 1024,
@@ -44,16 +41,20 @@ const SingleEventSlider = () => {
     return (
         <>
             <Slider {...settingsSingle}>
-                {CommunityEventsData.map((eventSingle, index) => {
-                    const {img, id, title, category, text, day, host, clock} = eventSingle;
+                {eventsData && eventsData.map((event, index) => {
                     return (
                         <div key={index} style={{width: '100%'}}>
-                            <SingleCommunityExplore img={img} id={id} title={title} category={category} text={text}
-                                                    day={day}
-                                                    host={host} clock={clock}/>
+                            <SingleCommunityExplore 
+                                img={event.gallery[0].image} 
+                                id={event.id} 
+                                title={event.event_name} 
+                                category={event.event_type.name} 
+                                host={event.host[0].name} 
+                                day={event.dates[0].check_in_date}
+                                clock={event.dates[0].check_in_time}
+                                text={event.description}
+                                img_style='img_style' />
                         </div>
-
-
                     )
                 })}
             </Slider>

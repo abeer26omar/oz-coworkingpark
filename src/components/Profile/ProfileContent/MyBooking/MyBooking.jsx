@@ -87,14 +87,14 @@ const MyBooking = ()=>{
                                     onClick={()=>{navigate(`/mybookingDetails/${item?.id}`)}} key={index}>
                                     <div className='row g-3 align-items-center'>
                                         <div className='col-lg-3 col-12 d-flex align-items-center'>
-                                            <img src={item.venueData?.gallery[0].image} alt='event-img' width={'100%'} height={'136px'} style={{
+                                            <img src={(item.venueData && item.venueData.gallery.length !== 0 ) && item.venueData?.gallery[0].image} alt='event-img' width={'100%'} height={'136px'} style={{
                                                 objectFit:'cover'
                                             }}/>
                                         </div>
                                             <div className='col-lg-7 col-md-8 col-12'>
                                                 <Paragraph className='card-title mb-0'>{item.venueData?.title}</Paragraph>
                                                     <ul className="list-options d-flex p-0 py-3 m-0">
-                                                        {item.venueData?.services.map((item, index)=>{
+                                                        {(item.venueData && item.venueData.services !== null) && item.venueData.services.map((item, index)=>{
                                                             return (
                                                                 <li className="list-option-item" key={index}>{item.name}</li>
                                                             )

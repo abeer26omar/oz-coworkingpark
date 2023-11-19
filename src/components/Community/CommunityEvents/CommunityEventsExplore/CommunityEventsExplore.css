@@ -87,3 +87,7 @@
 .single-margin {
     margin: 32px 0;
 }
+.img_style{
+    height: 856px !important;
+    object-fit: cover !important;
+}

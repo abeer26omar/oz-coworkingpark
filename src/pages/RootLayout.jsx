@@ -6,7 +6,7 @@ import Footer from "../components/Footer/Footer";
 import FooterAuth from '../components/Footer/FooterAuth';
 import { SiteConfigProvider } from '../apis/context/SiteConfigContext';
 import { AuthProvider } from '../apis/context/AuthTokenContext';
-import { useState , useEffect } from "react";
+import { useEffect } from "react";
 
 const RootLayout = ()=>{
     const location = useLocation();

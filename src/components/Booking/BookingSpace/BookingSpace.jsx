@@ -28,6 +28,7 @@ const BookingSpace = () => {
     const changeSpace = (branch_id, amenities_group_id, spaceTitle) => {
         getVenues(token, userId, branch_id, amenities_group_id).then(res=>{
             setVenues(res);
+            console.log(res);
             setSpaceTitle(spaceTitle);
             setSpaceId(amenities_group_id);
         }).catch(err=>{})
@@ -100,7 +101,7 @@ const BookingSpace = () => {
                     </div>
             </section>
 
-            <LastBooking placeId={spaceId}/>
+            {token && <LastBooking placeId={spaceId}/>}
         </>
     );
 };

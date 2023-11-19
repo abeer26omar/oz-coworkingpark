@@ -50,6 +50,7 @@ import SubissueType from './components/Profile/ProfileContent/IssueReporting/Sub
 import AddPlacesIssueDetails from './components/Profile/ProfileContent/IssueReporting/AddPlacesIssueDetails';
 import TalentMarket from './components/Talent Market/TalentMarket';
 import AddService from './components/Talent Market/AddService';
+import Error404 from './pages/Error404';
 import SiteMap from "./components/SiteMap&Faq/SiteMap";
 import Faq from "./components/SiteMap&Faq/Faq";
 
@@ -58,7 +59,7 @@ function App() {
       {
         path: "/",
         element: <RootLayout />,
-        id: "root",
+        id: 'root',
         // errorElement: <Error />,
         children: [
           { index: true, element: <Home /> },
@@ -87,40 +88,33 @@ function App() {
               { path: "issueplace", element: <AddPlacesIssueDetails /> },
             ],
           },
-          { path: "login", element: <Login /> },
-          { path: "register", element: <Register /> },
-          { path: "forgetpass", element: <ForgetPass /> },
-          { path: "newpassword", element: <NewPassword /> },
-          { path: "membership", element: <Membership /> },
-          { path: "membership/:id", element: <MembershipOptions /> },
-          { path: "singleMember/:id", element: <MemberPackage /> },
-          { path: "community", element: <Community /> },
-          { path: "community/events", element: <CommunityEventsExplore /> },
-          {
-            path: "events/communityEventsDetails",
-            element: <CommunityEventsDetails />,
-          },
-          { path: "community/newsfeed", element: <NewsFeed /> },
-          {
-            path: "community/newsfeed/singleFeed/:id",
-            element: <SingleNewFeed />,
-          },
-          { path: "private", element: <PrivateEvents /> },
-          { path: "houses", element: <Houses /> },
-          { path: "houses/:id", element: <HouseDetails /> },
-          { path: "booking", element: <Booking /> },
-          { path: "bookingDetails/:id", element: <BookingDetails /> },
-          { path: "mybookingDetails/:id", element: <MyBookingDetails /> },
-          { path: "myplanDetials/:id", element: <MyplanDetials /> },
-          { path: "myeventDetails/:id", element: <MyEventDetails /> },
-          { path: "bookingDetails/bookNow", element: <BookingSummary /> },
-          { path: "community/galleryshow", element: <Gallery /> },
-          { path: "ozys", element: <Ozys /> },
-          { path: "amenities", element: <Amenities /> },
-          { path: "talentmarket", element: <TalentMarket /> },
-          { path: "addService", element: <AddService /> },
-        ],
-      },
+          { path:'login', element: <Login />},
+          { path:'register', element: <Register />},
+          { path:'forgetpass', element: <ForgetPass />},
+          { path:'newpassword', element: <NewPassword />},
+          { path:'membership', element: <Membership />},  
+          { path:'membership/:id', element: <MembershipOptions />},
+          { path:'singleMember/:id', element: <MemberPackage />},
+          { path:'community', element: <Community />},
+          { path:'community/events', element: <CommunityEventsExplore />},
+          { path:'events/communityEventsDetails', element: <CommunityEventsDetails />},
+          { path:'community/newsfeed', element: <NewsFeed />},
+          { path:'community/newsfeed/singleFeed/:id', element: <SingleNewFeed />},
+          { path:'private', element: <PrivateEvents />},
+          { path:'houses', element: <Houses />},
+          { path:'houses/:id', element: <HouseDetails />},
+          { path:'booking', element: <Booking />},
+          { path:'bookingDetails/:id', element: <BookingDetails />},
+          { path:'mybookingDetails/:id', element: <MyBookingDetails />},
+          { path:'myplanDetials/:id', element: <MyplanDetials />},
+          { path:'myeventDetails/:id', element: <MyEventDetails/>},
+          { path:'bookingDetails/bookNow', element: <BookingSummary />},
+          { path:'community/galleryshow', element: <Gallery />},
+          { path:'ozys', element: <Ozys />},
+          { path:'amenities', element: <Amenities />},
+          { path:'talentmarket', element: <TalentMarket />},
+          { path:'addService', element: <AddService />}
+        ]}
     ]);
     const queryClient = new QueryClient();
     return (

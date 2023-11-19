@@ -21,7 +21,7 @@ export const getAmenitiesGroup = async (token, source) => {
     return response.data.data;
 };
 
-export const getVenues = async (token, UserId, branch_id, amenities_group_id, source) => {
+export const getVenues = async (token, UserId, branch_id, amenities_group_id) => {
     
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -35,7 +35,6 @@ export const getVenues = async (token, UserId, branch_id, amenities_group_id, so
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-        cancelToken: source.token
     };
 
     const response = await axios(config);
@@ -63,7 +62,7 @@ export const getVenueById = async (token, venue_id, source) => {
     return response.data.data;
 };
 
-export const likeVenues = async (token, UserId, venue_id, source) => {
+export const likeVenues = async (token, UserId, venue_id) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -76,7 +75,6 @@ export const likeVenues = async (token, UserId, venue_id, source) => {
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-        cancelToken: source.token
     };
 
     const response = await axios(config);
@@ -119,6 +117,93 @@ export const getMyBookingList = async (token, UserId, source) => {
             maxBodyLength: Infinity,
             cancelToken: source.token
         };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const confirmBooking = async (token, 
+    UserId,
+    branch_id,
+    venue_id,
+    guests,
+    booking_code,
+    services,
+    booking_price,
+    service_price,
+    total_price,
+    date_time,
+    check_in,
+    check_out) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('user_id', UserId);
+    formData.append('branch_id', branch_id);
+    formData.append('venue_id', venue_id);
+    formData.append('guests', guests);
+    formData.append('booking_code', booking_code);
+    formData.append('booking_price', booking_price);
+    formData.append('service_price', service_price);
+    formData.append('total_price', total_price);
+    formData.append('date_time', date_time);
+    formData.append('check_in', check_in);
+    formData.append('check_out', check_out);
+    services.forEach(service => {
+        formData.append('service[]', service.value);
+    });
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/confirm-booking?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const getCancelReasonsList = async (token, UserId, source) => {
+        
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('user_id', UserId);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/cancel_reasons?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+        cancelToken: source.token
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const cancelBooking = async (token, UserId, booking_id, reasons_id, answer,source) => {
+        
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('user_id', UserId);
+    formData.append('booking_id', booking_id);
+    formData.append('cancel_reasons_id', reasons_id);
+    formData.append('answer', answer);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/booking_cancel_reasons?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+        cancelToken: source.token
+    };
 
     const response = await axios(config);
         

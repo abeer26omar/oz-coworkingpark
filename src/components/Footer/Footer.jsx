@@ -5,6 +5,7 @@ import facebookWhite from "../../assets/images/icons/facebookWhite.png";
 import twitterWhite from "../../assets/images/icons/twitterWhite.png";
 import linkedinWhite from "../../assets/images/icons/insta.png";
 import { Link } from "react-router-dom";
+import SocialMedia from "../UI/SocialMedia";
 
 
 const Footer = ({data}) => {
@@ -49,34 +50,7 @@ const Footer = ({data}) => {
                                 <path d="M1 0L1.00001 170" stroke="#BDBDBD" stroke-width="1.5"/>
                             </svg>
                             <div className="social-links d-flex align-items-center">
-                                {data && data.map((configItem , index)=>(
-                                    <React.Fragment key={index}>
-                                        {configItem.key === "facebook_url" && 
-                                        <a className="media-link" href={configItem.value} target="_blank">
-                                            <img
-                                                src={ facebookWhite} 
-                                                alt="facebook"
-                                            />
-                                        </a>
-                                        }
-                                        {configItem.key === "instagram_url" &&
-                                        <a className="media-link" href={configItem.value} target="_blank">
-                                            <img
-                                                src={twitterWhite} 
-                                                alt="twitter"
-                                            />
-                                        </a>
-                                        }
-                                            { configItem.key === "twitter_url" &&
-                                            <a className="media-link" href={configItem.value} target="_blank">
-                                                    <img
-                                                        src={linkedinWhite} 
-                                                        alt="linkedin"
-                                                    />
-                                            </a>
-                                            }
-                                    </React.Fragment>
-                                ))}
+                                <SocialMedia footer={true}/>
                             </div>
                         </div>
                     </div>

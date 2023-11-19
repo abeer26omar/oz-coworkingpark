@@ -1,37 +1,30 @@
-import React, {useState, useEffect} from 'react';
-import callenderbook from '../../../../assets/images/icons/calender-book.svg';
-import alarmbook from '../../../../assets/images/icons/alarmbook.svg';
-import people from '../../../../assets/images/icons/people.svg';
+import React, {useState, useRef, useEffect} from 'react';
 import "react-datepicker/dist/react-datepicker.css";
-import RequestFormModal from '../../BookingSpace/RequestFormModal';
 import './BookingForm.css'
 import DatePicker from "react-datepicker";
-import {NavLink, useNavigate} from "react-router-dom";
-import Media from "../../../Media/Media";
+import {useNavigate} from "react-router-dom";
 import Button from '../../../UI/Button';
+import RequestFormModal from '../../../Auth/LoginAlertModal';
+import { Tooltip } from 'react-bootstrap';
+import Overlay from 'react-bootstrap/Overlay';
+import Toast from 'react-bootstrap/Toast'
 
-const BookingForm = (props) => {
+const BookingForm = ({venueDetails, token}) => {
     const [startDate, setStartDate] = useState(null);
     const [selectedStartTime, setSelectedStartTime] = useState(null);
     const [selectedEndTime, setSelectedEndTime] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
-    const [bookingDetails, setBookingDetails] = useState(false);
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [showToast, setShowToast] = useState(false);
+    const [showTooltip, setShowTooltip] = useState(false);
+    const [counter, setCounter] = useState(0);
+    const [initialCount, setInitialCount] = useState(0);
     const navigate = useNavigate();
-
-
-    useEffect(()=>{
-        if(props.space_redirect === '/bookingDetails'){
-            setBookingDetails(true)
-        }
-    },[])
+    const target = useRef(null);
 
     const handleDateChange = (date) => {
         setStartDate(date);
     };
-
 
     const handleStartTimeChange = (startTime) => {
         setSelectedStartTime(startTime);
@@ -42,9 +35,7 @@ const BookingForm = (props) => {
         setSelectedEndTime(endTime);
 
     };
-    // END Time Picker
-    const [counter, setCounter] = useState(0);
-    const [initialCount, setInitialCount] = useState(0);
+
     const handleInitialCountChange = (event) => {
         event.preventDefault();
 
@@ -54,61 +45,69 @@ const BookingForm = (props) => {
     const openSelectGuest = (event) => {
         event.preventDefault();
         setIsOpen(!isOpen);
-
+        setShowTooltip(false);
     }
 
     const closeSelectGuest = (event) => {
         event.preventDefault();
         setIsOpen(!isOpen);
     }
-    //
-    // let body = document.querySelector("body");
-    //
-    // body.addEventListener("click", closeSelectGuest);
+   
     const increment = (event) => {
         event.preventDefault();
-        if(counter < 6){
+        if(counter < venueDetails.capacity){
             setCounter(counter + 1)
+        }else{
+            setShowTooltip(!showTooltip);
         }
     }
 
-    // const decrement = (event) => {
-    //     event.preventDefault();
-    //     if (setCounter < 0) {
-    //         setCounter((counter) => counter - 1);
-    //     }
-    //     // setCounter(counter - 1)
-    // }
-
     const decrement = (event) => {
         event.preventDefault();
-        if (counter > 0) {
+        if (counter > 1) {
             setCounter((prevCount) => prevCount - 1);
         }
     };
+
     const handleReset = (event) => {
         event.preventDefault();
         setCounter(initialCount);
     };
 
-const saveBookingData = (e)=>{
-    e.preventDefault();
-    if(bookingDetails){
-        navigate('/bookingDetails/bookNow')
-        const bookingData = {
-            date: startDate,
-            time: {
-                start: selectedStartTime,
-                end: selectedEndTime
-            },
-            numberOfPeople: counter,
-            spaceDetails: props.space_details
+    const handelHide = ()=> setShow(false);
+
+    const saveBookingData = (e)=>{
+        e.preventDefault();
+        if((counter !== null && counter !== 0) && (startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
+            const bookingData = {
+                date: startDate,
+                time: {
+                    start: selectedStartTime,
+                    end: selectedEndTime
+                },
+                numberOfPeople: counter,
+                spaceDetails: venueDetails,
+                services: JSON.parse(sessionStorage.getItem("BookingOZServices"))
+            }
+            if(token){
+                navigate('/bookingDetails/bookNow')
+            }else{
+                setShow(true);
+            }
+            sessionStorage.setItem("BookingOZDetails", JSON.stringify(bookingData));
+        }else{
+            setShowToast(true)
         }
-        window.sessionStorage.setItem("BookingDetails", JSON.stringify(bookingData));
-    } else{
-        handleShow()
     }
-}
+    useEffect(()=>{
+        const data = JSON.parse(sessionStorage.getItem("BookingOZDetails"));
+        if(data){
+            setStartDate(new Date(data.date));
+            setSelectedStartTime(new Date(data.time.start));
+            setSelectedEndTime(new Date(data.time.end));
+            setCounter(data.numberOfPeople);
+        }
+    },[])
     return (
         <>
             <div className="featured__bookbottom align-self-end col-12" style={{
@@ -118,33 +117,36 @@ const saveBookingData = (e)=>{
             }}>
                 <div className="bookbottom">
                     <form className="bookbottom__form">
-                        <input type="hidden" id="bookbottom-value-arrive" name="arrive" value="09/08/2023"/>
-                        <input type="hidden" id="bookbottom-value-depart" name="depart" value="09/09/2023"/>
-                        <input type="hidden" id="bookbottom-value-depart" name="depart" value="09/09/2023"/>
-                        <input type="hidden" id="bookbottom-value-depart" name="depart" value="09/09/2023"/>
-                        <input type="hidden" id="bookbottom-value-adult" name="adult" value="1"/>
                         <ul className="bookbottom__ul">
 
-                            { bookingDetails && 
-                                <>
-                                <li className="bookbottom__li bookbottom__li--icon bookbottom__li--icon-guests">
+                            <li className="bookbottom__li bookbottom__li--icon bookbottom__li--icon-guests">
                                 <div className="bookbottom__guesticon">
-                                    <Media
-                                        type="img"
-                                        src={people}
-                                        alt="Icon Profile New"
-                                        className=" ls-is-cached"/>
-
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
+                                        <circle cx="44.1593" cy="32.421" r="8.42103" stroke="white" stroke-width="3.5"/>
+                                        <path d="M56.791 38.7372C60.2791 38.7372 63.1068 36.3808 63.1068 33.4741C63.1068 30.5673 60.2791 28.2109 56.791 28.2109" stroke="#BDBDBD" stroke-width="3.5" stroke-linecap="round"/>
+                                        <path d="M31.5273 38.7372C28.0392 38.7372 25.2116 36.3808 25.2116 33.4741C25.2116 30.5673 28.0392 28.2109 31.5273 28.2109" stroke="#BDBDBD" stroke-width="3.5" stroke-linecap="round"/>
+                                        <ellipse cx="44.1589" cy="55.5773" rx="12.6316" ry="8.42103" stroke="white" stroke-width="3.5"/>
+                                        <path d="M61 59.7919C64.6931 58.982 67.3158 56.931 67.3158 54.5288C67.3158 52.1265 64.6931 50.0755 61 49.2656" stroke="#BDBDBD" stroke-width="3.5" stroke-linecap="round"/>
+                                        <path d="M27.3164 59.7919C23.6233 58.982 21.0006 56.931 21.0006 54.5288C21.0006 52.1265 23.6233 50.0755 27.3164 49.2656" stroke="#BDBDBD" stroke-width="3.5" stroke-linecap="round"/>
+                                    </svg>
                                 </div>
                             </li>
                             <li className="bookbottom__li bookbottom__li--select bookbottom__li--select-guests">
                                 <div className="bookbottom__select position-relative">
-                                    {/*<div className="bookbottom__select-text">Total Guests</div>*/}
-                                    <button className="button-select-guest" onClick={openSelectGuest} style={{
+                                    <button 
+                                        className="button-select-guest" 
+                                        onClick={openSelectGuest} style={{
                                         cursor: 'pointer'
-                                    }}>
-                                        {counter !== null && counter != 0 ? `${counter} persons` : "Number of People"}
+                                    }} ref={target}>
+                                        {(counter !== null && counter !== 0) ? `${counter} persons` : "Number of People"}
                                     </button>
+                                    <Overlay target={target.current} show={showTooltip} placement="right">
+                                        {(props) => (
+                                        <Tooltip id="overlay-example" {...props}>
+                                            {`Max Room Capacity is ${venueDetails.capacity}`}
+                                        </Tooltip>
+                                        )}
+                                    </Overlay>
 
                                     {isOpen && (
                                         <div className='counter-container'>
@@ -158,17 +160,21 @@ const saveBookingData = (e)=>{
                                     )}
                                 </div>
                             </li>
-                                </>
-                            
-                           }
 
                             <li className="bookbottom__li bookbottom__li--icon bookbottom__li--icon-datepicker">
                                 <div className="bookbottom__calicon">
-                                    <Media
-                                        type="img"
-                                        src={callenderbook}
-                                        alt="icon cal new"
-                                        className=" ls-is-cached"/>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
+                                    <path d="M24 43.4803C24 35.7427 24 31.8739 26.3434 29.4702C28.6869 27.0664 32.4585 27.0664 40.0019 27.0664H48.0029C55.5463 27.0664 59.318 27.0664 61.6614 29.4702C64.0048 31.8739 64.0048 35.7427 64.0048 43.4803V47.5838C64.0048 55.3214 64.0048 59.1902 61.6614 61.594C59.318 63.9978 55.5463 63.9978 48.0029 63.9978H40.0019C32.4585 63.9978 28.6869 63.9978 26.3434 61.594C24 59.1902 24 55.3214 24 47.5838V43.4803Z" stroke="white" stroke-width="2"/>
+                                    <path opacity="0.5" d="M34.002 27.0776V24" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                    <path opacity="0.5" d="M54.0078 27.0776V24" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                    <path opacity="0.5" d="M25.002 37.3242H63.0065" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M56.0044 53.747C56.0044 54.8801 55.1088 55.7987 54.0041 55.7987C52.8994 55.7987 52.0039 54.8801 52.0039 53.747C52.0039 52.6138 52.8994 51.6953 54.0041 51.6953C55.1088 51.6953 56.0044 52.6138 56.0044 53.747Z" fill="white"/>
+                                    <path d="M56.0044 45.54C56.0044 46.6732 55.1088 47.5918 54.0041 47.5918C52.8994 47.5918 52.0039 46.6732 52.0039 45.54C52.0039 44.4069 52.8994 43.4883 54.0041 43.4883C55.1088 43.4883 56.0044 44.4069 56.0044 45.54Z" fill="white"/>
+                                    <path d="M46.0024 53.747C46.0024 54.8801 45.1069 55.7987 44.0022 55.7987C42.8975 55.7987 42.002 54.8801 42.002 53.747C42.002 52.6138 42.8975 51.6953 44.0022 51.6953C45.1069 51.6953 46.0024 52.6138 46.0024 53.747Z" fill="white"/>
+                                    <path d="M46.0024 45.54C46.0024 46.6732 45.1069 47.5918 44.0022 47.5918C42.8975 47.5918 42.002 46.6732 42.002 45.54C42.002 44.4069 42.8975 43.4883 44.0022 43.4883C45.1069 43.4883 46.0024 44.4069 46.0024 45.54Z" fill="white"/>
+                                    <path d="M36.0044 53.747C36.0044 54.8801 35.1088 55.7987 34.0041 55.7987C32.8994 55.7987 32.0039 54.8801 32.0039 53.747C32.0039 52.6138 32.8994 51.6953 34.0041 51.6953C35.1088 51.6953 36.0044 52.6138 36.0044 53.747Z" fill="white"/>
+                                    <path d="M36.0044 45.54C36.0044 46.6732 35.1088 47.5918 34.0041 47.5918C32.8994 47.5918 32.0039 46.6732 32.0039 45.54C32.0039 44.4069 32.8994 43.4883 34.0041 43.4883C35.1088 43.4883 36.0044 44.4069 36.0044 45.54Z" fill="white"/>
+                                </svg>
 
                                 </div>
                             </li>
@@ -182,13 +188,15 @@ const saveBookingData = (e)=>{
                                 />
 
                             </li>
-                            {bookingDetails && 
-                                <>
+                           
                             <li className="bookbottom__li bookbottom__li--icon">
                                 <div className="bookbottom__roomicon">
-                                    <Media
-                                        type="img" src={alarmbook} alt="icon bed new"
-                                        className=" ls-is-cached lazyloaded"/>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
+                                    <circle cx="44" cy="46" r="18" stroke="white" stroke-width="3.5"/>
+                                    <path d="M44 38V46L49 51" stroke="#BDBDBD" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M27 29L35 24" stroke="#BDBDBD" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M61 29L53 24" stroke="#BDBDBD" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                                 </div>
                             </li>
                             <li className="bookbottom__li bookbottom__li--select">
@@ -272,8 +280,6 @@ const saveBookingData = (e)=>{
                                 </div>
 
                             </li>
-                            </>
-                           }
 
                             <li className="bookbottom__li bookbottom__li--submit">
                                 <div className="btnlinks">
@@ -281,16 +287,32 @@ const saveBookingData = (e)=>{
                                         className="reservebutton" 
                                         tagType='link'
                                         onClick={saveBookingData}>Book Now</Button>
-                                    {/*<input type="submit" value="" className="reservebutton"/>*/}
                                 </div>
                             </li>
                         </ul>
                     </form>
                 </div>
             </div>
+            <Toast 
+                onClose={() => setShowToast(false)} 
+                show={showToast} 
+                delay={3000} 
+                autohide 
+                bg={'info'}
+                position={'top-center'}
+                style={{
+                    position: 'absolute',
+                    bottom: '15%',
+                    zIndex: '9'
+                }}>
+                <Toast.Body style={{
+                    color: '#fff',
+                    textTransform: 'capitalize'
+                }}>Please select Your booking details!</Toast.Body>
+            </Toast>
             <RequestFormModal 
                 show={show}
-                handleClose={handleClose}/>
+                handleClose={handelHide}/>
         </>
     );
 };

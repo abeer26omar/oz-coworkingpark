@@ -9,6 +9,8 @@ const Booking = () => {
 
     useEffect(()=>{
         config('booking');
+        sessionStorage.removeItem("BookingOZDetails");
+        sessionStorage.removeItem("BookingOZServices");
     },[]);
 
     return (

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import axios from 'axios';
 import Slider from "react-slick";
 import Card from "react-bootstrap/Card";
 import Media from "../Media/Media";
@@ -7,8 +8,10 @@ import {getEventsList} from '../../apis/Events';
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 
 const PublicEventList = ({}) => {
+    
     const [eventsData, setEventsData] = useState([]);
-    const { token, UserId } = useContext(AuthContext)
+    const { token, userId } = useContext(AuthContext);
+
     const settings = {
         dots: false,
         slidesToShow: 4,
@@ -42,10 +45,26 @@ const PublicEventList = ({}) => {
     };
 
     useEffect(()=>{
-        getEventsList(token, UserId).then(res=>{
-            setEventsData(res)
-        }).catch(err=>{});
-    },[]);
+        let isMounted = true;
+        const source = axios.CancelToken.source();
+
+        const fetchNewsFeedPosts = async () => {
+            try{
+                const res = await getEventsList(token, userId, source);
+                if (isMounted) {
+                    setEventsData(res);
+                }
+            }catch (error){
+
+            }
+        }
+        fetchNewsFeedPosts();
+
+        return ()=>{
+            isMounted = false;
+            source.cancel();
+        };
+    },[token, userId]);
 
     return (
         <>
@@ -65,7 +84,7 @@ const PublicEventList = ({}) => {
                                             <Card.Title>{event.event_name}</Card.Title>
                                             <Card.Text className="py-2">{event.description.slice(0,50)} ...</Card.Text>
                                             <Button 
-                                                to={"/events/communityEventsDetails"} 
+                                                to={`/events/communityEventsDetails/${event.id}`} 
                                                 className="btn_outline_black "
                                                 tagType='link'>{event.event_type.name}</Button>
                                         </div>

@@ -1,9 +1,8 @@
 import React from 'react';
 import Slider from "react-slick";
-import {CommunityEventsData} from "../../../../../Data/CommunityEventsData";
 import SingleCommunityExplore from "../SingleCommunityExplore";
 
-const MultipleEventSlider = () => {
+const MultipleEventSlider = ({eventsData}) => {
     const settings = {
         className: "center",
         dots: false,
@@ -15,7 +14,6 @@ const MultipleEventSlider = () => {
         slidesPerRow: 2,
         vertical: true,
         verticalSwiping: true,
-        // centerMode: true,
         infinite: true,
         pauseOnHover: true,
         swipeToSlide: true,
@@ -34,13 +32,18 @@ const MultipleEventSlider = () => {
 
             <div className="slider-vertical-rows">
                 <Slider {...settings}>
-                    {CommunityEventsData.map((eventData, index) => {
-                        const {id, img, linkText, title, text, category} = eventData;
+                    {eventsData && eventsData.map((event, index) => {
                         return (
                             <div key={index}>
-                                <SingleCommunityExplore id={id} img={img} linkText={linkText}
-                                                        title={title}
-                                                        text={text} category={category}/>
+                                <SingleCommunityExplore 
+                                    img={event.gallery[0].image} 
+                                    id={event.id} 
+                                    title={event.event_name} 
+                                    category={event.event_type.name} 
+                                    host={event.host[0].name} 
+                                    day={event.dates[0].check_in_date}
+                                    clock={event.dates[0].check_in_time}
+                                    text={event.description} />
                             </div>
                         )
                     })}

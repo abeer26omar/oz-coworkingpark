@@ -284,6 +284,15 @@ p.list-option-item{
     font-weight: var(--font-weight-bold);
     line-height: 120%;
 }
+.discount{
+    color: #BDBDBD !important;
+    font-family: Questrial;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%;
+    text-decoration: line-through;
+}
 @media screen and (max-width: 1440px) {
     .paragraph_black{
         font-size: var(--font-size-41);

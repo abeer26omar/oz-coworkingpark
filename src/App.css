@@ -186,6 +186,10 @@ a {
     width: 100%;
     height: auto !important;
 }
+.img_block > span > img{
+    height: 520px !important;
+    object-fit: cover;
+}
 /****************** Form Fields ****************/
 
 .css-13cymwt-control,
@@ -635,3 +639,51 @@ select option{cursor:default;display:block;font-size:inherit;width:100%;-webkit-
 .css-10wo9uf-option{cursor:default;display:block;font-size:inherit;width:100%;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);background-color:transparent;color:inherit;padding:8px 12px;box-sizing:border-box;}
 
 .css-10wo9uf-option:active{background-color:#B2D4FF;} */
+.fav_event{
+    position: absolute;
+    z-index: 99;
+    top: 4%;
+    right: 3%;
+}
+
+.full-bg {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../src/assets/images/404\ Page.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: 9;
+    transition: all .3s ease-in-out;
+    margin: 0;
+    padding: 0;
+}
+.full-bg h1{
+    color: #000;
+    font-size: 128px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.full-bg p{
+    color: #000;
+    font-family: Couture;
+    font-size: 58px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+.full-bg p + p{
+    color: #000;
+    text-align: center;
+    font-family: Questrial;
+    font-size: 29px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}

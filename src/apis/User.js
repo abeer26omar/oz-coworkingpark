@@ -186,7 +186,7 @@ export const getSingleItemById = async (token, type, id, source) => {
 
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/get-by-id?access_token=${token}`,
+        url: `${process.env.REACT_APP_API_URL}/api/get-by-id?access_token=${token}&skip=true`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,

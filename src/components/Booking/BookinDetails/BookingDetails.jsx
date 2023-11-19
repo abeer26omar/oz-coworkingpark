@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import BookingDetailsHeader from "./BookDeatilsHeader/BookingDetailsHeader";
+import axios from 'axios';
 import SpaceDetails from "./SpaceDetails/SpaceDetails";
 import { useParams } from 'react-router-dom';
-import { getSingleItemById } from '../../../apis/User';
+import { getVenueById } from '../../../apis/Booking';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 
 const BookingDetails = () => {
@@ -12,20 +13,19 @@ const BookingDetails = () => {
     const [venueDetails, setVenueDetails] = useState({});
 
     useEffect(()=>{
-        const controller = new AbortController();
-        const signal = controller.signal;
+        const source = axios.CancelToken.source();
 
-        getSingleItemById(token, 'booking', id, signal).then(res=>{
+        getVenueById(token, id, source).then(res=>{
             setVenueDetails(res);
         }).catch(err=>{console.log(err);});
         
-        return ()=>controller.abort();
+        return ()=>source.cancel(); 
     },[id, token]);
 
     return (
-        <>   
+        <>
             <BookingDetailsHeader venueDetails={venueDetails} />
-            {/* <SpaceDetails venueDetails={venueDetails}/> */}
+            <SpaceDetails venueDetails={venueDetails}/>
         </>
     )
 };
