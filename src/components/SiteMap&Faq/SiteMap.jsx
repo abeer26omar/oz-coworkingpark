@@ -3,6 +3,7 @@ import './sitemap.css'
 import site from '../../assets/images/site_map.jpg'
 import MainHeaderWrapper from '../UI/MainHeaderWrapper';
 import CardSite from '../UI/CardSite';
+import Paragraph from '../UI/Paragraph';
 const  SiteMap  = () => {
 const links = [
     { name: 'Booking', to: '/booking' },
@@ -55,42 +56,32 @@ const links7 = [
 ];
  
  return (
-    <>
-  <MainHeaderWrapper image={site}>
-  </MainHeaderWrapper>
-  <div className='container py-4'>
-    <div className='row'>
-        <div className='col-xl-3'>
-            <CardSite title={'HOme Page'}  links={links}/>
-        </div>
-        <div className='col-xl-3'>
-            <CardSite title={'Booking'} links={links1}/>
-        </div>
-        <div className='col-xl-3'>
-            <CardSite title={'Membership'} links={links2}/>
-        </div>
-        <div className='col-xl-3'>
-            <CardSite title={'Community'} links={links3}/>
-        </div>
-    </div> 
-     <div className='row'>
-        <div className='col-xl-3 mt-xl-4'>
-            <CardSite title={'Events'}links={links4} />
-        </div>
-        <div className='col-xl-3'>
-            <CardSite title={'Profile'} links={links5}/>
-        </div>
-        <div className='col-xl-3'>
-            <CardSite title={'Explore'} links={links6} />
-        </div>
-        <div className='col-xl-3'>
-            <CardSite title={'Important links'} links={links7}/>
-        </div>
-    </div>
-
-  </div>
-    </>
-  )
+   <>
+     <MainHeaderWrapper image={site}>
+       <Paragraph>SITE MAP</Paragraph>
+     </MainHeaderWrapper>
+     <div className="container py-4">
+       <div className="row">
+         <div className="col-xl-3">
+           <CardSite title={"HOme Page"} links={links} />
+           <CardSite title={"Events"} links={links4} />
+         </div>
+         <div className="col-xl-3">
+           <CardSite title={"Booking"} links={links1} />
+           <CardSite title={"Profile"} links={links5} />
+         </div>
+         <div className="col-xl-3">
+           <CardSite title={"Membership"} links={links2} />
+           <CardSite title={"Explore"} links={links6} />
+         </div>
+         <div className="col-xl-3">
+           <CardSite title={"Community"} links={links3} />
+           <CardSite title={"Important links"} links={links7} />
+         </div>
+       </div>
+     </div>
+   </>
+ );
 }
 
 export default SiteMap

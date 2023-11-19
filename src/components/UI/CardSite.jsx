@@ -8,7 +8,7 @@ const  CardSite = (props )=> {
  ));
   return (
     <>
-       <div className='site_card'>
+       <div className='site_card mb-4'>
                 <Paragraph className='title_link'>{props.title}</Paragraph>
                 <ul className='p-0 d-flex flex-column'> 
                 {linkElements }
