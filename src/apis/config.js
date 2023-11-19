@@ -82,3 +82,69 @@ export const getIssuesCaseStudies = async (source)=>{
     const response = await axios(config);
     return response.data.data;
 };
+
+export const getTicketCategories = async (source)=>{
+
+    const config = {
+        method: 'get',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/ticket_categories`,
+        cancelToken: source.token
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+};
+
+export const getSubCategories = async (source, id)=>{
+
+    const config = {
+        method: 'get',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/ticket_categories/${id}/sub_categories`,
+        cancelToken: source.token
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+};
+
+export const getVenuesById = async (source, id)=>{
+
+    const config = {
+        method: 'get',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/venues/${id}`,
+        cancelToken: source.token
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+};
+
+export const createIssue = async (userId, 
+    case_type_id,
+    ticket_category_id,
+    ticket_sub_category_id,
+    venue_id,
+    branch_id,
+    description,
+    location,
+    amenity_id)=>{
+
+    const config = {
+        method: 'POST',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/tickets`,
+        data: {
+            "user_id": userId,
+            "case_type_id": case_type_id,
+            "ticket_category_id": ticket_category_id, 
+            "ticket_sub_category_id": ticket_sub_category_id,
+            "venue_id": venue_id,
+            "branch_id": branch_id,
+            "description": description,
+            "location": location,
+            "amenity_id": amenity_id
+        }
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+};

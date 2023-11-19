@@ -5,6 +5,7 @@ import Paragraph from '../../UI/Paragraph';
 import { getCommunityNewsFeed } from '../../../apis/Events';
 import NewsFeedBlogList from "./NewsFeedBlogList";
 import NewsFeedHeader from "../NewsFeedHeader/NewsFeedHeader";
+import CardPlaceHolder from '../../UIPlaceholders/CardPlaceHolder';
 
 const NewsFeedBlogs = () => {
 
@@ -36,7 +37,7 @@ const NewsFeedBlogs = () => {
                     >
                         <Masonry columnsCount={4} gutter="30px" className="newsfeeds ">
 
-                            {newsFeedData && newsFeedData.map((feed, index) => {
+                            {newsFeedData ? newsFeedData.map((feed, index) => {
                                 const {id, content, title, banner, category_name} = feed;
                                 return (
                                     <div key={index}>
@@ -48,7 +49,9 @@ const NewsFeedBlogs = () => {
                                             category={category_name}/>
                                     </div>
                                 )
-                            })}
+                            }) : (
+                                <CardPlaceHolder />
+                            )}
 
                         </Masonry>
                     </ResponsiveMasonry>

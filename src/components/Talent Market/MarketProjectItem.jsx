@@ -73,7 +73,7 @@ const MarketProjectItem = ({id, title, image, category, category_logo, user, des
                     <Card.Text>{description}</Card.Text>
                     <div className="d-flex justify-content-between align-items-center card-footer p-0">
                         <Paragraph className='mb-0 black-span'>{setHours(parseInt(lastseen, 10))} hrs ago</Paragraph>
-                        <Button to={`/bookingDetails/${id}`} tagType='link' className='btn_outline_black px-3 py-2'>View Details</Button>
+                        <Button to={`/projectDetails/${id}`} tagType='link' className='btn_outline_black px-3 py-2'>View Details</Button>
                     </div>
 
                 </Card.Body>

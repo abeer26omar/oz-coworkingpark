@@ -1,62 +1,39 @@
 import { useEffect, useState, useContext } from 'react'
 import { Formik } from 'formik';
 import * as Yup from "yup";
-import { Register } from "../../apis/AuthApi";
 import { useNavigate } from "react-router-dom";
-import Button  from '../UI/Button';
-import RegisterOTPModal from './RegisterOTPModal';
+import Button  from '../../UI/Button';
 import SweetAlert2 from 'react-sweetalert2';
-import { SiteConfigContext } from '../../apis/context/SiteConfigContext';
-import { AuthContext } from '../../apis/context/AuthTokenContext';
+import { SiteConfigContext } from '../../../apis/context/SiteConfigContext';
+import { inquiry } from '../../../apis/AuthApi';
+import { AuthContext } from '../../../apis/context/AuthTokenContext';
+import './Contactus.css';
 
-const RegisterForm = ({provider, profile})=>{
-    const [show, setShow] = useState(false);
-    const [email, setEmail] = useState('');
-    const [userInfo, setUSerInfo] = useState({});
-    const handleClose = () => setShow(false);
+const ContactusForm = ()=>{
     const [swalProps, setSwalProps] = useState({});
-    const navigate = useNavigate();
     const siteConfig = useContext(SiteConfigContext);
-    const { handleLogin } = useContext(AuthContext);
-
-    useEffect(()=>{
-        if(provider === 'google'){
-            setUSerInfo({ 
-                first_name: profile.given_name,
-                last_name: profile.family_name,
-                email: profile.email,
-                phone: '',
-                user_type: '',
-                password: '',
-                confirm_password: ''
-            });
-        }else if(provider === 'facebook'){
-            setUSerInfo({ 
-                first_name: profile.first_name,
-                last_name: profile.last_name,
-                email: profile.email,
-                phone: '',
-                user_type: '',
-                password: '',
-                confirm_password: ''
-            });
-        }else{
-
-        }
-    },[profile, provider]);
+    const { userProfileDate } = useContext(AuthContext)
+    const [userInfo, setUSerInfo] = useState(userProfileDate);
 
     const handleSubmit = async (values) => {
         try {
-            const result = await Register(values.first_name, 
-                values.last_name, 
-                values.email, 
-                values.phone, 
-                values.user_type, 
-                values.password,
-                values.confirm_password);
-            setShow(true);
-            setEmail(values.email);
-            handleLogin(result);
+            const result = await inquiry(values.first_name,
+                values.last_name,
+                values.email,
+                values.phone,
+                values.user_type,
+                values.inquiry_type,
+                values.location,
+                values.comments);
+            setSwalProps({
+                show: true,
+                icon: 'success',
+                title: result.status,
+                text: 'send successfully',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            
         } catch (error) {
             setSwalProps({
                 show: true,
@@ -71,14 +48,15 @@ const RegisterForm = ({provider, profile})=>{
     return (
         <>
             <Formik 
-                initialValues = {userInfo || {
-                    first_name: '',
-                    last_name: '',
-                    email: '',
-                    phone: '',
+                initialValues = {{
+                    first_name: userInfo ? userInfo.first_name : '',
+                    last_name: userInfo ? userInfo.last_name : '',
+                    email: userInfo ? userInfo.email : '',
+                    phone: userInfo ? userInfo.phone_number : '',
                     user_type: '',
-                    password: '',
-                    confirm_password: ''
+                    inquiry_type: '',
+                    location: '',
+                    comments: ''
                 }}
                 onSubmit={async values => {
                     await new Promise(resolve => setTimeout(resolve, 0));
@@ -90,9 +68,9 @@ const RegisterForm = ({provider, profile})=>{
                     email: Yup.string().email().required(),
                     phone: Yup.string().required(),
                     user_type: Yup.string().required(),
-                    password: Yup.string().required(),
-                    confirm_password: Yup.string().required()
-                    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+                    inquiry_type: Yup.string().required(),
+                    location: Yup.string().required(),
+                    comments: Yup.string().required()
                 })}
                 enableReinitialize>
             {props => {
@@ -196,6 +174,7 @@ const RegisterForm = ({provider, profile})=>{
                             onChange={handleChange}
                             onBlur={handleBlur}
                             className="form__field placeholderSelect">
+                                <option disabled selected>Choose Type</option>
                                 {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_4.data).map(([key, value]) => (
                                     <option key={key} value={key}>
                                         {value}
@@ -205,56 +184,72 @@ const RegisterForm = ({provider, profile})=>{
                         {errors.user_type && touched.user_type && <p className='text-danger mb-0'>{errors.user_type}</p>}
                     </div>
                     <div className="form__group field mt-3 group-check">
-                        <label htmlFor="password" className="form__label">Password</label>
-                        <input 
-                            id='password'
-                            type="password"
-                            className={
-                                errors.password && touched.password
-                                ? "form__field is-invalid"
-                                : "form__field"
-                            }
-                            placeholder="Enter Your Password"
-                            name="password"
-                            value={values.password}
+                        <label htmlFor='inquiry_type' className="form__label">Inquiry Type</label>
+                        <select
+                            id='inquiry_type'
+                            value={values.inquiry_type}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                        /> 
-                        {errors.password && touched.password && <p className='text-danger mb-0'>{errors.password}</p>}
+                            className={
+                                errors.comments && touched.comments
+                                    ? "form__field placeholderSelect is-invalid"
+                                    : "form__field placeholderSelect"
+                            }>
+                            <option disabled selected>Choose Service</option>
+                            <option value="one">One</option>
+                            <option value="two">Two</option>
+                            <option value="three">Three</option>
+                        </select>
+                        {errors.inquiry_type && touched.inquiry_type && <p className='text-danger mb-0'>{errors.inquiry_type}</p>}
                     </div>
                     <div className="form__group field mt-3 group-check">
-                        <label htmlFor="confirm_password" className="form__label">Confirm Password</label>
-                        <input 
-                            id='confirm_password'
-                            type="password"
+                        <label htmlFor="location" className="form__label">Locations</label>
+                        <select
+                            id='location'
+                            value={values.location}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
                             className={
-                                errors.confirm_password && touched.confirm_password
-                                ? "form__field is-invalid"
-                                : "form__field"
+                                errors.comments && touched.comments
+                                    ? "form__field placeholderSelect is-invalid"
+                                    : "form__field placeholderSelect"
+                            }>
+                            <option disabled selected>Choose Location</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                        {errors.location && touched.location && <p className='text-danger mb-0'>{errors.location}</p>}
+                    </div>
+                    <div className="form__group field my-3 group-check">
+                        <label htmlFor="comments" className="form__label">Comments</label>
+                        <input 
+                            id='comments'
+                            type="text"
+                            className={
+                                errors.comments && touched.comments
+                                    ? "form__field is-invalid"
+                                    : "form__field"
                             }
-                            placeholder="Enter confirm password"
-                            name="confirm_password"
-                            value={values.confirm_password}
+                            placeholder="Enter Your comments"
+                            name="comments"
+                            value={values.comments}
                             onChange={handleChange}
                             onBlur={handleBlur}
                         /> 
-                        {errors.confirm_password && touched.confirm_password && <p className='text-danger mb-0'>{errors.confirm_password}</p>}
+                        {errors.comments && touched.comments && <p className='text-danger mb-0'>{errors.comments}</p>}
                     </div>
                     <div className="d-flex justify-content-center py-3">
                         <Button 
                             tagType='button'
                             type="submit" 
-                            className="btn_outline_black auth_btn_padding">Register</Button>
+                            className="btn_outline_black auth_btn_padding">Submit</Button>
                     </div>
                 </form>
             )}}
             </Formik>
-            <RegisterOTPModal 
-                show={show}
-                onHide={handleClose}
-                email={email}/>
             <SweetAlert2 {...swalProps} />
         </>
     )
 }
-export default RegisterForm;
+export default ContactusForm;

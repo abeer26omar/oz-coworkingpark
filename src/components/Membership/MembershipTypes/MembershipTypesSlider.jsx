@@ -4,6 +4,7 @@ import { getListMembershipTypes } from '../../../apis/MembershipApi';
 import MembershipTypesList from './MembershipTypesList';
 import Paragraph from '../../UI/Paragraph';
 import { MembershipIndividualsTypes } from '../../../Data/IndividualsTypesData';
+import CardPlaceHolder  from '../../UIPlaceholders/CardPlaceHolder';
 
 const MembershipTypesSlider = () => {
     // const {data, error, isError} = useQuery({
@@ -67,7 +68,7 @@ const MembershipTypesSlider = () => {
     return (
         <>
         <Slider {...settings} className='individual_slider'>
-            {MembershipIndividualsTypes && MembershipIndividualsTypes.map((listMembershipType, index) => {
+            {MembershipIndividualsTypes ? MembershipIndividualsTypes.map((listMembershipType, index) => {
                 const {id, name, logo, link, description, image }  = listMembershipType;
                 return (
                     <div className='px-3'>
@@ -82,7 +83,11 @@ const MembershipTypesSlider = () => {
                         />
                     </div>
                 );
-            })}
+            }) : (
+                <div className='px-3'>
+                    <CardPlaceHolder />
+                </div>
+            )}
         </Slider>
         {/* {isError && <Paragraph>there is no membership type to display</Paragraph>} */}
         </>

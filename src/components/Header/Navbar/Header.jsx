@@ -17,7 +17,7 @@ const Header = ({showBlackNav}) => {
     const [explore , setexplore] = useState(true);
     const [openSideMenu , SetOpenSideMenu] = useState(true);
     const [branches, setBranches] = useState([]);
-    const { token } = useContext(AuthContext);
+    const { token, handelChangeBranch } = useContext(AuthContext);
 
     useEffect(()=>{
         const controller = new AbortController();
@@ -25,10 +25,15 @@ const Header = ({showBlackNav}) => {
 
         getBranches(token, signal).then(res=>{
             setBranches(res);
+            handelChangeBranch(res[0].id);
         }).catch(err=>{console.log(err)});
         
         return ()=>controller.abort();
     },[token]);
+
+    const setBransh = (id) => {
+        handelChangeBranch(id);
+    };
 
     return (
         <>
