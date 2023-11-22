@@ -49,10 +49,10 @@ const PersonalData = () => {
     const [interestsList, setInterestsList] = useState([]);
     const [focus, setFocused] = useState(false);
     const [swalProps, setSwalProps] = useState({});
-    const siteConfig = useContext(SiteConfigContext);
+    const {siteConfig} = useContext(SiteConfigContext);
     const { token, userId } = useContext(AuthContext);
     const [selectedInterests, setSelectedInterests] = useState();
-    const [selectedHobbies, setSelectedHobbies] = useState(custom ? [custom.fid_11] : [""]);
+    const [selectedHobbies, setSelectedHobbies] = useState(custom ? [custom?.fid_11] : [""]);
 
 
     useEffect(()=>{
@@ -93,7 +93,7 @@ const PersonalData = () => {
             })
             setHobbiesList(optionList);
         });
-    },[]);
+    },[token]);
 
     const updateData = async (values) => {
         try {
@@ -153,12 +153,12 @@ const PersonalData = () => {
                     birthday: userInfo ? userInfo.birthday : '',
                     language: userInfo ? userInfo.language : '',
                     nationality: custom ? custom.fid_8 : '',
-                    jobTitle: custom ? custom.fid_5 : '',
-                    industry: custom ? custom.fid_6 : '',
-                    city: custom ? custom.fid_7 : '',
+                    jobTitle: custom ? custom?.fid_5 : '',
+                    industry: custom ? custom?.fid_6 : '',
+                    city: custom ? custom?.fid_7 : '',
                     companyName: userInfo ? userInfo.working : '',
-                    howDidYouKnowUs: custom ? custom.fid_10 : '',
-                    serviceProvide: custom ? custom.fid_9 : '',
+                    howDidYouKnowUs: custom ? custom?.fid_10 : '',
+                    serviceProvide: custom ? custom?.fid_9 : '',
                     about: userInfo ? userInfo.about : '',
                     hobbies: custom ? [custom.fid_11] : [""],
                     interest: custom ? [custom.fid_12] : [""],
@@ -451,7 +451,7 @@ const PersonalData = () => {
                                                 onBlur={handleBlur}
                                                 disabled={disabled}
                                                 className="form__field placeholderSelect">
-                                                    {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_6.data).map(([key, value]) => (
+                                                    {siteConfig && Object.entries(siteConfig.profile_dropdown?.fid_6.data).map(([key, value]) => (
                                                         <option key={key} value={key}>
                                                             {value}
                                                         </option>

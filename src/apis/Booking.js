@@ -123,6 +123,35 @@ export const getMyBookingList = async (token, UserId, source) => {
     return response.data.data;
 };
 
+export const checkAvailability = async (token, 
+    user_id, 
+    venue_id, 
+    buffering_time, 
+    date, 
+    check_in, 
+    check_out) => {
+        const formData = new FormData();
+        formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+        formData.append('user_id', user_id);
+        formData.append('venue_id', venue_id);
+        formData.append('buffering_time', buffering_time);
+        formData.append('date', date);
+        formData.append('check_in', check_in);
+        formData.append('check_out', check_out);
+
+        const config = {
+            method: 'post',
+            url: `${process.env.REACT_APP_API_URL}/api/check_availability?access_token=${token}`,
+            data: formData,
+            maxContentLength: Infinity,
+            maxBodyLength: Infinity,
+        };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
 export const confirmBooking = async (token, 
     UserId,
     branch_id,

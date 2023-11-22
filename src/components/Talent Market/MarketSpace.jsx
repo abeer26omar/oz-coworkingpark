@@ -21,7 +21,7 @@ const MarketSpace = ()=>{
         setEmpty('');
         setError('')
         getProductsList(token, userId).then(res=>{
-            setCards(res?.slice(0, 3));
+            setCards(res);
         })
 
         return controller.abort();
