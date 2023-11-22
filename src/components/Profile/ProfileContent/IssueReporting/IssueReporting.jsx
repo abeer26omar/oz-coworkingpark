@@ -21,7 +21,6 @@ const IssueReporting = () => {
 
     return (
         <>
-        {console.log(cases)}
             <div className="container py-4 px-5">
                 <div className="head-form">
                     <h2>issue Reporting</h2>
@@ -29,7 +28,7 @@ const IssueReporting = () => {
                 <div className="col-11 mx-auto space-description">
                     { cases && cases.map(item=>{
                         return (
-                            <Button className='p-0 d-block' tagType='link' to={'/profile/issueType'}>
+                            <Button className='p-0 d-block' tagType='link' to={`/profile/issueType/case_${item.id}`}>
                                 <div className='d-flex justify-content-between align-items-center border-bottom my-5'>
                                     <div className='d-flex align-items-center'>
                                         <img src={item.image} alt={item.name} />

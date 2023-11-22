@@ -6,13 +6,15 @@ const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(sessionStorage.getItem('TokenOZ'));
     const [userId, setUserId] = useState(sessionStorage.getItem('userIdOZ'));
     const [activeUserId, setActiveUserId] = useState(sessionStorage.getItem('activeUserOZ'));
-    const [userProfileDate, setUserProfileData] = useState(JSON.parse(sessionStorage.getItem('userProfileDate')))
+    const [userProfileDate, setUserProfileData] = useState(JSON.parse(sessionStorage.getItem('userProfileDate')));
+    const [branchId, setBranchId] = useState(sessionStorage.getItem('branchIdOZ'));
 
     useEffect(() => {
         const storedToken = sessionStorage.getItem('TokenOZ');
         const storedUserId = sessionStorage.getItem('userIdOZ');
         const storedActiveUserId = sessionStorage.getItem('activeUserOZ');
         const storedUserProfileDate = JSON.parse(sessionStorage.getItem('userProfileDate'));
+        const storedBranchId = sessionStorage.getItem('branchIdOZ');
 
         if (storedToken) {
             setToken(storedToken);
@@ -20,7 +22,8 @@ const AuthProvider = ({ children }) => {
             setActiveUserId(storedActiveUserId);
             setUserProfileData(storedUserProfileDate);
         }
-    }, [token, userId, activeUserId]);
+        setBranchId(storedBranchId)
+    }, [token, userId, activeUserId, branchId]);
 
     const handleLogin = (loginDetails) => {
         sessionStorage.setItem('TokenOZ', loginDetails.access_token);
@@ -55,8 +58,12 @@ const AuthProvider = ({ children }) => {
         setUserProfileData('');
     };
 
+    const handelChangeBranch = (branchId) => {
+        sessionStorage.setItem('branchIdOZ', branchId);
+    };
+
     return (
-        <AuthContext.Provider value={{ token, userId, activeUserId, userProfileDate, handleLogin, handleLogout }}>
+        <AuthContext.Provider value={{ token, userId, branchId, activeUserId, userProfileDate, handleLogin, handleLogout, handelChangeBranch }}>
             {children}
         </AuthContext.Provider>
     );

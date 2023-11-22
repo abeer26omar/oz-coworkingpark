@@ -32,7 +32,7 @@ export const getProductsList = async (token, userId, branchId, catergoreyId,sign
 
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/list-products?access_token=${token}`,
+        url: `${process.env.REACT_APP_API_URL}/api/list-products?access_token=${token}&skip=true`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
@@ -69,6 +69,44 @@ export const filterProducts = async (token,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
         signal: signal
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const createProject = async (token, 
+    userId,
+    branch_id,
+    product_category,
+    product_title,
+    product_description,
+    product_price,
+    image,
+    portfolio_link,
+    contact_type,
+    period) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('user_id', userId);
+    formData.append('branch_id', branch_id);
+    formData.append('product_category', product_category);
+    formData.append('product_title', product_title);
+    formData.append('product_description', product_description);
+    formData.append('product_price', product_price);
+    formData.append('image', image);
+    formData.append('portfolio_link', portfolio_link);
+    formData.append('contact_type', contact_type);
+    formData.append('period', period);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/oz-create-product?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
     };
 
     const response = await axios(config);

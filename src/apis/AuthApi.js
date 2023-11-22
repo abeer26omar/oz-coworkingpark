@@ -124,3 +124,34 @@ export const Logout = async (token) => {
 };
 
 export const checkAuthLoader = async () => {};
+
+export const inquiry = async (first_name,
+    last_name,
+    email,
+    phone,
+    user_type,
+    inquiry_type,
+    location,
+    comments) => {
+    const formData = new FormData();
+        formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+        formData.append('first_name', first_name);
+        formData.append('last_name', last_name);
+        formData.append('email', email);
+        formData.append('phone', phone);
+        formData.append('user_type', user_type);
+        formData.append('inquiry_type', inquiry_type);
+        formData.append('location_id', location);
+        formData.append('comments', comments);
+
+        const config = {
+            method: 'post',
+            url: `${process.env.REACT_APP_API_URL}/api/inquiry`,
+            data: formData,
+            maxContentLength: Infinity,
+            maxBodyLength: Infinity,
+        };
+
+    const response = await axios(config);
+    return response.data.data;
+};

@@ -1,9 +1,61 @@
+import { useState, useEffect, useContext } from 'react';
 import { Formik } from 'formik';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import Paragraph from '../../../UI/Paragraph';
 import Button from '../../../UI/Button';
+import { getVenuesById, createIssue } from '../../../../apis/config';
+import { AuthContext } from '../../../../apis/context/AuthTokenContext';
+import SweetAlert2 from 'react-sweetalert2';
 
 const AddPlacesIssueDetails = ()=>{
-    const submitIssue = ()=>{};
+
+    const [venues, setVenues] = useState([]);
+    const [swalProps, setSwalProps] = useState({});
+    const { branchId, userId } = useContext(AuthContext);
+    const {case_id, type_id, id} = useParams();
+    const caseId = case_id.split('_')[1];
+    const typeId = type_id.split('_')[1];
+
+    useEffect(()=>{
+        const source = axios.CancelToken.source();
+
+        getVenuesById(source, branchId).then(res=>{
+            setVenues(res);
+        }).catch(err=>{console.log(err)})
+
+        return ()=>source.cancel();
+    },[]);
+
+    const submitIssue = async (values) => {
+        try {
+            const result = await createIssue(userId, 
+                caseId,
+                typeId,
+                id,
+                values.picked,
+                branchId,
+                values.comment,
+                values.code);
+            setSwalProps({
+                show: true,
+                icon: 'success',
+                title: result.status,
+                text: result.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }catch (error){
+            setSwalProps({
+                show: true,
+                icon: 'error',
+                title: error.response.data.status,
+                text: error.response.data.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    };
 
     return (
         <>
@@ -15,7 +67,7 @@ const AddPlacesIssueDetails = ()=>{
                     <Formik
                         initialValues={{
                             code: '',
-                            selectedRoom: '',
+                            picked: '',
                             comment: ''
                         }}
                         onSubmit={async (values) => {
@@ -46,27 +98,32 @@ const AddPlacesIssueDetails = ()=>{
                                             </div>
                                         </div>
                                         <div className='form__group field my-3'>
-                                                <div className='card card_event p-3 mb-3'>
-                                                    <div className='row g-3 align-items-center'>
-                                                        <div className='col-lg-3 col-12 d-flex align-items-center'>
-                                                            <img src={''} alt='event-img' width={'100%'} height={'125px'} style={{
-                                                                objectFit:'cover'
-                                                            }}/>
-                                                        </div>
-                                                        <div className='col-lg-7 col-md-8 col-12'>
-                                                                <Paragraph className='card-title mb-0'>{'Meeting room 01'}</Paragraph>
-                                                        </div>
-                                                        <div className='col-lg-2 col-md-4 col-12 d-flex justify-content-end'>
-                                                            <input 
-                                                                className="form-check-input issue_checkbox" 
-                                                                type="checkbox" 
-                                                                value={values.selectedRoom}
-                                                                onChange={handleChange}
-                                                                onBlur={handleBlur}
-                                                                id="flexCheckDefault"/>
+                                            {venues && venues.map((venue, index) => {
+                                                return (
+                                                    <div className='card card_event p-3 mb-3' key={index}>
+                                                        <div className='row g-3 align-items-center'>
+                                                            <div className='col-lg-3 col-12 d-flex align-items-center'>
+                                                                <img src={venue.logo} alt='event-img' width={'100%'} height={'125px'} style={{
+                                                                    objectFit:'cover'
+                                                                }}/>
+                                                            </div>
+                                                            <div className='col-lg-7 col-md-8 col-12'>
+                                                                <Paragraph className='card-title mb-0'>{venue.title}</Paragraph>
+                                                            </div>
+                                                            <div className='col-lg-2 col-md-4 col-12 d-flex justify-content-end'>
+                                                                <input
+                                                                    name='picked' 
+                                                                    className="form-check-input issue_checkbox" 
+                                                                    type='radio' 
+                                                                    value={venue.id}
+                                                                    onChange={handleChange}
+                                                                    onBlur={handleBlur}
+                                                                    id="flexCheckDefault"/>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                )
+                                            })}
                                         </div>
                                         <div className="form__group field my-3">
                                             <label htmlFor="comment"
@@ -96,6 +153,7 @@ const AddPlacesIssueDetails = ()=>{
                     </Formik>
                 </div>
             </div>
+            <SweetAlert2 {...swalProps} />
         </>
     )
 };

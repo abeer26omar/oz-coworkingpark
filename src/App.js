@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import RootLayout from './pages/RootLayout';
 import Membership from "./pages/Membership";
 import Login from "./components/Auth/Login";
-import ContactUs from "./pages/ContactUS";
+import Contactus from "./pages/ContactUS";
 import MembershipOptions from "./components/Membership/MembershipOptions/MembershipOptions";
 import Joinus from "./components/Forms/JoinUS/Joinus";
 import Home from "./pages/Home";
@@ -53,26 +53,23 @@ import AddService from './components/Talent Market/AddService';
 import Error404 from './pages/Error404';
 import SiteMap from "./components/SiteMap&Faq/SiteMap";
 import Faq from "./components/SiteMap&Faq/Faq";
-
+import ServiceDetails from './components/Talent Market/ServiceDetails';
 function App() {
     const router = createBrowserRouter([
       {
         path: "/",
         element: <RootLayout />,
         id: 'root',
-        // errorElement: <Error />,
+        errorElement: <Error404 />,
         children: [
-          { index: true, element: <Home /> },
-          { path: "about", element: <About /> },
-          { path: "joinus", element: <Joinus /> },
-          { path: "contactus", element: <ContactUs /> },
-          { path: "sitemap", element: <SiteMap /> },
-          { path: "faq", element: <Faq/> },
-
-          {
-            path: "profile",
-            element: <Profile />,
-            id: "profile",
+          { index: true, element: <Home />},
+          { path:'about', element: <About />},
+          { path:'joinus', element: <Joinus />},
+          { path:'contactus', element: <Contactus />},
+          { path:'sitemap', element: <SiteMap /> },
+          { path:'faq', element: <Faq/> },
+          { path:'profile', element: <Profile />,
+            id:'profile',
             children: [
               { index: true, element: <PersonalData /> },
               { path: "changePassword", element: <ChangePassword /> },
@@ -83,9 +80,9 @@ function App() {
               { path: "privacypolicy", element: <PrivacyPolicy /> },
               { path: "terms&condition", element: <TermsConditions /> },
               { path: "issueReport", element: <IssueReporting /> },
-              { path: "issueType", element: <IssueType /> },
-              { path: "subissueType", element: <SubissueType /> },
-              { path: "issueplace", element: <AddPlacesIssueDetails /> },
+              { path: "issueType/:case_id", element: <IssueType /> },
+              { path: "subissueType/:case_id/:type_id", element: <SubissueType /> },
+              { path: "issueplace/:case_id/:type_id/:id", element: <AddPlacesIssueDetails /> },
             ],
           },
           { path:'login', element: <Login />},
@@ -97,7 +94,7 @@ function App() {
           { path:'singleMember/:id', element: <MemberPackage />},
           { path:'community', element: <Community />},
           { path:'community/events', element: <CommunityEventsExplore />},
-          { path:'events/communityEventsDetails', element: <CommunityEventsDetails />},
+          { path:'events/communityEventsDetails/:id', element: <CommunityEventsDetails />},
           { path:'community/newsfeed', element: <NewsFeed />},
           { path:'community/newsfeed/singleFeed/:id', element: <SingleNewFeed />},
           { path:'private', element: <PrivateEvents />},
@@ -113,6 +110,7 @@ function App() {
           { path:'ozys', element: <Ozys />},
           { path:'amenities', element: <Amenities />},
           { path:'talentmarket', element: <TalentMarket />},
+          { path:'projectDetails/:id', element: <ServiceDetails />},
           { path:'addService', element: <AddService />}
         ]}
     ]);
