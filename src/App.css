@@ -287,7 +287,9 @@ a {
     color: var(--primary-color);
     font-weight: var(--font-weight-regular);
 }
-
+.form__field:disabled{
+    color: var(--secondary-color2)
+}
 /* reset input */
 .form__field:required, .form__field:invalid {
     box-shadow: none;

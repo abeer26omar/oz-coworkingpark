@@ -54,6 +54,8 @@ import Error404 from './pages/Error404';
 import SiteMap from "./components/SiteMap&Faq/SiteMap";
 import Faq from "./components/SiteMap&Faq/Faq";
 import ServiceDetails from './components/Talent Market/ServiceDetails';
+import DMChat from './components/Talent Market/DMChat';
+import Spaces from './pages/Spaces';
 function App() {
     const router = createBrowserRouter([
       {
@@ -91,6 +93,7 @@ function App() {
           { path:'newpassword', element: <NewPassword />},
           { path:'membership', element: <Membership />},  
           { path:'membership/:id', element: <MembershipOptions />},
+          { path:'spaces', element: <Spaces />},
           { path:'singleMember/:id', element: <MemberPackage />},
           { path:'community', element: <Community />},
           { path:'community/events', element: <CommunityEventsExplore />},
@@ -111,7 +114,8 @@ function App() {
           { path:'amenities', element: <Amenities />},
           { path:'talentmarket', element: <TalentMarket />},
           { path:'projectDetails/:id', element: <ServiceDetails />},
-          { path:'addService', element: <AddService />}
+          { path:'addService', element: <AddService />},
+          { path:'dmchat', element: <DMChat />},
         ]}
     ]);
     const queryClient = new QueryClient();

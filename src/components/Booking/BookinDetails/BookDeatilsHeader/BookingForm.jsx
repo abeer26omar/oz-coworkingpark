@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useContext} from 'react';
 import "react-datepicker/dist/react-datepicker.css";
 import './BookingForm.css'
 import DatePicker from "react-datepicker";
@@ -7,7 +7,10 @@ import Button from '../../../UI/Button';
 import RequestFormModal from '../../../Auth/LoginAlertModal';
 import { Tooltip } from 'react-bootstrap';
 import Overlay from 'react-bootstrap/Overlay';
-import Toast from 'react-bootstrap/Toast'
+import Toast from 'react-bootstrap/Toast';
+import {checkAvailability} from '../../../../apis/Booking';
+import { AuthContext } from '../../../../apis/context/AuthTokenContext';
+import ShowAvaliablesModal from './ShowAvaliablesModal';
 
 const BookingForm = ({venueDetails, token}) => {
     const [startDate, setStartDate] = useState(null);
@@ -19,8 +22,11 @@ const BookingForm = ({venueDetails, token}) => {
     const [showTooltip, setShowTooltip] = useState(false);
     const [counter, setCounter] = useState(0);
     const [initialCount, setInitialCount] = useState(0);
+    const [avaliableDate, setAvaliableDates] = useState([]);
+    const [showAvailable, setShowAvailable] = useState(false);
     const navigate = useNavigate();
     const target = useRef(null);
+    const { userId } = useContext(AuthContext)
 
     const handleDateChange = (date) => {
         setStartDate(date);
@@ -74,29 +80,46 @@ const BookingForm = ({venueDetails, token}) => {
         setCounter(initialCount);
     };
 
-    const handelHide = ()=> setShow(false);
+    const handelHide = () => setShow(false);
+    const handelAvailableHide = () => setShowAvailable(false);
 
-    const saveBookingData = (e)=>{
+    const saveBookingData = async (e)=>{
         e.preventDefault();
-        if((counter !== null && counter !== 0) && (startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
-            const bookingData = {
-                date: startDate,
-                time: {
-                    start: selectedStartTime,
-                    end: selectedEndTime
-                },
-                numberOfPeople: counter,
-                spaceDetails: venueDetails,
-                services: JSON.parse(sessionStorage.getItem("BookingOZServices"))
-            }
-            if(token){
-                navigate('/bookingDetails/bookNow')
+        try{
+            if((counter !== null && counter !== 0) && (startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
+                
+                if(token){
+                    const dateObject = new Date(startDate);
+                    const formattedDate = dateObject.toISOString().substring(0, 10);
+                    const timeStartStamp = Math.floor(new Date(selectedStartTime).getTime() / 1000);
+                    const timeEndStamp = Math.floor(new Date(selectedEndTime).getTime() / 1000);
+                    const result = await checkAvailability(token, userId, venueDetails.id, venueDetails.buffering_time, formattedDate, timeStartStamp, timeEndStamp);
+                    if(result.conflict.length === 0){
+                        const bookingData = {
+                            date: startDate,
+                            time: {
+                                start: selectedStartTime,
+                                end: selectedEndTime
+                            },
+                            numberOfPeople: counter,
+                            spaceDetails: venueDetails,
+                            services: JSON.parse(sessionStorage.getItem("BookingOZServices"))
+                        }
+
+                        navigate('/bookingDetails/bookNow');
+                        sessionStorage.setItem("BookingOZDetails", JSON.stringify(bookingData));
+                    }else{
+                        setShowAvailable(true);
+                        setAvaliableDates(result.available);
+                    }
+                }else{
+                    setShow(true);
+                }
             }else{
-                setShow(true);
+                setShowToast(true)
             }
-            sessionStorage.setItem("BookingOZDetails", JSON.stringify(bookingData));
-        }else{
-            setShowToast(true)
+        }catch (error){
+
         }
     }
     useEffect(()=>{
@@ -107,7 +130,8 @@ const BookingForm = ({venueDetails, token}) => {
             setSelectedEndTime(new Date(data.time.end));
             setCounter(data.numberOfPeople);
         }
-    },[])
+    },[]);
+
     return (
         <>
             <div className="featured__bookbottom align-self-end col-12" style={{
@@ -313,6 +337,10 @@ const BookingForm = ({venueDetails, token}) => {
             <RequestFormModal 
                 show={show}
                 handleClose={handelHide}/>
+            <ShowAvaliablesModal 
+                show={showAvailable}
+                handleClose={handelAvailableHide}
+                avaliableDate={avaliableDate}/>
         </>
     );
 };

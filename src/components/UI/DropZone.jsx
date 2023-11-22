@@ -84,6 +84,7 @@ const Previews = ({getImages}) => {
         'image/jpg': [],
         'image/png': [],
     },
+    maxFiles:1,
     onDrop: acceptedFiles => {
       setFiles(acceptedFiles.map(file => Object.assign(file, {
         preview: URL.createObjectURL(file)
@@ -122,7 +123,7 @@ const Previews = ({getImages}) => {
   ]);
 
   return (
-    <section className="container">
+    <section className="container-fluid">
       <div {...getRootProps({className: 'dropzone'})} style={style}>
         <input {...getInputProps()} />
         <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" fill="none">

@@ -156,12 +156,14 @@ const Header = ({showBlackNav}) => {
                                                 <li>
                                                     <Button 
                                                         className='p-0'
-                                                        tagType='link'>Membership</Button>
+                                                        tagType='link'
+                                                        to={'/membership'}>Membership</Button>
                                                 </li>
                                                 <li>
                                                     <Button 
                                                         className='p-0'
-                                                        tagType='link'>Spaces</Button></li>                                        
+                                                        tagType='link'
+                                                        to={'/spaces'}>Spaces</Button></li>                                        
                                             </ul>
                                     </li>
                                         <li className="drop_event border-dropdown"><Button 

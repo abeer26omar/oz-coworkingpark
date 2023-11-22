@@ -7,7 +7,7 @@ import { filterProducts } from '../../apis/Market';
 
 const MarketFilter = ({isOpen, getFilteredData, seacrch_text}) => {
 
-    const { token, userId } = useContext(AuthContext);
+    const { token, userId, branch_id } = useContext(AuthContext);
     const [services, setServices] = useState([]);
     const [prices, setPrices] = useState([]);
     const [swalProps, setSwalProps] = useState({});
