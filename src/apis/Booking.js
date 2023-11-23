@@ -179,9 +179,11 @@ export const confirmBooking = async (token,
     formData.append('date_time', date_time);
     formData.append('check_in', check_in);
     formData.append('check_out', check_out);
-    services.forEach(service => {
-        formData.append('service[]', service.value);
-    });
+    if(services){
+        services.forEach(service => {
+            formData.append('service[]', service.value);
+        });
+    }
 
     const config = {
         method: 'post',

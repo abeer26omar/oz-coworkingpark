@@ -138,7 +138,8 @@ const BookingSummary = () => {
 
     },[bookingData]);
 
-    const confirmBookingVenue = () => {
+    const confirmBookingVenue = (event) => {
+        event.preventDefault();
         const service_price = bookingService && bookingService.reduce((total, service) => {
             return total + service.price;
           }, 0);
@@ -307,7 +308,7 @@ const BookingSummary = () => {
                                                                 </CopyToClipboard>
                                                                 <Overlay target={target.current} show={showTooltip} placement="right">
                                                                     {(props) => (
-                                                                    <Tooltip id="overlay-example" {...props}>
+                                                                    <Tooltip id="overlay-example-2" {...props}>
                                                                         {`link copied !`}
                                                                     </Tooltip>
                                                                     )}
@@ -330,7 +331,7 @@ const BookingSummary = () => {
                                             </div>
                                             <div className="step-one">
                                                 <button className="btn button-outLine btn-bg-white"
-                                                        onClick={confirmBookingVenue}>Booking
+                                                        onClick={handleBookingClick}>Booking
                                                 </button>
                                             </div>
 
@@ -376,7 +377,7 @@ const BookingSummary = () => {
                                                                 </div>
                                                                 <div className="step-one">
                                                                     <button className="btn button-outLine btn-bg-white"
-                                                                            onClick={handleBookingClick}>Confirm
+                                                                            onClick={confirmBookingVenue}>Confirm
                                                                     </button>
                                                                 </div>
                                                             </Form>

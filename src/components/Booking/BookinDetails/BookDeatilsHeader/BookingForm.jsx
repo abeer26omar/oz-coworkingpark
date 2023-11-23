@@ -86,7 +86,7 @@ const BookingForm = ({venueDetails, token}) => {
     const saveBookingData = async (e)=>{
         e.preventDefault();
         try{
-            if((counter !== null && counter !== 0) && (startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
+            if((startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
                 
                 if(token){
                     const dateObject = new Date(startDate);
@@ -172,7 +172,7 @@ const BookingForm = ({venueDetails, token}) => {
                                         )}
                                     </Overlay>
 
-                                    {isOpen && (
+                                    {/* {isOpen && (
                                         <div className='counter-container'>
                                             <span onClick={closeSelectGuest}>Number of People ✖</span>
                                             <button className="decrement-btn" onClick={decrement}>-
@@ -181,7 +181,7 @@ const BookingForm = ({venueDetails, token}) => {
                                             <button onClick={increment}>+
                                             </button>
                                         </div>
-                                    )}
+                                    )} */}
                                 </div>
                             </li>
 
@@ -339,7 +339,7 @@ const BookingForm = ({venueDetails, token}) => {
                 handleClose={handelHide}/>
             <ShowAvaliablesModal 
                 show={showAvailable}
-                handleClose={handelAvailableHide}
+                onHide={handelAvailableHide}
                 avaliableDate={avaliableDate}/>
         </>
     );
