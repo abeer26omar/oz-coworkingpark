@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { DataProvider } from '../apis/context/SiteDataContext';
 import ScrollToTop from "../ScrollToTop";
@@ -6,7 +7,7 @@ import Footer from "../components/Footer/Footer";
 import FooterAuth from '../components/Footer/FooterAuth';
 import { SiteConfigProvider } from '../apis/context/SiteConfigContext';
 import { AuthProvider } from '../apis/context/AuthTokenContext';
-import { useEffect } from "react";
+import Notification from '../components/UI/Notification';
 
 const RootLayout = ()=>{
     const location = useLocation();
@@ -33,6 +34,7 @@ const RootLayout = ()=>{
         <AuthProvider>
             <DataProvider>
                 <ScrollToTop/>
+                    <Notification />
                     <SiteConfigProvider>
                         <Header 
                             className="navbar"

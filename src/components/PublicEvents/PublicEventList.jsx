@@ -68,9 +68,8 @@ const PublicEventList = ({}) => {
 
     return (
         <>
-        {console.log(eventsData)}
             <div className="col-lg-12">
-                {/* <Slider {...settings} className="home-events">
+                <Slider {...settings} className="home-events">
                     {eventsData && eventsData.map((event, index) => {
                             return (
                                 <>
@@ -93,7 +92,7 @@ const PublicEventList = ({}) => {
                                 </>
                             );
                     })}
-                </Slider> */}
+                </Slider>
             </div>
         </>
     );
