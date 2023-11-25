@@ -1,9 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import {FieldArray, Formik} from 'formik';
+import {Formik} from 'formik';
 import * as Yup from "yup";
-import nameLabel from '../../../../assets/images/icons/User Id.png';
-import emailLabel from '../../../../assets/images/icons/Mail.png';
-import mobileLabel from '../../../../assets/images/icons/Smartphone 2.png';
 import genderLabel from '../../../../assets/images/icons/Male.png';
 import birthdayLabel from '../../../../assets/images/icons/Calendar Mark.png';
 import jobLabel from '../../../../assets/images/icons/Case.png';
@@ -23,28 +20,18 @@ import '../PersonalContent.css';
 import { getUserInfo, updateUserInfo, RequestUpdateUserInfo, getInterests, getHobbies } from '../../../../apis/User';
 import SweetAlert2 from 'react-sweetalert2';
 import { SiteConfigContext } from '../../../../apis/context/SiteConfigContext';
-import Button from '../../../UI/Button';
 import Select from 'react-select';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
+import {DisableContext} from '../../../../apis/context/DisableStateContext';
+import RequestChangeName from './RequestChangeName';
+import RequestChangeEmail from './RequestChangeEmail';
+import RequestChangePhone from './RequestChangePhone';
 
 const PersonalData = () => {
 
     const [userInfo, setUserInfo] = useState({});
     const [custom, setCustom] = useState({});
-
-    // const asignPrevInterestsDate = ()=>{
-    //     if (custom) {
-    //         const array = custom.fid_12.split(',').map(item => item.trim());
-    //         return array.map((item, index) => {
-    //           return { value: item, label: item };
-    //         });
-    //       }
-    //     return [];
-    // }
     const [disabled, setDisabled] = useState(true);
-    const [disabledName, setDisabledName] = useState(true);
-    const [disabledEmail, setDisabledEmail] = useState(true);
-    const [disabledPhone, setDisabledPhone] = useState(true);
     const [hobbiesList, setHobbiesList] = useState([]);
     const [interestsList, setInterestsList] = useState([]);
     const [focus, setFocused] = useState(false);
@@ -53,7 +40,7 @@ const PersonalData = () => {
     const { token, userId } = useContext(AuthContext);
     const [selectedInterests, setSelectedInterests] = useState();
     const [selectedHobbies, setSelectedHobbies] = useState(custom ? [custom?.fid_11] : [""]);
-
+    const { restState, image } = useContext(DisableContext);
 
     useEffect(()=>{
         const controller = new AbortController();
@@ -62,11 +49,7 @@ const PersonalData = () => {
         getUserInfo(token, userId, signal).then(res=>{
             setUserInfo(res['user_data']);
             setCustom(res['custom']);
-            const userInfoDataOZ = {
-                name: res['user_data'].name,
-                email: res['user_data'].email,
-                avatar: res['user_data'].avatar}
-            sessionStorage.setItem('userInfoDataOZ', JSON.stringify(userInfoDataOZ))
+            
         }).catch(err=>{console.log(err)});
 
         return ()=>controller.abort();
@@ -119,36 +102,11 @@ const PersonalData = () => {
         }
     };
 
-    const requestUpdateData = async (key, old_value, new_value) => {
-        try {
-            const result = await RequestUpdateUserInfo(key, old_value, new_value);
-            setSwalProps({
-                show: true,
-                icon: 'success',
-                title: result.status,
-                text: result.message,
-                showConfirmButton: false,
-                timer: 1500
-            });
-            setDisabledName(true);
-            setDisabledEmail(true);
-            setDisabledPhone(true);
-        } catch (error) {
-            setSwalProps({
-                show: true,
-                icon: 'error',
-                title: error.response.data.status,
-                text: error.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
-            });
-        }
-    };
-
     return (
         <>
             <Formik 
                 initialValues={{
+                    avatar: image,
                     gender: userInfo ? userInfo.gender : '',
                     birthday: userInfo ? userInfo.birthday : '',
                     language: userInfo ? userInfo.language : '',
@@ -163,9 +121,6 @@ const PersonalData = () => {
                     hobbies: custom ? [custom.fid_11] : [""],
                     interest: custom ? [custom.fid_12] : [""],
                 }}
-                validationSchema={Yup.object().shape({
-                    email: Yup.string().email('Please Enter A valid Email Address')
-                })}
                 onSubmit={async (values) => {
                     await new Promise((r) => setTimeout(r, 500));
                     updateData(values);
@@ -183,179 +138,25 @@ const PersonalData = () => {
                     } = props;
                     return (
                         <div className="container py-4 px-5">
-                            <div className="row align-items-center profile-edit">
-                                <div className="col-lg-12">
-                                    <div className="head-form">
-                                        <h2>Personal data</h2>
-                                    </div>
-                                </div>
-                                <div className="col-lg-6">
-                                    <Formik
-                                        initialValues={{
-                                            name: userInfo ? userInfo.name : '',
-                                        }}
-                                        onSubmit={async (values) => {
-                                            await new Promise((r) => setTimeout(r, 500));
-                                            requestUpdateData('name', userInfo.name, values.name)
-                                        }}
-                                        enableReinitialize>
-                                            {({ 
-                                                values, 
-                                                handleChange,
-                                                handleBlur,
-                                                handleSubmit }) => (
-                                                <form className="profile-edit" onSubmit={handleSubmit}>
-                                                    <div className="form__group field my-3">
-                                                        <label htmlFor="name"
-                                                            className="form__label d-flex align-items-center justify-content-start">
-                                                            {disabledName && <img src={nameLabel} alt="name" className="me-2"/>}
-                                                            Name
-                                                        </label>
-                                                        <div className='input-group'>
-                                                            <input 
-                                                                id="name" 
-                                                                placeholder="Name" 
-                                                                className="form-control form__field" 
-                                                                type='text'
-                                                                disabled={disabledName}
-                                                                value={values.name}
-                                                                onChange={handleChange}
-                                                                onBlur={handleBlur}
-                                                            />
-                                                            {disabledName && <Button
-                                                                tagType='link'
-                                                                className="p-0 input-group-text" 
-                                                                id="inputGroupPrepend2"
-                                                                onClick={()=>{setDisabledName(!disabledName)}}>
-                                                                <img src={editProfile} alt='editIcon'/>
-                                                            </Button>}
-                                                            {!disabledName && <Button
-                                                                tagType='button'
-                                                                type='submit'
-                                                                className="p-0 input-group-text" 
-                                                                id="inputGroupPrepend2">
-                                                                <img src={submit_mark} alt='editIcon'/>
-                                                            </Button>}
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            )}
-                                    </Formik>
-                                </div>
-                                <div className="col-lg-6">
-                                    <Formik
-                                        initialValues={{
-                                            email: userInfo ? userInfo.email : '',
-                                        }}
-                                        onSubmit={async (values) => {
-                                            await new Promise((r) => setTimeout(r, 500));
-                                            requestUpdateData('email', userInfo.email, values.email)
-                                        }}
-                                        enableReinitialize>
-                                            {({ 
-                                                values, 
-                                                handleChange,
-                                                handleBlur,
-                                                handleSubmit }) => (
-                                                <form className="profile-edit" onSubmit={handleSubmit}>
-                                                    <div className="form__group field my-3">
-                                                        <label htmlFor="email"
-                                                            className="form__label d-flex align-items-center justify-content-start">
-                                                            {disabled && <img src={emailLabel} alt="email" className="me-2"/>}
-                                                            E-Mail Address
-                                                        </label>
-                                                        <div className='input-group'>
-                                                            <input 
-                                                                id="email" 
-                                                                placeholder="Email Address" 
-                                                                className="form-control form__field" 
-                                                                type='text'
-                                                                disabled={disabledEmail}
-                                                                value={values.email}
-                                                                onChange={handleChange}
-                                                                onBlur={handleBlur}
-                                                            />
-                                                            {disabledEmail && <Button
-                                                                tagType='link'
-                                                                className="p-0 input-group-text" 
-                                                                id="inputGroupPrepend2"
-                                                                onClick={()=>{setDisabledEmail(!disabledEmail)}}>
-                                                                <img src={editProfile} alt='editIcon'/>
-                                                            </Button>}
-                                                            {!disabledEmail && <Button
-                                                                tagType='button'
-                                                                type='submit'
-                                                                className="p-0 input-group-text" 
-                                                                id="inputGroupPrepend2">
-                                                                <img src={submit_mark} alt='editIcon'/>
-                                                            </Button>}
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            )}
-                                    </Formik>
-                                </div>
-                                <div className="col-lg-6">
-                                    <Formik
-                                        initialValues={{
-                                            phone: userInfo ? userInfo.phone_number : '',
-                                        }}
-                                        onSubmit={async (values) => {
-                                            await new Promise((r) => setTimeout(r, 500));
-                                            requestUpdateData('phone', userInfo.phone_number, values.phone)
-                                        }}
-                                        enableReinitialize>
-                                            {({ 
-                                                values, 
-                                                handleChange,
-                                                handleBlur,
-                                                handleSubmit }) => (
-                                                <form className="profile-edit" onSubmit={handleSubmit}>
-                                                    <div className="form__group field my-3">
-                                                        <label htmlFor="phone"
-                                                            className="form__label d-flex align-items-center justify-content-start">
-                                                            {disabled && <img src={mobileLabel} alt="name" className="me-2"/>}
-                                                            Mobile Number
-                                                        </label>
-                                                        <div className='input-group'>
-                                                            <input 
-                                                                id="phone" 
-                                                                placeholder="Phone No." 
-                                                                className="form-control form__field" 
-                                                                type='number'
-                                                                disabled={disabledPhone}
-                                                                value={values.phone}
-                                                                onChange={handleChange}
-                                                                onBlur={handleBlur}
-                                                            />
-                                                            {disabledPhone && <Button
-                                                                tagType='link'
-                                                                className="p-0 input-group-text" 
-                                                                id="inputGroupPrepend2"
-                                                                onClick={()=>{setDisabledPhone(!disabledPhone)}}>
-                                                                <img src={editProfile} alt='editIcon'/>
-                                                            </Button>}
-                                                            {!disabledPhone && <Button
-                                                                tagType='button'
-                                                                type='submit'
-                                                                className="p-0 input-group-text" 
-                                                                id="inputGroupPrepend2">
-                                                                <img src={submit_mark} alt='editIcon'/>
-                                                            </Button>}
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            )}
-                                    </Formik>
-                                </div>
-                            </div>
                             <form className="profile-edit mb-5" onSubmit={handleSubmit}>
                                 <div className="row align-items-center">
                                     <div className="col-lg-12">
                                         <div className="head-form">
-                                            <h2>Other Data</h2>
+                                            <h2>Personal data</h2>
                                         </div>
                                     </div>
+                                    <div className="col-lg-6">
+                                        <RequestChangeName prevName={userInfo.name} />
+                                    </div>
+
+                                    <div className="col-lg-6">
+                                        <RequestChangeEmail prevEmail={userInfo.email} />
+                                    </div>
+
+                                    <div className="col-lg-6">
+                                        <RequestChangePhone prevPhone={userInfo.phone_number}/>
+                                    </div>
+
                                     <div className="col-lg-6">
                                         <div className="form__group field my-3">
                                             <label htmlFor="gender"
@@ -396,6 +197,7 @@ const PersonalData = () => {
                                                 disabled={disabled}/>
                                         </div>
                                     </div>
+
                                     <div className="col-lg-6">
                                         <div className="form__group field my-3">
                                             <label htmlFor="jobTitle"
@@ -709,7 +511,7 @@ const PersonalData = () => {
                                             <button 
                                                 type="button" 
                                                 className="btn btn_outline_black btn_default"
-                                                onClick={() => setDisabled(!disabled)}>
+                                                onClick={() => {setDisabled(!disabled); restState(disabled)}}>
                                                 {disabled ? (
                                                         <>
                                                             Edit Profile
@@ -726,7 +528,7 @@ const PersonalData = () => {
                                                 className="btn btn_default btn_outline_black ms-3">
                                                     save
                                             </button>
-                                    }
+                                        }
                                     </div>
                                 </div>
                             </form>

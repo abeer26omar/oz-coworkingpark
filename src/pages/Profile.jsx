@@ -1,13 +1,15 @@
 import ProfileHeader from "../components/Profile/ProfileHeader/ProfileHeader";
 import ProfileTabs from "../components/Profile/ProfileTabs/ProfileTabs";
-
+import {DisableProvider} from '../apis/context/DisableStateContext';
 
 const Profile = () => {
     
     return (
         <>
-            <ProfileHeader />
-            <ProfileTabs />
+            <DisableProvider >
+                <ProfileHeader />
+                <ProfileTabs />
+            </DisableProvider>
         </>
     );
 };
