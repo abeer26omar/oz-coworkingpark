@@ -113,3 +113,88 @@ export const createProject = async (token,
         
     return response.data.data;
 };
+
+export const getClientMessages = async (token, 
+    userId,
+    type,
+    page_id,
+    recipient_id) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('user_id', userId);
+    formData.append('type', type);
+    formData.append('page_id', page_id);
+    formData.append('recipient_id', recipient_id);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/page_chat?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const getChatList = async (token, type) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('type', type);
+    
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/page_chat?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const blockUser = async (token, action, user_id) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('block_action', action);
+    formData.append('user_id', user_id)
+    
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/block-user?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const reportUser = async (token, user_id, text) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('user_id', user_id)
+    formData.append('text', text);
+    
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/report_user?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};

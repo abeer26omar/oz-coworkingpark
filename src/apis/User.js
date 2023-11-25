@@ -103,7 +103,7 @@ const response = await axios(config);
 return response.data.data;
 };
 
-export const RequestUpdateUserInfo = async (key, old_value, new_value) => {
+export const RequestUpdateUserInfo = async (key, old_value, new_value, otp) => {
 
     const token = sessionStorage.getItem('TokenOZ');
     const formData = new FormData();
@@ -111,6 +111,9 @@ export const RequestUpdateUserInfo = async (key, old_value, new_value) => {
         formData.append('key', key);
         formData.append('old_value', old_value);
         formData.append('new_value', new_value);
+        if(otp){
+            formData.append('otp', otp);
+        }
 
     const config = {
         method: 'post',
@@ -192,6 +195,44 @@ export const getSingleItemById = async (token, type, id, source) => {
         maxBodyLength: Infinity,
         cancelToken: source.token,
 
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const ContactUs = async (userId, subject, message) => {
+        
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/contact_us`,
+        data: {
+            "user_id": userId,
+            "subject": subject,
+            "message": message
+        },
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const getNotificationList = async (token, type) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('type', type);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/list_notifications?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
     };
 
     const response = await axios(config);

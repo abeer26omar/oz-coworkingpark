@@ -6,7 +6,7 @@ const SiteConfigContext = createContext();
 
 const SiteConfigProvider = ({ children }) => {
 
-  const [siteConfig, setSiteConfig] = useState({});
+  const [siteConfig, setSiteConfig] = useState();
 
   const fetchSiteConfig = async () => {
     const formData = new FormData();

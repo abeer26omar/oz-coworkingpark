@@ -56,6 +56,8 @@ import Faq from "./components/SiteMap&Faq/Faq";
 import ServiceDetails from './components/Talent Market/ServiceDetails';
 import DMChat from './components/Talent Market/DMChat';
 import Spaces from './pages/Spaces';
+import ContactAdmin from './components/ContactAdmin/ContactAdmin';
+
 function App() {
     const router = createBrowserRouter([
       {
@@ -93,8 +95,8 @@ function App() {
           { path:'newpassword', element: <NewPassword />},
           { path:'membership', element: <Membership />},  
           { path:'membership/:id', element: <MembershipOptions />},
-          { path:'spaces', element: <Spaces />},
           { path:'singleMember/:id', element: <MemberPackage />},
+          { path:'spaces', element: <Spaces />},
           { path:'community', element: <Community />},
           { path:'community/events', element: <CommunityEventsExplore />},
           { path:'events/communityEventsDetails/:id', element: <CommunityEventsDetails />},
@@ -115,7 +117,8 @@ function App() {
           { path:'talentmarket', element: <TalentMarket />},
           { path:'projectDetails/:id', element: <ServiceDetails />},
           { path:'addService', element: <AddService />},
-          { path:'dmchat', element: <DMChat />},
+          { path:'dmchat/:project/:user', element: <DMChat />},
+          { path:'contactadmin', element: <ContactAdmin />},
         ]}
     ]);
     const queryClient = new QueryClient();

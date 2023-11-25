@@ -240,3 +240,26 @@ export const cancelBooking = async (token, UserId, booking_id, reasons_id, answe
         
     return response.data.data;
 };
+
+export const rateBooking = async (token, userId, booking_id, venueId, rate, message) => {
+        
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('user_id', userId);
+    formData.append('reservation_id', booking_id);
+    formData.append('venue_id', venueId);
+    formData.append('rating', rate);
+    formData.append('message', message);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/booking_rates?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};

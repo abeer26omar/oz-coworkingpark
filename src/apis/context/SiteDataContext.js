@@ -37,8 +37,12 @@ const  DataProvider = ({children})=>{
         return matchingItems;
     };
 
+    const ResetPageName = (page) => {
+        setPageName(page)
+    }
+
     return(
-        <DataContext.Provider value ={{config, data, getComponentValue }}>
+        <DataContext.Provider value ={{config, data, ResetPageName, getComponentValue }}>
             {children}
         </DataContext.Provider>
         )
