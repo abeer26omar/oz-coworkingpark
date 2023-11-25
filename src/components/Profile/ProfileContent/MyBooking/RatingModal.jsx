@@ -5,8 +5,11 @@ import { useState } from 'react';
 import ReactStars from "react-rating-stars-component";
 
 const RatingModal = (props)=>{
+
+    [rating, setRate] = useState();
+    
     const ratingChanged = (newRating) => {
-        console.log(newRating);
+        setRate(newRating);
     };
     return (
         <>

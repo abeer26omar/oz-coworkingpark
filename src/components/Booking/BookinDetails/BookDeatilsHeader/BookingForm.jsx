@@ -29,7 +29,8 @@ const BookingForm = ({venueDetails, token}) => {
     const { userId } = useContext(AuthContext)
 
     const handleDateChange = (date) => {
-        setStartDate(date);
+        const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+        setStartDate(utcDate);
     };
 
     const handleStartTimeChange = (startTime) => {
@@ -61,6 +62,7 @@ const BookingForm = ({venueDetails, token}) => {
    
     const increment = (event) => {
         event.preventDefault();
+        event.stopPropagation();
         if(counter < venueDetails.capacity){
             setCounter(counter + 1)
         }else{
@@ -70,6 +72,7 @@ const BookingForm = ({venueDetails, token}) => {
 
     const decrement = (event) => {
         event.preventDefault();
+        event.stopPropagation();
         if (counter > 1) {
             setCounter((prevCount) => prevCount - 1);
         }
@@ -87,12 +90,15 @@ const BookingForm = ({venueDetails, token}) => {
         e.preventDefault();
         try{
             if((startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
-                
                 if(token){
                     const dateObject = new Date(startDate);
                     const formattedDate = dateObject.toISOString().substring(0, 10);
-                    const timeStartStamp = Math.floor(new Date(selectedStartTime).getTime() / 1000);
-                    const timeEndStamp = Math.floor(new Date(selectedEndTime).getTime() / 1000);
+                    const timeStart = new Date(selectedStartTime);
+                    const timeStartStamp = Math.floor(timeStart.getTime() / 1000);
+                    const timeEnd = new Date(selectedEndTime);
+                    const timeEndStamp = Math.floor(timeEnd.getTime() / 1000);
+                    // const  = Math.floor(new Date(selectedStartTime).getTime() / 1000);
+                    // const timeEndStamp = Math.floor(new Date(selectedEndTime).getTime() / 1000);
                     const result = await checkAvailability(token, userId, venueDetails.id, venueDetails.buffering_time, formattedDate, timeStartStamp, timeEndStamp);
                     if(result.conflict.length === 0){
                         const bookingData = {
@@ -121,7 +127,8 @@ const BookingForm = ({venueDetails, token}) => {
         }catch (error){
 
         }
-    }
+    };
+
     useEffect(()=>{
         const data = JSON.parse(sessionStorage.getItem("BookingOZDetails"));
         if(data){
@@ -157,31 +164,27 @@ const BookingForm = ({venueDetails, token}) => {
                             </li>
                             <li className="bookbottom__li bookbottom__li--select bookbottom__li--select-guests">
                                 <div className="bookbottom__select position-relative">
-                                    <button 
-                                        className="button-select-guest" 
-                                        onClick={openSelectGuest} style={{
-                                        cursor: 'pointer'
-                                    }} ref={target}>
-                                        {(counter !== null && counter !== 0) ? `${counter} persons` : "Number of People"}
-                                    </button>
-                                    <Overlay target={target.current} show={showTooltip} placement="right">
-                                        {(props) => (
-                                        <Tooltip id="overlay-example" {...props}>
-                                            {`Max Room Capacity is ${venueDetails.capacity}`}
-                                        </Tooltip>
-                                        )}
-                                    </Overlay>
-
-                                    {/* {isOpen && (
-                                        <div className='counter-container'>
-                                            <span onClick={closeSelectGuest}>Number of People ✖</span>
-                                            <button className="decrement-btn" onClick={decrement}>-
-                                            </button>
-                                            <p className="counter-number">{counter}</p>
-                                            <button onClick={increment}>+
-                                            </button>
-                                        </div>
-                                    )} */}
+                                    <div class="btn-group">
+                                        <button class="btn button-select-guest dropdown-toggle dropup" 
+                                            type="button" id="dropdownMenuButton" 
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            {(counter !== null && counter !== 0) ? `${counter} persons` : "Number of People"}
+                                        </button>
+                                        
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{
+                                            backgroundColor: 'transparent',
+                                            border: 'none'
+                                        }}>
+                                            <div className='counter-container'>
+                                                <span>{`Max Room Capacity is ${venueDetails.capacity}`}</span>
+                                                <button className="decrement-btn" onClick={decrement}>-
+                                                </button>
+                                                <p className="counter-number">{counter}</p>
+                                                <button onClick={increment}>+
+                                                </button>
+                                            </div>
+                                        </ul>
+                                    </div>
                                 </div>
                             </li>
 

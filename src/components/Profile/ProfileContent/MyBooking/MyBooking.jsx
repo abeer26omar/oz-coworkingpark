@@ -38,8 +38,8 @@ const MyBooking = ()=>{
         }
     },[data]);
 
-    const setDate = (roodate)=>{
-        const dateParts = roodate.split(/[- :]/);
+    const setDate = (roomdate)=>{
+        const dateParts = roomdate.split(/[- :]/);
         const date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], dateParts[3], dateParts[4], dateParts[5]);
         const optionsDay = { day: '2-digit' };
         const optionsMonth = { month: 'short' }
@@ -104,7 +104,7 @@ const MyBooking = ()=>{
                                             </div>
                                             <div className='col-lg-2 col-md-4 col-12 d-flex justify-content-end'>
                                                 <div className='event_time'>
-                                                    {setDate(item.created_formmated)}
+                                                    {setDate(item.check_in_formmated)}
                                                 </div>
                                             </div>
                                         </div>
