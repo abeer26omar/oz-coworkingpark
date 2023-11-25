@@ -11,6 +11,7 @@
     text-transform: capitalize;
     display: inline-block;
     text-align: center;
+    color: black;
 }
 
 .btn_outline{
@@ -194,6 +195,16 @@
     font-weight: 400;
     line-height: 130%;
     text-decoration: underline;
+}
+.edit_photo{
+    color: #000;
+    font-family: Couture;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    text-decoration: underline;
+    cursor: pointer;
 }
 /* Media Query */
 @media screen and (max-width: 575px) {

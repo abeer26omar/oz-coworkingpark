@@ -11,18 +11,21 @@ import Notification from '../components/UI/Notification';
 
 const RootLayout = ()=>{
     const location = useLocation();
+
     const isGalleryRoute = location.pathname === '/community/galleryshow';
-    const isLimitedRoute = location.pathname === '/limited';
     const isAboutRoute = location.pathname === '/about';
     const isAmenitiesRoute = location.pathname === '/amenities';
+    const isSingleMemberRoute = location.pathname.includes('/singleMember');
+
     const AuthRoutes = location.pathname === '/login' || 
         location.pathname === '/contactus' || 
         location.pathname === '/joinus' || 
         location.pathname === '/register' || 
-        location.pathname === '/forgetpass';
+        location.pathname === '/forgetpass' || 
+        location.pathname === '/contactadmin';
 
         useEffect(()=>{
-            if(isGalleryRoute || isLimitedRoute || isAboutRoute || isAmenitiesRoute){
+            if(isGalleryRoute || isAboutRoute || isAmenitiesRoute || isSingleMemberRoute){
                 document.body.classList.add('body_dark');
             }
             return ()=>{
@@ -38,7 +41,7 @@ const RootLayout = ()=>{
                     <SiteConfigProvider>
                         <Header 
                             className="navbar"
-                            showBlackNav={isGalleryRoute || isLimitedRoute || isAboutRoute || isAmenitiesRoute}
+                            showBlackNav={isGalleryRoute || isAboutRoute || isAmenitiesRoute || isSingleMemberRoute}
                         />
                         <Outlet />
                         {!AuthRoutes && <Footer />}

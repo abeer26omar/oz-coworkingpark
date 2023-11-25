@@ -135,10 +135,13 @@
 .list_block{
     list-style: none;
     background: #F0F2F4;
-position: absolute;
-right: 65px;
-top: 65px;
-display: none;
+    position: absolute;
+    right: 65px;
+    top: 65px;
+    display: none;
+    border: none;
+    border-radius: 0px;
+    min-width: 200px;
 }
 .list_block.unblock{
     display: block;

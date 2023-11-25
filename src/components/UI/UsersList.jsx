@@ -1,6 +1,6 @@
 import React from 'react'
 import Paragraph from './Paragraph';
-const Massages = (props) => {
+const UsersList = (props) => {
   return (
     <>
       <div className="massage_1 my-4 d-flex" onClick={props.onClick}>
@@ -16,4 +16,4 @@ const Massages = (props) => {
   );
 }
 
-export default Massages
+export default UsersList
