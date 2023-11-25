@@ -8,21 +8,32 @@ import N_1 from '../../../assets/images/n-1.svg';
 import N_2 from '../../../assets/images/n-2.svg';
 import N_3 from '../../../assets/images/n-3.svg';
 import { useState , useContext, useEffect } from 'react';
+import {Tab, Nav} from 'react-bootstrap';
 import { Logout } from '../../../apis/AuthApi';
 import Button from '../../UI/Button';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
+import { getNotificationList } from '../../../apis/User';
 
 const LogedNav = ({showBlackNav, token})=>{
 
     const [Open , SetOpen] = useState(false);
     const [mark , setmark] = useState("All");
-    
+    const [activeTab, setActiveTab] = useState('all');
+    const [notification, setNotification] = useState([]);
+
+
     const handProp = (e)=>{
         e.stopPropagation()
     }
     const handleMark = (name )=>{
         setmark(name)
-    }
+    };
+
+    const handleTabClick = (key) => {
+        setActiveTab(key);
+        getList();
+    };
+
     const { handleLogout, userProfileDate } = useContext(AuthContext);
 
     const handelLogout = async () => {
@@ -34,6 +45,52 @@ const LogedNav = ({showBlackNav, token})=>{
             handleLogout();
         }
     };
+
+    const getList = async () => {
+        try{
+            const result = await getNotificationList(token, activeTab);
+            setNotification(result);
+        }catch(error){
+            console.log(error);
+        }
+    };
+
+    const setDay = (roomdate) => {
+        const parts = roomdate.split(/[- :]/);
+
+        const year = parseInt(parts[0]);
+        const month = parseInt(parts[1]);
+        const day = parseInt(parts[2]);
+        const hour = parseInt(parts[3]);
+        const minute = parseInt(parts[4]);
+
+        const date = new Date(year, month - 1, day, hour, minute);
+
+        const dayFormated = {
+            weekday: 'long'
+        };
+        const formattedDay = date.toLocaleTimeString('en-US', dayFormated);
+
+        const timeFormatOptions = {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true,
+        };
+
+        const formattedTime = date.toLocaleTimeString('en-US', timeFormatOptions);
+        return (
+            <>
+              <span className='mb-0 text-center me-2'>{formattedDay.split(' ')[0]}</span> 
+                at
+              <span className='mb-0 text-center ms-2'>{formattedTime}</span> 
+            </>
+        );
+    }
+
+
+    useEffect(()=>{
+        getList();
+    },[token, activeTab])
 
     return (
         <>
@@ -48,66 +105,59 @@ const LogedNav = ({showBlackNav, token})=>{
                     </svg>
                 </a>
                 <ul class="dropdown-menu Notifications" aria-labelledby="dropdownMenuButton1">
-                        <div className='box_Notifications'>
-                                <div className='position-relative'>
-                                    <Paragraph className="p_notification">Notifications</Paragraph>
-                                    <span className='pin'>1</span>
+                    <Tab.Container 
+                        id="left-tabs-example" 
+                        defaultActiveKey={activeTab}
+                        className=''>
+                            <div className='box_Notifications'>
+                                <div className='d-flex justify-content-start align-items-center'>
+                                    <Paragraph className="p_notification mb-0">Notifications</Paragraph>
+                                    <span className='badge pin'>1</span>
                                 </div>
-                                <div>
-                                    <ul className='ul_mark' onClick={handProp}>
-                                        <li onClick={()=>handleMark("All")} className={ mark === "All" ? 'notification_mark activity' :"notification_mark "}>All</li>
-                                        <li onClick={()=>handleMark("Event")} className={ mark === "Event" ? 'notification_mark activity' :"notification_mark "}>Events</li>
-                                        <li onClick={()=>handleMark("Invitation")} className={ mark === "Invitation" ? 'notification_mark activity' :"notification_mark"}>Invitation</li>
-                                    </ul>
-                                </div>
-                        </div>
-                            <li className="border-dropdown d-flex  px-4">
-                                <img className='rounded-circle ' alt='profile' src={N_1}/>
-                                    <div className='info_profile  mt-4 ms-4'> 
-                                        <Paragraph className='profile_notifications'>Reminder: Meeting Room 01 has 10 minutes left</Paragraph>
-                                        <Paragraph className='email' alt='#/'>Today at 9:42 AM</Paragraph>
-                                    </div>
-                            </li>
-                            <li className="border-dropdown d-flex  px-4">
-                                <img className='rounded-circle' alt='profile' src={N_2}/>
-                                <div className='info_profile mt-4 ms-4'> 
-                                    <Paragraph className='profile_notifications'>Meeting room Booking</Paragraph>
-                                    <Paragraph className='email' alt='#/'>Wants to edit the file Dynabike</Paragraph>
-                                    <Paragraph className='email' alt='#/'>Today at 9:42 AM</Paragraph>
-                                </div>
-                            </li>
-                            <li className="border-dropdown d-flex  px-4">
-                                <img className='rounded-circle' alt='profile' src={N_3}/>
-                                <div className='info_profile mt-4 ms-4'> 
-                                    <Paragraph className='profile_notifications'>Multi Purpose area event</Paragraph>
-                                    <Paragraph className='email' alt='#/'></Paragraph>
-                                    <Paragraph className='email' alt='#/'>Today at 9:42 AM</Paragraph>
-                                </div>
-                            </li>
-                            <li className="border-dropdown d-flex  px-4">
-                                <img className='rounded-circle' alt='profile' src={N_2}/>
-                                <div className='info_profile mt-4 ms-4'> 
-                                    <Paragraph className='profile_notifications'>Meeting room Booking</Paragraph>
-                                    <Paragraph className='email' alt='#/'>Wants to edit the file Dynabike</Paragraph>
-                                    <Paragraph className='email' alt='#/'>Today at 9:42 AM</Paragraph>
-                                </div>
-                            </li>
-                            <li className="border-dropdown d-flex  px-4">
-                                <img className='rounded-circle' alt='profile' src={N_2}/>
-                                <div className='info_profile mt-4 ms-4'> 
-                                    <Paragraph className='profile_notifications'>Meeting room Booking</Paragraph>
-                                    <Paragraph className='email' alt='#/'>Wants to edit the file Dynabike</Paragraph>
-                                    <Paragraph className='email' alt='#/'>Today at 9:42 AM</Paragraph>
-                                </div>
-                            </li>
-                            <li className=" d-flex  px-4">
-                                <img className='rounded-circle' alt='profile' src={N_3}/>
-                                <div className='info_profile mt-4 ms-4'> 
-                                    <Paragraph className='profile_notifications'>Multi Purpose area event</Paragraph>
-                                    <Paragraph className='email' alt='#/'></Paragraph>
-                                    <Paragraph className='email' alt='#/'>Today at 9:42 AM</Paragraph>
-                                </div>
-                            </li>
+                                <Nav variant="pills" className="mx-auto">
+                                    <Nav.Item onClick={(e)=>{e.stopPropagation();handleTabClick('all')}}>
+                                        <Nav.Link 
+                                            eventKey={'all'}
+                                            className='notification_mark py-0'>
+                                                All
+                                        </Nav.Link>
+                                    </Nav.Item>
+                                    <Nav.Item onClick={(e)=>{e.stopPropagation();handleTabClick('event')}}>
+                                        <Nav.Link 
+                                            eventKey={'event'}
+                                            className='notification_mark py-0'>
+                                                Events
+                                        </Nav.Link>
+                                    </Nav.Item>
+                                    <Nav.Item onClick={(e)=>{e.stopPropagation();handleTabClick('invitation')}}>
+                                        <Nav.Link 
+                                            eventKey={'invitation'}
+                                            className='notification_mark py-0'>
+                                                Invitation
+                                        </Nav.Link>
+                                    </Nav.Item>
+                                </Nav>
+                            </div>
+                            <Tab.Pane eventKey={activeTab} className='noti_container'>
+                                <ul className='ps-0'>
+                                    {notification && notification.map((item, index)=>{
+                                        return (
+                                            <li className="border-dropdown d-flex  px-4" key={index}>
+                                                <img className='rounded-circle' alt='profile' src={item.icon}/>
+                                                <div className='info_profile mt-4 ms-4'> 
+                                                    <Paragraph className='profile_notifications mb-2'>{item.title}</Paragraph>
+                                                    <Paragraph className='grey-span2 mb-2'>{item.text}</Paragraph>
+                                                    <Paragraph className='email mb-2' alt='#/'>{setDay(item.time_formmated)}</Paragraph>
+                                                </div>
+                                            </li>
+                                        )
+                                    })}
+                                    {(notification && notification.length === 0) && <Paragraph className='empty py-5 px-3'>
+                                        {`there is no notifications yet in ${activeTab}`}
+                                    </Paragraph>}
+                                </ul>
+                            </Tab.Pane>
+                    </Tab.Container>
                 </ul>
             </div> 
             <div className="dropdown">

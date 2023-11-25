@@ -13,7 +13,6 @@ const ContactusForm = ()=>{
     const [swalProps, setSwalProps] = useState({});
     const siteConfig = useContext(SiteConfigContext);
     const { userProfileDate } = useContext(AuthContext)
-    const [userInfo, setUSerInfo] = useState(userProfileDate);
 
     const handleSubmit = async (values) => {
         try {
@@ -44,15 +43,16 @@ const ContactusForm = ()=>{
                 timer: 1500
             });
         }
-    }
+    };
+    
     return (
         <>
             <Formik 
                 initialValues = {{
-                    first_name: userInfo ? userInfo.first_name : '',
-                    last_name: userInfo ? userInfo.last_name : '',
-                    email: userInfo ? userInfo.email : '',
-                    phone: userInfo ? userInfo.phone_number : '',
+                    first_name: userProfileDate ? userProfileDate.first_name : '',
+                    last_name: userProfileDate ? userProfileDate.last_name : '',
+                    email: userProfileDate ? userProfileDate.email : '',
+                    phone: userProfileDate ? userProfileDate.phone_number : '',
                     user_type: '',
                     inquiry_type: '',
                     location: '',
@@ -174,8 +174,8 @@ const ContactusForm = ()=>{
                             onChange={handleChange}
                             onBlur={handleBlur}
                             className="form__field placeholderSelect">
-                                <option disabled selected>Choose Type</option>
-                                {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_4.data).map(([key, value]) => (
+                                <option disabled selected value=''>Choose Type</option>
+                                {siteConfig && Object.entries(siteConfig.profile_dropdown?.fid_4.data).map(([key, value]) => (
                                     <option key={key} value={key}>
                                         {value}
                                     </option>
@@ -195,7 +195,7 @@ const ContactusForm = ()=>{
                                     ? "form__field placeholderSelect is-invalid"
                                     : "form__field placeholderSelect"
                             }>
-                            <option disabled selected>Choose Service</option>
+                            <option disabled selected value={''}>Choose Service</option>
                             <option value="one">One</option>
                             <option value="two">Two</option>
                             <option value="three">Three</option>
@@ -214,7 +214,7 @@ const ContactusForm = ()=>{
                                     ? "form__field placeholderSelect is-invalid"
                                     : "form__field placeholderSelect"
                             }>
-                            <option disabled selected>Choose Location</option>
+                            <option disabled selected value={''}>Choose Location</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>

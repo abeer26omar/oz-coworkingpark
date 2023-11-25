@@ -1,48 +1,58 @@
-import React, {useEffect, useState} from 'react';
-import Swal from 'sweetalert2';
+import React, {useEffect, useState, useContext} from 'react';
+import { Formik } from 'formik';
+import * as Yup from "yup";
+import Button  from '../../UI/Button';
+import SweetAlert2 from 'react-sweetalert2';
+import { SiteConfigContext } from '../../../apis/context/SiteConfigContext';
+import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import './Joinus.css';
 import vector from "../../../assets/images/Vector.png";
 import Media from "../../Media/Media";
+import { inquiry } from '../../../apis/AuthApi';
 
 const Joinus = () => {
-    const selectedType = localStorage.getItem('selectedType') || '';
-    const discount = localStorage.getItem('selectedDiscount') || '';
-    const price = localStorage.getItem('selectedPrice') || '';
-    const amenities = JSON.parse(localStorage.getItem('selectedAmenities')) || [];
+    const [plan, setPlan] = useState(JSON.parse(sessionStorage.getItem('selectedPlan')));
+    const [swalProps, setSwalProps] = useState({});
+    const siteConfig = useContext(SiteConfigContext);
+    const { userProfileDate } = useContext(AuthContext)
+    const [userInfo, setUSerInfo] = useState(userProfileDate);
 
-    const [selectedAmenities, setSelectedAmenities] = useState([]);
+    useEffect(()=>{
+        const planDetails = JSON.parse(sessionStorage.getItem('selectedPlan'));
+        setPlan(planDetails);
+    },[]);
 
-    useEffect(() => {
-        setSelectedAmenities(amenities);
-    }, [amenities]);
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = async (values) => {
+        try {
+            const result = await inquiry(values.first_name,
+                values.last_name,
+                values.email,
+                values.phone,
+                '',
+                '',
+                values.location,
+                values.comments);
+            setSwalProps({
+                show: true,
+                icon: 'success',
+                title: result.status,
+                text: 'send successfully',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            
+        } catch (error) {
+            setSwalProps({
+                show: true,
+                icon: 'error',
+                title: error.response.data.status,
+                text: error.response.data.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    }
 
-        // Retrieve form data here
-
-        // Show SweetAlert2 popup
-        Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: 'Your form has been submitted.',
-        }).then(() => {
-            // Clear form fields
-            document.getElementById('fname').value = '';
-            document.getElementById('lname').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('phone').value = '';
-            document.getElementById('comment').value = '';
-
-            // Clear local storage
-            localStorage.removeItem('selectedType');
-            localStorage.removeItem('selectedDiscount');
-            localStorage.removeItem('selectedPrice');
-            localStorage.removeItem('selectedAmenities');
-
-            // Navigate to profile page
-            window.location.href = '/profile'; // Replace '/profile' with the actual URL of your profile page
-        });
-    };
     return (
         <>
             <div className="position-relative">
@@ -60,100 +70,199 @@ const Joinus = () => {
 
             </div>
             <section className="contactus my-5 joinus-form">
-
-
                 <div className="container-fluid">
                     <div className="row ">
                         <div className="col-lg-6">
                             <div className="box-apply-member">
                                 <h3>Summary</h3>
                                 <div className=" name-price d-flex align-items-center justify-content-between">
-                                    <h2 className="d-flex justify-content-start align-items-center ">{selectedType}</h2>
+                                    <h2 className="d-flex justify-content-start align-items-center ">{plan.selectedPackage}</h2>
                                     <div className="d-block">
-                                        <del className="member_discount">{discount} / Monthly</del>
+                                        <del className="member_discount">{plan.price} / {plan.time}</del>
                                         <br/>
-                                        <strong className="current_price">{price} / Monthly</strong>
+                                        <strong className="current_price">{plan.priceDicounted} / {plan.time}</strong>
                                     </div>
                                 </div>
                                 <ul className="amenties-select">
-                                    {selectedAmenities.map((amenity, index) => (
+                                    {/* {selectedAmenities.map((amenity, index) => (
                                         <li key={index} className="d-flex align-items-center ">
                                             <img src={amenity.logo} alt={amenity.title} className="me-4"/>
                                             <span> {amenity.title}</span>
                                         </li>
-                                    ))}
+                                    ))} */}
 
                                 </ul>
                             </div>
                         </div>
                         <div className="col-lg-6">
-                            <div className="form-card py-3">
-                                <form className="px-5" onSubmit={handleSubmit}>
-                                    <div className="row">
-                                        <div className="col-6">
-                                            <div className="form__group field my-3">
-                                                <label htmlFor="fname" className="form__label">First Name</label>
-                                                <input type="text" className="form__field"
-                                                       placeholder="Enter Your First Name" name="email" id='fname'
-                                                       required/>
+                             <div className="form-card py-3">
+                             <Formik 
+                                initialValues = {{
+                                    first_name: userInfo ? userInfo.first_name : '',
+                                    last_name: userInfo ? userInfo.last_name : '',
+                                    email: userInfo ? userInfo.email : '',
+                                    phone: userInfo ? userInfo.phone_number : '',
+                                    location: '',
+                                    comments: ''
+                                }}
+                                onSubmit={async values => {
+                                    await new Promise(resolve => setTimeout(resolve, 0));
+                                    handleSubmit(values);
+                                }}
+                                validationSchema={Yup.object().shape({
+                                    first_name: Yup.string().required(),
+                                    last_name: Yup.string().required(),
+                                    email: Yup.string().email().required(),
+                                    phone: Yup.string().required(),
+                                    location: Yup.string().required(),
+                                    comments: Yup.string().required()
+                                })}
+                                enableReinitialize>
+                                {props => {
+                                    const {
+                                    values,
+                                    touched,
+                                    errors,
+                                    handleChange,
+                                    handleBlur,
+                                    handleSubmit,
+                                    } = props;
+                                return (
+                                    <form className="row g-3" onSubmit={handleSubmit}>
+                                        <div className='col-lg-6'>
+                                            <div className="form__group field my-3 group-check">
+                                                <label htmlFor="first_name" className="form__label">First Name</label>
+                                                <input 
+                                                    id='first_name'
+                                                    type="text"
+                                                    className={
+                                                        errors.first_name && touched.first_name
+                                                        ? "form__field is-invalid"
+                                                        : "form__field"
+                                                    }
+                                                    placeholder="Enter Your first Name"
+                                                    name="first_name"
+                                                    value={values.first_name}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                /> 
+                                                {errors.first_name && touched.first_name && <p className='text-danger mb-0'>{errors.first_name}</p>}
                                             </div>
                                         </div>
-                                        <div className="col-6">
-                                            <div className="form__group field my-3">
-                                                <label htmlFor="lname" className="form__label">Last Name</label>
-                                                <input type="text" className="form__field"
-                                                       placeholder="Enter Your Last Name" name="email" id='lname'
-                                                       required/>
+                                        <div className='col-lg-6'>
+                                            <div className="form__group field my-3 group-check">
+                                                <label htmlFor="last_name" className="form__label">Last Name</label>
+                                                <input 
+                                                    id='last_name'
+                                                    type="text"
+                                                    className={
+                                                        errors.last_name && touched.last_name
+                                                        ? "form__field is-invalid"
+                                                        : "form__field"
+                                                    }
+                                                    placeholder="Enter Your last Name"
+                                                    name="last_name"
+                                                    value={values.last_name}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                /> 
+                                                {errors.last_name && touched.last_name && <p className='text-danger mb-0'>{errors.last_name}</p>}
                                             </div>
                                         </div>
-                                        <div className="col-12">
-                                            <div className="form__group field my-3">
-                                                <label htmlFor="email" className="form__label">Email</label>
-                                                <input type="email" className="form__field"
-                                                       placeholder="Enter Your Email" name="email" id='email' required/>
-                                            </div>
+                                        <div className="form__group field my-3 group-check">
+                                            <label htmlFor="email" className="form__label">Email</label>
+                                            <input 
+                                                id='email'
+                                                type="email"
+                                                className={
+                                                    errors.email && touched.email
+                                                    ? "form__field is-invalid"
+                                                    : "form__field"
+                                                }
+                                                placeholder="Enter Your Email"
+                                                name="email"
+                                                value={values.email}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            /> 
+                                            {errors.email && touched.email && <p className='text-danger mb-0'>{errors.email}</p>}
                                         </div>
-                                        <div className="col-12">
-                                            <div className="form__group field my-3">
-                                                <label htmlFor="phone" className="form__label">Phone number</label>
-                                                <input type="number" className="form__field" placeholder="Phone No."
-                                                       name="phone" id='phone' required/>
-                                            </div>
+                                        <div className="form__group field my-3 group-check">
+                                            <label htmlFor="phone" className="form__label">Phone number</label>
+                                            <input 
+                                                type="text"
+                                                className={"form__field me-3 px-lg-0 country_code"}
+                                                placeholder="+20"
+                                                disabled
+                                            />  
+                                            <input 
+                                                id='phone'
+                                                type="number"
+                                                className={
+                                                    errors.phone && touched.phone
+                                                    ? "form__field phone_field is-invalid"
+                                                    : "form__field phone_field"
+                                                }
+                                                placeholder="Phone No."
+                                                name="phone"
+                                                value={values.phone}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            />
+                                            {errors.phone && touched.phone && <p className='text-danger mb-0'>{errors.phone}</p>}
                                         </div>
-                                        <div className="col-12">
-                                            <div className="form__group field my-3">
-                                                <label htmlFor="phone" className="form__label">User Type</label>
-                                                <select className="form__field placeholderSelect" required>
-                                                    <option selected>Enter user type</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-
-                                                </select>
-                                            </div>
+                                        <div className="form__group field mt-3 group-check">
+                                            <label htmlFor="location" className="form__label">Locations</label>
+                                            <select
+                                                id='location'
+                                                value={values.location}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                className={
+                                                    errors.comments && touched.comments
+                                                        ? "form__field placeholderSelect is-invalid"
+                                                        : "form__field placeholderSelect"
+                                                }>
+                                                <option disabled selected value=''>Choose Location</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                            {errors.location && touched.location && <p className='text-danger mb-0'>{errors.location}</p>}
                                         </div>
-
-                                        <div className="col-12">
-                                            <div className="form__group field my-3">
-                                                <label htmlFor="comment" className="form__label">Comments</label>
-                                                <input type="text" className="form__field"
-                                                       placeholder="Enter your comments" name="comment" id='comment'
-                                                       required/>
-                                            </div>
+                                        <div className="form__group field my-3 group-check">
+                                            <label htmlFor="comments" className="form__label">Comments</label>
+                                            <input 
+                                                id='comments'
+                                                type="text"
+                                                className={
+                                                    errors.comments && touched.comments
+                                                        ? "form__field is-invalid"
+                                                        : "form__field"
+                                                }
+                                                placeholder="Enter Your comments"
+                                                name="comments"
+                                                value={values.comments}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            /> 
+                                            {errors.comments && touched.comments && <p className='text-danger mb-0'>{errors.comments}</p>}
                                         </div>
-                                    </div>
-
-                                    <div className="d-flex justify-content-center my-3">
-                                        <button type="submit" className="button-one-outline btn-bg-white">Submit
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+                                        <div className="d-flex justify-content-center py-3">
+                                            <Button 
+                                                tagType='button'
+                                                type="submit" 
+                                                className="btn_outline_black auth_btn_padding">Submit</Button>
+                                        </div>
+                                    </form>
+                                )}}
+                            </Formik>
+                            </div> 
                         </div>
                     </div>
                 </div>
             </section>
-
+            <SweetAlert2 {...swalProps} />
         </>
     );
 };
