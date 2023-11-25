@@ -4,8 +4,8 @@ import vector from "../../../assets/images/Vector.png";
 import ServicesList from "./ServicesList";
 import {useLocation} from "react-router-dom";
 import Media from "../../Media/Media";
-import axios from 'axios';
 import Paragraph from '../../UI/Paragraph';
+import { getMembershipAmenities } from '../../../apis/MembershipApi';
 
 const Services = () => {
     const [amenities, setamenities] = useState([]);
@@ -15,13 +15,8 @@ const Services = () => {
     useEffect(()=>{
         const getAmenities = async ()=>{
             try{
-                const config = {
-                    method: 'get',
-                    url: `${process.env.REACT_APP_API_CONFIG_URL}/api/membership_amenities`
-                };
-                const response = await axios(config);
-                setamenities(response.data.data);
-                console.log(response.data.data);
+               const result = await getMembershipAmenities();
+               setamenities(result);
             }catch(error){
                 console.log(error);
             }
@@ -30,7 +25,7 @@ const Services = () => {
     },[]);
     return (
         <>
-            <section className=" {`membership-component ${isMembershipPage ? 'yellow-background p-60' : ''}`}">
+            <section className={`membership-component ${isMembershipPage ? 'yellow-background p-60' : ''}`}>
                 <div className="position-relative mb-5" style={{height: "100px"}}>
                     <Media
                         type="img" src={vector} className="position-absolute"
@@ -46,7 +41,7 @@ const Services = () => {
                         {amenities.map((amenity, index) => {
                             const {id, title, image,description} = amenity;
                             return (
-                                <div className="col-lg-4 col-md-6 col-sm-12 my-5" key={index}>
+                                <div className="col-lg-4 col-md-6 col-sm-12 my-4" key={index}>
                                     <ServicesList id={id} title={title} image={image} description={description}/>
                                 </div>
                             )

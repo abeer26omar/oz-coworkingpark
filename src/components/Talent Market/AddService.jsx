@@ -15,7 +15,7 @@ const AddService = () => {
     const [services, setServices] = useState([]);
     const {token, userId, branch_id} = useContext(AuthContext);
     const siteConfig  = useContext(SiteConfigContext);
-    const contacts = ['Email', 'Call', 'Chat'];
+    const contacts = ['email', 'call', 'chat'];
 
     useEffect(()=>{
         const controller = new AbortController();
@@ -246,7 +246,7 @@ const AddService = () => {
                                     </div>
                                     <div className="col-md-6 col-12">
                                         <div className="form__group field my-3">
-                                            <label htmlFor="postCost" className="form__label">POst cost</label>
+                                            <label htmlFor="postCost" className="form__label">Post cost</label>
                                             <input
                                                 id='postCost' 
                                                 type="text"

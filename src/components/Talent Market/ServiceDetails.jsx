@@ -119,14 +119,20 @@ const ServiceDetails = () => {
                                     </p>
                             </div>
                             <div className="cards-event-buttons text-center">
-                               {(service && service.contact_type === 'Chat') && 
-                                    <Button 
-                                        tagType='link'
-                                        to={'/dmchat'}
-                                        className="btn button-outLine btn-bg-white attend-btn">Contact</Button>
+                                {(service && service.user_id?.user_id !== userId) &&
+                                    (
+                                        <>
+                                            {(service && service.contact_type.includes('hat')) && 
+                                                <Button 
+                                                    tagType='link'
+                                                    to={`/dmchat/${service.id}/${service.user_id?.id}`}
+                                                    className="btn button-outLine btn-bg-white attend-btn">Contact</Button>
+                                            }
+                                            {(service && service.contact_type.includes('mail')) && <a className="btn button-outLine btn-bg-white attend-btn" href={`mailto://${service.user_id?.email}`} target='_blank'>Contact</a>}
+                                            {(service && service.contact_type.includes('all')) && <a className="btn button-outLine btn-bg-white attend-btn" href={`tel://${service.user_id?.phone}`} target='_blank'>Contact</a>}
+                                        </>
+                                    )
                                 }
-                                {(service && service.contact_type === 'Email') && <a className="btn button-outLine btn-bg-white attend-btn" href={`mailto://${service.user_id?.email}`} target='_blank'>Contact</a>}
-                                {(service && service.contact_type === 'Call') && <a className="btn button-outLine btn-bg-white attend-btn" href={`tel://${service.user_id?.phone}`} target='_blank'>Contact</a>}
                             </div>
                         </div>
                     </div>
