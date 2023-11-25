@@ -12,7 +12,8 @@ const Community = () => {
     const {config, getComponentValue} = useContext(DataContext);
 
     useEffect(()=>{
-        config('community')
+        config("community");
+        // console.log(config("community"));
     },[]);
 
     return (

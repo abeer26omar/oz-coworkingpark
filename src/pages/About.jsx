@@ -1,30 +1,20 @@
-import React from 'react';
+import React, { useContext, useEffect } from "react";
 import AboutHeader from "../components/About/AboutHeader/AboutHeader";
 import AboutOz from "../components/About/AboutOz/AboutOz";
-import { config } from '../apis/config';
-import { useEffect ,useState } from 'react';
+import { DataContext } from "../apis/context/SiteDataContext";
 const About = () => {
-    const [data , setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
-    useEffect(()=>{
-        config('about_us').then(res =>{
-            setData(res)
-            setLoading(false)
-        })
-        .catch(err =>{
-            setError(err)
-            setLoading(false)
-        })
-    },[]);
+    const { config, getComponentValue } = useContext(DataContext);
+  useEffect(() => {
+    config("about_us");
+  }, []);
 
-    return (
-        <>
-            <AboutHeader configData={data}/>
-            <AboutOz configData={data}/>
-        </>
-    );
+  return (
+    <>
+      <AboutHeader configData={getComponentValue("about_us_page")} />
+      <AboutOz configData={getComponentValue("about_us_page")} />
+    </>
+  );
 };
 
-export default React.memo(About) ;
+export default React.memo(About);

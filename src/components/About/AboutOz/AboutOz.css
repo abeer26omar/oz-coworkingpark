@@ -46,20 +46,19 @@
     font-weight: var(--font-weight-bold);
     line-height: 120%;
 }
-.mission{
-    width: 75%;
-    margin: auto;
-}
+
 .flex-end{
     display: flex;
     justify-content: end;
     margin-top: 75px;
         
 }
-.img-small-top{
-    position: absolute;
-    right: 310px;
-    top: -110px;
+
+.img-small-right{
+    position: absolute ;
+    left: 0;
+    top: -75px;
+    z-index: 999 ;
 }
 .event-end{
     display: flex;
@@ -75,30 +74,33 @@
     margin: 400px 0 ;
 }
 .food-1{
-    bottom:-305px ;
     position: absolute;
-    left:675px ;
+    left: 390px;
+    top: 70px;
 }
 .food-2{
     position: absolute;
-    bottom:-465px;
-    left: 105px;
+    left: 10px;
+    top: 260px;
 }
 .food-3{
     position: absolute;
-    bottom: -910px;
-    left: 270px;    
+    top: 85px;
+    right: 0;
+    z-index: 999;
+
 }
 .food-4{
     position: absolute;
-    bottom: -875px;
-    left: 1240px;
+    bottom: 145px;
+    left: 15px;
         
 }
 .food-5{
     position: absolute;
-    left: 1550px;
-    bottom: -730px;
+    right: 310px;
+    bottom: 200px;
+    
         
 }
 @media screen and (max-width:575px) {

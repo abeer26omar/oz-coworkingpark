@@ -24,28 +24,36 @@ const Home = () => {
 
     useEffect(()=>{
         config('home');
+  
     },[]);
 
+
     return (
-        <>
-            <MainHeaderWrapper configData={getComponentValue('header')} video={headVideo}>
-                <SectionHeader configData={getComponentValue('header')} video={headVideo} />
-            </MainHeaderWrapper>
-            <MonoBlockTitle configData = {getComponentValue("mono_block")}/>
-            <LeftContent configData = {getComponentValue("page_about")} />
-            <RightContentNewFeed configData = {getComponentValue("page_newsfeed")} />
-            <HomeMembership />
-            <OurSpaces />
-            <OZAmenities />
-            <ExploreOZ />
-            <PublicEvent configData={getComponentValue("page_event")}/>
-            <ZeeStudio configData={getComponentValue('')}/>
-            <OZKnowledge  configData={getComponentValue("")} />
-            <RightContentFB configData={getComponentValue("page_fb")} />
-            <MonoBlockMember configData={getComponentValue("page_membership")}/>
-            <Locations configData={getComponentValue('page_location')}/>
-            <NewsLetter/>
-        </>
+      <>
+        <MainHeaderWrapper
+          configData={getComponentValue("header")}
+          video={headVideo}
+        >
+          <SectionHeader
+            configData={getComponentValue("header")}
+            video={headVideo}
+          />
+        </MainHeaderWrapper>
+        <MonoBlockTitle configData={getComponentValue("mono_block")} />
+        <LeftContent configData={getComponentValue("page_about")} />
+        <RightContentNewFeed configData={getComponentValue("page_newsfeed")} />
+        <HomeMembership configData={getComponentValue("page_membership")} />
+        <OurSpaces configData={getComponentValue("_page_space")} />
+        <OZAmenities />
+        <ExploreOZ />
+        <PublicEvent configData={getComponentValue("page_event")} />
+        <ZeeStudio configData={getComponentValue("page_zee")} />
+        <OZKnowledge configData={getComponentValue("page_oz")} />
+        <RightContentFB configData={getComponentValue("page_ozy")} />
+        <MonoBlockMember configData={getComponentValue("page_membership")} />
+        <Locations configData={getComponentValue("page_location")} />
+        <NewsLetter />
+      </>
     );
 };
 
