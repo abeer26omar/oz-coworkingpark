@@ -118,12 +118,16 @@ const SingleNewFeed = () => {
                             <div className="box-details border-bottom">
                                 <div className='row m-auto'>
                                     <div className='col-xl-6  col-sm-12'>
-                                    <img className='w-100 pb-2' src={post.banner}/>
+                                    <img className='w-100 pb-2' src={post.image_1}/>
                                     </div>
                                      <div className='col-xl-6 col-sm-12 pb-2'>
-                                    <img className='w-100' src={post.banner}/>
+                                    <img className='w-100' src={post.image_2}/>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="box-details border-bottom">
+                                
+                                <p>{post.description}</p>
                             </div>
                             <div className="box-details border-bottom">
                                 <a href="#" className="btn button-outLine btn-bg-white ">Share</a>

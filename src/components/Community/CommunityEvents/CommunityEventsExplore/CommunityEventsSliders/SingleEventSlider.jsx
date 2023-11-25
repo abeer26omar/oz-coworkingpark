@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import SingleCommunityExplore from "../SingleCommunityExplore";
 
 const SingleEventSlider = ({eventsData}) => {
+
     const settingsSingle = {
         dots: true,
         infinite: true,
@@ -38,6 +39,7 @@ const SingleEventSlider = ({eventsData}) => {
             }
         ]
     };
+    
     return (
         <>
             <Slider {...settingsSingle}>

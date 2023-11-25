@@ -4,10 +4,9 @@ import date from "../../../../assets/images/icons/calendar-event.svg";
 import user from "../../../../assets/images/icons/user.svg";
 import time from "../../../../assets/images/icons/alarm-event.svg";
 import './CommunityEventsExplore.css';
-import favs from "../../../../assets/images/icons/heart.svg";
-import {Link} from "react-router-dom";
 import Button from '../../../UI/Button';
-import ShareIcon from '../../../UI/ShareIcon';
+import ShareButton from '../../../UI/ShareButton';
+import AddToFavButton from '../../../UI/AddToFavButton';
 
 const SingleCommunityExplore = ({id, img, title, text, category, day, host, clock, img_style}) => {
     return (
@@ -15,13 +14,13 @@ const SingleCommunityExplore = ({id, img, title, text, category, day, host, cloc
             <Card className="slider-card" key={id}>
                 <div className="position-relative">
                     <Card.Img variant="top" src={img} className={`rounded-0 ${img_style}`} title={title}/>
-                    <Button tagType='link'><img src={favs} alt="fav" className="fav-event"/></Button>
+                    <AddToFavButton />
                 </div>
 
                 <Card.Body>
                     <span className="card-category">{category}</span>
                     <Card.Title className="title-explore">{title}</Card.Title>
-                    <Card.Text>{text.slice(0,90)}...</Card.Text>
+                    <Card.Text>{text.lenght > 50 ? text.slice(0,50) :  text}</Card.Text>
                     <div className="d-flex justify-content-start align-items-center">
                         <div className="details-event d-flex align-items-center">
                             <img src={date} alt={day}/>
@@ -37,12 +36,9 @@ const SingleCommunityExplore = ({id, img, title, text, category, day, host, cloc
                         </div>
                     </div>
                     <div className="cards-event-buttons">
-                        <Link to={`/events/communityEventsDetails/${id}`}
-                              className="btn button-outLine btn-bg-white">Attend</Link>
-                        <a className="share-button">
-                         <ShareIcon />
-                        </a>
-
+                        <Button tagType='link' to={`/events/communityEventsDetails/${id}`}
+                              className="btn button-outLine btn-bg-white attend-btn">Attend</Button>
+                        <ShareButton />
                     </div>
                 </Card.Body>
             </Card>

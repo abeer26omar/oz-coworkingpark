@@ -21,10 +21,6 @@ const MultipleEventSlider = ({eventsData}) => {
         duration: 3000,
         useTransform: true,
         lazyLoad: true,
-        adaptiveHeight: false,
-
-
-    
     };
 
     return (

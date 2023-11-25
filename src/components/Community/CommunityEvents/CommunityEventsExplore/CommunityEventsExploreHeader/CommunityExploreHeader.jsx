@@ -11,7 +11,7 @@ const CommunityExploreHeader = () => {
     return (
         <>
           
-                  <MainHeaderWrapper configData={config('')} image={party}>
+            <MainHeaderWrapper image={party}>
                 <div className={`container-fluid px-70 py-5`}>
                     <div className='col-md-6 col-12'>
                         <p class="main_header mb-0">Initiating</p>

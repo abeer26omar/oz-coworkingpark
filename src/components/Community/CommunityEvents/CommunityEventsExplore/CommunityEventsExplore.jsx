@@ -6,6 +6,7 @@ import SingleEventSlider from "./CommunityEventsSliders/SingleEventSlider";
 import CommunityExploreHeader from "./CommunityEventsExploreHeader/CommunityExploreHeader";
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import { getEventsList } from '../../../../apis/Events';
+import Button from '../../../UI/Button';
 
 const CommunityEventsExplore = () => {
 
@@ -89,7 +90,7 @@ const CommunityEventsExplore = () => {
                                     elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod</p>
                             </div>
                             <div className="buttons d-flex justify-content-center align-items-center">
-                                <a href="#" className="btn button-outLine btn-bg-white">Become a Member</a>
+                                <Button tagType='link' to={'/contactus'} className="btn button-outLine btn-bg-white">Become a Member</Button>
                             </div>
                         </div>
                     </div>

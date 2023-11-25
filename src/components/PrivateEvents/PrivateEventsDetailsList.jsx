@@ -33,8 +33,8 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                             ))}
                         </ul>
                         <div className="d-flex buttons-group">
-                            <Button to="/joinus" className="btn button-outLine btn-bg-white" tagType='link'>inquire</Button>
-                            <a href="#" className="btn button-outLine btn-bg-white btn-pdf">Download PDF</a>
+                            <Button to="/contactus" className="btn button-outLine btn-bg-white" tagType='link'>inquire</Button>
+                            <a href="#!" className="btn button-outLine btn-bg-white btn-pdf">Download PDF</a>
 
                         </div>
 
@@ -86,8 +86,8 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                             ))}
                         </ul>
                         <div className="d-flex buttons-group">
-                            <Button to="/joinus" className="btn button-outLine btn-bg-white" tagType='link'>inquire</Button>
-                            <a href="#" className="btn button-outLine btn-bg-white btn-pdf">Download PDF</a>
+                            <Button to="/contactus" className="btn button-outLine btn-bg-white" tagType='link'>inquire</Button>
+                            <a href="#!" className="btn button-outLine btn-bg-white btn-pdf">Download PDF</a>
 
                         </div>
 

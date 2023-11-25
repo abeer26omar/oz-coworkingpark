@@ -23,7 +23,7 @@ const  JoinCommuinty = (props) => {
                                                     }   
                                     </React.Fragment>
                                 )):''}
-                                    <NavLink to={"/community/galleryshow"}
+                                    <NavLink to={"/contactus"}
                                           className="btn button-outLine btn-bg-white mx-3">Connect</NavLink> 
                             </div>
                        
