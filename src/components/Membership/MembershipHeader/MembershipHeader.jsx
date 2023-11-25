@@ -3,14 +3,14 @@ import Navbar from "react-bootstrap/Navbar";
 import {Container, Nav} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
 
-const MembershipHeader = () => {
+const MembershipHeader = ({title}) => {
     return (
         <>
             <Navbar expand="lg" className="bg-body-tertiary navigator">
                 <Container fluid>
-                    <Navbar.Brand className="title-name" href="#home">
-                        Membership
-                    </Navbar.Brand>
+                    <h1 className="title-name mb-0">
+                        {title}
+                    </h1>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="2"

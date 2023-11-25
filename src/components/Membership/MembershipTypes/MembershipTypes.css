@@ -92,3 +92,6 @@
     line-height: 1.5;
     opacity: 0.5;
 }
+.corporate_slider .slick-track{
+    margin: 0;
+}

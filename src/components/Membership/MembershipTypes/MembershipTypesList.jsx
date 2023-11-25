@@ -3,7 +3,7 @@ import Media from "../../Media/Media";
 import Button from '../../UI/Button';
 import Paragraph from '../../UI/Paragraph';
 
-const MembershipTypesList = ({id, image, name, link ,description}) => {
+const MembershipTypesList = ({id, image, name ,description}) => {
 
     return (
         <>
@@ -12,12 +12,12 @@ const MembershipTypesList = ({id, image, name, link ,description}) => {
                     type="img" src={image} className="card-img-top" alt={name}/>
                 <div className="card-body">
                     <Paragraph className="card-title">{name}</Paragraph>
-                    <Paragraph>{description}</Paragraph>
+                    <Paragraph>{description && (description.length > 30 ? `${description.slice(0,30)}...` : description)}</Paragraph>
                     <Button
                         tagType='link' 
                         to={`/membership/${id}`} 
                         name={name}
-                        className="btn button-outLine btn-bg-white">{link}</Button>
+                        className="btn button-outLine btn-bg-white">{'Find out more'}</Button>
                 </div>
             </div>
         </>

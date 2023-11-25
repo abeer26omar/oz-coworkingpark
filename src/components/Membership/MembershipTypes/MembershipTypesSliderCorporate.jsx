@@ -1,40 +1,42 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import Slider from "react-slick";
 import { getListMembershipTypes } from '../../../apis/MembershipApi';
 import MembershipTypesList from './MembershipTypesList';
-import {memberTypes} from '../../../Data/MemberTypesData'
 import Paragraph from '../../UI/Paragraph';
+import {AuthContext} from '../../../apis/context/AuthTokenContext';
 
 const MembershipTypesSliderCorporate = (props) => {
-    const [listMembershipsTypes, setListMembershipsTypes] = useState(memberTypes);
 
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         try {
-    //             const membershipTypes = await getListMembershipTypes();
-    //             setListMembershipsTypes(membershipTypes);
-    //         } catch (error) {
-    //             console.error('Error fetching membership types:', error);
-    //         }
-    //     }
+    const [types, setTypes] = useState([]);
+    const {token} = useContext(AuthContext);
 
-    //     fetchData();
-    // }, []);
+    useEffect(()=>{
+        const getMemebershipTypes = async () => {
+            try {
+                const result = await getListMembershipTypes(token);
+                setTypes(result['corporate']);
+            }catch (err){console.log(err)}
+        }
+        getMemebershipTypes();
+    },[token]);
+
     const settings = {
         dots: false,
-        arrows: false,
+        arrows: true,
         slidesToShow: 3,
         slidesToScroll: 1,
+        infinite: false,
+        centerMode: false,
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 1500,
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 1,
                 }
             },
             {
-                breakpoint: 992,
+                breakpoint: 1024,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 1,
@@ -45,6 +47,7 @@ const MembershipTypesSliderCorporate = (props) => {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 1,
+                    centerMode: false,
                 }
             },
             {
@@ -52,13 +55,15 @@ const MembershipTypesSliderCorporate = (props) => {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
+                    centerMode: false,
                 }
             },
             {
                 breakpoint: 480,
                 settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1
+                    slidesToScroll: 1,
+                    centerMode: false,
                 }
             },
             {
@@ -66,33 +71,28 @@ const MembershipTypesSliderCorporate = (props) => {
                 settings: "unslick",
 
             }
-            // You can unslick at a given breakpoint now by adding:
-            // settings: "unslick"
-            // instead of a settings object
         ]
 
     };
     return (
         <>
-        <Slider {...settings}>
-            {listMembershipsTypes && listMembershipsTypes.map((listMembershipType, index) => {
-                const {id, name, link, description, img} = listMembershipType;
+        <Slider {...settings} className='corporate_slider'>
+            {types && types.map((listMembershipType, index) => {
+                const {id, name, link, description, logo} = listMembershipType;
                 return (
-                    <div className="row" key={index}>
-                        <div className="col-lg-12">
+                        <div key={index}>
                             <MembershipTypesList
                                 id={id}
                                 name={name}
                                 link={link}
                                 description={description}
-                                image={img}
+                                image={logo}
                             />
                         </div>
-                    </div>
                 );
             })}
         </Slider>
-        {!listMembershipsTypes && <Paragraph>there is no membership type to display</Paragraph>}
+        {!types && <Paragraph>there is no membership type to display</Paragraph>}
         </>
     );
 

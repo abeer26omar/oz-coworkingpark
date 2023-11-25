@@ -12,33 +12,19 @@ const MembershipTypes = (props) => {
                     <Row>
                         <div className="col-lg-12 border-bottom border-top ">
                             <div className="head-content-sec text-center">
-                                <h2 className="h2-text">For individual</h2>
+                                <h2 className="h2-text">For {props.title}</h2>
                             </div>
                         </div>
                         <div className='col-lg-12'>
-                            <h2 className="h2-text-bold">Membership individual</h2>
-                            <MembershipTypesSlider />
+                            <h2 className="h2-text-bold">{props.subTitle}</h2>
+                            {(props.title && props.title === 'individual') && <MembershipTypesSlider />}
+                            {(props.title && props.title === 'Corporate') && <MembershipTypesSliderCorporate />}
                         </div>
                     </Row>
 
                 </Container>
             </section>
-            <section className={`membership-types ${props.className}`}>
-                <Container fluid>
-                    <Row>
-                        <div className="col-lg-12 border-bottom border-top ">
-                            <div className="head-content-sec text-center">
-                                <h2 className="h2-text">For Corporate</h2>
-                            </div>
-                        </div>
-                        <div className='col-xxl-10 col-lg-12 mx-auto'>
-                            <h2 className="h2-text-bold">Spaces Corporate</h2>
-                            <MembershipTypesSliderCorporate />
-                        </div>
-                    </Row>
-
-                </Container>
-            </section>
+            
         </>
     );
 };

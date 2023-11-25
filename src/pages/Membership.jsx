@@ -11,9 +11,9 @@ const Membership = () => {
     
     return (
         <>
-            <MembershipHeader/>
+            <MembershipHeader title={'membership'}/>
             <BecomeMember configData= {getComponentValue('membership_page')}/>
-            <MembershipTypes />
+            <MembershipTypes title={'individual'} subTitle={'Membership individual'}/>
             <Services/>
         </>
     );

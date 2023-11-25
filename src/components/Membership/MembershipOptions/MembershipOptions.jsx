@@ -1,57 +1,63 @@
-import { useQuery } from '@tanstack/react-query';
+import { useState, useContext, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import './MebershipOptions.css';
 import './Membership.css';
 import { Container, Row } from "react-bootstrap";
-// import { getMembershipOptions } from "../../../apis/MembershipApi";
+import { getMembershipOptions } from "../../../apis/MembershipApi";
 import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
 import vector from "../../../assets/images/vectorRight.svg";
 import Paragraph from '../../UI/Paragraph';
 import Media from "../../Media/Media";
-import { IndividualTypesList } from '../../../Data/IndividualsTypesData';
 import check_yes from '../../../assets/images/check_yes.svg';
 import check_no from '../../../assets/images/check_no.svg';
-import MembershipTypesSlider from '../MembershipTypes/MembershipTypesSlider'
-import MembershipOptionsList from "./MembershipOptionsList";
-import Slider from "react-slick";
-import MembershipOptionsHeaderList from "./MembershipOptionsHeaderList";
-import MembershipCompared from "../MembershipsCompared/MembershipCompared";
-import MembershipTypes from "../MembershipTypes/MembershipTypes";
+import MembershipTypesSlider from '../MembershipTypes/MembershipTypesSlider';
+import MembershipTypesSliderCorporate from '../MembershipTypes/MembershipTypesSliderCorporate';
 import Button from '../../UI/Button';
+import { AuthContext } from '../../../apis/context/AuthTokenContext';
 
 const MembershipOptions = () => {
-    const {id} = useParams();
-// important for using api
-    // const {data, error, isError} = useQuery({
-    //     queryKey: ['membershipTypes'],
-    //     queryFn: ()=>getMembershipOptions(id)
-    // });
 
-//Slick Slider Settings
-    // const settings = {
-    //     dots: true,
-    //     infinite: true,
-    //     speed: 300,
-    //     slidesToShow: 1,
-    //     arrows: false,
-    //     autoplay: true,
-    //     autoplaySpeed: 3000,
-    // }
+    const {id} = useParams();
+    const [typeDetials, setTypeDetials] = useState();
+    const {token} = useContext(AuthContext);
+
+    useEffect(()=>{
+        const getMemebershipDetails = async () => {
+            try {
+                const result = await getMembershipOptions(token, id);
+                setTypeDetials(result);
+            }catch (err){console.log(err)}
+        }
+        getMemebershipDetails();
+    },[token, id]);
+
+    const calcDiscount = (price, discount) => {
+        const priceDicounted =  price * discount / 100;
+        return price-priceDicounted;
+    }
+
+    const setSlectedMemebershipDetails = (type, price, discount, description, time) => {
+       const selectedPlan = {
+            mainPlan: typeDetials?.name,
+            selectedPackage: type,
+            price: price,
+            priceDicounted: calcDiscount(price, discount),
+            description: description,
+            time: time
+       } 
+       sessionStorage.setItem('selectedPlan', JSON.stringify(selectedPlan));
+    }
     return (
         <>
-        {
-            IndividualTypesList.filter(id => id === id).map((option, index) => {
-                return (
-                    <>
-                        <MainHeaderWrapper image={option.image} key={index}>
-                            <div className="container-fluid px-70 py-5">
-                                <div className="col-md-6 col-12">
-                                    <h1 className="main_header mb-0">{option.type}</h1>
-                                    <h2 className="head_paragraph mb-3">{option.title}</h2>
-                                    <Paragraph className="description mb-0">{option.head_description}</Paragraph>
-                                </div>
-                            </div>
-                        </MainHeaderWrapper>
+            <MainHeaderWrapper image={typeDetials?.logo}>
+                <div className="container-fluid px-70 py-5">
+                    <div className="col-md-6 col-12">
+                        <h1 className="main_header mb-0">{typeDetials?.is_individual === '1' ? 'individulal' : 'corporate'}</h1>
+                        <h2 className="head_paragraph mb-3">{typeDetials?.name}</h2>
+                        <Paragraph className="description mb-0">{typeDetials?.description}</Paragraph>
+                    </div>
+                </div>
+            </MainHeaderWrapper>
                         <div className ='position-relative'>
                             <div className='img_float'>
                                 <Media
@@ -64,7 +70,7 @@ const MembershipOptions = () => {
                         <div className='container-fluid px-70 pt-5'>
                             <div className='col-lg-6 pt-70'>
                                 <h1>Description Membership</h1>
-                                <Paragraph className='opacity-75'>{option.description}</Paragraph>
+                                <Paragraph className='opacity-75'>{typeDetials?.description}</Paragraph>
                             </div>
                         </div>
                         <section className="Individual-types p-60">
@@ -79,19 +85,20 @@ const MembershipOptions = () => {
                                 <div className='d-flex justify-content-center'>
                                     <div className="membershipOptionsList container">
                                         <div className='row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-3 align-items-center justify-content-center'>
-                                            {
-                                                option.options.map((item, index)=>{
+                                            {typeDetials &&
+                                                typeDetials.options.map((item, index)=>{
                                                     return(
                                                         <div className='col d-flex justify-content-center' key={index}>
                                                             <div className='card h-100'>
                                                                 <div className='card-header'>
-                                                                    <span>{option.title}</span>
-                                                                    <h1 className='py-3'>{item.name}</h1>
-                                                                    <Paragraph className='mb-0'>{item.limit} days/week<span className='px-2'>{item.discount}</span></Paragraph>
+                                                                    <span>{typeDetials?.name}</span>
+                                                                    <h1 className='py-3'>{item.type}</h1>
+                                                                    <span className='px-2 discount'>{item.price} / {item.time}</span>
+                                                                    <span className='mb-0 priceafter'>{calcDiscount(item.price, item.discount)} / {item.time}</span>
                                                                 </div>
                                                                 <div className='card-body'>
                                                                     <Paragraph>Your Plan Benefits</Paragraph>
-                                                                    <ul className=''>
+                                                                    {/* <ul className=''>
                                                                         {
                                                                             item.Benefits.map(e=>{
                                                                                 return  (
@@ -102,13 +109,13 @@ const MembershipOptions = () => {
                                                                                 )
                                                                             })
                                                                         }
-                                                                    </ul>
+                                                                    </ul> */}
                                                                 </div>
                                                                 <div className='card-footer'>
                                                                     <div className='row row-cols-xxl-4 row-cols-lg-2 g-3' style={{
                                                                         marginRight: '15px'
                                                                     }}>
-                                                                        {item.Amenties.slice(0,4).map((item, index)=>{
+                                                                        {item.amenities.slice(0,4).map((item, index)=>{
                                                                             return (
                                                                                 <div className='col d-flex flex-column align-items-center' key={index}>
                                                                                     <Media type='img' src={item.icon} alt={item.name} className='mb-3' />
@@ -121,10 +128,12 @@ const MembershipOptions = () => {
                                                                         <Button 
                                                                             tagType='link'
                                                                             to={`/singleMember/${item.id}`}
-                                                                            className='ex_link mb-3'>{item.link}</Button>
+                                                                            onClick={()=>{sessionStorage.setItem('membership', typeDetials?.name)}}
+                                                                            className='ex_link mb-3'>{'explore more'}</Button>
                                                                         <Button 
                                                                             tagType='link'
                                                                             to={`/joinus`}
+                                                                            onClick={setSlectedMemebershipDetails(item.type, item.price, item.discount, item.description, item.time)}
                                                                             className='btn_outline_black d-block auth_btn_padding'>{'apply'}</Button>
                                                                     </div>
                                                                 </div>
@@ -150,9 +159,6 @@ const MembershipOptions = () => {
                                 </div>
                             </div>
                         </section>
-                    </>
-                )
-            })}
             <section className={`membership-types mb-5`}>
                 <Container fluid>
                     <Row>
@@ -162,8 +168,12 @@ const MembershipOptions = () => {
                             </div>
                         </div>
                         <div className='col-lg-12'>
-                            <h2 className="h2-text-bold">Other Membership individual</h2>
-                            <MembershipTypesSlider />
+                            <h2 className="h2-text-bold">Other Membership {typeDetials?.is_individual === '1' ? 'individulal' : 'corporate'}</h2>
+                            {typeDetials?.is_individual === '1' ? (
+                                <MembershipTypesSlider />
+                            ) : (
+                                <MembershipTypesSliderCorporate />
+                            )}
                         </div>
                     </Row>
 

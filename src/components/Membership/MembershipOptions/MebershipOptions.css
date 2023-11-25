@@ -131,3 +131,20 @@
 
 /*END*/
 
+.membershipOptionsList .card-header span.discount {
+    color: #BDBDBD;
+    font-family: Questrial;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    text-decoration: line-through;
+}
+.membershipOptionsList .card-header span.priceafter{
+    color:  #000;
+    font-family: Couture;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}

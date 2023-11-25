@@ -1,16 +1,24 @@
-import { useQuery } from '@tanstack/react-query';
+import { useContext, useEffect, useState } from 'react';
 import Slider from "react-slick";
 import { getListMembershipTypes } from '../../../apis/MembershipApi';
 import MembershipTypesList from './MembershipTypesList';
-import Paragraph from '../../UI/Paragraph';
-import { MembershipIndividualsTypes } from '../../../Data/IndividualsTypesData';
-import CardPlaceHolder  from '../../UIPlaceholders/CardPlaceHolder';
+import {AuthContext} from '../../../apis/context/AuthTokenContext';
 
 const MembershipTypesSlider = () => {
-    // const {data, error, isError} = useQuery({
-    //     queryKey: ['membershipTypes'],
-    //     queryFn: getListMembershipTypes
-    // });
+    
+    const [types, setTypes] = useState([]);
+    const {token} = useContext(AuthContext);
+
+    useEffect(()=>{
+        const getMemebershipTypes = async () => {
+            try {
+                const result = await getListMembershipTypes(token);
+                setTypes(result['individual']);
+            }catch (err){console.log(err)}
+        }
+        getMemebershipTypes();
+    },[token]);
+
     const settings = {
         dots: false,
         arrows: true,
@@ -68,10 +76,10 @@ const MembershipTypesSlider = () => {
     return (
         <>
         <Slider {...settings} className='individual_slider'>
-            {MembershipIndividualsTypes ? MembershipIndividualsTypes.map((listMembershipType, index) => {
-                const {id, name, logo, link, description, image }  = listMembershipType;
+            {types && types.map((listMembershipType, index) => {
+                const {id, name, logo, link, description }  = listMembershipType;
                 return (
-                    <div className='px-3'>
+                    <div className='px-2'>
                         <MembershipTypesList
                             key={index}
                             id={id}
@@ -79,15 +87,11 @@ const MembershipTypesSlider = () => {
                             logo={logo}
                             link={link}
                             description={description}
-                            image={image}
+                            image={logo}
                         />
                     </div>
                 );
-            }) : (
-                <div className='px-3'>
-                    <CardPlaceHolder />
-                </div>
-            )}
+            })}
         </Slider>
         {/* {isError && <Paragraph>there is no membership type to display</Paragraph>} */}
         </>
