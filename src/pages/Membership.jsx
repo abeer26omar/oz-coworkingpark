@@ -7,7 +7,7 @@ import { DataContext } from '../apis/context/SiteDataContext';
 
 const Membership = () => {
 
-    const {config, getComponentValue} = useContext(DataContext);
+    const {getComponentValue} = useContext(DataContext);
     
     return (
         <>

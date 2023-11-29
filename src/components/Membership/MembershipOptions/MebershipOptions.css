@@ -148,3 +148,23 @@
     font-weight: 700;
     line-height: 120%;
 }
+.selectDate_plan input[type='checkbox'] {
+    border: transparent;
+    box-shadow: none !important;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+}
+.selectDate_plan input[type='checkbox']:checked{
+    background-color: var(--primary-color);
+    background-image: url('../../../assets/images/icons/checkboxplan.svg');
+}
+.selectDate_plan label {
+    color:  #000;
+    text-align: center;
+    font-family: Questrial;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+} 

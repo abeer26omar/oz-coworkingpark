@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import './MebershipOptions.css';
 import './Membership.css';
 import { Container, Row } from "react-bootstrap";
@@ -9,17 +9,23 @@ import vector from "../../../assets/images/vectorRight.svg";
 import Paragraph from '../../UI/Paragraph';
 import Media from "../../Media/Media";
 import check_yes from '../../../assets/images/check_yes.svg';
-import check_no from '../../../assets/images/check_no.svg';
 import MembershipTypesSlider from '../MembershipTypes/MembershipTypesSlider';
 import MembershipTypesSliderCorporate from '../MembershipTypes/MembershipTypesSliderCorporate';
 import Button from '../../UI/Button';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
+import ApplyPlanModal from './ApplyPlanModal';
 
 const MembershipOptions = () => {
 
     const {id} = useParams();
     const [typeDetials, setTypeDetials] = useState();
-    const {token} = useContext(AuthContext);
+    const { token } = useContext(AuthContext);
+    const [planId, setPlanId] = useState(null);
+    const [show, setShow] = useState(false);
+
+    const navigate = useNavigate(); 
+
+    const handelHide = () => setShow(false);
 
     useEffect(()=>{
         const getMemebershipDetails = async () => {
@@ -36,7 +42,7 @@ const MembershipOptions = () => {
         return price-priceDicounted;
     }
 
-    const setSlectedMemebershipDetails = (type, price, discount, description, time) => {
+    const setSlectedMemebershipDetails = (id, type, price, discount, description, time) => {
        const selectedPlan = {
             mainPlan: typeDetials?.name,
             selectedPackage: type,
@@ -46,7 +52,14 @@ const MembershipOptions = () => {
             time: time
        } 
        sessionStorage.setItem('selectedPlan', JSON.stringify(selectedPlan));
-    }
+       setPlanId(id);
+       if(token){
+            setShow(true)
+        }else{
+            navigate('/joinus');
+        }
+    };
+    
     return (
         <>
             <MainHeaderWrapper image={typeDetials?.logo}>
@@ -84,12 +97,12 @@ const MembershipOptions = () => {
                                 </div>
                                 <div className='d-flex justify-content-center'>
                                     <div className="membershipOptionsList container">
-                                        <div className='row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-3 align-items-center justify-content-center'>
+                                        <div className='row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-3'>
                                             {typeDetials &&
                                                 typeDetials.options.map((item, index)=>{
                                                     return(
                                                         <div className='col d-flex justify-content-center' key={index}>
-                                                            <div className='card h-100'>
+                                                            <div className='card h-100 w-100'>
                                                                 <div className='card-header'>
                                                                     <span>{typeDetials?.name}</span>
                                                                     <h1 className='py-3'>{item.type}</h1>
@@ -97,19 +110,8 @@ const MembershipOptions = () => {
                                                                     <span className='mb-0 priceafter'>{calcDiscount(item.price, item.discount)} / {item.time}</span>
                                                                 </div>
                                                                 <div className='card-body'>
-                                                                    <Paragraph>Your Plan Benefits</Paragraph>
-                                                                    {/* <ul className=''>
-                                                                        {
-                                                                            item.Benefits.map(e=>{
-                                                                                return  (
-                                                                                    <li>
-                                                                                        <Media type='img' src={e.value === 'YES' ? check_yes : check_no} alt='check_mark' />
-                                                                                        <span className='ps-3'>{e.name}</span>
-                                                                                    </li>
-                                                                                )
-                                                                            })
-                                                                        }
-                                                                    </ul> */}
+                                                                    <Paragraph><img type='img' src={check_yes} alt='check_mark' /> Your Plan Benefits</Paragraph>
+                                                                    <div className='ps-3 dynamic_p' dangerouslySetInnerHTML={{ __html: item.website_description }}></div>
                                                                 </div>
                                                                 <div className='card-footer'>
                                                                     <div className='row row-cols-xxl-4 row-cols-lg-2 g-3' style={{
@@ -118,8 +120,8 @@ const MembershipOptions = () => {
                                                                         {item.amenities.slice(0,4).map((item, index)=>{
                                                                             return (
                                                                                 <div className='col d-flex flex-column align-items-center' key={index}>
-                                                                                    <Media type='img' src={item.icon} alt={item.name} className='mb-3' />
-                                                                                    <span className='amenity_title'>{item.key}</span>
+                                                                                    <Media type='img' src={item.logo} alt={item.title} className='mb-3' />
+                                                                                    <span className='amenity_title'>{item.title}</span>
                                                                                 </div>
                                                                             )
                                                                         })}
@@ -132,8 +134,7 @@ const MembershipOptions = () => {
                                                                             className='ex_link mb-3'>{'explore more'}</Button>
                                                                         <Button 
                                                                             tagType='link'
-                                                                            to={`/joinus`}
-                                                                            onClick={setSlectedMemebershipDetails(item.type, item.price, item.discount, item.description, item.time)}
+                                                                            onClick={()=>setSlectedMemebershipDetails(item.id, item.type, item.price, item.discount, item.description, item.time)}
                                                                             className='btn_outline_black d-block auth_btn_padding'>{'apply'}</Button>
                                                                     </div>
                                                                 </div>
@@ -143,18 +144,6 @@ const MembershipOptions = () => {
                                                 })
                                             }
                                         </div>
-                                        {/* {listMembershipsTypes.map((option, index) => {
-                                            const {id, type, logo, name, typeId, image, price} = option;
-                                            return (
-                                                <div className="col-lg-4 col-md-6 col-sm-12 my-3">
-                                                    <MembershipOptionsList id={id} typeId={typeId} logo={logo} name={name}
-                                                                        type={type}
-                                                                        image={image} price={price}/>
-                                                </div>
-                                            );
-                                        })}
-                */}
-
                                     </div>
                                 </div>
                             </div>
@@ -179,6 +168,11 @@ const MembershipOptions = () => {
 
                 </Container>
             </section> 
+            <ApplyPlanModal 
+                show={show}
+                onHide={handelHide}
+                type={planId}
+            />
         </>
     );
 

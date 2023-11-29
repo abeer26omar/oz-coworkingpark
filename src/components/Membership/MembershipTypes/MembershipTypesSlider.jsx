@@ -12,7 +12,7 @@ const MembershipTypesSlider = () => {
     useEffect(()=>{
         const getMemebershipTypes = async () => {
             try {
-                const result = await getListMembershipTypes(token);
+                const result = await getListMembershipTypes(token, 'no');
                 setTypes(result['individual']);
             }catch (err){console.log(err)}
         }

@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react';
 import axios from 'axios';
 import at_oz from "../../../../assets/images/at_oz.png";
-import {useParams} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import './MemberPackage.css';
 import vector from "../../../../assets/images/Vector.png";
 import Media from "../../../Media/Media";
@@ -10,12 +10,19 @@ import Paragraph from '../../../UI/Paragraph';
 import Button from '../../../UI/Button';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import { getSingleItemById } from '../../../../apis/User';
+import ApplyPlanModal from '../../MembershipOptions/ApplyPlanModal';
 
 const MemberPackage = () => {
     const {id} = useParams();
     const [packageDetails, setPackageDetails] = useState({});
     const [membershipType, setMemebershipType] = useState(sessionStorage.getItem('membership'))
     const { token, userId } = useContext(AuthContext);
+    const [show, setShow] = useState(false);
+
+    const navigate = useNavigate(); 
+
+    const handelHide = () => setShow(false);
+
 
     useEffect(()=>{
 
@@ -38,6 +45,27 @@ const MemberPackage = () => {
         };
     },[token, id]);
 
+    const calcDiscount = (price, discount) => {
+        const priceDicounted =  price * discount / 100;
+        return price-priceDicounted;
+    }
+
+    const setSlectedMemebershipDetails = (type, price, discount, description, time) => {
+        const selectedPlan = {
+            // mainPlan: typeDetials?.name,
+            selectedPackage: type,
+            price: price,
+            priceDicounted: calcDiscount(price, discount),
+            description: description,
+            time: time
+        } 
+        sessionStorage.setItem('selectedPlan', JSON.stringify(selectedPlan));
+        if(token){
+            setShow(true)
+         }else{
+            navigate('/joinus');
+         }
+     };
     return (
         <>
             <MainHeaderWrapper image={packageDetails?.image}>
@@ -56,9 +84,10 @@ const MemberPackage = () => {
                                 <div className="box-content px-60">
                                     <h2 className="h2-text-box">I'LL BE AT OZ</h2>
                                     <p className="p-text-box">{packageDetails?.description}</p>
+                                    <div className='ps-3 dynamic_p' dangerouslySetInnerHTML={{ __html: packageDetails?.website_description }}></div>
                                         <Button 
                                             tagType='link'
-                                            to={'/joinus'}
+                                            onClick={()=>setSlectedMemebershipDetails(packageDetails.id, packageDetails.type, packageDetails.price, packageDetails.discount, packageDetails.description, packageDetails.time)}
                                             className="btn_outline m-auto">
                                             Apply
                                         </Button>
@@ -89,30 +118,35 @@ const MemberPackage = () => {
                         </div>
                         <div className="container py-5">
                             <div className="row">
-                                {/* {packageDetails?.amenties.map((i, index) => {
+                                {packageDetails && packageDetails.amenities?.map((i, index) => {
                                     return (
                                         <div className="col-lg-6 col-md-6 col-sm-12 py-5 border-all" key={index}>
-                                            <div className='row'>
+                                            <div className='row align-items-center'>
                                                 <div className="col-6">
                                                     <div className="d-flex align-items-center">
-                                                                        <Media
+                                                                        <img
                                                                             type="img" 
-                                                                            src={i.icon_white} 
-                                                                            alt={i.name}/>
-                                                                        <h2 className="bold_desc mb-0">{i.key}</h2>
+                                                                            src={i.logo} 
+                                                                            alt={i.title}/>
+                                                        <h2 className="bold_desc mb-0">{i.title}</h2>
                                                     </div>
                                                 </div>
                                                 <div className='col-6'>
-                                                    <Paragraph className='mb-0 text-content text-secondary'>{i.name}</Paragraph>
+                                                    <Paragraph className='mb-0 text-content text-secondary'>{i.notes}</Paragraph>
                                                 </div>
                                             </div>
                                         </div>
                                     )
                                 }
-                            )} */}
+                            )}
                     </div>
                 </div>
             </section>
+            <ApplyPlanModal 
+                show={show}
+                onHide={handelHide}
+                type={id}
+            />
         </>
     );
 };

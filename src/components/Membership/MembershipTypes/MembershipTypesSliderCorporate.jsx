@@ -13,7 +13,7 @@ const MembershipTypesSliderCorporate = (props) => {
     useEffect(()=>{
         const getMemebershipTypes = async () => {
             try {
-                const result = await getListMembershipTypes(token);
+                const result = await getListMembershipTypes(token, 'no');
                 setTypes(result['corporate']);
             }catch (err){console.log(err)}
         }

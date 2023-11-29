@@ -1,9 +1,10 @@
 import axios from 'axios';
 import FormData from 'form-data';
 
-export const getListMembershipTypes = async (token) => {
+export const getListMembershipTypes = async (token, business_bundle) => {
         const formData = new FormData();
         formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+        formData.append('business_bundle', business_bundle);
 
         const config = {
             method: 'post',
@@ -45,18 +46,3 @@ export const getMembershipOptions = async (token, id) => {
         return response.data.data;
 };
 
-// export const getlistAmenities = async () => {
-
-//     const formData = new FormData();
-//     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
-
-//     const config = {
-//         method: 'post',
-//         url: `${process.env.REACT_APP_API_URL}/api/list_amenities_group?access_token=${process.env.REACT_APP_ACCESS_TOKEN}`,
-//         data: formData,
-//     };
-
-//     const response = await axios(config);
-//     return response.data.data;
-
-// };
