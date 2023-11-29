@@ -55,6 +55,7 @@ import SiteMap from "./components/SiteMap&Faq/SiteMap";
 import Faq from "./components/SiteMap&Faq/Faq";
 import ServiceDetails from './components/Talent Market/ServiceDetails';
 import DMChat from './components/Talent Market/DMChat';
+import DMChatProvider from './components/Talent Market/DMChatProvider';
 import Spaces from './pages/Spaces';
 import ContactAdmin from './components/ContactAdmin/ContactAdmin';
 
@@ -118,6 +119,7 @@ function App() {
           { path:'projectDetails/:id', element: <ServiceDetails />},
           { path:'addService', element: <AddService />},
           { path:'dmchat/:project/:user', element: <DMChat />},
+          { path:'dmchat/provider/:project', element: <DMChatProvider />},
           { path:'contactadmin', element: <ContactAdmin />},
         ]}
     ]);

@@ -59,6 +59,7 @@ export const getHobbies = async (token) => {
 };
 
 export const updateUserInfo = async ({
+    avatar,
     gender,
     birthday,
     language,
@@ -71,7 +72,7 @@ export const updateUserInfo = async ({
     serviceProvide,
     about,
     hobbies,
-    interest,
+    interest
     }) => {
     const token = sessionStorage.getItem('TokenOZ');
     const formData = new FormData();
@@ -89,6 +90,7 @@ export const updateUserInfo = async ({
     formData.append('custom[][fid_10]', howDidYouKnowUs);
     formData.append('custom[][fid_11]', hobbies);
     formData.append('custom[][fid_12]', interest);
+    formData.append('avatar', avatar);
 
     const config = {
         method: 'post',
@@ -230,6 +232,45 @@ export const getNotificationList = async (token, type) => {
     const config = {
         method: 'post',
         url: `${process.env.REACT_APP_API_URL}/api/list_notifications?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const addExtraBundle = async (token, membership_id) => {
+        
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('membership_id', membership_id);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/subscribe_business_bundle?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const upgradePlan = async (token, type, days) => {
+        
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('type', type);
+    formData.append('days', days);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/upgrade?access_token=${token}`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,

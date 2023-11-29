@@ -1,6 +1,4 @@
 import React from 'react';
-import about from "../../../assets/images/about/aboutHeader.png";
-import Media from "../../Media/Media";
 import Paragraph from '../../UI/Paragraph';
 import classess from '../../UI/MainHeaderWrapper.module.css';
 const AboutHeader = (props) => {
