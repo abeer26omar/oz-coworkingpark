@@ -4,13 +4,26 @@ import { getServices } from '../../apis/Market';
 import { AuthContext } from '../../apis/context/AuthTokenContext';
 import Button from '../UI/Button';
 import { filterProducts } from '../../apis/Market';
+import RangeSlider from 'react-range-slider-input';
+import 'react-range-slider-input/dist/style.css';
+const MIN = 50;
+const MAX = 1000;
 
 const MarketFilter = ({isOpen, getFilteredData, seacrch_text}) => {
 
-    const { token, userId, branch_id } = useContext(AuthContext);
+    const { token, userId, branchId } = useContext(AuthContext);
     const [services, setServices] = useState([]);
-    const [prices, setPrices] = useState([]);
     const [swalProps, setSwalProps] = useState({});
+    const [value, setValue] = useState([MIN, MAX]);
+    const [minValue, setminValue] = useState(MIN);
+    const [maxValue, setmaxValue] = useState(MAX);
+
+
+    const handleSliderChange = (newValue) => {
+        setValue(newValue);
+        setminValue(newValue[0]);
+        setmaxValue(newValue[1]);
+    };
 
     useEffect(()=>{
         const controller = new AbortController();
@@ -29,9 +42,10 @@ const MarketFilter = ({isOpen, getFilteredData, seacrch_text}) => {
                 token,
                 userId, 
                 seacrch_text, 
-                values.types, 
-                values.price, 
-                values.price, 1);
+                values.types,
+                minValue,
+                maxValue,
+                branchId);
             getFilteredData(result);
         }
         catch (error){
@@ -45,6 +59,7 @@ const MarketFilter = ({isOpen, getFilteredData, seacrch_text}) => {
             });
         }
     };
+
     return (
         <>
             {isOpen && (
@@ -79,7 +94,7 @@ const MarketFilter = ({isOpen, getFilteredData, seacrch_text}) => {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         className="form__field placeholderSelect">
-                                            <option disabled>service types</option>
+                                            <option disabled selected value=''>service types</option>
                                             {services && services.map((item, index) => (
                                                 <option key={index} value={item.id}>
                                                     {item.name}
@@ -87,21 +102,15 @@ const MarketFilter = ({isOpen, getFilteredData, seacrch_text}) => {
                                             ))}
                                     </select>
                                 </div>
-                                <div className='col-xxl-3 col-md-3'>
-                                    <select
-                                        id='prices'
-                                        name='prices'
-                                        value={values.prices}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className="form__field placeholderSelect">
-                                        <option disabled>prices</option>
-                                        {prices && prices.map((item, index) => (
-                                            <option key={index} value={item.id}>
-                                                {item.name}
-                                            </option>
-                                        ))}
-                                    </select>
+                                <div className='col-xxl-3 col-md-3 align-self-end'>
+                                    <RangeSlider
+                                        min={MIN}
+                                        max={MAX}
+                                        step={10}
+                                        value={value}
+                                        onInput={handleSliderChange}
+                                    />
+                                    <span>price: [{minValue}, {maxValue}] EGP</span>
                                 </div>
                             
                                 <div className='col-xxl-2 col-md-2'>

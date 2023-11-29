@@ -119,18 +119,33 @@ const ServiceDetails = () => {
                                     </p>
                             </div>
                             <div className="cards-event-buttons text-center">
-                                {(service && service.user_id?.user_id !== userId) &&
+                                {(service && service.user_id?.user_id !== userId) ? 
                                     (
                                         <>
-                                            {(service && service.contact_type.includes('hat')) && 
+                                            {(service && service.contact_type?.includes('hat')) && 
                                                 <Button 
                                                     tagType='link'
+                                                    onClick={()=>{
+                                                        const recipent = {
+                                                            name: service.user_id?.name,
+                                                            id: service.user_id?.id,
+                                                            avatar: service.user_id?.avatar
+                                                        }
+                                                        sessionStorage.setItem('recipentOZData',JSON.stringify(recipent))
+                                                    }}
                                                     to={`/dmchat/${service.id}/${service.user_id?.id}`}
                                                     className="btn button-outLine btn-bg-white attend-btn">Contact</Button>
                                             }
-                                            {(service && service.contact_type.includes('mail')) && <a className="btn button-outLine btn-bg-white attend-btn" href={`mailto://${service.user_id?.email}`} target='_blank'>Contact</a>}
-                                            {(service && service.contact_type.includes('all')) && <a className="btn button-outLine btn-bg-white attend-btn" href={`tel://${service.user_id?.phone}`} target='_blank'>Contact</a>}
+                                            {(service && service.contact_type?.includes('mail')) && <a className="btn button-outLine btn-bg-white attend-btn" href={`mailto://${service.user_id?.email}`} target='_blank'>Contact</a>}
+                                            {(service && service.contact_type?.includes('all')) && <a className="btn button-outLine btn-bg-white attend-btn" href={`tel://${service.user_id?.phone}`} target='_blank'>Contact</a>}
                                         </>
+                                    )
+                                    :
+                                    (
+                                        <Button 
+                                            tagType='link'
+                                            to={`/dmchat/provider/${service.id}`}
+                                            className="btn button-outLine btn-bg-white attend-btn">See Contacts</Button>
                                     )
                                 }
                             </div>

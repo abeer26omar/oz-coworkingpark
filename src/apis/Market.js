@@ -50,8 +50,7 @@ export const filterProducts = async (token,
     service_type_id,
     price_from,
     price_to, 
-    branchId,
-    signal) => {
+    branchId) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -68,7 +67,6 @@ export const filterProducts = async (token,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-        signal: signal
     };
 
     const response = await axios(config);
@@ -114,18 +112,13 @@ export const createProject = async (token,
     return response.data.data;
 };
 
-export const getClientMessages = async (token, 
-    userId,
-    type,
-    page_id,
-    recipient_id) => {
+export const getClientMessages = async (token, pageId, recipientId) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
-    formData.append('user_id', userId);
-    formData.append('type', type);
-    formData.append('page_id', page_id);
-    formData.append('recipient_id', recipient_id);
+    formData.append('type', 'fetch');
+    formData.append('page_id', pageId);
+    formData.append('recipient_id', recipientId);
 
     const config = {
         method: 'post',
@@ -140,11 +133,12 @@ export const getClientMessages = async (token,
     return response.data.data;
 };
 
-export const getChatList = async (token, type) => {
+export const getChatList = async (token, productId) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
-    formData.append('type', type);
+    formData.append('type', 'get_list');
+    formData.append('page_id', productId);
     
     const config = {
         method: 'post',
@@ -189,6 +183,49 @@ export const reportUser = async (token, user_id, text) => {
     const config = {
         method: 'post',
         url: `${process.env.REACT_APP_API_URL}/api/report_user?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const likeProduct = async (token, userId, product_id) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('user_id', userId);
+    formData.append('product_id', product_id);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/like-product?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const sendMessage = async (token, product_id, recipient_id, message, message_hash_id) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('type', 'send');
+    formData.append('page_id', product_id);
+    formData.append('recipient_id', recipient_id);
+    formData.append('text', message);
+    formData.append('message_hash_id', message_hash_id);
+    
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/page_chat?access_token=${token}`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,

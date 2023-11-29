@@ -6,6 +6,7 @@ import MarketFilter from './MarketFilter';
 import { getProductsList } from '../../apis/Market';
 import { AuthContext } from '../../apis/context/AuthTokenContext';
 import MarketProjectItem from './MarketProjectItem';
+
 const MarketSpace = ()=>{
 
     const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -13,7 +14,12 @@ const MarketSpace = ()=>{
     const [error, setError] = useState('');
     const [empty, setEmpty] = useState('');
     const [searchText, setSearchText] = useState('');
+    const [visibleCards, setVisibleCards] = useState(3);
     const { token, userId } = useContext(AuthContext);
+
+    const handleShowMore = () => {
+      setVisibleCards(prevVisibleCards => prevVisibleCards + 3);
+    };
 
     useEffect(()=>{
         const controller = new AbortController();
@@ -44,15 +50,6 @@ const MarketSpace = ()=>{
             setEmpty('');
         }
     };
-
-    const handleShowMore = (e) => {
-        e.preventDefault()
-        const newCards = [...cards, setCards(cards)?.slice(cards.length, cards.length + 3)];
-        setCards(newCards);
-        setError('');
-        setEmpty('');
-    };
-
 
     return (
         <section className="booking-space p-0">
@@ -145,7 +142,7 @@ const MarketSpace = ()=>{
                     {empty && <Paragraph className='empty'>{empty}</Paragraph>}
                     {error && <Paragraph className='text-danger empty'>{error}</Paragraph>}
                     <div className="row">
-                        {cards && cards.map((item, index) => {                                
+                        {cards && cards.slice(0, visibleCards).map((item, index) => {                                
                             return (
                                 <>
                                     <div className="col-lg-4 col-md-6 col-sm-12" key={index}>
@@ -153,11 +150,11 @@ const MarketSpace = ()=>{
                                             id={item.id}
                                             title={item.title} 
                                             image={item.image}
-                                            category={item.category.name}
-                                            category_logo={item.category.logo}
-                                            user={item.user_id.first_name}
+                                            category={item.category?.name}
+                                            category_logo={item.category?.logo}
+                                            user={item.user_id?.first_name}
                                             description={item.description}
-                                            lastseen={item.user_id.lastseen}
+                                            lastseen={item.user_id?.lastseen}
                                             is_favorite={item.is_favorite} 
                                         />
                                     </div>
@@ -165,7 +162,7 @@ const MarketSpace = ()=>{
                             )
                         })}
                     </div>
-                        {cards && cards.length < cards.length && (
+                        {cards && visibleCards < cards.length && (
                             <div className='text-center mt-5'>
                                 <Button 
                                     tagType="link" 
