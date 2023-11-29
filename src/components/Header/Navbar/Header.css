@@ -277,7 +277,18 @@ nav.btn.show {
     background: var(--primary-color); 
     border-radius: 0px;
 }
-
+.form-select {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: black;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: var(--questrial-font);
+}
+.form-select:focus{
+    box-shadow: none !important;
+}
 /* Handle on hover */
 .Notifications .noti_container::-webkit-scrollbar-thumb:hover {
     background: var(--primary-color); 

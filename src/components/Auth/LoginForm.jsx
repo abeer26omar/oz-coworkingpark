@@ -6,12 +6,14 @@ import { Login } from "../../apis/AuthApi";
 import { useNavigate } from "react-router-dom";
 import Button  from '../UI/Button';
 import SweetAlert2 from 'react-sweetalert2';
+import {requestForToken} from '../../apis/firebase';
 
 const LoginForm = ({profile, provider})=>{
     const navigate = useNavigate();
     const [swalProps, setSwalProps] = useState({});
     const [userInfo, setUSerInfo] = useState({});
     const { handleLogin } = useContext(AuthContext);
+    const [notificationToken, setNotificationToken] = useState('');
 
     useEffect(()=>{
         if(provider === 'google'){
@@ -27,9 +29,19 @@ const LoginForm = ({profile, provider})=>{
         }
     },[profile, provider]);
 
+    useEffect(()=>{
+        const getToken = async () => {
+            try{
+                const result = await requestForToken();
+                setNotificationToken(result);
+            }catch(error){}
+        }
+        getToken();
+    },[]);
+
     const handleSubmit = async (values) => {
         try {
-            const result = await Login(values.email, values.password, provider);
+            const result = await Login(values.email, values.password, provider, notificationToken);
             handleLogin(result);
             navigate(-1);
         } catch (error) {
@@ -42,7 +54,8 @@ const LoginForm = ({profile, provider})=>{
                 timer: 1500
             });
         }
-    }
+    };
+    
     return (
         <>
             <Formik 
@@ -57,8 +70,8 @@ const LoginForm = ({profile, provider})=>{
                     handleSubmit(values);
                 }}
                 validationSchema={Yup.object().shape({
-                    email: Yup.string().email().required('Required'),
-                    password: Yup.string().required('Required')
+                    email: Yup.string().email().required(),
+                    password: Yup.string().required()
                 })}>
             {props => {
                 const {

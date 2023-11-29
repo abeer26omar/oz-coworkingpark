@@ -2,7 +2,6 @@ import { useEffect, useState, useContext } from 'react'
 import { Formik } from 'formik';
 import * as Yup from "yup";
 import { Register } from "../../apis/AuthApi";
-import { useNavigate } from "react-router-dom";
 import Button  from '../UI/Button';
 import RegisterOTPModal from './RegisterOTPModal';
 import SweetAlert2 from 'react-sweetalert2';
@@ -15,7 +14,6 @@ const RegisterForm = ({provider, profile})=>{
     const [userInfo, setUSerInfo] = useState({});
     const handleClose = () => setShow(false);
     const [swalProps, setSwalProps] = useState({});
-    const navigate = useNavigate();
     const siteConfig = useContext(SiteConfigContext);
     const { handleLogin } = useContext(AuthContext);
 
@@ -196,6 +194,7 @@ const RegisterForm = ({provider, profile})=>{
                             onChange={handleChange}
                             onBlur={handleBlur}
                             className="form__field placeholderSelect">
+                                <option selected disabled value={''}>choose user type</option>
                                 {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_4.data).map(([key, value]) => (
                                     <option key={key} value={key}>
                                         {value}

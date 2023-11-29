@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const Register = async (first_name,last_name,email,phone,user_type,password,confirm_password) => {
+export const Register = async (first_name, last_name, email, phone, user_type, password, confirm_password, notificationToken) => {
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY)
     formData.append('first_name', first_name);
@@ -10,11 +10,14 @@ export const Register = async (first_name,last_name,email,phone,user_type,passwo
     formData.append('fid_4', user_type);
     formData.append('password', password);
     formData.append('confirm_password', confirm_password);
+    formData.append('android_m_device_id', notificationToken);
+
     const config = {
         method: 'post',
         url: `${process.env.REACT_APP_API_URL}/api/create-account`,
         data: formData
     };
+
     const response = await axios(config);
     return response.data.data;
 };
@@ -47,16 +50,16 @@ export const ResendOtp = async (email)=>{
     return response.data.data;
 };
 
-export const Login = async (email, password, provider) => {
+export const Login = async (email, password, provider, notificationToken) => {
     const formData = new FormData();
         formData.append('server_key', process.env.REACT_APP_SERVER_KEY)
         formData.append('username', email);
         formData.append('password', password);
         formData.append('device_type', 'windows');
-        formData.append('social', 'true');
+        formData.append('android_m_device_id', notificationToken);
 
         if(provider){
-            formData.append('social', true);   
+            formData.append('social', true);
         }
         
     const config = {

@@ -1,16 +1,10 @@
-import { useState, useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { useNavigate } from 'react-router-dom';
 import Paragraph from  '../UI/Paragraph';
 import Button from '../UI/Button';
 
 import './Auth.css';
 
 const LoginAlert = (props) => {
-    
-    const navigate = useNavigate();
-
-    
     
     return (
         <>
@@ -22,7 +16,8 @@ const LoginAlert = (props) => {
                 centered>
                     <Modal.Body className={`justify-content-center align-items-center p-4`}>
                         <div className="text-center">
-                            <Paragraph>please, login first</Paragraph>
+                        <Paragraph className="hand-write mb-0">Please,</Paragraph>
+                        <Paragraph className="bold-head">login first</Paragraph>
                             <Button    
                                 tagType='link'
                                 to={'/login'}
