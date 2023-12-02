@@ -6,12 +6,14 @@ import vector from "../../../../assets/images/VectorRight.png";
 import {NavLink, useParams} from "react-router-dom";
 import { getNewFeedsPost, getCommunityNewsFeed } from '../../../../apis/Events';
 import Card from "react-bootstrap/Card";
+import ShareButton from '../../../UI/ShareButton';
 
 const SingleNewFeed = () => {
 
     const { id } = useParams();
     const [post, setPost] = useState({});
     const [relatiedArticles, setRelatiedArticles] = useState([]);
+    const [url, setUrl] = useState('');
 
     useEffect(()=>{
         let isMounted = true;
@@ -36,6 +38,8 @@ const SingleNewFeed = () => {
     },[id]);
 
     useEffect(()=>{
+        const fullUrl = window.location.href;
+        setUrl(fullUrl);
         let isMounted = true;
         const source = axios.CancelToken.source();
 
@@ -129,8 +133,8 @@ const SingleNewFeed = () => {
                                 
                                 <p>{post.description}</p>
                             </div>
-                            <div className="box-details border-bottom">
-                                <a href="#" className="btn button-outLine btn-bg-white ">Share</a>
+                            <div className="box-details border-bottom d-flex">
+                                <ShareButton button={true} shareUrl={url}/>
                             </div>
 
                         </div>

@@ -91,3 +91,10 @@
     height: 856px !important;
     object-fit: cover !important;
 }
+.multi_img_style{
+    height: 400px !important;
+    object-fit: cover !important;
+}
+.multiple-event-slider  .slick-list{
+    height: 1100px !important;
+}

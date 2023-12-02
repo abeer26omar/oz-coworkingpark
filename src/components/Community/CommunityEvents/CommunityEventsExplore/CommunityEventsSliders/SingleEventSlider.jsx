@@ -55,7 +55,8 @@ const SingleEventSlider = ({eventsData}) => {
                                 day={event.dates[0].check_in_date}
                                 clock={event.dates[0].check_in_time}
                                 text={event.description}
-                                img_style='img_style' />
+                                img_style='img_style'
+                                is_favorite={event.is_favorite} />
                         </div>
                     )
                 })}

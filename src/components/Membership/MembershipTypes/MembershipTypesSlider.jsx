@@ -63,6 +63,7 @@ const MembershipTypesSlider = () => {
                     slidesToShow: 1,
                     slidesToScroll: 1,
                     centerMode: false,
+                    arrows: false
                 }
             },
             {

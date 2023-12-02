@@ -12,9 +12,9 @@ const PrivateEventsHeader = () => {
         <>
             <Navbar expand="lg" className="bg-body-tertiary navigator">
                 <Container fluid>
-                    <Navbar.Brand className="title-name" href="#home">
+                    <h1 className="title-name mb-0">
                         Private Events
-                    </Navbar.Brand>
+                    </h1>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="2"

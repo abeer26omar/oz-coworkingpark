@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from "react-bootstrap/Card";
 import date from "../../../../assets/images/icons/calendar-event.svg";
 import user from "../../../../assets/images/icons/user.svg";
@@ -8,19 +8,26 @@ import Button from '../../../UI/Button';
 import ShareButton from '../../../UI/ShareButton';
 import AddToFavButton from '../../../UI/AddToFavButton';
 
-const SingleCommunityExplore = ({id, img, title, text, category, day, host, clock, img_style}) => {
+const SingleCommunityExplore = ({id, img, title, text, category, day, host, clock, img_style, is_favorite}) => {
+    
+    const [url, setUrl] = useState('');
+    useEffect(()=>{
+        const fullUrl = window.location.href;
+        setUrl(fullUrl);
+    },[])
+
     return (
         <>
             <Card className="slider-card" key={id}>
                 <div className="position-relative">
                     <Card.Img variant="top" src={img} className={`rounded-0 ${img_style}`} title={title}/>
-                    <AddToFavButton />
+                    <AddToFavButton is_favorite={is_favorite} id={id} add_fav={true} type='event'/>
                 </div>
 
                 <Card.Body>
                     <span className="card-category">{category}</span>
                     <Card.Title className="title-explore">{title}</Card.Title>
-                    <Card.Text>{text.lenght > 50 ? text.slice(0,50) :  text}</Card.Text>
+                    <Card.Text>{text.slice(0,50)}</Card.Text>
                     <div className="d-flex justify-content-start align-items-center">
                         <div className="details-event d-flex align-items-center">
                             <img src={date} alt={day}/>
@@ -35,10 +42,10 @@ const SingleCommunityExplore = ({id, img, title, text, category, day, host, cloc
                             <span>{host}</span>
                         </div>
                     </div>
-                    <div className="cards-event-buttons">
+                    <div className="cards-event-buttons d-flex">
                         <Button tagType='link' to={`/events/communityEventsDetails/${id}`}
                               className="btn button-outLine btn-bg-white attend-btn">Attend</Button>
-                        <ShareButton />
+                        <ShareButton border={true} shareUrl={url}/>
                     </div>
                 </Card.Body>
             </Card>

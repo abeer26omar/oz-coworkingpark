@@ -4,6 +4,7 @@ import './CommunityExploreHeader.css';
 import { DataContext } from '../../../../../apis/context/SiteDataContext';
 import MainHeaderWrapper from '../../../../UI/MainHeaderWrapper';
 import Paragraph from '../../../../UI/Paragraph';
+
 const CommunityExploreHeader = () => {
 
     const {config, getComponentValue} = useContext(DataContext);

@@ -13,7 +13,6 @@ const Community = () => {
 
     useEffect(()=>{
         config("community");
-        // console.log(config("community"));
     },[]);
 
     return (

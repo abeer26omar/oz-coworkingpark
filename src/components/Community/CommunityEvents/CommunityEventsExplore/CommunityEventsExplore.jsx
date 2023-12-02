@@ -67,7 +67,7 @@ const CommunityEventsExplore = () => {
                                 <SingleEventSlider eventsData={eventsData} />
                             </div>
                         </div>
-                        <div className="col-lg-6 border-left">
+                        <div className="col-lg-6 border-left" >
                             <div className="multiple-event-slider ">
                                 <MultipleEventSlider eventsData={eventsData} />
                             </div>

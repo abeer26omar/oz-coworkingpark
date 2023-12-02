@@ -1,6 +1,5 @@
 import React from 'react';
 import PlaceItem from "./PlaceItem";
-import {Link} from "react-router-dom";
 import Paragraph from '../UI/Paragraph';
 import Button from '../UI/Button';
 
@@ -34,7 +33,9 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                         </ul>
                         <div className="d-flex buttons-group">
                             <Button to="/contactus" className="btn button-outLine btn-bg-white" tagType='link'>inquire</Button>
-                            <a href="#!" className="btn button-outLine btn-bg-white btn-pdf">Download PDF</a>
+                            <a href="#!" className="btn button-outLine btn-bg-white btn-pdf" title='comming Soon' style={{
+                                cursor: 'not-allowed'
+                            }}>Download PDF</a>
 
                         </div>
 
@@ -87,8 +88,9 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                         </ul>
                         <div className="d-flex buttons-group">
                             <Button to="/contactus" className="btn button-outLine btn-bg-white" tagType='link'>inquire</Button>
-                            <a href="#!" className="btn button-outLine btn-bg-white btn-pdf">Download PDF</a>
-
+                            <a href="#!" className="btn button-outLine btn-bg-white btn-pdf" title='comming Soon' style={{
+                                cursor: 'not-allowed'
+                            }}>Download PDF</a>
                         </div>
 
                     </div>

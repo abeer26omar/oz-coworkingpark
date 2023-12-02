@@ -21,6 +21,7 @@ const MultipleEventSlider = ({eventsData}) => {
         duration: 3000,
         useTransform: true,
         lazyLoad: true,
+        adaptiveHeight: true
     };
 
     return (
@@ -39,7 +40,8 @@ const MultipleEventSlider = ({eventsData}) => {
                                     host={event.host[0].name} 
                                     day={event.dates[0].check_in_date}
                                     clock={event.dates[0].check_in_time}
-                                    text={event.description} />
+                                    text={event.description}
+                                    img_style={'multi_img_style'} />
                             </div>
                         )
                     })}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import aminites from "../../../../assets/images/aminites.png";
 import vector from '../../../../assets/images/Vector.png';
 import './CommunityEventsDetails.css';
 import Slider from "react-slick";
@@ -9,19 +8,26 @@ import Media from "../../../Media/Media";
 import Button from "../../../UI/Button";
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import { getSingleItemById } from '../../../../apis/User';
-import { attendEvent, likeEvent } from '../../../../apis/Events';
+import { attendEvent, checkEvent, cancelEventAttend } from '../../../../apis/Events';
 import SweetAlert2 from 'react-sweetalert2';
 import ShareButton from '../../../UI/ShareButton';
+import AddToFavButton from '../../../UI/AddToFavButton';
 import { DataContext } from '../../../../apis/context/SiteDataContext';
+import Paragraph from '../../../UI/Paragraph';
+import LoginAlert from '../../../Auth/LoginAlertModal';
 
 const CommunityEventsDetails = () => {
 
     const {id} = useParams();
     const [eventDetails, setEventDetails] = useState([]);
-    const [like, setLike] = useState(eventDetails?.is_favorite);
+    const [url, setUrl] = useState('');
     const [swalProps, setSwalProps] = useState({});
     const { token, userId } = useContext(AuthContext);
     const {data, ResetPageName} = useContext(DataContext);
+    const [show, setShow] = useState(false);
+    const currentTime = new Date();
+    
+    const handelHide = ()=>setShow(false);
 
     useEffect(()=>{
         ResetPageName('gallery');
@@ -45,43 +51,72 @@ const CommunityEventsDetails = () => {
         };
     },[token, id]);
     
-    const attend = async () => {
-        try{
-            const res = await attendEvent(token, userId, id);
-            setSwalProps({
-                show: true,
-                icon: 'success',
-                title: res.status,
-                text: res.data.like_status,
-                showConfirmButton: false,
-                timer: 1500
-            });
-        }catch (error){
-            setSwalProps({
-                show: true,
-                icon: 'error',
-                title: error.response.data.status,
-                text: error.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
-            });
-        }
-    };
+    useEffect(()=>{
+        const fullUrl = window.location.href;
+        setUrl(fullUrl);
+    },[]);
 
-    const likeFavEvent = async () => {
-        try{
-            const res = await likeEvent(token, userId, id);
-                if(res){
-                    setLike(!like);
+    const attend = async () => {
+        if(token){
+            try{
+                const result = await checkEvent(token, userId, id);
+                if(result.bookable){
+                    try{
+                        const res = await attendEvent(token, userId, id);
+                        setSwalProps({
+                            show: true,
+                            icon: 'success',
+                            title: res.status,
+                            text: res.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }catch(error){
+                        setSwalProps({
+                            show: true,
+                            icon: 'error',
+                            title: error.response.data.status,
+                            text: error.response.data.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });   
+                    }
+                } else{
                     setSwalProps({
                         show: true,
-                        icon: 'success',
-                        title: res.status,
-                        text: res.message,
+                        icon: 'error',
+                        title: result.status,
+                        text: result.message,
                         showConfirmButton: false,
                         timer: 1500
                     });
                 }
+            }catch (error){
+                setSwalProps({
+                    show: true,
+                    icon: 'error',
+                    title: error.response.data.status,
+                    text: error.response.data.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }else{
+            setShow(true);
+        }
+    };
+
+    const cancel = async () => {
+        try{
+            const res = await cancelEventAttend(token, userId, eventDetails.event_attend_id);
+            setSwalProps({
+                show: true,
+                icon: 'success',
+                title: res.status,
+                text: res.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
         }catch (error){
             setSwalProps({
                 show: true,
@@ -198,9 +233,6 @@ const CommunityEventsDetails = () => {
                                      className='vector'/>
 
                                 </div>
-                                <Button href="#">
-                                    Explore
-                                </Button>
                             </div>
                         </div>
 
@@ -232,52 +264,54 @@ const CommunityEventsDetails = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="event-type-details">
-                                <span className="status-event">Host: 
+                            <div className="event-type-details">
+                                <Paragraph className="status-event">Price:<br /><span className='mt-3'>{eventDetails.default_price} EGP</span></Paragraph>
+                            </div>
+                            <div className="event-type-details">
+                                <Paragraph className="status-event">capacity:<br /><span className='mt-3'>{eventDetails.capacity} person</span></Paragraph>
+                            </div>
+                                
+                            </div>
+                            <div className="event-type-details">
+                                <span className="status-event">About Event</span>
+                                    <Paragraph className="event_text mt-3">
+                                        {eventDetails.description}
+                                    </Paragraph>
+                            </div>
+                            <span className="status-event">Host:
                                     {eventDetails && eventDetails.host?.map(host=>{
                                         return (
-                                            <span>{host.name}</span>
+                                            <span className='ms-2'>{host.name}</span>
                                         )
                                     })}
                                 </span>
-                            </div>
-                            <div className="event-type-details">
-                                <span className="status-event ">About Event
-                                    <p className="p-text">
-                                        {eventDetails.description}
-                                    </p>
-                                </span>
-                            </div>
-                            <div className="event-type-details">
-                                <span className="status-event">Price: <span>{eventDetails.default_price} EGP</span></span>
-                            </div>
 
-                            <div className="cards-event-buttons text-center">
-                                <Button 
-                                    tagType='link'
-                                    className="btn button-outLine btn-bg-white attend-btn"
-                                    onClick={attend}>Attend</Button>
-                                <ShareButton />
-                                <Button 
-                                    tagType='link'
-                                    className="p-0"
-                                    onClick={likeFavEvent}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
-                                        <g filter="url(#filter0_b_3789_18299)">
-                                            <rect x="0.5" y="0.5" width="47" height="47" stroke="black"/>
-                                        </g>
-                                        <path d="M36.099 15.7153L36.0993 15.7159C37.4978 18.58 36.9847 21.8798 34.2459 25.6467L34.2446 25.6486C32.0756 28.6511 28.945 31.6687 24.3568 35.2318L24.3555 35.2328C24.3412 35.2439 24.3236 35.25 24.3054 35.25C24.2873 35.25 24.2696 35.2439 24.2553 35.2328L24.2542 35.2319C19.6602 31.6625 16.5351 28.6186 14.364 25.6454C11.6176 21.879 11.1049 18.5796 12.5033 15.7159L12.5035 15.7153C13.4542 13.7643 16.2788 12.0651 19.6788 13.0394C21.2994 13.5077 22.7133 14.5117 23.6897 15.8874L24.3013 16.7492L24.9129 15.8874C25.8894 14.5115 27.3036 13.5074 28.9245 13.0392L28.9264 13.0387C32.3135 12.0505 35.147 13.7615 36.099 15.7153Z" stroke={like ? 'red' : 'black'} stroke-width="1.5"/>
-                                        <defs>
-                                            <filter id="filter0_b_3789_18299" x="-6" y="-6" width="60" height="60" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                                            <feGaussianBlur in="BackgroundImageFix" stdDeviation="3"/>
-                                            <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_3789_18299"/>
-                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_3789_18299" result="shape"/>
-                                            </filter>
-                                        </defs>
-                                    </svg>
-                                </Button>
-                                
-                               
+                            <div className="cards-event-buttons d-flex justify-content-center align-items-center">
+                               {currentTime < (eventDetails && new Date(eventDetails.end)) && (
+                                    <>
+                                        {
+                                            eventDetails.event_attend_id === null ? (
+                                                <Button 
+                                                tagType='link'
+                                                className="btn button-outLine btn-bg-white attend-btn m-0"
+                                                onClick={attend}>Attend</Button>
+                                            )
+                                            :
+                                            (
+                                                <Button 
+                                                tagType='link'
+                                                className="btn button-outLine btn-bg-white attend-btn m-0"
+                                                onClick={cancel}>cancel</Button>
+                                            )
+                                        }
+                                    </>
+                                    )
+                                }
+                                    
+                                <div className='mx-4'>
+                                    <ShareButton border={true} shareUrl={url} />
+                                </div>
+                                <AddToFavButton border={true} add_fav={false} is_favorite={eventDetails.is_favorite} id={eventDetails.id} type={'event'}/>
                             </div>
                         </div>
                     </div>
@@ -320,6 +354,10 @@ const CommunityEventsDetails = () => {
                 </div>
             </section>
             <SweetAlert2 {...swalProps} />
+            <LoginAlert 
+                show={show}
+                onHide={handelHide}
+            />
 
         </>
     );
