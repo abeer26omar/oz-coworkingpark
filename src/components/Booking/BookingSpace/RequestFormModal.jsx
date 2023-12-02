@@ -12,7 +12,7 @@ const RequestFormModal = (props) => {
                 centered
                 backdropClassName="custom-backdrop">
                     <Modal.Body className={`justify-content-center align-items-center p-5`}>
-                        <RequestForm />
+                        <RequestForm venueId={props.venueId}/>
                     </Modal.Body>
             </Modal>
             

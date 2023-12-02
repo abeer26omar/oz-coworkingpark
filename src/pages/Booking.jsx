@@ -5,10 +5,10 @@ import { DataContext } from '../apis/context/SiteDataContext';
 
 const Booking = () => {
 
-    const { config, data } = useContext(DataContext);
+    const { data, ResetPageName } = useContext(DataContext);
 
     useEffect(()=>{
-        config('booking');
+        ResetPageName('booking');
         sessionStorage.removeItem("BookingOZDetails");
         sessionStorage.removeItem("BookingOZServices");
     },[]);

@@ -1,29 +1,33 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import book1 from "../../../../assets/images/bookings/book2.png";
 import MainHeaderWrapper from '../../../UI/MainHeaderWrapper';
 import Paragraph from '../../../UI/Paragraph';
 import Button from '../../../UI/Button';
 import wifi from '../../../../assets/images/icons/wifi.png';
-import chairs from '../../../../assets/images/icons/chair.png';
-import printer from '../../../../assets/images/icons/print.png';
 import ModalInvities from './ModalInvities';
 import CancelBookingModalConfirm from './CancelBookingModalConfirm';
 import ProfileActions from '../../ProfileContent/ProfileActions';
 import {AuthContext} from '../../../../apis/context/AuthTokenContext';
 import {getSingleItemById} from '../../../../apis/User';
+import RatingModal from './RatingModal';
+import RemainderModal from './RemainderModal';
 
 const MyBookingDetails = () => {
     const {id} = useParams();
     const [show, setShow] = useState(false);
     const [showCancelModal, setShowCancelModal] = useState(false);
+    const [showRemainderModal, setShowRemainderModal] = useState(false);
+    const [showRatingModal, setShowRatingModal] = useState(false);
     const [booking, setBooking] = useState(false);
     const { token, userId } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
     const handleOpen = () => setShow(true);
     const closeCancelModal = () => setShowCancelModal(false);
+    const closeRemainderModal = () => setShowRemainderModal(false);
+    const closeRatingModal = () => setShowRatingModal(false);
 
     useEffect(()=>{
         const source = axios.CancelToken.source();
@@ -90,17 +94,43 @@ const MyBookingDetails = () => {
         );
     };
 
+    const setLocalTime = (obj) => {
+        const modifiedDate = obj.replace(' PM', '').replace(' AM', '');
+        const dateObj = new Date(modifiedDate);
+        const formattedTime = dateObj.toISOString();
+        return formattedTime;
+    };
+
+    const handelReschedule = (e) => {
+        e.preventDefault();
+        const data  = {
+            date: setLocalTime(booking.check_in_formmated),
+            time: {
+                start: setLocalTime(booking.check_in_formmated),
+                end: setLocalTime(booking.check_out_formmated)
+            },
+            numberOfPeople: booking.invites.length,
+            spaceDetails: booking.venueData,
+            services: JSON.parse(sessionStorage.getItem("BookingOZServices"))
+        };
+        sessionStorage.setItem("BookingOZDetails", JSON.stringify(data));
+
+        navigate(`/bookingDetails/${booking.venueData?.id}`);
+    }
+
     return (
         <>
             <div className='position-relative'>
-                <MainHeaderWrapper image={booking.venueData && booking.venueData?.gallery} special_flex={`justify-content-md-center`}>
+                <MainHeaderWrapper image={(booking.venueData && booking.venueData?.gallery && booking.venueData?.gallery.length !==0) ? booking.venueData.gallery : ''} special_flex={`justify-content-md-center`}>
                     <div className="container text-center">
                         <Paragraph className="text-one">booking details</Paragraph>
                         <Paragraph className="text-two">{booking.venueData && booking.venueData?.title}</Paragraph>
+                        {booking?.max_cancellation_time && 
                         <Button 
                             tagType='link' 
                             className='btn_outline mt-4'
-                            to={`/bookingDetails/${booking.venueData?.id}`}>Reschedule</Button>
+                            onClick={handelReschedule}>Reschedule</Button>}
+                            
                         <div className='mt-5'>
                             {booking?.max_cancellation_time && <Button tagType='link' className='btn_underline p-0' onClick={()=>{setShowCancelModal(true)}}>Cancel Booking</Button>}
                         </div>
@@ -166,12 +196,16 @@ const MyBookingDetails = () => {
                                                 )
                                             })}
                                         </ul>
-                                        <Button 
-                                            className='more_people'
-                                            tagType='link' 
-                                            onClick={handleOpen}>
-                                                +4
-                                        </Button>
+                                        {booking.invites.length > 4 && (
+                                            <Button
+                                                className="more_people"
+                                                tagType="link"
+                                                onClick={handleOpen}
+                                            >
+                                                +{booking.invites.length - 4}
+                                            </Button>
+                                            )
+                                        }
                                     </div>
                                 }
                             </div>
@@ -182,7 +216,7 @@ const MyBookingDetails = () => {
                                 </Paragraph>
                                 <div className="facilities-list">
                                     <ul className="list-options d-flex p-0 py-3 m-0">
-                                        {booking && booking.venueData.facilities.map((item, index)=>{
+                                        {booking && booking.venueData?.facilities.map((item, index)=>{
                                             return (
                                                 <li className="list-option-item" key={index}><img src={item.logo} alt={item.name} />{item.name}</li>
                                             )
@@ -205,7 +239,7 @@ const MyBookingDetails = () => {
                             </div>
                         </div>
                         <div className='col-lg-4 col-12 p-sm-5 p-3'>
-                            <ProfileActions />
+                            <ProfileActions canceled={booking?.canceled}/>
                         </div>
                     </div>
                 </div>
@@ -218,6 +252,17 @@ const MyBookingDetails = () => {
                 show={showCancelModal}
                 onHide={closeCancelModal}
                 booking_id={booking.id} 
+            />
+            <RatingModal
+                show={showRatingModal}
+                onHide={closeRatingModal}
+                booking_id={booking.id} 
+            />
+            <RemainderModal
+                show={showRemainderModal}
+                onHide={closeRemainderModal}
+                booking_id={booking.id}
+                venueId={booking.venueData?.id} 
             />
         </>
     )

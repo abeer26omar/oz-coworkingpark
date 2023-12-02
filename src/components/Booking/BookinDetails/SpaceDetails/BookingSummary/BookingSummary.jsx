@@ -3,27 +3,30 @@ import {Nav, Tab} from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import './BookingSummary.css';
 import {FaRegCheckCircle, FaRegCircle} from 'react-icons/fa';
-import {CopyToClipboard} from 'react-copy-to-clipboard';
-import shape from "../../../../../assets/images/VectorRight.png";
 import cash from '../../../../../assets/images/icons/Cash.svg';
 import wallet from '../../../../../assets/images/icons/Credit.svg';
 import Media from "../../../../Media/Media";
 import { getBranchById } from '../../../../../apis/config';
 import {AuthContext} from '../../../../../apis/context/AuthTokenContext';
 import Button from '../../../../UI/Button';
-import { Tooltip } from 'react-bootstrap';
-import Overlay from 'react-bootstrap/Overlay';
 import { confirmBooking } from '../../../../../apis/Booking';
 import Paragraph from '../../../../UI/Paragraph';
+import TermsAndConditionsModal from '../../../../UI/TermsAndConditionsModal';
+import ShareButton from '../../../../UI/ShareButton';
+import SweetAlert2 from 'react-sweetalert2';
 
 const BookingSummary = () => {
+
     const [bookingData, setBookingData] = useState(JSON.parse(sessionStorage.getItem("BookingOZDetails")));
     const [bookingService, setBookingService] = useState(JSON.parse(sessionStorage.getItem("BookingOZServices")));
     const [branch , setBransh] = useState();
-    const [showTooltip, setShowTooltip] = useState(false);
+    const [show, setShow] = useState(false);
     const [activeStep, setActiveStep] = useState(0);
+    const [swalProps, setSwalProps] = useState({});
+    const [payment,setPayment] = useState(1)
     const { token, userId } = useContext(AuthContext);
-    const target = useRef(null);
+
+    const handelClose = () => setShow(false);
 
     useEffect(()=>{
         setBookingData(JSON.parse(sessionStorage.getItem("BookingOZDetails")));
@@ -42,8 +45,7 @@ const BookingSummary = () => {
         }
     };
 
-    const handleBookingClick = (event) => {
-        event.preventDefault();
+    const handleBookingClick = () => {
         window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -102,7 +104,15 @@ const BookingSummary = () => {
             </>
         )
     };
-
+    const setDateApi = (roomdate)=>{
+        const date = new Date(roomdate);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const dateNew = `${year}-${month}-${day}`;
+        return dateNew;
+    };
+    
     const setTime = (roomdate)=>{
         const date = new Date(roomdate);
         
@@ -114,6 +124,16 @@ const BookingSummary = () => {
                 })}
             </span>
         )
+    };
+
+    const setTimeApi = (roomdate)=>{
+        const date = new Date(roomdate);
+        const newTime = date.toLocaleTimeString('en-us', {
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit',
+        })
+        return newTime;
     };
 
     const getPeriod = (start, end) => {
@@ -132,50 +152,66 @@ const BookingSummary = () => {
 
     useEffect(()=>{
 
-        getBranchById(token, bookingData.spaceDetails.amenitie.branche_id).then(res=>{
+        getBranchById(token, bookingData?.spaceDetails?.amenitie?.branche_id).then(res=>{
             setBransh(res.name);
         });
 
     },[bookingData]);
 
-    const confirmBookingVenue = (event) => {
-        event.preventDefault();
+    const confirmBookingVenue = async () => {
+    try {
         const service_price = bookingService && bookingService.reduce((total, service) => {
             return total + service.price;
           }, 0);
         const total_price = service_price + bookingData.spaceDetails.price_discounted;
-
-        confirmBooking(token, userId, 
-            bookingData.spaceDetails.amenitie.branche_id, 
-            bookingData.spaceDetails.id, 
-            bookingData.numberOfPeople, 
-            bookingData.spaceDetails.booking_code,
-            bookingService,
-            bookingData.spaceDetails.price_discounted,
-            service_price,
-            total_price,
-            bookingData.date,
-            bookingData.time.start,
-            bookingData.time.end).then(res=>{
-                console.log(res);
-                sessionStorage.removeItem("BookingOZDetails");
-                sessionStorage.removeItem("BookingOZServices");
-            }).catch(err=>{
-                console.log(err);
+            const result = await confirmBooking(token, userId, 
+                bookingData.spaceDetails.amenitie.branche_id, 
+                bookingData.spaceDetails.id, 
+                bookingData.numberOfPeople, 
+                bookingData.spaceDetails.booking_code,
+                bookingService,
+                bookingData.spaceDetails.price_discounted,
+                service_price,
+                total_price,
+                setDateApi(bookingData.date),
+                setTimeApi(bookingData.time.start),
+                setTimeApi(bookingData.time.end))
+                if(result)
+                        {sessionStorage.removeItem("BookingOZDetails");
+                        sessionStorage.removeItem("BookingOZServices");
+                        setSwalProps({
+                            show: true,
+                            icon: 'success',
+                            title: result.status,
+                            text: result.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                handleBookingClick();}
+        }
+    catch(error){
+            setSwalProps({
+                    show: true,
+                    icon: 'error',
+                    title: error.response.data.status,
+                    text: error.response.data.message,
+                    showConfirmButton: false,
+                    timer: 1500
             });
+        }
     };
 
     return (
         <>
             <section className="summary position-relative">
-                <div className="img_float">
+                {/* <div className="img_float">
                     <img
                         type="img"
                         src={shape}
                         alt="shape"
                         width={'100%'} 
                         className=""/>
-                </div>
+                </div> */}
                 <div className="container">
                     <Tab.Container activeKey={steps[activeStep]?.key} onSelect={handleTabSelect}>
                         <Nav variant="tabs" className="mb-4">
@@ -198,10 +234,10 @@ const BookingSummary = () => {
                                                             <div className="head-box-summary">
                                                                 <span>Summary</span>
                                                                 <div className='d-flex justify-content-between align-items-center mb-5 mt-3'>
-                                                                    <h2>{bookingData.spaceDetails.title}</h2>
+                                                                    <h2>{bookingData?.spaceDetails.title}</h2>
                                                                     <Button 
                                                                         tagType='link'
-                                                                        to={`/bookingDetails/${bookingData.spaceDetails.id}`}
+                                                                        to={`/bookingDetails/${bookingData?.spaceDetails.id}`}
                                                                         className='p-0'>
                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
                                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M30.6196 12.3347C31.0659 11.8884 31.7895 11.8884 32.2359 12.3347L35.6644 15.7633C36.1107 16.2096 36.1107 16.9332 35.6644 17.3795L25.3787 27.6653C25.2039 27.8401 24.977 27.9535 24.7322 27.9885L20.7322 28.5599C20.3761 28.6108 20.0168 28.491 19.7625 28.2367C19.5081 27.9823 19.3884 27.623 19.4392 27.2669L20.0107 23.2669C20.0456 23.0221 20.1591 22.7953 20.3339 22.6204L30.6196 12.3347ZM22.2195 23.9673L21.9175 26.0817L24.0319 25.7796L33.2401 16.5714L31.4277 14.7591L22.2195 23.9673Z" fill="#BDBDBD"/>
@@ -222,7 +258,7 @@ const BookingSummary = () => {
                                                                 <path d="M2.66602 15.9987C2.66602 10.9704 2.66602 8.45623 4.22811 6.89413C5.79021 5.33203 8.30437 5.33203 13.3327 5.33203H18.666C23.6943 5.33203 26.2085 5.33203 27.7706 6.89413C29.3327 8.45623 29.3327 10.9704 29.3327 15.9987V18.6654C29.3327 23.6937 29.3327 26.2078 27.7706 27.7699C26.2085 29.332 23.6943 29.332 18.666 29.332H13.3327C8.30437 29.332 5.79021 29.332 4.22811 27.7699C2.66602 26.2078 2.66602 23.6937 2.66602 18.6654V15.9987Z" stroke="black" stroke-width="2"/>
                                                                 <path d="M23.9993 21.3347L21.3327 21.3347M21.3327 21.3347L18.666 21.3347M21.3327 21.3347L21.3327 18.668M21.3327 21.3347L21.3327 24.0013" stroke="black" stroke-width="2" stroke-linecap="round"/>
                                                                 </svg>
-                                                                {setDate(bookingData.date)}
+                                                                {setDate(bookingData?.date)}
                                                             </li>
                                                             <li>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -232,8 +268,9 @@ const BookingSummary = () => {
                                                                 <path d="M27.3333 6.00129L22 2.66797" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                             </svg>
                                                             
-                                                                    {setTime(bookingData.time.start)} - {setTime(bookingData.time.end)} -
-                                                                    ({getPeriod(bookingData.time.start,bookingData.time.end)})                                                          </li>
+                                                                    {setTime(bookingData?.time.start)} - {setTime(bookingData?.time.end)} -
+                                                                    ({getPeriod(bookingData?.time.start,bookingData?.time.end)})
+                                                            </li>
                                                             <li>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                                             <ellipse cx="15.9993" cy="8.0013" rx="5.33333" ry="5.33333" stroke="black" stroke-width="1.5"/>
@@ -244,7 +281,7 @@ const BookingSummary = () => {
                                                             <path d="M5.33398 25.3346C2.99499 24.8217 1.33398 23.5227 1.33398 22.0013C1.33398 20.4799 2.99499 19.1809 5.33398 18.668" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
                                                             </svg>
 
-                                                                <span className='ms-3'>{bookingData.numberOfPeople} People</span>
+                                                                <span className='ms-3'>{bookingData?.numberOfPeople} People</span>
                                                             </li>
                                                             <li>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -256,7 +293,7 @@ const BookingSummary = () => {
                                                                 <path d="M5.33398 28.5178H8.34723C9.69504 28.5178 11.0574 28.6583 12.3691 28.9285C14.6894 29.4065 17.1324 29.4645 19.4766 29.085C20.6324 28.8979 21.7687 28.6118 22.7973 28.1154C23.7258 27.6672 24.8632 27.0355 25.6272 26.3279C26.3901 25.6213 27.1846 24.4649 27.7486 23.561C28.2321 22.7859 27.9982 21.8349 27.2334 21.2574C26.3837 20.6159 25.1229 20.616 24.2735 21.2577L21.8639 23.0779C20.93 23.7833 19.9099 24.4327 18.6948 24.6265C18.5487 24.6499 18.3955 24.6711 18.2358 24.6896M18.2358 24.6896C18.1877 24.6952 18.139 24.7005 18.0897 24.7055M18.2358 24.6896C18.4302 24.6479 18.6232 24.5281 18.8043 24.37C19.6619 23.6215 19.7162 22.36 18.9721 21.5242C18.7994 21.3302 18.5974 21.1685 18.3727 21.0345C14.643 18.8099 8.83987 20.5043 5.33398 22.9906M18.2358 24.6896C18.1871 24.7 18.1384 24.7055 18.0897 24.7055M18.0897 24.7055C17.3919 24.7772 16.5755 24.7957 15.6697 24.7102" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
                                                                 <path d="M23.219 13.8856C24 13.1046 24 11.8475 24 9.33333C24 6.81918 24 5.5621 23.219 4.78105M23.219 13.8856C22.4379 14.6667 21.1808 14.6667 18.6667 14.6667H13.3333C10.8192 14.6667 9.5621 14.6667 8.78105 13.8856M23.219 13.8856C23.219 13.8856 23.219 13.8856 23.219 13.8856ZM23.219 4.78105C22.4379 4 21.1808 4 18.6667 4L13.3333 4C10.8192 4 9.5621 4 8.78105 4.78105M23.219 4.78105C23.219 4.78105 23.219 4.78105 23.219 4.78105ZM8.78105 4.78105C8 5.5621 8 6.81918 8 9.33333C8 11.8475 8 13.1046 8.78105 13.8856M8.78105 4.78105C8.78105 4.78105 8.78105 4.78105 8.78105 4.78105ZM8.78105 13.8856C8.78105 13.8856 8.78105 13.8856 8.78105 13.8856Z" stroke="black" stroke-width="1.5"/>
                                                             </svg>
-                                                            <span className='ms-3'>{bookingData.spaceDetails.price} EGP</span>
+                                                            <span className='ms-3'>{bookingData?.spaceDetails.price} EGP</span>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -292,27 +329,7 @@ const BookingSummary = () => {
                                                                     </svg>
                                                                     <span className='ms-3'>https://www.ozcoworkingspace.com</span>
                                                                 </span>
-                                                                <CopyToClipboard 
-                                                                    text={bookingData.spaceDetails.booking_url+bookingData.spaceDetails.booking_code}>
-                                                                    <Button tagType='link' className='p-0' 
-                                                                        ref={target}
-                                                                        onClick={()=>{setShowTooltip(true)}}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
-                                                                        <path d="M27.4685 29.3354L21.5566 25.4336" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
-                                                                        <path d="M27.5778 18.2656L21.666 22.1674" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
-                                                                        <path d="M21.5556 23.4457C21.5556 24.9799 20.3119 26.2235 18.7778 26.2235C17.2437 26.2235 16 24.9799 16 23.4457C16 21.9116 17.2437 20.668 18.7778 20.668C20.3119 20.668 21.5556 21.9116 21.5556 23.4457Z" stroke="black" stroke-width="1.5"/>
-                                                                        <path d="M32.6669 31.2231C32.6669 32.7572 31.4232 34.0009 29.8891 34.0009C28.355 34.0009 27.1113 32.7572 27.1113 31.2231C27.1113 29.689 28.355 28.4453 29.8891 28.4453C31.4232 28.4453 32.6669 29.689 32.6669 31.2231Z" stroke="black" stroke-width="1.5"/>
-                                                                        <path d="M32.6669 16.7778C32.6669 18.3119 31.4232 19.5556 29.8891 19.5556C28.355 19.5556 27.1113 18.3119 27.1113 16.7778C27.1113 15.2437 28.355 14 29.8891 14C31.4232 14 32.6669 15.2437 32.6669 16.7778Z" stroke="black" stroke-width="1.5"/>
-                                                                        </svg>
-                                                                    </Button>
-                                                                </CopyToClipboard>
-                                                                <Overlay target={target.current} show={showTooltip} placement="right">
-                                                                    {(props) => (
-                                                                    <Tooltip id="overlay-example-2" {...props}>
-                                                                        {`link copied !`}
-                                                                    </Tooltip>
-                                                                    )}
-                                                                </Overlay>
+                                                                    <ShareButton shareUrl={bookingData?.spaceDetails.booking_url+bookingData?.spaceDetails.booking_code}/>
                                                             </li>
 
                                                         </ul>
@@ -325,14 +342,14 @@ const BookingSummary = () => {
                                             <div className="terms">
                                                 <Button 
                                                     tagType='link'
-                                                    to={'/'}
-                                                    className='p-0 terms_link'>Term&conditions Apply
+                                                    onClick={()=>setShow(true)}
+                                                    className='p-0 terms_link'>Terms&conditions Apply
                                                 </Button>
                                             </div>
                                             <div className="step-one">
-                                                <button className="btn button-outLine btn-bg-white"
+                                                <a className="btn button-outLine btn-bg-white"
                                                         onClick={handleBookingClick}>Booking
-                                                </button>
+                                                </a>
                                             </div>
 
                                         </>
@@ -361,6 +378,8 @@ const BookingSummary = () => {
                                                                         name="radioOptions"
                                                                         id="radioOption1"
                                                                         className="col-12"
+                                                                        checked
+                                                                        onChange={()=>setPayment(1)}
                                                                     />
                                                                 </div>
                                                                 <div
@@ -369,16 +388,16 @@ const BookingSummary = () => {
                                                                         type="img" src={wallet}/>
                                                                     <Form.Check
                                                                         type="radio"
-                                                                        label="Option 2"
+                                                                        label="Credit Payment"
                                                                         name="radioOptions"
                                                                         id="radioOption2"
                                                                         className="col-12"
                                                                     />
                                                                 </div>
                                                                 <div className="step-one">
-                                                                    <button className="btn button-outLine btn-bg-white"
+                                                                    <a className="btn button-outLine btn-bg-white"
                                                                             onClick={confirmBookingVenue}>Confirm
-                                                                    </button>
+                                                                    </a>
                                                                 </div>
                                                             </Form>
 
@@ -403,7 +422,7 @@ const BookingSummary = () => {
                                                             <div
                                                                 className="d-flex align-items-center justify-content-between">
                                                                 <span
-                                                                    className="date-period">Date Period: Feb 2 , 2023<br/>
+                                                                    className="date-period">Date Period: {setDate(bookingData?.date)}<br/>
                                                                     <span
                                                                         className="invoice">Invoice</span></span>
                                                                 <span className="location">OZ Working space El- sheikh- zayed Giza, Egypt </span>
@@ -420,12 +439,10 @@ const BookingSummary = () => {
                                                                 <div
                                                                     className="d-flex align-items-center justify-content-between item-box ">
                                                                   <span
-                                                                      className="item-name">Meeting room 01</span>
+                                                                      className="item-name">{bookingData?.spaceDetails.title}</span>
                                                                     <span className="item-price">
-                                                                    <del>1125 EGP</del><br/>
-                                                                    1100 EGP
-
-                                                                </span>
+                                                                    {bookingData?.spaceDetails.price} EGP
+                                                                    </span>
                                                                 </div>
                                                             </div>
 
@@ -433,7 +450,7 @@ const BookingSummary = () => {
                                                                 className="d-flex align-items-center justify-content-between line">
                                                                 <span
                                                                     className="date-period">Tax 14%</span>
-                                                                <span className="location">123.68 EGP</span>
+                                                                <span className="location">{(bookingData?.spaceDetails.price * 14 / 100) + bookingData?.spaceDetails.price} EGP</span>
                                                             </div>
                                                             <div
                                                                 className="d-flex align-items-center justify-content-between item-box">
@@ -449,14 +466,14 @@ const BookingSummary = () => {
                                                     <div className="col-lg-6 col-md-6 col-sm-12 order-summary-black ">
                                                         <div className="order-details">
                                                             <div className="line">
-                                                                <h2>Meeting room 01</h2>
+                                                                <h2>{bookingData?.spaceDetails.title}</h2>
 
                                                             </div>
                                                             <div className="booking-items">
-                                                                <span>Date : Sunday, Feb. 2 , 2023</span>
-                                                                <span>Time : 09:00 PM - 12:00 PM (3 hours )</span>
-                                                                <span>Number of people : 3 People</span>
-                                                                <span>Cash notes : Total payment due in 2 days.</span>
+                                                                <span>Date : {setDate(bookingData?.date)}</span>
+                                                                <span>Time : {setTime(bookingData?.time.start)}  {setTime(bookingData?.time.end)}  {getPeriod(bookingData?.time.start,bookingData?.time.end)}</span>
+                                                                <span>Number of people : {bookingData?.numberOfPeople} People</span>
+                                                               {payment && <span>Cash notes : Total payment due in 2 days.</span>}
                                                             </div>
                                                         </div>
 
@@ -465,6 +482,14 @@ const BookingSummary = () => {
 
                                                 </div>
 
+                                            </div>
+                                            <div className="step-one">
+                                                <Button 
+                                                    tagType='link' 
+                                                    className="btn button-outLine btn-bg-white"
+                                                    to={'/profile/mybooking'}
+                                                   >see booking
+                                                </Button>
                                             </div>
 
 
@@ -477,6 +502,11 @@ const BookingSummary = () => {
                     </Tab.Container>
                 </div>
             </section>
+            <SweetAlert2 {...swalProps} />
+            <TermsAndConditionsModal 
+                show={show}
+                onHide={handelClose}
+            />
         </>
     );
 };

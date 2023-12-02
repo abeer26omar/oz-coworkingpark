@@ -1,12 +1,23 @@
-import React from 'react';
-import Navbar from "react-bootstrap/Navbar";
+import React, { useEffect, useState } from 'react';
 import {Container} from "react-bootstrap";
-import booking from "../../../assets/images/videos/book.mp4";
 import './BookinHeader.css';
 import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
 import Paragraph from '../../UI/Paragraph';
 
 const BookingHeader = (props) => {
+
+    const [video, setVideo] = useState('')
+
+    useEffect(()=>{
+        const bookingVideo = () => {
+            props.configData.map((configItem) => {
+            if(configItem.key === 'booking_page_video'){
+                setVideo (configItem.value)
+            }
+        })}
+        bookingVideo();
+    },[props])
+
     return (
         <>
             <div className="bg-body-tertiary navigator">
@@ -27,7 +38,7 @@ const BookingHeader = (props) => {
                     </div>
                 </Container>
             </div>
-            <MainHeaderWrapper configData={props.configData} video={booking}>
+            <MainHeaderWrapper configData={props.configData} video={video}>
                 <div className={`container-fluid px-70 py-5`}>
                     <div className='col-md-6 col-12'>
                         {props.configData ? props.configData.map((configItem, index) => (

@@ -1,25 +1,21 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import book1 from "../../../../assets/images/bookings/book2.png";
 import MainHeaderWrapper from '../../../UI/MainHeaderWrapper';
 import Paragraph from '../../../UI/Paragraph';
 import Button from '../../../UI/Button';
 import CancelEventModal from './CancelEventModal';
 import { getSingleItemById } from '../../../../apis/User';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
-import wifi from '../../../../assets/images/icons/wifi.png';
-import chairs from '../../../../assets/images/icons/chair.png';
-import printer from '../../../../assets/images/icons/print.png';
 
 const MyEventDetails = () => {
     const {id} = useParams();
     const [show, setShow] = useState(false);
     const [event, setEvent] = useState({});
-    const { token } = useContext(AuthContext);
+    const { token, userId } = useContext(AuthContext);
 
     const handleClose = () => setShow(false);
-
+    
     useEffect(()=>{
         const source = axios.CancelToken.source();
 
@@ -34,11 +30,13 @@ const MyEventDetails = () => {
     return (
         <>
             <div className='position-relative'>
-                <MainHeaderWrapper image={book1} special_flex={`justify-content-md-center`}>
+                <MainHeaderWrapper image={event.gallery} special_flex={`justify-content-md-center`}>
                     <div className="container text-center">
                         <Paragraph className="text-two">{event.event_name}</Paragraph>
                         <div className='mt-5'>
-                            <Button tagType='link' className='btn_outline mt-4' onClick={()=>{setShow(true)}}>Cancel Booking</Button>
+                            {(event && event.event_attend_id) && (
+                                <Button tagType='link' className='btn_outline mt-4' onClick={()=>setShow(true)}>Cancel Attend</Button>
+                            )}
                         </div>
                     </div>
                 </MainHeaderWrapper>
@@ -122,6 +120,9 @@ const MyEventDetails = () => {
             <CancelEventModal 
                 show={show}
                 onHide={handleClose}
+                token={token} 
+                userId={userId}
+                event_attend_id={event.event_attend_id}
             />
         </>
     )

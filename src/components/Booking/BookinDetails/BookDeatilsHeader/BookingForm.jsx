@@ -11,6 +11,7 @@ import Toast from 'react-bootstrap/Toast';
 import {checkAvailability} from '../../../../apis/Booking';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import ShowAvaliablesModal from './ShowAvaliablesModal';
+import TimeRangePicker from '../../../UI/TimeRangePicker';
 
 const BookingForm = ({venueDetails, token}) => {
     const [startDate, setStartDate] = useState(null);
@@ -26,14 +27,22 @@ const BookingForm = ({venueDetails, token}) => {
     const [showAvailable, setShowAvailable] = useState(false);
     const navigate = useNavigate();
     const target = useRef(null);
-    const { userId } = useContext(AuthContext)
+    const [selectedRange, setSelectedRange] = useState([null, null]);
+    const [userNewTimeInfo, setUserNewTimeInfo] = useState(null)
+    const { userId } = useContext(AuthContext);
 
     const handleDateChange = (date) => {
-        const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+        const timezoneOffset = date.getTimezoneOffset();
+        const utcDate = new Date(date.getTime() - timezoneOffset * 60000);
         setStartDate(utcDate);
     };
 
+    const handleRangeChange = (range) => {
+        setSelectedRange(range);
+    };
+
     const handleStartTimeChange = (startTime) => {
+        console.log(startTime);
         setSelectedStartTime(startTime);
         setSelectedEndTime(null);
     };
@@ -90,6 +99,17 @@ const BookingForm = ({venueDetails, token}) => {
         e.preventDefault();
         try{
             if((startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
+                const bookingData  = {
+                    date: startDate,
+                    time: {
+                        start: selectedStartTime,
+                        end: selectedEndTime
+                    },
+                    numberOfPeople: counter,
+                    spaceDetails: venueDetails,
+                    services: JSON.parse(sessionStorage.getItem("BookingOZServices"))
+                };
+                sessionStorage.setItem("BookingOZDetails", JSON.stringify(bookingData));
                 if(token){
                     const dateObject = new Date(startDate);
                     const formattedDate = dateObject.toISOString().substring(0, 10);
@@ -97,23 +117,9 @@ const BookingForm = ({venueDetails, token}) => {
                     const timeStartStamp = Math.floor(timeStart.getTime() / 1000);
                     const timeEnd = new Date(selectedEndTime);
                     const timeEndStamp = Math.floor(timeEnd.getTime() / 1000);
-                    // const  = Math.floor(new Date(selectedStartTime).getTime() / 1000);
-                    // const timeEndStamp = Math.floor(new Date(selectedEndTime).getTime() / 1000);
                     const result = await checkAvailability(token, userId, venueDetails.id, venueDetails.buffering_time, formattedDate, timeStartStamp, timeEndStamp);
                     if(result.conflict.length === 0){
-                        const bookingData = {
-                            date: startDate,
-                            time: {
-                                start: selectedStartTime,
-                                end: selectedEndTime
-                            },
-                            numberOfPeople: counter,
-                            spaceDetails: venueDetails,
-                            services: JSON.parse(sessionStorage.getItem("BookingOZServices"))
-                        }
-
                         navigate('/bookingDetails/bookNow');
-                        sessionStorage.setItem("BookingOZDetails", JSON.stringify(bookingData));
                     }else{
                         setShowAvailable(true);
                         setAvaliableDates(result.available);
@@ -137,7 +143,12 @@ const BookingForm = ({venueDetails, token}) => {
             setSelectedEndTime(new Date(data.time.end));
             setCounter(data.numberOfPeople);
         }
-    },[]);
+    },[userNewTimeInfo]);
+
+    const updateTimeInfo = (data) => {
+        sessionStorage.setItem("BookingOZDetails", JSON.stringify(data));
+        setUserNewTimeInfo(data);
+    };
 
     return (
         <>
@@ -230,14 +241,11 @@ const BookingForm = ({venueDetails, token}) => {
                                 <div className="bookbottom__select active" data-target="roomType">
                                     <div className="bookbottom__select-text ">
                                         <div className="position-relative">
-
-                                            {/*<button onClick={handleButtonClick}>Open Date Pickers</button>*/}
-                                            <div className="time-container">
+                                            <div className="time-container px-4">
                                                 {selectedEndTime ? (
                                                         <div className="d-flex justify-content-evenly align-items-center">
                                                             <p className='mb-0'>
                                                                 <DatePicker
-                                                                    // selected={selectedStartTime}
                                                                     onChange={handleStartTimeChange}
                                                                     showTimeSelect
                                                                     showTimeSelectOnly
@@ -250,7 +258,6 @@ const BookingForm = ({venueDetails, token}) => {
                                                                     fixedHeight
                                                                     placeholderText={selectedStartTime.toLocaleTimeString()}
                                                                     className="place-text"
-                                                                    // Open the start time picker automatically
                                                                 >
                                                                 </DatePicker>
                                                             </p>
@@ -343,7 +350,9 @@ const BookingForm = ({venueDetails, token}) => {
             <ShowAvaliablesModal 
                 show={showAvailable}
                 onHide={handelAvailableHide}
-                avaliableDate={avaliableDate}/>
+                avaliableDate={avaliableDate}
+                onConfirm={updateTimeInfo}
+            />
         </>
     );
 };

@@ -11,6 +11,10 @@
     line-height: 120%; 
     margin: auto;
     text-transform: capitalize;
+    transition: all ease .3s;
+}
+.booking-space .slick-current .space-name{
+    color: var(--primary-color);
 }
 
 .booking-space .slick-next:hover, .slick-prev:hover {

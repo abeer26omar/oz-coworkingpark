@@ -23,17 +23,7 @@ const ModalInvities = (props) => {
                                     </svg>
                                     <Paragraph className='ms-3 grey-span mb-0'>Admin</Paragraph>
                                 </div>
-                                    <Button className='p-0 btn_underline' tagType='link'>
-                                        Delete
-                                    </Button>
                             </div>
-                        </div>
-                        <div className='text-center mt-5'>
-                            <Button 
-                                tagType='link'
-                                className="btn btn_outline_black btn_default auth_btn_padding"> 
-                                save                                               
-                            </Button>
                         </div>
                     </Modal.Body>
             </Modal>

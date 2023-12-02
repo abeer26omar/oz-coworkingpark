@@ -50,6 +50,11 @@ const MyBooking = ()=>{
                 {date.toLocaleDateString('en-US', optionsMonth)}
             </Paragraph>
         )
+    };
+
+    const handelShowDetails = (item) => {
+        navigate(`/mybookingDetails/${item?.id}`);
+        sessionStorage.setItem('invoiceOZ', JSON.stringify(item));
     }
 
     return (
@@ -84,7 +89,7 @@ const MyBooking = ()=>{
                         { bookingData && bookingData.map((item, index)=>{
                             return (
                                 <div className='card card_event p-3 mb-3' 
-                                    onClick={()=>{navigate(`/mybookingDetails/${item?.id}`)}} key={index}>
+                                    onClick={()=>{handelShowDetails(item)}} key={index}>
                                     <div className='row g-3 align-items-center'>
                                         <div className='col-lg-3 col-12 d-flex align-items-center'>
                                             <img src={(item.venueData && item.venueData.gallery.length !== 0 ) && item.venueData?.gallery[0].image} alt='event-img' width={'100%'} height={'136px'} style={{

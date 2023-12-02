@@ -1,11 +1,40 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from "yup";
 import Button  from '../../UI/Button';
 import Paragraph from '../../UI/Paragraph';
+import {requestBooking} from '../../../apis/Booking';
+import { AuthContext } from '../../../apis/context/AuthTokenContext';
+import SweetAlert2 from 'react-sweetalert2';
 
-const RequestForm = (props)=>{
-    const handleSubmit = ()=>{}
+const RequestForm = ({venueId})=>{
+
+    const {token, userId, branchId} = useContext(AuthContext);
+    const [swalProps, setSwalProps] = useState({});
+
+    const handleSubmit = async (values)=>{
+        try{
+            const result = await requestBooking(token, userId, branchId, 
+                venueId, values.date, values.company_name, values.activities, values.comments);
+                setSwalProps({
+                    show: true,
+                    icon: 'success',
+                    title: result.status,
+                    text: result.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+        }catch(error){
+            setSwalProps({
+                show: true,
+                icon: 'error',
+                title: error.response.data.status,
+                text: error.response.data.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    }
     return (
         <>
             <Formik 
@@ -13,7 +42,8 @@ const RequestForm = (props)=>{
                     { 
                         company_name: '',
                         activities: '',
-                        comments: ''
+                        comments: '',
+                        date: ''
                     }
                 }
                 onSubmit={async values => {
@@ -21,9 +51,10 @@ const RequestForm = (props)=>{
                     handleSubmit(values);
                 }}
                 validationSchema={Yup.object().shape({
-                    company_name: Yup.string().required('Required'),
-                    activities: Yup.string().required('Required'),
-                    comments: Yup.string().required('Required')
+                    company_name: Yup.string().required(),
+                    activities: Yup.string().required(),
+                    comments: Yup.string().required(),
+                    date: Yup.string().required()
                 })}>
             {props => {
                 const {
@@ -57,6 +88,21 @@ const RequestForm = (props)=>{
                             onBlur={handleBlur}
                         /> 
                         {errors.company_name && touched.company_name && <p className='text-danger mb-0'>{errors.company_name}</p>}
+                    </div>
+                    <div className="form__group field my-3">
+                        <label htmlFor="date"
+                            className="form__label d-flex align-items-center justify-content-start">select date</label>
+                        <input 
+                            type={"date"}
+                            id="date" 
+                            name="date"
+                            placeholder="select Date"
+                            className="form__field"
+                            value={values.date}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                           />
+                        {errors.date && touched.date && <p className='text-danger mb-0'>{errors.date}</p>}
                     </div>
                     <div className="form__group field my-3 group-check">
                         <label htmlFor="activities" className="form__label">Activities</label>
@@ -101,6 +147,7 @@ const RequestForm = (props)=>{
                 </form>
             )}}
             </Formik>
+            <SweetAlert2 {...swalProps} />
         </>
     )
 }

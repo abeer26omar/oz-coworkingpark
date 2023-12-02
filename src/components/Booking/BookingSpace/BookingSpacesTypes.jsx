@@ -10,9 +10,10 @@ import { AuthContext } from '../../../apis/context/AuthTokenContext';
 const BookingSpacesTypes = ({venues, placeId,spaceTitle})=>{
 
     const [isFilterOpen, setIsFilterOpen] = useState(false);
-    const [cards, setCards] = useState(...Object.values(venues)?.slice(0, 3));
+    const [cards, setCards] = useState(...Object.values(venues));
     const [error, setError] = useState('');
     const [empty, setEmpty] = useState('');
+    const [visibleCards, setVisibleCards] = useState(3);
     const { token, userId } = useContext(AuthContext);
 
     useEffect(()=>{
@@ -25,12 +26,8 @@ const BookingSpacesTypes = ({venues, placeId,spaceTitle})=>{
         setCards(...Object.values(venues)?.slice(0, 3));
     },[venues]);
 
-    const handleShowMore = (e) => {
-        e.preventDefault()
-        const newCards = [...cards, ...Object.values(venues)?.slice(cards.length, cards.length + 3)];
-        setCards(newCards);
-        setError('');
-        setEmpty('');
+    const handleShowMore = () => {
+        setVisibleCards(prevVisibleCards => prevVisibleCards + 3);
     };
 
     const toggleFilter = (e) => {
@@ -128,7 +125,7 @@ const BookingSpacesTypes = ({venues, placeId,spaceTitle})=>{
                         {empty && <Paragraph className='empty'>{empty}</Paragraph>}
                         {error && <Paragraph className='text-danger empty'>{error}</Paragraph>}
                         <div className="row">
-                            {cards && cards.map((book, index) => {                                
+                            {cards && cards.slice(0, visibleCards).map((book, index) => {                                
                                     return (
                                         <>
                                             <div className="col-lg-4 col-md-6 col-sm-12" key={index}>
@@ -146,7 +143,7 @@ const BookingSpacesTypes = ({venues, placeId,spaceTitle})=>{
                                     )
                             })}
                         </div>
-                        {cards && cards.length < cards.length && (
+                        {cards && visibleCards < cards.length && (
                             <div className='text-center mt-5'>
                                 <Button 
                                     tagType="link" 

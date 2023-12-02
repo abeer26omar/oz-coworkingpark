@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import './BookingSpace.css'
 import Slider from "react-slick";
 import axios from 'axios';
@@ -12,23 +13,39 @@ const BookingSpace = () => {
     const [spaceTitle, setSpaceTitle] = useState('');
     const [spaceId, setSpaceId] = useState('');
     const [venues, setVenues] = useState([]);
-    const { token, userId } = useContext(AuthContext);
+    const { token, userId, branchId } = useContext(AuthContext);
+    const sliderRef = useRef(null);
+    const [searchParams] = useSearchParams();
+    const amenity = searchParams.get('amenity');
+    const amenityid = searchParams.get('id');
+    const [activeSlide, setActiveSlide] = useState(amenityid);
+
+    useEffect(() => {
+
+        if (sliderRef.current) {
+            sliderRef.current.slickGoTo(activeSlide);
+        }
+
+    }, [activeSlide]);
 
     useEffect(()=>{
         const source = axios.CancelToken.source();
 
         getAmenitiesGroup(token, source).then(res=>{
             setBookingPlaces(res);
-            changeSpace(1,res[0].id,res[0].name);
+            if(amenity && amenityid){
+                changeSpace(amenityid, amenity);
+            }else{
+                changeSpace(res[0].id,res[0].name);
+            }
         }).catch(err=>{});
 
         return ()=>source.cancel();
-    },[]);
+    },[amenity, amenityid]);
 
-    const changeSpace = (branch_id, amenities_group_id, spaceTitle) => {
-        getVenues(token, userId, branch_id, amenities_group_id).then(res=>{
+    const changeSpace = (amenities_group_id, spaceTitle) => {
+        getVenues(token, userId, branchId, amenities_group_id).then(res=>{
             setVenues(res);
-            console.log(res);
             setSpaceTitle(spaceTitle);
             setSpaceId(amenities_group_id);
         }).catch(err=>{})
@@ -72,33 +89,47 @@ const BookingSpace = () => {
                         slidesToScroll: 1
                     }
                 }
-            ]
+            ],
+            beforeChange: (current, next) => {
+                setActiveSlide(next);
+            },
+    };
+
+    const handleSlideClick = (index) => {
+        setActiveSlide(index);
     };
 
     return (
         <>
             <section className="booking-space">
-                    <div className="container-fluid">
-                        <div className="row">
-                            <Slider {...settings}>
-                                {bookingPlaces && bookingPlaces.map((place, index)=>{
-                                    return (
-                                        <div className="col-lg-2" key={index}>
-                                            <div className="d-flex justify-content-between align-items-center" 
-                                                onClick={()=>{changeSpace(1,place.id,place.name)}}>
-                                                    <span className="space-name">{place.name}</span>
-                                                    <svg width="2" height="40" viewBox="0 0 2 40" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M1 0L0.999998 40" stroke="#BDBDBD"/>
-                                                    </svg>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </Slider>
-                        </div>
-                        <BookingSpacesTypes venues={venues} placeId={spaceId} spaceTitle={spaceTitle}/>
+                <div className="container-fluid">
+                    <div className="row">
+                    <Slider {...settings} ref={sliderRef}>
+                        {bookingPlaces &&
+                            bookingPlaces.map((place, index) => {
+                            const isActive = activeSlide === index ? 'activePlan' : '';
+                            return (
+                            <div
+                                className={`col-lg-2 ${isActive}`}
+                                key={index}
+                                onClick={() => {
+                                changeSpace(place.id, place.name);
+                                handleSlideClick(index);
+                                }}
+                            >
+                                <div className={`d-flex justify-content-between align-items-center`}>
+                                <span className={`space-name`}>{place.name}</span>
+                                <svg width="2" height="40" viewBox="0 0 2 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 0L0.999998 40" stroke="#BDBDBD" />
+                                </svg>
+                                </div>
+                            </div>
+                            );
+                        })}
+                    </Slider>
                     </div>
+                    <BookingSpacesTypes venues={venues} placeId={spaceId} spaceTitle={spaceTitle} />
+                </div>
             </section>
 
             {token && <LastBooking placeId={spaceId}/>}
