@@ -36,10 +36,10 @@ const PersonalData = () => {
     const [interestsList, setInterestsList] = useState([]);
     const [focus, setFocused] = useState(false);
     const [swalProps, setSwalProps] = useState({});
-    const {siteConfig} = useContext(SiteConfigContext);
+    const siteConfig = useContext(SiteConfigContext);
     const { token, userId } = useContext(AuthContext);
-    const [selectedInterests, setSelectedInterests] = useState();
-    const [selectedHobbies, setSelectedHobbies] = useState(custom ? [custom?.fid_11] : [""]);
+    const [selectedInterests, setSelectedInterests] = useState(custom ? [custom.fid_12] : [""]);
+    const [selectedHobbies, setSelectedHobbies] = useState(custom ? [custom.fid_11] : [""]);
     const { restState, image } = useContext(DisableContext);
 
     useEffect(()=>{
@@ -90,6 +90,7 @@ const PersonalData = () => {
                 timer: 1500
             });
             setDisabled(true);
+            restState(disabled);
         } catch (error) {
             setSwalProps({
                 show: true,
@@ -465,7 +466,7 @@ const PersonalData = () => {
                                                 placeholder="Hobbies"
                                                 className="form__field placeholderSelect"
                                                 isDisabled={disabled}
-                                                defaultValue={selectedHobbies}
+                                                defaultValue={custom ? [custom.fid_11] : [""]}
                                                 onChange={handleChangeHobbies}
                                                 isSearchable={true}
                                                 isMulti

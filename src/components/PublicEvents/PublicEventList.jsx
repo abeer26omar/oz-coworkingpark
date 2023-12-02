@@ -10,11 +10,11 @@ import { AuthContext } from "../../apis/context/AuthTokenContext";
 const PublicEventList = ({}) => {
     
     const [eventsData, setEventsData] = useState([]);
-    const { token, userId } = useContext(AuthContext);
+    const { token, userId }  = useContext(AuthContext);
 
     const settings = {
         dots: false,
-        slidesToShow: 4,
+        slidesToShow: eventsData?.length > 4 ? 4 : eventsData?.length ,
         slidesToScroll: 1,
         arrows: false,
         cssEase: "linear",
@@ -41,29 +41,24 @@ const PublicEventList = ({}) => {
                     slidesToScroll: 1,
                 },
             },
+            {
+                breakpoint: 3,
+                settings: "unslick",
+
+            }
         ],
     };
 
     useEffect(()=>{
-        let isMounted = true;
-        const source = axios.CancelToken.source();
-
+    
         const fetchNewsFeedPosts = async () => {
             try{
-                const res = await getEventsList(token, userId, source);
-                if (isMounted) {
+                const res = await getEventsList(token, userId);
                     setEventsData(res);
-                }
-            }catch (error){
-
-            }
+            }catch (error){}
         }
         fetchNewsFeedPosts();
 
-        return ()=>{
-            isMounted = false;
-            source.cancel();
-        };
     },[token, userId]);
 
     return (
@@ -76,17 +71,20 @@ const PublicEventList = ({}) => {
                                     <div className="card image-box" key={index}>
                                         <Media 
                                             type="img" 
-                                            src={event.gallery[0].image} 
+                                            src={event.gallery[0]?.image} 
                                             className="card-img-top rounded-0" 
-                                            alt={event.event_name} />
+                                            alt={event.event_name}
+                                            height= '400px' style={{
+                                                objectFit: 'cover'
+                                            }}/>
 
                                         <div className="card-body py-4">
                                             <Card.Title>{event.event_name}</Card.Title>
-                                            <Card.Text className="py-2">{event.description.slice(0,50)} ...</Card.Text>
+                                            <Card.Text className="py-2">{event.description?.slice(0,50)} ...</Card.Text>
                                             <Button 
                                                 to={`/events/communityEventsDetails/${event.id}`} 
                                                 className="btn_outline_black "
-                                                tagType='link'>{event.event_type.name}</Button>
+                                                tagType='link'>{event.event_type?.name}</Button>
                                         </div>
                                     </div>
                                 </>

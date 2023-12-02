@@ -6,13 +6,14 @@ import MainHeaderWrapper from '../../../UI/MainHeaderWrapper';
 import Paragraph from '../../../UI/Paragraph';
 import Button from '../../../UI/Button';
 import ProfileActions from '../ProfileActions';
-import CancelPlanModal from './CancelPlanModal';
+import ExtrabundlesModal from '../MyPlan/ExtrabundlesModal';
 import { getSingleItemById } from '../../../../apis/User';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 const PlanDetails = () => {
+
     const {id} = useParams();
     const [show, setShow] = useState(false);
     const [plan, setPlan] = useState({});
@@ -41,7 +42,7 @@ const PlanDetails = () => {
                         <Button 
                             tagType='link' 
                             className='btn_outline mt-4'
-                            to={`/bookingDetails/Metting Rooms/1`}>extend</Button>
+                            onClick={handleOpen}>Add Extra</Button>
                     </div>
                 </MainHeaderWrapper>
             </div>
@@ -105,11 +106,14 @@ const PlanDetails = () => {
                             </div>
                         </div>
                         <div className='col-lg-4 col-12 p-sm-5 p-3'>
-                            <ProfileActions />
+                            <ProfileActions details={plan}/>
                         </div>
                     </div>
                 </div>
             </section>
+            <ExtrabundlesModal 
+                show={show}
+                onHide={handleClose}/>
         </>
     )
 };
