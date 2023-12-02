@@ -17,7 +17,7 @@ const RightContentFB = (props) => {
             </div>
             <div className="row border-of-section">
               <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto ">
-                <div className="box-content px-4">
+                <div className="box-content  p-lg-4 p-3">
                   {props.configData
                     ? props.configData.map((configItem, index) => (
                         <React.Fragment key={index}>

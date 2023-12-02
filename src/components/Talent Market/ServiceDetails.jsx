@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { getSingleItemById } from '../../apis/User';
 import {AuthContext} from '../../apis/context/AuthTokenContext';
-import Paragraph from '../UI/Paragraph';
+import LoginAlert from '../Auth/LoginAlertModal';
 import vector from '../../assets/images/Vector.png';
 import Media from '../Media/Media';
 import Button from '../UI/Button';
@@ -12,6 +12,10 @@ const ServiceDetails = () => {
     const {id} = useParams();
     const [service, setService] = useState({});
     const { token, userId } = useContext(AuthContext);
+    const [show, setShow] = useState(false);
+    const navigate = useNavigate();
+
+    const handelHide = ()=>setShow(false);
 
     useEffect(()=>{
         const source = axios.CancelToken.source();
@@ -23,9 +27,6 @@ const ServiceDetails = () => {
         return ()=>source.cancel();
     },[token, id]);
 
-    const handelContact = () => {
-        
-    }
 
     return (
         <>
@@ -126,14 +127,18 @@ const ServiceDetails = () => {
                                                 <Button 
                                                     tagType='link'
                                                     onClick={()=>{
-                                                        const recipent = {
-                                                            name: service.user_id?.name,
-                                                            id: service.user_id?.id,
-                                                            avatar: service.user_id?.avatar
+                                                        if(token){
+                                                            const recipent = {
+                                                                name: service.user_id?.name,
+                                                                id: service.user_id?.id,
+                                                                avatar: service.user_id?.avatar
+                                                            }
+                                                            sessionStorage.setItem('recipentOZData',JSON.stringify(recipent));
+                                                            navigate(`/dmchat/${service.id}/${service.user_id?.id}`)
+                                                        }else{
+                                                            setShow(true);
                                                         }
-                                                        sessionStorage.setItem('recipentOZData',JSON.stringify(recipent))
                                                     }}
-                                                    to={`/dmchat/${service.id}/${service.user_id?.id}`}
                                                     className="btn button-outLine btn-bg-white attend-btn">Contact</Button>
                                             }
                                             {(service && service.contact_type?.includes('mail')) && <a className="btn button-outLine btn-bg-white attend-btn" href={`mailto://${service.user_id?.email}`} target='_blank'>Contact</a>}
@@ -153,6 +158,10 @@ const ServiceDetails = () => {
                     </div>
                 </div>
             </section>
+            <LoginAlert 
+                show={show}
+                onHide={handelHide}
+            />
         </>
     )
 };

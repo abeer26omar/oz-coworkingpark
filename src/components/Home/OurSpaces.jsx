@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
-import Slider from "react-slick";
+import React from 'react';
 import Buttons from "../UI/Button";
 import Paragraph from '../UI/Paragraph';
-import LocationsList from '../Locations/LocationsList';
-import {locationsData} from '../../Data/LocationsData';
 import Media from '../Media/Media';
 const OurSpaces = (props)=>{
         return (
@@ -20,8 +17,8 @@ const OurSpaces = (props)=>{
                   </div>
                 </div>
                 <div className="row border-of-section">
-                  <div className="col-md-4 col-12 m-auto ">
-                    <div className="box-content px-60">
+                  <div className="col-lg-4 col-md-5 col-12 m-auto ">
+                    <div className="box-content p-lg-4 p-3">
                       {props.configData
                         ? props.configData.map((configItem, index) => (
                             <React.Fragment key={index}>
@@ -52,7 +49,7 @@ const OurSpaces = (props)=>{
                     ? props.configData.map((configItem, index) => (
                         <React.Fragment key={index}>
                           {configItem.key === "home_page_space_image" && (
-                            <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-left img_block">
+                            <div className="col-lg-8 col-md-7 col-sm-12 col-xs-6 border-left img_block">
                               <Media
                                 type="img"
                                 className="image-box w-100"

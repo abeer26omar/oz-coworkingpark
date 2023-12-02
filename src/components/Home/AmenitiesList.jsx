@@ -1,16 +1,33 @@
-import React, {useEffect, useState ,useRef} from 'react';
+import React, {useEffect, useState } from 'react';
 import Slider from "react-slick";
 import Paragraph from '../UI/Paragraph';
-import {amenitiesList} from '../../Data/AmenitiesList';
 import HoverVideoPlayer from "react-hover-video-player";
-const AmenitiesList = (props) => {
+import {getAmenities} from '../../apis/config';
+
+const AmenitiesList = () => {
+
+    const [AmenitiesList, setAmenitiesList] = useState([]);
+
+    useEffect(()=>{
+
+        const getAmenitiesList = async () => {
+            try{
+                const result = await getAmenities();
+                setAmenitiesList(result);
+
+            }catch (error){
+
+            }
+        }
+        getAmenitiesList();
+
+    },[])
 
 
-    const [AmenitiesList, setAmenitiesList] = useState(amenitiesList)
     const settings = {
         dots: false,
         arrows: false,
-        slidesToShow: 7,
+        slidesToShow: AmenitiesList?.length > 7 ?  7  : AmenitiesList?.length,
         slidesToScroll: 1,
         autoplay: false,
         responsive: [
@@ -57,7 +74,7 @@ const AmenitiesList = (props) => {
                 }
             },
             {
-                breakpoint: 3,
+                breakpoint: 6,
                 settings: "unslick",
 
             }
@@ -72,35 +89,36 @@ const AmenitiesList = (props) => {
         <div className="col-lg-12 AmenitiesList_videos">
             <Slider {...settings} className="home-events">
                 {AmenitiesList && AmenitiesList.map((AmenitiesList, index) =>{
-                    const {id,title, video} = AmenitiesList;
+                    const {id, title, video, icon} = AmenitiesList;
                     return(
-                            <HoverVideoPlayer
+                                <HoverVideoPlayer
                                     key={index}
                                     videoSrc={video}
                                     overlayTransitionDuration={1000}
                                     restartOnPaused
                                     hoverOverlay={
-                                    <div className=''
-                                    style={{
-                                    backgroundColor: "#00000070",
-                                    position: "absolute",
-                                    top: "0",
-                                    left: "0",
-                                    width: "100%",
-                                    height: "100%",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    transition:".7s"
-                                    }}                         
-                                    >
-                                            <Paragraph className='overlay_p'>{title}</Paragraph>
-                                        </div>               
-                                                }
-                                                
-            
-
-                                                />
+                                        <div className=''
+                                            style={{
+                                                backgroundColor: "#00000070",
+                                                position: "absolute",
+                                                top: "0",
+                                                left: "0",
+                                                width: "100%",
+                                                height: "100%",
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                flexDirection: 'column',
+                                                transition:".7s"
+                                            }}>
+                                                <img src={icon} alt={title} width='40px' height='40px' style={{
+                                                    width: '40px',
+                                                    height: '40px'
+                                                }}/>
+                                                <Paragraph className='overlay_p'>{title}</Paragraph>
+                                        </div>          
+                                    }
+                                />
                     )
                 })}
             </Slider>

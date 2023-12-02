@@ -1,8 +1,8 @@
 import React , { useState } from 'react';
 import Paragraph from './Paragraph';
 import Button from './Button';
-import classes from './MainHeaderWrapper.module.css';
 import ModalVideo from './ModalVideo';
+
 const SectionHeader = (props)=>{
     const [show, setShow] = useState(false);
     const [fullscreen, setFullscreen] = useState(true);

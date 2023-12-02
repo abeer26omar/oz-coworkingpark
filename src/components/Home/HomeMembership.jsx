@@ -15,7 +15,7 @@ const HomeMembership = (props) => {
                 </div>
               </div>
               <div className="border-of-section">
-                <div className="row p-5 justify-content-between align-items-center">
+                <div className="row p-sm-5 p-3 justify-content-between align-items-center">
                   {props.configData
                     ? props.configData.map((configItem, index) => (
                         <React.Fragment key={index}>

@@ -41,11 +41,11 @@ export const getNewFeedsPost = async (id, source) => {
     return response.data.data;
 };
 
-export const getEventsList = async (token, UserId) => {
+export const getEventsList = async (token, userId) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
-    formData.append('user_id', UserId);
+    formData.append('user_id', userId);
 
     const config = {
         method: 'post',
@@ -99,12 +99,32 @@ export const getMyEventsList = async (token, UserId) => {
     return response.data.data;
 };
 
-export const attendEvent = async (token, UserId, event_id) => {
+export const checkEvent = async (token, userId, eventId) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
-    formData.append('user_id', UserId);
-    formData.append('event_id', event_id);
+    formData.append('user_id', userId);
+    formData.append('event_id', eventId);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/check-event?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const attendEvent = async (token, userId, eventId) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('user_id', userId);
+    formData.append('event_id', eventId);
 
     const config = {
         method: 'post',
@@ -119,11 +139,31 @@ export const attendEvent = async (token, UserId, event_id) => {
     return response.data.data;
 };
 
-export const likeEvent = async (token, UserId, event_id) => {
+export const cancelEventAttend = async (token, userId, eventAttendId) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
-    formData.append('user_id', UserId);
+    formData.append('user_id', userId);
+    formData.append('event_attend_id', eventAttendId);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/cancel-event-attend?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const likeEvent = async (token, userId, event_id) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('user_id', userId);
     formData.append('event_id', event_id);
 
     const config = {

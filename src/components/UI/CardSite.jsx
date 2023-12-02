@@ -3,9 +3,16 @@ import { Link } from 'react-router-dom';
 import Paragraph from './Paragraph';
 
 const  CardSite = (props )=> {
-   const linkElements = props.links.map((link, index) => (
-    <Link to={link.to} key={index} className='pb-3 links'>{link.name}</Link>
- ));
+   const linkElements = props.links.map((link, index) => {
+     if(props.to){
+        const stringWithoutSpaces = link.name.replace(/\s/g, "");
+      return ( <Link key={index} className='pb-3 links' to={props.to+stringWithoutSpaces}>{link.name}</Link>) 
+     }else{
+        return ( <Link key={index} className='pb-3 links' to={link.to}>{link.name}</Link>)
+
+     }
+   }
+ );
   return (
     <>
        <div className='site_card mb-4'>

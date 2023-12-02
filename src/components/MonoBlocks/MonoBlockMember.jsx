@@ -2,8 +2,8 @@
 import React from "react";
 import Button from "../UI/Button";
 import Paragraph from "../UI/Paragraph";
+
 const  MonoBlockMember = (props) => {
-          console.log(props.configData);
     return(
         <>
             <section className={`monoBlock bgBlack`}>
@@ -27,7 +27,10 @@ const  MonoBlockMember = (props) => {
                                 <Button 
                                     tagType = 'link' 
                                     to={'/membership'}
-                                    className={`button-outLine`}>
+                                    className={`button-outLine`}
+                                    style={{
+                                        width: '210px'
+                                    }}>
                                     Explore Memberships
                                 </Button>
                         </div>

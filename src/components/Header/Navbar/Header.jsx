@@ -10,6 +10,7 @@ import Button from '../../UI/Button';
 import { getBranches } from '../../../apis/config';
 import SocialMedia from "../../UI/SocialMedia";
 import { getListMembershipTypes } from '../../../apis/MembershipApi';
+import { getAmenitiesGroup } from '../../../apis/Booking';
 
 const Header = ({showBlackNav}) => {
 
@@ -19,6 +20,7 @@ const Header = ({showBlackNav}) => {
     const [branches, setBranches] = useState([]);
     const [address, setAddress] = useState('');
     const [types, setTypes] = useState([]);
+    const [bookingPlaces, setBookingPlaces] = useState([]);
     const { token, handelChangeBranch } = useContext(AuthContext);
 
     useEffect(()=>{
@@ -43,6 +45,14 @@ const Header = ({showBlackNav}) => {
         }
         getMemebershipTypes();
     },[token]);
+
+    useEffect(()=>{
+      
+        getAmenitiesGroup(token).then(res=>{
+            setBookingPlaces(res);
+        }).catch(err=>{});
+  
+    },[]);
 
     const setBransh = (id) => {
         handelChangeBranch(id);
@@ -71,9 +81,19 @@ const Header = ({showBlackNav}) => {
                                 })} 
                                 to={'/booking'}><span>booking</span></NavLink>
                                 <ul class="dropdown-nav">
-				                	<li className="drop_event">MR</li>
-				                	<li className="drop_event">Spaces</li>
-					                <li className="drop_event">Office </li>
+                                    {bookingPlaces && bookingPlaces.map((item,index)=>{
+                                        return (
+                                            <li className="drop_event" key={index}>
+                                                <Button 
+                                                    tagType='link' 
+                                                    className='p-0' 
+                                                    to={`/booking?amenity=${item.name}&id=${item.id}`} 
+                                                >
+                                                    {item.name}
+                                                </Button>
+                                            </li>
+                                        )
+                                    })}
 			                	</ul>
                             </li>
                             <li className="nav-item px-3  dropdown">
@@ -148,7 +168,7 @@ const Header = ({showBlackNav}) => {
                         {!token && (<LoginNav />)}
                         {token && (<LogedNav showBlackNav={showBlackNav} token={token}/>)}
                         <div class="dropdown position-relative">
-                            <a role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a role="button" id="dropdownMenuLink" className='d-flex' data-bs-toggle="dropdown" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                     <path d="M5.33398 9.33301L26.6673 9.33301" stroke={showBlackNav ? 'white' : 'black'} stroke-width="1.5" stroke-linecap="round"/>
                                     <path opacity="0.6" d="M12 16H26.6667" stroke={showBlackNav ? 'white' : 'black'} stroke-width="1.5" stroke-linecap="round"/>

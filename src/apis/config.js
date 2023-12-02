@@ -148,3 +148,14 @@ export const createIssue = async (userId,
     const response = await axios(config);
     return response.data.data;
 };
+
+export const getAmenities = async ()=>{
+
+    const config = {
+        method: 'get',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/oz_benefits`,
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+};

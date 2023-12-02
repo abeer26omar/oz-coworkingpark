@@ -92,7 +92,7 @@ const LogedNav = ({showBlackNav, token})=>{
     return (
         <>
             <div className="dropdown">
-                <a id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{
+                <a id="dropdownMenuButton1" className='d-flex' data-bs-toggle="dropdown" aria-expanded="false" style={{
                     cursor: 'pointer'
                 }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -139,7 +139,7 @@ const LogedNav = ({showBlackNav, token})=>{
                                 <ul className='ps-0'>
                                     {notification && notification.map((item, index)=>{
                                         return (
-                                            <li className="border-dropdown d-flex  px-4" key={index}>
+                                            <li className="border-dropdown d-flex px-sm-4 px-2" key={index}>
                                                 <img className='rounded-circle' alt='profile' src={item.icon}/>
                                                 <div className='info_profile mt-4 ms-4'> 
                                                     <Paragraph className='profile_notifications mb-2'>{item.title}</Paragraph>

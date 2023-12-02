@@ -4,14 +4,14 @@ const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(sessionStorage.getItem('TokenOZ'));
-    const [userId, setUserId] = useState(JSON.parse(sessionStorage.getItem('userIdOZ')));
+    const [userId, setUserId] = useState(sessionStorage.getItem('userIdOZ'));
     const [activeUserId, setActiveUserId] = useState(sessionStorage.getItem('activeUserOZ'));
     const [userProfileDate, setUserProfileData] = useState(JSON.parse(sessionStorage.getItem('userProfileDate')));
     const [branchId, setBranchId] = useState(sessionStorage.getItem('branchIdOZ'));
 
     useEffect(() => {
         const storedToken = sessionStorage.getItem('TokenOZ');
-        const storedUserId = JSON.parse(sessionStorage.getItem('userIdOZ'));
+        const storedUserId = sessionStorage.getItem('userIdOZ');
         const storedActiveUserId = sessionStorage.getItem('activeUserOZ');
         const storedUserProfileDate = JSON.parse(sessionStorage.getItem('userProfileDate'));
         const storedBranchId = sessionStorage.getItem('branchIdOZ');
@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
 
     const handleLogin = (loginDetails) => {
         sessionStorage.setItem('TokenOZ', loginDetails.access_token);
-        sessionStorage.setItem("userIdOZ", JSON.stringify(loginDetails.user_id));
+        sessionStorage.setItem("userIdOZ", loginDetails.user_id);
         sessionStorage.setItem("activeUserOZ", loginDetails.active);
         sessionStorage.setItem("userProfileDate", JSON.stringify({name: loginDetails.account_data.name,
             email: loginDetails.account_data.email,

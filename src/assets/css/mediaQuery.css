@@ -7,7 +7,6 @@
     }
 
     .box-content {
-        padding: 30px 30px;
         text-align: center;
     }
 
@@ -267,9 +266,9 @@
         padding: 0 10px;
     }
 
-    .about-section .box-content-black {
+    /* .about-section .box-content-black {
         padding: 39px 10px 59px;
-    }
+    } */
 
     .head-amenities .text-h2 {
         font-size: 32px;
@@ -293,10 +292,10 @@
         padding: 0;
     }
 
-    .box-content {
+    /* .box-content {
         padding: 30px 30px;
 
-    }
+    } */
 
     .h2-text {
         font-size: 42px;

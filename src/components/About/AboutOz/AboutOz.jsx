@@ -1,19 +1,6 @@
 import React from "react";
 import "./AboutOz.css";
 import vector from "../../../assets/images/VectorRight.png";
-import about1 from "../../../assets/images/about/about5.png";
-import about2 from "../../../assets/images/about/about3.png";
-import about3 from "../../../assets/images/about/about4.png";
-import about4 from "../../../assets/images/about/teams-1.png";
-import about5 from "../../../assets/images/about/teams-2.png";
-import about6 from "../../../assets/images/about/site-about.png";
-import about7 from "../../../assets/images/about/about6.png";
-import about8 from "../../../assets/images/about/food (3).png";
-import about9 from "../../../assets/images/about/food (2).png";
-import about10 from "../../../assets/images/about/food (4).png";
-import about11 from "../../../assets/images/about/food (5).png";
-import about12 from "../../../assets/images/about/food (1).png";
-import about13 from "../../../assets/images/about/c-meeet.png";
 import AboutozFooter from "./AboutozFooter";
 import Media from "../../Media/Media";
 import { useEffect, useState } from "react";
@@ -21,8 +8,9 @@ import axios from "axios";
 import Paragraph from "../../UI/Paragraph";
 
 const AboutOz = (props) => {
-  console.log(props.configData);
+
   const [amenities, setamenities] = useState([]);
+
   useEffect(() => {
     const getAmenities = async () => {
       try {
@@ -38,18 +26,10 @@ const AboutOz = (props) => {
     };
     getAmenities();
   }, []);
+
   return (
     <>
-      <section className="about-oz body-dark">
-        <div className="position-relative mb-5">
-          <div className="img_float">
-            <Media className="opacity-50" type="img" src={vector} alt="shape" />
-          </div>
-          <div
-            className="head-content-left-shape text-left  position-absolute"
-            style={{ top: "40px", left: "100px" }}
-          ></div>
-        </div>
+      <section className="about-oz body-dark position-relative">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
@@ -76,7 +56,7 @@ const AboutOz = (props) => {
                       <React.Fragment key={index}>
                         {configItem.key ===
                           "about_us_page_header_sub_description" && (
-                          <Paragraph className="head_paragraph text-uppercase font-2">
+                          <Paragraph className="head_paragraph text-uppercase">
                             “{configItem.value}”
                           </Paragraph>
                         )}
@@ -87,20 +67,27 @@ const AboutOz = (props) => {
             </div>
           </div>
         </div>
+          {/* <div className="img_float">
+            <img className="opacity-50 w-100" type="img" src={vector} alt="shape" />
+          </div> */}
       </section>
 
       <section className="about-section body-dark">
         <div className="container-fluid">
-          <div className="row ">
-            <div className="col-md-6 col-lg-5 col-sm-6 col-xs-6 box-content-black px-0">
+          <div className="row">
+            <div className="col-lg-6 col-md- col-12 box-content-black px-0">
               {props.configData
                 ? props.configData.map((configItem, index) => (
                     <React.Fragment key={index}>
-                      {configItem.key === "about_us_page_our_vision_image" && (
+                      {configItem.key === "about_us_page_new_idea_image" && (
                         <img
                           className="image-box w-100 ps-0"
                           src={configItem.value}
                           alt={configItem.key}
+                          style={{
+                            height: '608px',
+                            objectFit: 'cover'
+                          }}
                         />
                       )}
                     </React.Fragment>
@@ -108,8 +95,8 @@ const AboutOz = (props) => {
                 : ""}
             </div>
 
-            <div className="col-md-6 col-lg-7 col-sm-6 col-xs-6 box-content-black m-auto ms-auto ps-0">
-              <div className="box-content ">
+            <div className="col-lg-6 col-md- col-12 box-content-black m-auto ms-auto ps-0">
+              <div className="box-content p-lg-4 p-3">
                 {props.configData
                   ? props.configData.map((configItem, index) => (
                       <React.Fragment key={index}>
@@ -129,7 +116,7 @@ const AboutOz = (props) => {
                   : ""}
               </div>
             </div>
-
+{/* 
             <div className="col-md-6 col-lg-7 col-sm-6 col-xs-6 box-content-black m-auto ">
               <div className="box-content">
                 {props.configData
@@ -166,10 +153,10 @@ const AboutOz = (props) => {
                     </React.Fragment>
                   ))
                 : ""}
-            </div>
+            </div> */}
 
             <div className="row py-5">
-              <div className="col-lg-6 ">
+              {/* <div className="col-lg-6 ">
                 <div className="mission">
                   <Paragraph className="text_desc_black w-75 mx-auto">
                     Our Mission
@@ -197,8 +184,8 @@ const AboutOz = (props) => {
                       ))
                     : ""}
                 </div>
-              </div>
-              <div className="col-6 position-relative flex-end p-60 ">
+              </div> */}
+              {/* <div className="col-6 position-relative flex-end p-60 ">
                 {props.configData
                   ? props.configData.map((configItem, index) => (
                       <React.Fragment key={index}>
@@ -221,11 +208,10 @@ const AboutOz = (props) => {
                       </React.Fragment>
                     ))
                   : ""}
-              </div>
+              </div> */}
             </div>
-            {/* //// */}
             <div className="row p-5">
-              <div className="col-lg-7 ">
+              {/* <div className="col-lg-7 ">
                 <div className="row">
                   <div className="col-lg-6">
                     {props.configData
@@ -262,8 +248,8 @@ const AboutOz = (props) => {
                       : ""}
                   </div>
                 </div>
-              </div>
-              <div className="col-lg-5 flex-end ">
+              </div> */}
+              {/* <div className="col-lg-5 flex-end ">
                 {props.configData
                   ? props.configData.map((configItem, index) => (
                       <React.Fragment key={index}>
@@ -274,9 +260,9 @@ const AboutOz = (props) => {
                       </React.Fragment>
                     ))
                   : ""}
-              </div>
+              </div> */}
             </div>
-            <div className="col-md-6 col-lg-6 col-sm-4 col-xs-6 box-content-black   ">
+            {/* <div className="col-md-6 col-lg-6 col-sm-4 col-xs-6 box-content-black   ">
               <div className="box-content     ">
                 <div className="d-block justify-content-center ">
                   <div className="">
@@ -333,9 +319,9 @@ const AboutOz = (props) => {
                     </React.Fragment>
                   ))
                 : ""}
-            </div>
+            </div> */}
           </div>
-          <div className="position-relative py-5">
+          {/* <div className="position-relative py-5">
             {props.configData
               ? props.configData.map((configItem, index) => (
                   <React.Fragment key={index}>
@@ -390,9 +376,8 @@ const AboutOz = (props) => {
                 Personalized Hospitality That Knows You by Name
               </Paragraph>
             </div>
-          </div>
-          {/* /////////////////////////////// */}
-          <div className="row py-5">
+          </div> */}
+          {/* <div className="row py-5">
             <div className="col-xl-5">
               {props.configData
                 ? props.configData.map((configItem, index) => (
@@ -423,11 +408,11 @@ const AboutOz = (props) => {
                   ))
                 : ""}
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
-      <section className="what-get p-60">
+      {/* <section className="what-get p-60">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
@@ -461,7 +446,7 @@ const AboutOz = (props) => {
             })}
           </div>
         </div>
-      </section>
+      </section> */}
       <AboutozFooter />
     </>
   );

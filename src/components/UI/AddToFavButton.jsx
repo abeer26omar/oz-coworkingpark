@@ -6,6 +6,7 @@ import { AuthContext } from '../../apis/context/AuthTokenContext';
 import { likeVenues } from '../../apis/Booking';
 import { likeEvent } from '../../apis/Events';
 import { likeProduct } from '../../apis/Market';
+import { useEffect } from 'react';
 
 const AddToFavButton = ({is_favorite, id, type, border, add_fav}) => {
 
@@ -49,6 +50,8 @@ const AddToFavButton = ({is_favorite, id, type, border, add_fav}) => {
             });
         }
     };
+
+    useEffect(()=>{},[is_favorite, id, type, border, add_fav]);
 
     return (
         <>

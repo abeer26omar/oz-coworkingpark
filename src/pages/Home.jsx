@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import MainHeaderWrapper from '../components/UI/MainHeaderWrapper';
 import SectionHeader from '../components/UI/SectionHeader';
 import NewsLetter from "../components/NewsLetter/NewsLetter";
@@ -10,7 +10,6 @@ import MonoBlockMember from '../components/MonoBlocks/MonoBlockMember';
 import RightContentFB from '../components/Home/ContentComponent/RightContentFB';
 import RightContentNewFeed from '../components/Home/ContentComponent/RightContentNewFeed';
 import { DataContext } from '../apis/context/SiteDataContext';
-import headVideo from '../assets/images/videos/header.mp4';
 import HomeMembership from '../components/Home/HomeMembership';
 import OurSpaces from '../components/Home/OurSpaces';
 import OZAmenities from '../components/Home/OZAmenities';
@@ -20,35 +19,44 @@ import OZKnowledge from '../components/Home/OZKnowledge';
 
 const Home = () => {
     
-    const {config, getComponentValue} = useContext(DataContext);
+    const { data, getComponentValue, ResetPageName } = useContext(DataContext);
+
+    const [video, setVideo] = useState('')
 
     useEffect(()=>{
-        config('home');
-  
-    },[]);
+        ResetPageName('home');
 
+        const bookingVideo = () => {
+          getComponentValue("header").map((configItem) => {
+            if(configItem.key === 'home_page_header_video'){
+                setVideo (configItem.value)
+            }
+        })}
 
+        bookingVideo();
+    },[data])
+    
     return (
       <>
         <MainHeaderWrapper
           configData={getComponentValue("header")}
-          video={headVideo}
+          video={video}
         >
           <SectionHeader
             configData={getComponentValue("header")}
-            video={headVideo}
+            video={video}
           />
         </MainHeaderWrapper>
         <MonoBlockTitle configData={getComponentValue("mono_block")} />
         <LeftContent configData={getComponentValue("page_about")} />
         <RightContentNewFeed configData={getComponentValue("page_newsfeed")} />
         <HomeMembership configData={getComponentValue("page_membership")} />
-        <OurSpaces configData={getComponentValue("_page_space")} />
-        <OZAmenities />
-        <ExploreOZ />
+        <OurSpaces configData={getComponentValue("page_space")} />
+        <OZAmenities configData={getComponentValue("page_benefit")}/>
+        <ExploreOZ configData={getComponentValue("explore_space")}/>
         <PublicEvent configData={getComponentValue("page_event")} />
         <ZeeStudio configData={getComponentValue("page_zee")} />
-        <OZKnowledge configData={getComponentValue("page_oz")} />
+        <OZKnowledge configData={getComponentValue("page_courses")} />
         <RightContentFB configData={getComponentValue("page_ozy")} />
         <MonoBlockMember configData={getComponentValue("page_membership")} />
         <Locations configData={getComponentValue("page_location")} />
