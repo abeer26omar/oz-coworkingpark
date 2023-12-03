@@ -16,6 +16,7 @@ const Favoriates = () => {
     const [activeTab, setActiveTab] = useState('event');
     const [swalProps, setSwalProps] = useState({});
     const { token, userId } = useContext(AuthContext);
+    const [reload, setReload] = useState(false);
 
     const currentTime = new Date();
 
@@ -35,7 +36,7 @@ const Favoriates = () => {
             console.log(err);
         });
         return ()=>controller.abort();
-    },[token, userId]);
+    },[token, userId, reload]);
 
     useEffect(()=>{
         if(data){
@@ -120,6 +121,11 @@ const Favoriates = () => {
         }
     };
 
+    const handelReload = (value, key) => {
+        setReload(value);
+        handleTabClick(key)
+    }
+
     return (
         <>
             <Tab.Container id="left-tabs-example" defaultActiveKey={activeTab} className='py-4 px-5'>
@@ -161,7 +167,7 @@ const Favoriates = () => {
                                                 <div className='col-lg-10 col-12'>
                                                         <div className='d-flex justify-content-between align-items-center'>
                                                             <Paragraph className='card-title mb-0'>{item.title || item.event_name}</Paragraph>
-                                                            <AddToFavButton is_favorite={item.is_favorite} id={item.id} />
+                                                            <AddToFavButton is_favorite={item.is_favorite} id={item.id} reload={handelReload}/>
                                                             {/* <Button 
                                                                 tagType='link' 
                                                                 className="fav-event p-0"
@@ -205,7 +211,7 @@ const Favoriates = () => {
                                                 <div className='col-lg-9 col-12'>
                                                     <div className='d-flex justify-content-between align-items-center'>
                                                         <Paragraph className='card-title mb-0'>{item.title || item.event_name}</Paragraph>
-                                                        <AddToFavButton is_favorite={item.is_favorite} id={item.id} type={'venue'}/>
+                                                        <AddToFavButton is_favorite={item.is_favorite} id={item.id} type={'venue'} reload={handelReload}/>
                                                         {/* <Button 
                                                             tagType='link' 
                                                             className="fav-event p-0"
@@ -247,7 +253,7 @@ const Favoriates = () => {
                                                     <div className='col-lg-9 col-12'>
                                                         <div className='d-flex justify-content-between align-items-center'>
                                                             <Paragraph className='card-title mb-0'>{item.title || item.event_name}</Paragraph>
-                                                            <AddToFavButton is_favorite={item.is_favorite} id={item.id} type={'event'}/>
+                                                            <AddToFavButton is_favorite={item.is_favorite} id={item.id} type={'event'} reload={handelReload}/>
                                                         </div>
                                                         <ul className="list-options d-flex p-0 py-4 m-0" style={{
                                                                 listStyle: 'none'

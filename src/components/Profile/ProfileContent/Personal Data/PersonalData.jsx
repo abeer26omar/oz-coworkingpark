@@ -34,6 +34,7 @@ const PersonalData = () => {
     const [disabled, setDisabled] = useState(true);
     const [hobbiesList, setHobbiesList] = useState([]);
     const [interestsList, setInterestsList] = useState([]);
+    const [reload, setReload] = useState(false);
     const [focus, setFocused] = useState(false);
     const [swalProps, setSwalProps] = useState({});
     const siteConfig = useContext(SiteConfigContext);
@@ -53,7 +54,7 @@ const PersonalData = () => {
         }).catch(err=>{console.log(err)});
 
         return ()=>controller.abort();
-    },[]);
+    },[reload]);
 
     const handleChangeInterests = (data)=>{
         setSelectedInterests(data);
@@ -91,6 +92,7 @@ const PersonalData = () => {
             });
             setDisabled(true);
             restState(disabled);
+            setReload(true);
         } catch (error) {
             setSwalProps({
                 show: true,

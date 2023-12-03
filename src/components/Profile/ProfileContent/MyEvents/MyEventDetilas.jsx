@@ -13,6 +13,7 @@ const MyEventDetails = () => {
     const [show, setShow] = useState(false);
     const [event, setEvent] = useState({});
     const { token, userId } = useContext(AuthContext);
+    const currentTime = new Date();
 
     const handleClose = () => setShow(false);
     
@@ -35,7 +36,11 @@ const MyEventDetails = () => {
                         <Paragraph className="text-two">{event.event_name}</Paragraph>
                         <div className='mt-5'>
                             {(event && event.event_attend_id) && (
-                                <Button tagType='link' className='btn_outline mt-4' onClick={()=>setShow(true)}>Cancel Attend</Button>
+                                <>
+                                {(currentTime > event?.dates[0]?.check_in_date) && (
+                                    <Button tagType='link' className='btn_outline mt-4' onClick={()=>setShow(true)}>Cancel Attend</Button>
+                                )}
+                                </>
                             )}
                         </div>
                     </div>

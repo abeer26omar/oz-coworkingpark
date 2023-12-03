@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import BecomeMember from "../components/Membership/BecomeMembber/BecomeMember";
 import MembershipTypes from "../components/Membership/MembershipTypes/MembershipTypes";
 import MembershipHeader from "../components/Membership/MembershipHeader/MembershipHeader";
@@ -7,7 +7,11 @@ import { DataContext } from '../apis/context/SiteDataContext';
 
 const Membership = () => {
 
-    const {getComponentValue} = useContext(DataContext);
+    const {getComponentValue, ResetPageName} = useContext(DataContext);
+
+    useEffect(()=>{
+        ResetPageName('membership');
+    },[])
     
     return (
         <>

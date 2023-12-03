@@ -8,7 +8,7 @@ import { likeEvent } from '../../apis/Events';
 import { likeProduct } from '../../apis/Market';
 import { useEffect } from 'react';
 
-const AddToFavButton = ({is_favorite, id, type, border, add_fav}) => {
+const AddToFavButton = ({is_favorite, id, type, border, add_fav, reload}) => {
 
     const [like, setLike] = useState(is_favorite);
     const [swalProps, setSwalProps] = useState({});
@@ -24,22 +24,32 @@ const AddToFavButton = ({is_favorite, id, type, border, add_fav}) => {
                     const result = await likeVenues(token, userId, id);
                     if(result){
                         setLike(!like);
+                        if(reload){
+                            reload(true, 'booking');
+                        }
                     }
                 }else if(type === 'event'){
                     const result = await likeEvent(token, userId, id);
                     if(result){
                         setLike(!like);
+                        if(reload){
+                            reload(true, 'event');
+                        }
                     }
                 }else {
                     const result = await likeProduct(token, userId, id);
                     if(result){
                         setLike(!like);
+                        if(reload){
+                            reload(true, 'market');
+                        }
                     }
                 }
             }else{
                 setShow(true);
             }
         }catch(error){
+            console.log(error);
             setSwalProps({
                 show: true,
                 icon: 'error',
