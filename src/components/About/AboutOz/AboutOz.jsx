@@ -116,7 +116,7 @@ const AboutOz = (props) => {
                   : ""}
               </div>
             </div>
-{/* 
+
             <div className="col-md-6 col-lg-7 col-sm-6 col-xs-6 box-content-black m-auto ">
               <div className="box-content">
                 {props.configData
@@ -153,10 +153,10 @@ const AboutOz = (props) => {
                     </React.Fragment>
                   ))
                 : ""}
-            </div> */}
+            </div>
 
             <div className="row py-5">
-              {/* <div className="col-lg-6 ">
+              <div className="col-lg-6 ">
                 <div className="mission">
                   <Paragraph className="text_desc_black w-75 mx-auto">
                     Our Mission
@@ -184,8 +184,8 @@ const AboutOz = (props) => {
                       ))
                     : ""}
                 </div>
-              </div> */}
-              {/* <div className="col-6 position-relative flex-end p-60 ">
+              </div>
+              <div className="col-6 position-relative flex-end p-60 ">
                 {props.configData
                   ? props.configData.map((configItem, index) => (
                       <React.Fragment key={index}>
@@ -208,10 +208,10 @@ const AboutOz = (props) => {
                       </React.Fragment>
                     ))
                   : ""}
-              </div> */}
+              </div>
             </div>
             <div className="row p-5">
-              {/* <div className="col-lg-7 ">
+              <div className="col-lg-7 ">
                 <div className="row">
                   <div className="col-lg-6">
                     {props.configData
@@ -248,8 +248,8 @@ const AboutOz = (props) => {
                       : ""}
                   </div>
                 </div>
-              </div> */}
-              {/* <div className="col-lg-5 flex-end ">
+              </div>
+              <div className="col-lg-5 flex-end ">
                 {props.configData
                   ? props.configData.map((configItem, index) => (
                       <React.Fragment key={index}>
@@ -260,9 +260,9 @@ const AboutOz = (props) => {
                       </React.Fragment>
                     ))
                   : ""}
-              </div> */}
+              </div>
             </div>
-            {/* <div className="col-md-6 col-lg-6 col-sm-4 col-xs-6 box-content-black   ">
+            <div className="col-md-6 col-lg-6 col-sm-4 col-xs-6 box-content-black   ">
               <div className="box-content     ">
                 <div className="d-block justify-content-center ">
                   <div className="">
@@ -319,9 +319,9 @@ const AboutOz = (props) => {
                     </React.Fragment>
                   ))
                 : ""}
-            </div> */}
+            </div>
           </div>
-          {/* <div className="position-relative py-5">
+          <div className="position-relative py-5">
             {props.configData
               ? props.configData.map((configItem, index) => (
                   <React.Fragment key={index}>
@@ -376,8 +376,8 @@ const AboutOz = (props) => {
                 Personalized Hospitality That Knows You by Name
               </Paragraph>
             </div>
-          </div> */}
-          {/* <div className="row py-5">
+          </div>
+          <div className="row py-5">
             <div className="col-xl-5">
               {props.configData
                 ? props.configData.map((configItem, index) => (
@@ -408,11 +408,11 @@ const AboutOz = (props) => {
                   ))
                 : ""}
             </div>
-          </div> */}
+          </div>
         </div>
       </section>
 
-      {/* <section className="what-get p-60">
+      <section className="what-get p-60">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
@@ -446,7 +446,7 @@ const AboutOz = (props) => {
             })}
           </div>
         </div>
-      </section> */}
+      </section>
       <AboutozFooter />
     </>
   );

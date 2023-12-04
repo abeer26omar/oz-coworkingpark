@@ -58,6 +58,8 @@ import DMChat from './components/Talent Market/DMChat';
 import DMChatProvider from './components/Talent Market/DMChatProvider';
 import Spaces from './pages/Spaces';
 import ContactAdmin from './components/ContactAdmin/ContactAdmin';
+import IssueHistory from './components/Profile/ProfileContent/IssueReporting/IssueHistory';
+import IssueDetails from './components/Profile/ProfileContent/IssueReporting/IssueDetails';
 
 function App() {
     const router = createBrowserRouter([
@@ -88,6 +90,8 @@ function App() {
               { path: "issueType/:case_id", element: <IssueType /> },
               { path: "subissueType/:case_id/:type_id", element: <SubissueType /> },
               { path: "issueplace/:case_id/:type_id/:id", element: <AddPlacesIssueDetails /> },
+              { path: "issuehistory", element: <IssueHistory /> },
+              { path: "issueDetails/:id", element: <IssueDetails /> },
             ],
           },
           { path:'login', element: <Login />},

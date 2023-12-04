@@ -33,7 +33,7 @@ const MultipleEventSlider = ({eventsData}) => {
                         return (
                             <div key={index}>
                                 <SingleCommunityExplore 
-                                    img={event.gallery[0].image} 
+                                    img={event.gallery[0]?.image} 
                                     id={event.id} 
                                     title={event.event_name} 
                                     category={event.event_type.name} 

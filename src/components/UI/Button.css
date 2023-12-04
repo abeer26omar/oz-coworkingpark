@@ -57,7 +57,8 @@
     transform: translateY(0);
 }
 .btn_outline_black:hover svg path{
-    fill: var(--white-color)
+    fill: var(--white-color);
+    transition: all .3 ease;
 }
 .button-outLine {
     border: 1px solid;

@@ -47,7 +47,7 @@ const SingleEventSlider = ({eventsData}) => {
                     return (
                         <div key={index} style={{width: '100%'}}>
                             <SingleCommunityExplore 
-                                img={event.gallery[0].image} 
+                                img={event.gallery[0]?.image} 
                                 id={event.id} 
                                 title={event.event_name} 
                                 category={event.event_type.name} 

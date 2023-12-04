@@ -6,7 +6,6 @@ import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import { getFavoriates } from '../../../../apis/User';
 import SweetAlert2 from 'react-sweetalert2';
 import AddToFavButton from '../../../UI/AddToFavButton';
-import ShareButton from '../../../UI/ShareIcon';
 import { attendEvent, checkEvent, cancelEventAttend } from '../../../../apis/Events';
 
 const Favoriates = () => {
@@ -17,6 +16,7 @@ const Favoriates = () => {
     const [swalProps, setSwalProps] = useState({});
     const { token, userId } = useContext(AuthContext);
     const [reload, setReload] = useState(false);
+    const [key, setKey] = useState()
 
     const currentTime = new Date();
 
@@ -40,11 +40,16 @@ const Favoriates = () => {
 
     useEffect(()=>{
         if(data){
-            const initialTab = Object.keys(data)[0];
-            setActiveTab(initialTab);
-            setBookingData(data[initialTab]);
+            if(key){
+                setActiveTab(key);
+                setBookingData(data[key]);
+            }else{
+                const initialTab = Object.keys(data)[0];
+                setActiveTab(initialTab);
+                setBookingData(data[initialTab]);
+            }
         }
-    },[data]);
+    },[data, key]);
 
     const setHours = (seconds) => {
         const milliseconds = seconds * 1000;
@@ -123,7 +128,7 @@ const Favoriates = () => {
 
     const handelReload = (value, key) => {
         setReload(value);
-        handleTabClick(key)
+        setKey(key);
     }
 
     return (

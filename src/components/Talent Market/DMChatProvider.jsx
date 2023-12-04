@@ -8,11 +8,11 @@ import Img9 from "../../assets/images/icons/icon-park-outline_more.svg";
 import UsersList from "../UI/UsersList";
 import MyMassage from "../UI/MyMessage";
 import YourMassage from "../UI/YourMessage";
-import { getClientMessages, getChatList, sendMessage } from '../../apis/Market';
+import { getClientMessages, getChatList, sendMessage, reportUser, blockUser } from '../../apis/Market';
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import './TalentMarket.css';
 import Button from "../UI/Button";
-import ModalBlock from './ModalBlock';
+import SweetAlert2 from 'react-sweetalert2';
 import { useParams } from "react-router-dom";
 
 const DMChatProvider = () => {
@@ -26,11 +26,13 @@ const DMChatProvider = () => {
     const [isBlocked, setIsBlocked] = useState(false);
     const [action, setAction] = useState('block');
     const [chatList, setChatList] = useState([]);
-    const [activeTab, setActiveTab] = useState('');
+    const [activeTab, setActiveTab] = useState('item_1');
     const [senderName, setSenderName] = useState(null);
     const [senderAvatar, setSenderAvatar] = useState(null);
     const [recipent, setrecipent] = useState(null);
     const [msgSend, setMsgSend] = useState(false);
+    const [swalProps, setSwalProps] = useState({});
+    const [reload, setReload] = useState(false);
 
     const { token, userId } = useContext(AuthContext);
     const { project } = useParams();
@@ -41,12 +43,58 @@ const DMChatProvider = () => {
       SetOpenChat(!OpenChat)
     };
 
-    const HandleBlock =()=>{
-      SetOpenBlock(!OpenBlock)
-    }
+    const HandleBlock = async (e) => {
+      e.stopPropagation();
+      try {
+          const result = await blockUser(token, action, recipent);
+          setSwalProps({
+              show: true,
+              icon: 'success',
+              title: result.status,
+              text: result.message,
+              showConfirmButton: false,
+              timer: 1500
+          });
+          setReload(!reload);
+      }catch(error){
+          setSwalProps({
+              show: true,
+              icon: 'error',
+              title: error.response.data.status,
+              text: error.response.data.message,
+              showConfirmButton: false,
+              timer: 1500
+          });
+      }
+    };
+
+    const HandelSendIssue = async (e) => {
+        e.stopPropagation();
+        try {
+            const result = await reportUser(token, recipent);
+            setSwalProps({
+                show: true,
+                icon: 'success',
+                title: result.status,
+                text: result.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }catch(error){
+            setSwalProps({
+                show: true,
+                icon: 'error',
+                title: error.response.data.status,
+                text: error.response.data.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+
+    };
 
     const handleTabClick = (key, recipentId, recipentName, recipentAvatar) => {
-      setActiveTab(key);
+      setActiveTab(`item_${key}`);
       setrecipent(recipentId);
       setSenderName(recipentName);
       setSenderAvatar(recipentAvatar);
@@ -62,9 +110,8 @@ const DMChatProvider = () => {
           try{
             const result = await getClientMessages(token, project, recipent);
             setMessages(result.messages.reverse());
-            setIsBlocked(result.is_blocked);
-            checkStatus();
-  
+            setIsBlocked(result.is_blocked); 
+            setAction(result.is_blocked ? 'un-block' : 'block') 
           }catch(err){
             console.log(err);
           }
@@ -75,7 +122,7 @@ const DMChatProvider = () => {
         
       return () => clearInterval(interval);
 
-    },[token, project, recipent])
+    },[token, project, recipent, reload])
 
     useEffect(()=>{
       const getClientList = async () => {
@@ -92,10 +139,6 @@ const DMChatProvider = () => {
       }
       getClientList();
     },[token, msgSend]);
-
-    const checkStatus = () => {
-      isBlocked ? setAction('un Block') : setAction('Block');
-    };
 
     const generateRandomString = () => {
       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -163,9 +206,9 @@ const DMChatProvider = () => {
                             return(
                                   <Nav.Item  key={index}>
                                     <Nav.Link 
-                                      eventKey={item.chat_id}
+                                      eventKey={`item_${index}`}
                                       onClick={()=>{handleTabClick(
-                                        item.chat_id, 
+                                        index, 
                                         userId === item.last_message?.from_id ? item.last_message?.to_id : item.last_message?.from_id,
                                         item.username,
                                         item.avatar
@@ -210,7 +253,6 @@ const DMChatProvider = () => {
                                         }}>
                                         <img
                                           className="pointer"
-                                          onClick={HandleBlock}
                                           src={Img9}
                                           alt="img"
                                         />
@@ -218,7 +260,7 @@ const DMChatProvider = () => {
                                     <ul class="dropdown-menu list_block" aria-labelledby="dropdownMenuButton1">
                                         <li className="d-flex align-items-center border-bottom pointer p-3">
                                         <Button className='d-flex align-items-center p-0' tagType='link' 
-                                          onClick={(e)=>{e.stopPropagation();setShowBlock(true);}}>
+                                          onClick={HandelSendIssue}>
                                           <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="32"
@@ -247,7 +289,8 @@ const DMChatProvider = () => {
                                         </Button>
                                         </li>
                                         <li className="pointer p-3">
-                                          <Button className='d-flex align-items-center p-0' tagType='link' onClick={(e)=>{e.stopPropagation();setShowBlock(true);}}>
+                                          <Button className='d-flex align-items-center p-0' tagType='link' 
+                                            onClick={HandleBlock}>
                                             <svg
                                               xmlns="http://www.w3.org/2000/svg"
                                               width="32"
@@ -330,13 +373,7 @@ const DMChatProvider = () => {
                 </div>
               </div>
         </Tab.Container>
-        {/* <ModalBlock
-          show={showBlock}
-          onHide={handelClose} 
-          token={token}
-          user={user}
-          action={action}
-        /> */}
+        <SweetAlert2 {...swalProps} />
       </>
     );
 };

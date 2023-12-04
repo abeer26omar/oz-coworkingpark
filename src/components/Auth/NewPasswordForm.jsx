@@ -28,7 +28,7 @@ const NewPasswordForm = ()=>{
                 });
                 sessionStorage.removeItem("emailuseroz");
                 sessionStorage.removeItem("otpuseroz");
-                navigate('login')
+                navigate('/login')
             }
         } catch (error) {
             console.log(error);
