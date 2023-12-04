@@ -26,7 +26,7 @@ const DMChatProvider = () => {
     const [isBlocked, setIsBlocked] = useState(false);
     const [action, setAction] = useState('block');
     const [chatList, setChatList] = useState([]);
-    const [activeTab, setActiveTab] = useState('item_1');
+    const [activeTab, setActiveTab] = useState();
     const [senderName, setSenderName] = useState(null);
     const [senderAvatar, setSenderAvatar] = useState(null);
     const [recipent, setrecipent] = useState(null);
@@ -94,7 +94,7 @@ const DMChatProvider = () => {
     };
 
     const handleTabClick = (key, recipentId, recipentName, recipentAvatar) => {
-      setActiveTab(`item_${key}`);
+      setActiveTab(key);
       setrecipent(recipentId);
       setSenderName(recipentName);
       setSenderAvatar(recipentAvatar);
@@ -206,9 +206,9 @@ const DMChatProvider = () => {
                             return(
                                   <Nav.Item  key={index}>
                                     <Nav.Link 
-                                      eventKey={`item_${index}`}
+                                      eventKey={item.chat_id}
                                       onClick={()=>{handleTabClick(
-                                        index, 
+                                        item.chat_id, 
                                         userId === item.last_message?.from_id ? item.last_message?.to_id : item.last_message?.from_id,
                                         item.username,
                                         item.avatar
