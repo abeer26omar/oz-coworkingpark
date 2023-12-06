@@ -247,3 +247,17 @@ export const getChatHistory = async (userId) => {
         
     return response.data.data;
 };
+
+export const getChatHistoryDetails = async (issueId, userId) => {
+    
+    const config = {
+        method: 'GET',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/tickets/${issueId}?user_id=${userId}`,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};

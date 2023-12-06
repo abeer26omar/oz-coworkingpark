@@ -58,6 +58,8 @@ import DMChat from './components/Talent Market/DMChat';
 import DMChatProvider from './components/Talent Market/DMChatProvider';
 import Spaces from './pages/Spaces';
 import ContactAdmin from './components/ContactAdmin/ContactAdmin';
+import ContactAdminHistory from './components/ContactAdmin/ContactAdminHistory';
+import ContactAdminReply from './components/ContactAdmin/ContactAdminReply';
 import IssueHistory from './components/Profile/ProfileContent/IssueReporting/IssueHistory';
 import IssueDetails from './components/Profile/ProfileContent/IssueReporting/IssueDetails';
 
@@ -124,7 +126,9 @@ function App() {
           { path:'addService', element: <AddService />},
           { path:'dmchat/:project/:user', element: <DMChat />},
           { path:'dmchat/provider/:project', element: <DMChatProvider />},
-          { path:'contactadmin', element: <ContactAdmin />},
+          { path:'contactadmin', element: <ContactAdminHistory />},
+          { path:'replydetails', element: <ContactAdminReply />},
+          { path:'sendcontact', element: <ContactAdmin />},
         ]}
     ]);
     const queryClient = new QueryClient();

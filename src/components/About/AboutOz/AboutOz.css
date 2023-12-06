@@ -103,6 +103,12 @@
     
         
 }
+.width-75{
+    width: 75%
+}
+.img-about{
+    object-fit: cover;
+}
 @media screen and (max-width: 575.5px) {
 .about-section .img-fixed {
         margin-right: 0;

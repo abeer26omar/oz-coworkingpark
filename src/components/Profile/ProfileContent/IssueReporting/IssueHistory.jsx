@@ -18,7 +18,14 @@ const IssueHistory = () => {
             }
         } 
         getHistory()
-    },[])
+    },[]);
+
+    const setDate = (roomdate) => {
+        const date = new Date(roomdate);
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+
+        return date.toLocaleDateString('en-US', options);
+    };
 
     return (
         <>
@@ -26,20 +33,19 @@ const IssueHistory = () => {
                 <div className="head-form d-flex justify-content-between">
                     <h2>Report history</h2>
                 </div>
-                <div className="col-11 mx-auto space-description">
+                <div className="col-12 space-description">
                     { reports && reports.map(item=>{
                         return (
-                            <Button className='p-0 d-block' tagType='link' to={`/profile/issueType/case_${item.id}`}>
+                            <Button className='p-0 d-block' tagType='link' to={`/profile/issueDetails/${item.id}`}>
                                 <div className='d-flex justify-content-between align-items-center border-bottom my-5'>
                                     <div className='d-flex align-items-center'>
                                         <img src={item.ticket_category.image} alt={item.ticket_category.name} />
                                         <Paragraph className='ms-3 service_catering mb-0'>{item.ticket_category.name}</Paragraph>
                                     </div>
                                     <div className="d-flex">
-                                        <Paragraph className='mb-0'>{item.date}</Paragraph>
-                                        <Paragraph className='mb-0' style={{
-                                            color: `${item.ticket_status.name === 'Open' ? '#05B15D':''}`
-                                        }}>{item.ticket_status.name}</Paragraph>
+                                        <Paragraph className='mb-0 text-date me-2'>{setDate(item.date)}</Paragraph>
+                                        <span className="seprator"></span>
+                                        <Paragraph className={`mb-0 ms-2 status ${item.ticket_status?.name === 'Open' ? 'open' : ''}`}>{item.ticket_status.name}</Paragraph>
                                     </div>
                                 </div>
                             </Button>

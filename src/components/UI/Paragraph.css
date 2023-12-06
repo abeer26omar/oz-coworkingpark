@@ -296,6 +296,33 @@ p.list-option-item{
     line-height: 110%;
     text-decoration: line-through;
 }
+.issue{
+    color: #000;
+    font-family: Couture;
+    font-size: 1.625rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+.text-date{
+    color: #BDBDBD;
+    font-family: Questrial;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+}
+.status{
+    color: #BDBDBD;
+    font-family: Questrial;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+}
+.open{
+    color: #07c669;
+}
 @media screen and (max-width: 1440px) {
     .paragraph_black{
         font-size: var(--font-size-40);

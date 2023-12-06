@@ -7,8 +7,7 @@ const About = () => {
 
     const { ResetPageName, getComponentValue } = useContext(DataContext);
     useEffect(() => {
-      ResetPageName('about_us')
-
+      ResetPageName('about_us');
     }, []);
 
   return (

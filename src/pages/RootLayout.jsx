@@ -22,7 +22,7 @@ const RootLayout = ()=>{
         location.pathname === '/joinus' || 
         location.pathname === '/register' || 
         location.pathname === '/forgetpass' || 
-        location.pathname === '/contactadmin';
+        location.pathname === '/sendcontact';
 
         useEffect(()=>{
             if(isGalleryRoute || isAboutRoute || isAmenitiesRoute || isSingleMemberRoute){
