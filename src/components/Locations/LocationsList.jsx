@@ -7,12 +7,11 @@ import Paragraph from '../UI/Paragraph';
 const LocationsList = ({id, address, img, addAddress}) => {
     return (
         <>
-            <div className="image-box " key={id}>
+            <div className="" key={id}>
                 <Media
                     type="img" 
                     src={img} 
-                    className="w-100"
-                    height = '512px'
+                    className="w-100 image-box"
                     alt={address} />
                     {addAddress && (
                         <div className="d-flex align-items-center box-locations justify-content-end">

@@ -63,11 +63,11 @@ const MyBooking = ()=>{
                 id="left-tabs-example" 
                 defaultActiveKey={activeTab}
                 className='py-4 px-5'>
-                <div className="container p-sm-4 p-2">
+                <div className="container p-sm-4 p-0">
                     <div className="head-form">
                         <h2>My Booking</h2>
                     </div>
-                    <Nav variant="pills" className="col-11 row mx-auto my-3 justify-content-center booking_nav">
+                    <Nav variant="pills" className="col-sm-11 col-12 row mx-auto my-3 justify-content-center booking_nav">
                         {
                             data && Object.keys(data).map((item,index)=>{
                                 return (

@@ -14,6 +14,7 @@ const LoginAlert = (props) => {
                 keyboard={false}
                 backdropClassName="custom-backdrop"
                 centered>
+                    <Modal.Header closeButton style={{border: 'none'}}></Modal.Header>
                     <Modal.Body className={`justify-content-center align-items-center p-4`}>
                         <div className="text-center">
                         <Paragraph className="hand-write mb-0">Please,</Paragraph>

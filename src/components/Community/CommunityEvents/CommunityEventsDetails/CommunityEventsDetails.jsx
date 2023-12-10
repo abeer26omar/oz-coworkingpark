@@ -22,6 +22,7 @@ const CommunityEventsDetails = () => {
     const [eventDetails, setEventDetails] = useState([]);
     const [url, setUrl] = useState('');
     const [swalProps, setSwalProps] = useState({});
+    const [reload, setReload] = useState(false);
     const { token, userId } = useContext(AuthContext);
     const {data, ResetPageName} = useContext(DataContext);
     const [show, setShow] = useState(false);
@@ -49,7 +50,7 @@ const CommunityEventsDetails = () => {
             isMounted = false;
             source.cancel();
         };
-    },[token, id]);
+    },[token, id, reload]);
     
     useEffect(()=>{
         const fullUrl = window.location.href;
@@ -71,6 +72,7 @@ const CommunityEventsDetails = () => {
                             showConfirmButton: false,
                             timer: 1500
                         });
+                        setReload(true)
                     }catch(error){
                         setSwalProps({
                             show: true,
@@ -117,6 +119,7 @@ const CommunityEventsDetails = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
+            setReload(true)
         }catch (error){
             setSwalProps({
                 show: true,
@@ -287,7 +290,7 @@ const CommunityEventsDetails = () => {
                                 </span>
 
                             <div className="cards-event-buttons d-flex justify-content-center align-items-center">
-                               {currentTime < (eventDetails && new Date(eventDetails.end)) && (
+                               {currentTime < (eventDetails && new Date(eventDetails.start)) && (
                                     <>
                                         {
                                             eventDetails.event_attend_id === null ? (

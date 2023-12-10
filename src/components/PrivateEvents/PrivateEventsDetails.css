@@ -43,3 +43,8 @@
 .private-events-details .buttons-group .btn-pdf {
     margin-left: 16px;
 }
+@media screen and (max-width: 425px) {
+    .private-events-details .buttons-group .btn-pdf {
+        margin-left: 6px;
+    }
+}

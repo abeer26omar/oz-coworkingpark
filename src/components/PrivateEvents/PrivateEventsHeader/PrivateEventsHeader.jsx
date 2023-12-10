@@ -1,52 +1,52 @@
 import React from 'react';
-import Navbar from "react-bootstrap/Navbar";
-import {Container, Nav} from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Link } from 'react-scroll';
 import prevent from "../../../assets/images/videos/prevent.mp4";
 import './PrivateEventsHeader.css';
 import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
 import {PrivateEventsData} from "../../../Data/PrivateEventsData";
 import Paragraph from '../../UI/Paragraph';
+
 const PrivateEventsHeader = () => {
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary navigator">
+            <div className="bg-body-tertiary navigator private">
                 <Container fluid>
-                    <h1 className="title-name mb-0">
-                        Private Events
-                    </h1>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="2"
-                        height="127"
-                        viewBox="0 0 2 127"
-                        fill="none"
-                    >
-                        <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
-                    </svg>
+                    <div className='d-flex align-items-center justify-content-between change_dir'>
+                        <div className='d-flex'>
+                            <h1 className="title-name mb-0">
+                                Private Events
+                            </h1>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="2"
+                                height="127"
+                                viewBox="0 0 2 127"
+                                fill="none"
+                            >
+                                <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <div className="d-flex align-items-centerprivate-events-head py-3 change_dir_sm">
+                                {PrivateEventsData.map((addevent, index) => {
+                                    const {address} = addevent;
+                                    return (
+                                        <Link 
+                                            className="nav-link-two links-margin" 
+                                            to={address} 
+                                            smooth={true} 
+                                            duration={100}
+                                            key={index} 
+                                        >
+                                            {address}
+                                        </Link>
+                                    )
+                                })}
 
-                    <Nav className="ms-auto nav-head private-events-head ">
-                        <>
-
-                            {PrivateEventsData.map((addevent, index) => {
-                                const {address} = addevent;
-                                return (
-                                    <Link 
-                                        className="nav-link-two links-margin" 
-                                        to={address} 
-                                        smooth={true} 
-                                        duration={100}
-                                        key={index} 
-                                    >
-                                        {address}
-                                    </Link>
-                                )
-                            })}
-
-                        </>
-                    </Nav>
+                        </div>
+                    </div>
                 </Container>
-            </Navbar>
+            </div>
 
             <MainHeaderWrapper  video={prevent}>
                 <div className={`container-fluid px-70 py-5`}>

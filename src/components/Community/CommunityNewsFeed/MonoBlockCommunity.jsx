@@ -6,7 +6,7 @@ const  MonoBlockCommunity = (props) => {
     return(
         <>
             <section className={` border-top mt-4`}>
-                <div className="monoBlock bgBlack mt-4 ">
+                <div className="monoBlock bgBlack mt-4 community">
 
                 <div className="container">
                     <div className="row">

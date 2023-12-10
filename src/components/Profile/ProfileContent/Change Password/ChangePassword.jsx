@@ -65,16 +65,16 @@ const ChangePassword = () => {
                     handleSubmit
                     } = props
                     return (
-                    <section className="changepass-style py-4 px-5">
+                    <section className="changepass-style py-4 px-sm-5 px-0">
                         <div className="container">
                             <form className="profile-edit" onSubmit={handleSubmit}>
-                                <div className="row align-items-center">
-                                    <div className="col-lg-12">
+                                <div className="flex-column align-items-center">
+                                    <div className="col-12">
                                         <div className="head-form">
                                             <h2>Change Password</h2>
                                         </div>
                                     </div>
-                                    <div className="col-lg-12">
+                                    <div className="col-lg-8 col-12">
                                         <div className="form__group field my-3">
                                             <label htmlFor="email" className="form__label">Email</label>
                                             <input 
@@ -88,7 +88,7 @@ const ChangePassword = () => {
                                             {errors.email && touched.email && <p className='text-danger mb-0'>{errors.email}</p>}
                                         </div>
                                     </div>
-                                    <div className="col-lg-12">
+                                    <div className="col-lg-8 col-12">
                                         <div className="form__group field my-3">
                                             <label htmlFor="currentPassword"
                                                    className="form__label d-flex align-items-center justify-content-start">
@@ -111,7 +111,7 @@ const ChangePassword = () => {
                                             {errors.currentPassword && touched.currentPassword && <p className='text-danger mb-0'>{errors.currentPassword}</p>}
                                         </div>
                                     </div>
-                                    <div className="col-lg-12">
+                                    <div className="col-lg-8 col-12">
                                         <div className="form__group field my-3">
                                             <label htmlFor="newPassword"
                                                    className="form__label d-flex align-items-center justify-content-start">
@@ -134,7 +134,7 @@ const ChangePassword = () => {
                                             {errors.newPassword && touched.newPassword && <p className='text-danger mb-0'>{errors.newPassword}</p>}
                                         </div>
                                     </div>
-                                    <div className="col-lg-12">
+                                    <div className="col-lg-8 col-12">
                                         <div className="form__group field my-3">
                                             <label htmlFor="confirmPassword"
                                                    className="form__label d-flex align-items-center justify-content-start">

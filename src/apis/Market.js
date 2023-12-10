@@ -22,13 +22,11 @@ export const getServices = async (token, userId, branchId, signal) => {
     return response.data.data;
 };
 
-export const getProductsList = async (token, userId, branchId, catergoreyId,signal) => {
+export const getProductsList = async (token, userId, signal) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
     formData.append('user_id', userId);
-    // formData.append('branch_id', branchId);
-    // formData.append('category_id', catergoreyId);
 
     const config = {
         method: 'post',
@@ -173,12 +171,12 @@ export const blockUser = async (token, action, user_id) => {
     return response.data.data;
 };
 
-export const reportUser = async (token, user_id, text) => {
+export const reportUser = async (token, user_id) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
-    formData.append('user_id', user_id)
-    formData.append('text', text);
+    formData.append('user', user_id)
+    formData.append('text', 'report');
     
     const config = {
         method: 'post',
@@ -190,7 +188,7 @@ export const reportUser = async (token, user_id, text) => {
 
     const response = await axios(config);
         
-    return response.data.data;
+    return response.data;
 };
 
 export const likeProduct = async (token, userId, product_id) => {
@@ -227,6 +225,34 @@ export const sendMessage = async (token, product_id, recipient_id, message, mess
         method: 'post',
         url: `${process.env.REACT_APP_API_URL}/api/page_chat?access_token=${token}`,
         data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const getChatHistory = async (userId) => {
+    
+    const config = {
+        method: 'GET',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/tickets?user_id=${userId}`,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
+export const getChatHistoryDetails = async (issueId, userId) => {
+    
+    const config = {
+        method: 'GET',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/tickets/${issueId}?user_id=${userId}`,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
     };

@@ -159,7 +159,7 @@
     line-height: 130%;
     text-transform: capitalize;
 }
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1024px) {
     .membershipOptionsList{
         margin: 20px;
     }
@@ -168,4 +168,4 @@
     .membershipOptionsList{
         margin: 16px;
     }
-}
+} */

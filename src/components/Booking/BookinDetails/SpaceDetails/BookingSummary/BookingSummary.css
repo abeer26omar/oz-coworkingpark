@@ -58,8 +58,7 @@
     font-size: var(--font-size-58);
     font-style: normal;
     font-weight: var(--font-weight-bold);
-    line-height: 120%; /* 69.6px */
-    /*margin: 60px 0;*/
+    line-height: 120%; 
     margin: 80px 0 80px 0;
 }
 
@@ -128,7 +127,7 @@
 .payment-bg {
     background: #FFF;
     padding: 37px 49px;
-    width: 733px;
+    max-width: 733px;
     height: 420px;
     margin: auto;
 }
@@ -304,11 +303,25 @@
 .order-details .line {
     border-bottom: 1px solid #fff;
 }
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 575.5px) {
     .summary-bg{
         padding: 37px 25px;
     }
+    .payment-bg {
+        padding: 35px 25px;
+    }
     .summary  img{
         display: none;
+    }
+    .step-label {
+        font-size: 30px;
+    }
+    .change_dir{
+        flex-direction: column;
+    }
+}
+@media screen and (max-width: 425px) {
+    .head-box-summary h2 {
+        font-size: 20px;
     }
 }

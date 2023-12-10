@@ -11,6 +11,7 @@ const RequestFormModal = (props) => {
                 onHide={props.handleClose}
                 centered
                 backdropClassName="custom-backdrop">
+                     <Modal.Header closeButton style={{border: 'none'}}></Modal.Header>
                     <Modal.Body className={`justify-content-center align-items-center p-5`}>
                         <RequestForm venueId={props.venueId}/>
                     </Modal.Body>

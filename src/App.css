@@ -76,6 +76,7 @@ a {
     --font-size-26: 26px;
     --font-size-23: 23px;
     --font-size-20: 20px;
+    --font-size-19: 19px;
     --font-size-18: 18px;
     --font-size-16: 16px;
     --font-size-14: 14px;
@@ -374,13 +375,6 @@ a {
     text-align: left;
     color: var(--primary-color);
 
-}
-
-.head-content-left-shape .text-shape {
-    position: absolute;
-    left: 0;
-    top: 0;
-    transform: translate(20px, 25px);
 }
 
 
@@ -720,7 +714,7 @@ a {
     padding: 4px 8px;
     font-size: 14px;
     border-radius: 4px;
-  }
+}
   
 .tooltip::after {
     content: '';
@@ -731,6 +725,17 @@ a {
     border-width: 8px;
     border-style: solid;
     border-color: transparent transparent #000 transparent;
+}
+.seprator{
+    border-left: 1px solid var(--secondary-color2);
+}
+@media (max-width: 575px) {
+    .img_block > span > img{
+        height: auto;
+    }
+    .head-content-left-shape .bold-head {
+        font-size: var(--font-size-20);
+    }
 }
 @media screen and (max-width: 426px) {
     .AmenitiesList_videos video{

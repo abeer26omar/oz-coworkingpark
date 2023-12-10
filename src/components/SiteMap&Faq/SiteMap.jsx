@@ -8,7 +8,8 @@ import { AuthContext } from '../../apis/context/AuthTokenContext';
 import { getAmenitiesGroup } from '../../apis/Booking';
 import { getListMembershipTypes } from '../../apis/MembershipApi';
 import { Link } from 'react-router-dom';
-
+import { HashLink } from 'react-router-hash-link';
+ 
 const  SiteMap  = () => {
   
   const [types, setTypes] = useState([]);
@@ -40,18 +41,17 @@ const  SiteMap  = () => {
         { name: 'Community', to: '/community' },   
         { name: 'Events', to: '/community/events' },
 
-    ]
-    
+    ];
     const links3 = [
       { name: "Community Newsfeed", to: "/community/newsfeed" },
       { name: "Community Events", to: "/community/events" },
       { name: "Gallery", to: "/community/galleryshow" },
-    ]
+    ];
     const links4 = [
         { name: 'Previous Events', to: '/' },
         { name: 'Upcoming Events', to: '/' },  
 
-    ]
+    ];
     const links5 = [
       { name: "My Booking", to: "/profile/mybooking" },
       { name: "My Events", to: "/profile/myevents" },
@@ -94,7 +94,9 @@ const  SiteMap  = () => {
                 <ul className='p-0 d-flex flex-column'> 
                   {bookingPlaces && bookingPlaces.map((item, index)=>{
                     return (
-                      <Link key={index} className='pb-3 links' to={`/booking?amenity=${item.name}&id=${item.id}`} >{item.name}</Link>
+                      <HashLink key={index} className='pb-3 links' smooth to={`/booking?amenity=${item.name}&id=${item.id}#${item.name}`}>
+                        {item.name}
+                      </HashLink>
                     )
                   })}
                 </ul>

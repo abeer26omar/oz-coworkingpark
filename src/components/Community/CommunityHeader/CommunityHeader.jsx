@@ -10,58 +10,60 @@ import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
 const CommunityHeader = (props) => {
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary navigator">
+            <div className="bg-body-tertiary navigator community">
                 <Container fluid>
-                    <h1 className="title-name mb-0">
-                        community
-                    </h1>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="2"
-                        height="127"
-                        viewBox="0 0 2 127"
-                        fill="none"
-                    >
-                        <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
-                    </svg>
-                    <Nav className="ms-auto nav-head">
-                        <>
-                            <Link 
-                                className="nav-link-two links-margin" 
-                                to={'community-newsfeed'} 
-                                smooth={true} 
-                                duration={100}
+                    <div className='d-flex justify-content-between align-items-center change_dir'>
+                        <div className='d-flex'>
+                            <h1 className="title-name mb-0">
+                                community
+                            </h1>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="2"
+                                height="127"
+                                viewBox="0 0 2 127"
+                                fill="none"
                             >
-                                {'News Feed'}
-                            </Link>
-                            <Link 
-                                className="nav-link-two links-margin" 
-                                to={'community-events'} 
-                                smooth={true} 
-                                duration={100}
-                            >
-                                {'Events'}
-                            </Link>
-                            <Link 
-                                className="nav-link-two links-margin" 
-                                to={'community-gallery'} 
-                                smooth={true} 
-                                duration={100}
-                            >
-                                {'Gallery'}
-                            </Link>
-                        </>
-                    </Nav>
+                                <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <div className="py-3">
+                                <Link 
+                                    className="nav-link-two links-margin" 
+                                    to={'community-newsfeed'} 
+                                    smooth={true} 
+                                    duration={100}
+                                >
+                                    {'News Feed'}
+                                </Link>
+                                <Link 
+                                    className="nav-link-two links-margin" 
+                                    to={'community-events'} 
+                                    smooth={true} 
+                                    duration={100}
+                                >
+                                    {'Events'}
+                                </Link>
+                                <Link 
+                                    className="nav-link-two links-margin" 
+                                    to={'community-gallery'} 
+                                    smooth={true} 
+                                    duration={100}
+                                >
+                                    {'Gallery'}
+                                </Link>
+                        </div>
+                    </div>
                 </Container>
-            </Navbar>
+            </div>
             <MainHeaderWrapper configData={props.configData} video={community}>
                 <div className={`container-fluid px-70 py-5`}>
-                    <div className='col-md-6 col-12'>
+                    <div className='col-xl-6 col-lg-9 col-12 community'>
                         {props.configData ? props.configData.map((configItem, index) => (
                             <React.Fragment key={index}>
-                                {configItem.key === 'community_page_header_main_title' && (
+                                {/* {configItem.key === 'community_page_header_main_title' && (
                                     <Paragraph className='head_paragraph mb-3'>{configItem.value}</Paragraph>
-                                )}
+                                )} */}
                                 {configItem.key === 'community_page_header_sub_title' && (
                                     <Paragraph className='head_paragraph mb-3'>{configItem.value}</Paragraph>
                                 )}

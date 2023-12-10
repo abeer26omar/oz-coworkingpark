@@ -27,7 +27,7 @@ const CommunityGallery = (props) => {
                                         </React.Fragment>
                                             )):''}
                                             <div  className="col-md-4 col-lg-4 col-sm-12 col-xs-6 m-auto "> 
-                                                <div className="box-content px-60 flex-box-start" >
+                                                <div className="box-content p-lg-4 p-3">
                                             {props.configData ? props.configData.map((configItem , index)=>(
                                                 <React.Fragment key={index}>
                                                     

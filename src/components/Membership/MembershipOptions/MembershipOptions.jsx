@@ -51,7 +51,7 @@ const MembershipOptions = () => {
             description: description,
             time: time
        } 
-       sessionStorage.setItem('selectedPlan', JSON.stringify(selectedPlan));
+       sessionStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
        setPlanId(id);
        if(token){
             setShow(true)
@@ -95,8 +95,8 @@ const MembershipOptions = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='d-flex justify-content-center'>
-                                    <div className="membershipOptionsList container">
+                                <div className='pt-5'>
+                                    <div className="membershipOptionsList container-fluid">
                                         <div className='row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 g-3'>
                                             {typeDetials &&
                                                 typeDetials.options.map((item, index)=>{

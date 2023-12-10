@@ -1,6 +1,9 @@
 .profile-taps .nav-item {
     padding: 2rem 0;
     border-bottom: 0;
+    align-items: center;
+    display: flex;
+    justify-content: start;
 }
 
 .explore_link_profile {
@@ -33,8 +36,10 @@
 .tabs-btns .nav-link:hover {
     border: 0;
 }
-.booking_nav .nav-link{
+.booking_nav .nav-item{
     border-bottom: 1px solid var(--secondary-color2);
+}
+.booking_nav .nav-link{
     border-radius: 0;
     color: var(--secondary-color2);
     font-family: Questrial;
@@ -50,7 +55,7 @@
     border-bottom: 1px solid var(--black-color);
     color: var(--black-color);
     text-align: center;
-    font-weight: 600;    
+    font-weight: 600;
 }
 .card_event{
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.10);
@@ -191,8 +196,54 @@
     font-weight: 400;
     line-height: 120%;
 }
-@media screen and (max-width: 425px) {
+
+.profile_tabs,
+.profile_content{
+    transition: all .3s ease-in-out;
+}
+/* .profile-taps{
+    position: absolute;
+} */
+.profile_tabs.profile_nav{
+    width: 100px;
+}
+
+.profile_tabs.profile_nav .nav-pills{
+    padding: .5rem !important;
+    align-items: center;
+}
+.profile_tabs.profile_nav .nav-item span{
+    display: none;
+}
+@media screen and (max-width: 575.5px) {
+    .btn_profile{
+        display: none;
+    }
+    .profile_tabs.profile_nav{
+        width: 70px;
+    }
+    .h2-description{
+        font-size: var(--font-size-20);
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .profile_tabs.profile_nav{
+        width: 60px;
+    }
     .list-options{
         flex-direction: column;
+    }
+    .card_event p.card-title{
+        font-size: var(--font-size-19);
+    }
+    .card_event .price-hour{
+        font-size: var(--font-size-16);
+    }
+       
+}
+@media screen and (max-width: 360px) {
+    .profile_tabs.profile_nav{
+        width: 50px;
     }
 }

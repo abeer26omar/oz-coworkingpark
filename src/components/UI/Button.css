@@ -57,7 +57,8 @@
     transform: translateY(0);
 }
 .btn_outline_black:hover svg path{
-    fill: var(--white-color)
+    fill: var(--white-color);
+    transition: all .3 ease;
 }
 .button-outLine {
     border: 1px solid;
@@ -206,18 +207,20 @@
     text-decoration: underline;
     cursor: pointer;
 }
+.spec_padding{
+    padding: .6rem 3rem
+}
 /* Media Query */
 @media screen and (max-width: 575px) {
     .btn_default{
         padding: 1rem 1.5rem;
     }
-    .button-outLine{
-        width: 150px;
-        font-weight: 500;
-    }
 }
 @media screen and (max-width: 375px) {
     .btn_default{
         padding: 1rem;
+    }
+    .spec_padding{
+        padding: .6rem
     }
 } 

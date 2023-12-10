@@ -65,12 +65,12 @@ const BookingSpacesTypes = ({venues, placeId,spaceTitle})=>{
 
     return (
         <>
-            <div className="row border-top border-bottom booking-space-margin">
-                <div className="col-lg-6 col-md-6 col-sm-12 border-right">
-                    {spaceTitle && <h2 className="book-title">{spaceTitle}</h2>}
+            <div className="row border-top g-3 border-bottom booking-space-margin align-items-center">
+                <div className="col-xl-6 col-lg-4 col-12 border-right">
+                    {spaceTitle && <h2 className="book-title mb-0">{spaceTitle}</h2>}
                 </div>
-                <div className="col-lg-6 col-md-6 col-sm-12 px-3 d-flex align-items-center justify-content-between">
-                    <div className='col-6'>
+                <div className="col-xl-6 col-lg-8 col-12 px-3 d-flex flex-wrap align-items-center justify-content-between">
+                    <div className='col-sm-6 col-12'>
                         <div className="input-group">
                             <input 
                                 type="text" 
@@ -124,7 +124,7 @@ const BookingSpacesTypes = ({venues, placeId,spaceTitle})=>{
                     <div className="booking-section border-top border-bottom">
                         {empty && <Paragraph className='empty'>{empty}</Paragraph>}
                         {error && <Paragraph className='text-danger empty'>{error}</Paragraph>}
-                        <div className="row">
+                        <div className="row" id={spaceTitle}>
                             {cards && cards.slice(0, visibleCards).map((book, index) => {                                
                                     return (
                                         <>

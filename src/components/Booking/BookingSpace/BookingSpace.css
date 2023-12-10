@@ -53,8 +53,7 @@
     font-style: normal;
     font-weight: var(--font-weight-bold);
     line-height: 120%;
-    padding: 8px 32px;
-
+    padding: 25px 32px;
 }
 
 .booking-space .btn-filter {

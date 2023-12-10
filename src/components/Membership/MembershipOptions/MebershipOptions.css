@@ -124,11 +124,6 @@
     line-height: 130%; /* 20.8px */
     opacity: 0.5;
 }
-
-.membershipOptionsList {
-    margin: 32px 70px;
-}
-
 /*END*/
 
 .membershipOptionsList .card-header span.discount {

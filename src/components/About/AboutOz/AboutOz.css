@@ -11,6 +11,10 @@
     margin: 160px auto;
     text-align: center;
     color:var(--white-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .about-oz .content-block svg {
@@ -56,8 +60,8 @@
 
 .img-small-right{
     position: absolute ;
-    left: 0;
-    top: -75px;
+    left: -16%;
+    top: -33%;
     z-index: 999 ;
 }
 .event-end{
@@ -99,28 +103,61 @@
 .food-5{
     position: absolute;
     right: 310px;
-    bottom: 200px;
-    
-        
+    bottom: 200px;      
 }
+.width-75{
+    width: 95%
+}
+.img-about{
+    object-fit: cover;
+}
+.img-width{
+    width: auto;
+}
+@media screen and (max-width: 1200px) {
+    .img-width{
+        width: 100%;
+    }
+    .img-small-right{
+        position: static;
+        width: 100%;
+    } 
+}
+@media screen and (max-width: 1024.5px) {
+    .width-75{
+        width: 100%
+    }
+}
+@media screen and (max-width: 991.5px) {
+
+    .width-100{
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 575.5px) {
-.about-section .img-fixed {
+    .about-section .img-fixed {
         margin-right: 0;
         width: 240px;
         height: 240px;
     }
-        .about-section .box-content .h2-text-box {
-            font-size: var(--font-size-33);
-        }
-    .img-events {
-                
-    width: 240px;
-    height: 240px;
+    .head-amenities .text-h2{
+        font-size: var(--font-size-33);
+    }
+    .about-section .box-content .h2-text-box {
+        font-size: var(--font-size-33);
+    }
+    .img-events {         
+        width: 240px;
+        height: 240px;
     }
     .img_float{
         display: none;
     }
     .head_paragraph{
-        font-size: 1.56rem;
+        font-size: 1.5rem;
+    }
+    .img-about{
+        height: auto !important;
     }
 }

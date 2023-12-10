@@ -280,3 +280,17 @@ export const upgradePlan = async (token, type, days) => {
         
     return response.data.data;
 };
+
+export const getContactAdminHistory = async (userId) => {
+        
+    const config = {
+        method: 'GET',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/contact_us?user_id=${userId}`,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};

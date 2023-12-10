@@ -3,7 +3,7 @@ import React from 'react';
 const TermsConditions = () => {
     return (
         <>
-            <section className="profile-edit py-4 px-5">
+            <section className="profile-edit py-4 px-md-5 px-2">
                 <div className="row align-items-center">
                     <div className="col-lg-12">
                         <div className="head-form">

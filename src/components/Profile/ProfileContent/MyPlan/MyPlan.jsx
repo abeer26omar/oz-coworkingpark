@@ -44,7 +44,7 @@ const MyPlan = ()=>{
             <Tab.Container id="left-tabs-example"
                 defaultActiveKey={activeTab}
                 className='py-4 px-5'>
-                <div className="container p-4">
+                <div className="container p-sm-4 p-0">
                     <div className="head-form">
                         <h2>My Plan</h2>
                     </div>

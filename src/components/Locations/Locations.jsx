@@ -52,7 +52,7 @@ const Locations = (props) => {
                         </div>
                     </div>
                     <div className="row border-of-section">
-                        <div className="col-md-8 col-d-7 col-12 border-right ">
+                        <div className="col-lg-8 col-md-7 col-12 border-right ">
                             <Slider {...settings}>
                                 {locations.length !== 0 && locations.map((location, index) => {
                                     const {id, address, main_image, title} = location;
@@ -66,8 +66,8 @@ const Locations = (props) => {
                             {locations.length === 0 && <p className='empty'>theres is no partners yet!!</p>}
                             {response !== '' && <p className={`empty text-danger mt-2 mb-0`}>{response}</p>}
                         </div>
-                        <div className="col-lg-4 col-md-5 col-12 m-auto ">
-                            <div className="box-content  p-lg-4 p-3">
+                        <div className="col-lg-4 col-md-5 col-12 my-auto ">
+                            <div className="box-content p-lg-4 p-3">
                                 {props.configData ? props.configData.map((configItem, index) => (
                                     <React.Fragment key={index}>
                                         {configItem.key === 'home_page_location_title' && (
@@ -82,7 +82,7 @@ const Locations = (props) => {
                                         tagType='link' 
                                         className="btn button-outLine btn-bg-white"
                                         to={'/houses'}>our houses</Buttons>
-                                    </div>
+                            </div>
                         </div>
                     </div>
                 </div>

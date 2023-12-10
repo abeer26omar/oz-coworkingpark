@@ -31,12 +31,13 @@
 .reservebutton {
     color: var(--white-color);
     font-family: Couture;
-    font-size: var(--font-size-32);
+    font-size: var(--font-size-25);
     font-style: normal;
     font-weight: var(--font-weight-bold);
     line-height: 120%; 
     background: transparent;
     border: 0;
+    padding: 1rem;
     transition: .3s all ease;
 }
 .reservebutton:hover{

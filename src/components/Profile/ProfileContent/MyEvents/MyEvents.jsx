@@ -69,7 +69,7 @@ const MyEvents = ()=>{
                 id="left-tabs-example" 
                 defaultActiveKey={activeTab}
                 className='py-4 px-5'>
-                <div className="container p-4">
+                <div className="container p-sm-4 p-0">
                     <div className="head-form">
                         <h2>My Events</h2>
                     </div>
@@ -103,7 +103,7 @@ const MyEvents = ()=>{
                                                 objectFit: 'cover'
                                             }}/>
                                         </div>
-                                            <div className='col-lg-7 col-md-8 col-12'>
+                                            <div className='col-lg-8 col-md-10 col-12'>
                                                 <Paragraph className='card-title mb-0'>{event?.event_name}</Paragraph>
                                                 <ul className="list-options d-flex p-0 py-4 m-0" style={{
                                                     listStyle: 'none'
@@ -117,7 +117,7 @@ const MyEvents = ()=>{
                                                         <path d="M17.998 16L15.998 16M15.998 16L13.998 16M15.998 16L15.998 14M15.998 16L15.998 18" stroke="black" stroke-width="1.25" stroke-linecap="round"/>
                                                         </svg>{event.dates && event.dates[0].check_in_date}
                                                     </li>
-                                                    <li className="list-option-item d-flex align-items-center">
+                                                    <li className="list-option-item d-flex align-items-center ms-0">
                                                         <svg xmlns="http://www.w3.org/2000/svg" className='me-2' width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                         <circle cx="12" cy="13" r="8.99998" stroke="black" stroke-width="1.25"/>
                                                         <path d="M12 9V13L14.5 15.5" stroke="#BDBDBD" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -126,7 +126,7 @@ const MyEvents = ()=>{
                                                         </svg>
                                                         {event.dates && event.dates[0].check_in_time}
                                                     </li>
-                                                    <li className="list-option-item d-flex align-items-center">
+                                                    <li className="list-option-item d-flex align-items-center ms-0">
                                                         <svg xmlns="http://www.w3.org/2000/svg" className='me-2' width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                         <path d="M4.27148 18.3457C4.27148 18.3457 6.5005 15.5 12.0005 15.5C17.5005 15.5 19.7296 18.3457 19.7296 18.3457" stroke="#BDBDBD" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                                         <path d="M11.998 2C6.4752 2 1.99805 6.47715 1.99805 12C1.99805 17.5228 6.4752 22 11.998 22C17.5208 22 21.998 17.5228 21.998 12C21.998 6.47715 17.5208 2 11.998 2Z" stroke="black" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>

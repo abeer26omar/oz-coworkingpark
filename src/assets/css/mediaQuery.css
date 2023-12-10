@@ -26,7 +26,7 @@
 
     .title-name {
         font-size: 32px;
-        margin: auto;
+        padding: .7rem;
     }
 
     .navigator .p-name {
@@ -149,16 +149,6 @@
     }
 
     /* END Private Events*/
-    /*    Contact Us Page */
-    .contactus form {
-        padding: 0 28px;
-    }
-
-    /*    End Contact us*/
-    /*    Start Login Page*/
-    .login-card form {
-        padding: 0 28px;
-    }
 
     .login-card form .group-check {
         margin-top: 3rem;
@@ -232,14 +222,13 @@
 
     /*End Community Events */
     .booking-space .book-title {
-        font-size: 32px;
+        font-size: 26px;
         text-align: center;
 
     }
 
     .booking-space .btn-spaces-filter {
         text-align: center;
-        margin: 8px auto;
         padding: 8px 0;
     }
 
@@ -303,7 +292,6 @@
 
     .box-content .h2-text-box {
         font-size: var(--font-size-26);
-        text-align: center;
     }
 
     /*End Default Classes*/
@@ -390,6 +378,3 @@
 }
 
 /* Styles for devices with a width above 1024px (laptops and desktops) */
-@media (min-width: 1025px) {
-    /* CSS rules for laptops and desktops */
-}

@@ -1,7 +1,6 @@
-import { useEffect, useState, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { Formik } from 'formik';
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
 import Button  from '../../UI/Button';
 import SweetAlert2 from 'react-sweetalert2';
 import { SiteConfigContext } from '../../../apis/context/SiteConfigContext';
@@ -84,7 +83,7 @@ const ContactusForm = ()=>{
                 } = props;
             return (
                 <form className="row g-3" onSubmit={handleSubmit}>
-                    <div className='col-lg-6'>
+                    <div className='col-lg-6 col-12'>
                         <div className="form__group field my-3 group-check">
                             <label htmlFor="first_name" className="form__label">First Name</label>
                             <input 
@@ -104,7 +103,7 @@ const ContactusForm = ()=>{
                             {errors.first_name && touched.first_name && <p className='text-danger mb-0'>{errors.first_name}</p>}
                         </div>
                     </div>
-                    <div className='col-lg-6'>
+                    <div className='col-lg-6 col-12'>
                         <div className="form__group field my-3 group-check">
                             <label htmlFor="last_name" className="form__label">Last Name</label>
                             <input 

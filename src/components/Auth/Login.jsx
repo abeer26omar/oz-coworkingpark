@@ -31,7 +31,7 @@ const Login = () => {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-6">
-                            <div className="login-card form-card py-4">
+                            <div className="login-card form-card p-md-5 p-3">
                                 <div className="head-content text-center pb-3">
                                     <h1 className="hand-write">Welcome</h1>
                                     <h3 className="bold-head">Please Sign in</h3>
