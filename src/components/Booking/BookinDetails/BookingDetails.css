@@ -14,3 +14,16 @@
 .form-horizontal {
     display: flex;
 }
+@media screen and (max-width: 992px) {
+    .booking_details .text-two{
+        font-size:  45px;
+    }
+}
+@media screen and (max-width: 425px) {
+    .booking_details .text-two{
+        font-size:  30px;
+    }
+    .spec_size{
+        font-size: 1rem;
+    }    
+}

@@ -18,11 +18,13 @@ const BookingDetailsHeader = ({venueDetails}) => {
 
     return (
         <>
-            <div className='position-relative'>
+            <div className='position-relative booking_details'>
                 
                 <AddToFavButton is_favorite={venueDetails.is_favorite} id={venueDetails.id} add_fav={true} type='venue'/>
 
-                <MainHeaderWrapper image={(venueDetails.gallery && venueDetails.gallery.length !== 0) && venueDetails.gallery} special_flex={`justify-content-md-center justify-content-start`}>
+                <MainHeaderWrapper 
+                    image={(venueDetails.gallery && venueDetails.gallery.length !== 0) && venueDetails.gallery} 
+                    special_flex={venueDetails.online_booking ? 'justify-content-lg-center justify-content-start' : 'justify-content-center'}>
                     <div className="container text-center">
                         <Paragraph className="text-one">Booking</Paragraph>
                         <Paragraph className="text-two mb-4">{venueDetails.title}</Paragraph>

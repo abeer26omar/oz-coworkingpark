@@ -40,7 +40,7 @@ const BookingHeader = (props) => {
             </div>
             <MainHeaderWrapper configData={props.configData} video={video}>
                 <div className={`container-fluid px-70 py-5`}>
-                    <div className='col-md-6 col-12'>
+                    <div className='col-xl-6 col-lg-9 col-12'>
                         {props.configData ? props.configData.map((configItem, index) => (
                             <React.Fragment key={index}>
                                 {configItem.key === 'booking_page_title' && (

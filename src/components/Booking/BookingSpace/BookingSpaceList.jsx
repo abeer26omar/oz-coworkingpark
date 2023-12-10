@@ -29,7 +29,7 @@ const BookingSpaceList = ({id, img, description, price, name, amenities, is_favo
                     </ul>
                     <Card.Text>{description}</Card.Text>
                     <div
-                        className="d-flex justify-content-between align-items-center card-footer">
+                        className="d-flex justify-content-between align-items-center card-footer p-0">
                         <span className="price-hour">{price} EGP / Hour</span>
                         <Button to={`/bookingDetails/${id}`} tagType='link' className='btn_outline_black'>Book Now</Button>
                     </div>
