@@ -211,6 +211,10 @@
     .btn_default{
         padding: 1rem 1.5rem;
     }
+    .button-outLine{
+        width: 150px;
+        font-weight: 500;
+    }
 }
 @media screen and (max-width: 375px) {
     .btn_default{

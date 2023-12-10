@@ -39,3 +39,12 @@ select {
 .form-check-label {
     color: var(--secondary-color2);
 }
+
+@media screen and (max-width:525px) {
+    .icon-custom {
+            right: 5px;
+            bottom: 14px;
+            font-size: 15px;
+    }
+    
+}

@@ -11,7 +11,7 @@ export const config = async(page_name)=>{
     return response.data.data;
 }
 
-export const getBranches = async (token, signal)=>{
+export const getBranches = async (token)=>{
     
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -22,7 +22,6 @@ export const getBranches = async (token, signal)=>{
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-        signal: signal
     };
 
     const response = await axios(config);

@@ -332,7 +332,6 @@ a {
 
 .placeholderSelect {
     color: var(--secondary-color2);
-
 }
 .is-invalid{
     border-color: var(--semantic-color2);
@@ -606,12 +605,6 @@ a {
     margin-bottom: 40px !important;
 }
 
-@media screen and (max-width: 575px) {
-    .m_b_center{
-        margin-top: 48px !important;
-    }
-    
-}
 
 .card{
     border-radius: 0;
@@ -743,4 +736,12 @@ a {
     .AmenitiesList_videos video{
         height: 100% !important;
     }
+}
+@media screen and (max-width: 575px) {
+.m_b_center {
+    margin-top: 48px !important;
+}
+.placeholderSelect {
+    font-size: 13px;
+}
 }
