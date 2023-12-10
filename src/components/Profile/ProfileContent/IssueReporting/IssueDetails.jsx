@@ -43,7 +43,7 @@ const IssueDetails = () => {
                         <Paragraph className='issue mt-3'>{report.case_type?.name}</Paragraph>
                     </div>
                     <hr />
-                    <div className="p-4">
+                    <div className="p-sm-4 p-2">
                         <div className="space-price">
                             <Paragraph className="h2-description mb-3">{report.ticket_sub_category?.name}</Paragraph>
                         </div>

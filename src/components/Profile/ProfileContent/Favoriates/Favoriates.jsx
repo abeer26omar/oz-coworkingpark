@@ -134,7 +134,7 @@ const Favoriates = () => {
     return (
         <>
             <Tab.Container id="left-tabs-example" defaultActiveKey={activeTab} className='py-4 px-5'>
-                <div className="container p-4">
+                <div className="container p-sm-4 p-0">
                     <div className="head-form">
                         <h2>Favoriates</h2>
                     </div>
@@ -163,24 +163,20 @@ const Favoriates = () => {
                                         <div className='card card_event p-3 mb-3' 
                                             key={index}>
                                             <div className='row g-3 align-items-center'>
-                                                <div className='col-lg-2 col-12 d-flex align-items-center justify-content-center'>
-                                                    <img src={item.user_id?.avatar} alt='event-img'  width={'134px'} height={'136px'} style={{
-                                                        objectFit:'fill',
-                                                        borderRadius: '50%'
-                                                    }}/>
+                                                <div className='col-lg-3  col-12 d-flex align-items-center justify-content-center'>
+                                                    <img src={item.user_id?.avatar} alt='event-img'  
+                                                        width={'134px'} 
+                                                        height={'136px'} 
+                                                        style={{
+                                                            objectFit:'cover',
+                                                            borderRadius: '50%'
+                                                        }}
+                                                    />
                                                 </div>
-                                                <div className='col-lg-10 col-12'>
+                                                <div className='col-lg-9 col-12'>
                                                         <div className='d-flex justify-content-between align-items-center'>
                                                             <Paragraph className='card-title mb-0'>{item.title || item.event_name}</Paragraph>
                                                             <AddToFavButton is_favorite={item.is_favorite} id={item.id} reload={handelReload}/>
-                                                            {/* <Button 
-                                                                tagType='link' 
-                                                                className="fav-event p-0"
-                                                                onClick={()=>{likeVenue(item.id)}}>
-                                                                <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M33.3901 11.2123L33.3904 11.2128C34.9886 14.4857 34.3927 18.2453 31.2918 22.5101L31.2905 22.512C28.8369 25.9084 25.2986 29.3178 20.1211 33.3385L20.1199 33.3395C20.0869 33.3652 20.0463 33.3791 20.0045 33.3791C19.9627 33.3791 19.922 33.3652 19.8891 33.3395L19.888 33.3386C14.7036 29.3105 11.1719 25.8716 8.71624 22.5088C5.60676 18.2445 5.01118 14.4853 6.60917 11.2128L6.60944 11.2123C7.70239 8.96926 10.9357 7.03332 14.8135 8.1446C16.6619 8.67868 18.2746 9.82376 19.3882 11.3928L19.9998 12.2546L20.6114 11.3928C21.7251 9.82356 23.3381 8.67839 25.1868 8.14439L25.1887 8.14383C29.0525 7.01654 32.2958 8.96645 33.3901 11.2123Z" fill={item.is_favorite ? '#CB0A05' : '#585858'} fill-opacity="0.7" stroke={item.is_favorite ? '#A50805' : '#BDBDBD'} stroke-width="1.5"/>
-                                                                </svg>
-                                                            </Button> */}
                                                         </div>
                                                         <div className="list-option-item m-0 d-flex align-items-center  my-3">
                                                                         <svg xmlns="http://www.w3.org/2000/svg" className='me-2' width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -210,21 +206,13 @@ const Favoriates = () => {
                                             <div className='row g-3 align-items-center'>
                                                 <div className='col-lg-3 col-12 d-flex align-items-center justify-content-center'>
                                                     <img src={item.image || item.gallery[0]?.image} alt='event-img'  width={'100%'} height={'136px'} style={{
-                                                        objectFit:'fill'
+                                                        objectFit:'cover'
                                                     }}/>
                                                 </div>
                                                 <div className='col-lg-9 col-12'>
                                                     <div className='d-flex justify-content-between align-items-center'>
                                                         <Paragraph className='card-title mb-0'>{item.title || item.event_name}</Paragraph>
                                                         <AddToFavButton is_favorite={item.is_favorite} id={item.id} type={'venue'} reload={handelReload}/>
-                                                        {/* <Button 
-                                                            tagType='link' 
-                                                            className="fav-event p-0"
-                                                            onClick={()=>{likeVenue(item.id)}}>
-                                                            <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M33.3901 11.2123L33.3904 11.2128C34.9886 14.4857 34.3927 18.2453 31.2918 22.5101L31.2905 22.512C28.8369 25.9084 25.2986 29.3178 20.1211 33.3385L20.1199 33.3395C20.0869 33.3652 20.0463 33.3791 20.0045 33.3791C19.9627 33.3791 19.922 33.3652 19.8891 33.3395L19.888 33.3386C14.7036 29.3105 11.1719 25.8716 8.71624 22.5088C5.60676 18.2445 5.01118 14.4853 6.60917 11.2128L6.60944 11.2123C7.70239 8.96926 10.9357 7.03332 14.8135 8.1446C16.6619 8.67868 18.2746 9.82376 19.3882 11.3928L19.9998 12.2546L20.6114 11.3928C21.7251 9.82356 23.3381 8.67839 25.1868 8.14439L25.1887 8.14383C29.0525 7.01654 32.2958 8.96645 33.3901 11.2123Z" fill={item.is_favorite ? '#CB0A05' : '#585858'} fill-opacity="0.7" stroke={item.is_favorite ? '#A50805' : '#BDBDBD'} stroke-width="1.5"/>
-                                                            </svg>
-                                                        </Button> */}
                                                     </div>
                                                         <ul className="list-options d-flex p-0 py-3 m-0">
                                                             {item.services?.map((item, index)=>{
@@ -237,10 +225,7 @@ const Favoriates = () => {
                                                                 <Paragraph className="price-hour mb-0">{item?.price} EGP / Hour</Paragraph>
                                                                 <Button 
                                                                     tagType='link' 
-                                                                    className="btn_outline_black"
-                                                                    style={{
-                                                                        padding: '.6rem 3rem'
-                                                                    }}>book now</Button>
+                                                                    className="btn_outline_black spec_padding">book now</Button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -252,7 +237,7 @@ const Favoriates = () => {
                                             <div className='row g-3 align-items-center'>
                                                 <div className='col-lg-3 col-12 d-flex align-items-center justify-content-center'>
                                                     <img src={item.image || item.gallery[0]?.image} alt='event-img'  width={'100%'} height={'136px'} style={{
-                                                        objectFit:'fill'
+                                                        objectFit:'cover'
                                                     }}/>
                                                 </div>
                                                     <div className='col-lg-9 col-12'>
@@ -275,7 +260,7 @@ const Favoriates = () => {
                                                                     return (<span key={index}>{date.check_in_date}</span>)
                                                                 })}
                                                             </li>
-                                                            <li className="list-option-item d-flex align-items-center">
+                                                            <li className="list-option-item d-flex align-items-center ms-0">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" className='me-2' width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                                 <circle cx="12" cy="13" r="8.99998" stroke="black" stroke-width="1.25"/>
                                                                 <path d="M12 9V13L14.5 15.5" stroke="#BDBDBD" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -286,7 +271,7 @@ const Favoriates = () => {
                                                                     return (<span key={index}>{date.check_in_time}</span>)
                                                                 })}
                                                             </li>
-                                                            <li className="list-option-item d-flex align-items-center">
+                                                            <li className="list-option-item d-flex align-items-center ms-0">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" className='me-2' width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                                 <path d="M4.27148 18.3457C4.27148 18.3457 6.5005 15.5 12.0005 15.5C17.5005 15.5 19.7296 18.3457 19.7296 18.3457" stroke="#BDBDBD" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                                                 <path d="M11.998 2C6.4752 2 1.99805 6.47715 1.99805 12C1.99805 17.5228 6.4752 22 11.998 22C17.5208 22 21.998 17.5228 21.998 12C21.998 6.47715 17.5208 2 11.998 2Z" stroke="black" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -302,22 +287,16 @@ const Favoriates = () => {
                                                                                 item.event_attend_id === null ? (
                                                                                     <Button 
                                                                                         tagType='link' 
-                                                                                        className="btn_outline_black"
-                                                                                        onClick={()=>attend(item.id)} 
-                                                                                        style={{
-                                                                                            padding: '.6rem 3rem'
-                                                                                        }}>attend
+                                                                                        className="btn_outline_black spec_padding"
+                                                                                        onClick={()=>attend(item.id)}>attend
                                                                                     </Button>
                                                                                 )
                                                                                 :
                                                                                 (
                                                                                     <Button 
                                                                                         tagType='link' 
-                                                                                        className="btn_outline_black"
-                                                                                        onClick={()=>cancel(item.event_attend_id)} 
-                                                                                        style={{
-                                                                                            padding: '.6rem 3rem'
-                                                                                        }}>cancel
+                                                                                        className="btn_outline_black spec_padding"
+                                                                                        onClick={()=>cancel(item.event_attend_id)}>cancel
                                                                                     </Button>
                                                                                 )
                                                                             }

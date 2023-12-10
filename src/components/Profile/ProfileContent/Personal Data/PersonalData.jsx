@@ -140,7 +140,7 @@ const PersonalData = () => {
                     handleSubmit,
                     } = props;
                     return (
-                        <div className="container py-4 px-5">
+                        <div className="container py-4 px-sm-5 px-2">
                             <form className="profile-edit mb-5" onSubmit={handleSubmit}>
                                 <div className="row align-items-center">
                                     <div className="col-lg-12">

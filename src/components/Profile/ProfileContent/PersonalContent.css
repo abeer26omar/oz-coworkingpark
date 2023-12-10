@@ -60,14 +60,8 @@
     background: transparent;
 }
 
-.changepass-style .form__field {
-    width: 50%;
-}
-
 .profile-edit p {
     color: var(--primary-color);
-
-    /* 20 r */
     font-family: Questrial;
     font-size: 16px;
     font-style: normal;
@@ -169,4 +163,17 @@
 }
 .input-group{
     align-items: center;
+}
+@media screen and (max-width: 576px) {
+    .auth_btn_padding {
+        padding: 0.62rem 2.12rem;
+    }
+}
+@media screen and (max-width: 425px) {
+    .head-form {
+        flex-wrap: wrap;
+    }
+    .head-form h2{
+        font-size: 1.3rem;
+    }
 }

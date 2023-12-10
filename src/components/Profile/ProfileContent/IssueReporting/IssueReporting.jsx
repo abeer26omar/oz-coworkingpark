@@ -21,7 +21,7 @@ const IssueReporting = () => {
 
     return (
         <>
-            <div className="container py-4 px-5">
+            <div className="container py-4 px-lg-5 px-3">
                 <div className="head-form d-flex justify-content-between">
                     <h2>issue Reporting</h2>
                     <Button tagType='link' to={'/profile/issuehistory'} className='btn_outline_black auth_btn_padding'>
@@ -30,7 +30,7 @@ const IssueReporting = () => {
                             <path d="M12.5 7.55469C12.7072 7.55469 12.9059 7.637 13.0524 7.78351C13.1989 7.93002 13.2813 8.12874 13.2813 8.33594V12.1797L15.6562 14.5547C15.733 14.6262 15.7946 14.7125 15.8373 14.8083C15.88 14.9041 15.9029 15.0076 15.9048 15.1125C15.9066 15.2174 15.8873 15.3216 15.848 15.4189C15.8088 15.5161 15.7503 15.6045 15.6761 15.6787C15.6019 15.7529 15.5135 15.8114 15.4162 15.8506C15.319 15.8899 15.2148 15.9092 15.1099 15.9074C15.005 15.9055 14.9015 15.8826 14.8057 15.8399C14.7099 15.7972 14.6236 15.7356 14.5521 15.6589L12.024 13.1318C11.9271 13.0349 11.8503 12.92 11.7979 12.7934C11.7455 12.6669 11.7186 12.5312 11.7188 12.3943V8.33594C11.7188 8.12874 11.8011 7.93002 11.9476 7.78351C12.0941 7.637 12.2928 7.55469 12.5 7.55469Z" fill="#BDBDBD"/>
                         </svg> History</Button>
                 </div>
-                <div className="col-11 mx-auto space-description">
+                <div className="col-sm-11 col-12 mx-auto space-description">
                     { cases && cases.map(item=>{
                         return (
                             <Button className='p-0 d-block' tagType='link' to={`/profile/issueType/case_${item.id}`}>

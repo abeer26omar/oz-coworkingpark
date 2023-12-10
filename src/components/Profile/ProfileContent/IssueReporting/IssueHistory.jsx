@@ -29,7 +29,7 @@ const IssueHistory = () => {
 
     return (
         <>
-            <div className="container py-4 px-5">
+            <div className="container px-lg-5 px-md-3 p-0">
                 <div className="head-form d-flex justify-content-between">
                     <h2>Report history</h2>
                 </div>

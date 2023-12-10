@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Nav} from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 import './ProfileTabs.css'
 import { Outlet } from 'react-router-dom';
+import Button from '../../UI/Button';
 
 const ProfileTabs = () => {
+    const [sideMenu, setSideMenu] = useState(true);
+
+    const handelSideMenu = (e)=>{
+        e.preventDefault();
+        setSideMenu(!sideMenu);
+    };
+
     return (
         <>
                 <div className="container-fluid profile-taps">
                     <div className="row">
-                        <div className="col-md-4 col-lg-3 border-right">
-                            <Nav variant="pills" className="flex-column p-5">
+                        <div className={`col-md-3 col-2 d-flex flex-column border-right profile_tabs ${sideMenu ? 'profile_nav' : ''}`}>
+                            <Nav variant="pills" className="flex-column p-xl-5 p-4">
                                 <li className="nav-item">
                                     <NavLink 
                                         to={'/profile'}
@@ -173,7 +181,17 @@ const ProfileTabs = () => {
                                 </li>
                             </Nav>
                         </div>
-                        <div className="col-md-8 col-lg-9">
+                        <div className={`col-md-9 col-10 profile_content ${sideMenu ? 'opened ' : ''}`}>
+                            <Button 
+                                tagType='link'
+                                className='p-0 align-self-end btn_profile'
+                                onClick={handelSideMenu}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                    <path d="M5.33398 9.33301L26.6673 9.33301" stroke={'black'} stroke-width="1.5" stroke-linecap="round"/>
+                                    <path opacity="0.6" d="M12 16H26.6667" stroke={'black'} stroke-width="1.5" stroke-linecap="round"/>
+                                    <path opacity="0.4" d="M20 22.667H26.6667" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </Button>
                             <Outlet />
                         </div>
                     </div>
