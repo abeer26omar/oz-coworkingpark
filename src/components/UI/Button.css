@@ -207,14 +207,23 @@
     text-decoration: underline;
     cursor: pointer;
 }
+.spec_padding{
+    padding: .6rem 3rem
+}
 /* Media Query */
 @media screen and (max-width: 575px) {
     .btn_default{
         padding: 1rem 1.5rem;
     }
+    .spec_padding{
+        padding: .6rem 1rem
+    }
 }
 @media screen and (max-width: 375px) {
     .btn_default{
         padding: 1rem;
+    }
+    .spec_padding{
+        padding: .6rem
     }
 } 

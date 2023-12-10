@@ -1,19 +1,9 @@
 .contactus .head-content-left-shape .text-shape {
-
-    transform: translate(-240px, 25px);
-
-}
-
-.contactus form {
-    padding: 0 75px;
+    position: relative;
+    z-index: 99;
 }
 
 .contactus .btn-bg-white {
     background-color: #fff;
     border-radius: 0;
-}
-@media screen and (max-width: 1024px) and (min-width: 992px) {
-    .contactus form {
-        padding: 0 25px;
-    }
 }

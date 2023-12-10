@@ -38,7 +38,7 @@ const Register = () => {
                                 </div>
                             </div>
                             <div className="col-lg-6">
-                                <div className="form-card py-3">
+                                <div className="form-card p-md-5 p-3">
                                     <RegisterForm provider={provider} profile={profile} />
                                     <div className="py-3 log-social d-flex justify-content-center">
                                         <LoginSocialFacebook

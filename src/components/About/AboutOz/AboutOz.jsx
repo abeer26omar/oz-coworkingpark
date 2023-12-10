@@ -75,7 +75,7 @@ const AboutOz = (props) => {
       <section className="about-section body-dark">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-lg-6 col-md- col-12 box-content-black px-0">
+            <div className="col-lg-6 col-md- col-12 box-content-black px-lg-0">
               {props.configData
                 ? props.configData.map((configItem, index) => (
                     <React.Fragment key={index}>
@@ -94,7 +94,7 @@ const AboutOz = (props) => {
                 : ""}
             </div>
 
-            <div className="col-lg-6 col-md- col-12 box-content-black m-auto ms-auto ps-0">
+            <div className="col-lg-6 col-md- col-12 box-content-black m-auto ms-auto ps-lg-0">
               <div className="box-content p-lg-4 p-3">
                 {props.configData
                   ? props.configData.map((configItem, index) => (
@@ -117,8 +117,8 @@ const AboutOz = (props) => {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-6 col-md- col-12 box-content-black my-auto ">
-                <div className="box-content px-5">
+            <div className="col-lg-6 col-md- col-12 box-content-black my-auto">
+                <div className="box-content px-xl-5 px-3">
                   {props.configData
                     ? props.configData.map((configItem, index) => (
                         <React.Fragment key={index}>
@@ -158,74 +158,116 @@ const AboutOz = (props) => {
                 : ""}
             </div>
           </div>
-          {/* <div className="row py-5">
-              <div className="col-lg-6 ">
-                  <div className="mission">
-                    {props.configData
-                      ? props.configData.map((configItem, index) => (
-                          <React.Fragment key={index}>
-                            {configItem.key ===
-                              "'about_us_page_our_mission_title" && (
-                              <Paragraph className="text_desc_black ">
-                                {configItem.value}
-                              </Paragraph>
-                            )}
-                            {configItem.key ===
-                              "about_us_page_our_mission_description" && (
-                              <Paragraph className="p-text-box w-75 m-auto pb-2">
-                                {configItem.value}
-                              </Paragraph>
-                            )}
-                            {configItem.key ===
-                              "about_us_page_our_mission_image_3" && (
-                              <img src={configItem.value} alt={"img"} />
-                            )}
-                          </React.Fragment>
+          <div className="row py-5">
+              <div className="col-xl-6 col-12">
+                  <div className="row">
+                    <div className="col-xl-12 col-lg-6 my-auto">
+                      <div className="box-content px-xl-5 px-3">
+                          {props.configData
+                            ? props.configData.map((configItem, index) => (
+                                <React.Fragment key={index}>
+                                  {configItem.key ===
+                                    "about_us_page_our_mission_title" && (
+                                    <Paragraph className="text_desc_black pb-3">
+                                      {configItem.value}
+                                    </Paragraph>
+                                  )}
+                                  {configItem.key ===
+                                    "about_us_page_our_mission_description" && (
+                                    <Paragraph className="p-text-box pb-xl-5 pb-0 width-75">
+                                      {configItem.value}
+                                    </Paragraph>
+                                  )}
+                                </React.Fragment>
+                              ))
+                            : ""}
+                        </div>
+                    </div>
+                    <div className="col-xl-12 col-lg-6 col-12">
+                        {props.configData
+                          ? props.configData.map((configItem, index) => (
+                              <React.Fragment key={index}>
+                                {configItem.key ===
+                                  "about_us_page_our_mission_image_3" && (
+                                  <img 
+                                    src={configItem.value}
+                                    className="image-box img-about img-width ps-0" 
+                                    alt={"img"}
+                                    style={{
+                                      height: '345px'
+                                    }} />
+                                )}
+                              </React.Fragment>
+                            ))
+                        : ""}
+                    </div>
+                  </div>
+              </div>
+              <div className="col-xl-6 col-12 d-flex align-items-center flex-end">
+                <div className="row g-3 align-items-center position-relative">
+                  <div className="col-md-6 col-12">
+                      {props.configData
+                        ? props.configData.map((configItem, index) => (
+                            <React.Fragment key={index}>
+                              {configItem.key ===
+                                "about_us_page_our_mission_image_1" && (
+                                <img
+                                  className=" img-small-right img-about"
+                                  src={configItem.value}
+                                  alt={"img"}
+                                  style={{
+                                    height: '292px'
+                                  }}
+                                />
+                              )}
+                            </React.Fragment>
+                          ))
+                        : ""}
+                  </div>
+                  <div className="col-xl-12 col-md-6 col-12">
+                      {props.configData
+                        ? props.configData.map((configItem, index) => (
+                            <React.Fragment key={index}>
+                              {configItem.key ===
+                                "about_us_page_our_mission_image_2" && (
+                                <img
+                                  className="img-about w-100" 
+                                  src={configItem.value}
+                                  alt={"img"}
+                                  style={{
+                                    height: '428px'
+                                  }}
+                                />
+                              )}
+                            </React.Fragment>
                         ))
                       : ""}
                   </div>
+                </div>
               </div>
-              <div className="col-6 position-relative flex-end p-60 ">
-                {props.configData
-                  ? props.configData.map((configItem, index) => (
-                      <React.Fragment key={index}>
-                        {configItem.key ===
-                          "about_us_page_our_mission_image_1" && (
-                          <img
-                            className="img-small-right"
-                            src={configItem.value}
-                            alt={"img"}
-                          />
-                        )}
-                        {configItem.key ===
-                          "about_us_page_our_mission_image_2" && (
-                          <Media
-                            type="img"
-                            src={configItem.value}
-                            alt={"img"}
-                          />
-                        )}
-                      </React.Fragment>
-                    ))
-                  : ""}
-              </div>
-          </div> */}
-          {/* <div className="row p-5">
-              <div className="col-lg-7 ">
-                <div className="row">
-                  <div className="col-lg-6">
+          </div>
+          <div className="row py-5 justify-content-between">
+              <div className="col-lg-8">
+                <div className="row g-3">
+                  <div className="col-xl-5 col-12">
                     {props.configData
                       ? props.configData.map((configItem, index) => (
                           <React.Fragment key={index}>
                             {configItem.key ===
                               "about_us_page_community_image_1" && (
-                              <img src={configItem.value} alt={"img"} />
+                              <img 
+                                className="w-100 img-about"
+                                src={configItem.value} 
+                                alt={"img"}
+                                style={{
+                                  height: '352px'
+                                }} />
                             )}
                           </React.Fragment>
                         ))
                       : ""}
                   </div>
-                  <div className="col-lg-6">
+                  <div className="col-xl-7 col-12">
                     {props.configData
                       ? props.configData.map((configItem, index) => (
                           <React.Fragment key={index}>
@@ -247,25 +289,29 @@ const AboutOz = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-5 flex-end ">
+              <div className="col-lg-4 d-flex justify-content-end">
                 {props.configData
                   ? props.configData.map((configItem, index) => (
                       <React.Fragment key={index}>
                         {configItem.key ===
                           "about_us_page_community_image_2" && (
-                          <img src={configItem.value} alt={"img"} />
+                          <img
+                            className="w-100 img-about"
+                            src={configItem.value} 
+                            alt={"img"}
+                            style={{
+                              height: '549px'
+                            }} />
                         )}
                       </React.Fragment>
                     ))
                   : ""}
               </div>
-          </div> */}
-          {/* <div className="row py-5">
-              <div className="col-md-6 col-lg-6 col-sm-4 col-xs-6 box-content-black   ">
-                <div className="box-content     ">
-                  <div className="d-block justify-content-center ">
-                    <div className="">
-                      {props.configData
+          </div>
+          <div className="row g-3 py-5">
+              <div className="col-lg-6 col-12">
+                <div className="box-content p-xl-5 p-3">
+                    {props.configData
                         ? props.configData.map((configItem, index) => (
                             <React.Fragment key={index}>
                               {configItem.key === "about_us_page_event_title" && (
@@ -282,35 +328,34 @@ const AboutOz = (props) => {
                             </React.Fragment>
                           ))
                         : ""}
-                    </div>
+                </div>
                     {props.configData
                       ? props.configData.map((configItem, index) => (
                           <React.Fragment key={index}>
                             {configItem.key === "about_us_page_event_image_1" && (
                               <img
-                                className="img-events"
+                                className="img-about width-100"
                                 src={configItem.value}
                                 alt={configItem.key}
+                                style={{
+                                  height: '265px'
+                                }}
                               />
                             )}
                           </React.Fragment>
                         ))
                       : ""}
-                  </div>
-                </div>
               </div>
-              <div className="col-md-6 col-lg-6 col-sm-6 col-xs-6 m-auto box-content-black  ">
+              <div className="col-lg-6 col-12 px-lg-0">
                 {props.configData
                   ? props.configData.map((configItem, index) => (
                       <React.Fragment key={index}>
                         {configItem.key === "about_us_page_event_image_2" && (
-                          <Media
-                            type="img"
-                            className="image-box w-100"
+                          <img
+                            className="w-100 img-about"
                             src={configItem.value}
                             alt={configItem.key}
                             style={{
-                              width: "762px",
                               height: "546px",
                             }}
                           />
@@ -319,7 +364,7 @@ const AboutOz = (props) => {
                     ))
                   : ""}
               </div>
-          </div> */}
+          </div>
           {/* <div className="position-relative py-5">
             {props.configData
               ? props.configData.map((configItem, index) => (
@@ -376,38 +421,47 @@ const AboutOz = (props) => {
               </Paragraph>
             </div>
           </div> */}
-          {/* <div className="row py-5">
-            <div className="col-xl-5">
+          <div className="row py-5">
+            <div className="col-md-6 col-12">
               {props.configData
                 ? props.configData.map((configItem, index) => (
                     <React.Fragment key={index}>
-                      {configItem.key === "about_us_page_community_image_1" && (
-                        <img src={configItem.value} alt={"img"} />
+                      {configItem.key === "about_us_page_oz_dna_iamge" && (
+                        <img 
+                            className="w-100 img-about"
+                            src={configItem.value} 
+                            alt={"img"}
+                            style={{
+                              height: '568px'
+                            }} 
+                        />
                       )}
                     </React.Fragment>
                   ))
                 : ""}
             </div>
-            <div className="col-md-6 col-lg-7 col-sm-6 col-xs-6 box-content-black m-auto ">
-              {props.configData
-                ? props.configData.map((configItem, index) => (
-                    <React.Fragment key={index}>
-                      {configItem.key === "about_us_page_oz_dna_title" && (
-                        <Paragraph className="text_desc_black mt-0">
-                          {configItem.value}
-                        </Paragraph>
-                      )}
-                      {configItem.key ===
-                        "about_us_page_oz_dna_description" && (
-                        <Paragraph className="p-text-box">
-                          {configItem.value}
-                        </Paragraph>
-                      )}
-                    </React.Fragment>
+            <div className="col-md-6 col-12 my-auto">
+              <div className="box-content p-xl-5 p-3">
+                {props.configData
+                  ? props.configData.map((configItem, index) => (
+                      <React.Fragment key={index}>
+                        {configItem.key === "about_us_page_oz_dna_title" && (
+                          <Paragraph className="text_desc_black mt-0">
+                            {configItem.value}
+                          </Paragraph>
+                        )}
+                        {configItem.key ===
+                          "about_us_page_oz_dna_description" && (
+                          <Paragraph className="p-text-box">
+                            {configItem.value}
+                          </Paragraph>
+                        )}
+                      </React.Fragment>
                   ))
                 : ""}
+              </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </section>
 

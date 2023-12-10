@@ -21,3 +21,18 @@
     transform: translateY(-96px);
 
 }
+@media screen  and (max-width: 1024px){
+    .private .title-name {
+        font-size: 2.25rem;
+    }
+}
+@media screen and (max-width: 768px) {
+    .private .change_dir{
+        flex-direction: column;
+    }
+}
+@media screen and (max-width: 425px) {
+    .private .change_dir_sm{
+        flex-direction: column;
+    }
+}

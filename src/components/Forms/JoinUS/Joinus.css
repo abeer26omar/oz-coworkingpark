@@ -1,14 +1,6 @@
 .head-content-left-shape {
-    height: 140px;
+    /* height: 140px; */
 
-}
-
-.head-content-left-shape .text-shape {
-    transform: translate(65px, 25px);
-}
-
-.joinus-form {
-    padding: 0 70px;
 }
 
 .joinus-form .box-apply-member {

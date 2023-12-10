@@ -49,7 +49,7 @@ const OurSpaces = (props)=>{
                     ? props.configData.map((configItem, index) => (
                         <React.Fragment key={index}>
                           {configItem.key === "home_page_space_image" && (
-                            <div className="col-lg-8 col-md-7 col-sm-12 col-xs-6 border-left img_block">
+                            <div className="col-lg-8 col-md-7 col-sm-12 border-left img_block">
                               <Media
                                 type="img"
                                 className="image-box w-100"

@@ -11,6 +11,7 @@ import { getBranches } from '../../../apis/config';
 import SocialMedia from "../../UI/SocialMedia";
 import { getListMembershipTypes } from '../../../apis/MembershipApi';
 import { getAmenitiesGroup } from '../../../apis/Booking';
+import { HashLink } from 'react-router-hash-link';
 
 const Header = ({showBlackNav}) => {
 
@@ -84,13 +85,12 @@ const Header = ({showBlackNav}) => {
                                     {bookingPlaces && bookingPlaces.map((item,index)=>{
                                         return (
                                             <li className="drop_event" key={index}>
-                                                <Button 
-                                                    tagType='link' 
-                                                    className='p-0' 
-                                                    to={`/booking?amenity=${item.name}&id=${item.id}`} 
-                                                >
+                                                <HashLink 
+                                                    key={index} 
+                                                    className='pb-3 links' 
+                                                    smooth to={`/booking?amenity=${item.name}&id=${item.id}#${item.name}`}>
                                                     {item.name}
-                                                </Button>
+                                                </HashLink>
                                             </li>
                                         )
                                     })}

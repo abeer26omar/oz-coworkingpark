@@ -25,7 +25,7 @@ const Contactus = () => {
                             </div>
                         </div>
                         <div className="col-lg-6">
-                            <div className="form-card py-3">
+                            <div className="form-card p-md-5 p-3">
                                 <ContactusForm />
                             </div>
                         </div>

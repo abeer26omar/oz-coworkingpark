@@ -36,7 +36,7 @@ const NewsFeedHeader = ({getSearchResult}) => {
             <div className="bg-body-tertiary navigator-feed">
                 <Container fluid>
                     <div className="d-flex justify-content-between align-items-center">
-                        <div className="d-flex">
+                        <div className="d-flex align-items-center">
                             <h1 className="title-name mb-0">
                                 News Feed
                             </h1>
@@ -117,7 +117,7 @@ const NewsFeedHeader = ({getSearchResult}) => {
             </div>} */}
             <MainHeaderWrapper configData={config('')} image={newsfeed}>
                 <div className={`container-fluid px-70 py-5`}>
-                    <div className='col-md-6 col-12'>
+                    <div className='col-xl-6 col-lg-9 col-12'>
                         <h2 class="main_header mb-0">Community</h2>
                         <Paragraph className='head_paragraph mb-3'>News Feed</Paragraph>
                         <Paragraph className='description mb-0'>

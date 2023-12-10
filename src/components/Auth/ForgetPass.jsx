@@ -16,7 +16,7 @@ const ForgetPass = () => {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-6">
-                            <div className="login-card form-card py-4">
+                            <div className="login-card form-card p-md-5 p-3">
                                 <ForgetPassForm />                               
                             </div>
                         </div>

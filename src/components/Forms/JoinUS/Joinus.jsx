@@ -11,14 +11,15 @@ import Media from "../../Media/Media";
 import { inquiry } from '../../../apis/AuthApi';
 
 const Joinus = () => {
-    const [plan, setPlan] = useState(JSON.parse(sessionStorage.getItem('selectedPlan')));
+
+    const [plan, setPlan] = useState(JSON.parse(sessionStorage.getItem('selectedPlanOZ')));
     const [swalProps, setSwalProps] = useState({});
     const siteConfig = useContext(SiteConfigContext);
     const { userProfileDate } = useContext(AuthContext)
     const [userInfo, setUSerInfo] = useState(userProfileDate);
 
     useEffect(()=>{
-        const planDetails = JSON.parse(sessionStorage.getItem('selectedPlan'));
+        const planDetails = JSON.parse(sessionStorage.getItem('selectedPlanOZ'));
         setPlan(planDetails);
     },[]);
 
@@ -56,46 +57,40 @@ const Joinus = () => {
     return (
         <>
             <div className="position-relative">
-                <Media
-                    type="img" src={vector} className="position-absolute"
+                <img
+                    src={vector} 
+                    className="position-absolute"
                     style={{top: "0px", left: "0", width: "100px"}}
                     alt="shape"/>
-                <div className="head-content-left-shape text-left pb-3 position-relative">
-                    <div className="text-shape">
-                        <h1 className="hand-write">Join us</h1>
-                        <h3 className="bold-head">Get started to join with oz community</h3>
-                    </div>
-                </div>
-
-
             </div>
             <section className="contactus my-5 joinus-form">
                 <div className="container-fluid">
-                    <div className="row ">
+                    <div className="head-content-left-shape text-left pb-3">
+                        <div className="text-shape">
+                            <h1 className="hand-write">Join us</h1>
+                            <h3 className="bold-head">Get started to join with oz community</h3>
+                        </div>
+                    </div>
+                    <div className="row g-3">
                         <div className="col-lg-6">
                             <div className="box-apply-member">
                                 <h3>Summary</h3>
                                 <div className=" name-price d-flex align-items-center justify-content-between">
-                                    <h2 className="d-flex justify-content-start align-items-center ">{plan.selectedPackage}</h2>
+                                    <h2 className="d-flex justify-content-start align-items-center ">{plan?.selectedPackage}</h2>
                                     <div className="d-block">
-                                        <del className="member_discount">{plan.price} / {plan.time}</del>
+                                        <del className="member_discount">{plan?.price} / {plan?.time}</del>
                                         <br/>
-                                        <strong className="current_price">{plan.priceDicounted} / {plan.time}</strong>
+                                        <strong className="current_price">{plan?.priceDicounted} / {plan?.time}</strong>
                                     </div>
                                 </div>
                                 <ul className="amenties-select">
-                                    {/* {selectedAmenities.map((amenity, index) => (
-                                        <li key={index} className="d-flex align-items-center ">
-                                            <img src={amenity.logo} alt={amenity.title} className="me-4"/>
-                                            <span> {amenity.title}</span>
-                                        </li>
-                                    ))} */}
+                                    {plan.description}
 
                                 </ul>
                             </div>
                         </div>
                         <div className="col-lg-6">
-                             <div className="form-card py-3">
+                             <div className="form-card p-md-5 p-3">
                              <Formik 
                                 initialValues = {{
                                     first_name: userInfo ? userInfo.first_name : '',

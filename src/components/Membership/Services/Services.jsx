@@ -23,20 +23,23 @@ const Services = () => {
         }
         getAmenities();
     },[]);
+
     return (
         <>
             <section className={`membership-component ${isMembershipPage ? 'yellow-background p-60' : ''}`}>
-                <div className="position-relative mb-5" style={{height: "100px"}}>
-                    <Media
-                        type="img" src={vector} className="position-absolute"
-                        style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>
-                    <div className="head-content-left-shape text-left  position-absolute"
-                         style={{top: "40px", left: "100px"}}>
+                <div className="position-relative">
+                    <img
+                        src={vector} 
+                        className="position-absolute"
+                        style={{top: "0px", left: "0", width: "100px"}} 
+                        alt="shape"
+                    />
+                </div>
+                <div className="container">
+                    <div className="head-content-left-shape text-left position-relative" style={{zIndex: '99'}}>
                         <Paragraph className="bold-head mb-4 ">What you'll get</Paragraph>
                         <Paragraph className="text-content text-secondary">Enjoy the boundlessness of possibilities at OZ:</Paragraph>
                     </div>
-                </div>
-                <div className="container-fluid">
                     <div className="row">
                         {amenities.map((amenity, index) => {
                             const {id, title, image,description} = amenity;
