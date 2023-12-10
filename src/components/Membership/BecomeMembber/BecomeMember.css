@@ -56,3 +56,9 @@
     font-weight: var(--font-weight-bold);
 }
 /*END*/
+
+@media screen and (max-width: 1200px) {
+    .h2-text-box{
+        font-size: var(--font-size-41);
+    }
+}

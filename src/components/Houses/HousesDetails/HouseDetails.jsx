@@ -39,67 +39,67 @@ const HouseDetails = () => {
     }
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary navigator">
+            <div className="bg-body-tertiary navigator houses">
                 <Container fluid>
-                    <h1 className="title-name mb-0">
-                        {houseDetails.title}
-                    </h1>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="2"
-                        height="127"
-                        viewBox="0 0 2 127"
-                        fill="none"
-                    >
-                        <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
-                    </svg>
-                    <Nav className="ms-auto nav-head">
-                        <>
-                            <NavLink className="nav-link-two links-margin" onClick={() => {
-                                window.location.href = '#community-events';
-                            }}>
-                                Community Events
-                            </NavLink>
-                            <NavLink className="nav-link-two  links-margin"
-                                     onClick={() => {
-                                         window.location.href = '#f-b';
-                                     }}
-                                     smooth={true}
-                                     smoothScrollTimeout={1000}
-                            >
-                                F&B
-                            </NavLink>
-                            <NavLink className="nav-link-two links-margin"
-                                     onClick={() => {
-                                         window.location.href = '#amenities';
-                                     }
-                                     }
-                            >
-                                Amenities
-                            </NavLink>
-                            <NavLink className="nav-link-two btn button-outLine btn-bg-white"
-                                     to="/contactus"
-                            >
-                                inquire
-                            </NavLink>
-                        </>
-                    </Nav>
+                    <div className='d-flex align-items-center change_dir'>
+                        <h1 className="title-name mb-0">
+                            {houseDetails.title}
+                        </h1>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="2"
+                            height="127"
+                            viewBox="0 0 2 127"
+                            fill="none"
+                        >
+                            <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
+                        </svg>
+                        <div className="d-flex justify-content-center align-items-center py-3 change_dir_sm">
+                                <NavLink className="nav-link-two links-margin" onClick={() => {
+                                    window.location.href = '#community-events';
+                                }}>
+                                    Community Events
+                                </NavLink>
+                                <NavLink className="nav-link-two links-margin"
+                                        onClick={() => {
+                                            window.location.href = '#f-b';
+                                        }}
+                                        smooth={true}
+                                        smoothScrollTimeout={1000}
+                                >
+                                    F&B
+                                </NavLink>
+                                <NavLink className="nav-link-two links-margin"
+                                        onClick={() => {
+                                            window.location.href = '#amenities';
+                                        }
+                                        }
+                                >
+                                    Amenities
+                                </NavLink>
+                                <NavLink className="nav-link-two btn button-outLine btn-bg-white"
+                                    to="/contactus"
+                                >
+                                    inquire
+                                </NavLink>
+                        </div>
+                    </div>
                 </Container>
-            </Navbar>
+            </div>
 
             <section className=" locations house-details ">
                 <div className="container-fluid">
 
                     <div className="row border-of-section ">
                         <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto ">
-                            <div className="box-content px-4">
+                            <div className="box-content p-sm-4 p-2">
                                 <h2 className="h2-text-box">{houseDetails.address}</h2>
                                 <p className="p-text-box">
                                    {houseDetails.description}
                                 </p>
                             </div>
                         </div>
-                        <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left ">
+                        <div className="col-md-8 col-lg-8 col-sm-8 col-xs-6 border-left">
                             <Slider {...settings}>
                                 {houseDetails.images && houseDetails.images.map((house, index) => {
                                     const {id, path} = house;
@@ -123,7 +123,7 @@ const HouseDetails = () => {
                 <div className="container-fluid">
                     <div className="row border-of-section ">
                         <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto ">
-                            <div className="box-content px-4">
+                            <div className="box-content p-sm-4 p-2">
                                 <h2 className="h2-text-box">
                                     F&B
                                 </h2>
@@ -138,7 +138,6 @@ const HouseDetails = () => {
                             <Media
                                 type="img" 
                                 className="image-box w-100"
-                                height='512px'
                                 src={houseDetails.fb_image} 
                                 alt="Our OZ Vision"
                             />

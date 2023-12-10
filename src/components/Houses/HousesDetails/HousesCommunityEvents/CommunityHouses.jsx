@@ -33,7 +33,7 @@ const CommunityHouses = (props) => {
                             </Slider>
                         </div>
                         <div className="col-md-4 col-lg-4 col-sm-4 col-xs-6 m-auto ">
-                            <div className="box-content px-4">
+                            <div className="box-content p-sm-4 p-2">
                                 <h2 className="h2-text-box">Community Events</h2>
                                 <p className="p-text-box">
                                     {props.description}

@@ -52,20 +52,21 @@ const MemberPackage = () => {
 
     const setSlectedMemebershipDetails = (type, price, discount, description, time) => {
         const selectedPlan = {
-            // mainPlan: typeDetials?.name,
+            mainPlan: membershipType,
             selectedPackage: type,
             price: price,
             priceDicounted: calcDiscount(price, discount),
             description: description,
             time: time
-        } 
-        sessionStorage.setItem('selectedPlan', JSON.stringify(selectedPlan));
+        }
+        sessionStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
         if(token){
             setShow(true)
          }else{
             navigate('/joinus');
          }
-     };
+    };
+
     return (
         <>
             <MainHeaderWrapper image={packageDetails?.image}>
@@ -87,7 +88,7 @@ const MemberPackage = () => {
                                     <div className='ps-3 dynamic_p' dangerouslySetInnerHTML={{ __html: packageDetails?.website_description }}></div>
                                         <Button 
                                             tagType='link'
-                                            onClick={()=>setSlectedMemebershipDetails(packageDetails.id, packageDetails.type, packageDetails.price, packageDetails.discount, packageDetails.description, packageDetails.time)}
+                                            onClick={()=>setSlectedMemebershipDetails(packageDetails.type, packageDetails.price, packageDetails.discount, packageDetails.description, packageDetails.time)}
                                             className="btn_outline m-auto">
                                             Apply
                                         </Button>

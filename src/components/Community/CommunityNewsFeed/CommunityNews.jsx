@@ -35,10 +35,9 @@ const CommunityNews = (props) => {
         <Element name="community-newsfeed">
             <section  className="news-feed">
                 <div className="container-fluid">
-                    <div className="row"></div>
-                    <div className="row border-of-section ">
-                        <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto ">
-                            <div className="box-content px-60  flex-box-start">
+                    <div className="row border-of-section">
+                        <div className="col-lg-4 col-md-5 col-12 m-auto">
+                            <div className="box-content p-lg-4 p-3">
                                     {props.configData ? props.configData.map((configItem, index) => (
                                     <React.Fragment key={index}>
                                         {configItem.key === "community_page_newsfeed_title" && 
@@ -53,7 +52,7 @@ const CommunityNews = (props) => {
                                     className="btn button-outLine btn-bg-white mx-0">Explore</NavLink>
                             </div>
                         </div>
-                        <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-left ">
+                        <div className="col-lg-8 col-md-7 col-12 border-left img_block">
                             <Slider {...settings} className="news-feed">
                                 {newsData && newsData.map((news, index) => {
                                     const {id, banner} = news;
@@ -63,8 +62,8 @@ const CommunityNews = (props) => {
                                                 type='img'
                                                 src={banner}
                                                 alt='img'
-                                                className="img-book"
-                                                height={'520px'} />
+                                                className="image-box w-100"
+                                            />
                                         </div>
                                     );
                                 })}

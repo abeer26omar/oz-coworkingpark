@@ -25,3 +25,21 @@
     line-height: 120%; /* 24px */
     text-align: center;
 }
+@media screen and (max-width: 1200px) {
+    .houses .title-name {
+        font-size: 1.25rem;
+    }
+}
+@media screen and (max-width: 768px) {
+    .houses .change_dir{
+        flex-direction: column;
+    }
+    .houses .links-margin{
+        margin: auto 1rem;
+    }
+}
+@media screen and (max-width: 575px) {
+    .houses .change_dir_sm{
+        flex-direction: column;
+    }
+}

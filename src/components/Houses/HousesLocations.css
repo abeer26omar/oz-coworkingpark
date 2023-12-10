@@ -43,3 +43,16 @@
     line-height: 120%; /* 24px */
     opacity: 0.7;
 }
+@media screen and (max-width: 1200px) {
+    .locations-houses .location-contact .h2-text-box {
+        font-size: 30px;
+    }
+}
+@media screen and (max-width: 575.5px) {
+    .change_dir{
+        flex-direction: column;
+    }
+    .locations-houses .location-contact .h2-text-box {
+        font-size: 22px;
+    }
+}

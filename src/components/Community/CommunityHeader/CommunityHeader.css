@@ -2,11 +2,6 @@
     background-image: none;
 }
 
-.community-header .text-wrapper-2 {
-    /*font-size: var(--font-size-94);*/
-    /*margin-bottom: 32px !important;*/
-}
-
 .community-header .p {
     line-height: 1.5;
     text-align: justify;
@@ -22,7 +17,6 @@
 
 .com-events .p {
     line-height: 1.5;
-    /*margin-top: 32px;*/
     text-align: justify;
     width: 75%;
 }
@@ -34,4 +28,17 @@
     bottom: 60px;
     transform: translateY(-96px);
 
+}
+@media screen and (max-width: 1200px) {
+    .community .head_paragraph{
+        font-size: 3rem;
+    }
+}
+@media screen and (max-width: 575px) {
+    .community .change_dir{
+        flex-direction: column;
+    }
+    .community .head_paragraph {
+        font-size: 2rem;
+    }
 }
