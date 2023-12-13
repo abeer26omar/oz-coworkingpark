@@ -254,22 +254,21 @@ const BookingForm = ({venueDetails, token}) => {
                                                                         startDate={selectedStartTime}
                                                                         endDate={selectedEndTime}
                                                                         fixedHeight
-                                                                        placeholderText={selectedStartTime.toLocaleTimeString()}
+                                                                        placeholderText={selectedStartTime.toLocaleTimeString([],{ hour: 'numeric', minute: 'numeric' })}
                                                                         className="place-text"
                                                                     >
                                                                     </DatePicker>
                                                                 </p>
                                                                 <p className="mb-0 mx-2">-</p>
-                                                                <p className="place-text mb-0">{selectedEndTime.toLocaleTimeString()}</p>
+                                                                <p className="place-text mb-0">{selectedEndTime.toLocaleTimeString([],{ hour: 'numeric', minute: 'numeric' })}</p>
                                                             </div>
 
 
                                                     ) : (
-                                                        <div>
+                                                        <>
                                                             <DatePicker
                                                                 selected={selectedStartTime}
                                                                 onChange={handleStartTimeChange}
-
                                                                 showTimeSelect
                                                                 showTimeSelectOnly
                                                                 timeIntervals={5}
@@ -303,7 +302,7 @@ const BookingForm = ({venueDetails, token}) => {
                                                                     open={true} // Open the end time picker automatically
                                                                 />
                                                             )}
-                                                        </div>
+                                                        </>
                                                     )}
                                                 </div>
                                             </div>
