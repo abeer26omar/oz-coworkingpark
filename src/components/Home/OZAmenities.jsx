@@ -32,7 +32,7 @@ const OZAmenities = (props) => {
                             <div className="col-lg-12 text-center py-4">
                             <Button
                                 tagType='link' 
-                                to={`/membership`} 
+                                to={`/amenities`} 
                                 className="btn button-outLine btn-bg-white">{'explore'}</Button>
                             </div>
                         </div>

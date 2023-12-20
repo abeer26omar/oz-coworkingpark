@@ -87,7 +87,7 @@ const Header = ({showBlackNav}) => {
                                             <li className="drop_event" key={index}>
                                                 <HashLink 
                                                     key={index} 
-                                                    className='pb-3 links' 
+                                                    className='pb-3 links p-0' 
                                                     smooth to={`/booking?amenity=${item.name}&id=${item.id}#${item.name}`}>
                                                     {item.name}
                                                 </HashLink>

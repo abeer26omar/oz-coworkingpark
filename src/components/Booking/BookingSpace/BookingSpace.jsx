@@ -31,7 +31,7 @@ const BookingSpace = () => {
     useEffect(()=>{
         const source = axios.CancelToken.source();
 
-        getAmenitiesGroup(token, source).then(res=>{
+        getAmenitiesGroup(token).then(res=>{
             setBookingPlaces(res);
             if(amenity && amenityid){
                 changeSpace(amenityid, amenity);
