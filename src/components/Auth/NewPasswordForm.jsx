@@ -56,8 +56,8 @@ const NewPasswordForm = ()=>{
                     handleSubmit(values);
                 }}
                 validationSchema={Yup.object().shape({
-                    password: Yup.string().required('Required'),
-                    confirm_password: Yup.string().required('Required')
+                    password: Yup.string().required('password is required'),
+                    confirm_password: Yup.string().required('confirm password is required')
                     .oneOf([Yup.ref('password'), null], 'Passwords must match')
                 })}>
             {props => {

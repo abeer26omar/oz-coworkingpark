@@ -6,6 +6,8 @@ import Button from '../UI/Button';
 import { filterProducts } from '../../apis/Market';
 import RangeSlider from 'react-range-slider-input';
 import 'react-range-slider-input/dist/style.css';
+import { Select } from 'antd';
+
 const MIN = 50;
 const MAX = 1000;
 
@@ -29,7 +31,7 @@ const MarketFilter = ({isOpen, getFilteredData, seacrch_text}) => {
         const controller = new AbortController();
         const signal = controller.signal;
 
-        getServices(token, userId, 1,signal).then(res=>{
+        getServices(token, userId, branchId, signal).then(res=>{
             setServices(res);
         }).catch(err=>{});
 
@@ -80,27 +82,30 @@ const MarketFilter = ({isOpen, getFilteredData, seacrch_text}) => {
                     values,
                     handleChange,
                     handleBlur,
-                    handleSubmit
+                    handleSubmit,
+                    setFieldValue
                 } = props;
                 return (
                     <div className="container-fluid">
                         <form className="form-filter" onSubmit={handleSubmit}>
                             <div className="filter-component row g-sm-0 g-3 d-flex align-items-center justify-content-around">
                                 <div className='col-xxl-3 col-md-3'>
-                                    <select
+                                    <Select
                                         id='types'
-                                        name='types'
-                                        value={values.types}
-                                        onChange={handleChange}
+                                        defaultValue={values.types || undefined}
+                                        value={values.types || undefined}
+                                        className="form__field p-0 placeholderSelect"
                                         onBlur={handleBlur}
-                                        className="form__field placeholderSelect">
-                                            <option disabled selected value=''>service types</option>
+                                        onChange={(value) => setFieldValue('types', value)}
+                                        bordered={false}
+                                        placeholder={'Choose type'}
+                                        >
                                             {services && services.map((item, index) => (
-                                                <option key={index} value={item.id}>
+                                                <Select.Option key={index} value={item.id}>
                                                     {item.name}
-                                                </option>
+                                                </Select.Option>
                                             ))}
-                                    </select>
+                                        </Select>
                                 </div>
                                 <div className='col-xxl-3 col-md-3 align-self-end'>
                                     <RangeSlider

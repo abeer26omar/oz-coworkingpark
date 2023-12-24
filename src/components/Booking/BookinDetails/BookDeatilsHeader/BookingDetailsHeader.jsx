@@ -24,7 +24,8 @@ const BookingDetailsHeader = ({venueDetails}) => {
 
                 <MainHeaderWrapper 
                     image={(venueDetails.gallery && venueDetails.gallery.length !== 0) && venueDetails.gallery} 
-                    special_flex={venueDetails.online_booking ? 'justify-content-lg-center justify-content-start' : 'justify-content-center'}>
+                    special_flex={venueDetails.online_booking ? 'justify-content-lg-center justify-content-start' : 'justify-content-center'}
+                    height='670px'>
                     <div className="container text-center">
                         <Paragraph className="text-one">Booking</Paragraph>
                         <Paragraph className="text-two mb-4">{venueDetails.title}</Paragraph>

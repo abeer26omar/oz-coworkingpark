@@ -113,7 +113,7 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                                             placeholder='Select date'/>
                                     </div>
                                 </div>
-                                <div className='col-xxl-2 col-md-3'>
+                                {/* <div className='col-xxl-2 col-md-3'>
                                     <select
                                         id='wings'
                                         name='wings'
@@ -128,8 +128,8 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                                                 </option>
                                             ))}
                                     </select>
-                                </div>
-                                <div className='col-xxl-2 col-md-3'>
+                                </div> */}
+                                {/* <div className='col-xxl-2 col-md-3'>
                                     <select
                                         id='floors'
                                         name='floors'
@@ -144,7 +144,7 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                                             </option>
                                         ))}
                                     </select>
-                                </div>
+                                </div> */}
                                 <div className='col-xxl-2 col-md-3'>
                                     <select
                                         id='capacity'

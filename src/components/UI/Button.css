@@ -147,7 +147,6 @@
     line-height: 120%;
 }
 .ex_link{
-    display: block;
     padding: 0;
     color: var(--secondary-color2);
     font-family: var(--questrial-font);

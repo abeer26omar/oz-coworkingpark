@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const LoginNav =()=>{
+const LoginNav =({showBlackNav})=>{
 
     return(
         <>
@@ -17,7 +17,7 @@ const LoginNav =()=>{
                     xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M1 0L0.999999 34"
-                        stroke="black"
+                        stroke={`${showBlackNav ? 'white' : 'black'}`}
                         stroke-width="0.5"
                         className="log-border"
                     />

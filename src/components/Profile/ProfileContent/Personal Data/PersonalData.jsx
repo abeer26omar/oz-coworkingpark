@@ -20,12 +20,13 @@ import '../PersonalContent.css';
 import { getUserInfo, updateUserInfo, RequestUpdateUserInfo, getInterests, getHobbies } from '../../../../apis/User';
 import SweetAlert2 from 'react-sweetalert2';
 import { SiteConfigContext } from '../../../../apis/context/SiteConfigContext';
-import Select from 'react-select';
+// import Select from 'react-select';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import {DisableContext} from '../../../../apis/context/DisableStateContext';
 import RequestChangeName from './RequestChangeName';
 import RequestChangeEmail from './RequestChangeEmail';
 import RequestChangePhone from './RequestChangePhone';
+import { Select } from 'antd';
 
 const PersonalData = () => {
 
@@ -39,8 +40,8 @@ const PersonalData = () => {
     const [swalProps, setSwalProps] = useState({});
     const siteConfig = useContext(SiteConfigContext);
     const { token, userId } = useContext(AuthContext);
-    const [selectedInterests, setSelectedInterests] = useState(custom ? [custom.fid_12] : [""]);
-    const [selectedHobbies, setSelectedHobbies] = useState(custom ? [custom.fid_11] : [""]);
+    const [selectedInterests, setSelectedInterests] = useState([]);
+    const [selectedHobbies, setSelectedHobbies] = useState([]);
     const { restState, image } = useContext(DisableContext);
 
     useEffect(()=>{
@@ -50,6 +51,8 @@ const PersonalData = () => {
         getUserInfo(token, userId, signal).then(res=>{
             setUserInfo(res['user_data']);
             setCustom(res['custom']);
+            setSelectedHobbies(res['custom']?.fid_11);
+            setSelectedInterests(res['custom']?.fid_12);
             
         }).catch(err=>{console.log(err)});
 
@@ -67,13 +70,31 @@ const PersonalData = () => {
     useEffect(()=>{
         getInterests(token).then(res=>{
             const optionList = res.map(item=>{
-                return { value: item.id , label: item.title }
+                if(item.children?.length === 0){
+                    return { value: item.title , label: item.title }
+                }else{
+                    return { 
+                        label: item.title, 
+                        options: item.children.map(e=>{
+                            return { value: e.title , label: e.title }
+                        })
+                    }
+                }
             })
             setInterestsList(optionList);
         });
         getHobbies(token).then(res=>{
             const optionList = res.map(item=>{
-                return { value: item.id , label: item.title }
+                if(item.children?.length === 0){
+                    return { value: item.title , label: item.title }
+                }else{
+                    return { 
+                        label: item.title, 
+                        options: item.children.map(e=>{
+                            return { value: e.title , label: e.title }
+                        })
+                    }
+                }
             })
             setHobbiesList(optionList);
         });
@@ -112,7 +133,6 @@ const PersonalData = () => {
                     avatar: image,
                     gender: userInfo ? userInfo.gender : '',
                     birthday: userInfo ? userInfo.birthday : '',
-                    language: userInfo ? userInfo.language : '',
                     nationality: custom ? custom.fid_8 : '',
                     jobTitle: custom ? custom?.fid_5 : '',
                     industry: custom ? custom?.fid_6 : '',
@@ -121,8 +141,8 @@ const PersonalData = () => {
                     howDidYouKnowUs: custom ? custom?.fid_10 : '',
                     serviceProvide: custom ? custom?.fid_9 : '',
                     about: userInfo ? userInfo.about : '',
-                    hobbies: custom ? [custom.fid_11] : [""],
-                    interest: custom ? [custom.fid_12] : [""],
+                    hobbies: selectedHobbies,
+                    interest: selectedInterests,
                 }}
                 onSubmit={async (values) => {
                     await new Promise((r) => setTimeout(r, 500));
@@ -138,6 +158,7 @@ const PersonalData = () => {
                     handleChange,
                     handleBlur,
                     handleSubmit,
+                    setFieldValue
                     } = props;
                     return (
                         <div className="container py-4 px-sm-5 px-2">
@@ -167,16 +188,20 @@ const PersonalData = () => {
                                                 {disabled && <img src={genderLabel} alt="name" className="me-2"/>}
                                                 Gender
                                             </label>
-                                            <select
+                                            <Select
                                                 id='gender'
-                                                value={values.gender}
-                                                onChange={handleChange}
+                                                defaultValue={values.gender || undefined}
+                                                value={values.gender || undefined}
+                                                className="form__field ant placeholderSelect"
                                                 onBlur={handleBlur}
+                                                onChange={(value) => setFieldValue('gender', value)}
+                                                bordered={false}
                                                 disabled={disabled}
-                                                className="form__field placeholderSelect">
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
-                                            </select>
+                                                placeholder={'select gender'}
+                                            >
+                                                <Select.Option value="male">Male</Select.Option>
+                                                <Select.Option value="female">Female</Select.Option>
+                                            </Select>
                                         </div>
                                     </div>
 
@@ -248,20 +273,23 @@ const PersonalData = () => {
                                                 {disabled && <img src={industryLabel} alt="name" className="me-2"/>}
                                                 Industry
                                             </label>
-                                            <select
-                                                id="industry" 
-                                                name="industry"
-                                                value={values.industry}
-                                                onChange={handleChange}
+                                            <Select
+                                                id='industry'
+                                                defaultValue={values.industry || undefined}
+                                                value={values.industry || undefined}
+                                                className="form__field ant placeholderSelect"
                                                 onBlur={handleBlur}
+                                                onChange={(value) => setFieldValue('industry', value)}
+                                                bordered={false}
                                                 disabled={disabled}
-                                                className="form__field placeholderSelect">
-                                                    {siteConfig && Object.entries(siteConfig.profile_dropdown?.fid_6.data).map(([key, value]) => (
-                                                        <option key={key} value={key}>
+                                                placeholder={'select industry'}
+                                            >
+                                                {siteConfig && Object.entries(siteConfig.profile_dropdown?.fid_6.data).map(([key, value]) => (
+                                                        <Select.Option  key={key} value={key}>
                                                             {value}
-                                                        </option>
+                                                        </Select.Option >
                                                     ))}
-                                            </select>
+                                            </Select>
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
@@ -271,20 +299,23 @@ const PersonalData = () => {
                                                 {disabled && <img src={cityLabel} alt="name" className="me-2"/>}
                                                 City
                                             </label>
-                                            <select
-                                                id="city" 
-                                                name="city"
-                                                value={values.city}
-                                                onChange={handleChange}
+                                            <Select
+                                                id='city'
+                                                defaultValue={values.city || undefined}
+                                                value={values.city || undefined}
+                                                className="form__field ant placeholderSelect"
                                                 onBlur={handleBlur}
+                                                onChange={(value) => setFieldValue('city', value)}
+                                                bordered={false}
                                                 disabled={disabled}
-                                                className="form__field placeholderSelect">
-                                                    {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_7.data).map(([key, value]) => (
-                                                        <option key={key} value={key}>
-                                                            {value}
-                                                        </option>
-                                                    ))}
-                                            </select>
+                                                placeholder={'select city'}
+                                            >
+                                                {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_7.data).map(([key, value]) => (
+                                                    <Select.Option key={key} value={key}>
+                                                        {value}
+                                                    </Select.Option>
+                                                ))}
+                                            </Select>
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
@@ -294,39 +325,23 @@ const PersonalData = () => {
                                                 {disabled && <img src={nationalityLabel} alt="name" className="me-2"/>}
                                                 Nationality
                                             </label>
-                                            <select
-                                                id="nationality" 
-                                                name="nationality"
-                                                    value={values.nationality}
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                    disabled={disabled}
-                                                    className="form__field placeholderSelect">
-                                                    {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_8.data).map(([key, value]) => (
-                                                        <option key={key} value={key}>
-                                                            {value}
-                                                        </option>
-                                                    ))}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="form__group field my-3">
-                                            <label htmlFor="language"
-                                                className="form__label d-flex align-items-center justify-content-start">
-                                                {disabled && <img src={nationalityLabel} alt="nationalityLabel" className="me-2"/>}
-                                                Language
-                                            </label>
-                                            <select
-                                                id='language'
-                                                value={values.language}
-                                                onChange={handleChange}
+                                            <Select
+                                                id='nationality'
+                                                defaultValue={values.nationality || undefined}
+                                                value={values.nationality || undefined}
+                                                className="form__field ant placeholderSelect"
                                                 onBlur={handleBlur}
+                                                onChange={(value) => setFieldValue('nationality', value)}
+                                                bordered={false}
                                                 disabled={disabled}
-                                                className="form__field placeholderSelect">
-                                                    <option value="english">English</option>
-                                                    <option value="arabic">Arabic</option>
-                                            </select>
+                                                placeholder={'select nationality'}
+                                            >
+                                                {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_8.data).map(([key, value]) => (
+                                                    <Select.Option key={key} value={key}>
+                                                        {value}
+                                                    </Select.Option>
+                                                ))}
+                                            </Select>
                                         </div>
                                     </div>
                                     <div className="col-lg-6">
@@ -339,50 +354,19 @@ const PersonalData = () => {
                                                 Interest
                                             </label>
                                             <Select
-                                                options={interestsList}
+                                                id='Interests'
+                                                className="form__field ant placeholderSelect"
+                                                onBlur={handleBlur}
+                                                onChange={(value) => handleChangeInterests(value)}
+                                                bordered={false}
+                                                disabled={disabled}
                                                 placeholder="Interests"
-                                                className="form__field placeholderSelect"
-                                                isDisabled={disabled}
-                                                defaultValue={selectedInterests}
-                                                onChange={handleChangeInterests}
-                                                isSearchable={true}
-                                                isMulti
-                                            />
-                                            {/* <FieldArray name="interest">
-                                                {({push, remove}) => (
-                                                    <div className="d-flex align-items-center flex-wrap ">
-                                                        {values.interest.map((singleInterst, index) => (
-                                                            <div key={index}
-                                                                className="d-flex align-items-center flex-wrap position-relative">
-                                                                <input
-                                                                    type="text"
-                                                                    name={`interest.${index}`}
-                                                                    placeholder="Crafting - Design"
-                                                                    className="form__field "
-                                                                    disabled={disabled}
-                                                                    value={singleInterst}
-                                                                    onChange={handleChange}
-                                                                    onBlur={handleBlur}
-                                                                />
-                                                                {(!disabled && index > 0) && <button
-                                                                    type="button"
-                                                                    onClick={() => {remove(index)}}
-                                                                    className="remove-array"
-                                                                >
-                                                                    <ImMinus/>
-                                                                </button>}
-                                                            </div>
-                                                        ))}
-
-                                                        {!disabled && <button className="add_array" type="button"
-                                                                onClick={() => push('')}>
-                                                            <ImPlus/>
-                                                        </button>}
-
-
-                                                    </div>
-                                                )}
-                                            </FieldArray> */}
+                                                defaultValue={selectedInterests || undefined}
+                                                value={selectedInterests || undefined}
+                                                options={interestsList}
+                                                mode="multiple"
+                                                allowClear
+                                            ></Select>
                                         </div>
                                     </div>
 
@@ -393,20 +377,23 @@ const PersonalData = () => {
                                                 {disabled && <img src={knowLabel} alt="name" className="me-2"/>}
                                                 How did you know us ?
                                             </label>
-                                            <select
+                                            <Select
                                                 id='howDidYouKnowUs'
-                                                name='howDidYouKnowUs'
-                                                value={values.howDidYouKnowUs}
-                                                onChange={handleChange}
+                                                defaultValue={values.howDidYouKnowUs || undefined}
+                                                value={values.howDidYouKnowUs || undefined}
+                                                className="form__field ant placeholderSelect"
                                                 onBlur={handleBlur}
+                                                onChange={(value) => setFieldValue('howDidYouKnowUs', value)}
+                                                bordered={false}
                                                 disabled={disabled}
-                                                className="form__field placeholderSelect">
-                                                    {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_10.data).map(([key, value]) => (
-                                                        <option key={key} value={key}>
-                                                            {value}
-                                                        </option>
-                                                    ))}
-                                            </select>
+                                                placeholder={'How did you know us'}
+                                            >
+                                                {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_10.data).map(([key, value]) => (
+                                                    <Select.Option key={key} value={key}>
+                                                        {value}
+                                                    </Select.Option>
+                                                ))}
+                                            </Select>
                                         </div>
                                     </div>
 
@@ -417,20 +404,23 @@ const PersonalData = () => {
                                                 {disabled && <img src={provideLabel} alt="name" className="me-2"/>}
                                                 What Service can you Provide ?
                                             </label>
-                                            <select
-                                                id="serviceProvide" 
-                                                name="serviceProvide"
-                                                value={values.serviceProvide}
-                                                onChange={handleChange}
+                                            <Select
+                                                id='serviceProvide'
+                                                defaultValue={values.serviceProvide || undefined}
+                                                value={values.serviceProvide || undefined}
+                                                className="form__field ant placeholderSelect"
                                                 onBlur={handleBlur}
+                                                onChange={(value) => setFieldValue('serviceProvide', value)}
+                                                bordered={false}
                                                 disabled={disabled}
-                                                className="form__field placeholderSelect">
-                                                    {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_9.data).map(([key, value]) => (
-                                                        <option key={key} value={key}>
-                                                            {value}
-                                                        </option>
-                                                    ))}
-                                            </select>
+                                                placeholder={'What Service can you Provide'}
+                                            >
+                                                {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_9.data).map(([key, value]) => (
+                                                    <Select.Option key={key} value={key}>
+                                                        {value}
+                                                    </Select.Option>
+                                                ))}
+                                            </Select>
                                         </div>
                                     </div>
 
@@ -464,50 +454,19 @@ const PersonalData = () => {
                                                 Hobbies
                                             </label>
                                             <Select
-                                                options={hobbiesList}
+                                                id='hobbies'
+                                                className="form__field ant placeholderSelect"
+                                                onBlur={handleBlur}
+                                                onChange={(value) => handleChangeHobbies(value)}
+                                                bordered={false}
+                                                disabled={disabled}
                                                 placeholder="Hobbies"
-                                                className="form__field placeholderSelect"
-                                                isDisabled={disabled}
-                                                defaultValue={custom ? [custom.fid_11] : [""]}
-                                                onChange={handleChangeHobbies}
-                                                isSearchable={true}
-                                                isMulti
-                                            />
-                                            {/* <FieldArray name="hobbies">
-                                                {({push, remove}) => (
-                                                    <div className="d-flex align-items-center flex-wrap ">
-                                                        {values.hobbies.map((singlehobbie, index) => (
-                                                            <div key={index}
-                                                                className="d-flex align-items-center flex-wrap position-relative">
-                                                                <input
-                                                                    type="text"
-                                                                    name={`hobbies.${index}`}
-                                                                    placeholder="hobbies"
-                                                                    className="form__field "
-                                                                    disabled={disabled}
-                                                                    value={singlehobbie}
-                                                                    onChange={handleChange}
-                                                                    onBlur={handleBlur}
-                                                                />
-                                                                {(!disabled && index > 0) && <button
-                                                                    type="button"
-                                                                    onClick={() => remove(index)}
-                                                                    className="remove-array"
-                                                                >
-                                                                    <ImMinus/>
-                                                                </button>}
-                                                            </div>
-                                                        ))}
-
-                                                        {!disabled && <button className="add_array" type="button"
-                                                                onClick={() => push('')}>
-                                                            <ImPlus/>
-                                                        </button>}
-
-
-                                                    </div>
-                                                )}
-                                            </FieldArray> */}
+                                                defaultValue={selectedHobbies || undefined}
+                                                value={selectedHobbies || undefined}
+                                                options={hobbiesList}
+                                                mode="multiple"
+                                                allowClear
+                                            ></Select>
                                         </div>
                                     </div>
                                     <div className="col-lg-12 text-center">

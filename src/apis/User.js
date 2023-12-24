@@ -62,7 +62,6 @@ export const updateUserInfo = async ({
     avatar,
     gender,
     birthday,
-    language,
     nationality,
     jobTitle,
     industry,
@@ -80,7 +79,6 @@ export const updateUserInfo = async ({
     formData.append('birthday', birthday);
     formData.append('gender', gender);
     formData.append('about', about);
-    formData.append('language', language);
     formData.append('working', companyName);
     formData.append('custom[][fid_5]', jobTitle);
     formData.append('custom[][fid_6]', industry);

@@ -7,7 +7,7 @@ import Paragraph from '../UI/Paragraph';
 const LocationsList = ({id, address, img, addAddress}) => {
     return (
         <>
-            <div className="" key={id}>
+            <div className="img_block" key={id}>
                 <Media
                     type="img" 
                     src={img} 

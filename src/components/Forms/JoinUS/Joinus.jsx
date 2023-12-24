@@ -7,8 +7,8 @@ import { SiteConfigContext } from '../../../apis/context/SiteConfigContext';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import './Joinus.css';
 import vector from "../../../assets/images/Vector.png";
-import Media from "../../Media/Media";
 import { inquiry } from '../../../apis/AuthApi';
+import { Select } from 'antd';
 
 const Joinus = () => {
 
@@ -77,21 +77,22 @@ const Joinus = () => {
                                 <h3>Summary</h3>
                                 <div className=" name-price d-flex align-items-center justify-content-between">
                                     <h2 className="d-flex justify-content-start align-items-center ">{plan?.selectedPackage}</h2>
-                                    <div className="d-block">
-                                        <del className="member_discount">{plan?.price} / {plan?.time}</del>
+                                    {plan?.discount !== '0' && <div className="d-block">
+                                        <del className="member_discount">{plan?.price} / {plan?.time_count} {plan?.time}</del>
                                         <br/>
-                                        <strong className="current_price">{plan?.priceDicounted} / {plan?.time}</strong>
-                                    </div>
-                                </div>
-                                <ul className="amenties-select">
-                                    {plan.description}
+                                        <strong className="current_price">{plan?.priceDicounted} / {plan?.time_count} {plan?.time}</strong>
+                                    </div>}
+                                    {plan?.discount === '0' &&
+                                        <strong className="current_price">{plan?.price} / {plan?.time_count} {plan?.time}</strong>
+                                    }
 
-                                </ul>
+                                </div>
+                                <div className='dynamic_p' dangerouslySetInnerHTML={{ __html: plan?.website_description }}></div>
                             </div>
                         </div>
                         <div className="col-lg-6">
-                             <div className="form-card p-md-5 p-3">
-                             <Formik 
+                            <div className="form-card p-md-5 p-3">
+                            <Formik 
                                 initialValues = {{
                                     first_name: userInfo ? userInfo.first_name : '',
                                     last_name: userInfo ? userInfo.last_name : '',
@@ -105,12 +106,12 @@ const Joinus = () => {
                                     handleSubmit(values);
                                 }}
                                 validationSchema={Yup.object().shape({
-                                    first_name: Yup.string().required(),
-                                    last_name: Yup.string().required(),
-                                    email: Yup.string().email().required(),
-                                    phone: Yup.string().required(),
-                                    location: Yup.string().required(),
-                                    comments: Yup.string().required()
+                                    first_name: Yup.string().required('first name is required'),
+                                    last_name: Yup.string().required('last name is required'),
+                                    email: Yup.string().email().required('email is required'),
+                                    phone: Yup.string().required('phone is required'),
+                                    location: Yup.string().required('location is required'),
+                                    comments: Yup.string().required('comments is required')
                                 })}
                                 enableReinitialize>
                                 {props => {
@@ -121,6 +122,7 @@ const Joinus = () => {
                                     handleChange,
                                     handleBlur,
                                     handleSubmit,
+                                    setFieldValue
                                     } = props;
                                 return (
                                     <form className="row g-3" onSubmit={handleSubmit}>
@@ -208,21 +210,20 @@ const Joinus = () => {
                                         </div>
                                         <div className="form__group field mt-3 group-check">
                                             <label htmlFor="location" className="form__label">Locations</label>
-                                            <select
+                                            <Select
                                                 id='location'
-                                                value={values.location}
-                                                onChange={handleChange}
+                                                defaultValue={values.location || undefined}
+                                                value={values.location || undefined}
+                                                className="form__field p-0 placeholderSelect"
                                                 onBlur={handleBlur}
-                                                className={
-                                                    errors.comments && touched.comments
-                                                        ? "form__field placeholderSelect is-invalid"
-                                                        : "form__field placeholderSelect"
-                                                }>
-                                                <option disabled selected value=''>Choose Location</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                            </select>
+                                                onChange={(value) => setFieldValue('location', value)}
+                                                bordered={false}
+                                                placeholder={'Choose Location'}
+                                            >
+                                                <Select.Option value="1">1</Select.Option>
+                                                <Select.Option value="2">2</Select.Option>
+                                                <Select.Option value="3">3</Select.Option>
+                                            </Select>
                                             {errors.location && touched.location && <p className='text-danger mb-0'>{errors.location}</p>}
                                         </div>
                                         <div className="form__group field my-3 group-check">

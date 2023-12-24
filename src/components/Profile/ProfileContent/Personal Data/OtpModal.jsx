@@ -54,6 +54,9 @@ const OtpModal = (props) => {
                 keyboard={false}
                 backdropClassName="custom-backdrop"
                 centered>
+                    <Modal.Header closeButton style={{
+                        border: 'none'
+                    }}></Modal.Header>
                     <Modal.Body className={`justify-content-center align-items-center p-5`}>
                         <div className="head-content text-center pb-3">
                             <Paragraph className="hand-write mb-0">Please,</Paragraph>

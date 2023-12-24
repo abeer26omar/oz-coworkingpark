@@ -26,13 +26,9 @@ const ExploreOZ = (props) => {
                                             <React.Fragment key={index}>
                                                 {configItem.key === "home_page_explore_space_image_1" &&
                                                     <img
-                                                        className="image-box w-100"
+                                                        className="image-box img_notLazey w-100"
                                                         src={configItem.value}
                                                         alt="Our OZ Vision"
-                                                        style={{
-                                                            height: '520px', 
-                                                            objectFit: 'cover'
-                                                        }}
                                                     />
                                                 }
                                             </React.Fragment>  
@@ -43,13 +39,9 @@ const ExploreOZ = (props) => {
                                             <React.Fragment key={index}>
                                                 {configItem.key === "home_page_explore_space_image_2" &&
                                                     <img
-                                                        className="image-box w-100"
+                                                        className="image-box img_notLazey w-100"
                                                         src={configItem.value}
                                                         alt="Our OZ Vision"
-                                                        style={{
-                                                            height: '520px', 
-                                                            objectFit: 'cover'
-                                                        }}
                                                     />
                                                 }
                                             </React.Fragment>  
@@ -60,13 +52,9 @@ const ExploreOZ = (props) => {
                                             <React.Fragment key={index}>
                                                 {configItem.key === "home_page_explore_space_image_3" &&
                                                     <img
-                                                        className="image-box w-100"
+                                                        className="image-box img_notLazey w-100"
                                                         src={configItem.value}
                                                         alt="Our OZ Vision"
-                                                        style={{
-                                                            height: '520px', 
-                                                            objectFit: 'cover'
-                                                        }}
                                                     />
                                                 }
                                             </React.Fragment>  
@@ -77,20 +65,15 @@ const ExploreOZ = (props) => {
                                             <React.Fragment key={index}>
                                                 {configItem.key === "home_page_explore_space_image_4" &&
                                                     <img
-                                                        className="image-box w-100"
+                                                        className="image-box img_notLazey w-100"
                                                         src={configItem.value}
                                                         alt="Our OZ Vision"
-                                                        style={{
-                                                            height: '520px', 
-                                                            objectFit: 'cover'
-                                                        }}
                                                     />
                                                 }
                                             </React.Fragment>  
                                         )):''}
                                     </Tab.Pane>
                                 </Tab.Content>
-                            {/*  */}
                             </div>
                             <div className="col-lg-4 col-md-5 col-sm-12 col-xs-6 m-auto">
                                 <div className="box-content p-lg-4 p-2">

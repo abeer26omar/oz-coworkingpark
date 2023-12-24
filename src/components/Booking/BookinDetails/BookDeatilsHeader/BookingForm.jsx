@@ -12,6 +12,7 @@ import ShowAvaliablesModal from './ShowAvaliablesModal';
 import TimeRangePicker from '../../../UI/TimeRangePicker';
 
 const BookingForm = ({venueDetails, token}) => {
+    
     const [startDate, setStartDate] = useState(null);
     const [selectedStartTime, setSelectedStartTime] = useState(null);
     const [selectedEndTime, setSelectedEndTime] = useState(null);

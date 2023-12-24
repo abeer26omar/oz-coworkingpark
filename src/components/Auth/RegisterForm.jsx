@@ -7,13 +7,17 @@ import RegisterOTPModal from './RegisterOTPModal';
 import SweetAlert2 from 'react-sweetalert2';
 import { SiteConfigContext } from '../../apis/context/SiteConfigContext';
 import { AuthContext } from '../../apis/context/AuthTokenContext';
+import { Select } from 'antd';
 
 const RegisterForm = ({provider, profile})=>{
+
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState('');
     const [userInfo, setUSerInfo] = useState({});
-    const handleClose = () => setShow(false);
     const [swalProps, setSwalProps] = useState({});
+    const [userData, setUserData] = useState({});
+    const [code, setCode] = useState(false);
+    const handleClose = () => setShow(false);
     const siteConfig = useContext(SiteConfigContext);
     const { handleLogin } = useContext(AuthContext);
 
@@ -52,9 +56,9 @@ const RegisterForm = ({provider, profile})=>{
                 values.user_type, 
                 values.password,
                 values.confirm_password);
-            setShow(true);
-            setEmail(values.email);
-            handleLogin(result);
+                setEmail(values.email);
+                setUserData(result.account_data);
+                setShow(true);
         } catch (error) {
             setSwalProps({
                 show: true,
@@ -75,6 +79,7 @@ const RegisterForm = ({provider, profile})=>{
                     email: '',
                     phone: '',
                     user_type: '',
+                    code: '',
                     password: '',
                     confirm_password: ''
                 }}
@@ -83,13 +88,13 @@ const RegisterForm = ({provider, profile})=>{
                     handleSubmit(values);
                 }}
                 validationSchema={Yup.object().shape({
-                    first_name: Yup.string().required(),
-                    last_name: Yup.string().required(),
-                    email: Yup.string().email().required(),
-                    phone: Yup.string().required(),
-                    user_type: Yup.string().required(),
-                    password: Yup.string().required(),
-                    confirm_password: Yup.string().required()
+                    first_name: Yup.string().required('first name is required'),
+                    last_name: Yup.string().required('last name is required'),
+                    email: Yup.string().email().required('email is required'),
+                    phone: Yup.string().required('phone is required'),
+                    user_type: Yup.string().required('user type is required'),
+                    password: Yup.string().required('password is required'),
+                    confirm_password: Yup.string().required('confirm password is required')
                     .oneOf([Yup.ref('password'), null], 'Passwords must match')
                 })}
                 enableReinitialize>
@@ -101,6 +106,7 @@ const RegisterForm = ({provider, profile})=>{
                 handleChange,
                 handleBlur,
                 handleSubmit,
+                setFieldValue
                 } = props;
             return (
                 <form className="row g-3" onSubmit={handleSubmit}>
@@ -188,21 +194,49 @@ const RegisterForm = ({provider, profile})=>{
                     </div>
                     <div className="form__group field my-3 group-check">
                         <label htmlFor="user_type" className="form__label">User Type</label>
-                        <select
-                            id='user_type'
-                            value={values.user_type}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            className="form__field placeholderSelect">
-                                <option selected disabled value={''}>choose user type</option>
-                                {siteConfig && Object.entries(siteConfig.profile_dropdown.fid_4.data).map(([key, value]) => (
-                                    <option key={key} value={key}>
+                        <Select
+                                id='user_type'
+                                defaultValue={values.user_type || undefined}
+                                value={values.user_type || undefined}
+                                className="form__field placeholderSelect"
+                                onBlur={handleBlur}
+                                onChange={(value, key) => {setFieldValue('user_type', value);
+                                    if(key.children === 'Company'){
+                                        setCode(true);
+                                    }else{
+                                        setCode(false);
+                                    }
+                                }}
+                                bordered={false}
+                                placeholder={'Choose Type'}
+                            >
+                                {siteConfig && Object.entries(siteConfig.profile_dropdown?.fid_4.data).map(([key, value]) => (
+                                    <Select.Option key={key} value={key}>
                                         {value}
-                                    </option>
+                                    </Select.Option>
                                 ))}
-                        </select>
+                            </Select>
                         {errors.user_type && touched.user_type && <p className='text-danger mb-0'>{errors.user_type}</p>}
                     </div>
+                    {code && <div className="form__group field mt-3 group-check">
+                        <label htmlFor="code" className="form__label">code</label>
+                        <input 
+                            id='code'
+                            type="text"
+                            className={
+                                errors.code && touched.code
+                                ? "form__field is-invalid"
+                                : "form__field"
+                            }
+                            placeholder="Enter company code"
+                            name="code"
+                            value={values.code}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            required
+                        /> 
+                        {errors.code && touched.code && <p className='text-danger mb-0'>{errors.code}</p>}
+                    </div>}
                     <div className="form__group field mt-3 group-check">
                         <label htmlFor="password" className="form__label">Password</label>
                         <input 
@@ -251,7 +285,8 @@ const RegisterForm = ({provider, profile})=>{
             <RegisterOTPModal 
                 show={show}
                 onHide={handleClose}
-                email={email}/>
+                email={email}
+                userData={userData}/>
             <SweetAlert2 {...swalProps} />
         </>
     )

@@ -44,7 +44,7 @@ const BookingSpace = () => {
     },[amenity, amenityid]);
 
     const changeSpace = (amenities_group_id, spaceTitle) => {
-        getVenues(token, userId, branchId, amenities_group_id).then(res=>{
+        getVenues(token, userId, branchId === null ? '1' : branchId, amenities_group_id).then(res=>{
             setVenues(res);
             setSpaceTitle(spaceTitle);
             setSpaceId(amenities_group_id);

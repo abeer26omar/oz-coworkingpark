@@ -10,17 +10,18 @@ import { AuthContext } from '../../apis/context/AuthTokenContext';
 import './Auth.css';
 
 const RegisterOTPModal = (props) => {
+
     const [OTP, setOTP] = useState('');
     const [swalProps, setSwalProps] = useState({});
     const [response, setResponse] = useState('');
     const [responseType, setResponseType] = useState()
     const navigate = useNavigate();
-    const { handleLogin } = useContext(AuthContext);
+    const { handelRegister } = useContext(AuthContext);
 
     const Confirm_OTP = async () => {
         try {
             const result = await ConfirmOTP(OTP, props.email,'create_account');
-            handleLogin(result);
+            handelRegister(result, props.userData);
             navigate(-1);
         } catch (error) {
             setSwalProps({
@@ -38,12 +39,11 @@ const RegisterOTPModal = (props) => {
     const Resend_Otp = async () => {
         try{
             const result = await ResendOtp(props.email);
-            console.log(result);
             setSwalProps({
                 show: true,
                 icon: 'success',
-                title: 'result',
-                text: 'result',
+                title: 'success',
+                text: 'OTP send successfully',
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -71,6 +71,9 @@ const RegisterOTPModal = (props) => {
                 keyboard={false}
                 backdropClassName="custom-backdrop"
                 centered>
+                <Modal.Header closeButton style={{
+                    border: 'none'
+                }}></Modal.Header>
                     <Modal.Body className={`justify-content-center align-items-center p-5`}>
                         <div className="head-content text-center pb-3">
                             <Paragraph className="hand-write mb-0">Please,</Paragraph>
