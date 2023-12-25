@@ -87,9 +87,9 @@ const Header = ({showBlackNav}) => {
                                             <li className="drop_event" key={index}>
                                                 <HashLink 
                                                     key={index} 
-                                                    className='pb-3 links' 
+                                                    className='p-0 subMenu' 
                                                     smooth to={`/booking?amenity=${item.name}&id=${item.id}#${item.name}`}>
-                                                    {item.name}
+                                                    <span>{item.name}</span>
                                                 </HashLink>
                                             </li>
                                         )
@@ -108,10 +108,10 @@ const Header = ({showBlackNav}) => {
                                             <li className="drop_event" key={index}>
                                                 <Button 
                                                     tagType='link' 
-                                                    className='p-0' 
+                                                    className='p-0 subMenu' 
                                                     to={`/membership/${item.id}`} 
                                                     >
-                                                    {item.name}
+                                                    <span>{item.name}</span>
                                                 </Button>
                                             </li>
                                         )
@@ -134,18 +134,18 @@ const Header = ({showBlackNav}) => {
                                 to={'/community'}><span>community</span></NavLink>
                                 <ul class="dropdown-nav">
 				                	<li className="drop_event"> 
-                                        <Button tagType='link' className='p-0' to={'/community/newsfeed'}>
-                                            Community Newsfeed
+                                        <Button tagType='link' className='p-0 subMenu' to={'/community/newsfeed'}>
+                                            <span>Community Newsfeed</span>
                                         </Button>
                                     </li>
 				                	<li className="drop_event">
-                                        <Button tagType='link' className='p-0' to={'/community/events'}>
-                                            Community Events
+                                        <Button tagType='link' className='p-0 subMenu' to={'/community/events'}>
+                                            <span>Community Events</span>
                                         </Button>
                                     </li>
 					                <li className="drop_event"> 
-                                        <Button tagType='link' className='p-0' to={'/community/galleryshow'}>
-                                            Gallery
+                                        <Button tagType='link' className='p-0 subMenu' to={'/community/galleryshow'}>
+                                            <span>Gallery</span>
                                         </Button>
                                     </li>
 
@@ -158,14 +158,22 @@ const Header = ({showBlackNav}) => {
                                 })}
                                 to={'/community/events'}><span>events</span></NavLink>
                                 <ul class="dropdown-nav">
-				                	<li className="drop_event"> Previous Events</li>
-					                <li className="drop_event"> Upcoming Events </li>
+				                	<li className="drop_event"> 
+                                        <Button tagType='link' className='p-0 subMenu'>
+                                            <span>Previous Events</span>
+                                        </Button>
+                                    </li>
+					                <li className="drop_event">
+                                        <Button tagType='link' className='p-0 subMenu'>
+                                            <span>Upcoming Events</span>
+                                        </Button>
+                                    </li>
 			                	</ul>
                             </li>
                         </ul>
                     </div>
                     <div className="d-flex justify-content-end align-items-center ">
-                        {!token && (<LoginNav />)}
+                        {!token && (<LoginNav showBlackNav={showBlackNav} />)}
                         {token && (<LogedNav showBlackNav={showBlackNav} token={token}/>)}
                         <div class="dropdown position-relative">
                             <a role="button" id="dropdownMenuLink" className='d-flex' data-bs-toggle="dropdown" aria-expanded="false">

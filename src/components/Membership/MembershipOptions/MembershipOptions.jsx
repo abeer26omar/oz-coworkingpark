@@ -42,18 +42,20 @@ const MembershipOptions = () => {
         return price-priceDicounted;
     }
 
-    const setSlectedMemebershipDetails = (id, type, price, discount, description, time) => {
+    const setSlectedMemebershipDetails = (id, type, price, discount, description, time, time_count) => {
        const selectedPlan = {
             mainPlan: typeDetials?.name,
             selectedPackage: type,
             price: price,
             priceDicounted: calcDiscount(price, discount),
             description: description,
-            time: time
+            time: time,
+            time_count: time_count,
+            discount: discount
        } 
        sessionStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
        setPlanId(id);
-       if(token){
+       if(token && time === 'day'){
             setShow(true)
         }else{
             navigate('/joinus');
@@ -63,7 +65,7 @@ const MembershipOptions = () => {
     return (
         <>
             <MainHeaderWrapper image={typeDetials?.logo}>
-                <div className="container-fluid px-70 py-5">
+                <div className="container-fluid px-70">
                     <div className="col-md-6 col-12">
                         <h1 className="main_header mb-0">{typeDetials?.is_individual === '1' ? 'individulal' : 'corporate'}</h1>
                         <h2 className="head_paragraph mb-3">{typeDetials?.name}</h2>
@@ -106,8 +108,8 @@ const MembershipOptions = () => {
                                                                 <div className='card-header'>
                                                                     <span>{typeDetials?.name}</span>
                                                                     <h1 className='py-3'>{item.type}</h1>
-                                                                    <span className='px-2 discount'>{item.price} / {item.time}</span>
-                                                                    <span className='mb-0 priceafter'>{calcDiscount(item.price, item.discount)} / {item.time}</span>
+                                                                    <span className={`px-2 ${item.discount !== '0' ? 'discount' : 'priceafter' }`}>{item.price} / {item.time_count} {item.time}</span>
+                                                                    {item.discount !== '0' && <span className='mb-0 priceafter'>{calcDiscount(item.price, item.discount)} / {item.time_count} {item.time}</span>}
                                                                 </div>
                                                                 <div className='card-body'>
                                                                     <Paragraph><img type='img' src={check_yes} alt='check_mark' /> Your Plan Benefits</Paragraph>
@@ -134,7 +136,7 @@ const MembershipOptions = () => {
                                                                             className='ex_link mb-3'>{'explore more'}</Button>
                                                                         <Button 
                                                                             tagType='link'
-                                                                            onClick={()=>setSlectedMemebershipDetails(item.id, item.type, item.price, item.discount, item.description, item.time)}
+                                                                            onClick={()=>setSlectedMemebershipDetails(item.id, item.type, item.price, item.discount, item.description, item.time, item.time_count)}
                                                                             className='btn_outline_black d-block auth_btn_padding'>{'apply'}</Button>
                                                                     </div>
                                                                 </div>

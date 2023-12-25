@@ -351,6 +351,9 @@ p.list-option-item{
     .head_paragraph{
         font-size: var(--font-size-41);
     }
+    .text-two{
+        font-size: 3rem;
+    }
 }
 @media screen and (max-width: 786px) {
     .text_desc_black{
@@ -363,6 +366,9 @@ p.list-option-item{
 @media screen and (max-width: 575px) {
     .head_feature{
         font-size: var(--font-size-66);
+    }
+    .text-two{
+        font-size: 2rem;
     }
 }
 @media screen and (max-width: 390px) {

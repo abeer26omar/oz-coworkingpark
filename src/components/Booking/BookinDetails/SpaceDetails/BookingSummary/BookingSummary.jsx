@@ -212,7 +212,7 @@ const BookingSummary = () => {
                         width={'100%'} 
                         className=""/>
                 </div> */}
-                <div className="container">
+                <div className="container-fluid px-4">
                     <Tab.Container activeKey={steps[activeStep]?.key} onSelect={handleTabSelect}>
                         <Nav variant="tabs" className="mb-4">
                             {steps.map((step, index) => (
@@ -248,8 +248,8 @@ const BookingSummary = () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="col-lg-6 col-md-6 col-sm-12 border-right">
-                                                        <ul className="list-details ps-3">
+                                                    <div className="col-lg-6 col-12 border-right">
+                                                        <ul className="list-details px-sm-3 px-1">
                                                             <li>
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                                                 <path d="M9.33398 5.33203V3.33203" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round"/>
@@ -297,8 +297,8 @@ const BookingSummary = () => {
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                    <div className="col-lg-6 col-md-6 col-sm-12 ">
-                                                        <ul className="list-details px-3">
+                                                    <div className="col-lg-6 col-12">
+                                                        <ul className="list-details px-sm-3 px-1">
                                                             <li>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                                             <path d="M5.33398 13.5257C5.33398 7.52914 10.1096 2.66797 16.0007 2.66797C21.8917 2.66797 26.6673 7.52914 26.6673 13.5257C26.6673 19.4753 23.2629 26.4179 17.9512 28.9006C16.713 29.4793 15.2883 29.4793 14.0501 28.9006C8.73842 26.4179 5.33398 19.4753 5.33398 13.5257Z" stroke="black" stroke-width="2"/>
@@ -318,8 +318,8 @@ const BookingSummary = () => {
                                                                     return (<span className='me-2'>{item.label},</span>)
                                                                 })}
                                                             </li>
-                                                            <li className='justify-content-between position-relative'>
-                                                                <span>
+                                                            <li className='justify-content-between position-relative change_dir'>
+                                                                <span className='d-flex align-items-center'>
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                                                     <ellipse cx="15.9993" cy="8.0013" rx="5.33333" ry="5.33333" stroke="#1C274C" stroke-width="1.5"/>
                                                                     <path opacity="0.5" d="M20.0007 17.7682C18.7654 17.4869 17.4152 17.332 16.0007 17.332C10.1096 17.332 5.33398 20.0183 5.33398 23.332C5.33398 26.6457 5.33398 29.332 16.0007 29.332C23.5839 29.332 25.776 27.9743 26.4097 25.9987" stroke="#1C274C" stroke-width="1.5"/>
@@ -327,7 +327,7 @@ const BookingSummary = () => {
                                                                     <path d="M24 19.5547V23.1102" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                                     <path d="M22.2207 21.332L25.7763 21.332" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                                     </svg>
-                                                                    <span className='ms-3'>https://www.ozcoworkingspace.com</span>
+                                                                    <span className='ms-sm-3 ms-1 spec_size'>https://www.ozcoworkingspace.com</span>
                                                                 </span>
                                                                     <ShareButton shareUrl={bookingData?.spaceDetails.booking_url+bookingData?.spaceDetails.booking_code}/>
                                                             </li>

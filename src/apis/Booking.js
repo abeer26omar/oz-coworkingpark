@@ -21,7 +21,6 @@ export const getAmenitiesGroup = async (token) => {
 };
 
 export const getVenues = async (token, userId, branch_id, amenities_group_id) => {
-    
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
     formData.append('branch_id', branch_id);

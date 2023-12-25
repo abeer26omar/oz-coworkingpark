@@ -147,7 +147,6 @@
     line-height: 120%;
 }
 .ex_link{
-    display: block;
     padding: 0;
     color: var(--secondary-color2);
     font-family: var(--questrial-font);
@@ -214,6 +213,9 @@
 @media screen and (max-width: 575px) {
     .btn_default{
         padding: 1rem 1.5rem;
+    }
+    .spec_padding{
+        padding: .6rem 1rem
     }
 }
 @media screen and (max-width: 375px) {

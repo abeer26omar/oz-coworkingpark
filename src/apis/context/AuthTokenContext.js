@@ -29,7 +29,8 @@ const AuthProvider = ({ children }) => {
         sessionStorage.setItem('TokenOZ', loginDetails.access_token);
         sessionStorage.setItem("userIdOZ", loginDetails.user_id);
         sessionStorage.setItem("activeUserOZ", loginDetails.active);
-        sessionStorage.setItem("userProfileDate", JSON.stringify({name: loginDetails.account_data.name,
+        sessionStorage.setItem("userProfileDate", JSON.stringify({
+            name: loginDetails.account_data.name,
             email: loginDetails.account_data.email,
             avatar: loginDetails.account_data.avatar,
             first_name: loginDetails.account_data.first_name,
@@ -47,6 +48,30 @@ const AuthProvider = ({ children }) => {
             phone_number: loginDetails.account_data.phone_number})
     };
 
+    const handelRegister = (authDetails, userDetails) => {
+
+        sessionStorage.setItem('TokenOZ', authDetails.access_token);
+        sessionStorage.setItem("userIdOZ", authDetails.user_id);
+        sessionStorage.setItem("activeUserOZ", authDetails.active);
+        sessionStorage.setItem("userProfileDate", JSON.stringify({
+            name: userDetails.account_data.name,
+            email: userDetails.account_data.email,
+            avatar: userDetails.account_data.avatar,
+            first_name: userDetails.account_data.first_name,
+            last_name: userDetails.account_data.last_name,
+            phone_number: userDetails.account_data.phone_number}));
+
+        setToken(authDetails.access_token);
+        setUserId(authDetails.user_id);
+        setActiveUserId(authDetails.active);
+        setUserProfileData({name: userDetails.name,
+            email: userDetails.email,
+            avatar: userDetails.avatar,
+            first_name: userDetails.first_name,
+            last_name: userDetails.last_name,
+            phone_number: userDetails.phone_number})
+    }
+
     const handleLogout = () => {
         sessionStorage.removeItem('TokenOZ');
         sessionStorage.removeItem('userIdOZ');
@@ -63,7 +88,7 @@ const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ token, userId, branchId, activeUserId, userProfileDate, handleLogin, handleLogout, handelChangeBranch }}>
+        <AuthContext.Provider value={{ token, userId, branchId, activeUserId, userProfileDate, handleLogin, handelRegister, handleLogout, handelChangeBranch }}>
             {children}
         </AuthContext.Provider>
     );

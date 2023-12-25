@@ -45,7 +45,6 @@ nav.btn.show {
 
 .log-border {
     stroke-width: 0.5px;
-    stroke: var(--primary-color);
 }
 
 .log{
@@ -120,7 +119,12 @@ nav.btn.show {
     line-height: 3.6;
     font-family: var(--questrial-font);
     padding: 0 25px;
-    cursor: pointer;
+}
+.drop_event a{
+    color: var(--black-color);
+    font-size: var(--font-size-13);
+    font-weight: var(--font-weight-bold);
+    font-family: var(--questrial-font);
 }
 
 .dropdown:hover .dropdown-nav{ 
@@ -365,6 +369,17 @@ nav.btn.show {
 }
 .body_dark .user_name{
     color: #fff;
+}
+.subMenu span::after{
+    content: "";
+    display: block;
+    width: 0;
+    height: 0.5px;
+    background-color: #000000;
+    transition: width 0.35s;
+}
+.subMenu:hover span::after{
+    width: 100%;
 }
 /*END*/
 @media screen and (max-width: 575.5px) {

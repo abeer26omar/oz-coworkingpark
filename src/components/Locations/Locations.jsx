@@ -63,7 +63,7 @@ const Locations = (props) => {
                                             )
                                         })}
                             </Slider>
-                            {locations.length === 0 && <p className='empty'>theres is no partners yet!!</p>}
+                            {locations.length === 0 && <p className='empty'>theres is no Locations yet!!</p>}
                             {response !== '' && <p className={`empty text-danger mt-2 mb-0`}>{response}</p>}
                         </div>
                         <div className="col-lg-4 col-md-5 col-12 my-auto ">

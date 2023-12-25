@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 
 const MainHeaderWrapper = (props)=>{
     const [imageIndex, setImageIndex] = useState(0);
+    const [videoIndex, setVideoIndex] = useState(0);
+
 
     useEffect(()=>{
         const timer = setInterval(()=>{
@@ -17,10 +19,35 @@ const MainHeaderWrapper = (props)=>{
         return ()=>clearInterval(timer);
     },[imageIndex]);
 
+    // useEffect(()=>{
+        // props.getVideoTitle(props.video[videoIndex]?.title);
+    //     const timer = setInterval(()=>{
+    //         if(props.video){
+    //             if(props.video.length > 1){
+    //                 setVideoIndex((prevIndex) => (prevIndex + 1) % props.video.length);
+    //                 props.getVideoTitle(props.video[videoIndex].title);
+    //             }
+    //         }
+    //     },5000);
+
+    //     return ()=>clearInterval(timer);
+    // },[videoIndex]);
+
     return (
        <div className={`position-relative`}>
-            <div className={`${classes.header_bg} ${props.special_flex}`}>
-                {props.video && <video className={`${classes.video_bg}`} alt="oz video" src={props.video} autoPlay muted loop />}
+            <div className={`${classes.header_bg} ${props.special_flex}`} style={{
+                height: `${props.height}`
+            }}>
+                {props.video && 
+                    <video 
+                        className={`${classes.video_bg}`} 
+                        alt="oz video" 
+                        src={props.video[videoIndex]?.video || props.video} 
+                        autoPlay 
+                        muted 
+                        loop
+                    />
+                }
                 {props.image && 
                     <div style={
                         {
@@ -28,7 +55,7 @@ const MainHeaderWrapper = (props)=>{
                         }
                     } className={`${classes.img_bg}`}></div>
                 }
-                <div className={'position-relative py-5'} style={{
+                <div className={'position-relative'} style={{
                     zIndex: 99
                 }}>
                     {props.children}

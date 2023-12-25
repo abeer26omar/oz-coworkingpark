@@ -16,7 +16,7 @@ const SectionHeader = (props)=>{
     return (
         <>
             <div className={`container-fluid px-70`}>
-                <div className='col-md-6 col-12'>
+                <div className='col-xl-6 col-12'>
                     {props.configData ? props.configData.map((configItem, index) => (
                         <React.Fragment key={index}>
                             {configItem.key === 'home_page_main_header' && (

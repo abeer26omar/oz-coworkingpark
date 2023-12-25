@@ -50,3 +50,9 @@
     font-size: var(--font-size-41);
     margin-bottom: 35px;
 }
+
+.dark_theme .head-content-left-shape .bold-head,
+.dark_theme .features .bold-head,
+.dark_theme .features .text-content {
+    color: var(--white-color);
+}

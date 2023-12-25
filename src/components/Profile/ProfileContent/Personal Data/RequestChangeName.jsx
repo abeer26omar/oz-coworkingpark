@@ -10,6 +10,7 @@ import { RequestUpdateUserInfo } from '../../../../apis/User';
 const RequestChangeName = ({prevName}) => {
 
     const [disabledName, setDisabledName] = useState(true);
+    const [restName, setRestName] = useState(prevName);
     const [swalProps, setSwalProps] = useState({});
 
     const requestUpdateData = async (key, old_value, new_value) => {
@@ -43,9 +44,10 @@ const RequestChangeName = ({prevName}) => {
                 initialValues={{
                     name: prevName ? prevName : '',
                 }}
-                onSubmit={async (values) => {
+                onSubmit={async (values, { resetForm }) => {
                     await new Promise((r) => setTimeout(r, 500));
-                    requestUpdateData('name', prevName, values.name)
+                    requestUpdateData('name', prevName, values.name);
+                    resetForm()
                 }}
                 enableReinitialize>
                 {({ 

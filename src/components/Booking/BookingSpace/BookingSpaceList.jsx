@@ -3,22 +3,32 @@ import Card from "react-bootstrap/Card";
 import Media from "../../Media/Media";
 import Button from "../../UI/Button";
 import AddToFavButton from '../../UI/AddToFavButton';
+import { useNavigate } from "react-router-dom";
 
 const BookingSpaceList = ({id, img, description, price, name, amenities, is_favorite}) => {
-    
+    const navigate = useNavigate()
     return (
         <>
             <Card className="book-card" key={id}>
 
                 <div className="position-relative">
-                    <Media type="img" src={img} class="card-img-top rounded-0" title="desk room" height='309px' />
+                    <Media 
+                        type="img" 
+                        src={img} 
+                        className="card-img-top rounded-0" 
+                        title="desk room" 
+                        height='309px' 
+                        onClick={()=>{navigate(`/bookingDetails/${id}`)}}
+                    />
 
                     <AddToFavButton is_favorite={is_favorite} id={id} add_fav={true} type='venue'/>
 
 
                 </div>
                 <Card.Body>
-                    <Card.Title>{name}</Card.Title>
+                    <Card.Title onClick={()=>{navigate(`/bookingDetails/${id}`)}} style={{
+                        cursor: 'pointer'
+                    }}>{name}</Card.Title>
 
                     <ul className="list-options ">
                         {amenities.slice(0, 3).map((single, index) => {

@@ -37,7 +37,7 @@ const RightContentFB = (props) => {
                       ))
                     : ""}
                   <Button
-                    to={"/community/newsfeed"}
+                    to={"/ozys"}
                     className="btn button-outLine btn-bg-white"
                     tagType="link"
                   >

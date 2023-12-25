@@ -28,7 +28,7 @@ const TalentMarket = (props) => {
                 </Container>
             </div>
             <MainHeaderWrapper configData={props.configData} video={booking}>
-                <div className={`container-fluid px-70 py-5`}>
+                <div className={`container-fluid px-70`}>
                     <div className='col-md-6 col-12'>
                     <Paragraph className='head_paragraph mb-3'>{'Talent Market'}</Paragraph>
                     <Paragraph className='description mb-0'>{'Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,'}</Paragraph>

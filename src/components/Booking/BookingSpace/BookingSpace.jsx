@@ -29,29 +29,25 @@ const BookingSpace = () => {
   useEffect(() => {
     const source = axios.CancelToken.source();
 
-    getAmenitiesGroup(token, source)
-      .then((res) => {
-        setBookingPlaces(res);
-        if (amenity && amenityid) {
-          changeSpace(amenityid, amenity);
-        } else {
-          changeSpace(res[0].id, res[0].name);
-        }
-      })
-      .catch((err) => {});
+        getAmenitiesGroup(token).then(res=>{
+            setBookingPlaces(res);
+            if(amenity && amenityid){
+                changeSpace(amenityid, amenity);
+            }else{
+                changeSpace(res[0].id,res[0].name);
+            }
+        }).catch(err=>{});
 
     return () => source.cancel();
   }, [amenity, amenityid]);
 
-  const changeSpace = (amenities_group_id, spaceTitle) => {
-    getVenues(token, userId, branchId, amenities_group_id)
-      .then((res) => {
-        setVenues(res);
-        setSpaceTitle(spaceTitle);
-        setSpaceId(amenities_group_id);
-      })
-      .catch((err) => {});
-  };
+    const changeSpace = (amenities_group_id, spaceTitle) => {
+        getVenues(token, userId, branchId === null ? '1' : branchId, amenities_group_id).then(res=>{
+            setVenues(res);
+            setSpaceTitle(spaceTitle);
+            setSpaceId(amenities_group_id);
+        }).catch(err=>{})
+    };
 
   let settings = {
     dots: false,

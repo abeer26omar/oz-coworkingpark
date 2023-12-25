@@ -14,6 +14,7 @@ const Media = (props) => {
                     height={props.height}
                     className={props.className}
                     effect="blur"
+                    onClick={props.onClick}
                 />
             }
             {props.type === 'video' &&

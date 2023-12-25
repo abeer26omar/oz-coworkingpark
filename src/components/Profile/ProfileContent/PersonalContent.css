@@ -2,6 +2,9 @@
 .profile-edit .form__field {
     margin: 12px 0px 0px 12px;
 }
+.profile-edit .form__field.ant {
+    margin: 0px 0px 0px 12px;
+}
 .profile-edit .form-control{
     border-radius: 0;
     box-shadow: none;

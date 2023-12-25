@@ -10,7 +10,7 @@ export const getServices = async (token, userId, branchId, signal) => {
     
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/product-categories?access_token=${token}`,
+        url: `${process.env.REACT_APP_API_URL}/api/product-categories?access_token=${token}&skip=true`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
@@ -22,7 +22,7 @@ export const getServices = async (token, userId, branchId, signal) => {
     return response.data.data;
 };
 
-export const getProductsList = async (token, userId, signal) => {
+export const getProductsList = async (token, userId) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -34,7 +34,6 @@ export const getProductsList = async (token, userId, signal) => {
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-        signal: signal
     };
 
     const response = await axios(config);

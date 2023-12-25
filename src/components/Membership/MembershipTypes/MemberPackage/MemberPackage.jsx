@@ -11,6 +11,7 @@ import Button from '../../../UI/Button';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import { getSingleItemById } from '../../../../apis/User';
 import ApplyPlanModal from '../../MembershipOptions/ApplyPlanModal';
+import HouseServices from '../../../Houses/HousesDetails/HouseServices/HouseServices';
 
 const MemberPackage = () => {
     const {id} = useParams();
@@ -50,27 +51,29 @@ const MemberPackage = () => {
         return price-priceDicounted;
     }
 
-    const setSlectedMemebershipDetails = (type, price, discount, description, time) => {
+    const setSlectedMemebershipDetails = (type, price, discount, website_description, time, time_count) => {
         const selectedPlan = {
             mainPlan: membershipType,
             selectedPackage: type,
             price: price,
             priceDicounted: calcDiscount(price, discount),
-            description: description,
-            time: time
-        }
+            website_description: website_description,
+            time: time,
+            time_count: time_count,
+            discount: discount
+       }
         sessionStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
-        if(token){
+        if(token && time === 'day'){
             setShow(true)
-         }else{
+        }else{
             navigate('/joinus');
-         }
+        }
     };
 
     return (
         <>
             <MainHeaderWrapper image={packageDetails?.image}>
-                <div className="container-fluid px-70 py-5">
+                <div className="container-fluid px-70">
                     <div className="col-md-6 col-12">
                         <h1 className="main_header mb-0">{membershipType}</h1>
                         <h2 className="head_paragraph mb-3">{packageDetails?.type}</h2>
@@ -88,7 +91,7 @@ const MemberPackage = () => {
                                     <div className='ps-3 dynamic_p' dangerouslySetInnerHTML={{ __html: packageDetails?.website_description }}></div>
                                         <Button 
                                             tagType='link'
-                                            onClick={()=>setSlectedMemebershipDetails(packageDetails.type, packageDetails.price, packageDetails.discount, packageDetails.description, packageDetails.time)}
+                                            onClick={()=>setSlectedMemebershipDetails(packageDetails.type, packageDetails.price, packageDetails.discount, packageDetails.website_description, packageDetails.time, packageDetails.time_count)}
                                             className="btn_outline m-auto">
                                             Apply
                                         </Button>
@@ -105,7 +108,9 @@ const MemberPackage = () => {
                         </div>
                     </div>
                 </section>
-                <section className="what-get"> 
+                <HouseServices location_amenities={packageDetails.amenities} dark_theme={true}/>
+
+                {/* <section className="what-get"> 
                     <div className="position-relative mb-5" >
                         <Media
                             type="img" src={vector} className="position-absolute m-0"
@@ -141,8 +146,8 @@ const MemberPackage = () => {
                                 }
                             )}
                     </div>
-                </div>
-            </section>
+                        </div>
+                </section> */}
             <ApplyPlanModal 
                 show={show}
                 onHide={handelHide}

@@ -43,7 +43,7 @@ const ForgetPassForm = ()=>{
                     handleSubmit(values);
                 }}
                 validationSchema={Yup.object().shape({
-                    email: Yup.string().email().required('Required'),
+                    email: Yup.string().email().required('email is required'),
                 })}>
             {props => {
                 const {

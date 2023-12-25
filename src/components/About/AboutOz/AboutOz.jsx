@@ -6,6 +6,7 @@ import Media from "../../Media/Media";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Paragraph from "../../UI/Paragraph";
+import HouseServices from '../../Houses/HousesDetails/HouseServices/HouseServices';
 
 const AboutOz = (props) => {
 
@@ -464,6 +465,7 @@ const AboutOz = (props) => {
           </div>
         </div>
       </section>
+      <HouseServices location_amenities={amenities} dark_theme={true}/>
 
       <section className="what-get p-60">
         <div className="container">

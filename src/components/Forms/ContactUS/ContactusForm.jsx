@@ -7,11 +7,17 @@ import { SiteConfigContext } from '../../../apis/context/SiteConfigContext';
 import { inquiry } from '../../../apis/AuthApi';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import './Contactus.css';
+import { Select } from 'antd';
 
 const ContactusForm = ()=>{
     const [swalProps, setSwalProps] = useState({});
+    const [code, setCode] = useState(false);
     const siteConfig = useContext(SiteConfigContext);
-    const { userProfileDate } = useContext(AuthContext)
+    const { userProfileDate } = useContext(AuthContext);
+
+    const optionList = siteConfig && Object.entries(siteConfig.profile_dropdown?.fid_4.data).map(item=>{
+        return { value: item.id , label: item.name }
+    })
 
     const handleSubmit = async (values) => {
         try {
@@ -55,21 +61,22 @@ const ContactusForm = ()=>{
                     user_type: '',
                     inquiry_type: '',
                     location: '',
-                    comments: ''
+                    comments: '',
+                    code: ''
                 }}
                 onSubmit={async values => {
                     await new Promise(resolve => setTimeout(resolve, 0));
                     handleSubmit(values);
                 }}
                 validationSchema={Yup.object().shape({
-                    first_name: Yup.string().required(),
-                    last_name: Yup.string().required(),
-                    email: Yup.string().email().required(),
-                    phone: Yup.string().required(),
-                    user_type: Yup.string().required(),
-                    inquiry_type: Yup.string().required(),
-                    location: Yup.string().required(),
-                    comments: Yup.string().required()
+                    first_name: Yup.string().required('first name is required'),
+                    last_name: Yup.string().required('last name is required'),
+                    email: Yup.string().email().required('email is required'),
+                    phone: Yup.string().required('phone is required'),
+                    user_type: Yup.string().required('user type is required'),
+                    inquiry_type: Yup.string().required('inquiry type is required'),
+                    location: Yup.string().required('locations is required'),
+                    comments: Yup.string().required('comments is required')
                 })}
                 enableReinitialize>
             {props => {
@@ -80,6 +87,7 @@ const ContactusForm = ()=>{
                 handleChange,
                 handleBlur,
                 handleSubmit,
+                setFieldValue
                 } = props;
             return (
                 <form className="row g-3" onSubmit={handleSubmit}>
@@ -167,57 +175,83 @@ const ContactusForm = ()=>{
                     </div>
                     <div className="form__group field my-3 group-check">
                         <label htmlFor="user_type" className="form__label">User Type</label>
-                        <select
-                            id='user_type'
-                            value={values.user_type}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            className="form__field placeholderSelect">
-                                <option disabled selected value=''>Choose Type</option>
+                            <Select
+                                id='user_type'
+                                defaultValue={values.user_type || undefined}
+                                value={values.user_type || undefined}
+                                className="form__field placeholderSelect"
+                                onBlur={handleBlur}
+                                onChange={(value, key) => {setFieldValue('user_type', value);
+                                if(key.children === 'Company'){
+                                    setCode(true);
+                                }else{
+                                    setCode(false);
+                                }
+                            }}
+                                bordered={false}
+                                placeholder={'Choose Type'}
+                            >
                                 {siteConfig && Object.entries(siteConfig.profile_dropdown?.fid_4.data).map(([key, value]) => (
                                     <option key={key} value={key}>
                                         {value}
                                     </option>
                                 ))}
-                        </select>
+                            </Select>
                         {errors.user_type && touched.user_type && <p className='text-danger mb-0'>{errors.user_type}</p>}
                     </div>
-                    <div className="form__group field mt-3 group-check">
-                        <label htmlFor='inquiry_type' className="form__label">Inquiry Type</label>
-                        <select
-                            id='inquiry_type'
-                            value={values.inquiry_type}
+                    {code && <div className="form__group field mt-3 group-check">
+                        <label htmlFor="code" className="form__label">code</label>
+                        <input 
+                            id='code'
+                            type="text"
+                            className={
+                                errors.code && touched.code
+                                ? "form__field is-invalid"
+                                : "form__field"
+                            }
+                            placeholder="Enter company code"
+                            name="code"
+                            value={values.code}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            className={
-                                errors.comments && touched.comments
-                                    ? "form__field placeholderSelect is-invalid"
-                                    : "form__field placeholderSelect"
-                            }>
-                            <option disabled selected value={''}>Choose Service</option>
+                            required
+                        /> 
+                        {errors.code && touched.code && <p className='text-danger mb-0'>{errors.code}</p>}
+                    </div>}
+                    <div className="form__group field mt-3 group-check">
+                        <label htmlFor='inquiry_type' className="form__label">Inquiry Type</label>
+                        <Select
+                            id='inquiry_type'
+                            defaultValue={values.inquiry_type || undefined}
+                            value={values.inquiry_type || undefined}
+                            className="form__field placeholderSelect"
+                            onBlur={handleBlur}
+                            onChange={(value) => setFieldValue('inquiry_type', value)}
+                            bordered={false}
+                            placeholder={'Choose Type'}
+                        >
                             <option value="one">One</option>
                             <option value="two">Two</option>
                             <option value="three">Three</option>
-                        </select>
+                        </Select>
                         {errors.inquiry_type && touched.inquiry_type && <p className='text-danger mb-0'>{errors.inquiry_type}</p>}
                     </div>
                     <div className="form__group field mt-3 group-check">
                         <label htmlFor="location" className="form__label">Locations</label>
-                        <select
+                        <Select
                             id='location'
-                            value={values.location}
-                            onChange={handleChange}
+                            defaultValue={values.location || undefined}
+                            value={values.location || undefined}
+                            className="form__field placeholderSelect"
                             onBlur={handleBlur}
-                            className={
-                                errors.comments && touched.comments
-                                    ? "form__field placeholderSelect is-invalid"
-                                    : "form__field placeholderSelect"
-                            }>
-                            <option disabled selected value={''}>Choose Location</option>
+                            onChange={(value) => setFieldValue('location', value)}
+                            bordered={false}
+                            placeholder={'Choose Location'}
+                        >
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
-                        </select>
+                        </Select>
                         {errors.location && touched.location && <p className='text-danger mb-0'>{errors.location}</p>}
                     </div>
                     <div className="form__group field my-3 group-check">
