@@ -533,7 +533,11 @@ a {
         width: 250px !important;
     }
 } */
-
+/* /position / */
+.top-20{
+    top: -20px;
+}
+/* /position / */
 .head-of-section {
     border-top: 1.5px solid var(--secondary-color2);
     background: var(--neturals-color1);
