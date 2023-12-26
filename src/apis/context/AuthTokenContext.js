@@ -83,12 +83,32 @@ const AuthProvider = ({ children }) => {
         setUserProfileData('');
     };
 
+    const modifyUserData = (userDetails) => {
+        sessionStorage.setItem("userProfileDate", JSON.stringify({
+            name: userDetails.name,
+            email: userDetails.email,
+            avatar: userDetails.avatar,
+            first_name: userDetails.first_name,
+            last_name: userDetails.last_name,
+            phone_number: userDetails.phone_number
+        }));
+
+        setUserProfileData({
+            name: userDetails.name,
+            email: userDetails.email,
+            avatar: userDetails.avatar,
+            first_name: userDetails.first_name,
+            last_name: userDetails.last_name,
+            phone_number: userDetails.phone_number
+        });
+    }
+
     const handelChangeBranch = (branchId) => {
         sessionStorage.setItem('branchIdOZ', branchId);
     };
 
     return (
-        <AuthContext.Provider value={{ token, userId, branchId, activeUserId, userProfileDate, handleLogin, handelRegister, handleLogout, handelChangeBranch }}>
+        <AuthContext.Provider value={{ token, userId, branchId, activeUserId, userProfileDate, handleLogin, handelRegister, handleLogout, handelChangeBranch, modifyUserData }}>
             {children}
         </AuthContext.Provider>
     );

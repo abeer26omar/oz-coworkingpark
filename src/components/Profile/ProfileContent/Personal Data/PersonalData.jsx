@@ -39,7 +39,7 @@ const PersonalData = () => {
     const [focus, setFocused] = useState(false);
     const [swalProps, setSwalProps] = useState({});
     const siteConfig = useContext(SiteConfigContext);
-    const { token, userId } = useContext(AuthContext);
+    const { token, userId, modifyUserData } = useContext(AuthContext);
     const [selectedInterests, setSelectedInterests] = useState([]);
     const [selectedHobbies, setSelectedHobbies] = useState([]);
     const { restState, image } = useContext(DisableContext);
@@ -51,8 +51,9 @@ const PersonalData = () => {
         getUserInfo(token, userId, signal).then(res=>{
             setUserInfo(res['user_data']);
             setCustom(res['custom']);
-            setSelectedHobbies(res['custom']?.fid_11);
-            setSelectedInterests(res['custom']?.fid_12);
+            setSelectedHobbies(res['custom']?.fid_11.split(','));
+            setSelectedInterests(res['custom']?.fid_12.split(','));
+            modifyUserData(res['user_data']);
             
         }).catch(err=>{console.log(err)});
 

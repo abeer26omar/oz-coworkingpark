@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {FiSearch} from "react-icons/fi";
 import Button from '../UI/Button';
 import Paragraph from "../UI/Paragraph";
@@ -19,7 +19,7 @@ const MarketSpace = ()=>{
     const [searchText, setSearchText] = useState('');
     const [visibleCards, setVisibleCards] = useState(3);
     const { token, userId } = useContext(AuthContext);
-    const navigate = useNavigation();
+    const navigate = useNavigate();
 
     const handelHide = () => setShow(false);
 
@@ -84,10 +84,12 @@ const MarketSpace = ()=>{
                             <div className="col-xl-5 col-12 btn-spaces-filter text-center">
                                 <Button 
                                     tagType='link'
-                                    onclick={()=>{
+                                    onClick={()=>{
                                         if(token){
+                                            console.log('logged');
                                             navigate('/addService')
                                         }else{
+                                            console.log('not');
                                             setShow(true);
                                         }
                                     }}

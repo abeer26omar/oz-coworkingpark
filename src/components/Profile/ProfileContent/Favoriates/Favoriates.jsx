@@ -10,7 +10,7 @@ import { attendEvent, checkEvent, cancelEventAttend } from '../../../../apis/Eve
 
 const Favoriates = () => {
 
-    const [data, setData] = useState();
+    const [data, setData] = useState([]);
     const [bookingData, setBookingData] = useState([]);
     const [activeTab, setActiveTab] = useState('event');
     const [swalProps, setSwalProps] = useState({});
@@ -30,7 +30,8 @@ const Favoriates = () => {
         const signal = controller.signal;
 
         getFavoriates(token, 'all', signal).then(res=>{
-            setData(res)
+            setData(res);
+            setReload(false);
         })
         .catch(err =>{
             console.log(err);
@@ -176,7 +177,12 @@ const Favoriates = () => {
                                                 <div className='col-lg-9 col-12'>
                                                         <div className='d-flex justify-content-between align-items-center'>
                                                             <Paragraph className='card-title mb-0'>{item.title || item.event_name}</Paragraph>
-                                                            <AddToFavButton is_favorite={item.is_favorite} id={item.id} reload={handelReload}/>
+                                                            <AddToFavButton 
+                                                                is_favorite={item.is_favorite} 
+                                                                id={item.id} 
+                                                                reload={handelReload}
+                                                                key={item.id}
+                                                            />
                                                         </div>
                                                         <div className="list-option-item m-0 d-flex align-items-center  my-3">
                                                                         <svg xmlns="http://www.w3.org/2000/svg" className='me-2' width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -212,7 +218,13 @@ const Favoriates = () => {
                                                 <div className='col-lg-9 col-12'>
                                                     <div className='d-flex justify-content-between align-items-center'>
                                                         <Paragraph className='card-title mb-0'>{item.title || item.event_name}</Paragraph>
-                                                        <AddToFavButton is_favorite={item.is_favorite} id={item.id} type={'venue'} reload={handelReload}/>
+                                                        <AddToFavButton 
+                                                            is_favorite={item.is_favorite} 
+                                                            id={item.id} 
+                                                            type={'venue'} 
+                                                            reload={handelReload}
+                                                            key={item.id}
+                                                        />
                                                     </div>
                                                         <ul className="list-options d-flex p-0 py-3 m-0">
                                                             {item.services?.map((item, index)=>{
@@ -243,7 +255,13 @@ const Favoriates = () => {
                                                     <div className='col-lg-9 col-12'>
                                                         <div className='d-flex justify-content-between align-items-center'>
                                                             <Paragraph className='card-title mb-0'>{item.title || item.event_name}</Paragraph>
-                                                            <AddToFavButton is_favorite={item.is_favorite} id={item.id} type={'event'} reload={handelReload}/>
+                                                            <AddToFavButton 
+                                                                is_favorite={item.is_favorite} 
+                                                                id={item.id} 
+                                                                type={'event'} 
+                                                                reload={handelReload}
+                                                                key={item.id}
+                                                            />
                                                         </div>
                                                         <ul className="list-options d-flex p-0 py-4 m-0" style={{
                                                                 listStyle: 'none'

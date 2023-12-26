@@ -59,7 +59,7 @@ const MyEventDetails = () => {
                                 </Paragraph>
                             </div>
                             <div className="catering py-5">
-                                <span className='service_catering'>Area: </span><span className='opacity-50'>Multi Purpose Area</span>
+                                <span className='service_catering'>Area: </span><span className='opacity-50'>{event.venue_data?.title}</span>
                             </div>
                         </div>
                         <div className='col-lg-6 col-12 p-sm-5 p-3'>

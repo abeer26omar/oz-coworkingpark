@@ -106,7 +106,7 @@ function App() {
           { path:'spaces', element: <Spaces />},
           { path:'community', element: <Community />},
           { path:'community/events', element: <CommunityEventsExplore />},
-          { path:'events/communityEventsDetails/:id', element: <CommunityEventsDetails />},
+          { path:'events/:name/:id', element: <CommunityEventsDetails />},
           { path:'community/newsfeed', element: <NewsFeed />},
           { path:'community/newsfeed/singleFeed/:id', element: <SingleNewFeed />},
           { path:'private', element: <PrivateEvents />},

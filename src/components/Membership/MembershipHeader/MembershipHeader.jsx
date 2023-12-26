@@ -1,10 +1,11 @@
 import React from 'react';
-import Navbar from "react-bootstrap/Navbar";
-import {Container, Nav} from "react-bootstrap";
-import {NavLink} from "react-router-dom";
 import Button from '../../UI/Button';
 
 const MembershipHeader = ({title}) => {
+    const handelInguireType = () => {
+        sessionStorage.setItem('MembershipInquireOZ', 'membership')
+    }
+    
     return (
         <>
             <div className="bg-body-tertiary navigator">
@@ -27,6 +28,7 @@ const MembershipHeader = ({title}) => {
                     <Button
                         tagType='link'
                         to={"/contactus"}
+                        onClick={handelInguireType}
                         className="btn button-outLine btn-bg-white m-0"
                     >inquire</Button>
                     </div>

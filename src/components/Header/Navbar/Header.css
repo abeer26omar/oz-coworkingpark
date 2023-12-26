@@ -118,7 +118,6 @@ nav.btn.show {
     font-weight: var(--font-weight-bold);
     line-height: 3.6;
     font-family: var(--questrial-font);
-    padding: 0 25px;
 }
 .drop_event a{
     color: var(--black-color);
@@ -369,6 +368,9 @@ nav.btn.show {
 }
 .body_dark .user_name{
     color: #fff;
+}
+.subMenu span{
+    display: inline-block;
 }
 .subMenu span::after{
     content: "";

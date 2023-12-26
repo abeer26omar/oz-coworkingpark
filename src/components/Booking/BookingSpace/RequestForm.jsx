@@ -6,6 +6,7 @@ import Paragraph from '../../UI/Paragraph';
 import {requestBooking} from '../../../apis/Booking';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import SweetAlert2 from 'react-sweetalert2';
+import {Select} from 'antd';
 
 const RequestForm = ({venueId})=>{
 
@@ -106,17 +107,19 @@ const RequestForm = ({venueId})=>{
                     </div>
                     <div className="form__group field my-3 group-check">
                         <label htmlFor="activities" className="form__label">Activities</label>
-                        <select
+                        <Select
                             id='activities'
-                            value={values.activities}
+                            value={values.activities || undefined}
+                            defaultValue={values.activities || undefined}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            className="form__field placeholderSelect">
-                                <option selected value=''>Select user activities</option>
-                                <option value="company">company</option>
-                                <option value="individual">individual</option>
-                                <option value="startup">startup</option>
-                        </select>
+                            className="form__field placeholderSelect"
+                            placeholder={'Select user activities'}
+                            bordered={false}>
+                                <Select.Option value="company">company</Select.Option>
+                                <Select.Option value="individual">individual</Select.Option>
+                                <Select.Option value="startup">startup</Select.Option>
+                        </Select>
                         {errors.activities && touched.activities && <p className='text-danger mb-0'>{errors.activities}</p>}
                     </div>
                     <div className="form__group field my-3 group-check">

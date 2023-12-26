@@ -9,11 +9,11 @@ import { DataContext } from "../apis/context/SiteDataContext";
 
 const Community = () => {
     
-    const {config, getComponentValue} = useContext(DataContext);
+    const { ResetPageName, getComponentValue } = useContext(DataContext);
 
-    useEffect(()=>{
-        config("community");
-    },[]);
+    useEffect(() => {
+      ResetPageName('community');
+    }, []);
 
     return (
         <>

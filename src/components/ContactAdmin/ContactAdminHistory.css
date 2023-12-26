@@ -27,3 +27,7 @@
     font-weight: 700;
     line-height: 120%;
 }
+.history_tabs .booking_nav .nav-link,
+.history_tabs .booking_nav .nav-item{
+    border: none !important;
+}

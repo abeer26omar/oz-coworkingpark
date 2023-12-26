@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { 
     FacebookShareButton,
     FacebookMessengerShareButton,
@@ -17,7 +17,7 @@ import {
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Button from './Button';
 
-const ShareButton = ({border, button, shareUrl, fav_dark}) => {
+const ShareButton = ({border, button, shareUrl, fav_dark, title, description}) => {
 
     const [message, setmessage] = useState('copy link!');
 
@@ -90,7 +90,9 @@ const ShareButton = ({border, button, shareUrl, fav_dark}) => {
                 <div className='row g-3 d-flex align-items-center justify-content-evenly position-relative'>
                         <FacebookShareButton
                             url={shareUrl || 'https://ozcoworkingpark.com/'}
-                            className="Demo__some-network__share-button">
+                            className="Demo__some-network__share-button"
+                            title={title}
+                            description={description}>
                             <FacebookIcon size={32} round />
                         </FacebookShareButton>
 
@@ -98,21 +100,24 @@ const ShareButton = ({border, button, shareUrl, fav_dark}) => {
                             url={shareUrl || 'https://ozcoworkingpark.com/'}
                             appId="521270401588372"
                             className="Demo__some-network__share-button"
-                            >
+                            title={title}
+                            description={description}>
                             <FacebookMessengerIcon size={32} round />
                         </FacebookMessengerShareButton>
                     
                         <TwitterShareButton
                             url={shareUrl || 'https://ozcoworkingpark.com/'}
                             className="Demo__some-network__share-button"
-                            >
+                            title={title}
+                            description={description}>
                             <XIcon size={32} round />
                         </TwitterShareButton>
 
                         <TelegramShareButton
                             url={shareUrl || 'https://ozcoworkingpark.com/'}
                             className="Demo__some-network__share-button"
-                            >
+                            title={title}
+                            description={description}>
                             <TelegramIcon size={32} round />
                         </TelegramShareButton>
 
@@ -120,14 +125,16 @@ const ShareButton = ({border, button, shareUrl, fav_dark}) => {
                             url={shareUrl || 'https://ozcoworkingpark.com/'}
                             separator=":: "
                             className="Demo__some-network__share-button"
-                            >
+                            title={title}
+                            description={description}>
                             <WhatsappIcon size={32} round />
                         </WhatsappShareButton>
 
                         <LinkedinShareButton
                             url={shareUrl || 'https://ozcoworkingpark.com/'}
                             className="Demo__some-network__share-button"
-                            >
+                            title={title}
+                            summary={description}>
                             <LinkedinIcon size={32} round />
                         </LinkedinShareButton>
 
