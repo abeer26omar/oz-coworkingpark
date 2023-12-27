@@ -61,7 +61,7 @@ const AddToFavButton = ({is_favorite, id, type, border, add_fav, reload}) => {
         }
     };
 
-    useEffect(()=>{},[is_favorite, id, type, border, add_fav]);
+    useEffect(()=>{},[is_favorite, id, type, border, add_fav, reload]);
 
     return (
         <>

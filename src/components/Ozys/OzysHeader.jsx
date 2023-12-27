@@ -21,7 +21,7 @@ const OzysHeader = () => {
             title: 'City Drink'
         },
     ]
-    const [videos, setVideos] = useState('');
+    const [videos, setVideos] = useState(videosArr);
     const [videoTitle, setVideoTitle] = useState('');
 
     const getVideoTitle = (title) => {

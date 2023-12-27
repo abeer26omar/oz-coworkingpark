@@ -20,13 +20,12 @@ const CommunityEventsDetails = () => {
 
     const {id} = useParams();
     const [eventDetails, setEventDetails] = useState([]);
-    const [url, setUrl] = useState('');
+    const [image, setImage] = useState('');
     const [swalProps, setSwalProps] = useState({});
     const [reload, setReload] = useState(false);
     const { token, userId } = useContext(AuthContext);
     const {data, ResetPageName} = useContext(DataContext);
     const [show, setShow] = useState(false);
-    const currentTime = new Date();
     
     const handelHide = ()=>setShow(false);
 
@@ -41,6 +40,7 @@ const CommunityEventsDetails = () => {
                 const res = await getSingleItemById(token, 'event', id, source);
                 if (isMounted) {
                     setEventDetails(res);
+                    setImage(res.gallery[0]?.image)
                 }
             }catch (error){}
         }
@@ -52,10 +52,10 @@ const CommunityEventsDetails = () => {
         };
     },[token, id, reload]);
     
-    useEffect(()=>{
-        const fullUrl = window.location.href;
-        setUrl(fullUrl);
-    },[]);
+    // useEffect(()=>{
+    const url = window.location.href;
+        // setUrl(fullUrl);
+    // },[]);
 
     const attend = async () => {
         if(token){
@@ -156,6 +156,17 @@ const CommunityEventsDetails = () => {
         autoplaySpeed: 3000,
         lazyLoad: true,
     }
+    
+    const currentTime = new Date().toLocaleString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        timeZoneName: 'short'
+      });
     
     return (
         <>
@@ -290,8 +301,19 @@ const CommunityEventsDetails = () => {
                                 </span>
 
                             <div className="cards-event-buttons d-flex justify-content-center align-items-center">
-                               {currentTime < (eventDetails && new Date(eventDetails.start)) && (
-                                    <>
+                                
+                                {console.log('current', currentTime)}
+                               {(currentTime < (eventDetails && new Date(eventDetails.start).toLocaleString('en-US', {
+                                        weekday: 'short',
+                                        month: 'short',
+                                        day: 'numeric',
+                                        year: 'numeric',
+                                        hour: 'numeric',
+                                        minute: 'numeric',
+                                        second: 'numeric',
+                                        timeZoneName: 'short'
+                                    }))) ? (
+                                   <>
                                         {
                                             eventDetails.event_attend_id === null ? (
                                                 <Button 
@@ -309,10 +331,12 @@ const CommunityEventsDetails = () => {
                                         }
                                     </>
                                     )
+                                    :
+                                    ''
                                 }
                                     
                                 <div className='mx-4'>
-                                    <ShareButton border={true} shareUrl={url} />
+                                    <ShareButton border={true} shareUrl={url}title={eventDetails.event_name} description={eventDetails.description} />
                                 </div>
                                 <AddToFavButton border={true} add_fav={false} is_favorite={eventDetails.is_favorite} id={eventDetails.id} type={'event'}/>
                             </div>

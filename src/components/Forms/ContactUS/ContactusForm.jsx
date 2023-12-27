@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Formik } from 'formik';
 import * as Yup from "yup";
 import Button  from '../../UI/Button';
@@ -14,10 +14,15 @@ const ContactusForm = ()=>{
     const [code, setCode] = useState(false);
     const siteConfig = useContext(SiteConfigContext);
     const { userProfileDate } = useContext(AuthContext);
+    const [type, setType] = useState(sessionStorage.getItem('MembershipInquireOZ'));
 
     const optionList = siteConfig && Object.entries(siteConfig.profile_dropdown?.fid_4.data).map(item=>{
         return { value: item.id , label: item.name }
-    })
+    });
+
+    useEffect(()=>{
+        setType(sessionStorage.getItem('MembershipInquireOZ'))
+    },[]);
 
     const handleSubmit = async (values) => {
         try {
@@ -52,6 +57,7 @@ const ContactusForm = ()=>{
     
     return (
         <>
+        {console.log(type)}
             <Formik 
                 initialValues = {{
                     first_name: userProfileDate ? userProfileDate.first_name : '',
@@ -59,7 +65,7 @@ const ContactusForm = ()=>{
                     email: userProfileDate ? userProfileDate.email : '',
                     phone: userProfileDate ? userProfileDate.phone_number : '',
                     user_type: '',
-                    inquiry_type: '',
+                    inquiry_type: type || '',
                     location: '',
                     comments: '',
                     code: ''
@@ -230,9 +236,8 @@ const ContactusForm = ()=>{
                             bordered={false}
                             placeholder={'Choose Type'}
                         >
-                            <option value="one">One</option>
-                            <option value="two">Two</option>
-                            <option value="three">Three</option>
+                            <Select.Option value="membership">Membership</Select.Option>
+                            <Select.Option value="booking">Booking</Select.Option>
                         </Select>
                         {errors.inquiry_type && touched.inquiry_type && <p className='text-danger mb-0'>{errors.inquiry_type}</p>}
                     </div>

@@ -39,8 +39,8 @@ const IssueHistory = () => {
                             <Button className='p-0 d-block' tagType='link' to={`/profile/issueDetails/${item.id}`}>
                                 <div className='d-flex justify-content-between align-items-center border-bottom my-5'>
                                     <div className='d-flex align-items-center'>
-                                        <img src={item.ticket_category.image} alt={item.ticket_category.name} />
-                                        <Paragraph className='ms-3 service_catering mb-0'>{item.ticket_category.name}</Paragraph>
+                                        <img src={item.ticket_sub_category.image} alt={item.ticket_sub_category.name} />
+                                        <Paragraph className='ms-3 service_catering mb-0'>{item.ticket_sub_category.name}</Paragraph>
                                     </div>
                                     <div className="d-flex">
                                         <Paragraph className='mb-0 text-date me-2'>{setDate(item.date)}</Paragraph>

@@ -43,7 +43,7 @@ const LoginForm = ({profile, provider})=>{
         try {
             const result = await Login(values.email, values.password, provider, notificationToken);
             handleLogin(result);
-            navigate(-1);
+            navigate('/');
         } catch (error) {
             setSwalProps({
                 show: true,

@@ -8,6 +8,9 @@ import SweetAlert2 from 'react-sweetalert2';
 import { AuthContext } from '../../apis/context/AuthTokenContext';
 import { getServices } from '../../apis/Market';
 import { SiteConfigContext } from '../../apis/context/SiteConfigContext';
+import { useNavigation } from 'react-router-dom';
+import { Select } from 'antd';
+
 const AddService = () => {
 
     const [images, setImages] = useState([]);
@@ -16,6 +19,7 @@ const AddService = () => {
     const {token, userId, branch_id} = useContext(AuthContext);
     const siteConfig  = useContext(SiteConfigContext);
     const contacts = ['email', 'call', 'chat'];
+    const navigate = useNavigation();
 
     useEffect(()=>{
         const controller = new AbortController();
@@ -49,6 +53,8 @@ const AddService = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
+            navigate('/talentmarket');
+            
         }catch(error){
             setSwalProps({
                 show: true,
@@ -99,7 +105,8 @@ const AddService = () => {
                     values,
                     handleChange,
                     handleBlur,
-                    handleSubmit
+                    handleSubmit,
+                    setFieldValue
                 } = props;
                 return (
                     <div className='container-fluid'>
@@ -123,7 +130,7 @@ const AddService = () => {
                         </div>
                         <form className="form-filter" onSubmit={handleSubmit}>
                             <div className="container-fluid">
-                                <div className="row g-5">
+                                <div className="row g-5 align-items-center">
                                     <div className='col-lg-12 py-3'>
                                         <Previews getImages={getImages} />
                                     </div>
@@ -145,20 +152,23 @@ const AddService = () => {
                                     <div className="col-md-6 col-12">
                                         <div className="form__group field my-3">
                                             <label htmlFor="serviceType" className="form__label">service Type</label>
-                                            <select
+                                            <Select
                                                 id='serviceType'
                                                 name='serviceType'
-                                                value={values.serviceType}
-                                                onChange={handleChange}
+                                                defaultValue={values.serviceType || undefined}
+                                                value={values.serviceType || undefined}
+                                                className="form__field placeholderSelect"
                                                 onBlur={handleBlur}
-                                                className="form__field placeholderSelect">
-                                                    <option value="" disabled selected>service types</option>
-                                                    {services && services.map((item, index) => (
-                                                        <option key={index} value={item.id}>
-                                                            {item.name}
-                                                        </option>
-                                                    ))}
-                                            </select>
+                                                onChange={(value) => {setFieldValue('serviceType', value)}}
+                                                bordered={false}
+                                                placeholder={'service types'}
+                                            >
+                                                {services && services.map((item) => (
+                                                    <Select.Option key={item.id} value={item.id}>
+                                                        {item.name}
+                                                    </Select.Option>
+                                                ))}
+                                            </Select>
                                         </div>
                                     </div>
                                     <div className="col-md-6 col-12">
@@ -194,21 +204,23 @@ const AddService = () => {
                                     <div className="col-md-6 col-12">
                                         <div className="form__group field my-3">
                                             <label htmlFor="contactType" className="form__label">Contact Type</label>
-                                            <select
+                                            <Select
                                                 id='contactType'
                                                 name='contactType'
-                                                value={values.contactType}
-                                                onChange={handleChange}
+                                                defaultValue={values.contactType || undefined}
+                                                value={values.contactType || undefined}
+                                                className="form__field placeholderSelect"
                                                 onBlur={handleBlur}
-                                                placeholder='select how people contact you'
-                                                className="form__field placeholderSelect">
-                                                    <option value="" disabled selected>select how people contact you</option>
-                                                    {contacts && contacts.map((item, index) => (
-                                                        <option key={index} value={item}>
-                                                            {item}
-                                                        </option>
-                                                    ))}
-                                            </select>
+                                                onChange={(value) => {setFieldValue('contactType', value)}}
+                                                bordered={false}
+                                                placeholder={'select how people contact you'}
+                                            >
+                                                {contacts && contacts.map((item, index) => (
+                                                    <Select.Option key={index} value={item}>
+                                                        {item}
+                                                    </Select.Option>
+                                                ))}
+                                            </Select>
                                         </div>
                                     </div>
                                     <div className="col-md-6 col-12">

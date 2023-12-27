@@ -12,7 +12,7 @@ const SingleCommunityExplore = ({id, img, title, text, category, day, host, cloc
     
     const [url, setUrl] = useState('');
     useEffect(()=>{
-        const fullUrl = window.location.href;
+        const fullUrl = window.location.origin;
         setUrl(fullUrl);
     },[])
 
@@ -43,9 +43,9 @@ const SingleCommunityExplore = ({id, img, title, text, category, day, host, cloc
                         </div>
                     </div>
                     <div className="cards-event-buttons d-flex">
-                        <Button tagType='link' to={`/events/communityEventsDetails/${id}`}
+                        <Button tagType='link' to={`/events/${title}/${id}`}
                               className="btn button-outLine btn-bg-white attend-btn">Attend</Button>
-                        <ShareButton border={true} shareUrl={url}/>
+                        <ShareButton border={true} shareUrl={`${url}/events/${title}/${id}`} title={title} description={text}/>
                     </div>
                 </Card.Body>
             </Card>

@@ -26,7 +26,7 @@ const DMChatProvider = () => {
     const [isBlocked, setIsBlocked] = useState(false);
     const [action, setAction] = useState('block');
     const [chatList, setChatList] = useState([]);
-    const [activeTab, setActiveTab] = useState();
+    const [activeTab, setActiveTab] = useState('0');
     const [senderName, setSenderName] = useState(null);
     const [senderAvatar, setSenderAvatar] = useState(null);
     const [recipent, setrecipent] = useState(null);
@@ -129,9 +129,9 @@ const DMChatProvider = () => {
         try{
           const result = await getChatList(token, project);
           setChatList(result);
-          setActiveTab(result[0]?.chat_id);
+          setActiveTab(0);
           const recipentIdFirst = (userId === result[0]?.last_message?.from_id) ? result[0]?.last_message?.to_id : result[0]?.last_message?.from_id;
-          handleTabClick(result[0]?.chat_id, recipentIdFirst, result[0].username, result[0].avatar);
+          handleTabClick(0, recipentIdFirst, result[0].username, result[0].avatar);
 
         }catch(err){
           console.log(err);
@@ -194,21 +194,21 @@ const DMChatProvider = () => {
                   <div className="row">
                     <div className="col-xl-4 col-md-4 col-sm-12 p-2 ">
                       <div className="border-bottom ms-2 ">
-                        <Paragraph className="p-4 directory ">Directory</Paragraph>
+                        <Paragraph className="p-4 directory mb-0">Directory</Paragraph>
                       </div>
                       <div className="p-4">
                         <div className="requests d-flex">
                           <Paragraph className="m-0">Requests</Paragraph>
                           {/* <span className="req_number ms-2">3</span> */}
                         </div>
-                        <Nav variant="pills" className="list_container row mx-auto my-3">
+                        <Nav variant="pills" className="list_container flex-column mx-auto my-3">
                           {(chatList && chatList.length !== 0) && chatList?.map((item, index)=>{
                             return(
                                   <Nav.Item  key={index}>
                                     <Nav.Link 
-                                      eventKey={item.chat_id}
+                                      eventKey={index}
                                       onClick={()=>{handleTabClick(
-                                        item.chat_id, 
+                                        index, 
                                         userId === item.last_message?.from_id ? item.last_message?.to_id : item.last_message?.from_id,
                                         item.username,
                                         item.avatar

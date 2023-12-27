@@ -766,3 +766,12 @@ a {
     font-size: 16px !important;
     height: 100% !important;
 }
+:where(.css-dev-only-do-not-override-2rgkd4).ant-dropdown .ant-dropdown-menu, 
+:where(.css-dev-only-do-not-override-2rgkd4).ant-dropdown-menu-submenu .ant-dropdown-menu {
+    background-color: var(--Head_color) !important;
+    border-radius: 0px !important;
+    width: 190px !important;
+}
+:where(.css-dev-only-do-not-override-2rgkd4).ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover{
+    background-color: transparent !important;
+}

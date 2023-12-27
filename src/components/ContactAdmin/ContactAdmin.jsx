@@ -50,7 +50,7 @@ const ContactAdmin = () => {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-6">
-                            <div className="login-card form-card py-4">
+                            <div className="login-card form-card p-md-5 p-3">
                                 <div className="head-content text-center pb-3">
                                     <h1 className="hand-write">let's connect</h1>
                                     <h3 className="bold-head">with admin</h3>
@@ -123,6 +123,7 @@ const ContactAdmin = () => {
                                                     type="submit" 
                                                     className="btn_outline_black auth_btn_padding">send</Button>
                                             </div>
+                                                <Button tagType='link' className='btn_underline p-0' to={'/contactadmin'}>History</Button>
                                         </form>
                                     )}}
                                 </Formik>

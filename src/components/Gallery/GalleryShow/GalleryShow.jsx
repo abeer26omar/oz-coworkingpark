@@ -68,7 +68,7 @@ const GalleryShow = () => {
                         </div>
                         <div className='container'>
                             <ResponsiveMasonry
-                                columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}>
+                                columnsCountBreakPoints={{350: 1, 750: 2, 900: 3, 1024: 4}}>
                                 <Masonry columnsCount={3} gutter="30px">
                                     {galleryData[activeTab] ? galleryData[activeTab].map((gallery) => {
                                         const {image, id, category, text, date, title} = gallery;
@@ -78,7 +78,7 @@ const GalleryShow = () => {
                                                     <Media
                                                         type="img" className="w-100" src={gallery.image} alt={`Gallery Item ${id}`}/>
                                                     <div className="gallery-description">
-                                                       <ShareButton border={true} shareUrl={url} fav_dark={true}/>
+                                                       <ShareButton border={true} shareUrl={image} fav_dark={true} title={title}/>
                                                         <div className='py-5'></div>
                                                         <div className='text-center'>
                                                             <h3>{title}</h3>

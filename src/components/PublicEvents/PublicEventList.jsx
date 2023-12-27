@@ -1,16 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from 'axios';
 import Slider from "react-slick";
 import Card from "react-bootstrap/Card";
 import Media from "../Media/Media";
 import Button from "../UI/Button";
 import {getEventsList} from '../../apis/Events';
 import { AuthContext } from "../../apis/context/AuthTokenContext";
+import { useNavigate } from "react-router-dom";
 
 const PublicEventList = ({}) => {
     
     const [eventsData, setEventsData] = useState([]);
     const { token, userId }  = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const settings = {
         dots: false,
@@ -74,12 +75,19 @@ const PublicEventList = ({}) => {
                                             src={event.gallery[0]?.image} 
                                             className="card-img-top rounded-0" 
                                             alt={event.event_name}
-                                            height= '400px' style={{
+                                            height= '400px' 
+                                            style={{
                                                 objectFit: 'cover'
-                                            }}/>
+                                            }}
+                                            onClick={()=>{
+                                                navigate(`/events/communityEventsDetails/${event.id}`)
+                                            }}
+                                        />
 
                                         <div className="card-body py-4">
-                                            <Card.Title>{event.event_name}</Card.Title>
+                                            <Card.Title onClick={()=>{
+                                                navigate(`/events/communityEventsDetails/${event.id}`)
+                                            }}>{event.event_name}</Card.Title>
                                             <Card.Text className="py-2">{event.description?.slice(0,50)} ...</Card.Text>
                                             <Button 
                                                 to={`/events/communityEventsDetails/${event.id}`} 

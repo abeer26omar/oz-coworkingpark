@@ -19,19 +19,23 @@ const MainHeaderWrapper = (props)=>{
         return ()=>clearInterval(timer);
     },[imageIndex]);
 
-    // useEffect(()=>{
-        // props.getVideoTitle(props.video[videoIndex]?.title);
-    //     const timer = setInterval(()=>{
-    //         if(props.video){
-    //             if(props.video.length > 1){
-    //                 setVideoIndex((prevIndex) => (prevIndex + 1) % props.video.length);
-    //                 props.getVideoTitle(props.video[videoIndex].title);
-    //             }
-    //         }
-    //     },5000);
+    useEffect(()=>{
+        if(props.getVideoTitle){
+            props.getVideoTitle(props.video[videoIndex]?.title);
+        }
+        const timer = setInterval(()=>{
+            if(props.video){
+                if(props.video.length > 1){
+                    setVideoIndex((prevIndex) => (prevIndex + 1) % props.video.length);
+                    if(props.getVideoTitle){
+                        props.getVideoTitle(props.video[videoIndex].title);
+                    }
+                }
+            }
+        },5000);
 
-    //     return ()=>clearInterval(timer);
-    // },[videoIndex]);
+        return ()=>clearInterval(timer);
+    },[videoIndex]);
 
     return (
        <div className={`position-relative`}>

@@ -3,7 +3,7 @@ import './Paragraph.css';
 function Paragraph(props) {
   return (
     <>
-     <p className= {`${props.className}`}>{props.children}</p> 
+     <p className= {`${props.className}`} style={props.style}>{props.children}</p> 
     </>
   )    
 }

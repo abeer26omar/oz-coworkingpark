@@ -12,6 +12,7 @@ import SocialMedia from "../../UI/SocialMedia";
 import { getListMembershipTypes } from '../../../apis/MembershipApi';
 import { getAmenitiesGroup } from '../../../apis/Booking';
 import { HashLink } from 'react-router-hash-link';
+import { Dropdown } from 'antd';
 
 const Header = ({showBlackNav}) => {
 
@@ -65,6 +66,96 @@ const Header = ({showBlackNav}) => {
         setAddress("");
         }
     };
+    const membershipItems = types && types.map((item,index)=>{
+        return {
+            key: index,
+            label: (
+                <li className="drop_event">
+                    <Button 
+                        tagType='link' 
+                        className='p-0 subMenu' 
+                        to={`/membership/${item.id}`} 
+                        >
+                        <span>{item.name}</span>
+                    </Button>
+                </li>
+            )
+        }
+        
+    });
+
+    const bookingItems = bookingPlaces && bookingPlaces.map((item,index)=>{
+        return {
+            key: index,
+            label: (
+                <li className="drop_event">
+                    <HashLink 
+                        key={index} 
+                        className='p-0 subMenu' 
+                        smooth to={`/booking?amenity=${item.name}&id=${item.id}#${item.name}`}>
+                        <span>{item.name}</span>
+                    </HashLink>
+                </li>
+            )
+        }
+        
+    });
+    
+    const communityItems = [
+        {
+            key: '1',
+            label: (
+                <li className="drop_event"> 
+                    <Button tagType='link' className='p-0 subMenu' to={'/community/newsfeed'}>
+                        <span>Community Newsfeed</span>
+                    </Button>
+                </li>
+            )
+        },
+        {
+            key: '2',
+            label: (
+                <li className="drop_event">
+                    <Button tagType='link' className='p-0 subMenu' to={'/community/events'}>
+                        <span>Community Events</span>
+                    </Button>
+                </li>
+            )
+        },
+        {
+            key: '3',
+            label: (
+                <li className="drop_event"> 
+                    <Button tagType='link' className='p-0 subMenu' to={'/community/galleryshow'}>
+                        <span>Gallery</span>
+                    </Button>
+                </li>
+            )
+        },
+    ];
+
+    const eventsItems = [
+        {
+            key: '1',
+            label: (
+                <li className="drop_event"> 
+                    <Button tagType='link' className='p-0 subMenu'>
+                        <span>Previous Events</span>
+                    </Button>
+                </li>
+            )
+        },
+        {
+            key: '2',
+            label: (
+                <li className="drop_event"> 
+                    <Button tagType='link' className='p-0 subMenu'>
+                        <span>Upcoming Events</span>
+                    </Button>
+                </li>
+            )
+        }
+    ];
 
     return (
         <>
@@ -75,48 +166,31 @@ const Header = ({showBlackNav}) => {
                     </NavLink>
                     <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
                         <ul className="nav">
-                            <li className="nav-item px-3  dropdown">
+                            <li className="nav-item px-3">
                                 <NavLink className={`nav-link px-0`} 
-                                style={({ isActive }) => ({
-                                    borderBottom: isActive ? `2px solid black` : 'none',
-                                })} 
-                                to={'/booking'}><span>booking</span></NavLink>
-                                <ul class="dropdown-nav">
-                                    {bookingPlaces && bookingPlaces.map((item,index)=>{
-                                        return (
-                                            <li className="drop_event" key={index}>
-                                                <HashLink 
-                                                    key={index} 
-                                                    className='p-0 subMenu' 
-                                                    smooth to={`/booking?amenity=${item.name}&id=${item.id}#${item.name}`}>
-                                                    <span>{item.name}</span>
-                                                </HashLink>
-                                            </li>
-                                        )
-                                    })}
-			                	</ul>
+                                    style={({ isActive }) => ({
+                                        borderBottom: isActive ? `2px solid black` : 'none',
+                                    })} 
+                                    to={'/booking'}>
+                                    <Dropdown
+                                        menu={{items: bookingItems}}
+                                    >
+                                        <span>booking</span>
+                                    </Dropdown>
+                                </NavLink>
                             </li>
-                            <li className="nav-item px-3  dropdown">
+                            <li className="nav-item px-3">
                                 <NavLink className={`nav-link px-0`} 
-                                style={({ isActive }) => ({
-                                    borderBottom: isActive ? `2px solid black` : 'none',
-                                })}
-                                to={'/membership'}><span>membership</span></NavLink>
-                                <ul class="dropdown-nav">
-                                    {types && types.map((item,index)=>{
-                                        return (
-                                            <li className="drop_event" key={index}>
-                                                <Button 
-                                                    tagType='link' 
-                                                    className='p-0 subMenu' 
-                                                    to={`/membership/${item.id}`} 
-                                                    >
-                                                    <span>{item.name}</span>
-                                                </Button>
-                                            </li>
-                                        )
+                                    style={({ isActive }) => ({
+                                        borderBottom: isActive ? `2px solid black` : 'none',
                                     })}
-			                	</ul>
+                                    to={'/membership'}>
+                                    <Dropdown
+                                        menu={{items: membershipItems}}
+                                    >
+                                        <span>membership</span>
+                                    </Dropdown>
+                                </NavLink>
                             </li>
                             <li className="nav-item px-3 dropdown">
                                 <NavLink className={`nav-link px-0`} 
@@ -126,49 +200,31 @@ const Header = ({showBlackNav}) => {
                                 to={'/private'}><span>private events</span></NavLink>
                             </li>
                             
-                            <li className="nav-item px-3 dropdown">
+                            <li className="nav-item px-3">
                                 <NavLink className={`nav-link px-0`} 
-                                style={({ isActive }) => ({
-                                    borderBottom: isActive ? `2px solid black` : 'none',
-                                })}
-                                to={'/community'}><span>community</span></NavLink>
-                                <ul class="dropdown-nav">
-				                	<li className="drop_event"> 
-                                        <Button tagType='link' className='p-0 subMenu' to={'/community/newsfeed'}>
-                                            <span>Community Newsfeed</span>
-                                        </Button>
-                                    </li>
-				                	<li className="drop_event">
-                                        <Button tagType='link' className='p-0 subMenu' to={'/community/events'}>
-                                            <span>Community Events</span>
-                                        </Button>
-                                    </li>
-					                <li className="drop_event"> 
-                                        <Button tagType='link' className='p-0 subMenu' to={'/community/galleryshow'}>
-                                            <span>Gallery</span>
-                                        </Button>
-                                    </li>
-
-			                	</ul>
+                                    style={({ isActive }) => ({
+                                        borderBottom: isActive ? `2px solid black` : 'none',
+                                    })}
+                                    to={'/community'}>
+                                    <Dropdown
+                                        menu={{items: communityItems}}
+                                    >
+                                        <span>community</span>
+                                    </Dropdown>
+                                </NavLink>
                             </li>
                             <li className="nav-item px-3 dropdown">
+                                <Dropdown
+                                    menu={{items: eventsItems}}
+                                >
                                 <NavLink className={`nav-link px-0`}
-                                style={({ isActive }) => ({
-                                    borderBottom: isActive ? `2px solid black` : 'none',
-                                })}
-                                to={'/community/events'}><span>events</span></NavLink>
-                                <ul class="dropdown-nav">
-				                	<li className="drop_event"> 
-                                        <Button tagType='link' className='p-0 subMenu'>
-                                            <span>Previous Events</span>
-                                        </Button>
-                                    </li>
-					                <li className="drop_event">
-                                        <Button tagType='link' className='p-0 subMenu'>
-                                            <span>Upcoming Events</span>
-                                        </Button>
-                                    </li>
-			                	</ul>
+                                    style={({ isActive }) => ({
+                                        borderBottom: isActive ? `2px solid black` : 'none',
+                                    })}
+                                    to={'/community/events'}>
+                                        <span>events</span>
+                                </NavLink>
+                                </Dropdown>
                             </li>
                         </ul>
                     </div>
@@ -203,7 +259,7 @@ const Header = ({showBlackNav}) => {
                                             e.stopPropagation()
                                             setexplore(!explore)
                                         }} 
-                                        className="drop_event border-dropdown" 
+                                        className="drop_event border-dropdown px-3 py-2" 
                                         id="explore">
                                             Explore
                                             <svg className={`mx-2 up_down ${explore ? '' : 'up'}`} width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -248,18 +304,18 @@ const Header = ({showBlackNav}) => {
                                                 </li>
                                             </ul>
                                     </li>
-                                        <li className="drop_event border-dropdown"><Button 
+                                        <li className="drop_event border-dropdown px-3 py-2"><Button 
                                             className='p-0' tagType='link' to={'/about'}>About OZ</Button></li>
-                                        <li className="drop_event border-dropdown"><Button 
+                                        <li className="drop_event border-dropdown px-3 py-2"><Button 
                                             className='p-0' tagType='link' to={'/talentmarket'}>Talent Market</Button> </li>
-                                        <li className="drop_event border-dropdown">
+                                        <li className="drop_event border-dropdown px-3 py-2">
                                             <a className='p-0' href={`https://www.google.com/maps/dir/${address}`} target='_blank'>Get Direction</a>
                                         </li> 
-                                        <li className="drop_event border-dropdown">
+                                        <li className="drop_event border-dropdown px-3 py-2">
                                             <Button 
-                                                className='p-0' tagType='link' to={'/contactadmin'}>Contact Admin</Button>
+                                                className='p-0' tagType='link' to={'/sendcontact'}>Contact Admin</Button>
                                         </li> 
-                                        <li className="drop_event border-dropdown">
+                                        <li className="drop_event border-dropdown px-3 py-2">
                                             <Button 
                                                 className='p-0' tagType='link' to={'#!'}>Rewards</Button>
                                         </li>
@@ -267,7 +323,7 @@ const Header = ({showBlackNav}) => {
                                             onClick={(e)=>{
                                                 e.stopPropagation();
                                             }} 
-                                            className="drop_event border-dropdown py-2">
+                                            className="drop_event border-dropdown px-3 py-2">
                                             <select class="form-select px-0" aria-label="Default select example" onChange={(e) => setBransh(e.target.value)}>
                                                 {branches && branches.map((e, index)=>{
                                                     return(
