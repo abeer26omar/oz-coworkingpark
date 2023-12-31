@@ -429,7 +429,7 @@ const AboutOz = (props) => {
               </Paragraph>
             </div>
           </div> */}
-          <div className="mobile-food-drink">
+          {/* <div className="mobile-food-drink">
             <div className="row">
               <div className="col-6 ">
                 <img className="w-100" src={foodMobile} alt="" />
@@ -455,7 +455,7 @@ const AboutOz = (props) => {
                 <img className="w-100" src={tallMobile} alt="" />
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="row py-5">
             <div className="col-md-6 col-12">
               {props.configData

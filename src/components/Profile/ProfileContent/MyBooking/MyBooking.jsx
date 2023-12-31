@@ -54,7 +54,6 @@ const MyBooking = ()=>{
 
     const handelShowDetails = (item) => {
         navigate(`/mybookingDetails/${item?.id}`);
-        sessionStorage.setItem('invoiceOZ', JSON.stringify(item));
     }
 
     return (

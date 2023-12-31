@@ -62,6 +62,7 @@ import ContactAdminHistory from './components/ContactAdmin/ContactAdminHistory';
 import ContactAdminReply from './components/ContactAdmin/ContactAdminReply';
 import IssueHistory from './components/Profile/ProfileContent/IssueReporting/IssueHistory';
 import IssueDetails from './components/Profile/ProfileContent/IssueReporting/IssueDetails';
+import Invoice from "./components/UI/Invoice";
 
 function App() {
     const router = createBrowserRouter([
@@ -129,6 +130,7 @@ function App() {
           { path:'contactadmin', element: <ContactAdminHistory />},
           { path:'replydetails', element: <ContactAdminReply />},
           { path:'sendcontact', element: <ContactAdmin />},
+          { path:'invoice', element: <Invoice />}
         ]}
     ]);
     const queryClient = new QueryClient();

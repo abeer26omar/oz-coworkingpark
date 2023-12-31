@@ -56,14 +56,16 @@ const AddService = () => {
             navigate('/talentmarket');
             
         }catch(error){
-            setSwalProps({
-                show: true,
-                icon: 'error',
-                title: error.response.data.status,
-                text: error.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
-            });
+            if(error){
+                setSwalProps({
+                    show: true,
+                    icon: 'error',
+                    title: error.response.data?.status,
+                    text: error.response.data?.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
         }
     };
 

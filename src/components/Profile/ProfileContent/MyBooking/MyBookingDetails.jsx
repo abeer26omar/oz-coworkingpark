@@ -168,7 +168,7 @@ const MyBookingDetails = () => {
                                             <path d="M2.66406 16.0026C2.66406 10.9743 2.66406 8.46013 4.22616 6.89803C5.78826 5.33594 8.30241 5.33594 13.3307 5.33594H18.6641C23.6924 5.33594 26.2065 5.33594 27.7686 6.89803C29.3307 8.46013 29.3307 10.9743 29.3307 16.0026V18.6693C29.3307 23.6976 29.3307 26.2117 27.7686 27.7738C26.2065 29.3359 23.6924 29.3359 18.6641 29.3359H13.3307C8.30241 29.3359 5.78826 29.3359 4.22616 27.7738C2.66406 26.2117 2.66406 23.6976 2.66406 18.6693V16.0026Z" stroke="black" stroke-width="2"/>
                                             <path d="M23.9974 21.3308L21.3307 21.3308M21.3307 21.3308L18.6641 21.3308M21.3307 21.3308L21.3307 18.6641M21.3307 21.3308L21.3307 23.9974" stroke="black" stroke-width="2" stroke-linecap="round"/>
                                         </svg>
-                                        <span className='grey-span opacity-25 ps-3'>{booking && setDate(booking.check_in_formmated)}</span>
+                                        <span className='grey-span opacity-25 ps-3'>{booking && setDate(booking?.check_in_formmated)}</span>
                                     </div>
                                     <div className='ps-3'>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -177,7 +177,7 @@ const MyBookingDetails = () => {
                                                 <path d="M4.66406 5.99739L9.99742 2.66406" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                 <path d="M27.3333 5.99739L22 2.66406" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
-                                            <span className='grey-span opacity-25 ps-3'>{booking && setTime(booking.check_in_formmated)} - {booking && setTime(booking.check_out_formmated)}</span>
+                                            <span className='grey-span opacity-25 ps-3'>{booking && setTime(booking?.check_in_formmated)} - {booking && setTime(booking.check_out_formmated)}</span>
                                     </div>
                                 </div>
                             </div>
@@ -239,7 +239,7 @@ const MyBookingDetails = () => {
                             </div>
                         </div>
                         <div className='col-lg-4 col-12 p-sm-5 p-3'>
-                            <ProfileActions canceled={booking?.canceled}/>
+                            <ProfileActions canceled={booking?.canceled} details={booking}/>
                         </div>
                     </div>
                 </div>

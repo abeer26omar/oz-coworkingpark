@@ -3,6 +3,7 @@ import Button from "../UI/Button";
 import Paragraph from "../UI/Paragraph";
 import Media from "../Media/Media";
 import AddToFavButton from '../UI/AddToFavButton';
+import { useNavigate } from "react-router-dom";
 
 const MarketProjectItem = ({id, title, image, category, category_logo, user, description, lastseen, is_favorite})=>{
 
@@ -10,7 +11,8 @@ const MarketProjectItem = ({id, title, image, category, category_logo, user, des
         const milliseconds = seconds * 1000;
         const date = new Date(milliseconds);
         return date.getUTCHours();
-    }
+    };
+    const navigate = useNavigate();
 
     return (
         <>
@@ -18,14 +20,21 @@ const MarketProjectItem = ({id, title, image, category, category_logo, user, des
             <Card className="book-card" key={id}>
 
                 <div className="position-relative">
-                    <Media type="img" src={image} className="card-img-top rounded-0" title="desk room" height='309px' />
+                    <Media 
+                        type="img" 
+                        src={image} 
+                        className="card-img-top rounded-0" 
+                        title="desk room" 
+                        height='309px'
+                        onClick={()=>{navigate(`/projectDetails/${id}`)}}
+                    />
 
                     <AddToFavButton is_favorite={is_favorite} id={id} add_fav={true}/>
 
 
                 </div>
                 <Card.Body>
-                    <Card.Title>{title}</Card.Title>
+                    <Card.Title onClick={()=>{navigate(`/projectDetails/${id}`)}}>{title}</Card.Title>
                     <div className="d-flex  my-3">
                         <Paragraph className="list-option-item m-0 d-flex align-items-center me-3">
                             <svg xmlns="http://www.w3.org/2000/svg" className='me-2' width="24" height="24" viewBox="0 0 24 24" fill="none">

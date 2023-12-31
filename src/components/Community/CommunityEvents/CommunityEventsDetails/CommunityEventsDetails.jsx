@@ -157,16 +157,57 @@ const CommunityEventsDetails = () => {
         lazyLoad: true,
     }
     
-    const currentTime = new Date().toLocaleString('en-US', {
-        weekday: 'short',
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        timeZoneName: 'short'
-      });
+    const compareTime = (eventStart, eventId) => {
+        
+        const currentTime = new Date();
+        const eventStartTime = new Date(eventStart);
+
+        const currentHour = currentTime.getHours();
+        const eventHour = eventStartTime.getHours();
+        const isSameDay = currentTime.getDate() === eventStartTime.getDate();
+        
+        if (isSameDay) {
+            
+            if(currentTime.setHours(currentHour + 12) < eventStartTime.setHours(eventHour + 12) ){
+
+                if(eventId === null){
+                    return (
+                        <Button 
+                        tagType='link'
+                        className="btn button-outLine btn-bg-white attend-btn m-0"
+                        onClick={attend}>Attend</Button>
+                    )
+                }else{
+                    return (
+                        <Button 
+                        tagType='link'
+                        className="btn button-outLine btn-bg-white attend-btn m-0"
+                        onClick={cancel}>cancel</Button>
+                    )
+                }
+            }
+        }
+
+        if ((eventDetails && eventStartTime) > currentTime) {
+
+            if(eventId === null){
+                return (
+                    <Button 
+                    tagType='link'
+                    className="btn button-outLine btn-bg-white attend-btn m-0"
+                    onClick={attend}>Attend</Button>
+                )
+            }else{
+                return (
+                    <Button 
+                    tagType='link'
+                    className="btn button-outLine btn-bg-white attend-btn m-0"
+                    onClick={cancel}>cancel</Button>
+                )
+            }
+        }
+
+    }
     
     return (
         <>
@@ -301,39 +342,7 @@ const CommunityEventsDetails = () => {
                                 </span>
 
                             <div className="cards-event-buttons d-flex justify-content-center align-items-center">
-                                
-                                {console.log('current', currentTime)}
-                               {(currentTime < (eventDetails && new Date(eventDetails.start).toLocaleString('en-US', {
-                                        weekday: 'short',
-                                        month: 'short',
-                                        day: 'numeric',
-                                        year: 'numeric',
-                                        hour: 'numeric',
-                                        minute: 'numeric',
-                                        second: 'numeric',
-                                        timeZoneName: 'short'
-                                    }))) ? (
-                                   <>
-                                        {
-                                            eventDetails.event_attend_id === null ? (
-                                                <Button 
-                                                tagType='link'
-                                                className="btn button-outLine btn-bg-white attend-btn m-0"
-                                                onClick={attend}>Attend</Button>
-                                            )
-                                            :
-                                            (
-                                                <Button 
-                                                tagType='link'
-                                                className="btn button-outLine btn-bg-white attend-btn m-0"
-                                                onClick={cancel}>cancel</Button>
-                                            )
-                                        }
-                                    </>
-                                    )
-                                    :
-                                    ''
-                                }
+                                {compareTime(eventDetails.start, eventDetails.event_attend_id)}
                                     
                                 <div className='mx-4'>
                                     <ShareButton border={true} shareUrl={url}title={eventDetails.event_name} description={eventDetails.description} />

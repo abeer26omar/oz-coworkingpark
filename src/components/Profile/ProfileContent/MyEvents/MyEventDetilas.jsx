@@ -9,6 +9,7 @@ import { getSingleItemById } from '../../../../apis/User';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 
 const MyEventDetails = () => {
+
     const {id} = useParams();
     const [show, setShow] = useState(false);
     const [event, setEvent] = useState({});
@@ -27,6 +28,47 @@ const MyEventDetails = () => {
         return ()=>source.cancel();
     },[token, id]);
 
+    const compareTime = (eventStart, eventId) => {
+        
+        const currentTime = new Date();
+        const eventStartTime = new Date(eventStart);
+
+        const currentHour = currentTime.getHours();
+        const eventHour = eventStartTime.getHours();
+        const isSameDay = currentTime.getDate() === eventStartTime.getDate();
+        
+        if (isSameDay) {
+            
+            if(currentTime.setHours(currentHour + 12) < eventStartTime.setHours(eventHour + 12) ){
+
+                if(eventId){
+                    return (<Button tagType='link' className='btn_outline mt-4' onClick={()=>setShow(true)}>Cancel Attend</Button>)
+                }
+            }
+        }
+
+        if ((event && eventStartTime) > currentTime) {
+
+            if(eventId){
+                return (
+                    <Button tagType='link' className='btn_outline mt-4' onClick={()=>setShow(true)}>Cancel Attend</Button>
+                )
+            }
+        }
+
+    };
+
+    const handelInvoice = (eventData) => {
+        const data = {
+            invoice_info: eventData.invoice_info,
+            title: eventData.event_name,
+            dates: eventData.dates,
+            venue: eventData.venue_data,
+            price: eventData.default_price,
+            numberOfPeople: 1
+        }
+        sessionStorage.setItem('OZInvoice', JSON.stringify(data));
+    }
 
     return (
         <>
@@ -35,13 +77,14 @@ const MyEventDetails = () => {
                     <div className="container text-center">
                         <Paragraph className="text-two">{event.event_name}</Paragraph>
                         <div className='mt-5'>
-                            {(event && event.event_attend_id) && (
-                                <>
-                                {(currentTime > event?.dates[0]?.check_in_date) && (
-                                    <Button tagType='link' className='btn_outline mt-4' onClick={()=>setShow(true)}>Cancel Attend</Button>
-                                )}
-                                </>
-                            )}
+                            {compareTime(event.start, event.event_attend_id)}
+                        </div>
+                        <div className='mt-3'>
+                            {event.event_attend_id !== null && <Button 
+                                tagType='link' 
+                                className='btn_underline p-0'
+                                onClick={handelInvoice(event)}
+                                to={'/invoice'}>View Invoice</Button>}
                         </div>
                     </div>
                 </MainHeaderWrapper>

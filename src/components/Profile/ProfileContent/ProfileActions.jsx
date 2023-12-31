@@ -8,6 +8,21 @@ const ProfileActions = ({details, canceled}) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
 
+    const handelInvoice = (eventData) => {
+        const data = {
+            invoice_info: eventData.invoice_info,
+            title: 'booking',
+            venue: eventData.venueData,
+            price: eventData.booking_price,
+            servicesPrice: eventData.service_price,
+            totalPrice: eventData.total_price,
+            numberOfPeople: eventData.guests || 1,
+            checkIn: eventData.check_in_formmated,
+            checkOut: eventData.check_out_formmated
+        }
+        sessionStorage.setItem('OZInvoice', JSON.stringify(data));
+    }
+
     return (
         <>
             <div className="space-description mb-5">
@@ -45,7 +60,7 @@ const ProfileActions = ({details, canceled}) => {
                     </Button>
                 </div>
                 {canceled === '0' && <div className='my-5'>
-                    <Button className='d-flex justify-content-between align-items-center p-0' tagType='link' onClick={()=>setShow(true)}>
+                    <Button className='d-flex justify-content-between align-items-center p-0' tagType='link' onClick={handelInvoice(details)} to={'/invoice'}>
                         <div className='d-flex align-items-center'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
                             <path d="M32.8202 39.2741C33.909 38.3063 35.5498 38.3063 36.6387 39.2741C37.3785 39.9317 38.5479 39.4065 38.5479 38.4167V9.58327C38.5479 8.59347 37.3785 8.06831 36.6387 8.72589C35.5498 9.69375 33.909 9.69375 32.8202 8.72589C31.7313 7.75804 30.0905 7.75804 29.0017 8.72589C27.9129 9.69375 26.272 9.69375 25.1832 8.72589C24.0944 7.75804 22.4536 7.75804 21.3647 8.72589C20.2759 9.69375 18.6351 9.69375 17.5462 8.72589C16.4574 7.75804 14.8166 7.75804 13.7277 8.72589C12.6389 9.69375 10.9981 9.69375 9.90925 8.72589C9.16946 8.06831 8 8.59347 8 9.58327V38.4167C8 39.4065 9.16946 39.9317 9.90925 39.2741C10.9981 38.3063 12.6389 38.3063 13.7277 39.2741C14.8166 40.242 16.4574 40.242 17.5462 39.2741C18.6351 38.3063 20.2759 38.3063 21.3647 39.2741C22.4536 40.242 24.0944 40.242 25.1832 39.2741C26.272 38.3063 27.9129 38.3063 29.0017 39.2741C30.0905 40.242 31.7313 40.242 32.8202 39.2741Z" stroke="black" stroke-width="2"/>

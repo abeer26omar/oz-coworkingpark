@@ -757,21 +757,21 @@ a {
 .ant-select-selector{
     padding: 0 !important;
 }
-:where(.css-dev-only-do-not-override-2rgkd4).ant-select-single .ant-select-selector{
+.ant-select-single .ant-select-selector{
     font-family: var(--questrial-font) !important;
     font-size: 1rem !important;
     font-weight: 500 !important;
 }
-:where(.css-dev-only-do-not-override-2rgkd4).ant-select-single {
+.ant-select-single {
     font-size: 16px !important;
     height: 100% !important;
 }
-:where(.css-dev-only-do-not-override-2rgkd4).ant-dropdown .ant-dropdown-menu, 
-:where(.css-dev-only-do-not-override-2rgkd4).ant-dropdown-menu-submenu .ant-dropdown-menu {
+.ant-dropdown .ant-dropdown-menu, 
+.ant-dropdown-menu-submenu .ant-dropdown-menu {
     background-color: var(--Head_color) !important;
     border-radius: 0px !important;
     width: 190px !important;
 }
-:where(.css-dev-only-do-not-override-2rgkd4).ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover{
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover{
     background-color: transparent !important;
 }
