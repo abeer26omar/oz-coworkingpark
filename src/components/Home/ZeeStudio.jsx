@@ -37,7 +37,7 @@ const ZeeStudio = (props) => {
                 <Button
                   tagType="link"
                   className="btn_outline_black"
-                  to={"/about"}
+                  to={"/zeestudio"}
                 >
                   Explore Studio
                 </Button>

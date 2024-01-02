@@ -1,0 +1,86 @@
+.Schedule{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.Schedule .ant-segmented .ant-segmented-item {
+    margin: 0 30px !important;
+    transition: unset !important;
+    border-radius:  unset !important;
+    transform: unset !important;
+}
+.Schedule .ant-segmented .ant-segmented-item-selected{
+    background-color: unset !important;
+    color: #D0DF00 !important;
+    box-shadow: unset !important;
+
+}
+.Schedule .ant-segmented .ant-segmented-item:active,
+.Schedule .ant-segmented .ant-segmented-item:hover{
+    color: unset !important;
+    background-color: unset !important;
+}
+.Schedule .ant-table-wrapper .ant-table-pagination {
+    display: none !important;
+}
+.Schedule .ant-table-wrapper .ant-table-thead tr th,
+.Schedule .ant-table-wrapper table{
+    text-align: center !important;
+    background-color: unset !important;
+    color: #fff !important
+}
+.Schedule .ant-table-wrapper .ant-table-thead tr th{
+    background-color: #2C323A !important;
+    padding: 30px !important;
+}
+.Schedule .ant-table-row>.ant-table-cell-row-hover {
+    background-color: unset !important;
+}
+.Schedule .ant-table-wrapper .ant-table-thead tr th:hover,
+.Schedule .ant-table-wrapper table:hover {
+    /* background-color: unset !important; */
+}
+.Schedule .ant-table-wrapper .ant-table{
+    background-color: unset !important;
+}
+.Schedule .ant-table-wrapper .ant-table-tbody>tr>td {
+    color:  #fff !important;
+    border: 1px solid #3D4248 !important;
+}
+.Schedule .ant-table-wrapper .ant-table-tbody>tr>:nth-child(2){
+    color: #D0DF00 !important;
+}
+.Schedule .ant-table-wrapper .ant-table-tbody>tr>:nth-child(3) {
+    font-weight: 700;
+    font-size: 18px !important;
+}
+.rounded-img{
+    border-radius: 50% !important;
+}
+.ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before{
+background-color: unset !important;
+}
+
+@media screen and (max-width:767px) {
+.Schedule .ant-segmented .ant-segmented-item {
+    margin: 0 0 !important;
+}
+.Schedule .ant-segmented .ant-segmented-group{
+    flex-direction: column !important;
+}
+.Schedule .ant-segmented .ant-segmented-thumb {
+     background-color: unset !important;
+}
+.Schedule .ant-segmented .ant-segmented-item-selected {
+    background-color: unset !important;
+    color: #D0DF00 !important;
+    box-shadow: unset !important;
+
+}
+}
+
+@media screen and (min-width:767px) and (max-width:992px) {
+    .Schedule .ant-segmented .ant-segmented-item {
+            margin: 0 0 !important;
+        }
+}

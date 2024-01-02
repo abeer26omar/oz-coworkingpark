@@ -63,6 +63,7 @@ import ContactAdminReply from './components/ContactAdmin/ContactAdminReply';
 import IssueHistory from './components/Profile/ProfileContent/IssueReporting/IssueHistory';
 import IssueDetails from './components/Profile/ProfileContent/IssueReporting/IssueDetails';
 import Invoice from "./components/UI/Invoice";
+import ZeeStudio from "./components/ZeeSudio/ZeeStudio";
 
 function App() {
     const router = createBrowserRouter([
@@ -73,6 +74,7 @@ function App() {
         errorElement: <Error404 />,
         children: [
           { index: true, element: <Home />},
+          {path:"zeestudio" , element:<ZeeStudio/>},
           { path:'about', element: <About />},
           { path:'joinus', element: <Joinus />},
           { path:'contactus', element: <Contactus />},
