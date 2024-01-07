@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import "./Header.css";
 import logo from "../../../assets/images/logo.svg";
 import galleryLogo from "../../../assets/images/logoWhite.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import LogedNav from "./LogedNav";
 import LoginNav from "./LoginNav";
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
@@ -13,17 +13,24 @@ import { getListMembershipTypes } from '../../../apis/MembershipApi';
 import { getAmenitiesGroup } from '../../../apis/Booking';
 import { HashLink } from 'react-router-hash-link';
 import { Dropdown } from 'antd';
+import LoginAlert from '../../Auth/LoginAlertModal';
 
-const Header = ({showBlackNav}) => {
+const Header = ({showBlackNav, show}) => {
 
     const logoImage = showBlackNav ? galleryLogo : logo;
     const [explore , setexplore] = useState(true);
     const [openSideMenu , SetOpenSideMenu] = useState(true);
     const [branches, setBranches] = useState([]);
+    const [selectedBranch, setSelectedBranch] = useState('');
     const [address, setAddress] = useState('');
     const [types, setTypes] = useState([]);
     const [bookingPlaces, setBookingPlaces] = useState([]);
-    const { token, handelChangeBranch } = useContext(AuthContext);
+    const [subBranchMenu, setSubBranchMenu] = useState(true);
+    const [ showAuthModal, setShowAuthModal ] = useState(false);
+    const { token, handelChangeBranch, branchId } = useContext(AuthContext);
+    const Navigate = useNavigate();
+
+    const handelHideAuthModal = () => setShowAuthModal(false);
 
     useEffect(()=>{
         const controller = new AbortController();
@@ -33,6 +40,10 @@ const Header = ({showBlackNav}) => {
             setBranches(res);
             handelChangeBranch(res[0].id);
             setAddress(res[0].name);
+            res.filter(item => {
+                if(item.id === branchId)
+                setSelectedBranch(item.name)
+            })
         }).catch(err=>{console.log(err)});
         
         return ()=>controller.abort();
@@ -56,16 +67,18 @@ const Header = ({showBlackNav}) => {
   
     },[]);
 
-    const setBransh = (id) => {
+    const setBranch = (id) => {
         handelChangeBranch(id);
         const getName = branches.filter((item) => item.id === id);
         if (getName.length > 0) {
         const name = getName[0].name;
-        setAddress(name);
+            setAddress(name);
+            setSelectedBranch(name)
         } else {
-        setAddress("");
+            setAddress("");
         }
     };
+
     const membershipItems = types && types.map((item,index)=>{
         return {
             key: index,
@@ -167,70 +180,70 @@ const Header = ({showBlackNav}) => {
                     <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
                         <ul className="nav">
                             <li className="nav-item px-3">
-                                <NavLink className={`nav-link px-0`} 
-                                    style={({ isActive }) => ({
-                                        borderBottom: isActive ? `2px solid black` : 'none',
-                                    })} 
-                                    to={'/booking'}>
-                                    <Dropdown
-                                        menu={{items: bookingItems}}
-                                    >
-                                        <span>booking</span>
-                                    </Dropdown>
-                                </NavLink>
+                                <Dropdown
+                                    menu={{items: bookingItems}}
+                                >
+                                    <NavLink className={`nav-link px-0`} 
+                                        style={({ isActive }) => ({
+                                            borderBottom: isActive ? `2px solid black` : 'none',
+                                        })} 
+                                        to={'/booking'}>
+                                            <span>booking</span>
+                                    </NavLink>
+                                </Dropdown>
                             </li>
                             <li className="nav-item px-3">
+                                <Dropdown
+                                    menu={{items: membershipItems}}
+                                >
+                                    <NavLink className={`nav-link px-0`} 
+                                        style={({ isActive }) => ({
+                                            borderBottom: isActive ? `2px solid black` : 'none',
+                                        })}
+                                        to={'/membership'}>
+                                            <span>membership</span>
+                                    </NavLink>
+                                </Dropdown>
+                            </li>
+                            <li className="nav-item px-3 dropdown">
                                 <NavLink className={`nav-link px-0`} 
                                     style={({ isActive }) => ({
                                         borderBottom: isActive ? `2px solid black` : 'none',
                                     })}
-                                    to={'/membership'}>
-                                    <Dropdown
-                                        menu={{items: membershipItems}}
-                                    >
-                                        <span>membership</span>
-                                    </Dropdown>
-                                </NavLink>
-                            </li>
-                            <li className="nav-item px-3 dropdown">
-                                <NavLink className={`nav-link px-0`} 
-                                style={({ isActive }) => ({
-                                    borderBottom: isActive ? `2px solid black` : 'none',
-                                })}
                                 to={'/private'}><span>private events</span></NavLink>
                             </li>
                             
                             <li className="nav-item px-3">
-                                <NavLink className={`nav-link px-0`} 
-                                    style={({ isActive }) => ({
-                                        borderBottom: isActive ? `2px solid black` : 'none',
-                                    })}
-                                    to={'/community'}>
-                                    <Dropdown
-                                        menu={{items: communityItems}}
-                                    >
-                                        <span>community</span>
-                                    </Dropdown>
-                                </NavLink>
+                                <Dropdown
+                                    menu={{items: communityItems}}
+                                >
+                                    <NavLink className={`nav-link px-0`} 
+                                        style={({ isActive }) => ({
+                                            borderBottom: isActive ? `2px solid black` : 'none',
+                                        })}
+                                        to={'/community'}>
+                                            <span>community</span>
+                                    </NavLink>
+                                </Dropdown>
                             </li>
                             <li className="nav-item px-3 dropdown">
                                 <Dropdown
                                     menu={{items: eventsItems}}
                                 >
-                                <NavLink className={`nav-link px-0`}
-                                    style={({ isActive }) => ({
-                                        borderBottom: isActive ? `2px solid black` : 'none',
-                                    })}
-                                    to={'/community/events'}>
-                                        <span>events</span>
-                                </NavLink>
+                                    <NavLink className={`nav-link px-0`}
+                                        style={({ isActive }) => ({
+                                            borderBottom: isActive ? `2px solid black` : 'none',
+                                        })}
+                                        to={'/community/events'}>
+                                            <span>events</span>
+                                    </NavLink>
                                 </Dropdown>
                             </li>
                         </ul>
                     </div>
                     <div className="d-flex justify-content-end align-items-center ">
                         {!token && (<LoginNav showBlackNav={showBlackNav} />)}
-                        {token && (<LogedNav showBlackNav={showBlackNav} token={token}/>)}
+                        {token && (<LogedNav showBlackNav={showBlackNav} token={token} show={show} />)}
                         <div class="dropdown position-relative">
                             <a role="button" id="dropdownMenuLink" className='d-flex' data-bs-toggle="dropdown" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -321,16 +334,23 @@ const Header = ({showBlackNav}) => {
                                         </li>
                                         <li 
                                             onClick={(e)=>{
-                                                e.stopPropagation();
-                                            }} 
+                                                e.stopPropagation()
+                                                setSubBranchMenu(!subBranchMenu)
+                                            }}  
                                             className="drop_event border-dropdown px-3 py-2">
-                                            <select class="form-select px-0" aria-label="Default select example" onChange={(e) => setBransh(e.target.value)}>
-                                                {branches && branches.map((e, index)=>{
+                                                {selectedBranch}
+                                            <ul className={`dropdown-explore ${subBranchMenu ? '' : 'show-ex'}`}>
+                                                {branches && branches.map((item, index)=>{
                                                     return(
-                                                        <option value={e.id} key={index}>{e.name}</option>
-                                                    )
-                                                })}
-                                            </select>
+                                                        <li key={index}>
+                                                            <Button 
+                                                                tagType='link'
+                                                                onClick={() => {setBranch(item.id)}}>{item.name}</Button>
+                                                        </li>
+                                                        )
+                                                    })
+                                                    }
+                                            </ul>   
                                         </li>
                                         <div className="dropdown-socail p-0">
                                             <SocialMedia />

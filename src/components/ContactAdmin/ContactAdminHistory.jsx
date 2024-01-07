@@ -6,23 +6,18 @@ import {getContactAdminHistory} from '../../apis/User';
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { useNavigate } from "react-router-dom";
 import {Tab, Nav} from 'react-bootstrap';
+import { useQuery } from "@tanstack/react-query";
 
 const ContactAdminHistory = () => {
 
-    const [contactList, setContactList] = useState([]);
+    // const [contactList, setContactList] = useState([]);
     const {userId} = useContext(AuthContext);
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        const getList = async () => {
-            try{
-                const result = await getContactAdminHistory(userId);
-                setContactList(result);
-
-            }catch(error){}
-        }
-        getList()
-    },[]);
+    const { data: contactList, isError, error, isPending } = useQuery({
+        queryKey: ['contact_us'],
+        queryFn: ({signal})=>getContactAdminHistory({signal, userId})
+    })
 
     const setDate = (roomdate) => {
         const date = new Date(roomdate);
@@ -34,6 +29,9 @@ const ContactAdminHistory = () => {
     const getDetails = (item) => {
         sessionStorage.setItem('replydetailsOZ', JSON.stringify(item))
         navigate('/replydetails');
+    }
+    if(isPending){
+        console.log('pend');
     }
 
     return (
@@ -59,31 +57,26 @@ const ContactAdminHistory = () => {
                                 <Nav.Link eventKey="first" className="booking_navlink">All</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link eventKey="second" className="booking_navlink" >Read</Nav.Link>
+                                <Nav.Link eventKey="second" className="booking_navlink">Read</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link eventKey="third" className="booking_navlink" >Unread</Nav.Link>
+                                <Nav.Link eventKey="third" className="booking_navlink">Unread</Nav.Link>
                             </Nav.Item>
                         </Nav>
-                        {/* <Button 
-                            className="nav-link-two btn button-outLine btn-bg-white m-0"
-                            tagType='link'
-                            to={'/sendcontact'}>
-                                contact admin
-                        </Button> */}
                     </div>
-
                 </div>
             </div>
             <div className="container py-5 ">
-                <Tab.Content>
+                <Tab.Content style={{
+                    minHeight: '50vh'
+                }}>
                     <Tab.Pane eventKey="first">
-                        {(contactList && contactList.length ===0) && (<Paragraph className='empty'>{'there is no Messages history'}</Paragraph>) }
+                        {(contactList && contactList.length === 0) && (<Paragraph className='empty'>{'there is no Messages history'}</Paragraph>) }
                         {contactList && contactList.map((item, index)=>{
                             return (
-                                <div className="history p-4" key={index} onClick={()=>{getDetails(item)}}>
-                                    <Paragraph className='status-event mb-3'>{item.message}</Paragraph>
-                                    <Paragraph className='p-text-history'>{item.subject}</Paragraph>
+                                <div className="history p-4 my-3" key={index} onClick={()=>{getDetails(item)}}>
+                                    <Paragraph className='status-event mb-3'>{item.subject}</Paragraph>
+                                    <Paragraph className='p-text-history'>{item.message}</Paragraph>
                                     <div className="d-flex justify-content-between">
                                         <Paragraph className='date-history'>Date Submitted : {setDate(item.updated_at)}</Paragraph>
                                         <Paragraph 
@@ -97,38 +90,40 @@ const ContactAdminHistory = () => {
                         }
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
-                        {contactList && contactList.map((item, index)=>{ 
-                            return item.is_read !== 0 ? (
-                                <div className="history p-4" key={index} onClick={()=>{getDetails(item)}}>
-                                    <Paragraph className='status-event mb-3'>{item.message}</Paragraph>
-                                    <Paragraph className='p-text-history'>{item.subject}</Paragraph>
-                                    <div className="d-flex justify-content-between">
-                                        <Paragraph className='date-history'>Date Submitted : {setDate(item.updated_at)}</Paragraph>
-                                        <Paragraph 
-                                            className='date-history'>status : <span style={{
-                                                color: `${item.is_read === 0 ? '#0047BB' : '#05B15D'}`
-                                            }}>{item.is_read === 0 ? 'Unread' : 'Read'}</span></Paragraph>
-                                    </div>
-                                </div>) : (<Paragraph className='empty'>{'there is no Messages history'}</Paragraph>)
-                            })
-                        }
+                        {contactList && contactList.filter((item => item.is_read !== 0)).length > 0 ? (
+                            contactList.filter((item => item.is_read === 0)).map((e, index)=>{ 
+                                return (
+                                    <div className="history p-4 my-3" key={index} onClick={()=>{getDetails(e)}}>
+                                        <Paragraph className='status-event mb-3'>{e.subject}</Paragraph>
+                                        <Paragraph className='p-text-history'>{e.message}</Paragraph>
+                                        <div className="d-flex justify-content-between">
+                                            <Paragraph className='date-history'>Date Submitted : {setDate(e.updated_at)}</Paragraph>
+                                            <Paragraph 
+                                                className='date-history'>status : <span style={{
+                                                    color: `${e.is_read === 0 ? '#0047BB' : '#05B15D'}`
+                                                }}>{e.is_read === 0 ? 'Unread' : 'Read'}</span></Paragraph>
+                                        </div>
+                                    </div>)
+                                })
+                        ): (<Paragraph className='empty'>{'there is no Read Messages'}</Paragraph>)}
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">
-                        {contactList && contactList.map((item, index)=>{ 
-                            return item.is_read === 0 ? (
-                                <div className="history p-4" key={index} onClick={()=>{getDetails(item)}}>
-                                    <Paragraph className='status-event mb-3'>{item.message}</Paragraph>
-                                    <Paragraph className='p-text-history'>{item.subject}</Paragraph>
-                                    <div className="d-flex justify-content-between">
-                                        <Paragraph className='date-history'>Date Submitted : {setDate(item.updated_at)}</Paragraph>
-                                        <Paragraph 
-                                            className='date-history'>status : <span style={{
-                                                color: `${item.is_read === 0 ? '#0047BB' : '#05B15D'}`
-                                            }}>{item.is_read === 0 ? 'Unread' : 'Read'}</span></Paragraph>
-                                    </div>
-                                </div>) : (<Paragraph className='empty'>{'there is no Messages history'}</Paragraph>)
-                            })
-                        }
+                        {contactList && contactList.filter((item => item.is_read === 0)).length > 0 ? (
+                            contactList.filter((item => item.is_read === 0)).map((e, index)=>{ 
+                                return (
+                                    <div className="history p-4 my-3" key={index} onClick={()=>{getDetails(e)}}>
+                                        <Paragraph className='status-event mb-3'>{e.subject}</Paragraph>
+                                        <Paragraph className='p-text-history'>{e.message}</Paragraph>
+                                        <div className="d-flex justify-content-between">
+                                            <Paragraph className='date-history'>Date Submitted : {setDate(e.updated_at)}</Paragraph>
+                                            <Paragraph 
+                                                className='date-history'>status : <span style={{
+                                                    color: `${e.is_read === 0 ? '#0047BB' : '#05B15D'}`
+                                                }}>{e.is_read === 0 ? 'Unread' : 'Read'}</span></Paragraph>
+                                        </div>
+                                    </div>)
+                                })
+                        ): (<Paragraph className='empty'>{'there is no Unread Messages'}</Paragraph>)}
                     </Tab.Pane>
 
                 </Tab.Content>

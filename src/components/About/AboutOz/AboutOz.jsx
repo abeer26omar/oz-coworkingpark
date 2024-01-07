@@ -373,7 +373,7 @@ const AboutOz = (props) => {
                 : ""}
             </div>
           </div>
-          {/* <div className="position-relative py-5">
+          <div className="position-relative food py-5">
             {props.configData
               ? props.configData.map((configItem, index) => (
                   <React.Fragment key={index}>
@@ -400,7 +400,7 @@ const AboutOz = (props) => {
                         src={configItem.value}
                         alt={"img"}
                       />
-                    )}{" "}
+                    )}
                     {configItem.key ===
                       "about_us_page_food_and_drink_image_4" && (
                       <img
@@ -408,7 +408,7 @@ const AboutOz = (props) => {
                         src={configItem.value}
                         alt={"img"}
                       />
-                    )}{" "}
+                    )}
                     {configItem.key ===
                       "about_us_page_food_and_drink_image_5" && (
                       <img
@@ -417,45 +417,102 @@ const AboutOz = (props) => {
                         alt={"img"}
                       />
                     )}
+                    {configItem.key ===
+                      "about_us_page_food_and_drink_title" && (
+                          <Paragraph className="text_desc_black mt-0">{configItem.value}</Paragraph>
+                      )}
+                    {configItem.key ===
+                        "about_us_page_food_and_drink_description" && (
+                          <Paragraph className="p-text-box  w-25 text-center">{configItem.value}</Paragraph>
+                    )}
                   </React.Fragment>
-                ))
+                  ))
               : ""}
-            <div className="food">
-              <Paragraph className="text_desc_black mt-0">
-                Food & Drink{" "}
-              </Paragraph>
-              <Paragraph className="p-text-box  w-25 text-center">
-                Personalized Hospitality That Knows You by Name
-              </Paragraph>
+          </div>
+          <div className="food_mobile py-5">
+            <div className="row g-3 align-items-center justify-content-center">
+              <div className="col-sm-6 col-12 ps-sm-0">
+              {props.configData
+                ? props.configData.map((configItem, index) => (
+                  <React.Fragment key={index}>
+                      {configItem.key ===
+                        "about_us_page_food_and_drink_image_2" && (
+                        <img
+                          src={configItem.value}
+                          alt={"img"}
+                        />
+                      )}
+                  </React.Fragment>
+                )): ''}
+              </div>
+              <div className="col-sm-6 col-12 img_upper pe-sm-0">
+                {props.configData
+                  ? props.configData.map((configItem, index) => (
+                    <React.Fragment key={index}>
+                        {configItem.key ===
+                          "about_us_page_food_and_drink_image_3" && (
+                          <img
+                            src={configItem.value}
+                            alt={"img"}
+                          />
+                        )}
+                    </React.Fragment>
+                  )): ''}
+              </div>
+              <div className="text-center py-3">
+              {props.configData
+                ? props.configData.map((configItem, index) => (
+                  <React.Fragment key={index}>
+                  {configItem.key ===
+                      "about_us_page_food_and_drink_title" && (
+                          <Paragraph className="text_desc_black mt-0">{configItem.value}</Paragraph>
+                      )}
+                    {configItem.key ===
+                        "about_us_page_food_and_drink_description" && (
+                          <Paragraph className="p-text-box text-center">{configItem.value}</Paragraph>
+                  )}
+                  </React.Fragment>
+                  ))
+                : ""}
+              </div>
+              <div className="col-sm-6 col-12 ps-0">
+                {props.configData
+                ? props.configData.map((configItem, index) => (
+                  <React.Fragment key={index}>
+                      {configItem.key ===
+                        "about_us_page_food_and_drink_image_4" && (
+                        <img
+                          src={configItem.value}
+                          alt={"img"}
+                        />
+                      )}
+                      {configItem.key ===
+                        "about_us_page_food_and_drink_image_5" && (
+                        <img
+                          src={configItem.value}
+                          alt={"img"}
+                          className="pt-3"
+                        />
+                      )}
+                  </React.Fragment>
+                )): ''}
+              </div>
+              <div className="col-sm-6 col-12 pe-sm-0 d-flex justify-content-end">
+              {props.configData
+                ? props.configData.map((configItem, index) => (
+                  <React.Fragment key={index}>
+                      {configItem.key ===
+                        "about_us_page_food_and_drink_image_1" && (
+                        <img
+                          src={configItem.value}
+                          alt={"img"}
+                        />
+                      )}
+                  </React.Fragment>
+                )): ''}
+              </div>
             </div>
-          </div> */}
-          {/* <div className="mobile-food-drink">
-            <div className="row">
-              <div className="col-6 ">
-                <img className="w-100" src={foodMobile} alt="" />
-              </div>
-              <div className="col-6 position-relative">
-                <img className="w-100 position-absolute top-20" src={DrinkMobile} alt="" />
-              </div>
-              <div className="text-center col-12 py-5">
-                <Paragraph className="text_desc_black mt-0">
-                  Food & Drink
-                </Paragraph>
-                <Paragraph className="p-text-box text-center ">
-                  Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
-                  Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod
-                  Lorem ipsum dolor sit{" "}
-                </Paragraph>
-              </div>
-              <div className="col-6">
-                <img className="w-100" src={fitMobile} alt="" />
-                <img className="w-100 pt-5" src={smallMobile} alt="" />
-              </div>
-              <div className="col-6">
-                <img className="w-100" src={tallMobile} alt="" />
-              </div>
-            </div>
-          </div> */}
+          </div>
           <div className="row py-5">
             <div className="col-md-6 col-12">
               {props.configData
@@ -500,42 +557,6 @@ const AboutOz = (props) => {
         </div>
       </section>
       <HouseServices location_amenities={amenities} dark_theme={true} />
-
-      {/* <section className="what-get p-60">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="head-amenities">
-                <h2 className="text-h2 pb-5">Our Amenities</h2>
-              </div>
-            </div>
-
-            {amenities.map((service, index) => {
-              const { title, image, description } = service;
-              return (
-                <div
-                  className="col-lg-6 col-md-6 col-sm-12 py-5 border-all"
-                  key={index}
-                >
-                  <div className="row">
-                    <div className="col-6">
-                      <div className="d-flex align-items-center">
-                        <Media type="img" src={image} alt={title} />
-                        <h2 className="bold_desc mb-0">{title}</h2>
-                      </div>
-                    </div>
-                    <div className="col-6">
-                      <Paragraph className="mb-0 text-content text-secondary">
-                        {description}
-                      </Paragraph>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section> */}
       <AboutozFooter />
     </>
   );

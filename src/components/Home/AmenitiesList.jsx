@@ -39,7 +39,7 @@ const AmenitiesList = () => {
                 }
             },
             {
-                breakpoint: 1440,
+                breakpoint: 1700,
                 settings: {
                     slidesToShow: 6,
                     slidesToScroll: 1,

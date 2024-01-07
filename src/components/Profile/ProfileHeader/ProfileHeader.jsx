@@ -15,7 +15,6 @@ const ProfileHeader = () => {
         const file = event.target.files[0];
         if(file && file.type.substring(0,5) === 'image'){
             setAvatar(URL.createObjectURL(file));
-            console.log(file);
             imageValue(file);
         }else{
             setAvatar(userProfileDate.avatar)

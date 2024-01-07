@@ -8,18 +8,20 @@ import SweetAlert2 from 'react-sweetalert2';
 import { AuthContext } from '../../apis/context/AuthTokenContext';
 import { getServices } from '../../apis/Market';
 import { SiteConfigContext } from '../../apis/context/SiteConfigContext';
-import { useNavigation } from 'react-router-dom';
-import { Select } from 'antd';
+import { useNavigate, useNavigation } from 'react-router-dom';
+import { Select, message} from 'antd';
 
 const AddService = () => {
-
+    
     const [images, setImages] = useState([]);
     const [swalProps, setSwalProps] = useState({});
     const [services, setServices] = useState([]);
     const {token, userId, branch_id} = useContext(AuthContext);
     const siteConfig  = useContext(SiteConfigContext);
     const contacts = ['email', 'call', 'chat'];
-    const navigate = useNavigation();
+    const [messageApi, contextHolder] = message.useMessage();
+    const key = 'updatable';
+    const navigate = useNavigate();
 
     useEffect(()=>{
         const controller = new AbortController();
@@ -33,6 +35,14 @@ const AddService = () => {
     },[]);
 
     const handleSubmit = async (values) => {
+        const controller = new AbortController();
+        const signal = controller.signal;
+        
+        messageApi.open({
+            key,
+            type: 'loading',
+            content: 'Sending...',
+        });
         try{
             const result = await createProject(token, 
                 userId,
@@ -44,26 +54,27 @@ const AddService = () => {
                 images,
                 values.portfolioLink,
                 values.contactType,
-                values.period);
-            setSwalProps({
-                show: true,
-                icon: 'success',
-                title: result.status,
-                text: result.message,
-                showConfirmButton: false,
-                timer: 1500
-            });
-            navigate('/talentmarket');
+                values.period,
+                signal);
+                if(result){
+                    console.log(result);
+                    messageApi.open({
+                        key,
+                        type: 'success',
+                        content: result.message,
+                        duration: 2,
+                        onClose: ()=>{navigate('/talentmarket')}
+                    });
+                }
             
         }catch(error){
             if(error){
-                setSwalProps({
-                    show: true,
-                    icon: 'error',
-                    title: error.response.data?.status,
-                    text: error.response.data?.message,
-                    showConfirmButton: false,
-                    timer: 1500
+                console.log(error);
+                messageApi.open({
+                    key,
+                    type: 'error',
+                    content: 'Loaded!',
+                    duration: 2,
                 });
             }
         }
@@ -288,7 +299,8 @@ const AddService = () => {
                     </div>
                 )}}
             </Formik>
-            <SweetAlert2 {...swalProps} />
+            {/* <SweetAlert2 {...swalProps} /> */}
+            {contextHolder}
         </>
     )
 };

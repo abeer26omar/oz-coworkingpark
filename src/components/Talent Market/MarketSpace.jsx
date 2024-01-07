@@ -61,7 +61,7 @@ const MarketSpace = ()=>{
         <>
             <section className="booking-space p-0">
                 <div className="container-fluid">
-                    <div className="row border-top border-bottom">
+                    <div className="row border-top border-bottom align-items-center">
                         <div className="col-lg-3 col-md-3 col-sm-12 border-right py-4">
                             <h2 className="book-title mb-0 p-0 text-center">{'services'}</h2>
                         </div>

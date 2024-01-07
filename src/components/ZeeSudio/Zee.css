@@ -5,20 +5,24 @@
 
 .Schedule .ant-segmented .ant-segmented-item {
     margin: 0 30px !important;
-    transition: unset !important;
-    border-radius:  unset !important;
-    transform: unset !important;
+    /* transition: unset !important; */
+    border-radius: 0 !important;
+    /* transform: unset !important; */
+    transition: transparent 0.1s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
+
 }
 .Schedule .ant-segmented .ant-segmented-item-selected{
-    background-color: unset !important;
+    background-color: transparent !important;
     color: #D0DF00 !important;
-    box-shadow: unset !important;
-
+    /* box-shadow: unset !important; */
+} 
+.Schedule .ant-segmented .ant-segmented-thumb {
+    background-color: transparent !important;
 }
 .Schedule .ant-segmented .ant-segmented-item:active,
 .Schedule .ant-segmented .ant-segmented-item:hover{
-    color: unset !important;
-    background-color: unset !important;
+    color: #D0DF00 !important;
+    background-color: transparent !important;
 }
 .Schedule .ant-table-wrapper .ant-table-pagination {
     display: none !important;
@@ -26,7 +30,7 @@
 .Schedule .ant-table-wrapper .ant-table-thead tr th,
 .Schedule .ant-table-wrapper table{
     text-align: center !important;
-    background-color: unset !important;
+    background-color: transparent !important;
     color: #fff !important
 }
 .Schedule .ant-table-wrapper .ant-table-thead tr th{
@@ -34,14 +38,10 @@
     padding: 30px !important;
 }
 .Schedule .ant-table-row>.ant-table-cell-row-hover {
-    background-color: unset !important;
-}
-.Schedule .ant-table-wrapper .ant-table-thead tr th:hover,
-.Schedule .ant-table-wrapper table:hover {
-    /* background-color: unset !important; */
+    background-color: transparent !important;
 }
 .Schedule .ant-table-wrapper .ant-table{
-    background-color: unset !important;
+    background-color: transparent !important;
 }
 .Schedule .ant-table-wrapper .ant-table-tbody>tr>td {
     color:  #fff !important;
@@ -58,29 +58,28 @@
     border-radius: 50% !important;
 }
 .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before{
-background-color: unset !important;
+    background-color: transparent !important;
 }
 
-@media screen and (max-width:767px) {
-.Schedule .ant-segmented .ant-segmented-item {
-    margin: 0 0 !important;
-}
-.Schedule .ant-segmented .ant-segmented-group{
-    flex-direction: column !important;
-}
-.Schedule .ant-segmented .ant-segmented-thumb {
-     background-color: unset !important;
-}
-.Schedule .ant-segmented .ant-segmented-item-selected {
-    background-color: unset !important;
-    color: #D0DF00 !important;
-    box-shadow: unset !important;
-
-}
+@media screen and (max-width: 767px) {
+    .Schedule .ant-segmented .ant-segmented-item {
+        margin: 0 0 !important;
+    }
+    .Schedule .ant-segmented .ant-segmented-group{
+        flex-direction: column !important;
+    }
+    .Schedule .ant-segmented .ant-segmented-thumb {
+        background-color: transparent !important;
+    }
+    .Schedule .ant-segmented .ant-segmented-item-selected {
+        background-color: transparent !important;
+        color: #D0DF00 !important;
+        box-shadow: unset !important;
+    }
 }
 
 @media screen and (min-width:767px) and (max-width:992px) {
     .Schedule .ant-segmented .ant-segmented-item {
-            margin: 0 0 !important;
-        }
+        margin: 0 0 !important;
+    }
 }

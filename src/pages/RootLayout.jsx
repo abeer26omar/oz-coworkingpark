@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { DataProvider } from '../apis/context/SiteDataContext';
 import ScrollToTop from "../ScrollToTop";
@@ -17,6 +17,8 @@ const RootLayout = ()=>{
     const isAmenitiesRoute = location.pathname === '/amenities';
     const isSingleMemberRoute = location.pathname.includes('/singleMember');
 
+    const [show, setShow] = useState(false);
+
     const AuthRoutes = location.pathname === '/login' || 
         location.pathname === '/contactus' || 
         location.pathname === '/joinus' || 
@@ -33,19 +35,25 @@ const RootLayout = ()=>{
             }
         },[location]);
 
+        const getShowDot = (data) => {
+            setShow(data);
+        }
+
     return(
         <AuthProvider>
             <DataProvider>
                 <ScrollToTop/>
-                    <Notification />
+                    <Notification getShowDot={getShowDot}/>
                     <SiteConfigProvider>
                         <Header 
                             className="navbar"
                             showBlackNav={isGalleryRoute || isAboutRoute || isAmenitiesRoute || isSingleMemberRoute}
+                            show={show}
                         />
                         <Outlet />
                         {!AuthRoutes && <Footer />}
                         {AuthRoutes && <FooterAuth />}
+
                     </SiteConfigProvider>
             </DataProvider>
         </AuthProvider>

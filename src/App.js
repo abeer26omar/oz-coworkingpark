@@ -63,7 +63,13 @@ import ContactAdminReply from './components/ContactAdmin/ContactAdminReply';
 import IssueHistory from './components/Profile/ProfileContent/IssueReporting/IssueHistory';
 import IssueDetails from './components/Profile/ProfileContent/IssueReporting/IssueDetails';
 import Invoice from "./components/UI/Invoice";
+import Knowledge from './components/OzKnowledge/Knowledge';
 import ZeeStudio from "./components/ZeeSudio/ZeeStudio";
+import CoursesHistory from './components/OzKnowledge/CoursesHistory';
+import OZCourses from './components/OzKnowledge/OZCourses';
+import CourseDetails from './components/OzKnowledge/CourseDetails/CourseDetails';
+import RouterGuard from './apis/RouterGuard';
+import HttpInterceptor from './apis/LoadingInterceptor';
 
 function App() {
     const router = createBrowserRouter([
@@ -74,7 +80,6 @@ function App() {
         errorElement: <Error404 />,
         children: [
           { index: true, element: <Home />},
-          {path:"zeestudio" , element:<ZeeStudio/>},
           { path:'about', element: <About />},
           { path:'joinus', element: <Joinus />},
           { path:'contactus', element: <Contactus />},
@@ -131,14 +136,20 @@ function App() {
           { path:'dmchat/provider/:project', element: <DMChatProvider />},
           { path:'contactadmin', element: <ContactAdminHistory />},
           { path:'replydetails', element: <ContactAdminReply />},
-          { path:'sendcontact', element: <ContactAdmin />},
-          { path:'invoice', element: <Invoice />}
+          { path:'sendcontact', element: <RouterGuard element={ContactAdmin} />},
+          { path:'invoice', element: <Invoice />},
+          { path:'knowledge', element: <Knowledge />},
+          { path:'courses/:name', element: <OZCourses />},
+          { path:'coursedetails/:id', element: <CourseDetails />},
+          { path:'coursesHistory', element: <CoursesHistory/>},
+          { path:'zeestudio', element: <ZeeStudio/>},
         ]}
     ]);
     const queryClient = new QueryClient();
     return (
       <>
       <QueryClientProvider client={queryClient}>
+        {/* <HttpInterceptor /> */}
         <RouterProvider router={router}/>
       </QueryClientProvider>
       </>

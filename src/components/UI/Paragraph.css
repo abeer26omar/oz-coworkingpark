@@ -14,7 +14,7 @@ p{
 }
 .main_header{
     color: var(--color-yellow);
-    font-family: goldenHopes;
+    font-family: var(--goldenHopes-font);
     font-size: var(--font-size-66);
     font-style: normal;
     font-weight: var(--font-weight-regular);
@@ -29,7 +29,7 @@ p{
     font-size: 4.125rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 120%; /* 4.95rem */
+    line-height: 120%;
 }
 .description,
 .monoBlock_description{
@@ -189,7 +189,7 @@ p{
 }
 .grey-span{
     color: var(--black-color);
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -198,7 +198,7 @@ p{
 }
 .grey-span2{
     color: var(--secondary-color2);
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -206,7 +206,7 @@ p{
 }
 .progress_text{
     color: #000;
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 12.138px;
     font-style: normal;
     font-weight: 400;
@@ -214,7 +214,7 @@ p{
 }
 .progress_percentage{
     color: #000;
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: 21.241px;
     font-style: normal;
     font-weight: 700;
@@ -223,7 +223,7 @@ p{
 .text_reminder{
     color: #000;
     text-align: center;
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 23px;
     font-style: normal;
     font-weight: 400;
@@ -231,7 +231,7 @@ p{
 }
 .completed_percentage{
     color: #BDBDBD;
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -239,7 +239,7 @@ p{
 }
 .empty{
     color: var(--secondary-color2);
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -249,7 +249,7 @@ p{
 }
 .event_price{
     color: var(--black-color);
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -257,7 +257,7 @@ p{
 }
 .map-address{
     color:  #000;
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -265,7 +265,7 @@ p{
 }
 p.list-option-item{
     color: #000;
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -273,7 +273,7 @@ p.list-option-item{
 }
 .black-span{
     color: #000;
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -289,7 +289,7 @@ p.list-option-item{
 }
 .discount{
     color: #BDBDBD !important;
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -298,7 +298,7 @@ p.list-option-item{
 }
 .issue{
     color: #000;
-    font-family: Couture;
+    font-family: var(--couture-font);
     font-size: 1.625rem;
     font-style: normal;
     font-weight: 700;
@@ -306,7 +306,7 @@ p.list-option-item{
 }
 .text-date{
     color: #BDBDBD;
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
@@ -314,7 +314,7 @@ p.list-option-item{
 }
 .status{
     color: #BDBDBD;
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
@@ -322,6 +322,97 @@ p.list-option-item{
 }
 .open{
     color: #07c669;
+}
+.p-counter{
+    color: var(--black-color);
+    font-family: var(--questrial-font);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    opacity: .7;
+}
+.main_section_title{
+    color:#000;
+    text-align: center;
+    font-family: Couture;
+    font-size: 66px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+.popular_title{
+    color: #000;
+    font-family: Couture;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+.popular_desc{
+    color: var(--Primary-1, #000);
+    font-family: Questrial;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+.courseCardTitle{
+    color: #000;
+    font-family: Couture;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+.courses_jobTitle{
+    color: #000;
+    text-align: justify;
+    font-family: Couture;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    opacity: 0.7;
+}
+.filter_result{
+    color: #000;
+    font-family: Questrial;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 120%;
+}
+.filter_result .count{
+    font-family: Couture;
+    font-weight: 700;
+}
+.course_details_title{
+    color: var(--black-color);
+    font-family: var(--couture-font);
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    text-transform: uppercase;
+}
+.course_details_desc{
+    color: var(--black-color);
+    font-family: var(--couture-font);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    width: 70%;
+}
+.course_details_light_desc{
+    color: var(--black-color);
+    font-family: var(--questrial-font);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+    opacity: 0.5;
 }
 @media screen and (max-width: 1440px) {
     .paragraph_black{
@@ -362,6 +453,9 @@ p.list-option-item{
     .spac_width{
         width: 100% !important;
     }
+    .filter_result {
+        font-size: 1rem;
+    }
 }
 @media screen and (max-width: 575px) {
     .head_feature{
@@ -370,10 +464,22 @@ p.list-option-item{
     .text-two{
         font-size: 2rem;
     }
+    .main_section_title {
+        font-size: 39px;
+    }
+    .course_details_desc{
+        width: 100%;
+    }
 }
 @media screen and (max-width: 390px) {
     .head_paragraph{
         font-size: var(--font-size-23);
+    }
+    .main_section_title {
+        font-size: 31px;
+    }
+    .p-counter {
+        font-size: 16px;
     }
 }
 @media screen and (max-width: 320px) {

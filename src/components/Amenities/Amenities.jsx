@@ -5,26 +5,16 @@ import HoverVideoPlayer from "react-hover-video-player";
 import Paragraph from '../UI/Paragraph';
 import MonoBlockBlack from '../UI/MonoBlockBlack';
 import {getAmenities} from '../../apis/config';
+import { useQuery } from '@tanstack/react-query';
 
 const Amenities = () => {
 
-    const [amenities, setAmenities] = useState([]);
+    const {data , isPending, isError, error } = useQuery({
+        queryKey: ['amenities'],
+        queryFn: getAmenities
 
-    useEffect(()=>{
-
-        const getAmenitiesList = async () => {
-            try{
-                const result = await getAmenities();
-                setAmenities(result);
-
-            }catch (error){
-
-            }
-        }
-        getAmenitiesList();
-
-    },[]);
-
+    });
+    
     return (
         <>
             <AmenitiesHeader />
@@ -35,7 +25,7 @@ const Amenities = () => {
                     >
                         <Masonry columnsCount={4} gutter="10px" className="newsfeeds">
 
-                            {amenities && amenities.map((amenity, index) => {
+                            {data && data.map((amenity, index) => {
                                 const {id, content, title, video, icon} = amenity;
                                 return (
                                     <HoverVideoPlayer

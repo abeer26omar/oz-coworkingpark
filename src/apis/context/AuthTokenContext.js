@@ -8,6 +8,7 @@ const AuthProvider = ({ children }) => {
     const [activeUserId, setActiveUserId] = useState(sessionStorage.getItem('activeUserOZ'));
     const [userProfileDate, setUserProfileData] = useState(JSON.parse(sessionStorage.getItem('userProfileDate')));
     const [branchId, setBranchId] = useState(sessionStorage.getItem('branchIdOZ'));
+    const [showAuthModal, setShowAuthModal] = useState(false);
 
     useEffect(() => {
         const storedToken = sessionStorage.getItem('TokenOZ');
@@ -108,7 +109,19 @@ const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ token, userId, branchId, activeUserId, userProfileDate, handleLogin, handelRegister, handleLogout, handelChangeBranch, modifyUserData }}>
+        <AuthContext.Provider value={{   
+            token, 
+            userId, 
+            branchId, 
+            activeUserId, 
+            userProfileDate, 
+            handleLogin, 
+            handelRegister, 
+            handleLogout, 
+            handelChangeBranch, 
+            modifyUserData,
+         }}
+        >
             {children}
         </AuthContext.Provider>
     );

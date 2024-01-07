@@ -1,5 +1,4 @@
 import React from "react";
-// import "./Content.css";
 import Button from "../UI/Button";
 import Media from "../Media/Media";
 import Paragraph from "../UI/Paragraph";
@@ -14,7 +13,7 @@ const OZKnowledge = (props) => {
               <div className="col-lg-12">
                 <div className="head-content-sec">
                   <Paragraph className="head_feature">
-                    {"OZ Knowledge&B"}
+                    {"OZ Knowledge"}
                   </Paragraph>
                 </div>
               </div>
@@ -58,7 +57,7 @@ const OZKnowledge = (props) => {
                 <Button
                   tagType="link"
                   className="btn_outline_black"
-                  to={"/"}
+                  to={'/knowledge'}
                 >Explore More</Button>
               </div>
             </div>

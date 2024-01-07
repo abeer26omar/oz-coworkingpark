@@ -12,6 +12,14 @@ export const config = async(page_name)=>{
 }
 
 export const getBranches = async (token)=>{
+
+    // const URL = `${process.env.REACT_APP_API_URL}/api/list_branches`;
+
+    // if(token){
+    //     URL += `?access_token=${token}`
+    // }else{
+    //     URL +=`?skip=true`
+    // }
     
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);

@@ -126,8 +126,6 @@ export const Logout = async (token) => {
     return response.data.data;
 };
 
-export const checkAuthLoader = async () => {};
-
 export const inquiry = async (first_name,
     last_name,
     email,

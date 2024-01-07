@@ -33,19 +33,13 @@ const ContactAdminReply = () => {
                                 <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
                             </svg>
                     </div>
-                    <Button 
-                            className="nav-link-two btn button-outLine btn-bg-white m-0 my-2"
-                            tagType='link'
-                            to={'/sendcontact'}>
-                                contact admin
-                    </Button>
-                    </div>
+                </div>
             </div>
             <div className="container py-5">
                 <div className="col-12 issue_description">
                     <div className="pt-4 pb-2 px-3">
                         <div className="d-flex align-items-center">
-                            <Paragraph className='issue mb-0 ms-2'>{details.message}</Paragraph>
+                            <Paragraph className='issue mb-0 ms-2'>{details.subject}</Paragraph>
                         </div>
                     </div>
                     <hr />
@@ -66,7 +60,7 @@ const ContactAdminReply = () => {
                         <div className="my-4">
                             <Paragraph className="date-title mb-4">Comment</Paragraph>
                                 <div className="price-list mb-4">
-                                    <span className='p-text-history'>{details.subject}</span>
+                                    <span className='p-text-history'>{details.message}</span>
                                 </div>
                         </div>
                     </div>

@@ -118,17 +118,12 @@ nav.btn.show {
     font-weight: var(--font-weight-bold);
     line-height: 3.6;
     font-family: var(--questrial-font);
+    width: 190px;
+    text-align: start;
+    padding: 0 1rem;
 }
-.drop_event a{
-    color: var(--black-color);
-    font-size: var(--font-size-13);
-    font-weight: var(--font-weight-bold);
-    font-family: var(--questrial-font);
-}
-
-.dropdown:hover .dropdown-nav{ 
-     opacity: 1;
-     display: block;    
+.dropdown-nav-user .drop_event{
+    width: 100%;
 }
 .dropdown-nav-user{
     position: absolute !important;
@@ -246,15 +241,16 @@ nav.btn.show {
 
 }
 .Notifications{
-    background-color: var(--white-color);
-    position: absolute !important;
+    /* background-color: var(--white-color); */
+    /* position: absolute !important;
     left: unset !important;
     right: 0;
-    min-width: 22rem !important;
+     */
+    width: 22rem !important;
     padding-top: 0px;
     border: none;
     border-radius: 0px;
-    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.25);
+    /* box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.25); */
 }
 .Notifications .noti_container{
     height: 600px;
@@ -317,8 +313,8 @@ nav.btn.show {
     border-radius: 50%;
 }
 .Notifications .notification_mark{
-    font-size: 11px;
-    color: #BDBDBD !important;
+    font-size: 14px;
+    color: #BDBDBD;
     font-style: normal;
     font-weight: 500;
     line-height: 2;
@@ -330,7 +326,7 @@ nav.btn.show {
 .Notifications .notification_mark.active{
     background: none;
     color: var(--black-color);
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
     border-radius: 0px;
 }
 
@@ -383,14 +379,22 @@ nav.btn.show {
 .subMenu:hover span::after{
     width: 100%;
 }
+.notifications_icon{
+    display: inline-flex;
+    align-items: center;
+}
+.notifications_icon .ant-badge .ant-badge-dot {
+    left: 50%;
+    transform: translate(50%, 140%);
+}
 /*END*/
 @media screen and (max-width: 575.5px) {
     .logo{
         width: 10rem;
     }
-    .Notifications{
+    /* .Notifications{
         right: -105px !important;
-    }
+    } */
 }
 @media screen and (max-width: 426px) {
     .links-margin {
@@ -407,9 +411,9 @@ nav.btn.show {
     .user_name{
         display: none;
     }
-    .Notifications{
+    /* .Notifications{
         min-width: 18rem !important;
-    }
+    } */
     .nav_profile{
         right: -36px !important;
         min-width: 18rem !important

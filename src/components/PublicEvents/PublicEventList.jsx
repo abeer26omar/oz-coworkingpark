@@ -20,6 +20,9 @@ const PublicEventList = ({}) => {
         arrows: false,
         cssEase: "linear",
         lazyLoad: false,
+        infinite: true,
+        centerMode: true,
+        centerPadding: '40px 0px 0px 0px',
         responsive: [
             {
                 breakpoint: 1024,
@@ -68,7 +71,6 @@ const PublicEventList = ({}) => {
                 <Slider {...settings} className="home-events">
                     {eventsData && eventsData.map((event, index) => {
                             return (
-                                <>
                                     <div className="card image-box" key={index}>
                                         <Media 
                                             type="img" 
@@ -95,7 +97,6 @@ const PublicEventList = ({}) => {
                                                 tagType='link'>{event.event_type?.name}</Button>
                                         </div>
                                     </div>
-                                </>
                             );
                     })}
                 </Slider>

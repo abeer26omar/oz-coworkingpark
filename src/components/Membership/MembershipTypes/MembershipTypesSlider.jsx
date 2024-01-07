@@ -22,10 +22,11 @@ const MembershipTypesSlider = () => {
     const settings = {
         dots: false,
         arrows: true,
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 1,
         infinite: true,
         centerMode: true,
+        centerPadding: '50px',
         responsive: [
             {
                 breakpoint: 1500,
@@ -80,9 +81,8 @@ const MembershipTypesSlider = () => {
             {types && types.map((listMembershipType, index) => {
                 const {id, name, logo, link, description }  = listMembershipType;
                 return (
-                    <div className='px-2'>
+                    <div className='px-2' key={index}>
                         <MembershipTypesList
-                            key={index}
                             id={id}
                             name={name}
                             logo={logo}

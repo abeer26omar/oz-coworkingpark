@@ -81,7 +81,8 @@ export const createProject = async (token,
     image,
     portfolio_link,
     contact_type,
-    period) => {
+    period,
+    signal) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -102,11 +103,12 @@ export const createProject = async (token,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
+        signal: signal
     };
 
     const response = await axios(config);
         
-    return response.data.data;
+    return response.data;
 };
 
 export const getClientMessages = async (token, pageId, recipientId) => {

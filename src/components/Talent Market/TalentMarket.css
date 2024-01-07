@@ -60,7 +60,7 @@
 .range-slider {
     height: 4px;
 }
-.nav-pills .nav-link{
+.card-chat .nav-pills .nav-link{
     color:  #000;
     font-family: Couture;
     font-size: 14px;
@@ -68,8 +68,8 @@
     font-weight: 700;
     line-height: 120%;
 }
-.chat .nav-pills .nav-link.active, 
-.chat .nav-pills .show>.nav-link {
+.card-chat .nav-pills .nav-link.active, 
+.card-chat .nav-pills .show>.nav-link {
     color:  #000 !important;
     background-color: #bdbdbd14 !important;
 }

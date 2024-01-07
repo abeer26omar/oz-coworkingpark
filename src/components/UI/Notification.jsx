@@ -4,7 +4,7 @@ import 'react-notifications-component/dist/theme.css';
 import { onMessageListener } from '../../apis/firebase';
 
 
-const Notification = () => {
+const Notification = ({getShowDot}) => {
   
   const [notification, setNotification] = useState({
     title: '',
@@ -14,6 +14,7 @@ const Notification = () => {
     buttonText: '',
     buttonClick: null
   });
+  const [showDot, setShowDot] = useState(false);
 
   useEffect(() => {
     const notificationOptions = {
@@ -56,7 +57,8 @@ const Notification = () => {
       
     onMessageListener()
         .then((payload) => {
-          console.log(payload);
+          setShowDot(true);
+          getShowDot(showDot);
           setNotification(
             {
               title: payload?.data?.title,
