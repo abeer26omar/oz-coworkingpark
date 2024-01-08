@@ -31,11 +31,14 @@ const OurTrain = () => {
       <div className="container py-5">
         <div className="col-12 d-flex justify-content-between">
           <Paragraph className="card-title">OUR TRAINING</Paragraph>
-          <Link className="btn_default btn_outline_black " href="/zeestudio">
+          <Link
+            className="btn_default btn_outline_black "
+            to="/More"
+          >
             Explore Studio
           </Link>
         </div>
-      <CardsGym/>
+        <CardsGym />
       </div>
     </>
   );

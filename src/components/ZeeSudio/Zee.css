@@ -61,21 +61,41 @@
     background-color: transparent !important;
 }
 
-@media screen and (max-width: 767px) {
-    .Schedule .ant-segmented .ant-segmented-item {
-        margin: 0 0 !important;
-    }
-    .Schedule .ant-segmented .ant-segmented-group{
-        flex-direction: column !important;
-    }
-    .Schedule .ant-segmented .ant-segmented-thumb {
-        background-color: transparent !important;
-    }
-    .Schedule .ant-segmented .ant-segmented-item-selected {
-        background-color: transparent !important;
-        color: #D0DF00 !important;
-        box-shadow: unset !important;
-    }
+.border-bottom-black{
+    border-bottom: 1px solid #000;
+}
+.border-solid{
+    border-top:  1px solid #0000002b;
+    border-bottom: 1px solid #0000002b;
+
+}
+.bg-gymDetails{
+    background-color: #fff;
+    /* border-radius: 10px; */
+
+}
+.steps-payment .ant-steps.ant-steps-navigation .ant-steps-item {
+    overflow:  hidden !important;
+}
+.steps-payment .ant-steps.ant-steps-navigation .ant-steps-item::before {
+    background-color: #000 !important;
+}
+@media screen and (max-width:767px) {
+.Schedule .ant-segmented .ant-segmented-item {
+    margin: 0 0 !important;
+}
+.Schedule .ant-segmented .ant-segmented-group{
+    flex-direction: column !important;
+}
+.Schedule .ant-segmented .ant-segmented-thumb {
+     background-color: unset !important;
+}
+.Schedule .ant-segmented .ant-segmented-item-selected {
+    background-color: unset !important;
+    color: #D0DF00 !important;
+    box-shadow: unset !important;
+
+}
 }
 
 @media screen and (min-width:767px) and (max-width:992px) {

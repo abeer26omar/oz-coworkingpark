@@ -70,23 +70,36 @@ import OZCourses from './components/OzKnowledge/OZCourses';
 import CourseDetails from './components/OzKnowledge/CourseDetails/CourseDetails';
 import RouterGuard from './apis/RouterGuard';
 import HttpInterceptor from './apis/LoadingInterceptor';
+import MoreClasses from "./components/ZeeSudio/MoreClasses";
+import OurTrainerPage from "./components/ZeeSudio/OurTrainerPage";
+import GymDetails from "./components/ZeeSudio/GymDetails";
+import GymHistory from "./components/ZeeSudio/GymHistory";
+import PaymentGym from "./components/ZeeSudio/PaymentGym";
 
 function App() {
     const router = createBrowserRouter([
       {
         path: "/",
         element: <RootLayout />,
-        id: 'root',
+        id: "root",
         errorElement: <Error404 />,
         children: [
-          { index: true, element: <Home />},
-          { path:'about', element: <About />},
-          { path:'joinus', element: <Joinus />},
-          { path:'contactus', element: <Contactus />},
-          { path:'sitemap', element: <SiteMap /> },
-          { path:'faq', element: <Faq/> },
-          { path:'profile', element: <Profile />,
-            id:'profile',
+          { index: true, element: <Home /> },
+          { path: "zeestudio", element: <ZeeStudio /> },
+          { path: "More", element: <MoreClasses /> },
+          { path: "ourtrainer", element: <OurTrainerPage /> },
+          { path: "gymdetails", element: <GymDetails /> },
+          { path: "payment", element: <PaymentGym/> },
+          { path: "gymhistory", element: <GymHistory /> },
+          { path: "about", element: <About /> },
+          { path: "joinus", element: <Joinus /> },
+          { path: "contactus", element: <Contactus /> },
+          { path: "sitemap", element: <SiteMap /> },
+          { path: "faq", element: <Faq /> },
+          {
+            path: "profile",
+            element: <Profile />,
+            id: "profile",
             children: [
               { index: true, element: <PersonalData /> },
               { path: "changePassword", element: <ChangePassword /> },
@@ -98,8 +111,14 @@ function App() {
               { path: "terms&condition", element: <TermsConditions /> },
               { path: "issueReport", element: <IssueReporting /> },
               { path: "issueType/:case_id", element: <IssueType /> },
-              { path: "subissueType/:case_id/:type_id", element: <SubissueType /> },
-              { path: "issueplace/:case_id/:type_id/:id", element: <AddPlacesIssueDetails /> },
+              {
+                path: "subissueType/:case_id/:type_id",
+                element: <SubissueType />,
+              },
+              {
+                path: "issueplace/:case_id/:type_id/:id",
+                element: <AddPlacesIssueDetails />,
+              },
               { path: "issuehistory", element: <IssueHistory /> },
               { path: "issueDetails/:id", element: <IssueDetails /> },
             ],
@@ -136,13 +155,8 @@ function App() {
           { path:'dmchat/provider/:project', element: <DMChatProvider />},
           { path:'contactadmin', element: <ContactAdminHistory />},
           { path:'replydetails', element: <ContactAdminReply />},
-          { path:'sendcontact', element: <RouterGuard element={ContactAdmin} />},
-          { path:'invoice', element: <Invoice />},
-          { path:'knowledge', element: <Knowledge />},
-          { path:'courses/:name', element: <OZCourses />},
-          { path:'coursedetails/:id', element: <CourseDetails />},
-          { path:'coursesHistory', element: <CoursesHistory/>},
-          { path:'zeestudio', element: <ZeeStudio/>},
+          { path:'sendcontact', element: <ContactAdmin />},
+          { path:'invoice', element: <Invoice />}
         ]}
     ]);
     const queryClient = new QueryClient();

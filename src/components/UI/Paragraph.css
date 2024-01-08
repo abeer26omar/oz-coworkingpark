@@ -187,6 +187,20 @@ p{
     font-weight: 700;
     line-height: 120%;
 }
+.desc_small{
+    font-family: Couture;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    color: var(--black-color);
+}
+.desc_small_light{
+    color: #BDBDBD;
+    font-family: Questrial;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+}
 .grey-span{
     color: var(--black-color);
     font-family: var(--questrial-font);

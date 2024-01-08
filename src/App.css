@@ -131,6 +131,9 @@ a {
 .py-70 {
     padding: 4.375rem 0;
 }
+.mx_7{
+    padding: 0 7rem !important;
+}
 .pt-70 {
     padding: 4.375rem 0 0 0;
 }
@@ -157,7 +160,9 @@ a {
 .m-35 {
     margin: 35px 0;
 }
-
+.light{
+    color: rgba(0, 0, 0, 0.50) !important;
+}
 /* nav-tabs */
 .nav-tabs{
     border: none !important;
