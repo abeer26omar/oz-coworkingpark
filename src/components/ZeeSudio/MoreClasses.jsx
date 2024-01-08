@@ -1,13 +1,13 @@
 import React from 'react'
 import HeaderClasses from './HeaderClasses'
-import RusletClasses from './RusletClasses'
+import TrainingClasses from './TrainingClasses'
 import CardsClasses from './CardsClasses'
 
 function MoreClasses() {
   return (
     <>
     <HeaderClasses/>
-    <RusletClasses/>
+    <TrainingClasses/>
     <CardsClasses/>
 
     </>

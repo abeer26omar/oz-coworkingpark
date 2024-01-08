@@ -411,7 +411,7 @@ const BookingSummary = () => {
                                         </>
                                     )}
                                     {step.key === 'invoice' && (
-                                        <>
+                                        <> 
 
                                             <div className="">
                                                 <div className="row">

@@ -85,12 +85,6 @@ function App() {
         errorElement: <Error404 />,
         children: [
           { index: true, element: <Home /> },
-          { path: "zeestudio", element: <ZeeStudio /> },
-          { path: "More", element: <MoreClasses /> },
-          { path: "ourtrainer", element: <OurTrainerPage /> },
-          { path: "gymdetails", element: <GymDetails /> },
-          { path: "payment", element: <PaymentGym/> },
-          { path: "gymhistory", element: <GymHistory /> },
           { path: "about", element: <About /> },
           { path: "joinus", element: <Joinus /> },
           { path: "contactus", element: <Contactus /> },
@@ -155,7 +149,18 @@ function App() {
           { path:'dmchat/provider/:project', element: <DMChatProvider />},
           { path:'contactadmin', element: <ContactAdminHistory />},
           { path:'replydetails', element: <ContactAdminReply />},
-          { path:'sendcontact', element: <ContactAdmin />},
+          { path:'sendcontact', element: <RouterGuard element={ContactAdmin} />},
+          { path:'invoice', element: <Invoice />},
+          { path:'knowledge', element: <Knowledge />},
+          { path:'courses/:name', element: <OZCourses />},
+          { path:'coursedetails/:id', element: <CourseDetails />},
+          { path:'coursesHistory', element: <CoursesHistory/>},
+          { path: "zeestudio", element: <ZeeStudio /> },
+          { path: "ourgymclasses", element: <MoreClasses /> },
+          { path: "ourtrainer", element: <OurTrainerPage /> },
+          { path: "gymdetails", element: <GymDetails /> },
+          { path: "payment", element: <PaymentGym/> },
+          { path: "gymhistory", element: <GymHistory /> },
           { path:'invoice', element: <Invoice />}
         ]}
     ]);

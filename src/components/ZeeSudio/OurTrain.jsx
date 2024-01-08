@@ -33,7 +33,7 @@ const OurTrain = () => {
           <Paragraph className="card-title">OUR TRAINING</Paragraph>
           <Link
             className="btn_default btn_outline_black "
-            to="/More"
+            to="/ourgymclasses"
           >
             Explore Studio
           </Link>

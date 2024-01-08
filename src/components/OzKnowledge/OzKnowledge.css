@@ -102,6 +102,31 @@
     line-height: 130%;
     padding-bottom: 1rem;
 }
+.course_date{
+    color: var(--secondary-color2);
+    font-family: var(--questrial-font);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+}
+.course_categorey{
+    color: var(--secondary-color2);
+    font-family: var(--couture-font);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+.course_desc{
+    color: rgba(0, 0, 0, 0.40);
+    text-align: justify;
+    font-family: var(--questrial-font);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
 @media screen and (max-width: 1200px) {
     .slick_knowledge .slick-next {
         right: 8% !important;
