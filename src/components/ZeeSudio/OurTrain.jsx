@@ -31,7 +31,10 @@ const OurTrain = () => {
       <div className="container-fluid py-5 px-70">
         <div className="col-12 d-flex justify-content-between">
           <Paragraph className="card-title">OUR TRAINING</Paragraph>
-          <Link className="btn_default btn_outline_black " to="/More">
+          <Link
+            className="btn_default btn_outline_black "
+            to="/ourgymclasses"
+          >
             Explore Studio
           </Link>
         </div>
