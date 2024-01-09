@@ -44,7 +44,7 @@ const CourseDetails = () => {
                                     <img src={confirmedIcon} alt='confirmed Icon'/>
                                 </div>
                             </div>
-                            <Button tagType='link' className="btn white_bg_btn me-2" to={'/about'}>Attend</Button>
+                            <Button tagType='link' className="btn white_bg_btn me-2" to={'/payment'}>Attend</Button>
                     </div>
                 </div>
             </MainHeaderWrapper>

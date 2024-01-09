@@ -80,6 +80,14 @@
 .steps-payment .ant-steps.ant-steps-navigation .ant-steps-item::before {
     background-color: #000 !important;
 }
+.ant-steps .ant-steps-item-process .ant-steps-item-icon ,
+.ant-steps .ant-steps-item-finish .ant-steps-item-icon {
+    background-color: var(--black-color);
+    border-color: var(--black-color);
+}
+.ant-steps .ant-steps-item-finish .ant-steps-item-icon >.ant-steps-icon {
+    color: var(--white-color);
+}
 @media screen and (max-width:767px) {
 .Schedule .ant-segmented .ant-segmented-item {
     margin: 0 0 !important;
