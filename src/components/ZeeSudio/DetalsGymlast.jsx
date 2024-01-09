@@ -4,7 +4,21 @@ import details from '../../assets/images/DetalPage.jpg' ;
 import Paragraph from '../UI/Paragraph';
 import Button from '../UI/Button';
 import img from '../../assets/images/Vimg.jpg'
+import { useNavigate } from 'react-router-dom';
 function DetalsGymlast() {
+
+  const navigate = useNavigate();
+
+  const HandelSummery = () => {
+    const gymCourseDetails = {
+      title: ''
+    }
+    sessionStorage.setItem(
+      "OZgymCourseDetails",
+      JSON.stringify(gymCourseDetails)
+    );
+    navigate(`/payment`);
+  }
   return (
     <>
       <div className="container py-5">
@@ -44,15 +58,14 @@ function DetalsGymlast() {
               </Paragraph>
               <Button
                 tagType="link"
-                to={`/payment`}
-                name={""}
+                onClick={HandelSummery}
                 className="btn button-outLine btn-bg-white"
               >
                 {"Book a Class"}
               </Button>
             </div>
           </div>
-          <div className="col-10">
+          <div className="col-10 mt-5 mt-xl-0">
             <Paragraph className="paragraph_black">
               The Healthy Life Style For All
             </Paragraph>

@@ -12,7 +12,7 @@ import Dance from "../../assets/images/Dance.jpg";
 const CardsClasses = () => {
   return (
     <>
-      <div className="container py-5">
+      <div className="container-fluid  px-70 py-5">
         <div className="row py-5">
           <Paragraph className="fs-4">
             <span className="card-title mx-2">574,395</span>
@@ -32,7 +32,7 @@ const CardsClasses = () => {
                     tagType="link"
                     to={`/`}
                     name={""}
-                    className="btn button-outLine btn-bg-white"
+                    className="btn button-outLine btn-bg-white  m-auto-unset"
                   >
                     {"Explore More"}
                   </Button>
@@ -55,7 +55,7 @@ const CardsClasses = () => {
                     tagType="link"
                     to={`/`}
                     name={""}
-                    className="btn button-outLine btn-bg-white"
+                    className="btn button-outLine btn-bg-white m-auto-unset"
                   >
                     {"Explore More"}
                   </Button>
@@ -78,7 +78,7 @@ const CardsClasses = () => {
                     tagType="link"
                     to={`/`}
                     name={""}
-                    className="btn button-outLine btn-bg-white"
+                    className="btn button-outLine btn-bg-white m-auto-unset"
                   >
                     {"Explore More"}
                   </Button>
@@ -101,7 +101,7 @@ const CardsClasses = () => {
                     tagType="link"
                     to={`/`}
                     name={""}
-                    className="btn button-outLine btn-bg-white"
+                    className="btn button-outLine btn-bg-white m-auto-unset"
                   >
                     {"Explore More"}
                   </Button>
@@ -124,7 +124,7 @@ const CardsClasses = () => {
                     tagType="link"
                     to={`/`}
                     name={""}
-                    className="btn button-outLine btn-bg-white"
+                    className="btn button-outLine btn-bg-white m-auto-unset"
                   >
                     {"Explore More"}
                   </Button>
@@ -147,7 +147,7 @@ const CardsClasses = () => {
                     tagType="link"
                     to={`/`}
                     name={""}
-                    className="btn button-outLine btn-bg-white"
+                    className="btn button-outLine btn-bg-white m-auto-unset"
                   >
                     {"Explore More"}
                   </Button>
@@ -170,7 +170,7 @@ const CardsClasses = () => {
                     tagType="link"
                     to={`/`}
                     name={""}
-                    className="btn button-outLine btn-bg-white"
+                    className="btn button-outLine btn-bg-white m-auto-unset"
                   >
                     {"Explore More"}
                   </Button>
@@ -193,7 +193,7 @@ const CardsClasses = () => {
                     tagType="link"
                     to={`/`}
                     name={""}
-                    className="btn button-outLine btn-bg-white"
+                    className="btn button-outLine btn-bg-white m-auto-unset"
                   >
                     {"Explore More"}
                   </Button>
@@ -216,7 +216,7 @@ const CardsClasses = () => {
                     tagType="link"
                     to={`/`}
                     name={""}
-                    className="btn button-outLine btn-bg-white"
+                    className="btn button-outLine btn-bg-white m-auto-unset"
                   >
                     {"Explore More"}
                   </Button>
@@ -239,7 +239,7 @@ const CardsClasses = () => {
                     tagType="link"
                     to={`/`}
                     name={""}
-                    className="btn button-outLine btn-bg-white"
+                    className="btn button-outLine btn-bg-white m-auto-unset"
                   >
                     {"Explore More"}
                   </Button>
@@ -262,7 +262,7 @@ const CardsClasses = () => {
                     tagType="link"
                     to={`/`}
                     name={""}
-                    className="btn button-outLine btn-bg-white"
+                    className="btn button-outLine btn-bg-white m-auto-unset"
                   >
                     {"Explore More"}
                   </Button>
@@ -285,7 +285,7 @@ const CardsClasses = () => {
                     tagType="link"
                     to={`/`}
                     name={""}
-                    className="btn button-outLine btn-bg-white"
+                    className="btn button-outLine btn-bg-white m-auto-unset"
                   >
                     {"Explore More"}
                   </Button>
@@ -300,7 +300,7 @@ const CardsClasses = () => {
             tagType="link"
             to={`/ourtrainer`}
             name={""}
-            className="btn button-outLine btn-bg-white"
+            className="btn button-outLine btn-bg-white m-auto-unset"
           >
             {"Explore More"}
           </Button>

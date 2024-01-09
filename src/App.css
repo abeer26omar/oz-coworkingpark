@@ -112,6 +112,9 @@ a {
 .font-2{
     font-size: 1.65rem !important;
 }
+.font-5{
+    font-size: 3.8rem !important;
+}
 /*******************Padding Size************************/
 .p-60 {
     padding: 60px 0;
@@ -131,7 +134,7 @@ a {
 .py-70 {
     padding: 4.375rem 0;
 }
-.mx_7{
+.px_7{
     padding: 0 7rem !important;
 }
 .pt-70 {
@@ -159,6 +162,9 @@ a {
 /***************Margin Size ********************/
 .m-35 {
     margin: 35px 0;
+}
+.m-auto-unset{
+    margin: unset !important;
 }
 .light{
     color: rgba(0, 0, 0, 0.50) !important;
@@ -730,6 +736,12 @@ a {
 @media screen and (max-width: 768px) {
     .px-70 {
         padding: 0 2rem;
+    }
+    .px_7{
+        padding:  0 0 !important;
+    }
+    .font-5{
+        font-size: unset !important;
     }
 }
 @media (max-width: 575px) {

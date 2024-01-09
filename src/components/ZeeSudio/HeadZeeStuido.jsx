@@ -47,9 +47,7 @@ const HeadZeeStuido = (props) => {
               amet, consectetuerLorem ipsum dolor sit amet, consectetuerLorem
               ipsum dolor sit
             </Paragraph>
-            <Link class="btn_default btn btn_outline mt-4 " href="/about">
-              Explore More
-            </Link>
+        
           </div>
         </div>
       </MainHeaderWrapper>

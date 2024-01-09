@@ -6,7 +6,7 @@ import CardsGym from "./CardsGym";
 const OurTrain = () => {
   return (
     <>
-      <div className="container py-5">
+      <div className="container-fluid px-70 py-5">
         <Paragraph className="card-title">Description Membership</Paragraph>
         <Paragraph className="description_black pt-3">
           Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet,
@@ -19,7 +19,7 @@ const OurTrain = () => {
           sit amet, consectetur dipiscing eliteiusmod{" "}
         </Paragraph>
       </div>
-      <div className="container-fluid">
+      <div className="container-fluid ">
         <div class="row border-of-section">
           <div class="col-lg-12">
             <div class="head-content-sec">
@@ -28,13 +28,10 @@ const OurTrain = () => {
           </div>
         </div>
       </div>
-      <div className="container py-5">
+      <div className="container-fluid py-5 px-70">
         <div className="col-12 d-flex justify-content-between">
           <Paragraph className="card-title">OUR TRAINING</Paragraph>
-          <Link
-            className="btn_default btn_outline_black "
-            to="/More"
-          >
+          <Link className="btn_default btn_outline_black " to="/More">
             Explore Studio
           </Link>
         </div>

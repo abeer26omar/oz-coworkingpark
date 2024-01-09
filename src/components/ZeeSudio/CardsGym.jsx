@@ -29,7 +29,7 @@ const CardsGym = () => {
                   tagType="link"
                   to={`/`}
                   name={""}
-                  className="btn button-outLine btn-bg-white"
+                  className="btn button-outLine btn-bg-white m-auto-unset"
                 >
                   {"Explore More"}
                 </Button>
@@ -52,7 +52,7 @@ const CardsGym = () => {
                   tagType="link"
                   to={`/`}
                   name={""}
-                  className="btn button-outLine btn-bg-white"
+                  className="btn button-outLine btn-bg-white  m-auto-unset"
                 >
                   {"Explore More"}
                 </Button>
@@ -75,7 +75,7 @@ const CardsGym = () => {
                   tagType="link"
                   to={`/`}
                   name={""}
-                  className="btn button-outLine btn-bg-white"
+                  className="btn button-outLine btn-bg-white  m-auto-unset"
                 >
                   {"Explore More"}
                 </Button>
@@ -98,7 +98,7 @@ const CardsGym = () => {
                   tagType="link"
                   to={`/`}
                   name={""}
-                  className="btn button-outLine btn-bg-white"
+                  className="btn button-outLine btn-bg-white  m-auto-unset"
                 >
                   {"Explore More"}
                 </Button>
@@ -121,7 +121,7 @@ const CardsGym = () => {
                   tagType="link"
                   to={`/`}
                   name={""}
-                  className="btn button-outLine btn-bg-white"
+                  className="btn button-outLine btn-bg-white  m-auto-unset"
                 >
                   {"Explore More"}
                 </Button>
@@ -139,7 +139,7 @@ const CardsGym = () => {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
                 dolores, iusto
               </Paragraph>
-              <div className="d-flex justify-content-between align-items-center ">
+              <div className="d-flex justify-content-between align-items-center  m-auto-unset ">
                 <Button
                   tagType="link"
                   to={`/`}

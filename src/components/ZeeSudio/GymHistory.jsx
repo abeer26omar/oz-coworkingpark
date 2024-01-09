@@ -29,7 +29,7 @@ function GymHistory() {
           </div>
         </div>
       </div>
-      <div className="container py-5">
+      <div className="container-fluid px-70  py-5">
         <div className="card my-4 p-2 ">
           <div className="d-flex justify-content-between align-items-center">
             <Media src={img} type="img" />

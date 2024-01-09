@@ -13,7 +13,7 @@ import CardTrainerLink from "../UI/CardTrainerLink";
 const TrainerLinksCard = () => {
   return (
     <>
-      <div className="container">
+      <div className="container-fluid px-70">
         <div className="row py-5">
           <Paragraph className="paragraph_black">Trainers</Paragraph>
           <div className="col-xl-4 col-md-6 col-sm-12 my-2">

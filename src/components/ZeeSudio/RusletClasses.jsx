@@ -2,7 +2,7 @@ import React from "react";
 import Paragraph from "../UI/Paragraph";
 import Button from "../UI/Button";
 import { useState } from "react";
-import BookingFilter from "../Booking/BookingFilter/BookingFilter";
+import FilterClasses from './FilterClasses'
 
 function RusletClasses() {
      const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -13,7 +13,7 @@ function RusletClasses() {
   return (
     <>
       <div className="navigator border-solid my-3">
-        <div className="container-fluid">
+        <div className="container-fluid px-70">
           <div className="row">
             <div className="col-4">
               <Paragraph className="paragraph_black p-5 mb-0 border-right">
@@ -53,7 +53,7 @@ function RusletClasses() {
                 <Button
                   tagType="link"
                   className="button-outLine px-4 btn-bg-white btn-filter text-center"
-                  // onClick={toggleFilter}
+                  onClick={toggleFilter}
                 >
                   <svg
                     className="me-3"
@@ -143,13 +143,12 @@ function RusletClasses() {
                 </Button>
               </div>
             </div>
-            {/* <div className="filter border-top border-bottom">
-              <BookingFilter
+            <div className="filter border-top border-bottom">
+              <FilterClasses
                 isOpen={isFilterOpen}
-                placeId={placeId}
-                getFilteredData={getFilteredData}
+              
               />
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
