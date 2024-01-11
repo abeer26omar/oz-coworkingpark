@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button, message, Steps, theme } from "antd";
+import { message, Steps, theme } from "antd";
 import Paragraph from "../UI/Paragraph";
 import CaseOne from "./CasesPay/CaseOne";
 import CaseTwo from "./CasesPay/CaseTwo";
 import CaseThree from "./CasesPay/CaseThree";
-import { Link } from "react-router-dom";
-// import Button from "../UI/Button";
+import Button from "../UI/Button";
 
 const PaymentGym = () => {
   const { token } = theme.useToken();
@@ -80,9 +79,8 @@ const PaymentGym = () => {
               <div className="text-center p-5">
                 {current < steps.length - 1 && (
                   <Button
-                    // to="/"
-                    // tagType="link"
-                    className="btn_default btn button-outLine btn-bg-white"
+                    tagType="link"
+                    className="button-outLine btn-bg-white"
                     onClick={() => next()}
                   >
                     confirm
@@ -92,14 +90,14 @@ const PaymentGym = () => {
             </div>
             <div className="text-center">
               {current === steps.length - 1 && (
-                <Link
-                to ='/'
-                  className="btn_default btn button-outLine btn-bg-white"
-                  type=""
-                  onClick={() => message.success("Processing complete!")}
+                <Button
+                  to ='/'
+                  className="button-outLine btn-bg-white"
+                  tagType="link"
+                  // onClick={() => message.success("Processing complete!")}
                 >
                   Back Home
-                </Link>
+                </Button>
               )}
             </div>
           </div>

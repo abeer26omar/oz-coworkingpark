@@ -127,6 +127,35 @@
     font-weight: 400;
     line-height: 120%;
 }
+.details_header{
+    color: var(--secondary-color2);
+    font-family: var(--couture-font);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+.details_list{
+    list-style: none;
+    border: 1px solid#E0E0E0;
+    background-color: var(--white-color);
+}
+.details_list .list_item span{
+    color: var(--black-color);
+    font-family: var(--questrial-font);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%;
+}
+.hour_details{
+    color: #615A63;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+    letter-spacing: 0.14px;
+}
 @media screen and (max-width: 1200px) {
     .slick_knowledge .slick-next {
         right: 8% !important;

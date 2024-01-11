@@ -73,7 +73,30 @@ const CoursesHistory = () => {
                             </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
-                        
+                        <div className='card card_event'>
+                                <div className='row align-items-center'>
+                                    <div className='col-xxl-3 col-xl-4 col-lg-4 col-md-4 col-sm-12 d-flex justify-content-start p-sm-0'>
+                                        <img 
+                                            src={cardTop} 
+                                            alt='event-img' 
+                                            height='256px'
+                                            width='100%'
+                                            style={{
+                                                objectFit: 'cover'
+                                            }}
+                                        />
+                                    </div>
+                                    <div className='col-xxl-8 col-xl-7 col-lg-7 col-md-7 col-sm-12 d-flex align-items-center'>
+                                        <div className='p-2'>
+                                            <Paragraph className='course_date'>Date Submitted : Feb 2 , 2023</Paragraph>
+                                            <Paragraph className='course_details_title'>{'UX & UI Design'}</Paragraph>
+                                            <Paragraph className='course_categorey'>{'Category: Design'}</Paragraph>
+                                            <Paragraph className='course_desc'>{'Coworking is an arrangement in which workers of different companies share an office space,  rking is an arrangement in which workers of different companies share an office space.....'}</Paragraph>
+                                            <Paragraph className='course_details_title'>{'course completed'}</Paragraph>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </Tab.Pane>
                     </Tab.Content>
                 </div>

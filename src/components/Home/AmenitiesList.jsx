@@ -34,7 +34,7 @@ const AmenitiesList = () => {
             {
                 breakpoint: 2000,
                 settings: {
-                    slidesToShow: 7,
+                    slidesToShow: AmenitiesList?.length > 7 ?  7  : AmenitiesList?.length,
                     slidesToScroll: 1,
                 }
             },

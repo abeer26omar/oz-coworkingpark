@@ -11,18 +11,18 @@ const CaseTwo = () => {
         </Paragraph>
         <ul className="p-0">
           <li className="d-flex align-items-center justify-content-between mb-4 pb-4 border-bottom">
-            <div className="d-flex  align-items-center">
+            <label className="d-flex align-items-center" htmlFor="cash">
               <CashPay />
               <Paragraph className="mb-0 mx-2">Cash Payment</Paragraph>
-            </div>
-            <input type="radio" />
+            </label>
+            <input type="radio" name="payemnt" id="cash"/>
           </li>
           <li className="d-flex align-items-center justify-content-between  mb-4 pb-4 border-bottom">
-            <div className="d-flex  align-items-center">
+            <label className="d-flex align-items-center" htmlFor="credit">
               <CridetPay />
               <Paragraph className="mb-0 mx-2">Credit Payment</Paragraph>
-            </div>
-            <input type="radio" />
+            </label>
+            <input type="radio" name="payemnt" id='credit'/>
           </li>
         </ul>
       </div>
