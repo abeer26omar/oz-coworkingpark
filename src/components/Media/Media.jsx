@@ -19,6 +19,7 @@ const Media = (props) => {
             }
             {props.type === 'video' &&
                 <video 
+                    className={props.className}
                     src={props.src} 
                     alt={props.alt} 
                     loading="lazy" 

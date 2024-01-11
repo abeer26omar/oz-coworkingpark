@@ -158,7 +158,7 @@ function App() {
           { path: "zeestudio", element: <ZeeStudio /> },
           { path: "ourgymclasses", element: <MoreClasses /> },
           { path: "ourtrainer", element: <OurTrainerPage /> },
-          { path: "gymdetails", element: <GymDetails /> },
+          { path: "gymdetails/:id", element: <GymDetails /> },
           { path: "payment", element: <PaymentGym/> },
           { path: "gymhistory", element: <GymHistory /> },
           { path:'invoice', element: <Invoice />}

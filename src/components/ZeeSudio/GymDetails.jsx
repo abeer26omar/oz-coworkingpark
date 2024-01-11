@@ -3,7 +3,9 @@ import HeaderDetalGym from './HeaderDetalGym'
 import DetalsGymlast from './DetalsGymlast'
 
 function GymDetails() {
+  
   return (
+
     <>
     <HeaderDetalGym/>
     <DetalsGymlast/>

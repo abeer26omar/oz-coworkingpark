@@ -10,8 +10,6 @@ const { Column } = Table;
 
 const WorkTimes = () => {
   const [day , setday] = useState();
-  // const [days , setdays] = useState();
-
   function handleDay (){
     const date = new Date();
     const ToDate = date.toLocaleDateString('en-us' , {weekday : 'long'});
