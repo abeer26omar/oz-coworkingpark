@@ -3,9 +3,9 @@ import Paragraph from "../UI/Paragraph";
 import Slider from "react-slick";
 import Button from "../UI/Button";
 import Media from "../Media/Media";
-// import img from "../../assets/images/image 12.png";
 
-const Madaion = () => {
+const BestTrainers = () => {
+
   const settings = {
     dots: true,
     infinite: false,
@@ -13,7 +13,7 @@ const Madaion = () => {
     slidesToShow: 1,
     cssEase: "linear",
     arrows: false,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 3000,
     lazyLoad: true,
     responsive: [
@@ -25,6 +25,7 @@ const Madaion = () => {
       },
     ],
   };
+
 
   return (
     <>
@@ -62,20 +63,19 @@ const Madaion = () => {
               </div>
               <div className="col-lg-4 col-md-5 col-12 my-auto ">
                 <div className="box-content p-lg-4 p-3">
-                  <Paragraph className="paragraph_black">{"Madison"}</Paragraph>
-                  <Paragraph className="courses_jobTitle">
-                    {"Crossfit Expoort, Nutrition & Rehab"}
-                  </Paragraph>
-                  <Paragraph className="description_black">
-                    {
-                      "Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod "
-                    }
-                  </Paragraph>
-
+                      <Paragraph className="paragraph_black">{"Madison"}</Paragraph>
+                      <Paragraph className="courses_jobTitle">
+                        {"Crossfit Expoort, Nutrition & Rehab"}
+                      </Paragraph>
+                      <Paragraph className="description_black">
+                        {
+                          "Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod "
+                        }
+                      </Paragraph>
                   <Button
                     tagType="link"
                     className="btn button-outLine btn-bg-white"
-                    to={"/houses"}
+                    to={"/ourtrainer"}
                   >
                     Explore More
                   </Button>
@@ -88,4 +88,4 @@ const Madaion = () => {
     </>
   );
 };
-export default Madaion;
+export default BestTrainers;

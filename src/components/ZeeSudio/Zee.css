@@ -90,6 +90,12 @@
 .ant-steps .ant-steps-item-finish .ant-steps-item-icon >.ant-steps-icon {
     color: var(--white-color);
 }
+/* .ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder {
+    background-color: var(--black-color);
+}
+.ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder:hover {
+    background-color: var(--black-color);
+} */
 @media screen and (max-width:767px) {
 .Schedule .ant-segmented .ant-segmented-item {
     margin: 0 0 !important;

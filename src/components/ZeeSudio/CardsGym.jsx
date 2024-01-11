@@ -2,18 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import Media from "../Media/Media";
 import Button from "../UI/Button";
 import Paragraph from "../UI/Paragraph";
-import Class from "../../assets/images/PlatesClass.jpg";
-import Aerobic from "../../assets/images/Aerobic.jpg";
-import CrossFit from "../../assets/images/CrossFit.jpg";
-import Yoga from "../../assets/images/Yoga.jpg";
-import Boxing from "../../assets/images/Boxing.jpg";
-import Dance from "../../assets/images/Dance.jpg";
 import {getTrainingClasses} from '../../apis/ZeeStudio';
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 
 const CardsGym = () => {
 
   const [classesList, setClassesList] = useState([]);
+  const [error, setError] = useState('');
 
   const { token } = useContext(AuthContext);
 
@@ -25,10 +20,8 @@ const CardsGym = () => {
       try{
         const result = await getTrainingClasses(token, signal);
         setClassesList(result);
-        console.log(result);
-
       }catch (error){
-        console.log(error);
+        setError(error)
       }
     }
     getClasses();
@@ -40,7 +33,7 @@ const CardsGym = () => {
     content = (<Paragraph className='empty mb-0'>there is not classes yet</Paragraph>)
   }
   if(classesList){
-    content = classesList.map((item, index) => {
+    content = classesList.slice(0,6).map((item, index) => {
       return (
         <div className="col my-2" key={index}>
           <div className="card my-2 h-100 text-start">

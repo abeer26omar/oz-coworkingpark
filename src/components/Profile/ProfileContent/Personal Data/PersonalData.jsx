@@ -72,7 +72,10 @@ const PersonalData = () => {
         getInterests(token).then(res=>{
             const optionList = res.map(item=>{
                 if(item.children?.length === 0){
-                    return { value: item.title , label: item.title }
+                    return { 
+                        label: item.title,
+                        options: []
+                    }
                 }else{
                     return { 
                         label: item.title, 
@@ -87,7 +90,10 @@ const PersonalData = () => {
         getHobbies(token).then(res=>{
             const optionList = res.map(item=>{
                 if(item.children?.length === 0){
-                    return { value: item.title , label: item.title }
+                    return { 
+                        label: item.title,
+                        options: []
+                    }
                 }else{
                     return { 
                         label: item.title, 
