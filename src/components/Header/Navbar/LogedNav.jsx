@@ -31,6 +31,7 @@ const LogedNav = ({showBlackNav, token, show})=>{
 
     const handleTabClick = (key) => {
         setActiveTab(key);
+        setSeenCount(0);
         getList();
     };
 
@@ -50,6 +51,7 @@ const LogedNav = ({showBlackNav, token, show})=>{
         try{
             const result = await getNotificationList(token, activeTab);
             setNotification(result);
+            setSeenCount(0);
             result.map(item => {
                 if(item.seen === '0'){
                     setSeenCount(prev => prev + 1);

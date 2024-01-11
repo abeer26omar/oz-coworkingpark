@@ -38,3 +38,43 @@ export const getClassById = async (token, signal , id)  => {
 
   return response.data.data;
 };
+
+export const getTrainersList = async (token, signal) => {
+    
+  const formData = new FormData();
+  formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
+
+  const config = {
+    method: "post",
+    url: `${process.env.REACT_APP_API_URL}/api/zee_trainer?access_token=${token}&skip=true`,
+    data: formData,
+    maxContentLength: Infinity,
+    maxBodyLength: Infinity,
+    signal: signal
+  };
+
+  const response = await axios(config);
+
+  return response.data.data;
+};
+
+export const getWorkingScheduleList = async (token, date, signal) => {
+
+  const formData = new FormData();
+  formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
+  formData.append("date", date);
+  formData.append("web", true);
+
+  const config = {
+    method: "post",
+    url: `${process.env.REACT_APP_API_URL}/api/zee_working_schedule?access_token=${token}&skip=true`,
+    data: formData,
+    maxContentLength: Infinity,
+    maxBodyLength: Infinity,
+    signal: signal
+  };
+
+  const response = await axios(config);
+
+  return response.data.data;
+};

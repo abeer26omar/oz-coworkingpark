@@ -5,8 +5,8 @@ import TrainerLinksCard from "./TrainerLinksCard";
 const OurTrainerPage = () => {
   return (
     <>
-  <HeadOurTrainer/>
-  <TrainerLinksCard/>
+      <HeadOurTrainer/>
+      <TrainerLinksCard/>
     </>
   );
 };

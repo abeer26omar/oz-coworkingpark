@@ -63,7 +63,7 @@ const GymHistory = () => {
                                       pontficate installed based portals after maintainabled products.
                                     </Paragraph>
                                   </div>
-                                  <div className="col-sm-3 col-12 d-sm-block d-flex justify-content-center">
+                                  <div className="col-sm-3 col-12 d-flex justify-content-sm-end justify-content-center">
                                     <div style={{
                                       width: '104px',
                                       height: '104px'
@@ -87,7 +87,49 @@ const GymHistory = () => {
                           </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
-                        
+                            <div className="card card_event">
+                                <div className="row align-items-center">
+                                  <div className='col-xxl-3 col-lg-4 col-12 d-flex justify-content-start'>
+                                    <img src={img} alt="img" width='100%' height='256px' style={{
+                                      objectFit: 'cover'
+                                    }}/>
+                                  </div>
+                                  <div className="col-xxl-8 col-lg-8 col-12">
+                                    <div className="row align-items-center justify-content-between p-lg-0 p-3">
+                                      <div className="col-sm-9 col-12">
+                                        <Paragraph className="light">
+                                          Date Submitted : Feb 2 , 2023
+                                        </Paragraph>
+                                        <Paragraph className="card-title">Boxing Class</Paragraph>
+                                        <Paragraph className="light">
+                                          Proactively envisioned multimedia based expertise crosses media
+                                          growth strategies. Seamlessly visualize quality intelectual
+                                          captal without superor collaboration idea sharing Holistically
+                                          pontficate installed based portals after maintainabled products.
+                                        </Paragraph>
+                                      </div>
+                                      <div className="col-sm-3 col-12 d-flex justify-content-sm-end justify-content-center">
+                                        <div style={{
+                                          width: '104px',
+                                          height: '104px'
+                                        }}>
+                                          <CircularProgressbarWithChildren
+                                            value={"50"}
+                                            styles={buildStyles({
+                                              pathTransitionDuration: 0.5,
+                                              pathColor: "#BDBDBD",
+                                              trailColor: "#BDBDBD",
+                                              backgroundColor: "#fff",
+                                            })}
+                                          >
+                                            <span className="progress_percentage light">12/12</span>
+                                          </CircularProgressbarWithChildren>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
                         </Tab.Pane>
                     </Tab.Content>
                 </div>
