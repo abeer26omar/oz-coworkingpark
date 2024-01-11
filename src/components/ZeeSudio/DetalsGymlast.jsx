@@ -13,24 +13,25 @@ function DetalsGymlast() {
   const [classDetails, setClassDetails] = useState({});
   const { token } = useContext(AuthContext);
   const { id } = useParams();
-  const date  = new Date()
-  console.log(date);
-
-
-  // function handleTime(time) {
-  //   const [hours, minutes, seconds] = time;
-  //   const date = new Date();
-  //   date.setHours(hours);
-  //   date.setMinutes(minutes);
-  //   date.setSeconds(seconds);
-  //   const formattedTime = date.toLocaleTimeString("en-US", {
-  //     hour: "numeric",
-  //     minute: "2-digit",
-  //     hour12: true,
-  //   });
-  //   return formattedTime;
+  // console.log(date);
+  
+  
+  
+  function handleTime(time) {
+    const [hours, minutes, seconds] = time;
+    const date  = new Date().toLocaleTimeString()
+    // const date = new Date();
+    date.setHours(hours);
+    date.setMinutes(minutes);
+    date.setSeconds(seconds);
+    // const formattedTime = date.toLocaleTimeString("en-US", {
+    //   hour: "numeric",
+    //   minute: "2-digit",
+    //   hour12: true,
+    // });
+    // return formattedTime;
    
-  // }
+  }
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
@@ -39,9 +40,9 @@ function DetalsGymlast() {
       try {
         const result = await getClassById(token, signal, id);
         setClassDetails(result);
-        console.log(result);
+        // console.log(result);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     getClass();
@@ -104,8 +105,6 @@ function DetalsGymlast() {
                   Start & End Time :
                   <span className="desc_small">
                     {classDetails.start_time}-{classDetails.end_time}
-                    {/* {handleTime(classDetails.start_time)} -
-                    {handleTime(classDetails.end_time)} */}
                   </span>
                 </Paragraph>
                 <Paragraph className="desc_small light ">

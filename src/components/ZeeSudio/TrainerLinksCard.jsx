@@ -77,7 +77,7 @@ const TrainerLinksCard = () => {
             className="btn button-outLine btn-bg-white"
             onClick={handleShowMore}
           >
-            {"Explore More"}
+            {"View More"}
           </Button>
         </div>
       </div>

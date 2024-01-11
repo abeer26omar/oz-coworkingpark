@@ -20,10 +20,7 @@ useEffect(()=>{
     try{
       let result = await getTrainingClasses(token , signal)
       setClassesGym(result)
-      console.log(result);
     }catch(error){
-      console.log(error);
-
     }
   }
   getClassesCards()
@@ -91,7 +88,7 @@ if (classesGym){
             name={""}
             className="btn button-outLine btn-bg-white m-auto-unset"
           >
-            {"Explore More"}
+            {"View More"}
           </Button>
         </div>
       </div>

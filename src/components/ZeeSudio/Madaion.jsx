@@ -30,9 +30,7 @@ const Madaion = () => {
     <>
       <section className="popularInstructor border-of-section">
         <div className="head-content-sec">
-          <Paragraph className="head_feature">
-            {"Our Best Instructor"}
-          </Paragraph>
+          <Paragraph className="head_feature">{"Our Trainers"}</Paragraph>
         </div>
         <div
           className="border-of-section"

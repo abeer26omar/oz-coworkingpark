@@ -2,11 +2,12 @@ import React from "react";
 import Paragraph from "../UI/Paragraph";
 import Button from "../UI/Button";
 import { useState } from "react";
-import BookingFilter from "../Booking/BookingFilter/BookingFilter";
+import ClassesFilter from "./ClassesFilter";
 
 function TrainingClasses() {
      const [isFilterOpen, setIsFilterOpen] = useState(false);
          const toggleFilter = (e) => {
+          console.log("log");
            e.preventDefault();
            setIsFilterOpen(!isFilterOpen);
          };
@@ -55,7 +56,7 @@ function TrainingClasses() {
                 <Button
                   tagType="link"
                   className="button-outLine px-4 btn-bg-white m-0 btn-filter text-center"
-                  // onClick={toggleFilter}
+                  onClick={toggleFilter}
                 >
                   <svg
                     className="me-3"
@@ -144,12 +145,12 @@ function TrainingClasses() {
                   Filter
                 </Button>
             </div>
-            {/* <div className="filter border-top border-bottom">
-              <BookingFilter
+            <div className="filter border-top border-bottom">
+              <ClassesFilter
                 isOpen={isFilterOpen}
                
               />
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ const CaseThree = () => {
                   <br />
                   <span className="invoice">Invoice</span>
                 </span>
-                <span className="location">
+                <span className="location w-40">
                   OZ Working space
                   <br />
                   El- sheikh- zayed Giza, Egypt
