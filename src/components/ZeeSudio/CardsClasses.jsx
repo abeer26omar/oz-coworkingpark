@@ -1,32 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Media from "../Media/Media";
 import Button from "../UI/Button";
 import Paragraph from "../UI/Paragraph";
-import { AuthContext } from "../../apis/context/AuthTokenContext";
-import { getTrainingClasses } from "../../apis/ZeeStudio";
 
-const CardsClasses = () => {
+const CardsClasses = ({classesGym}) => {
 
-    const [classesGym , setClassesGym] = useState([]);
     const [visibleCards, setVisibleCards] = useState(12);
-
-    const {token} = useContext(AuthContext);
-
-    useEffect(()=>{
-      const controller = new AbortController();
-      const signal = controller.signal;
-      const getClassesCards = async ()=>{
-        try{
-          let result = await getTrainingClasses(token , signal)
-          setClassesGym(result)
-        }catch(error){
-          console.log(error);
-
-        }
-      }
-      getClassesCards()
-      return () => {controller.abort()}
-    },[])
 
     let content = '';
     if (classesGym.length === 0) {

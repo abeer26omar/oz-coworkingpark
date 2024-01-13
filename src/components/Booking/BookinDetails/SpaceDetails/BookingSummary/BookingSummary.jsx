@@ -354,7 +354,7 @@ const BookingSummary = () => {
                                     stroke-linejoin="round"
                                   />
                                 </svg>
-                                {setTime(bookingData?.time.start)} -{" "}
+                                {setTime(bookingData?.time.start)} - {" "}
                                 {setTime(bookingData?.time.end)} - (
                                 {getPeriod(
                                   bookingData?.time.start,

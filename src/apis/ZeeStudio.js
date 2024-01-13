@@ -1,10 +1,20 @@
 import axios from "axios";
 import FormData from "form-data";
 
-export const getTrainingClasses = async (token, signal) => {
+export const getTrainingClasses = async (token, search_text, start_date, category_id, signal) => {
     
   const formData = new FormData();
   formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
+
+  if(search_text){
+    formData.append("search_text", search_text);
+  }
+  if(start_date){
+    formData.append("start_date", start_date);
+  }
+  if(category_id){
+    formData.append("category_id", category_id);
+  }
 
   const config = {
     method: "post",
@@ -79,8 +89,10 @@ export const getWorkingScheduleList = async (token, date, signal) => {
   return response.data.data;
 };
 
-export const BookGymClass = async (token, class_id, classDate, paymentType) => {
+export const BookGymClass = async (token, class_id, classDate, paymentType, signal) => {
+
   const formData = new FormData();
+
   formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
   formData.append("training_id", class_id);
   formData.append("date", classDate);
@@ -92,7 +104,7 @@ export const BookGymClass = async (token, class_id, classDate, paymentType) => {
     data: formData,
     maxContentLength: Infinity,
     maxBodyLength: Infinity,
-    // signal: signal,
+    signal: signal,
   };
 
   const response = await axios(config);

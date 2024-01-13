@@ -4,13 +4,15 @@ import Button from "../UI/Button";
 import { useState } from "react";
 import ClassesFilter from "./ClassesFilter";
 
-function TrainingClasses() {
-     const [isFilterOpen, setIsFilterOpen] = useState(false);
-         const toggleFilter = (e) => {
-          console.log("log");
-           e.preventDefault();
-           setIsFilterOpen(!isFilterOpen);
-         };
+function TrainingClasses({classesGym, getFilteredData}) {
+
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+    const toggleFilter = (e) => {
+        e.preventDefault();
+        setIsFilterOpen(!isFilterOpen);
+    };
+
   return (
     <>
       <div className="navigator border-solid my-3">
@@ -145,10 +147,11 @@ function TrainingClasses() {
                   Filter
                 </Button>
             </div>
-            <div className="filter border-top border-bottom">
+            <div className="filter">
               <ClassesFilter
                 isOpen={isFilterOpen}
-               
+                classesGym={classesGym || []}
+                getFilteredData={getFilteredData}
               />
             </div>
           </div>

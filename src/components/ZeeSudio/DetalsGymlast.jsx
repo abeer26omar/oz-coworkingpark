@@ -168,7 +168,7 @@ function DetalsGymlast({ details }) {
                 </ul> */}
               </div>
             </div>
-            <div className="col-12 py-5">
+            <div className="col-12 py-5 video-container position-relative">
               <video
                 src={details.video}
                 className="w-100"

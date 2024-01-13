@@ -7,17 +7,21 @@ import CaseThree from "./CasesPay/CaseThree";
 import Button from "../UI/Button";
 import { BookGymClass } from "../../apis/ZeeStudio";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
+
 const PaymentGym = () => {
+
   const {token} = useContext(AuthContext)
   const [current, setCurrent] = useState(0);
-  const [bookingRuslt, setBookingRuslet] = useState({});
+  const [bookingResult, setBookingResult] = useState({});
   const [paymentDetails, setPaymentDetails] = useState(
     JSON.parse(sessionStorage.getItem("OZgymCourseDetails"))
   );
   const [inputValue, setInputValue] = useState("cash");
+
   const getPaymentValue = (value) => {
     setInputValue(value);
   };
+
   const steps = [
     {
       title: "Summary Booking",
@@ -31,20 +35,18 @@ const PaymentGym = () => {
     },
     {
       title: "Invoice details",
-      ContentTitle: "Amount Due",
-      content: <CaseThree bookingRuslt={bookingRuslt} />,
+      ContentTitle: bookingResult?.invoice_title,
+      content: <CaseThree bookingResult={bookingResult} />,
     },
   ];
+  
   const bookRequset = async () => {
-    // const controller = new AbortController();
-    // const signal = controller.signal;
+    const controller = new AbortController();
+    const signal = controller.signal;
     try {
-      const result = await BookGymClass(token ,paymentDetails.id , paymentDetails.date , inputValue )
-    setBookingRuslet(result)
+      const result = await BookGymClass(token, paymentDetails.id, paymentDetails.date, inputValue, signal)
+      setBookingResult(result)
       setCurrent(current + 1);
-      
-
-
     }catch(error){
       console.log(error);
     }
@@ -52,7 +54,7 @@ const PaymentGym = () => {
   }
   const next = () => {
     if (current === 1) {
-    bookRequset();
+      bookRequset();
     } else {
       setCurrent(current + 1);
     }
@@ -61,6 +63,7 @@ const PaymentGym = () => {
   useEffect(() => {
     setPaymentDetails(JSON.parse(sessionStorage.getItem("OZgymCourseDetails")));
   }, []);
+
   const items = steps.map((item) => ({
     key: item.title,
     title: item.title,

@@ -1,4 +1,4 @@
-const CaseThree = ( {bookingRuslt} ) => {
+const CaseThree = ( {bookingResult} ) => {
 
 
 
@@ -8,17 +8,20 @@ const CaseThree = ( {bookingRuslt} ) => {
         <div className="col-lg-6 col-md-6 col-sm-12 order-summary">
           <div className="order-details">
             <h2>
-              Amount Due
-              <br /> #1123334
+              {bookingResult.invoice_title}
+              <br /> #{bookingResult.invoice_id}
             </h2>
             <div className="d-flex align-items-center justify-content-between">
               <span className="date-period">
-                Date Period:{bookingRuslt.invoice_date}
+                Date Period: {bookingResult.invoice_date}
                 <br />
                 <span className="invoice">Invoice</span>
               </span>
-              <span className="location w-40">
-                {bookingRuslt.invoice_address}
+              <span className="location w-40" 
+              dangerouslySetInnerHTML={{
+                __html: bookingResult.invoice_address.replace(/\n/g, "<br />"),
+              }}>
+                {/* {bookingResult.invoice_address} */}
               </span>
             </div>
           </div>
@@ -28,9 +31,9 @@ const CaseThree = ( {bookingRuslt} ) => {
                 <span className="date-period">Description</span>
               </div>
               <div className="d-flex align-items-center justify-content-between item-box ">
-                <span className="item-name">{bookingRuslt.training.title}</span>
+                <span className="item-name">{bookingResult.training.title}</span>
                 <span className="item-price">
-                  {bookingRuslt.invoice_price} EGP
+                  {bookingResult.invoice_price} EGP
                 </span>
               </div>
             </div>
@@ -38,15 +41,15 @@ const CaseThree = ( {bookingRuslt} ) => {
             <div className="d-flex align-items-center justify-content-between line">
               <span className="date-period">Tax 14%</span>
               <span className="location">
-                {Math.floor(bookingRuslt.invoice_price * 14) / 100}
+                {Math.floor(bookingResult.invoice_price * 14) / 100}
                 EGP
               </span>
             </div>
             <div className="d-flex align-items-center justify-content-between item-box">
               <span className="item-total">Total Price:</span>
               <span className="item-total-price">
-                {Math.floor(bookingRuslt.invoice_price * 14) / 100 +
-                  bookingRuslt.invoice_price}
+                {Math.floor(bookingResult.invoice_price * 14) / 100 +
+                  bookingResult.invoice_price}
                 EGP
               </span>
             </div>
@@ -58,13 +61,12 @@ const CaseThree = ( {bookingRuslt} ) => {
               <h2>{"Yoga As Therapy"}</h2>
             </div>
             <div className="booking-items">
-              <span>Date : {bookingRuslt.training.start_date}</span>
+              <span>Date : {bookingResult.training.start_date}</span>
               <span>
-                Time :{bookingRuslt.training.start_time}{" "}
-                {bookingRuslt.training.end_time}
+                Time :{bookingResult.training.start_time}{"-"}
+                {bookingResult.training.end_time}
               </span>
-              <span>Number of people : 3 People</span>
-              <span>Cash notes : {bookingRuslt.payment_type}</span>
+              <span>Cash notes: {bookingResult.payment_type}</span>
             </div>
           </div>
         </div>
