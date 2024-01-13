@@ -78,3 +78,24 @@ export const getWorkingScheduleList = async (token, date, signal) => {
 
   return response.data.data;
 };
+
+export const BookGymClass = async (token, class_id, classDate, paymentType) => {
+  const formData = new FormData();
+  formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
+  formData.append("training_id", class_id);
+  formData.append("date", classDate);
+  formData.append("payment_type", paymentType);
+
+  const config = {
+    method: "post",
+    url: `${process.env.REACT_APP_API_URL}/api/zee_invoice_confirm?access_token=${token}`,
+    data: formData,
+    maxContentLength: Infinity,
+    maxBodyLength: Infinity,
+    // signal: signal,
+  };
+
+  const response = await axios(config);
+
+  return response.data.data;
+};

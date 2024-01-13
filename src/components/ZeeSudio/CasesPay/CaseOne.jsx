@@ -7,27 +7,28 @@ import Payment from "../../UI/Icons/Payment";
 function CaseOne({ details, style }) {
   return (
     <>
-      {console.log(details)}
       <div className="p-5">
         <Paragraph className="paragraph_black light py-3">
-          Yoga As Therapy
+          {details.title}
         </Paragraph>
         <ul className="p-0">
           <li className="d-flex align-items-center mb-4">
             <Calunder />
-            <Paragraph className="mb-0 mx-2">Monday, Feb. 2 , 2023</Paragraph>
+            <Paragraph className="mb-0 mx-2">{details.date}</Paragraph>
           </li>
           <li className="d-flex align-items-center mb-4">
             <Alarm />
-            <Paragraph className="mb-0 mx-2">45 Minutes</Paragraph>
+            <Paragraph className="mb-0 mx-2">{details.duration}</Paragraph>
           </li>
           <li className="d-flex align-items-center mb-4">
             <Advanced />
-            <Paragraph className="mb-0 mx-2">Advanced</Paragraph>
+            <Paragraph className="mb-0 mx-2">{details.level}</Paragraph>
           </li>
           <li className="d-flex align-items-center mb-4">
             <Payment />
-            <Paragraph className="mb-0 mx-2">150 EGP</Paragraph>
+            <Paragraph className="mb-0 mx-2">
+              {Math.floor(details.price)} EGP
+            </Paragraph>
           </li>
         </ul>
       </div>

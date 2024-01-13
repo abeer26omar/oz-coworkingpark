@@ -1,45 +1,63 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { message, Steps, theme } from "antd";
 import Paragraph from "../UI/Paragraph";
 import CaseOne from "./CasesPay/CaseOne";
 import CaseTwo from "./CasesPay/CaseTwo";
 import CaseThree from "./CasesPay/CaseThree";
 import Button from "../UI/Button";
-
+import { BookGymClass } from "../../apis/ZeeStudio";
+import { AuthContext } from "../../apis/context/AuthTokenContext";
 const PaymentGym = () => {
-  const { token } = theme.useToken();
+  const {token} = useContext(AuthContext)
   const [current, setCurrent] = useState(0);
+  const [bookingRuslt, setBookingRuslet] = useState({});
   const [paymentDetails, setPaymentDetails] = useState(
     JSON.parse(sessionStorage.getItem("OZgymCourseDetails"))
   );
-
-  const contentStyle = {
-    backgroundColor: token.colorBgBase,
+  const [inputValue, setInputValue] = useState("cash");
+  const getPaymentValue = (value) => {
+    setInputValue(value);
   };
-
   const steps = [
     {
       title: "Summary Booking",
       ContentTitle: "Summary Booking",
-      content: <CaseOne details={paymentDetails} style={""} />,
+      content: <CaseOne details={paymentDetails} />,
     },
     {
       title: "Payment Method",
       ContentTitle: "Payment Method",
-      content: <CaseTwo />,
+      content: <CaseTwo getPaymentValue={getPaymentValue} />,
     },
     {
       title: "Invoice details",
       ContentTitle: "Amount Due",
-      content: <CaseThree />,
+      content: <CaseThree bookingRuslt={bookingRuslt} />,
     },
   ];
+  const bookRequset = async () => {
+    // const controller = new AbortController();
+    // const signal = controller.signal;
+    try {
+      const result = await BookGymClass(token ,paymentDetails.id , paymentDetails.date , inputValue )
+    setBookingRuslet(result)
+      setCurrent(current + 1);
+      
+
+
+    }catch(error){
+      console.log(error);
+    }
+
+  }
   const next = () => {
-    setCurrent(current + 1);
+    if (current === 1) {
+    bookRequset();
+    } else {
+      setCurrent(current + 1);
+    }
   };
-  // const prev = () => {
-  //   setCurrent(current - 1);
-  // };
+ 
   useEffect(() => {
     setPaymentDetails(JSON.parse(sessionStorage.getItem("OZgymCourseDetails")));
   }, []);
@@ -50,6 +68,7 @@ const PaymentGym = () => {
 
   return (
     <>
+   
       <div
         className="container py-5 steps-payment"
         style={{
@@ -72,7 +91,7 @@ const PaymentGym = () => {
           <div className={current < steps.length - 1 ? "px_7" : null}>
             <div
               className=""
-              style={current < steps.length - 1 ? contentStyle : null}
+              // style={current < steps.length - 1 ? '' : null}
             >
               {steps[current].content}
 
@@ -91,10 +110,9 @@ const PaymentGym = () => {
             <div className="text-center">
               {current === steps.length - 1 && (
                 <Button
-                  to ='/'
+                  to="/"
                   className="button-outLine btn-bg-white"
                   tagType="link"
-                  // onClick={() => message.success("Processing complete!")}
                 >
                   Back Home
                 </Button>
