@@ -1,14 +1,35 @@
 import Paragraph from "../UI/Paragraph";
 import CountUp from 'react-countup';
 import './OzKnowledge.css';
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { getCategoriesList } from '../../apis/OzKnowledge';
+import {AuthContext} from '../../apis/context/AuthTokenContext';
 
 const KnowledgeDescription = () => {
+    const [categories, setCategories] = useState([]);
+    const { token } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
-    const HandelCourses = (info) => {
-        navigate(`/courses/${info}`);
+    useEffect(()=>{
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        const getCategories = async () => {
+            try{
+                const result = await getCategoriesList(token, signal);
+                setCategories(result);
+            }catch (error){
+                console.log(error);
+            }
+        }
+        getCategories();
+        return () => controller.abort();
+    }, []);
+
+    const HandelCourses = (id) => {
+        navigate(`/courses/${id}`);
     }
 
     return (
@@ -135,122 +156,22 @@ const KnowledgeDescription = () => {
                 
                 </div>
             </section>
-            <section className="container-fluid px-70 py-5">
+            <section className="container px-70 py-5">
                 <Paragraph className='main_section_title'>Popular Category</Paragraph>
                 <div className="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-lg-5 g-3 justify-content-center py-5">
-                    <div className="col">
-                        <div className="categorey_box d-flex flex-column justify-content-center align-items-center">
-                            <div className="popular_icon mb-3" onClick={()=>HandelCourses('design')}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                    <path d="M11.4219 15.5C12.4574 15.5 13.2969 14.6605 13.2969 13.625C13.2969 12.5895 12.4574 11.75 11.4219 11.75C10.3863 11.75 9.54688 12.5895 9.54688 13.625C9.54688 14.6605 10.3863 15.5 11.4219 15.5Z" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M3.54688 21.4984L10.1 14.9453" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M3.54688 21.5L16.625 19.325C16.7541 19.303 16.875 19.2471 16.9755 19.1631C17.0759 19.0791 17.1523 18.97 17.1969 18.8469L19.2969 13.25L11.7969 5.75L6.2 7.85C6.07667 7.89698 5.9677 7.9753 5.88386 8.07722C5.80002 8.17915 5.74419 8.30117 5.72188 8.43125L3.54688 21.5Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M19.2969 13.2519L21.7625 10.7862C21.8334 10.7165 21.8896 10.6333 21.9281 10.5415C21.9665 10.4498 21.9862 10.3513 21.9862 10.2519C21.9862 10.1524 21.9665 10.0539 21.9281 9.96221C21.8896 9.87047 21.8334 9.78728 21.7625 9.7175L15.3312 3.28625C15.2615 3.21538 15.1783 3.15911 15.0865 3.12069C14.9948 3.08228 14.8963 3.0625 14.7969 3.0625C14.6974 3.0625 14.599 3.08228 14.5072 3.12069C14.4155 3.15911 14.3323 3.21538 14.2625 3.28625L11.7969 5.75187" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                    {categories && categories.map((item, index) => {
+                        return (
+                            <div className="col" key={index}>
+                                <div className="categorey_box d-flex flex-column justify-content-center align-items-center">
+                                    <div className="popular_icon mb-3" onClick={()=>HandelCourses(item.id)}>
+                                        <img src={item.image} alt={item.title} width='24px' height='24px' />
+                                    </div>
+                                    <Paragraph className="popular_title">{item.title}</Paragraph>
+                                    <Paragraph className='mb-0 popular_desc'>20 Course</Paragraph>
+                                </div>
                             </div>
-                            <Paragraph className="popular_title">Design</Paragraph>
-                            <Paragraph className='mb-0 popular_desc'>20 Course</Paragraph>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="d-flex flex-column justify-content-center align-items-center">
-                            <div className="popular_icon mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                    <path d="M20.0469 20H5.04688C4.64905 20 4.26752 19.842 3.98621 19.5607C3.70491 19.2794 3.54688 18.8978 3.54688 18.5V8C3.54688 7.60218 3.70491 7.22064 3.98621 6.93934C4.26752 6.65804 4.64905 6.5 5.04688 6.5H8.04688L9.54688 4.25H15.5469L17.0469 6.5H20.0469C20.4447 6.5 20.8262 6.65804 21.1075 6.93934C21.3888 7.22064 21.5469 7.60218 21.5469 8V18.5C21.5469 18.8978 21.3888 19.2794 21.1075 19.5607C20.8262 19.842 20.4447 20 20.0469 20Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M12.5469 16.25C14.4108 16.25 15.9219 14.739 15.9219 12.875C15.9219 11.011 14.4108 9.5 12.5469 9.5C10.6829 9.5 9.17188 11.011 9.17188 12.875C9.17188 14.739 10.6829 16.25 12.5469 16.25Z" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <Paragraph className="popular_title">Photography</Paragraph>
-                            <Paragraph className='mb-0 popular_desc'>20 Course</Paragraph>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="d-flex flex-column justify-content-center align-items-center">
-                            <div className="popular_icon mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                <path d="M11.7969 17H8.79688" stroke="#BDBDBD" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M10.2969 20.75V17" stroke="#BDBDBD" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M3.92188 17V20.75" stroke="#BDBDBD" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M6.54688 17V20.75" stroke="#BDBDBD" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M3.92188 18.875H6.54688" stroke="#BDBDBD" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M20.4219 17V20.75H22.6719" stroke="#BDBDBD" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M14.0469 20.75V17L15.9219 19.625L17.7969 17V20.75" stroke="#BDBDBD" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M5.04688 13.25V4.25C5.04688 4.05109 5.12589 3.86032 5.26655 3.71967C5.4072 3.57902 5.59796 3.5 5.79688 3.5H14.7969L20.0469 8.75V13.25" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M14.7969 3.5V8.75H20.0469" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <Paragraph className="popular_title">Development</Paragraph>
-                            <Paragraph className='mb-0 popular_desc'>20 Course</Paragraph>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="d-flex flex-column justify-content-center align-items-center">
-                            <div className="popular_icon mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                    <path d="M9.24727 6.03125L8.52539 4.29688" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M4.57812 10.6984L2.84375 9.97656" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M20.5156 10.6984L22.25 9.97656" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M15.8477 6.03125L16.5695 4.29688" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M20.0469 19.25H5.04688" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M7.12813 15.5014C6.89537 14.6657 6.85906 13.7876 7.02201 12.9355C7.18497 12.0835 7.54278 11.2807 8.06748 10.5899C8.59217 9.89909 9.26953 9.339 10.0466 8.95341C10.8237 8.56782 11.6794 8.36719 12.5469 8.36719C13.4144 8.36719 14.2701 8.56782 15.0471 8.95341C15.8242 9.339 16.5016 9.89909 17.0263 10.5899C17.551 11.2807 17.9088 12.0835 18.0717 12.9355C18.2347 13.7876 18.1984 14.6657 17.9656 15.5014" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M23.0469 15.5H2.04688" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <Paragraph className="popular_title">Lifestyle</Paragraph>
-                            <Paragraph className='mb-0 popular_desc'>20 Course</Paragraph>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="d-flex flex-column justify-content-center align-items-center">
-                            <div className="popular_icon mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                    <path d="M3.54688 12.5H7.29688L8.79688 10.25L11.7969 14.75L13.2969 12.5H15.5469" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M3.18125 9.50001C3.17188 9.37813 3.17188 9.24688 3.17188 9.12501C3.17188 7.99803 3.56234 6.90585 4.27683 6.03431C4.99133 5.16277 5.98571 4.5657 7.09081 4.34468C8.19591 4.12366 9.34344 4.29235 10.3382 4.82204C11.3329 5.35174 12.1134 6.20972 12.5469 7.25001V7.25001C12.9803 6.20972 13.7608 5.35174 14.7556 4.82204C15.7503 4.29235 16.8978 4.12366 18.0029 4.34468C19.108 4.5657 20.1024 5.16277 20.8169 6.03431C21.5314 6.90585 21.9219 7.99803 21.9219 9.12501C21.9219 15.5 12.5469 20.75 12.5469 20.75C12.5469 20.75 8.80625 18.65 6.05 15.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <Paragraph className="popular_title">Health & Fitness</Paragraph>
-                            <Paragraph className='mb-0 popular_desc'>20 Course</Paragraph>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="d-flex flex-column justify-content-center align-items-center">
-                            <div className="popular_icon mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                    <path d="M8.79688 22.25H16.2969" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M7.92508 16.1584C7.0322 15.4641 6.30904 14.5757 5.81038 13.5605C5.31173 12.5454 5.05066 11.43 5.04696 10.299C5.02821 6.23023 8.30008 2.84586 12.3688 2.75211C13.9435 2.71478 15.49 3.17417 16.7889 4.06514C18.0878 4.9561 19.0733 6.23341 19.6055 7.7159C20.1377 9.1984 20.1896 10.8108 19.754 12.3245C19.3183 13.8382 18.4171 15.1763 17.1782 16.149C16.9045 16.3605 16.6829 16.6318 16.5301 16.9422C16.3774 17.2525 16.2976 17.5937 16.297 17.9396V18.5021C16.297 18.701 16.2179 18.8918 16.0773 19.0324C15.9366 19.1731 15.7459 19.2521 15.547 19.2521H9.54696C9.34804 19.2521 9.15728 19.1731 9.01663 19.0324C8.87597 18.8918 8.79696 18.701 8.79696 18.5021V17.9396C8.79461 17.5963 8.71502 17.2579 8.56409 16.9496C8.41316 16.6412 8.19476 16.3708 7.92508 16.1584V16.1584Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M13.3047 5.82422C14.2214 5.97961 15.0672 6.41569 15.7255 7.07228C16.3837 7.72886 16.822 8.57358 16.9797 9.48984" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <Paragraph className="popular_title">Personal Develop</Paragraph>
-                            <Paragraph className='mb-0 popular_desc'>20 Course</Paragraph>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="d-flex flex-column justify-content-center align-items-center">
-                            <div className="popular_icon mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                    <path d="M16.2969 7.25V5.75C16.2969 5.35218 16.1388 4.97064 15.8575 4.68934C15.5762 4.40804 15.1947 4.25 14.7969 4.25H10.2969C9.89905 4.25 9.51752 4.40804 9.23622 4.68934C8.95491 4.97064 8.79688 5.35218 8.79688 5.75V7.25" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M21.5469 12.3398C18.8115 13.9218 15.7067 14.753 12.5469 14.7492C9.38642 14.7574 6.28051 13.926 3.54688 12.3398" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M11.4219 11.75H13.6719" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M20.7969 7.25H4.29688C3.88266 7.25 3.54688 7.58579 3.54688 8V20C3.54688 20.4142 3.88266 20.75 4.29688 20.75H20.7969C21.2111 20.75 21.5469 20.4142 21.5469 20V8C21.5469 7.58579 21.2111 7.25 20.7969 7.25Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <Paragraph className="popular_title">Business Industry</Paragraph>
-                            <Paragraph className='mb-0 popular_desc'>20 Course</Paragraph>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="d-flex flex-column justify-content-center align-items-center">
-                            <div className="popular_icon mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                    <path d="M8.79688 21.5C10.8679 21.5 12.5469 19.8211 12.5469 17.75C12.5469 15.6789 10.8679 14 8.79688 14C6.72581 14 5.04688 15.6789 5.04688 17.75C5.04688 19.8211 6.72581 21.5 8.79688 21.5Z" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M12.5469 17.75V4.25L20.0469 6.5V11L12.5469 8.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <Paragraph className="popular_title">Music</Paragraph>
-                            <Paragraph className='mb-0 popular_desc'>20 Course</Paragraph>
-                        </div>
-                    </div>
+                        )
+                    })}
                 </div>
             </section>
         </>

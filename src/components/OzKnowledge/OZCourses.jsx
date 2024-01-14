@@ -6,7 +6,7 @@ import CoursesDetails from './CoursesDetails';
 
 const OZCourses = () => {
 
-    const {name} = useParams();
+    const {id} = useParams();
 
     return (
         <>
@@ -19,7 +19,7 @@ const OZCourses = () => {
                             <React.Fragment key={index}>
                                 {configItem.key === 'booking_page_title' && ( */}
                                     <Paragraph className='main_header mb-3'>{'OZ Knowledge'}</Paragraph>
-                                    <Paragraph className='head_paragraph mb-3'>{name}</Paragraph>
+                                    <Paragraph className='head_paragraph mb-3'>{id}</Paragraph>
                                 {/* )}
                                 {configItem.key === 'booking_page_description' && ( */}
                                     <Paragraph className='description mb-0'>{'Lorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit amet, consectetuerLorem ipsum dolor sit'}</Paragraph>

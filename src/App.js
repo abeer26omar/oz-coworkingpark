@@ -153,7 +153,7 @@ function App() {
           { path:'sendcontact', element: <RouterGuard element={ContactAdmin} />},
           { path:'invoice', element: <Invoice />},
           { path:'knowledge', element: <Knowledge />},
-          { path:'courses/:name', element: <OZCourses />},
+          { path:'courses/:id', element: <OZCourses />},
           { path:'coursedetails/:id', element: <CourseDetails />},
           { path:'coursesHistory', element: <CoursesHistory/>},
           { path:'coursetracting/:id', element: <CourseTracting />},
