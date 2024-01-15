@@ -4,7 +4,7 @@ import Button from "../UI/Button";
 import { useState } from "react";
 import ClassesFilter from "./ClassesFilter";
 
-function TrainingClasses({classesGym, getFilteredData}) {
+function TrainingClasses({getFilteredData, limit}) {
 
     const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -150,8 +150,8 @@ function TrainingClasses({classesGym, getFilteredData}) {
             <div className="filter">
               <ClassesFilter
                 isOpen={isFilterOpen}
-                classesGym={classesGym || []}
                 getFilteredData={getFilteredData}
+                limit={limit}
               />
             </div>
           </div>

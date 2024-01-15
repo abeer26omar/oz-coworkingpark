@@ -8,6 +8,7 @@ import { getTrainingClasses } from "../../apis/ZeeStudio";
 function MoreClasses() {
 
   const [classesGym , setClassesGym] = useState([]);
+  const [limit, setLimit] = useState(12);
   const [classesGymFilter , setClassesGymFilter] = useState([]);
 
   const {token} = useContext(AuthContext);
@@ -18,7 +19,7 @@ function MoreClasses() {
 
       const getClassesCards = async ()=>{
         try{
-          const result = await getTrainingClasses(token, '', '', '', signal)
+          const result = await getTrainingClasses(token, limit, 0, '', '','' ,signal)
           setClassesGym(result);
           setClassesGymFilter(result);
         }catch(error){
@@ -28,17 +29,20 @@ function MoreClasses() {
 
       getClassesCards()
       return () => {controller.abort()}
-    },[]);
+    },[limit]);
 
   const getFilteredData = (data) => {
     setClassesGym(data);
+  }
+  const getLimit = (value) => {
+    setLimit(value)
   }
 
   return (
     <>
       <HeaderClasses/>
-      <TrainingClasses classesGym={classesGymFilter || []} getFilteredData={getFilteredData} />
-      <CardsClasses classesGym={classesGym} />
+      <TrainingClasses classesGym={classesGymFilter || []} getFilteredData={getFilteredData} limit={limit}/>
+      <CardsClasses classesGym={classesGym} getLimit={getLimit} />
     </>
   )
 }

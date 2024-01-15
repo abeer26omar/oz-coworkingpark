@@ -1,7 +1,7 @@
 import CountUp from 'react-countup';
 import Paragraph from '../../UI/Paragraph';
 
-const Counter = () => {
+const Counter = ({course_hours, total_assignment, video_lessons, student_enrolled}) => {
     return (
         <>
             <section className="container-fluid px-70">
@@ -9,7 +9,7 @@ const Counter = () => {
                     <div className="col">
                         <div className="d-flex flex-column justify-content-between align-items-center">
                             <CountUp 
-                                end={24} 
+                                end={course_hours} 
                                 separator="," 
                                 enableScrollSpy 
                                 scrollSpyOnce 
@@ -22,7 +22,7 @@ const Counter = () => {
                     <div className="col">
                         <div className="d-flex flex-column justify-content-between align-items-center">
                             <CountUp 
-                                end={18} 
+                                end={total_assignment} 
                                 separator="," 
                                 enableScrollSpy 
                                 scrollSpyOnce 
@@ -35,7 +35,7 @@ const Counter = () => {
                     <div className="col">
                         <div className="d-flex flex-column justify-content-between align-items-center">
                             <CountUp 
-                                end={20} 
+                                end={video_lessons} 
                                 separator="," 
                                 enableScrollSpy 
                                 scrollSpyOnce 
@@ -48,7 +48,7 @@ const Counter = () => {
                     <div className="col">
                         <div className="d-flex flex-column justify-content-between align-items-center">
                             <CountUp 
-                                end={4312} 
+                                end={student_enrolled} 
                                 separator="," 
                                 enableScrollSpy 
                                 scrollSpyOnce 

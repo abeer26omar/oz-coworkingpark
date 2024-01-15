@@ -3,9 +3,9 @@ import Media from "../Media/Media";
 import Button from "../UI/Button";
 import Paragraph from "../UI/Paragraph";
 
-const CardsClasses = ({classesGym}) => {
+const CardsClasses = ({classesGym, getLimit}) => {
 
-    const [visibleCards, setVisibleCards] = useState(12);
+    const [limit, setLimit] = useState(12);
 
     let content = '';
     if (classesGym.length === 0) {
@@ -14,10 +14,10 @@ const CardsClasses = ({classesGym}) => {
       );
     }
     if (classesGym){
-      content = classesGym.slice(0, visibleCards).map((card , index)=>{
+      content = classesGym.map((card , index)=>{
         return (
           <>
-            <div className="col-xl-4 col-md-6 col-sm-12 my-2" key={index}>
+            <div className="col-xxl-3 col-xl-4 col-md-6 col-sm-12 my-2" key={index}>
               <div className="card my-2 h-100 text-start">
                 <Media
                   type="img"
@@ -51,7 +51,8 @@ const CardsClasses = ({classesGym}) => {
     }
 
     const HandelShowMore = () => {
-      setVisibleCards(prevVisibleCards => prevVisibleCards + 3);
+      setLimit(prevLimit => prevLimit + 3);
+      getLimit(limit)
     };
 
   return (
@@ -64,7 +65,7 @@ const CardsClasses = ({classesGym}) => {
           </Paragraph>
           {content}
         </div>
-        {classesGym && visibleCards < classesGym.length && (
+        {/* {classesGym && visibleCards < classesGym.length && ( */}
           <div className="text-center">
             <Button
               tagType="link"
@@ -74,7 +75,7 @@ const CardsClasses = ({classesGym}) => {
               {"View More"}
             </Button>
           </div>
-        )}
+        {/* )} */}
       </div>
     </>
   );

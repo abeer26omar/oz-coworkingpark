@@ -1,14 +1,37 @@
 import Paragraph from '../UI/Paragraph';
 import Slider from "react-slick";
 import CourseCard from './CourseCard';
+import { useState, useContext, useEffect } from 'react';
+import { AuthContext } from '../../apis/context/AuthTokenContext';
+import { getCoursesList } from '../../apis/OzKnowledge';
 
 const PopularCourses = () => {
 
+    const [courses, setCourses] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const { token } = useContext(AuthContext);
+
+    useEffect(()=>{
+        const controller = new AbortController();
+        const signal = controller.signal;
+        const getCategories = async () => {
+            try{
+                const result = await getCoursesList(token, signal, 10, 0);
+                setCourses(result);
+                setLoading(false);
+            }catch (error){
+                console.log(error);
+            }
+        }
+        getCategories();
+        return () => controller.abort();
+    }, []);
+
     const settings = {
-        dots: true,
+        dots: false,
         arrows: true,
         slidesToShow: 3,
-        slidesToScroll: 1,
+        slidesToScroll: 3,
         infinite: true,
         centerMode: true,
         centerPadding: '60px 0px 0px 0px',
@@ -58,24 +81,13 @@ const PopularCourses = () => {
                             </div>
                             <div className='col-lg-9 col-md-8 col-12'>
                                 <Slider {...settings} className='slick_knowledge py-5'>
-                                    <div className='px-sm-2 px-0'>
-                                        <CourseCard />
-                                    </div>
-                                    <div className='px-sm-2 px-0'>
-                                        <CourseCard />
-                                    </div>
-                                    <div className='px-sm-2 px-0'>
-                                        <CourseCard />
-                                    </div>
-                                    <div className='px-sm-2 px-0'>
-                                        <CourseCard />
-                                    </div>
-                                    <div className='px-sm-2 px-0'>
-                                        <CourseCard />
-                                    </div>
-                                    <div className='px-sm-2 px-0'>
-                                        <CourseCard />
-                                    </div>
+                                    {courses && courses.map((item, index) => {
+                                        return (
+                                            <div className='px-sm-2 px-0' key={index}>
+                                                <CourseCard coursesDetails={item} loading={loading} />
+                                            </div>
+                                        )
+                                    })}
                                 </Slider>
                             </div>
                         </div>

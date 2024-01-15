@@ -38,9 +38,11 @@ export const getCategoryById = async (token, signal, id) => {
   return response.data.data;
 };
 
-export const getInstructorsList = async (token, signal) => {
+export const getInstructorsList = async (token, signal, limit, page) => {
   const formData = new FormData();
   formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
+  formData.append("limit", limit);
+  formData.append("page", page);
 
   const config = {
     method: "post",
@@ -75,25 +77,29 @@ export const getInstructorById = async (token, signal, id) => {
   return response.data.data;
 };
 
-export const getCoursesList = async (token, signal) => {
-  const formData = new FormData();
-  formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
-
-  const config = {
-    method: "post",
-    url: `${process.env.REACT_APP_API_URL}/api/zee_knowledge_courses?access_token=${token}&skip=true`,
-    data: formData,
-    maxContentLength: Infinity,
-    maxBodyLength: Infinity,
-    signal: signal,
-  };
-
-  const response = await axios(config);
-
-  return response.data.data;
+export const getCoursesList = async (token, signal, limit, page) => {
+    
+    const formData = new FormData();
+    formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
+    formData.append("limit", limit);
+    formData.append("page", page);
+  
+    const config = {
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}/api/zee_knowledge_courses?access_token=${token}&skip=true`,
+      data: formData,
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity,
+      signal: signal
+    };
+  
+    const response = await axios(config);
+  
+    return response.data.data;
 };
 
 export const getCoursesById = async (token, signal, id) => {
+  
   const formData = new FormData();
   formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
   formData.append("id", id);

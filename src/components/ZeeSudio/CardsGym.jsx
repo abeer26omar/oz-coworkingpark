@@ -18,7 +18,7 @@ const CardsGym = () => {
 
     const getClasses = async () => {
       try{
-        const result = await getTrainingClasses(token, '', '', '' ,signal);
+        const result = await getTrainingClasses(token, 6, 0,signal);
         setClassesList(result);
       }catch (error){
         setError(error)
@@ -33,7 +33,7 @@ const CardsGym = () => {
     content = (<Paragraph className='empty mb-0'>there is not classes yet</Paragraph>)
   }
   if(classesList){
-    content = classesList.slice(0,6).map((item, index) => {
+    content = classesList.map((item, index) => {
       return (
         <div className="col my-2" key={index}>
           <div className="card my-2 h-100 text-start">

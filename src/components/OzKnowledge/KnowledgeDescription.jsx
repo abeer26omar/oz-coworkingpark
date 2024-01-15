@@ -167,7 +167,7 @@ const KnowledgeDescription = () => {
                                         <img src={item.image} alt={item.title} width='24px' height='24px' />
                                     </div>
                                     <Paragraph className="popular_title">{item.title}</Paragraph>
-                                    <Paragraph className='mb-0 popular_desc'>20 Course</Paragraph>
+                                    <Paragraph className='mb-0 popular_desc'>{item.course_count} Course</Paragraph>
                                 </div>
                             </div>
                         )
