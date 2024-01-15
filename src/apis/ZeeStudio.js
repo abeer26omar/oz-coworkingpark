@@ -111,3 +111,23 @@ export const BookGymClass = async (token, class_id, classDate, paymentType, sign
 
   return response.data.data;
 };
+
+export const gymHistory = async(token, signal) => {
+const formData = new FormData();
+
+formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
+
+
+const config = {
+  method: "post",
+  url: `${process.env.REACT_APP_API_URL}/api/zee_invoice?access_token=${token}`,
+  data:formData,
+  maxContentLength:Infinity,
+  maxBodyLength:Infinity,
+  signal:signal,
+};
+
+const response = await axios(config);
+
+return response.data.data
+}
