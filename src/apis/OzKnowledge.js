@@ -167,7 +167,7 @@ export const BookGymClass = async (
   return response.data.data;
 };
 
-export const KnowledgeHistory = async (token, signal) => {
+export const KnowledgeHistory = async (token , signal) => {
   const formData = new FormData();
 
   formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
@@ -185,3 +185,24 @@ export const KnowledgeHistory = async (token, signal) => {
 
   return response.data.data;
 };
+
+export const getKnwoldgeByid = async ( token , signal , id ) =>{
+
+  const formData = new FormData();
+
+  formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
+  formData.append("id" , id);
+
+  const config = {
+    method: "post",
+    url: `${process.env.REACT_APP_API_URL}/api/zee_knowladge_invoice?access_token=${token}`,
+    data: formData,
+    maxContentLength: Infinity,
+    maxBodyLength: Infinity,
+    signal: signal,
+  };
+  
+  const response = await axios(config);
+
+  return response.data.data;
+}
