@@ -3,13 +3,14 @@ import { AuthContext } from '../../apis/context/AuthTokenContext';
 import { Formik } from 'formik';
 import * as Yup from "yup";
 import { Login } from "../../apis/AuthApi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Button  from '../UI/Button';
 import SweetAlert2 from 'react-sweetalert2';
 import {requestForToken} from '../../apis/firebase';
 
 const LoginForm = ({profile, provider})=>{
     const navigate = useNavigate();
+    const location = useLocation();
     const [swalProps, setSwalProps] = useState({});
     const [userInfo, setUSerInfo] = useState({});
     const { handleLogin } = useContext(AuthContext);
@@ -43,7 +44,12 @@ const LoginForm = ({profile, provider})=>{
         try {
             const result = await Login(values.email, values.password, provider, notificationToken);
             handleLogin(result);
-            navigate('/');
+            const AuthRoutes = location.pathname === '/login' || location.pathname === '/forgetpass' 
+            if(AuthRoutes){
+                navigate('/');
+            }else{
+                navigate(-1);
+            }
         } catch (error) {
             setSwalProps({
                 show: true,

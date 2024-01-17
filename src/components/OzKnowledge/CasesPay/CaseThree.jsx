@@ -8,8 +8,8 @@ const CaseThree = ( {bookingResult} ) => {
         <div className="col-lg-6 col-md-6 col-sm-12 order-summary">
           <div className="order-details">
             <h2>
-              {bookingResult.invoice_title}
-              <br /> #{bookingResult.invoice_id}
+              {bookingResult?.invoice_title}
+              <br /> #{bookingResult?.invoice_id}
             </h2>
             <div className="d-flex align-items-center justify-content-between">
               <span className="date-period">
@@ -31,7 +31,7 @@ const CaseThree = ( {bookingResult} ) => {
                 <span className="date-period">Description</span>
               </div>
               <div className="d-flex align-items-center justify-content-between item-box ">
-                <span className="item-name">{bookingResult.training.title}</span>
+                <span className="item-name">{bookingResult.course?.title}</span>
                 <span className="item-price">
                   {bookingResult.invoice_price} EGP
                 </span>
@@ -57,14 +57,14 @@ const CaseThree = ( {bookingResult} ) => {
         <div className="col-lg-6 col-md-6 col-sm-12 order-summary-black ">
           <div className="order-details">
             <div className="line">
-              <h2>{bookingResult.training.title}</h2>
+              <h2>{bookingResult.course?.title}</h2>
             </div>
             <div className="booking-items">
-              <span>Date : {bookingResult.training.start_date}</span>
-              <span>
-                Time :{bookingResult.training.start_time}{"-"}
-                {bookingResult.training.end_time}
-              </span>
+              <span>Date : {bookingResult.course?.start_date} - {bookingResult.course?.end_date}</span>
+              {/* <span>
+                Time :{bookingResult.course?.start_time}{"-"}
+                {bookingResult.course?.end_time}
+              </span> */}
               <span>Cash notes: {bookingResult.payment_type}</span>
             </div>
           </div>

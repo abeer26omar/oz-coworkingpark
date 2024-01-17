@@ -1,8 +1,35 @@
 import Button from '../UI/Button';
-import FilterCourses from './FilterCourses';
 import FilteredCourses from './FilteredCourses';
+import { getCoursesList } from '../../apis/OzKnowledge';
+import { useState, useContext, useEffect } from 'react';
+import { AuthContext } from '../../apis/context/AuthTokenContext';
 
 const CoursesDetails = () => {
+
+    const [courses, setCourses] = useState([]);
+    const [limit, setLimit] = useState(10);
+    const [page, setPage] = useState(0);
+
+    const ids = JSON.parse(sessionStorage.getItem('coursesIdsOz'));
+    const { token } = useContext(AuthContext);
+
+    useEffect(()=>{
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        const getClasses = async () => {
+            try{
+                const result = await getCoursesList(token, signal, '', '', '', '', '', ids, '', '', limit, page);
+                setCourses(result);
+            }catch (error){
+                console.log(error);
+            }
+        }
+        getClasses();
+
+        return () => controller.abort();
+    }, [ids]);
+
     return (
         <>
             <section className='container-fluid'>
@@ -30,8 +57,7 @@ const CoursesDetails = () => {
                     </div>
                 </div>
             </section>
-            <FilterCourses />
-            <FilteredCourses />
+            <FilteredCourses courses={courses}/>
         </>
     )
 };

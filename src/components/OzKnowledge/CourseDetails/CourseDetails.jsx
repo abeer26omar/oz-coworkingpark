@@ -12,12 +12,17 @@ import { useParams } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import { getCoursesById } from '../../../apis/OzKnowledge';
+import {useNavigate} from 'react-router-dom';
+import LoginAlert from "../../Auth/LoginAlertModal";
 
 const CourseDetails = () => {
 
     const [course, setCourse] = useState([]);
     const { token } = useContext(AuthContext);
-    const {id} = useParams();
+    const { id } = useParams();
+    const [showLogin, setShowLogin] = useState(false);
+
+    const handelClose = () => setShowLogin(false);
 
     useEffect(()=>{
         const controller = new AbortController();
@@ -35,6 +40,38 @@ const CourseDetails = () => {
 
         return () => controller.abort();
     }, [id]);
+
+    const navigate = useNavigate();
+
+    const HandelSummery = (value) => {
+      const gymCourseDetails = {
+        id: value.id,
+        title: value.title,
+        date: value.start_date,
+        duration: `${value.course_hours} hours`,
+        schedule: value.category?.title,
+        price: value.price,
+        level: value.category?.title,
+      };
+    
+      if (token) {
+        sessionStorage.setItem(
+          "OZCourseDetails",
+          JSON.stringify(gymCourseDetails)
+        );
+        navigate(`/bookclass`);
+      } else {
+        setShowLogin(true);
+      }
+    };
+
+    const HandelRate = (id) => {
+        if (token) {
+            console.log(id);
+        } else {
+            setShowLogin(true);
+        }
+    };
 
     return (
         <>
@@ -58,7 +95,7 @@ const CourseDetails = () => {
                                             <span className='reviews mx-3'>({course.reviews} Reviews)</span>
                                         </>
                                     ) : (
-                                        <Button tagType='link' className="rate_btn p-0 px-2">rate</Button>
+                                        <Button tagType='link' className="rate_btn p-0 px-2" onClick={()=>HandelRate(course.id)}>rate</Button>
                                     )}
                                     
                                 </div>
@@ -71,7 +108,7 @@ const CourseDetails = () => {
                                     <img src={confirmedIcon} alt='confirmed Icon'/>
                                 </div>
                             </div>
-                            <Button tagType='link' className="btn white_bg_btn me-2" to={'/payment'}>Attend</Button>
+                            <Button tagType='link' className="btn white_bg_btn me-2" onClick={()=>{HandelSummery(course)}}>Attend</Button>
                     </div>
                 </div>
             </MainHeaderWrapper>
@@ -84,6 +121,7 @@ const CourseDetails = () => {
             <AboutCourse descriptions={course.descriptions} />
             <AboutInstractor instractor={course.trainer} />
             <PopularCourses />
+            <LoginAlert show={showLogin} onHide={handelClose} />
         </>
     )
 };

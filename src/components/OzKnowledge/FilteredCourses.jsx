@@ -1,80 +1,109 @@
-import { useState } from 'react';
-import { Layout, Menu } from 'antd';
+import { useState, useContext, useEffect } from 'react';
+import { Layout, Menu, Slider, InputNumber, DatePicker, Select } from 'antd';
 import camera from '../../assets/images/icons/Camera.svg';
 import CourseCard from './CourseCard';
 import CheckBoxLabel from '../UI/CheckBoxLabel';
-import { Radio, Space } from 'antd';
+import FilterCourses from './FilterCourses';
+import { getCategoriesList, getInstructorsList } from '../../apis/OzKnowledge';
+import {AuthContext} from '../../apis/context/AuthTokenContext';
 
-const FilteredCourses = () => {
+const FilteredCourses = ({courses}) => {
 
     const [collapsed, setCollapsed] = useState(true);
-    const [value, setValue] = useState(1);
 
-    const onChange = (e) => {
-        console.log('radio checked', e.target.value);
-        setValue(e.target.value);
+    const [categories, setCategories] = useState([]);
+    const [trainers, setTrainers] = useState([]);
+
+    const [limit, setLimit] = useState(10);
+    const [page, setPage] = useState(0);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [priceFrom, setPriceFrom] = useState('');
+    const [priceTo, setPriceTo] = useState('');
+    const [categoryId, setCategoryId] = useState([]);
+    const [sellerType, setSellerType] = useState('');
+    const [trainerId, setTrainerId] = useState('');
+
+    const ids = JSON.parse(sessionStorage.getItem('coursesIdsOz'));
+    const { token } = useContext(AuthContext);
+
+    useEffect(()=>{
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        const getClasses = async () => {
+            try{
+                const result = await getCategoriesList(token, signal);
+                setCategories(result);
+            }catch (error){
+                console.log(error);
+            }
+        }
+        getClasses();
+
+        return () => controller.abort();
+    }, [ids]);
+
+    useEffect(()=>{
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        const getInstructors = async () => {
+            try{
+                const result = await getInstructorsList(token, signal, 100, 0);
+                setTrainers(result);
+            }catch (error){
+                console.log(error);
+            }
+        }
+        getInstructors();
+        return () => controller.abort();
+    }, []);
+
+
+    const onChangeSeller = (e) => {
+        setSellerType(e.target.value);
+        console.log(e.target.value);
     };
 
-    const getItem = (label, key, icon, children, type) => {
-        return {
-          key,
-          icon,
-          children,
-          label,
-          type,
-        };
-      }
+    const onChangeSlider = (value) => {
+        setPriceFrom(value[0]);
+        setPriceTo(value[1]);
+    };
+
+    const onChangeDateStart = (dateString) => {
+        setStartDate(dateString);
+    };
+
+    const onChangeDateEnd = (dateString) => {
+        setEndDate(dateString);
+    };
 
     const items = [
         {
             key: 'sub1',
             icon: null,
             label: 'CATEGORY',
-            children: [
-                {
-                    key: 'sub11',
-                    icon: (<img src={camera} alt='icon'/>),
-                    label: 'Photography',
-                    children: [
-                        {
-                            key: 'sub111',
-                            label: (<CheckBoxLabel key={1} label={'Graphic design'} value={'1'}/>),
-                        },
-                        {
-                            key: 'sub112',
-                            label: (<CheckBoxLabel key={2} label={'Ux & Ui Design'} value={'2'}/>),
-                        },
-                        {
-                            key: 'sub113',
-                            label: (<CheckBoxLabel key={3} label={'Motion Design'} value={'3'}/>),
-                        }
-                    ]
-                },
-                {
-                    key: 'sub12',
-                    icon: (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="32" viewBox="0 0 24 32" fill="none">
-                                <path d="M10.875 19C11.9105 19 12.75 18.1605 12.75 17.125C12.75 16.0895 11.9105 15.25 10.875 15.25C9.83947 15.25 9 16.0895 9 17.125C9 18.1605 9.83947 19 10.875 19Z" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M3 24.9984L9.55313 18.4453" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M3 25L16.0781 22.825C16.2072 22.803 16.3281 22.7471 16.4286 22.6631C16.5291 22.5791 16.6055 22.47 16.65 22.3469L18.75 16.75L11.25 9.25L5.65312 11.35C5.52979 11.397 5.42083 11.4753 5.33699 11.5772C5.25314 11.6792 5.19731 11.8012 5.175 11.9312L3 25Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M18.75 16.7519L21.2156 14.2862C21.2865 14.2165 21.3428 14.1333 21.3812 14.0415C21.4196 13.9498 21.4394 13.8513 21.4394 13.7519C21.4394 13.6524 21.4196 13.5539 21.3812 13.4622C21.3428 13.3705 21.2865 13.2873 21.2156 13.2175L14.7844 6.78625C14.7146 6.71538 14.6314 6.65911 14.5397 6.62069C14.4479 6.58228 14.3495 6.5625 14.25 6.5625C14.1505 6.5625 14.0521 6.58228 13.9603 6.62069C13.8686 6.65911 13.7854 6.71538 13.7156 6.78625L11.25 9.25187" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>),
-                    label: 'Design',
-                    children: [
-                        {
-                            key: 'sub111',
-                            label: (<CheckBoxLabel key={1} label={'Graphic design'} value={'1'}/>),
-                        },
-                        {
-                            key: 'sub112',
-                            label: (<CheckBoxLabel key={2} label={'Ux & Ui Design'} value={'2'}/>),
-                        },
-                        {
-                            key: 'sub113',
-                            label: (<CheckBoxLabel key={3} label={'Motion Design'} value={'3'}/>),
-                        }
-                    ]
-                }
-            ],
+            children: categories && categories.map(item=>{
+                    return {
+                        key: item.id,
+                        icon: (<img src={item.image} alt='icon' width= '24px' height= '24px'/>),
+                        label: item.title,
+                        children: item.sub_category.map(e=>{
+                            return {
+                                key: e.id,
+                                label: (
+                                    <div className='form-check' key={e.id}>
+                                        <input class="form-check-input" type="checkbox" name={e.tilte} id={e.id} value={e.id}/>
+                                        <label class="form-check-label" htmlFor={e.id}>
+                                            {e.title}
+                                        </label>
+                                    </div>
+                                )
+                            }
+                        })
+                    }
+                })
         },
         {
             type: 'divider',
@@ -88,7 +117,7 @@ const FilteredCourses = () => {
                     key: 'sub21',
                     label: (
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={onChangeSeller} value={'member'}/>
                             <label class="form-check-label" htmlFor="flexRadioDefault1">
                                 Member
                             </label>
@@ -98,7 +127,7 @@ const FilteredCourses = () => {
                     key: 'sub22',
                     label: (
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onChange={onChangeSeller} value={'public'}/>
                             <label class="form-check-label" htmlFor="flexRadioDefault2">
                                 Public
                             </label>
@@ -106,47 +135,134 @@ const FilteredCourses = () => {
                 }
             ],
         },
+        {
+            type: 'divider',
+        },
+        {
+            key: 'sub3',
+            icon: null,
+            label: 'PRICES',
+            children: [
+                {
+                    key: 'sub31',
+                    label: (
+                        <div className='my-2'>
+                            <div className='d-flex'>
+                            <div className='col-6'>
+                                <InputNumber
+                                    value={priceFrom}
+                                    onChange={onChangeSlider}
+                                />
+                            </div>
+                            <div className='col-6'>
+                                <InputNumber
+                                    value={priceTo}
+                                    onChange={onChangeSlider}
+                                />
+                            </div>
+                        </div>
+                            <Slider 
+                                range
+                                step={10}
+                                defaultValue={[priceFrom, priceTo]}
+                                onChange={onChangeSlider}
+                            />
+                        </div>
+                    ),
+                }
+            ]
+        },
+        {
+            type: 'divider',
+        },
+        {
+            key:'sub4',
+            label: 'Date Course',
+            children: [
+                {
+                    key: 'sub41',
+                    label: (
+                        <div className='d-flex my-2'>
+                            <div className='col-6'>
+                                <DatePicker 
+                                    size={'large'} 
+                                    placeholder="From"
+                                    value={startDate}
+                                    onChange={onChangeDateStart} />
+                            </div>
+                            <div className='col-6'>
+                                <DatePicker 
+                                    size={'large'}
+                                    placeholder="To"
+                                    value={endDate}
+                                    onChange={onChangeDateEnd}  />
+                            </div>
+                    </div>
+                    )
+                }
+            ]
+        },
+        {
+            type: 'divider',
+        },
+        {
+            key: 'sub5',
+            label: 'Select instructor',
+            children: [
+                {
+                    key: 'sub51',
+                    label: (
+                        <Select
+                            id='user_type'
+                            defaultValue={trainerId || undefined}
+                            value={trainerId || undefined}
+                            className="form__field placeholderSelect"
+                            onChange={(value) => {
+                                setTrainerId(value)
+                            }}
+                            bordered={false}
+                            placeholder={'Select instructor'}
+                        >
+                            {trainers && trainers.map((item) => (
+                                <Select.Option key={item.id} value={item.id}>
+                                    {item.name}
+                                </Select.Option>
+                            ))}
+                        </Select>
+                    )
+                }
+            ]
+        }
         
     ];
 
     return (
         <>
+            <FilterCourses courses_length={courses.length}/>
             <section className="container-fluid px-70 py-5">
                 <div className='row'>
                     <div className='col-xxl-4 col-xl-3 filter_side'>
                         <Layout.Sider>
                             <Menu 
                                 theme="light" 
-                                defaultSelectedKeys={['1']}
-                                mode="inline" 
                                 items={items} 
+                                defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4', 'sub5']}
+                                mode="inline" 
                                 inlineCollapsed={collapsed}
                             />
                         </Layout.Sider>
                     </div>
                     <div className='col-xxl-8 col-xl-9 ps-3'>
                         <div className='row g-3 row-cols-lg-3'>
-                            <div className='col'>
-                                <CourseCard />
-                            </div>
-                            <div className='col'>
-                                <CourseCard />
-                            </div>
-                            <div className='col'>
-                                <CourseCard />
-                            </div>
-                            <div className='col'>
-                                <CourseCard />
-                            </div>
-                            <div className='col'>
-                                <CourseCard />
-                            </div>
-                            <div className='col'>
-                                <CourseCard />
-                            </div>
-                            <div className='col'>
-                                <CourseCard />
-                            </div>
+                            {courses && 
+                                courses.map(item => {
+                                    return (
+                                        <div className='col' key={item.id}>
+                                            <CourseCard coursesDetails={item} />
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 </div>

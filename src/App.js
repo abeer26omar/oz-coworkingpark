@@ -76,6 +76,7 @@ import GymDetails from "./components/ZeeSudio/GymDetails";
 import GymHistory from "./components/ZeeSudio/GymHistory";
 import PaymentGym from "./components/ZeeSudio/PaymentGym";
 import CourseTracting from './components/OzKnowledge/Course Tracting/CourseTracting';
+import BookCourse from './components/OzKnowledge/BookCourse';
 
 function App() {
     const router = createBrowserRouter([
@@ -155,14 +156,15 @@ function App() {
           { path:'knowledge', element: <Knowledge />},
           { path:'courses', element: <OZCourses />},
           { path:'coursedetails/:id', element: <CourseDetails />},
-          { path:'coursesHistory', element: <CoursesHistory/>},
+          { path:'bookclass', element: <BookCourse />},
+          { path:'coursesHistory', element: <RouterGuard element={CoursesHistory} />},
           { path:'coursetracting/:id', element: <CourseTracting />},
           { path: "zeestudio", element: <ZeeStudio /> },
           { path: "ourgymclasses", element: <MoreClasses /> },
           { path: "ourtrainer", element: <OurTrainerPage /> },
           { path: "gymdetails/:id", element: <GymDetails /> },
           { path: "payment", element: <PaymentGym/> },
-          { path: "gymhistory", element: <GymHistory /> },
+          { path: "gymhistory", element: <RouterGuard element={GymHistory} /> },
           { path:'invoice', element: <Invoice />}
         ]}
     ]);

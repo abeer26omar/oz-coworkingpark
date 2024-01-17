@@ -156,6 +156,26 @@
     line-height: 160%;
     letter-spacing: 0.14px;
 }
+.padge_grey {
+    position: absolute;
+    top: 3%;
+    left: 3%;
+    background-color: rgb(255 255 255 / 60%);
+    padding: .5rem;
+}
+.padge_grey span{
+    color:#1B1D1F;
+    font-family: var(--couture-font);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+.header_course{
+    position: relative;
+    border: none;
+    padding: 0 !important;
+}
 @media screen and (max-width: 1200px) {
     .slick_knowledge .slick-next {
         right: 8% !important;
@@ -230,6 +250,14 @@
 .ant-menu-light>.ant-menu .ant-menu-submenu-selected >.ant-menu-submenu-title {
     color: var(--black-color);
 }
+.ant-menu-inline .ant-menu-item {
+    min-height: 40px;
+    height: 100%;
+}
+.ant-menu-light .ant-menu-item-selected, 
+.ant-menu-light>.ant-menu .ant-menu-item-selected {
+    background-color: transparent;
+}
 .ant-checkbox-wrapper .ant-checkbox .ant-checkbox-inner {
     border: 1.5px solid #DADDE5;
     border-radius: 0;
@@ -258,6 +286,7 @@
     font-weight: 400;
     line-height: 120%;
     margin-left: .5rem;
+    width: 100%;
 }
 .filter_side .form-check-input{
     box-shadow: none;
@@ -267,7 +296,10 @@
     background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="6" fill="black"/></svg>');
     background-size: 50%;
 }
-.filter_side .form-check-input:checked {
+.filter_side .form-check-input{
     background-color: var(--white-color);
     border-color: var(--black-color);
+}
+.filter_side .form-check-input[type=checkbox]:checked  {
+    background-color: var(--black-color);
 }

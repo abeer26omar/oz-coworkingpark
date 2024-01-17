@@ -11,7 +11,12 @@ const CourseCard = ({coursesDetails, loading}) => {
                 {loading ? 
                     <Skeleton.Image active className="card-img-top"/> 
                     : 
-                    <img src={coursesDetails.image} className="card-img-top" alt="..." height='229px'/>
+                    <div className='card-header header_course'>
+                        <img src={coursesDetails.image} className="card-img-top" alt="..." height='229px'/>
+                        <div className='padge_grey'>
+                            <span>{coursesDetails.category?.title}</span>
+                        </div>
+                    </div>
                 }
                 
                 <Skeleton loading={loading} active className='p-2'/>

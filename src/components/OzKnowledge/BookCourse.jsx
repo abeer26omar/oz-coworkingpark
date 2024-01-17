@@ -5,7 +5,7 @@ import CaseOne from "./CasesPay/CaseOne";
 import CaseTwo from "./CasesPay/CaseTwo";
 import CaseThree from "./CasesPay/CaseThree";
 import Button from "../UI/Button";
-import { BookGymClass } from "../../apis/ZeeStudio";
+import { BookKnowledgeCourse } from "../../apis/OzKnowledge";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 
 const BookCourse = () => {
@@ -14,7 +14,7 @@ const BookCourse = () => {
   const [current, setCurrent] = useState(0);
   const [bookingResult, setBookingResult] = useState({});
   const [paymentDetails, setPaymentDetails] = useState(
-    JSON.parse(sessionStorage.getItem("OZgymCourseDetails"))
+    JSON.parse(sessionStorage.getItem("OZCourseDetails"))
   );
   const [inputValue, setInputValue] = useState("cash");
 
@@ -44,7 +44,7 @@ const BookCourse = () => {
     const controller = new AbortController();
     const signal = controller.signal;
     try {
-      const result = await BookGymClass(token, paymentDetails.id, paymentDetails.date, inputValue, signal)
+      const result = await BookKnowledgeCourse(token, paymentDetails.id, paymentDetails.date, inputValue, signal)
       setBookingResult(result)
       setCurrent(current + 1);
     }catch(error){
@@ -61,7 +61,7 @@ const BookCourse = () => {
   };
  
   useEffect(() => {
-    setPaymentDetails(JSON.parse(sessionStorage.getItem("OZgymCourseDetails")));
+    setPaymentDetails(JSON.parse(sessionStorage.getItem("OZCourseDetails")));
   }, []);
 
   const items = steps.map((item) => ({
