@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import './Button.css';
-const Button = (props) => {
+const Button = (props ) => {
     return (
         <>
             {props.tagType === 'link' && <Link className={`btn_default ${props.className} `} to={props.to}

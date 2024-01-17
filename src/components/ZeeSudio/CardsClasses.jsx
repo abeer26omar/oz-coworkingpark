@@ -6,7 +6,7 @@ import Paragraph from "../UI/Paragraph";
 const CardsClasses = ({classesGym, getLimit}) => {
 
     const [limit, setLimit] = useState(12);
-
+    const  View = true;
     let content = '';
     if (classesGym.length === 0) {
       content = (
@@ -50,9 +50,12 @@ const CardsClasses = ({classesGym, getLimit}) => {
       })
     }
 
-    const HandelShowMore = () => {
-      setLimit(prevLimit => prevLimit + 3);
-      getLimit(limit)
+    const  HandelShowMore  = (e) => {
+      e.stopPropagation();
+
+      setLimit((prevLimit) => prevLimit + 3);
+      getLimit(limit);
+      console.log("ll");
     };
 
   return (
@@ -66,15 +69,15 @@ const CardsClasses = ({classesGym, getLimit}) => {
           {content}
         </div>
         {/* {classesGym && visibleCards < classesGym.length && ( */}
-          <div className="text-center">
-            <Button
-              tagType="link"
-              onClick={HandelShowMore}
-              className="btn button-outLine btn-bg-white m-auto-unset"
-            >
-              {"View More"}
-            </Button>
-          </div>
+        <div className="text-center">
+          <Button
+            tagType="button"
+            onClick={HandelShowMore}
+            className="btn button-outLine btn-bg-white m-auto-unset"
+          >
+            {"View More"}
+          </Button>
+        </div>
         {/* )} */}
       </div>
     </>

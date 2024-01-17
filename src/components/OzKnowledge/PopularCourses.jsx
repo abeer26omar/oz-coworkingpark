@@ -1,31 +1,13 @@
 import Paragraph from '../UI/Paragraph';
 import Slider from "react-slick";
 import CourseCard from './CourseCard';
-import { useState, useContext, useEffect } from 'react';
-import { AuthContext } from '../../apis/context/AuthTokenContext';
-import { getCoursesList } from '../../apis/OzKnowledge';
+import { useState} from 'react';
+
 
 const PopularCourses = ({ details }) => {
-    console.log(details);
-  const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { token } = useContext(AuthContext);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-    const getCategories = async () => {
-      try {
-        const result = await getCoursesList(token, signal, 10, 0);
-        setCourses(result);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getCategories();
-    return () => controller.abort();
-  }, []);
+
 
   const settings = {
     dots: false,
@@ -93,11 +75,13 @@ const PopularCourses = ({ details }) => {
               </div>
               <div className="col-lg-9 col-md-8 col-12">
                 <Slider {...settings} className="slick_knowledge py-5">
-                  {courses &&
-                    courses.map((item, index) => {
+                  {details &&
+                    details?.map((item, index) => {
                       return (
                         <div className="px-sm-2 px-0" key={index}>
-                          <CourseCard coursesDetails={item} loading={loading} />
+                          <CourseCard
+                            coursesDetails={item}
+                          />
                         </div>
                       );
                     })}
