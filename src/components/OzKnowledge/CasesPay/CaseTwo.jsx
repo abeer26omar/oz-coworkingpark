@@ -26,6 +26,7 @@ const CaseTwo = ({ getPaymentValue }) => {
               onChange={handleCheckboxChange}
               name="payment"
               id="cash"
+              className="radio_payment form-check-input"
             />
           </li>
           <li className="d-flex align-items-center justify-content-between  mb-4 pb-4 border-bottom">
@@ -39,6 +40,7 @@ const CaseTwo = ({ getPaymentValue }) => {
               name="payment"
               onChange={handleCheckboxChange}
               id="credit"
+              className="radio_payment form-check-input"
             />
           </li>
         </ul>

@@ -1,13 +1,33 @@
 import Paragraph from '../UI/Paragraph';
 import Slider from "react-slick";
 import CourseCard from './CourseCard';
-import { useState} from 'react';
+import { useState, useEffect, useContext} from 'react';
+import {KnowledgeHome} from '../../apis/OzKnowledge';
+import { AuthContext } from '../../apis/context/AuthTokenContext';
 
+const PopularCourses = () => {
 
-const PopularCourses = ({ details }) => {
-  const [loading, setLoading] = useState(true);
+  const [courses, setCourses] = useState([]);
+  const { token } = useContext(AuthContext);
 
+  useEffect(() => {
 
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    const KnowledgeData = async () => {
+      try {
+        const result = await KnowledgeHome(token, signal);
+        setCourses(result?.recommended_courses);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    KnowledgeData();
+
+    return () => controller.abort();
+  }, []);
 
   const settings = {
     dots: false,
@@ -75,8 +95,8 @@ const PopularCourses = ({ details }) => {
               </div>
               <div className="col-lg-9 col-md-8 col-12">
                 <Slider {...settings} className="slick_knowledge py-5">
-                  {details &&
-                    details?.map((item, index) => {
+                  {courses &&
+                    courses?.map((item, index) => {
                       return (
                         <div className="px-sm-2 px-0" key={index}>
                           <CourseCard

@@ -129,7 +129,7 @@ export const BookGymClass = async (token, class_id, classDate, paymentType, sign
 
   const response = await axios(config);
 
-  return response.data.data;
+  return response.data;
 };
 
 export const gymHistory = async(token, signal) => {

@@ -3,32 +3,17 @@ import Media from "../Media/Media";
 import details from "../../assets/images/DetalPage.jpg";
 import Paragraph from "../UI/Paragraph";
 import Button from "../UI/Button";
-import Moment, { moment } from "react-moment";
+import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import LoginAlert from "../Auth/LoginAlertModal";
 
 function DetalsGymlast({ details }) {
-  const date = new Date();
+
   const { token } = useContext(AuthContext);
   const [showLogin, setShowLogin] = useState(false);
 
   const handelClose = () => setShowLogin(false);
-
-  function handleTime(time) {
-    console.log(typeof time);
-    //   const [hours, minutes, seconds] = time;
-    //   const date = new Date();
-    //   date.setHours(hours);
-    //   date.setMinutes(minutes);
-    //   date.setSeconds(seconds);
-    //   const formattedTime = date.toLocaleTimeString("en-US", {
-    //     hour: "numeric",
-    //     minute: "2-digit",
-    //     hour12: true,
-    //   });
-    //   return formattedTime;
-  }
 
   const navigate = useNavigate();
 
@@ -67,7 +52,7 @@ function DetalsGymlast({ details }) {
               />
               <div className="py-4">
                 <Paragraph className="desc_small light">
-                  {details.end_date}
+                  {moment(details.end_date, "YYYY-MM-DD").format("MMMM DD, YYYY")}
                 </Paragraph>
               </div>
             </div>
@@ -97,13 +82,9 @@ function DetalsGymlast({ details }) {
                   Start & End Time :
                   <span className="desc_small">
                     <span className="px-2">
-                      <Moment
-                        add={{ hours: 12 }}
-                        format="LT"
-                        date={details.start_time}
-                      ></Moment>
+                      {moment(details.start_time, 'HH:mm:ss').format("hh:mm a")}
                     </span>
-                    -<span className="px-2">{details.end_time}</span>
+                    -<span className="px-2">{moment(details.end_time, 'HH:mm:ss').format("hh:mm a")}</span>
                   </span>
                 </Paragraph>
                 <Paragraph className="desc_small light ">
@@ -127,46 +108,7 @@ function DetalsGymlast({ details }) {
               </Paragraph>
               <Paragraph className="description_black light">
                 {details.descriptions}
-              </Paragraph>
-              {/* <ul className="ps-3">
-                <li className="description_black light">
-                  A natural way of your health.
-                </li>
-                <li className="description_black light">
-                  Train Yourself to Exercise.
-                </li>
-                <li className="description_black light">
-                  Enhancing the personal healing.
-                </li>
-              </ul> */}
-              <div className="">
-                {/* <Paragraph className="paragraph_black">
-                  Make real time a health improvements
-                </Paragraph>
-                <Paragraph className="description_black light">
-                  Proactively envisioned multimedia based expertise crosses
-                  media growth strategies. Seamlessly visualize quality
-                  intelectual captal without superor collaboration idea sharing
-                  Holistically pontficate installed based portals after
-                  maintainabled products. Phosfluorescently engaged world wide
-                  methodologies with enabled Completely pursue scalable customer
-                  service through sustainable potentialities
-                </Paragraph> */}
-                {/* <ul className="ps-1 list-unstyled">
-                  <li className="description_black light">
-                    1. It brings the right people together with all the right
-                    information and tools to get work done
-                  </li>
-                  <li className="description_black light">
-                    2. We provide operational efficiency, data security, and
-                    flexible scale
-                  </li>
-                  <li className="description_black light">
-                    3. Your best work, together in one package that works
-                    seamlessly from your computer
-                  </li>
-                </ul> */}
-              </div>
+              </Paragraph>              
             </div>
             <div className="col-12 py-5 video-container position-relative">
               <video

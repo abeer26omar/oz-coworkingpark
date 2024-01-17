@@ -1,5 +1,6 @@
 import Paragraph from '../../UI/Paragraph';
 import ProgressBar from "@ramonak/react-progress-bar";
+import moment from 'moment';
 
 const CourseProgress = ({ details }) => {
   return (
@@ -19,8 +20,8 @@ const CourseProgress = ({ details }) => {
               baseBgColor={"#C5CED340"}
             />
             <div className="my-3 d-flex justify-content-between">
-              <span className="grey-span">{details.training?.start_date}</span>
-              <span className="grey-span">{details.training?.end_date}</span>
+              <span className="grey-span">{moment(details.training?.start_date).format("MMM DD, YYYY")}</span>
+              <span className="grey-span">{moment(details.training?.end_date).format("MMM DD, YYYY")}</span>
             </div>
           </div>
           <span className="completed_percentage ms-sm-3 ms-1">

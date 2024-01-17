@@ -82,6 +82,17 @@
 .steps-payment .ant-steps.ant-steps-navigation .ant-steps-item::before {
     background-color: #000 !important;
 }
+.radio_payment.form-check-input:checked {
+    background-color: black;
+    border-color: black;
+    box-shadow: none;
+}
+.radio_payment{
+    width: 16px;
+    height: 16px;
+    border-color: black;
+    box-shadow: none;
+}
 .ant-steps .ant-steps-item-process .ant-steps-item-icon ,
 .ant-steps .ant-steps-item-finish .ant-steps-item-icon {
     background-color: var(--black-color);

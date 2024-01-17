@@ -2,11 +2,13 @@ import React , { useState }  from "react";
 import CashPay from "../../UI/Icons/CashPay";
 import CridetPay from "../../UI/Icons/CridetPay";
 import Paragraph from "../../UI/Paragraph";
+
 const CaseTwo = ({ getPaymentValue }) => {
+
   const handleCheckboxChange = (e) => {
     getPaymentValue(e.target.value);
- 
   };
+  
   return (
     <>
       <div className="p-5">
@@ -26,6 +28,7 @@ const CaseTwo = ({ getPaymentValue }) => {
               onChange={handleCheckboxChange}
               name="payment"
               id="cash"
+              className="radio_payment form-check-input"
             />
           </li>
           <li className="d-flex align-items-center justify-content-between  mb-4 pb-4 border-bottom">
@@ -39,6 +42,7 @@ const CaseTwo = ({ getPaymentValue }) => {
               name="payment"
               onChange={handleCheckboxChange}
               id="credit"
+              className="radio_payment form-check-input"
             />
           </li>
         </ul>

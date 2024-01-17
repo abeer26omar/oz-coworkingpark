@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { message, Steps, theme } from "antd";
+import { Modal, Steps } from "antd";
 import Paragraph from "../UI/Paragraph";
 import CaseOne from "./CasesPay/CaseOne";
 import CaseTwo from "./CasesPay/CaseTwo";
@@ -45,10 +45,17 @@ const BookCourse = () => {
     const signal = controller.signal;
     try {
       const result = await BookKnowledgeCourse(token, paymentDetails.id, paymentDetails.date, inputValue, signal)
-      setBookingResult(result)
-      setCurrent(current + 1);
+      setBookingResult(result.data);
+      Modal.success({
+        title: result.status,
+        content: result.message,
+        afterClose: ()=>setCurrent(current + 1)
+      });
     }catch(error){
-      console.log(error);
+      Modal.error({
+        title: 'error',
+        content: error.message,
+      });
     }
 
   }

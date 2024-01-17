@@ -7,7 +7,7 @@ import Img3 from "../../assets/images/Rounds (3).jpg";
 import Img4 from "../../assets/images/Rounds (4).jpg";
 import { getWorkingScheduleList } from '../../apis/ZeeStudio';
 import { AuthContext } from '../../apis/context/AuthTokenContext';
-import { Space, Table, Tag } from "antd";
+import { Space, Table } from "antd";
 
 const WorkTimes = () => {
 

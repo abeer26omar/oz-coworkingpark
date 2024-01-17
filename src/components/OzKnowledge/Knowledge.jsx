@@ -29,8 +29,6 @@ const Knowledge = () => {
   }, []);
   return (
     <>
-      {console.log(Data.knowladge_slider)}
-
       {Data.knowladge_slider &&
         Data.knowladge_slider?.map((item, index) => {
           return (
@@ -51,7 +49,7 @@ const Knowledge = () => {
           );
         })}
       <KnowledgeDescription categories={Data.categories} info={Data.info} />
-      <PopularCourses details={Data.recommended_courses} />
+      <PopularCourses />
       <PopularInstructor details={Data.recommended_trainers} />
       <JoinCommuinty details={Data.footer} />
     </>

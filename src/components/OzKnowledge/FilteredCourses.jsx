@@ -1,15 +1,16 @@
 import { useState, useContext, useEffect } from 'react';
 import { Layout, Menu, Slider, InputNumber, DatePicker, Select } from 'antd';
-import camera from '../../assets/images/icons/Camera.svg';
 import CourseCard from './CourseCard';
-import CheckBoxLabel from '../UI/CheckBoxLabel';
 import FilterCourses from './FilterCourses';
-import { getCategoriesList, getInstructorsList } from '../../apis/OzKnowledge';
+import { getCoursesList, getCategoriesList, getInstructorsList } from '../../apis/OzKnowledge';
 import {AuthContext} from '../../apis/context/AuthTokenContext';
+import Button from '../UI/Button';
+import Paragraph from '../UI/Paragraph';
 
-const FilteredCourses = ({courses}) => {
+const FilteredCourses = () => {
 
     const [collapsed, setCollapsed] = useState(true);
+    const [courses, setCourses] = useState([]);
 
     const [categories, setCategories] = useState([]);
     const [trainers, setTrainers] = useState([]);
@@ -24,14 +25,54 @@ const FilteredCourses = ({courses}) => {
     const [sellerType, setSellerType] = useState('');
     const [trainerId, setTrainerId] = useState('');
 
-    const ids = JSON.parse(sessionStorage.getItem('coursesIdsOz'));
     const { token } = useContext(AuthContext);
+
+    useEffect(()=>{
+        const categoryIds = sessionStorage.getItem('coursesIdsOz').split(',');
+        const numArray = categoryIds.map(Number);
+        setCategoryId(numArray);
+    },[]);
 
     useEffect(()=>{
         const controller = new AbortController();
         const signal = controller.signal;
 
-        const getClasses = async () => {
+        const getCourses = async () => {
+            try{
+                const result = await getCoursesList(token, 
+                    signal, 
+                    startDate, 
+                    endDate, 
+                    priceFrom, 
+                    priceTo, 
+                    categoryId, 
+                    sellerType, 
+                    trainerId, 
+                    limit, 
+                    page);
+                setCourses(result);
+            }catch (error){
+                console.log(error);
+            }
+        }
+        getCourses();
+
+        return () => controller.abort();
+    }, [startDate, 
+        endDate, 
+        priceFrom, 
+        priceTo, 
+        categoryId, 
+        sellerType, 
+        trainerId, 
+        limit, 
+        page]);
+
+    useEffect(()=>{
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        const getCategories = async () => {
             try{
                 const result = await getCategoriesList(token, signal);
                 setCategories(result);
@@ -39,10 +80,10 @@ const FilteredCourses = ({courses}) => {
                 console.log(error);
             }
         }
-        getClasses();
+        getCategories();
 
         return () => controller.abort();
-    }, [ids]);
+    }, []);
 
     useEffect(()=>{
         const controller = new AbortController();
@@ -60,6 +101,15 @@ const FilteredCourses = ({courses}) => {
         return () => controller.abort();
     }, []);
 
+    const handleCheckboxChange = (event) => {
+        const value = +event.target.value
+        const { checked } = event.target;
+        if (checked) {
+            setCategoryId((prevValues) => [...prevValues, value]);
+        } else {
+            setCategoryId((prevValues) => prevValues.filter((val) => val !== value));
+        }
+    };
 
     const onChangeSeller = (e) => {
         setSellerType(e.target.value);
@@ -79,6 +129,15 @@ const FilteredCourses = ({courses}) => {
         setEndDate(dateString);
     };
 
+    const restState = ()=>{
+        setTrainerId('');
+        setSellerType('');
+        setPriceTo('');
+        setPriceFrom('');
+        setEndDate('');
+        setStartDate('');
+    }
+
     const items = [
         {
             key: 'sub1',
@@ -94,8 +153,16 @@ const FilteredCourses = ({courses}) => {
                                 key: e.id,
                                 label: (
                                     <div className='form-check' key={e.id}>
-                                        <input class="form-check-input" type="checkbox" name={e.tilte} id={e.id} value={e.id}/>
-                                        <label class="form-check-label" htmlFor={e.id}>
+                                        <input 
+                                            className="form-check-input" 
+                                            type="checkbox" 
+                                            name={e.tilte} 
+                                            id={e.id} 
+                                            value={e.id}
+                                            onChange={handleCheckboxChange}
+                                            // checked={categoryId.includes(e.id)}
+                                        />
+                                        <label className="form-check-label" htmlFor={e.id}>
                                             {e.title}
                                         </label>
                                     </div>
@@ -240,20 +307,29 @@ const FilteredCourses = ({courses}) => {
         <>
             <FilterCourses courses_length={courses.length}/>
             <section className="container-fluid px-70 py-5">
-                <div className='row'>
-                    <div className='col-xxl-4 col-xl-3 filter_side'>
+                <Button
+                    tagType='link'
+                    onClick={restState}
+                    className='px-0'
+                    style={{
+                        textDecoration: 'underline'
+                    }}>
+                        clear
+                </Button>
+                <div className='row g-3'>
+                    <div className='col-xxl-4 col-xl-3 col-lg-3 filter_side'>
                         <Layout.Sider>
                             <Menu 
                                 theme="light" 
                                 items={items} 
                                 defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4', 'sub5']}
-                                mode="inline" 
+                                mode="inline"
                                 inlineCollapsed={collapsed}
                             />
                         </Layout.Sider>
                     </div>
-                    <div className='col-xxl-8 col-xl-9 ps-3'>
-                        <div className='row g-3 row-cols-lg-3'>
+                    <div className='col-xxl-8 col-lg-9 ps-3'>
+                        <div className='row g-3 row-cols-lg-3 row-cols-md-2 row-cols-1'>
                             {courses && 
                                 courses.map(item => {
                                     return (
@@ -263,6 +339,7 @@ const FilteredCourses = ({courses}) => {
                                     )
                                 })
                             }
+                            {(courses && courses.length === 0) && <Paragraph className='empty'>there is not classes yet</Paragraph>}
                         </div>
                     </div>
                 </div>
@@ -270,4 +347,5 @@ const FilteredCourses = ({courses}) => {
         </>
     )
 };
+
 export default FilteredCourses;

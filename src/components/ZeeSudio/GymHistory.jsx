@@ -1,13 +1,13 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Tab, Nav } from "react-bootstrap";
 import Paragraph from "../UI/Paragraph";
-import img from "../../assets/images/history.jpg";
 import {
   CircularProgressbarWithChildren,
   buildStyles,
 } from "react-circular-progressbar";
 import { gymHistory } from "../../apis/ZeeStudio";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
+import moment from 'moment';
 
 const GymHistory = () => {
   const { token } = useContext(AuthContext);
@@ -117,7 +117,7 @@ const GymHistory = () => {
                               <div className="row align-items-center justify-content-between p-lg-0 p-3">
                                 <div className="col-sm-9 col-12">
                                   <Paragraph className="light">
-                                    Date Submitted :{item.invoice_date}
+                                    Date Submitted: {moment(item.invoice_date).format("MMM DD, YYYY")}
                                   </Paragraph>
                                   <Paragraph className="card-title">
                                     {item.training?.title}

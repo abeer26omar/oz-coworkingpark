@@ -22,9 +22,8 @@ const CourseTracting = () => {
 
         const getCourse = async () => {
             try{
-                const result = await getKnwoldgeByid( token ,signal , '1' )
+                const result = await getKnwoldgeByid( token ,signal , id )
                 setClasses(result);
-                console.log(result);
             }catch (error){
                 console.log(error);
             }
@@ -43,23 +42,12 @@ const CourseTracting = () => {
         >
           <div className={`container`}>
             <div className="col-12 text-center">
-              {/* {props.configData ? props.configData.map((configItem, index) => (
-                            <React.Fragment key={index}>
-                                {configItem.key === 'booking_page_title' && ( */}
               <Paragraph className="main_header mb-3">
                 {"Course Details"}
               </Paragraph>
               <Paragraph className="head_paragraph mb-3">
                 {classes.training?.title}
               </Paragraph>
-              {/* )}
-                                {configItem.key === 'booking_page_description' && ( */}
-              <Button tagType="link" className="btn btn_outline me-2">
-                Cancel Booking
-              </Button>
-              {/* )}
-                            </React.Fragment>
-                        )): ''} */}
             </div>
           </div>
         </MainHeaderWrapper>

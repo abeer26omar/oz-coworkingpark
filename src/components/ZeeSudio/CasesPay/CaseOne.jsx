@@ -4,6 +4,8 @@ import Calunder from "../../UI/Icons/Calunder";
 import Alarm from "../../UI/Icons/Alarm";
 import Advanced from "../../UI/Icons/Advanced";
 import Payment from "../../UI/Icons/Payment";
+import moment from "moment";
+
 function CaseOne({ details, style }) {
   return (
     <>
@@ -14,7 +16,7 @@ function CaseOne({ details, style }) {
         <ul className="p-0">
           <li className="d-flex align-items-center mb-4">
             <Calunder />
-            <Paragraph className="mb-0 mx-2">{details.date}</Paragraph>
+            <Paragraph className="mb-0 mx-2">{moment(details.date).format("dddd, MMM. D, YYYY")}</Paragraph>
           </li>
           <li className="d-flex align-items-center mb-4">
             <Alarm />

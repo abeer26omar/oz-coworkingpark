@@ -7,7 +7,7 @@ const CourseCard = ({coursesDetails, loading}) => {
 
     return (
         <>
-            <div className='card'>
+            <div className='card h-100'>
                 {loading ? 
                     <Skeleton.Image active className="card-img-top"/> 
                     : 
@@ -23,8 +23,8 @@ const CourseCard = ({coursesDetails, loading}) => {
                 <div className='card-body'>
                     <Paragraph className='courseCardTitle'>{coursesDetails.title}</Paragraph>
                     <div className='d-flex align-items-center'>
-                        {/* <Rate disabled allowHalf defaultValue={4.5} /> */}
-                        {/* <span className='rate_count ms-2'>{'(15)'}</span> */}
+                        <Rate disabled allowHalf defaultValue={coursesDetails.rate} />
+                        <span className='rate_count ms-2'>{`(${coursesDetails.rate})`}</span>
                     </div>
                     <div className='d-flex justify-content-between align-items-center pt-4'>
                         <Paragraph className='courseCardTitle mb-0'>{Math.floor(coursesDetails.price)} Egp</Paragraph>

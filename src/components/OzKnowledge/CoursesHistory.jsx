@@ -5,11 +5,17 @@ import cardTop from "../../assets/images/image 5 (4).png";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { useState, useEffect, useContext } from "react";
 import { KnowledgeHistory } from "../../apis/OzKnowledge";
+import { useNavigate } from "react-router-dom";
+import moment from 'moment';
+
 const CoursesHistory = () => {
+
   const { token } = useContext(AuthContext);
   const [Data, setData] = useState([]);
   const [activeTab, setActiveTab] = useState("active");
   const [planData, setPlanData] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -27,6 +33,7 @@ const CoursesHistory = () => {
 
     return () => controller.abort();
   }, []);
+
   useEffect(() => {
     if (Data) {
       const initialTab = Object.keys(Data)[0];
@@ -34,6 +41,7 @@ const CoursesHistory = () => {
       setPlanData(Data[initialTab]);
     }
   }, [Data]);
+
   const HandleActive = (value) => {
     setActiveTab(value);
     setPlanData(Data[value]);
@@ -97,7 +105,7 @@ const CoursesHistory = () => {
                 planData.map((item, index) => {
                   return (
                     <>
-                      <div className="card card_event" key={index}>
+                      <div className="card card_event my-3" key={index} onClick={()=>{navigate(`/coursetracting/${item.id}`)}}>
                         <div className="row align-items-center">
                           <div className="col-xxl-3 col-xl-4 col-lg-4 col-md-4 col-sm-12 d-flex justify-content-start p-sm-0">
                             <img
@@ -111,18 +119,20 @@ const CoursesHistory = () => {
                             />
                           </div>
                           <div className="col-xxl-8 col-xl-7 col-lg-7 col-md-7 col-sm-12 d-flex align-items-center">
-                            <div className="p-2">
+                            <div className="p-2" style={{
+                              width: '100%'
+                            }}>
                               <Paragraph className="course_date">
-                                Date Submitted :{item.invoice_date}
+                                Date Submitted: {moment(item.invoice_date).format("MMM DD, YYYY")}
                               </Paragraph>
                               <Paragraph className="course_details_title">
-                                {item.training?.details}
+                                {item.training?.title}
                               </Paragraph>
                               <Paragraph className="course_categorey">
-                                Category : {item.training?.category.title}
+                                Category: {item.training?.category.title}
                               </Paragraph>
                               <Paragraph className="course_desc">
-                                {item.training?.category.description}
+                                {item.training?.details}
                               </Paragraph>
                               {activeTab === "active" ? (
                                 <div className="d-flex align-items-center justify-content-between">

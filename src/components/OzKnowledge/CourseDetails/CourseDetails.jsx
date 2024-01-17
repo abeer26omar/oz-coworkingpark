@@ -89,15 +89,8 @@ const CourseDetails = () => {
                             <div className='conrse_details d-flex mb-4'>
                                 <div className='d-flex align-items-center'>
                                     <img src={star} alt='star icon'/>
-                                    {course.is_rated ? (
-                                        <>
-                                            <span className='rate ms-2'>{course.rate}</span> 
-                                            <span className='reviews mx-3'>({course.reviews} Reviews)</span>
-                                        </>
-                                    ) : (
-                                        <Button tagType='link' className="rate_btn p-0 px-2" onClick={()=>HandelRate(course.id)}>rate</Button>
-                                    )}
-                                    
+                                    <span className='rate ms-2'>{course.rate}</span> 
+                                    <span className='reviews mx-3'>({course.reviews} Reviews)</span>                                   
                                 </div>
                                 <div className='d-flex align-items-center'>
                                     <svg width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">

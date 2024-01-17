@@ -96,21 +96,42 @@ export const getInstructorById = async (token, signal, id) => {
   return response.data.data;
 };
 
-export const getCoursesList = async (token, signal, search_text, start_date, end_date, price_from, price_to, category_id, seller_type, trainer_id, limit, page) => {
+export const getCoursesList = async (token, 
+      signal, 
+      start_date, 
+      end_date, 
+      price_from, 
+      price_to, 
+      category_id, 
+      seller_type, 
+      trainer_id, 
+      limit, 
+      page) => {
     
     const formData = new FormData();
     formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
+    formData.append("category_id", category_id);
     formData.append("limit", limit);
     formData.append("page", page);
     // 
-    // formData.append("search_text", search_text);
-    // formData.append("start_date", start_date);
-    // formData.append("end_date", end_date);
-    // formData.append("price_from", price_from);
-    // formData.append("price_to", price_to);
-    formData.append("category_id", category_id);
-    // formData.append("seller_type", seller_type);
-    // formData.append("trainer_id", trainer_id);
+    if(start_date){
+      formData.append("start_date", start_date);
+    }
+    if(end_date){
+      formData.append("end_date", end_date);
+    }
+    if(price_from){
+      formData.append("price_from", price_from);
+    }
+    if(price_to){
+      formData.append("price_to", price_to);
+    }
+    if(seller_type){
+      formData.append("seller_type", seller_type);
+    }
+    if(trainer_id){
+      formData.append("trainer_id", trainer_id);
+    }
     
     const config = {
       method: "post",
@@ -171,7 +192,7 @@ export const BookKnowledgeCourse = async (
 
   const response = await axios(config);
 
-  return response.data.data;
+  return response.data;
 };
 
 export const KnowledgeHistory = async (token , signal) => {

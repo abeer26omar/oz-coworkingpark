@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { message, Steps, theme } from "antd";
+import { Modal, Steps } from "antd";
 import Paragraph from "../UI/Paragraph";
 import CaseOne from "./CasesPay/CaseOne";
 import CaseTwo from "./CasesPay/CaseTwo";
@@ -45,13 +45,21 @@ const PaymentGym = () => {
     const signal = controller.signal;
     try {
       const result = await BookGymClass(token, paymentDetails.id, paymentDetails.date, inputValue, signal)
-      setBookingResult(result)
-      setCurrent(current + 1);
+      setBookingResult(result.data);
+      Modal.success({
+        title: result.status,
+        content: result.message,
+        afterClose: ()=>setCurrent(current + 1)
+      });
     }catch(error){
-      console.log(error);
+      Modal.error({
+        title: 'error',
+        content: error.message,
+      });
     }
 
   }
+
   const next = () => {
     if (current === 1) {
       bookRequset();
@@ -71,7 +79,6 @@ const PaymentGym = () => {
 
   return (
     <>
-   
       <div
         className="container py-5 steps-payment"
         style={{
