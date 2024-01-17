@@ -18,8 +18,9 @@ const CardsGym = () => {
 
     const getClasses = async () => {
       try{
-        const result = await getTrainingClasses(token, 6, 0,signal);
+        const result = await getTrainingClasses(token,  6 , 0 ,'' , '' , '' ,signal);
         setClassesList(result);
+       
       }catch (error){
         setError(error)
       }
