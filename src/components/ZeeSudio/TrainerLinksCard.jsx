@@ -20,6 +20,7 @@ const TrainerLinksCard = () => {
       try {
         const result = await getTrainersList(token, signal);
         setTrainersList(result);
+        console.log(trainersList);
       } catch (error) {
         console.log(error);
       }

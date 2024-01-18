@@ -17,7 +17,7 @@ const CardsClasses = ({classesGym, getLimit}) => {
       content = classesGym.map((card , index)=>{
         return (
           <>
-            <div className="col-xxl-3 col-xl-4 col-md-6 col-sm-12 my-2" key={index}>
+            <div className="col-xxl-4 col-xl-4 col-md-6 col-sm-12 my-2" key={index}>
               <div className="card my-2 h-100 text-start">
                 <Media
                   type="img"

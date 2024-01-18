@@ -111,6 +111,9 @@ a {
     font-family: questrial;
     src: url(assets/fonts/questrial/questrial-regular.ttf);
 }
+.font-couture{
+    font-family: couture !important;
+}
 /*  */
 .font-2{
     font-size: 1.65rem !important;
@@ -165,6 +168,9 @@ a {
 /***************Margin Size ********************/
 .m-35 {
     margin: 35px 0;
+}
+.mt-160{
+    margin-top: 160px !important;
 }
 .m-auto-unset{
     margin: unset !important;
@@ -746,6 +752,9 @@ a {
     .font-5{
         font-size: unset !important;
     }
+    .mt-160{
+        margin-top: unset;
+    }
 }
 @media (max-width: 575px) {
     .img_block > span > img{
@@ -757,10 +766,16 @@ a {
     .px-70{
         padding: 0 1.375rem;
     }
+    .mt-160 {
+             margin-top: unset;
+    }
 }
 @media screen and (max-width: 426px) {
     .AmenitiesList_videos video{
         height: 100% !important;
+    }
+    .mt-160 {
+         margin-top: unset;
     }
 }
 @media screen and (max-width: 375px) {

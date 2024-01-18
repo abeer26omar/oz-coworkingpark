@@ -40,10 +40,10 @@ function DetalsGymlast({ details }) {
   };
   return (
     <>
-      <div className="container py-5">
+      <div className="container-fluid px-70 py-5">
         {details && (
-          <div className="row">
-            <div className="col-xl-7 col-md-6 col-sm-12">
+          <div className="row g-0">
+            <div className="col-xl-8 col-md-6 col-sm-12">
               <Media
                 type="img"
                 src={details.image}
@@ -56,7 +56,7 @@ function DetalsGymlast({ details }) {
                 </Paragraph>
               </div>
             </div>
-            <div className="col-xl-5 col-md-6 col-sm-12">
+            <div className="col-xl-4 col-md-6 col-sm-12">
               <div className="bg-gymDetails py-4 px-4 ">
                 <Paragraph className="card-title">Class Details</Paragraph>
                 <Paragraph className="desc_small_light py-3">

@@ -44,7 +44,7 @@ function TrainingClasses({
             <div className="col-8 d-flex justify-content-end align-items-center">
               <Button
                 tagType="link"
-                className="button-outLine px-4 btn-bg-white m-0 me-3 btn-filter text-center"
+                className="button-outLine px-4 btn-bg-white m-0 me-3 btn-filter text-center font-couture"
                 to={`/gymhistory`}
               >
                 <svg
@@ -72,7 +72,7 @@ function TrainingClasses({
 
               <Button
                 tagType="link"
-                className="button-outLine px-4 btn-bg-white m-0 btn-filter text-center"
+                className="button-outLine px-4 btn-bg-white m-0 btn-filter text-center font-couture"
                 onClick={toggleFilter}
               >
                 <svg
