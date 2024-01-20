@@ -234,3 +234,27 @@ export const getKnwoldgeByid = async ( token , signal , id ) =>{
 
   return response.data.data;
 }
+
+export const rateCourse = async (token, userId, courseId, rating, message, signal) =>{
+
+  const formData = new FormData();
+
+  formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
+  formData.append("user_id", userId);
+  formData.append("course_id", courseId);
+  formData.append("rating", rating);
+  formData.append("message", message);
+
+  const config = {
+    method: "post",
+    url: `${process.env.REACT_APP_API_URL}/api/course_rates?access_token=${token}`,
+    data: formData,
+    maxContentLength: Infinity,
+    maxBodyLength: Infinity,
+    signal: signal,
+  };
+  
+  const response = await axios(config);
+
+  return response.data.data;
+}

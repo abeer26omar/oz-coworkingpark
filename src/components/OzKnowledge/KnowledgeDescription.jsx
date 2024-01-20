@@ -13,7 +13,7 @@ const KnowledgeDescription = ({ categories, info }) => {
   const navigate = useNavigate();
 
   const HandelCourses = (ids) => {
-    sessionStorage.setItem('coursesIdsOz', JSON.stringify(ids))
+    sessionStorage.setItem('coursesIdsOz', ids)
     navigate(`/courses`);
   };
 

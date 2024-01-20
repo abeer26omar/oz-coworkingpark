@@ -9,7 +9,7 @@ const CaseTwo = ({ getPaymentValue }) => {
   };
   return (
     <>
-      <div className="p-5">
+      <div className="p-5 bg_white">
         <Paragraph className="paragraph_black light py-3">
           Choose Payment Method
         </Paragraph>
@@ -21,7 +21,6 @@ const CaseTwo = ({ getPaymentValue }) => {
             </label>
             <input
               type="radio"
-              checked
               value={"cash"}
               onChange={handleCheckboxChange}
               name="payment"

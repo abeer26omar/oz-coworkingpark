@@ -6,15 +6,19 @@ import CourseProgress from './CourseProgress';
 import CourseSections from './CourseSections';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import { getKnwoldgeByid } from '../../../apis/OzKnowledge';
-// import { useParams } from 'react-router-dom';
+import star from '../../../assets/images/icons/star.svg';
 import { useContext, useEffect , useState} from 'react';
 import { useParams } from 'react-router-dom';
+import RateCourseModal  from './RateCourseModal';
 
 const CourseTracting = () => {
     
-    const [classes , setClasses] = useState({})
+    const [classes , setClasses] = useState({});
+    const [openRateModal , setOpenRateModal] = useState(false);
     const {token} = useContext(AuthContext);
     const {id} = useParams() ;
+
+    const closeRateModal = () => setOpenRateModal(false);
 
     useEffect(()=>{
         const controller = new AbortController();
@@ -31,7 +35,11 @@ const CourseTracting = () => {
         getCourse();
 
         return () => controller.abort();
-    }, [])
+    }, []);
+
+    const HandelRate = ()=>{
+      setOpenRateModal(true);
+    }
 
     return (
       <>
@@ -42,17 +50,32 @@ const CourseTracting = () => {
         >
           <div className={`container`}>
             <div className="col-12 text-center">
-              <Paragraph className="main_header mb-3">
+              <Paragraph className="main_header_title mb-3">
                 {"Course Details"}
               </Paragraph>
               <Paragraph className="head_paragraph mb-3">
                 {classes.training?.title}
               </Paragraph>
+              {classes.is_rated ? (
+                  <div className='d-flex align-items-center justify-content-center conrse_details'>
+                    <img src={star} alt='star icon'/>
+                    <span className='rate ms-2'>{classes.rate}</span> 
+                    <span className='reviews mx-3'>({classes.reviews} Reviews)</span>
+                  </div>
+                  ) : (
+                    <Button tagType='link' className="rate_btn p-0 px-2" onClick={()=>HandelRate()}>rate</Button>
+                  )
+                }
             </div>
           </div>
         </MainHeaderWrapper>
         <CourseProgress details={classes} />
         <CourseSections details={classes.training} />
+        <RateCourseModal
+          open={openRateModal}
+          handleCancel={closeRateModal}
+          courseId={classes.course_id}
+        />
       </>
     );
 };

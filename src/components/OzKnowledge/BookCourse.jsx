@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Modal, Steps } from "antd";
+import { Modal, Steps, message } from "antd";
 import Paragraph from "../UI/Paragraph";
 import CaseOne from "./CasesPay/CaseOne";
 import CaseTwo from "./CasesPay/CaseTwo";
@@ -13,10 +13,11 @@ const BookCourse = () => {
   const {token} = useContext(AuthContext)
   const [current, setCurrent] = useState(0);
   const [bookingResult, setBookingResult] = useState({});
+  const [messageApi, contextHolder] = message.useMessage();
   const [paymentDetails, setPaymentDetails] = useState(
     JSON.parse(sessionStorage.getItem("OZCourseDetails"))
   );
-  const [inputValue, setInputValue] = useState("cash");
+  const [inputValue, setInputValue] = useState();
 
   const getPaymentValue = (value) => {
     setInputValue(value);
@@ -61,7 +62,14 @@ const BookCourse = () => {
   }
   const next = () => {
     if (current === 1) {
-      bookRequset();
+      if(inputValue === null || inputValue === undefined){
+        messageApi.open({
+          type: 'error',
+          content: 'Please Choose Payment Method',
+        });
+      }else{
+        bookRequset();
+      }
     } else {
       setCurrent(current + 1);
     }
@@ -131,6 +139,7 @@ const BookCourse = () => {
           </div>
         </div>
       </div>
+      {contextHolder}
     </>
   );
 };

@@ -166,7 +166,7 @@ const FilteredCourses = () => {
                                             {e.title}
                                         </label>
                                     </div>
-                                )
+                                ),
                             }
                         })
                     }
@@ -213,16 +213,20 @@ const FilteredCourses = () => {
                 {
                     key: 'sub31',
                     label: (
-                        <div className='my-2'>
-                            <div className='d-flex'>
-                            <div className='col-6'>
+                        <div className='m-2'>
+                            <div className='d-flex justify-content-evenly'>
+                            <div className='col-5'>
                                 <InputNumber
+                                    controls={false}
+                                    addonAfter="USD"
                                     value={priceFrom}
                                     onChange={onChangeSlider}
                                 />
                             </div>
-                            <div className='col-6'>
+                            <div className='col-5'>
                                 <InputNumber
+                                    controls={false}
+                                    addonAfter="USD"
                                     value={priceTo}
                                     onChange={onChangeSlider}
                                 />
@@ -231,7 +235,10 @@ const FilteredCourses = () => {
                             <Slider 
                                 range
                                 step={10}
-                                defaultValue={[priceFrom, priceTo]}
+                                max={400}
+                                min={10}
+                                defaultValue={[priceFrom || 10, priceTo || 300]}
+                                // value={[priceFrom, priceTo]}
                                 onChange={onChangeSlider}
                             />
                         </div>
@@ -249,15 +256,15 @@ const FilteredCourses = () => {
                 {
                     key: 'sub41',
                     label: (
-                        <div className='d-flex my-2'>
-                            <div className='col-6'>
+                        <div className='d-flex justify-content-evenly my-2'>
+                        <div className='col-5'>
                                 <DatePicker 
                                     size={'large'} 
                                     placeholder="From"
                                     value={startDate}
                                     onChange={onChangeDateStart} />
                             </div>
-                            <div className='col-6'>
+                            <div className='col-5'>
                                 <DatePicker 
                                     size={'large'}
                                     placeholder="To"
@@ -279,7 +286,8 @@ const FilteredCourses = () => {
                 {
                     key: 'sub51',
                     label: (
-                        <Select
+                        <div className='my-2'>
+                            <Select
                             id='user_type'
                             defaultValue={trainerId || undefined}
                             value={trainerId || undefined}
@@ -296,6 +304,7 @@ const FilteredCourses = () => {
                                 </Select.Option>
                             ))}
                         </Select>
+                        </div>
                     )
                 }
             ]
