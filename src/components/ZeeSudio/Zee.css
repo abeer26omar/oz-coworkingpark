@@ -90,8 +90,13 @@
 .radio_payment{
     width: 16px;
     height: 16px;
-    border-color: black;
+    border-color: var(--black-color);
     box-shadow: none;
+}
+.radio_payment.form-check-input:focus {
+    border-color: var(--black-color);
+    outline: 0;
+    box-shadow: none !important;
 }
 .ant-steps .ant-steps-item-process .ant-steps-item-icon ,
 .ant-steps .ant-steps-item-finish .ant-steps-item-icon {
@@ -101,12 +106,9 @@
 .ant-steps .ant-steps-item-finish .ant-steps-item-icon >.ant-steps-icon {
     color: var(--white-color);
 }
-/* .ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder {
-    background-color: var(--black-color);
+.ant-steps.ant-steps-navigation {
+    border-bottom: 1px solid #BDBDBD;
 }
-.ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder:hover {
-    background-color: var(--black-color);
-} */
 @media screen and (max-width:767px) {
 .Schedule .ant-segmented .ant-segmented-item {
     margin: 0 0 !important;

@@ -1,6 +1,6 @@
+import moment from "moment";
+
 const CaseThree = ( {bookingResult} ) => {
-
-
 
   return (
     <div className="">
@@ -13,7 +13,7 @@ const CaseThree = ( {bookingResult} ) => {
             </h2>
             <div className="d-flex align-items-center justify-content-between">
               <span className="date-period">
-                Date Period: {bookingResult.invoice_date}
+                Date Period: {moment(bookingResult.invoice_date).format("MMM DD, YYYY")}
                 <br />
                 <span className="invoice">Invoice</span>
               </span>
@@ -29,6 +29,7 @@ const CaseThree = ( {bookingResult} ) => {
             <div className="pill">
               <div className="d-flex align-items-center justify-content-between line">
                 <span className="date-period">Description</span>
+                <span>Subtotal</span>
               </div>
               <div className="d-flex align-items-center justify-content-between item-box ">
                 <span className="item-name">{bookingResult.training.title}</span>
@@ -60,12 +61,12 @@ const CaseThree = ( {bookingResult} ) => {
               <h2>{bookingResult.training.title}</h2>
             </div>
             <div className="booking-items">
-              <span>Date : {bookingResult.training.start_date}</span>
+              <span>Date: {moment(bookingResult.training.start_date, 'HH:mm:ss').format("dddd, MMM. D, YYYY")}</span>
               <span>
-                Time :{bookingResult.training.start_time}{"-"}
-                {bookingResult.training.end_time}
+                Time: {moment(bookingResult.training.start_time, 'HH:mm:ss').format("hh:mm a")} {"-"}
+                {moment(bookingResult.training.end_time,'HH:mm:ss').format("hh:mm a")}
               </span>
-              <span>Cash notes: {bookingResult.payment_type}</span>
+              {bookingResult.payment_type === 'cash' && (<span>Cash notes: {bookingResult.payment_type}</span>)}
             </div>
           </div>
         </div>

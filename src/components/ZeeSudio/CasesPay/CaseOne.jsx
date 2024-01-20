@@ -6,10 +6,10 @@ import Advanced from "../../UI/Icons/Advanced";
 import Payment from "../../UI/Icons/Payment";
 import moment from "moment";
 
-function CaseOne({ details, style }) {
+function CaseOne({ details }) {
   return (
     <>
-      <div className="p-5">
+      <div className="p-5 bg_white">
         <Paragraph className="paragraph_black light py-3">
           {details.title}
         </Paragraph>

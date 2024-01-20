@@ -20,7 +20,7 @@ const SectionHeader = (props)=>{
                     {props.configData ? props.configData.map((configItem, index) => (
                         <React.Fragment key={index}>
                             {configItem.key === 'home_page_main_header' && (
-                                <Paragraph className='main_header mb-0'>{configItem.value}</Paragraph>
+                                <Paragraph className='main_header_title mb-0'>{configItem.value}</Paragraph>
                             )}
                             {configItem.key === 'home_page_sub_header' && (
                                 <Paragraph className='head_paragraph mb-0'>{configItem.value}</Paragraph>
