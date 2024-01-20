@@ -118,7 +118,7 @@ const NewsFeedHeader = ({getSearchResult}) => {
             <MainHeaderWrapper configData={config('')} image={newsfeed}>
                 <div className={`container-fluid px-70 py-5`}>
                     <div className='col-xl-6 col-lg-9 col-12'>
-                        <h2 class="main_header mb-0">Community</h2>
+                        <h2 class="main_header_title mb-0">Community</h2>
                         <Paragraph className='head_paragraph mb-3'>News Feed</Paragraph>
                         <Paragraph className='description mb-0'>
                             Stay updated with all the latest happenings inside OZ, including community members' achievements and more. We believe in celebrating the success stories of our vibrant community, and this section serves as a platform to showcase the incredible accomplishments of our members. From ground-breaking projects to innovative collaborations, you'll have a front-row seat to the inspiring journeys taking place within OZ.

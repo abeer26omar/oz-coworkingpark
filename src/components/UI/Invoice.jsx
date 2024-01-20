@@ -59,12 +59,11 @@ const Invoice = () => {
 
     return (
         <>
-        {console.log(invoice)}
             <div className="container py-5">
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 order-summary">
                         <div className="order-details">
-                            <h2>{invoice.paymentMethod ==='cash' ? 'Amount Due' : 'Receipt'} 
+                            <h2>{invoice?.paymentMethod ==='cash' ? 'Amount Due' : 'Receipt'} 
                               <br/> 
                               <span style={{
                                 fontFamily: 'questrial'

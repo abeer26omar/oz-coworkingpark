@@ -15,7 +15,7 @@ const CommunityExploreHeader = () => {
             <MainHeaderWrapper image={party}>
                 <div className={`container-fluid px-70 py-5`}>
                     <div className='col-md-6 col-12'>
-                        <p class="main_header mb-0">Initiating</p>
+                        <p class="main_header_title mb-0">Initiating</p>
                                     <Paragraph className='head_paragraph mb-3'>news feed</Paragraph>
                                     <Paragraph className='description mb-0'>Stay updated with all the latest
                                      happenings inside OZ, including community members' achievements and more.

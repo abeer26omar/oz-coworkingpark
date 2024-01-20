@@ -39,9 +39,7 @@ const MainHeaderWrapper = (props)=>{
 
     return (
         <div className={`position-relative`}>
-            <div className={`${classes.header_bg} ${props.special_flex}`} style={{
-                height: `${props.height}`
-            }}>
+            <div className={`${classes.header_bg} ${props.special_flex}`}>
                 {props.video && 
                     <video 
                         className={`${classes.video_bg}`} 
@@ -59,7 +57,7 @@ const MainHeaderWrapper = (props)=>{
                         }
                     } className={`${classes.img_bg}`}></div>
                 }
-                <div className={'position-relative'} style={{
+                <div className={'position-relative py-5'} style={{
                     zIndex: 99
                 }}>
                     {props.children}

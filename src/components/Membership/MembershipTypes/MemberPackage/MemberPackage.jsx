@@ -75,7 +75,7 @@ const MemberPackage = () => {
             <MainHeaderWrapper image={packageDetails?.image}>
                 <div className="container-fluid px-70">
                     <div className="col-md-6 col-12">
-                        <h1 className="main_header mb-0">{membershipType}</h1>
+                        <h1 className="main_header_title mb-0">{membershipType}</h1>
                         <h2 className="head_paragraph mb-3">{packageDetails?.type}</h2>
                         <Paragraph className="description mb-0">{packageDetails?.description}</Paragraph>
                     </div>

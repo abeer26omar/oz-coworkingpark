@@ -177,7 +177,7 @@ const MyBookingDetails = () => {
                                                 <path d="M4.66406 5.99739L9.99742 2.66406" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                 <path d="M27.3333 5.99739L22 2.66406" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
-                                            <span className='grey-span opacity-25 ps-3'>{booking && setTime(booking?.check_in_formmated)} - {booking && setTime(booking.check_out_formmated)}</span>
+                                            <span className='grey-span opacity-25 ps-3'>{booking && setTime(booking?.check_in_formmated)} - {booking && setTime(booking?.check_out_formmated)}</span>
                                     </div>
                                 </div>
                             </div>
@@ -186,17 +186,17 @@ const MyBookingDetails = () => {
                                 <div className='d-flex justify-content-between align-items-center'>
                                     <Paragraph className="h2-description mb-5">Invites</Paragraph>
                                 </div>
-                                <span className='grey-span'>{booking && booking.invites.length} people going</span>
-                                {(booking && booking.invites.length !== 0) && 
+                                <span className='grey-span'>{booking && booking.invites?.length} people going</span>
+                                {(booking && booking.invites?.length !== 0) && 
                                     <div className="facilities-list going_event">
                                         <ul className="list-options d-flex p-0 py-3 m-0">
-                                            {booking.invites.slice(0,4).map((item, index)=>{
+                                            {booking.invites?.slice(0,4).map((item, index)=>{
                                                 return (
                                                     <li className="list-option-item" key={index}><img src={wifi} alt='wifi'/><span className='grey-span'>Wifi</span></li>
                                                 )
                                             })}
                                         </ul>
-                                        {booking.invites.length > 4 && (
+                                        {booking.invites?.length > 4 && (
                                             <Button
                                                 className="more_people"
                                                 tagType="link"

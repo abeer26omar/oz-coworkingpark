@@ -1,24 +1,19 @@
-import { useEffect, useState } from "react";
-import InvoiceModal from './InvoiceModal';
 import Paragraph from "../../UI/Paragraph";
 import Button from "../../UI/Button";
 
 const ProfileActions = ({details, canceled}) => {
 
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-
     const handelInvoice = (eventData) => {
         const data = {
-            invoice_info: eventData.invoice_info,
+            invoice_info: eventData?.invoice_info,
             title: 'booking',
-            venue: eventData.venueData,
-            price: eventData.booking_price,
-            servicesPrice: eventData.service_price,
-            totalPrice: eventData.total_price,
-            numberOfPeople: eventData.guests || 1,
-            checkIn: eventData.check_in_formmated,
-            checkOut: eventData.check_out_formmated
+            venue: eventData?.venueData,
+            price: eventData?.booking_price,
+            servicesPrice: eventData?.service_price,
+            totalPrice: eventData?.total_price,
+            numberOfPeople: eventData?.guests || 1,
+            checkIn: eventData?.check_in_formmated,
+            checkOut: eventData?.check_out_formmated
         }
         sessionStorage.setItem('OZInvoice', JSON.stringify(data));
     }
@@ -76,10 +71,7 @@ const ProfileActions = ({details, canceled}) => {
                     </Button>
                 </div>}
             </div>
-            <InvoiceModal
-                show={show}
-                onHide={handleClose}
-            />
+           
         </>
     )
 };

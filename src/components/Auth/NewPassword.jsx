@@ -1,7 +1,17 @@
 import "./Auth.css";
 import vector from "../../assets/images/Vector.png";
 import NewPasswordForm from './NewPasswordForm';
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 const NewPassword = () => {
+    const location = useLocation();
+
+    useEffect(()=>{
+        const route = location.pathname;
+        sessionStorage.setItem('prevLocationOZ', route)
+    },[]);
+
     return (
         <>
             <section className="login auth my-5">

@@ -15,7 +15,12 @@ const LoginForm = ({profile, provider})=>{
     const [userInfo, setUSerInfo] = useState({});
     const { handleLogin } = useContext(AuthContext);
     const [notificationToken, setNotificationToken] = useState('');
+    const [previousLocation, setPreviousLocation] = useState(sessionStorage.getItem('prevLocationOZ'));
 
+    useEffect(() => {
+      setPreviousLocation(sessionStorage.getItem('prevLocationOZ'));
+    }, []);
+    
     useEffect(()=>{
         if(provider === 'google'){
             setUSerInfo({ 
@@ -44,9 +49,10 @@ const LoginForm = ({profile, provider})=>{
         try {
             const result = await Login(values.email, values.password, provider, notificationToken);
             handleLogin(result);
-            const AuthRoutes = location.pathname === '/login' || location.pathname === '/forgetpass' 
-            if(AuthRoutes){
+            const prevRoute = previousLocation === '/newpassword' 
+            if(prevRoute){
                 navigate('/');
+                sessionStorage.removeItem('prevLocationOZ')
             }else{
                 navigate(-1);
             }

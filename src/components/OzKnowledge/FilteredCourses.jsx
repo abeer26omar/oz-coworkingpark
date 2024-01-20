@@ -22,6 +22,7 @@ const FilteredCourses = () => {
     const [priceFrom, setPriceFrom] = useState('');
     const [priceTo, setPriceTo] = useState('');
     const [categoryId, setCategoryId] = useState([]);
+    const [isFirstChange, setIsFirstChange] = useState(true);
     const [sellerType, setSellerType] = useState('');
     const [trainerId, setTrainerId] = useState('');
 
@@ -102,6 +103,10 @@ const FilteredCourses = () => {
     }, []);
 
     const handleCheckboxChange = (event) => {
+        if (isFirstChange) {
+            setIsFirstChange(false);
+            setCategoryId([]);
+        }
         const value = +event.target.value
         const { checked } = event.target;
         if (checked) {

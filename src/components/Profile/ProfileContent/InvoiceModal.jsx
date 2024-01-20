@@ -14,11 +14,11 @@ const InvoiceModal = ({show, onHide}) => {
 
     const setDate = (roomdate) => {
 
-        const dateObj = new Date(roomdate.replace(' PM', ''));
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        const formattedDate = dateObj.toLocaleDateString('en-US', options);
+        // const dateObj = new Date(roomdate.replace(' PM', ''));
+        // const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        // const formattedDate = dateObj.toLocaleDateString('en-US', options);
 
-        return formattedDate;
+        // return formattedDate;
         
     };
 
@@ -56,14 +56,14 @@ const InvoiceModal = ({show, onHide}) => {
                         <div className="d-flex flex-column">
                             <div className=" order-summary">
                             <div className="order-details">
-                            <h2>Amount Due<br/>{`# ${details.invoice_info?.invoice_no}`}</h2>
+                            <h2>Amount Due<br/>{`# ${details?.invoice_info?.invoice_no}`}</h2>
                             <div
                             className="d-flex align-items-center justify-content-between">
                             <span
                             className="date-period">Date Period: {setDate(details?.check_in_formmated)}<br/>
                             <span
                             className="invoice">Invoice</span></span>
-                            <span className="location">{details.invoice_info?.address}</span>
+                            <span className="location">{details?.invoice_info?.address}</span>
                             </div>
                             </div>
                             <div className="order-description">
@@ -79,7 +79,7 @@ const InvoiceModal = ({show, onHide}) => {
                             <span
                             className="item-name">Meeting room 01</span>
                             <span className="item-price">
-                                {details.booking_price} EGP
+                                {details?.booking_price} EGP
                             </span>
                             </div>
                             </div>
@@ -102,7 +102,7 @@ const InvoiceModal = ({show, onHide}) => {
                             <div className="order-summary-black ">
                             <div className="order-details">
                             <div className="line">
-                            <h2>{details.name}</h2>
+                            <h2>{details?.name}</h2>
                             </div>
                             <div className="booking-items">
                             <span>Date : {setDate(details?.check_in_formmated)}</span>

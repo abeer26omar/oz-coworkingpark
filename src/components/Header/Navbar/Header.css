@@ -19,24 +19,6 @@
     font-weight: 700;
     line-height: 120%;
 }
-/* .nav-bar-link, .nav-link-two {
-    color: var(--primary-color);
-    font-family: couture, sans-serif;
-    font-size: var(--font-size-13);
-    font-weight: 400;
-    letter-spacing: 1px;
-    text-transform: capitalize;
-}
-} */
-/* .main_header .nav-link:hover {
-    cursor: pointer;
-    transition: 1s;
-    color: var(--primary-color);
-}
-.main_header .nav-item .active {
-    color: var(--primary-color);
-    border-bottom: 1px solid var(--primary-color);
-} */
 nav.btn.show {
     border: none !important;
     outline: none !important;
