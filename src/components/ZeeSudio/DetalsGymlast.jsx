@@ -42,13 +42,16 @@ function DetalsGymlast({ details }) {
     <>
       <div className="container-fluid px-70 py-5">
         {details && (
-          <div className="row g-0">
+          <div className="row g-3">
             <div className="col-xl-8 col-md-6 col-sm-12">
-              <Media
-                type="img"
+              <img
                 src={details.image}
                 alt={details.title}
                 className="w-100"
+                height={'608px'}
+                style={{
+                  objectFit: 'cover'
+                }}
               />
               <div className="py-4">
                 <Paragraph className="desc_small light">
@@ -62,15 +65,15 @@ function DetalsGymlast({ details }) {
                 <Paragraph className="desc_small_light py-3">
                   {details.details}
                 </Paragraph>
-                <Paragraph className="desc_small light ">
+                <Paragraph className="desc_small light py-2 ">
                   Duration :
                   <span className="desc_small"> {details.duration}</span>
                 </Paragraph>
-                <Paragraph className="desc_small light ">
+                <Paragraph className="desc_small light py-2 ">
                   Intensity :
                   <span className="desc_small"> {details.intensity}</span>
                 </Paragraph>
-                <Paragraph className="desc_small light ">
+                <Paragraph className="desc_small light py-2 ">
                   Fitness Level :
                   <span className="desc_small"> {details.level}</span>
                 </Paragraph>
@@ -78,7 +81,7 @@ function DetalsGymlast({ details }) {
                   Schedule :
                   <span className="desc_small">{details.schedule}</span>
                 </Paragraph>
-                <Paragraph className="desc_small light ">
+                <Paragraph className="desc_small light py-2 ">
                   Start & End Time :
                   <span className="desc_small">
                     <span className="px-2">
@@ -87,7 +90,7 @@ function DetalsGymlast({ details }) {
                     -<span className="px-2">{moment(details.end_time, 'HH:mm:ss').format("hh:mm a")}</span>
                   </span>
                 </Paragraph>
-                <Paragraph className="desc_small light ">
+                <Paragraph className="desc_small light py-2 ">
                   Price :
                   <span className="desc_small">
                     {Math.floor(details.price)} Egp

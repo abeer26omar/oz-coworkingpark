@@ -21,7 +21,7 @@ function TrainingClasses({
       <div className="navigator border-solid my-3">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-4">
+            <div className="col-xl-4 col-md-6 col-sm-12 py-3 py-xl-0">
               <div className="d-flex align-items-center justify-content-between">
                 <h2 className="paragraph_black mb-0 mx-auto">
                   {"training Classes"}
@@ -41,7 +41,7 @@ function TrainingClasses({
                 </svg>
               </div>
             </div>
-            <div className="col-8 d-flex justify-content-end align-items-center">
+            <div className="col-xl-8 col-md-6 col-sm-12 py-3 py-xl-0 d-flex justify-content-end align-items-center">
               <Button
                 tagType="link"
                 className="button-outLine px-4 btn-bg-white m-0 me-3 btn-filter text-center font-couture"
@@ -69,7 +69,6 @@ function TrainingClasses({
                 </svg>
                 History
               </Button>
-
               <Button
                 tagType="link"
                 className="button-outLine px-4 btn-bg-white m-0 btn-filter text-center font-couture"

@@ -7,6 +7,7 @@ import CaseThree from "./CasesPay/CaseThree";
 import Button from "../UI/Button";
 import { BookGymClass } from "../../apis/ZeeStudio";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
+import { useNavigate } from "react-router-dom";
 
 const PaymentGym = () => {
 
@@ -22,6 +23,8 @@ const PaymentGym = () => {
   const getPaymentValue = (value) => {
     setInputValue(value);
   };
+
+  const navigate = useNavigate();
 
   const steps = [
     {
@@ -54,8 +57,9 @@ const PaymentGym = () => {
       });
     }catch(error){
       Modal.error({
-        title: 'error',
-        content: error.message,
+        title: "error",
+        content: error.response.data.message,
+        afterClose: () => navigate("/ourgymclasses"),
       });
     }
 

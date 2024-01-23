@@ -21,6 +21,12 @@
     transform: translateY(-96px);
 
 }
+ @media screen and (max-width:575px) {
+.slider-sm-responsive .slick-slide{
+        width: 135px;
+}
+    
+ }
 @media screen  and (max-width: 1024px){
     .private .title-name {
         font-size: 2.25rem;

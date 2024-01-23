@@ -25,7 +25,7 @@ const ClassesFilter = ({
     setSearch_txt("");
     setCourse_date("");
     setCourse_categorey("");
-     setCourse_price("");
+    setCourse_price("");
   };
   useEffect(() => {
     const controller = new AbortController();
@@ -48,8 +48,8 @@ const ClassesFilter = ({
       {isOpen && (
         <div className="container-fluid border-top">
           <form className="form-filter">
-            <div className="filter-component row g-3 d-flex align-items-center justify-content-around">
-              <div className="col-xxl-2 col-md-3">
+            <div className="filter-component row ">
+              <div className="col-xl-3 col-md-6 col-sm-6">
                 <div className="input-group">
                   <input
                     name="search"
@@ -67,7 +67,7 @@ const ClassesFilter = ({
                   </span>
                 </div>
               </div>
-              <div className="col-xxl-2 col-md-2">
+              <div className="col-xl-3 col-md-6 col-sm-6">
                 <div className="input-group">
                   <input
                     type="date"
@@ -82,7 +82,7 @@ const ClassesFilter = ({
                   />
                 </div>
               </div>
-              <div className="col-xxl-2 col-md-3 mb-2">
+              <div className="col-xl-2 col-md-6 col-sm-6 mb-2">
                 <Select
                   id="class_type"
                   defaultValue={course_categorey || undefined}
@@ -102,7 +102,7 @@ const ClassesFilter = ({
                   ))}
                 </Select>
               </div>
-              <div className="col-xxl-2 col-md-2 ">
+              <div className="col-xl-2 col-md-6 col-sm-6 ">
                 <div className="input-group">
                   <input
                     type="text"
@@ -117,12 +117,12 @@ const ClassesFilter = ({
                   />
                 </div>
               </div>
-              <div className="col-xxl-4 col-md-2">
+              <div className="col-xl-2 col-md-12 col-sm-6 btn-filter-responsive">
                 <Button
                   tagType="button"
                   type="button"
                   onClick={Clearinput}
-                  className="btn_outline_black  px-5 text-center "
+                  className="btn_outline_black  btn-default-padding text-center "
                   // style={{Width:"100%"}}
                 >
                   clear

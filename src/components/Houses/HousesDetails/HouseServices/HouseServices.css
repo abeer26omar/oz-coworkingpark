@@ -38,10 +38,10 @@
     font-size: var(--font-size-16);
     font-family: Questrial;
     opacity: 0.7;
+    text-align: left;
 }
 
 .features img {
-    /* width: 50px; */
     text-align: left !important;
     margin-bottom: 24px;
 }
@@ -56,3 +56,15 @@
 .dark_theme .features .text-content {
     color: var(--white-color);
 }
+
+@media screen and (max-width:575px) {
+.features {
+    text-align: center;
+}
+.features .text-content {
+    text-align: center;
+}
+.features img {
+     transform: scale(.8);
+}
+    }

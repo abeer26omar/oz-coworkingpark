@@ -7,10 +7,10 @@ const ServicesList = ({id, title, image,description}) => {
             <div className="features" key={id}>
                 <img
                     src={image} 
-                    className=" services-icons mb-3" 
+                    className=" services-icons mb-0 mb-xl-3 mb-md-3" 
                     alt={title}/>
                 <Paragraph className="bold-head mt-3">{title}</Paragraph>
-                <Paragraph className="text-content text-left mt-4">{description}</Paragraph>
+                <Paragraph className="text-content  mt-4">{description}</Paragraph>
             </div>
         </>
     );

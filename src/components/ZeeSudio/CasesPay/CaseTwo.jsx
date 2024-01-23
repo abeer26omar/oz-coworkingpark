@@ -3,7 +3,7 @@ import CashPay from "../../UI/Icons/CashPay";
 import CridetPay from "../../UI/Icons/CridetPay";
 import Paragraph from "../../UI/Paragraph";
 
-const CaseTwo = ({ getPaymentValue }) => {
+const   CaseTwo = ({ getPaymentValue }) => {
 
   const handleCheckboxChange = (e) => {
     getPaymentValue(e.target.value);
@@ -18,9 +18,14 @@ const CaseTwo = ({ getPaymentValue }) => {
         <form>
           <ul className="p-0">
             <li className="form-check d-flex align-items-center justify-content-between mb-4 pb-4 border-bottom">
-              <label className="form-check-label d-flex align-items-center" htmlFor="cash">
+              <label
+                className="form-check-label d-flex align-items-center"
+                htmlFor="cash"
+              >
                 <CashPay />
-                <Paragraph className="mb-0 mx-2">Cash Payment</Paragraph>
+                <Paragraph className="mb-0 mx-2 black-span ">
+                  Cash Payment
+                </Paragraph>
               </label>
               <input
                 type="radio"
@@ -32,9 +37,14 @@ const CaseTwo = ({ getPaymentValue }) => {
               />
             </li>
             <li className="form-check d-flex align-items-center justify-content-between  mb-4 pb-4 border-bottom">
-              <label className="form-check-label d-flex align-items-center" htmlFor="credit">
+              <label
+                className="form-check-label d-flex align-items-center"
+                htmlFor="credit"
+              >
                 <CridetPay />
-                <Paragraph className="mb-0 mx-2">Credit Payment</Paragraph>
+                <Paragraph className="black-span mb-0 mx-2">
+                  Credit Payment
+                </Paragraph>
               </label>
               <input
                 type="radio"

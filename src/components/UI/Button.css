@@ -13,6 +13,9 @@
     text-align: center;
     color: black;
 }
+.btn-default-padding{
+    padding: 1rem 5rem  !important;
+}
 
 .btn_outline{
     color: var(--neturals-color1);

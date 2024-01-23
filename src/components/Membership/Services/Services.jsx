@@ -35,8 +35,8 @@ const Services = () => {
                         alt="shape"
                     />
                 </div>
-                <div className="container">
-                    <div className="head-content-left-shape text-left position-relative" style={{zIndex: '99'}}>
+                <div className="container-fluid px-70">
+                    <div className="head-content-left-shape text-left position-relative ms-4" style={{zIndex: '99'}}>
                         <Paragraph className="bold-head mb-4 ">What you'll get</Paragraph>
                         <Paragraph className="text-content text-secondary">Enjoy the boundlessness of possibilities at OZ:</Paragraph>
                     </div>
@@ -44,7 +44,7 @@ const Services = () => {
                         {amenities.map((amenity, index) => {
                             const {id, title, image,description} = amenity;
                             return (
-                                <div className="col-lg-4 col-md-6 col-sm-12 my-4" key={index}>
+                                <div className="col-lg-4 col-md-6 col-sm-12 my-0 my-xl-4 my-md-4" key={index}>
                                     <ServicesList id={id} title={title} image={image} description={description}/>
                                 </div>
                             )

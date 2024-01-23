@@ -106,6 +106,7 @@ nav.btn.show {
 }
 .dropdown-nav-user .drop_event{
     width: 100%;
+    /* text-align:  right !important; */
 }
 .dropdown-nav-user{
     position: absolute !important;

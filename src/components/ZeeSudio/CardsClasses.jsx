@@ -17,7 +17,10 @@ const CardsClasses = ({classesGym, getLimit}) => {
       content = classesGym.map((card , index)=>{
         return (
           <>
-            <div className="col-xxl-4 col-xl-4 col-md-6 col-sm-12 my-2" key={index}>
+            <div
+              className="col-xxl-4 col-xl-4 col-md-6 col-sm-12 my-2"
+              key={index}
+            >
               <div className="card my-2 h-100 text-start">
                 <Media
                   type="img"
@@ -30,7 +33,7 @@ const CardsClasses = ({classesGym, getLimit}) => {
                   <Paragraph className="description_black py-2">
                     {card.descriptions.slice(0, 150)}
                   </Paragraph>
-                  <div className="d-flex justify-content-between align-items-center ">
+                  <div className="d-flex justify-content-between align-items-center flex-dir-responsive ">
                     <Button
                       tagType="link"
                       to={`/gymdetails/${card.id}`}
@@ -38,7 +41,7 @@ const CardsClasses = ({classesGym, getLimit}) => {
                     >
                       {"Explore More"}
                     </Button>
-                    <Paragraph className="card-title">
+                    <Paragraph className="card-title mt-3 mt-xl-0">
                       {Math.floor(card.price)} Egp
                     </Paragraph>
                   </div>
@@ -60,7 +63,7 @@ const CardsClasses = ({classesGym, getLimit}) => {
 
   return (
     <>
-      <div className="container-fluid  px-70 py-5">
+      <div className="container-fluid  special_padding px-70 py-5">
         <div className="row py-5">
           <Paragraph className="fs-4">
             <span className="card-title mx-2">{classesGym.length}</span>
