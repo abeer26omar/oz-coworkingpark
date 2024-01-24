@@ -7,6 +7,7 @@ import CaseThree from "./CasesPay/CaseThree";
 import Button from "../UI/Button";
 import { BookKnowledgeCourse } from "../../apis/OzKnowledge";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
+import { useNavigate } from "react-router-dom";
 
 const BookCourse = () => {
 
@@ -18,6 +19,8 @@ const BookCourse = () => {
     JSON.parse(sessionStorage.getItem("OZCourseDetails"))
   );
   const [inputValue, setInputValue] = useState();
+
+  const navigate = useNavigate();
 
   const getPaymentValue = (value) => {
     setInputValue(value);
@@ -55,7 +58,8 @@ const BookCourse = () => {
     }catch(error){
       Modal.error({
         title: 'error',
-        content: error.message,
+        content: error.response.data.message,
+        afterClose: ()=>navigate('/courses')
       });
     }
 

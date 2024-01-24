@@ -22,7 +22,7 @@ const RateCourseModal = ({open, handleCancel, courseId}) => {
         const signal = controller.signal;
 
         try{
-            const result = await rateCourse(token, userId, courseId, rating, values.message, signal);
+            const result = await rateCourse(token, userId, courseId, rating, values.first_name, signal);
             console.log(result);
 
         }catch(error){
@@ -40,10 +40,10 @@ const RateCourseModal = ({open, handleCancel, courseId}) => {
                 <div>
                     <Paragraph className="h2-description">Rating</Paragraph>
                     <Formik
-                        initialValues={
+                        initialValues = {
                             {
                                 rating: rating,
-                                message: '',
+                                first_name: ''
                             }
                         }
                         onSubmit={async (values) => {
@@ -70,7 +70,7 @@ const RateCourseModal = ({open, handleCancel, courseId}) => {
                                         <div className='coures_rate'>
                                             <Paragraph className="h2-description">How was your experience ?</Paragraph>
                                                 <div className='d-flex justify-content-center py-3'>
-                                                    <Rate allowHalf defaultValue={'3.5'} onChange={ratingChanged}/>
+                                                    <Rate allowHalf  onChange={ratingChanged}/>
                                                     {errors.rating && touched.rating && <p className='text-danger mb-0'>{errors.rating}</p>}
                                                 </div>
                                             </div>
@@ -80,15 +80,18 @@ const RateCourseModal = ({open, handleCancel, courseId}) => {
                                                         Comment
                                                 </label>
                                                 <input 
-                                                    type='text'
-                                                    id="message" 
-                                                    name="comment"
-                                                    placeholder='Enter your comment'
-                                                    className="form__field color-grey"
-                                                    value={values.message}
+                                                    id='first_name'
+                                                    type="text"
+                                                    className={
+                                                        
+                                                        "form__field"
+                                                    }
+                                                    placeholder="Enter Your comment"
+                                                    name="first_name"
+                                                    value={values.first_name}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                />
+                                                /> 
                                             </div>
                                             <div className="col-12 d-flex justify-content-center py-3">
                                                 <Button 
