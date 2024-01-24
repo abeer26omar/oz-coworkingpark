@@ -106,17 +106,20 @@ const FilteredCourses = () => {
         return () => controller.abort();
     }, []);
 
-    const handleCheckboxChange = (event) => {
+    const handleCheckboxChange = (event, ids) => {
         if (isFirstChange) {
             setIsFirstChange(false);
             setCategoryId([]);
         }
-        const value = +event.target.value
+        const value = +event.target.value;
         const { checked } = event.target;
         if (checked) {
             setCategoryId((prevValues) => [...prevValues, value]);
         } else {
             setCategoryId((prevValues) => prevValues.filter((val) => val !== value));
+            if(categoryId.length === 1){
+                setCategoryId(ids);
+            }
         }
     };
 
@@ -179,7 +182,7 @@ const FilteredCourses = () => {
                                             name={item.title} 
                                             id={e.id} 
                                             value={e.id}
-                                            onChange={handleCheckboxChange}
+                                            onChange={(event)=>handleCheckboxChange(event, item.ids)}
                                         />
                                         <label className="form-check-label" htmlFor={e.id}>
                                             {e.title}

@@ -59,7 +59,7 @@ const BookCourse = () => {
       Modal.error({
         title: 'error',
         content: error.response.data.message,
-        afterClose: ()=>navigate('/courses')
+        afterClose: ()=>navigate('/knowledge')
       });
     }
 

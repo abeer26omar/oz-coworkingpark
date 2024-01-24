@@ -136,32 +136,18 @@ const KnowledgeDescription = ({ categories, info }) => {
           <div className="col d-flex align-items-center justify-content-center">
             <div className="d-flex">
               <div className="counter_icon me-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="40"
-                  height="40"
-                  viewBox="0 0 40 40"
-                  fill="none"
-                >
-                  <g clip-path="url(#clip0_5471_14149)">
-                    <path
-                      d="M28.75 17.5L37.5 12.5V27.5L28.75 22.5"
-                      stroke="#BDBDBD"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M3.75 9.375H23.75C25.0761 9.375 26.3479 9.90178 27.2855 10.8395C28.2232 11.7771 28.75 13.0489 28.75 14.375V29.375C28.75 29.7065 28.6183 30.0245 28.3839 30.2589C28.1495 30.4933 27.8315 30.625 27.5 30.625H7.5C6.17392 30.625 4.90215 30.0982 3.96447 29.1605C3.02678 28.2229 2.5 26.9511 2.5 25.625V10.625C2.5 10.2935 2.6317 9.97554 2.86612 9.74112C3.10054 9.5067 3.41848 9.375 3.75 9.375V9.375Z"
-                      stroke="white"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                  <g clip-path="url(#clip0_5471_14158)">
+                    <path d="M20 28.125C23.4518 28.125 26.25 25.3268 26.25 21.875C26.25 18.4232 23.4518 15.625 20 15.625C16.5482 15.625 13.75 18.4232 13.75 21.875C13.75 25.3268 16.5482 28.125 20 28.125Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M30.625 18.125C32.0809 18.1226 33.5171 18.4604 34.8193 19.1114C36.1214 19.7625 37.2534 20.7089 38.125 21.875" stroke="#BDBDBD" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M1.875 21.875C2.74656 20.7089 3.87856 19.7625 5.18072 19.1114C6.48287 18.4604 7.91915 18.1226 9.375 18.125" stroke="#BDBDBD" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M11 33.7499C11.8232 32.0641 13.1033 30.6434 14.6944 29.6496C16.2856 28.6558 18.124 28.1289 20 28.1289C21.876 28.1289 23.7144 28.6558 25.3056 29.6496C26.8968 30.6434 28.1768 32.0641 29 33.7499" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9.37422 18.125C8.42522 18.126 7.49555 17.8568 6.69382 17.3491C5.8921 16.8413 5.25144 16.1158 4.84669 15.2575C4.44195 14.3991 4.28984 13.4433 4.40815 12.5017C4.52645 11.5601 4.91027 10.6716 5.51477 9.94007C6.11927 9.20851 6.91947 8.66409 7.82189 8.37042C8.7243 8.07676 9.69166 8.04597 10.6109 8.28166C11.5302 8.51735 12.3634 9.00978 13.0132 9.70142C13.663 10.3931 14.1025 11.2553 14.2805 12.1875" stroke="#BDBDBD" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M25.7188 12.1875C25.8967 11.2553 26.3362 10.3931 26.986 9.70142C27.6358 9.00978 28.469 8.51735 29.3883 8.28166C30.3076 8.04597 31.2749 8.07676 32.1773 8.37042C33.0797 8.66409 33.88 9.20851 34.4844 9.94007C35.0889 10.6716 35.4728 11.5601 35.5911 12.5017C35.7094 13.4433 35.5573 14.3991 35.1525 15.2575C34.7478 16.1158 34.1071 16.8413 33.3054 17.3491C32.5037 17.8568 31.574 18.126 30.625 18.125" stroke="#BDBDBD" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                   </g>
                   <defs>
-                    <clipPath id="clip0_5471_14149">
-                      <rect width="40" height="40" fill="white" />
+                    <clipPath id="clip0_5471_14158">
+                      <rect width="40" height="40" fill="white"/>
                     </clipPath>
                   </defs>
                 </svg>
