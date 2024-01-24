@@ -15,8 +15,8 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
         return (
             <>
                 <Tab.Container id="left-tabs-example" defaultActiveKey="1">
-                    <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 m-auto">
-                        <div className="box-content p-md-4 p-2">
+                    <div className="col-lg-4 col-md-6 col-12 m-auto">
+                        <div className="box-content p-xl-4 p-2">
                             <Paragraph className="h2-text-box">{address}</Paragraph>
                             <Paragraph className="p-text-box">
                                 Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
@@ -32,7 +32,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                                 </Tab.Content>
                             </ul>
                             <div className="d-flex buttons-group">
-                                <Button to="/contactus" className="btn button-outLine btn-bg-white" tagType='link'>inquire</Button>
+                                <Button to="/contactus" className="btn button-outLine btn-bg-white m-0" tagType='link'>inquire</Button>
                                 <a href="#!" className="btn button-outLine btn-bg-white btn-pdf" title='comming Soon' style={{
                                     cursor: 'not-allowed'
                                 }}>Download PDF</a>
@@ -42,7 +42,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                         </div>
 
                     </div>
-                    <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 m-auto border-left img_block">
+                    <div className="col-lg-8 col-md-6 col-12 m-auto border-left img_block">
                             <Media
                                 type='img'
                                 id={`image-place-${id}`}
@@ -58,7 +58,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
         return (
             <>
                 <Tab.Container id="left-tabs-example" defaultActiveKey="1">
-                    <div className="col-md-6 col-lg-8 col-sm-8 col-xs-6 m-auto border-right img_block">
+                    <div className="col-lg-8 col-md-6 col-12 m-auto border-right img_block">
                             <Media
                                 type='img'
                                 id={`image-place-${id}`}
@@ -67,8 +67,8 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                                 alt="news feed"
                             />
                     </div>
-                    <div className="col-md-6 col-lg-4 col-sm-4 col-xs-6 m-auto">
-                        <div className="box-content p-md-4 p-2">
+                    <div className="col-lg-4 col-md-6 col-12 m-auto">
+                        <div className="box-content p-xl-4 p-2">
                             <Paragraph className="h2-text-box">{address}</Paragraph>
                             <Paragraph className="p-text-box">
                                 Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
@@ -84,7 +84,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                                 </Tab.Content>
                             </ul>
                             <div className="d-flex buttons-group">
-                                <Button to="/contactus" className="btn button-outLine btn-bg-white" tagType='link'>inquire</Button>
+                                <Button to="/contactus" className="btn button-outLine btn-bg-white m-0" tagType='link'>inquire</Button>
                                 <a href="#!" className="btn button-outLine btn-bg-white btn-pdf" title='comming Soon' style={{
                                     cursor: 'not-allowed'
                                 }}>Download PDF</a>

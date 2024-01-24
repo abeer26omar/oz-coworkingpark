@@ -10,7 +10,7 @@ const MembershipTypes = (props) => {
             <section className={`membership-types ${props.className}`}>
                 <Container fluid>
                     <Row>
-                        <div className="col-lg-12 border-bottom border-top ">
+                        <div className="col-lg-12 border-bottom ">
                             <div className="head-content-sec text-center">
                                 <h2 className="h2-text">For {props.title}</h2>
                             </div>

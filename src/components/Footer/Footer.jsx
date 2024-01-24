@@ -14,7 +14,7 @@ const Footer = () => {
         <footer className="footer-section container-fluid">
             <div className="row align-items-center">
                 <div className="col-xl-10 col-lg-8 col-md-12">
-                    <div className="row align-items-center justify-content-between py-lg-0 py-4">
+                    <div className="row align-items-center justify-content-between py-lg-0 py-4 g-3">
                         <div className="col-xl-2 col-lg-3 col-md-3">
                             <div className="footer-single-col d-flex justify-content-center">
                                 <Button 

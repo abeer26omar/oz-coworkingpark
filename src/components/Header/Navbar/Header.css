@@ -56,12 +56,12 @@ nav.btn.show {
 .title-name {
     color: var(--primary-color);
     font-family: var(--goldenHopes-font);
-    font-size: var(--font-size-52);
+    font-size: var(--font-size-66);
     font-style: normal;
-    font-weight: var(--font-weight-bold);
+    font-weight: 400;
     letter-spacing: 0;
-    text-transform: uppercase;
-    padding: 33px 42px;
+    padding: 25px 42px;
+    text-transform: capitalize;
 }
 .icons {
     display: none;

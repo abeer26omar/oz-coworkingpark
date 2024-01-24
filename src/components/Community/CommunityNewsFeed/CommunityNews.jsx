@@ -35,7 +35,7 @@ const CommunityNews = (props) => {
         <Element name="community-newsfeed">
             <section  className="news-feed">
                 <div className="container-fluid">
-                    <div className="row border-of-section">
+                    <div className="row border-of-section flex_reverse">
                         <div className="col-lg-4 col-md-5 col-12 m-auto">
                             <div className="box-content p-lg-4 p-3">
                                     {props.configData ? props.configData.map((configItem, index) => (

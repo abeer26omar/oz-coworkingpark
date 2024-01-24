@@ -15,7 +15,7 @@ const ZeeStudio = (props) => {
               </div>
             </div>
           </div>
-          <div className="row border-of-section ">
+          <div className="row flex_reverse border-of-section ">
             <div className="col-lg-4 col-md-5 col-sm-12 col-xs-6 m-auto">
               <div className="box-content p-lg-4 p-3">
                 {props.configData

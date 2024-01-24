@@ -79,10 +79,10 @@ const PrivateEventsHeader = () => {
         </Container>
       </div>
 
-      <MainHeaderWrapper video={prevent}>
-        <div className={`container-fluid px-70 py-5`}>
-          <div className="col-md-6 col-12">
-            {/* {props.configData ? props.configData.map((configItem, index) => (
+            <MainHeaderWrapper  video={prevent}>
+                <div className={`container-fluid px-70 py-5`}>
+                    <div className='col-md-6 col-12'>
+                        {/* {props.configData ? props.configData.map((configItem, index) => (
                             <React.Fragment key={index}> */}
             {/* {configItem.key === 'booking_page_title' && ( */}
             <Paragraph className="head_paragraph mb-3">
