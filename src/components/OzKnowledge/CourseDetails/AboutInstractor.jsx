@@ -1,10 +1,10 @@
 import Paragraph from '../../UI/Paragraph';
-import img from '../../../assets/images/Rectangle_35.png';
 import confirmedIcon from '../../../assets/images/icons/check.svg';
 import star from '../../../assets/images/icons/star.svg';
 import videoIcon from '../../../assets/images/icons/video.svg';
+import { Skeleton } from 'antd';
 
-const AboutInstractor = ({instractor}) => {
+const AboutInstractor = ({instractor, isPending}) => {
     return (
         <>
             <section className="py-5">
@@ -12,22 +12,33 @@ const AboutInstractor = ({instractor}) => {
                     <h1 className="course_details_title mb-5">about instractor</h1>
                     <div className="row align-items-center">
                         <div className="col-xxl-3 col-xl-4 col-md-6 col-12">
-                            <img src={instractor?.image} alt='' width= '307px' height= '324px'/>
+                            {isPending && (<Skeleton.Image className="w-100" active />)}
+
+                            <img 
+                                src={instractor?.image} 
+                                alt={isPending ? '' : 'oz instractor'} 
+                                width= '307px' 
+                                height={isPending ? '' : '324px'}
+                            />
                         </div>
                         <div className='col-xxl-9 col-xl-8 col-md-6 col-12'>
                             <div className='d-flex align-items-center  mb-3'>
+                                {isPending && (<Skeleton.Input style={{ width: 80 }} active />)}
                                 <h1 className="course_details_title mb-0">{instractor?.name}</h1>
                                 <img src={confirmedIcon} alt='confirmed Icon' className='ms-2'/>
                             </div>
+                            {isPending && (<Skeleton paragraph active/>)}
                             <Paragraph className='course_details_light_desc opacity-100'>{instractor?.description}</Paragraph>
                             <div className='d-flex align-items-center  mb-4'>
                                 <div className='d-flex align-items-center'>
                                     <img src={star} alt='star icon'/>
+                                    {isPending && (<Skeleton.Input style={{ width: 80 }} active />)}
                                     <span className='rate mx-2 fw-semibold'>{instractor?.rating}</span> 
                                     <span className='reviews'>Instructor Rating</span>
                                 </div>
                                 <div className='d-flex align-items-center ms-3'>
                                     <img src={videoIcon} alt='confirmed Icon'/>
+                                    {isPending && (<Skeleton.Input style={{ width: 80 }} active />)}
                                     <span className='reviews mx-2 fw-semibold'>{instractor?.courses}</span>
                                     <span className='reviews'>Courses</span>
                                 </div>

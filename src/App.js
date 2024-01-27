@@ -4,6 +4,8 @@ import "./App.css";
 import "../src/assets/fonts/golden-hopes/golden-hopes.otf";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { motion, useScroll, useSpring } from "framer-motion";
+import AnimatedCursor from "react-animated-cursor";
 import RootLayout from './pages/RootLayout';
 import Membership from "./pages/Membership";
 import Login from "./components/Auth/Login";
@@ -169,10 +171,24 @@ function App() {
         ]}
     ]);
     const queryClient = new QueryClient();
+    const { scrollYProgress } = useScroll();
+    const scaleX = useSpring(scrollYProgress, {
+      stiffness: 100,
+      damping: 30,
+      restDelta: 0.001
+    });
     return (
       <>
       <QueryClientProvider client={queryClient}>
-        {/* <HttpInterceptor /> */}
+      <motion.div className="progress-bar" style={{ scaleX }} />
+      <AnimatedCursor 
+        innerSize={8}
+        outerSize={45}
+        color='208, 223, 0'
+        outerAlpha={0.2}
+        innerScale={0.7}
+        outerScale={1.5}
+      />
         <RouterProvider router={router}/>
       </QueryClientProvider>
       </>

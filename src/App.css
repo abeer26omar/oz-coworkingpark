@@ -198,6 +198,16 @@ a {
 }
 
 /*******************************************/
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--color-yellow);
+    transform-origin: 0%;
+    z-index: 999;
+}
 /*******************************************/
 .img_block > span{
     width: 100%;
@@ -513,7 +523,9 @@ a {
     border-bottom: 1.5px solid var(--secondary-color2);
     background: var(--neturals-color1);
 }
-
+.border-top {
+    border-top: 1.5px solid var(--secondary-color2) !important;
+} 
 .border-left {
     border-left: 1.5px solid var(--secondary-color2)
 }

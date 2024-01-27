@@ -393,7 +393,7 @@
 .yellow_circle_instractors{
     position: absolute;
     right: 0;
-    bottom: -37%;
+    bottom: -30%;
 }
 @media screen and (max-width: 768px) {
     .circle_yellow,

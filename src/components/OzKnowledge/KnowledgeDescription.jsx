@@ -2,12 +2,9 @@ import Paragraph from "../UI/Paragraph";
 import CountUp from 'react-countup';
 import './OzKnowledge.css';
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
-import {AuthContext} from '../../apis/context/AuthTokenContext';
+import { Skeleton } from 'antd';
 
-const KnowledgeDescription = ({ categories, info }) => {
-
-  const { token } = useContext(AuthContext);
+const KnowledgeDescription = ({ categories, info, isPending }) => {
 
   const navigate = useNavigate();
 
@@ -21,6 +18,7 @@ const KnowledgeDescription = ({ categories, info }) => {
       <section className="knowledge_description container-fluid px-70 py-5">
         <div className="description">
           <Paragraph className="status-event">Description</Paragraph>
+          {isPending && (<Skeleton active paragraph={{rows: 3}} />)}
           <Paragraph className="p-text-box">{info?.descriptions}</Paragraph>
         </div>
         <div className="circle_yellow_knowledge">
@@ -169,6 +167,30 @@ const KnowledgeDescription = ({ categories, info }) => {
       </section>
       <section className="container px-70 py-5">
         <Paragraph className="main_section_title">Popular Category</Paragraph>
+        {isPending && (
+          <div className="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-lg-5 g-3 justify-content-center py-5">
+            {[1,2,3,4].map((n, index)=>{
+              return (
+                <div className="col" key={index}>
+                      <Skeleton 
+                        avatar={{ shape: 'square', size: 'large' }}
+                        active
+                        paragraph={{
+                          rows: 1,
+                        }}
+                        title={{width: '100%'}}
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        }}/>
+                </div>
+              )
+
+            })}
+          </div>
+        )}
         <div className="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-lg-5 g-3 justify-content-center py-5">
           {categories &&
             categories.map((item, index) => {

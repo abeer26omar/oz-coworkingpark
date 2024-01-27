@@ -1,25 +1,18 @@
-import { Rate, Skeleton } from 'antd';
-import { useState } from 'react';
+import { Rate } from 'antd';
 import Paragraph from '../UI/Paragraph';
 import Button from '../UI/Button';
 
-const CourseCard = ({coursesDetails, loading}) => {
+const CourseCard = ({coursesDetails}) => {
 
     return (
         <>
             <div className='card h-100'>
-                {loading ? 
-                    <Skeleton.Image active className="card-img-top"/> 
-                    : 
-                    <div className='card-header header_course'>
-                        <img src={coursesDetails.image} className="card-img-top" alt="..." height='229px'/>
+                <div className='card-header header_course'>
+                    <img src={coursesDetails.image} className="card-img-top" alt="..." height='229px'/>
                         <div className='padge_grey'>
                             <span>{coursesDetails.category?.title}</span>
                         </div>
-                    </div>
-                }
-                
-                <Skeleton loading={loading} active className='p-2'/>
+                </div>                
                 <div className='card-body'>
                     <Paragraph className='courseCardTitle'>{coursesDetails.title}</Paragraph>
                     <div className='d-flex align-items-center'>
@@ -36,11 +29,9 @@ const CourseCard = ({coursesDetails, loading}) => {
                                     <path d="M6 18L18 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M8.25 6H18V15.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                            </Button>
+                        </Button>
                     </div>
                 </div>
-                
-            
             </div>
         </>
     )

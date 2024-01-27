@@ -1,7 +1,7 @@
 import axios from "axios";
 import FormData from "form-data";
 
-export const KnowledgeHome = async ( token , signal ) => {
+export const KnowledgeHome = async (token, {signal} ) => {
   const formData = new FormData();
   formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
   
