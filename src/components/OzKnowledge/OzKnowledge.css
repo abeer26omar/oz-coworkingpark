@@ -381,3 +381,24 @@
     border-bottom: 1px solid #d9d9d9;
     border-radius: 0;
 }
+.circle_yellow{
+    position: absolute;
+    right: 0;
+    top: 22%;
+}
+.circle_yellow_knowledge{
+    position: absolute;
+    left: 0;
+}
+.yellow_circle_instractors{
+    position: absolute;
+    right: 0;
+    bottom: -30%;
+}
+@media screen and (max-width: 768px) {
+    .circle_yellow,
+    .circle_yellow_knowledge,
+    .yellow_circle_instractors {
+        display: none;
+    }
+}

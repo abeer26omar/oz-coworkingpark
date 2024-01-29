@@ -7,6 +7,7 @@ import Button from '../../../UI/Button';
 import CancelEventModal from './CancelEventModal';
 import { getSingleItemById } from '../../../../apis/User';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
+import moment from 'moment';
 
 const MyEventDetails = () => {
 
@@ -69,13 +70,6 @@ const MyEventDetails = () => {
         }
         sessionStorage.setItem('OZInvoice', JSON.stringify(data));
     }
-    const getDate = (eventDate) => {
-        const date = new Date(eventDate);
-        const options = { month: 'short', day: 'numeric'  };
-        const formattedDate = date.toLocaleDateString('en-US', options);
-        const [month, day] = formattedDate.split(' ');
-        return `${day} ${month}`;
-    }
 
     return (
         <>
@@ -136,7 +130,7 @@ const MyEventDetails = () => {
                                             <path d="M2.66406 16.0026C2.66406 10.9743 2.66406 8.46013 4.22616 6.89803C5.78826 5.33594 8.30241 5.33594 13.3307 5.33594H18.6641C23.6924 5.33594 26.2065 5.33594 27.7686 6.89803C29.3307 8.46013 29.3307 10.9743 29.3307 16.0026V18.6693C29.3307 23.6976 29.3307 26.2117 27.7686 27.7738C26.2065 29.3359 23.6924 29.3359 18.6641 29.3359H13.3307C8.30241 29.3359 5.78826 29.3359 4.22616 27.7738C2.66406 26.2117 2.66406 23.6976 2.66406 18.6693V16.0026Z" stroke="black" stroke-width="2"/>
                                             <path d="M23.9974 21.3308L21.3307 21.3308M21.3307 21.3308L18.6641 21.3308M21.3307 21.3308L21.3307 18.6641M21.3307 21.3308L21.3307 23.9974" stroke="black" stroke-width="2" stroke-linecap="round"/>
                                         </svg>
-                                        <span className='grey-span opacity-100 ps-3'>{event.dates && getDate(event.dates[0].check_in_date)}</span> - <span className='grey-span opacity-100'>{event.dates && getDate(event.dates[0].check_out_date)}</span>
+                                        <span className='grey-span opacity-100 ps-3'>{event.dates && moment(event.dates[0].check_in_date).format("DD MMMM")}</span>
                                     </div>
                                     <div className=''>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -145,7 +139,7 @@ const MyEventDetails = () => {
                                                 <path d="M4.66406 5.99739L9.99742 2.66406" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                 <path d="M27.3333 5.99739L22 2.66406" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
-                                            <span className='grey-span opacity-100 ps-3'>{event.dates && event.dates[0].check_in_time}</span> - <span className='grey-span opacity-100'>{event.dates && event.dates[0].check_out_time}</span>
+                                            <span className='grey-span opacity-100 ps-3'>{event.dates && moment(event.dates[0].check_in_time, 'HH:mm:ss').format("hh:mm a")}</span>
                                     </div>
                             </div>
                             <div className="space-facilities">

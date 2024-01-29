@@ -32,7 +32,7 @@
 }
 /* ///description module// */
 .bg-white {
-    background-color: #F0F2F4;
+    background-color: #F0F2F4 !important;
     padding: 140px 0;
 }
 

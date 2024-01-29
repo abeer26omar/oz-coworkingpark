@@ -428,6 +428,14 @@ p.list-option-item{
     line-height: 130%;
     opacity: 0.5;
 }
+.course_complete{
+    color: var(--black-color);
+    font-family: var(--couture-font);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
 @media screen and (max-width: 1440px) {
     .paragraph_black{
         font-size: var(--font-size-40);

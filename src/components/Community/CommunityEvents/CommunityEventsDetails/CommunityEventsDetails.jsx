@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { Modal } from "antd";
 import axios from 'axios';
 import vector from '../../../../assets/images/Vector.png';
 import './CommunityEventsDetails.css';
@@ -15,6 +16,7 @@ import AddToFavButton from '../../../UI/AddToFavButton';
 import { DataContext } from '../../../../apis/context/SiteDataContext';
 import Paragraph from '../../../UI/Paragraph';
 import LoginAlert from '../../../Auth/LoginAlertModal';
+import moment from 'moment';
 
 const CommunityEventsDetails = () => {
 
@@ -52,10 +54,7 @@ const CommunityEventsDetails = () => {
         };
     },[token, id, reload]);
     
-    // useEffect(()=>{
     const url = window.location.href;
-        // setUrl(fullUrl);
-    // },[]);
 
     const attend = async () => {
         if(token){
@@ -64,43 +63,43 @@ const CommunityEventsDetails = () => {
                 if(result.bookable){
                     try{
                         const res = await attendEvent(token, userId, id);
-                        setSwalProps({
-                            show: true,
-                            icon: 'success',
+                        Modal.success({
                             title: res.status,
-                            text: res.message,
-                            showConfirmButton: false,
-                            timer: 1500
+                            content: res.message,
+                            footer: false,
+                            centered: true,
+                            closable: true,
+                            maskClosable: true
                         });
                         setReload(true)
                     }catch(error){
-                        setSwalProps({
-                            show: true,
-                            icon: 'error',
+                        Modal.error({
                             title: error.response.data.status,
-                            text: error.response.data.message,
-                            showConfirmButton: false,
-                            timer: 1500
-                        });   
+                            content: error.response.data.message,
+                            footer: false,
+                            centered: true,
+                            closable: true,
+                            maskClosable: true
+                        });
                     }
                 } else{
-                    setSwalProps({
-                        show: true,
-                        icon: 'error',
+                    Modal.success({
                         title: result.status,
-                        text: result.message,
-                        showConfirmButton: false,
-                        timer: 1500
+                        content: result.message,
+                        footer: false,
+                        centered: true,
+                        closable: true,
+                        maskClosable: true
                     });
                 }
             }catch (error){
-                setSwalProps({
-                    show: true,
-                    icon: 'error',
+                Modal.error({
                     title: error.response.data.status,
-                    text: error.response.data.message,
-                    showConfirmButton: false,
-                    timer: 1500
+                    content: error.response.data.message,
+                    footer: false,
+                    centered: true,
+                    closable: true,
+                    maskClosable: true
                 });
             }
         }else{
@@ -111,23 +110,23 @@ const CommunityEventsDetails = () => {
     const cancel = async () => {
         try{
             const res = await cancelEventAttend(token, userId, eventDetails.event_attend_id);
-            setSwalProps({
-                show: true,
-                icon: 'success',
+            Modal.success({
                 title: res.status,
-                text: res.message,
-                showConfirmButton: false,
-                timer: 1500
+                content: res.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
             });
             setReload(true)
         }catch (error){
-            setSwalProps({
-                show: true,
-                icon: 'error',
+            Modal.error({
                 title: error.response.data.status,
-                text: error.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
+                content: error.response.data.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
             });
         }
     };
@@ -157,18 +156,18 @@ const CommunityEventsDetails = () => {
         lazyLoad: true,
     }
     
-    const compareTime = (eventStart, eventId) => {
+    const compareTime = (eventEnd, eventId) => {
         
         const currentTime = new Date();
-        const eventStartTime = new Date(eventStart);
+        const eventEndTime = new Date(eventEnd);
 
         const currentHour = currentTime.getHours();
-        const eventHour = eventStartTime.getHours();
-        const isSameDay = currentTime.getDate() === eventStartTime.getDate();
+        const eventHour = eventEndTime.getHours();
+        const isSameDay = currentTime.getDate() === eventEndTime.getDate();
         
         if (isSameDay) {
             
-            if(currentTime.setHours(currentHour + 12) < eventStartTime.setHours(eventHour + 12) ){
+            if(currentTime.setHours(currentHour + 12) < eventEndTime.setHours(eventHour + 12) ){
 
                 if(eventId === null){
                     return (
@@ -188,7 +187,7 @@ const CommunityEventsDetails = () => {
             }
         }
 
-        if ((eventDetails && eventStartTime) > currentTime) {
+        if ((eventDetails && eventEndTime) > currentTime) {
 
             if(eventId === null){
                 return (
@@ -251,7 +250,7 @@ const CommunityEventsDetails = () => {
                                         </svg>
                                         {eventDetails && eventDetails.dates?.map(date=>{
                                             return (
-                                                <h5 className="amenities-text">{date.check_in_date}</h5>
+                                                <h5 className="amenities-text">{moment(date.check_in_date).format("DD MMMM")}</h5>
                                             )
                                         })}
                                     </div>
@@ -265,7 +264,7 @@ const CommunityEventsDetails = () => {
                                         </svg>
                                         {eventDetails && eventDetails.dates?.map(date=>{
                                             return (
-                                                <h5 className="amenities-text">{date.check_in_time}</h5>
+                                                <h5 className="amenities-text">{moment(date.check_in_time, 'HH:mm:ss').format("hh:mm a")}</h5>
                                             )
                                         })}
                                     </div>
@@ -342,7 +341,7 @@ const CommunityEventsDetails = () => {
                                 </span>
 
                             <div className="cards-event-buttons d-flex justify-content-center align-items-center">
-                                {compareTime(eventDetails.start, eventDetails.event_attend_id)}
+                                {compareTime(eventDetails.end, eventDetails.event_attend_id)}
                                     
                                 <div className='mx-4'>
                                     <ShareButton border={true} shareUrl={url}title={eventDetails.event_name} description={eventDetails.description} />

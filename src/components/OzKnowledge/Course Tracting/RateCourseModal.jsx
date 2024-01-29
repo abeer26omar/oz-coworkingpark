@@ -2,7 +2,6 @@ import { useState, useContext } from 'react';
 import { Modal, Rate } from 'antd';
 import {Formik} from 'formik';
 import * as Yup from "yup";
-import ReactStars from "react-rating-stars-component";
 import Paragraph from '../../UI/Paragraph';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import {rateCourse} from '../../../apis/OzKnowledge';
@@ -22,11 +21,26 @@ const RateCourseModal = ({open, handleCancel, courseId}) => {
         const signal = controller.signal;
 
         try{
-            const result = await rateCourse(token, userId, courseId, rating, values.message, signal);
-            console.log(result);
-
-        }catch(error){
-            console.log(error);
+            const result = await rateCourse(token, userId, courseId, rating, values.first_name, signal);
+            handleCancel()
+            Modal.success({
+                title: result.status,
+                content: result.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
+              });
+            }catch(error){
+                handleCancel()
+                Modal.error({
+                    title: 'error',
+                    content: error.response.data.message,
+                    footer: false,
+                    centered: true,
+                    closable: true,
+                    maskClosable: true
+                });
         }
     };
 
@@ -40,10 +54,10 @@ const RateCourseModal = ({open, handleCancel, courseId}) => {
                 <div>
                     <Paragraph className="h2-description">Rating</Paragraph>
                     <Formik
-                        initialValues={
+                        initialValues = {
                             {
                                 rating: rating,
-                                message: '',
+                                first_name: ''
                             }
                         }
                         onSubmit={async (values) => {
@@ -70,7 +84,7 @@ const RateCourseModal = ({open, handleCancel, courseId}) => {
                                         <div className='coures_rate'>
                                             <Paragraph className="h2-description">How was your experience ?</Paragraph>
                                                 <div className='d-flex justify-content-center py-3'>
-                                                    <Rate allowHalf defaultValue={'3.5'} onChange={ratingChanged}/>
+                                                    <Rate allowHalf  onChange={ratingChanged}/>
                                                     {errors.rating && touched.rating && <p className='text-danger mb-0'>{errors.rating}</p>}
                                                 </div>
                                             </div>
@@ -80,15 +94,15 @@ const RateCourseModal = ({open, handleCancel, courseId}) => {
                                                         Comment
                                                 </label>
                                                 <input 
-                                                    type='text'
-                                                    id="message" 
-                                                    name="comment"
-                                                    placeholder='Enter your comment'
-                                                    className="form__field color-grey"
-                                                    value={values.message}
+                                                    id='first_name'
+                                                    type="text"
+                                                    className={"form__field"}
+                                                    placeholder="Enter Your comment"
+                                                    name="first_name"
+                                                    value={values.first_name}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                />
+                                                /> 
                                             </div>
                                             <div className="col-12 d-flex justify-content-center py-3">
                                                 <Button 
@@ -105,6 +119,6 @@ const RateCourseModal = ({open, handleCancel, courseId}) => {
             </Modal>
         </>
     )
-};
+}
 
 export default RateCourseModal;

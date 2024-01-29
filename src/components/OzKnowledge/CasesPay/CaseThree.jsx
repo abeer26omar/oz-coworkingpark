@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const CaseThree = ( {bookingResult} ) => {
 
 
@@ -13,7 +15,7 @@ const CaseThree = ( {bookingResult} ) => {
             </h2>
             <div className="d-flex align-items-center justify-content-between">
               <span className="date-period">
-                Date Period: {bookingResult.invoice_date}
+                Date Period: {moment(bookingResult.invoice_date).format("MMM DD, YYYY")}
                 <br />
                 <span className="invoice">Invoice</span>
               </span>
@@ -29,11 +31,12 @@ const CaseThree = ( {bookingResult} ) => {
             <div className="pill">
               <div className="d-flex align-items-center justify-content-between line">
                 <span className="date-period">Description</span>
+                <span className="date-period">Subtotal</span>
               </div>
               <div className="d-flex align-items-center justify-content-between item-box ">
                 <span className="item-name">{bookingResult.course?.title}</span>
                 <span className="item-price">
-                  {bookingResult.invoice_price} EGP
+                  {bookingResult.invoice_price} {' '}EGP
                 </span>
               </div>
             </div>
@@ -41,14 +44,14 @@ const CaseThree = ( {bookingResult} ) => {
             <div className="d-flex align-items-center justify-content-between line">
               <span className="date-period">Tax {bookingResult.invoice_tax}%</span>
               <span className="location">
-                {Math.floor(bookingResult.invoice_tax_value)}
+                {Math.floor(bookingResult.invoice_tax_value)} {' '}
                 EGP
               </span>
             </div>
             <div className="d-flex align-items-center justify-content-between item-box">
               <span className="item-total">Total Price:</span>
               <span className="item-total-price">
-                {Math.floor(bookingResult.invoice_total)}
+                {Math.floor(bookingResult.invoice_total)} {' '}
                 EGP
               </span>
             </div>
@@ -60,12 +63,12 @@ const CaseThree = ( {bookingResult} ) => {
               <h2>{bookingResult.course?.title}</h2>
             </div>
             <div className="booking-items">
-              <span>Date : {bookingResult.course?.start_date} - {bookingResult.course?.end_date}</span>
+              <span>Date: {moment(bookingResult.course?.start_date, 'HH:mm:ss').format("dddd, MMM. D, YYYY")} </span>
               {/* <span>
                 Time :{bookingResult.course?.start_time}{"-"}
                 {bookingResult.course?.end_time}
               </span> */}
-              <span>Cash notes: {bookingResult.payment_type}</span>
+              {bookingResult.payment_type === 'cash' && (<span>Cash notes: {bookingResult.payment_type}</span>)}
             </div>
           </div>
         </div>

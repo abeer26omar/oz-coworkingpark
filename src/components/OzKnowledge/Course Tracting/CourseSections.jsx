@@ -6,32 +6,36 @@ const CourseSections = ({ details }) => {
     <>
       {console.log(details?.sessions)}
       <section className="container-fluid px-70 py-5">
-        <Paragraph className="head-form mb-3">
+        <Paragraph className="head-form mb-5">
           {"Our courses are balanced mix of Session & articles"}
         </Paragraph>
-        <div className="row align-items-center justify-content-start">
-          <div className="col-xxl-3 col-xl-4 col-lg-6 col-12">
+        <div className="d-flex align-items-center justify-content-start">
+          <div>
             <span className="completed_percentage">
               {details?.video_lessons}
               {" lessons"}
             </span>
+          </div>
+          <div>
             <img src={bullet} alt="" className="mx-2" />
             <span className="completed_percentage">
               {details?.session_count} Session
             </span>
           </div>
-          <div className="col-xxl-4 col-lg-6 col-12">
+          <div>
             <img src={bullet} alt="" className="mx-2" />
             <span className="completed_percentage">
               {details?.total_assignment} {"Assignments"}
             </span>
+          </div>
+          <div>
             <img src={bullet} alt="" className="mx-2" />
             <span className="completed_percentage">
               {details?.course_hours} {" Complition Time"}
             </span>
           </div>
         </div>
-        <ul className="details_list my-5 p-0">
+        <ul className="details_list mt-4 mb-5 p-0">
           {details?.sessions.map((item, index) => {
             return (
               <>

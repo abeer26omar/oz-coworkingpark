@@ -1,33 +1,20 @@
-import Paragraph from '../UI/Paragraph';
-import Slider from "react-slick";
-import CourseCard from './CourseCard';
-import { useState, useEffect, useContext} from 'react';
-import {KnowledgeHome} from '../../apis/OzKnowledge';
+import { useContext} from 'react';
+import { KnowledgeHome } from '../../apis/OzKnowledge';
 import { AuthContext } from '../../apis/context/AuthTokenContext';
+import { useQuery } from '@tanstack/react-query';
+import { Alert } from 'antd';
+import SkeletonCard  from '../UI/SkeletonCard';
+import Slider from "react-slick";
+import Paragraph from '../UI/Paragraph';
+import CourseCard from './CourseCard';
 
 const PopularCourses = () => {
-
-  const [courses, setCourses] = useState([]);
   const { token } = useContext(AuthContext);
 
-  useEffect(() => {
-
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    const KnowledgeData = async () => {
-      try {
-        const result = await KnowledgeHome(token, signal);
-        setCourses(result?.recommended_courses);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    KnowledgeData();
-
-    return () => controller.abort();
-  }, []);
+  const { isPending, error, data: courses } = useQuery({
+    queryKey: ['KnowledgeHomeCourses'],
+    queryFn: ({signal}) => KnowledgeHome(token, signal)
+  });
 
   const settings = {
     dots: false,
@@ -94,9 +81,18 @@ const PopularCourses = () => {
                 </Paragraph>
               </div>
               <div className="col-lg-9 col-md-8 col-12">
+              {error && (<Alert message={error.message} type="error" showIcon />)}
                 <Slider {...settings} className="slick_knowledge py-5">
+                  {isPending && 
+                  [1,2,3,4,5].map((n,index)=>{
+                    return (
+                      <div className="px-sm-2 px-0" key={index}>
+                          <SkeletonCard />
+                      </div>
+                   )
+                  })}
                   {courses &&
-                    courses?.map((item, index) => {
+                    courses?.recommended_courses.map((item, index) => {
                       return (
                         <div className="px-sm-2 px-0" key={index}>
                           <CourseCard

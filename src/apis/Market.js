@@ -1,6 +1,25 @@
 import axios from 'axios';
 import FormData from 'form-data';
 
+export const getPostCost = async (token, signal) => {
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/marketplace-cost?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+        signal: signal
+    };
+
+    const response = await axios(config);
+        
+    return response.data.data;
+};
+
 export const getServices = async (token, userId, branchId, signal) => {
 
     const formData = new FormData();

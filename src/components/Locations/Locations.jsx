@@ -31,14 +31,14 @@ const Locations = (props) => {
         autoplay: false,
         autoplaySpeed: 3000,
         lazyLoad: true,
-        responsive: [
-            {
-                breakpoint: 425,
-                settings: {
-                    dots: false
-                }
-            }
-        ]
+        // responsive: [
+        //     {
+        //         breakpoint: 425,
+        //         settings: {
+        //             dots: false
+        //         }
+        //     }
+        // ]
     }
     return (
         <>

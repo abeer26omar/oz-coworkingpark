@@ -1,9 +1,13 @@
-const AboutCourse = ({descriptions}) => {
+import { Skeleton } from 'antd';
+
+const AboutCourse = ({descriptions, isPending}) => {
     return (
         <>
             <section className="border-of-section py-5">
                 <div className="container-fluid px-70">
                     <h1 className="course_details_title mb-5">about course</h1>
+                    {isPending && (<Skeleton active paragraph={{rows: 3}} />)}
+
                     <div dangerouslySetInnerHTML={{ __html: descriptions}}></div>
                     {/* <Paragraph className='course_details_desc mb-4'>Covers pretty much everything you need to know about UX</Paragraph>
                     <Paragraph className='course_details_light_desc mb-4'>

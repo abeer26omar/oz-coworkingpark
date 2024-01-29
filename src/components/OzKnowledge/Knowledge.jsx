@@ -1,57 +1,39 @@
+import { useContext } from "react";
+import { AuthContext } from "../../apis/context/AuthTokenContext";
+import { KnowledgeHome } from "../../apis/OzKnowledge";
+import { useQuery } from '@tanstack/react-query';
+import { Alert, Skeleton } from 'antd';
 import MainHeaderWrapper from "../UI/MainHeaderWrapper";
 import Paragraph from "../UI/Paragraph";
 import KnowledgeDescription from "./KnowledgeDescription";
 import PopularCourses from "./PopularCourses";
 import PopularInstructor from "./PopularInstructor";
 import JoinCommuinty from "../Community/JoinCommuinty/JoinCommuinty";
-import img from "../../assets/images/Rectangle_4.png";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../apis/context/AuthTokenContext";
-import { KnowledgeHome } from "../../apis/OzKnowledge";
 
 const Knowledge = () => {
   const { token } = useContext(AuthContext);
-  const [Data, setData] = useState({});
-  
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-    const KnowledgeData = async () => {
-      try {
-        const result = await KnowledgeHome(token, signal);
-        setData(result);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    KnowledgeData();
-    return () => controller.abort();
-  }, []);
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ['KnowledgeHome'],
+    queryFn: ({signal}) => KnowledgeHome(token, signal)
+  })
+
   return (
     <>
-      {Data.knowladge_slider &&
-        Data.knowladge_slider?.map((item, index) => {
-          return (
-            <>
-              <MainHeaderWrapper image={item?.image} height="670px" key={index}>
-                <div className={`container-fluid px-70`}>
-                  <div className="col-xl-6 col-lg-9 col-12">
-                    <Paragraph className="head_paragraph mb-3">
-                      {item?.title}
-                    </Paragraph>
-                    <Paragraph className="description mb-0">
-                      {item?.description}
-                    </Paragraph>
-                  </div>
-                </div>
-              </MainHeaderWrapper>
-            </>
-          );
-        })}
-      <KnowledgeDescription categories={Data.categories} info={Data.info} />
+      <MainHeaderWrapper image={data?.knowladge_slider} height="670px">
+        <div className={`container-fluid px-70`}>
+          <div className="col-xl-6 col-lg-9 col-12">
+              {isPending && (<Skeleton active paragraph={{rows: 2}} />)}
+              <Paragraph className="head_paragraph mb-3">{data?.knowladge_slider[0]?.title}</Paragraph>
+              <Paragraph className="description mb-0">{data?.knowladge_slider[0]?.description}</Paragraph>
+          </div>
+        </div>
+      </MainHeaderWrapper>
+        {error && (<Alert message={error.message} type="error" showIcon />)}
+      <KnowledgeDescription categories={data?.categories} info={data?.info} isPending={isPending} />
       <PopularCourses />
-      <PopularInstructor details={Data.recommended_trainers} />
-      <JoinCommuinty details={Data.footer} />
+      <PopularInstructor details={data?.recommended_trainers} />
+      <JoinCommuinty details={data?.footer} />
     </>
   );
 };

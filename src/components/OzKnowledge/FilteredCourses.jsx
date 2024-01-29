@@ -6,9 +6,11 @@ import { getCoursesList, getCategoriesList, getInstructorsList } from '../../api
 import {AuthContext} from '../../apis/context/AuthTokenContext';
 import Button from '../UI/Button';
 import Paragraph from '../UI/Paragraph';
+import { useParams } from 'react-router-dom';
 
 const FilteredCourses = () => {
-
+    
+    const { id } = useParams();
     const [collapsed, setCollapsed] = useState(true);
     const [courses, setCourses] = useState([]);
 
@@ -19,9 +21,10 @@ const FilteredCourses = () => {
     const [page, setPage] = useState(0);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [priceFrom, setPriceFrom] = useState('');
-    const [priceTo, setPriceTo] = useState('');
+    const [priceFrom, setPriceFrom] = useState(0);
+    const [priceTo, setPriceTo] = useState(400); 
     const [categoryId, setCategoryId] = useState([]);
+    const [categoryIds, setCategoryIds] = useState([]);
     const [isFirstChange, setIsFirstChange] = useState(true);
     const [sellerType, setSellerType] = useState('');
     const [trainerId, setTrainerId] = useState('');
@@ -32,6 +35,7 @@ const FilteredCourses = () => {
         const categoryIds = sessionStorage.getItem('coursesIdsOz').split(',');
         const numArray = categoryIds.map(Number);
         setCategoryId(numArray);
+        setCategoryIds(numArray);
     },[]);
 
     useEffect(()=>{
@@ -102,23 +106,25 @@ const FilteredCourses = () => {
         return () => controller.abort();
     }, []);
 
-    const handleCheckboxChange = (event) => {
+    const handleCheckboxChange = (event, ids) => {
         if (isFirstChange) {
             setIsFirstChange(false);
             setCategoryId([]);
         }
-        const value = +event.target.value
+        const value = +event.target.value;
         const { checked } = event.target;
         if (checked) {
             setCategoryId((prevValues) => [...prevValues, value]);
         } else {
             setCategoryId((prevValues) => prevValues.filter((val) => val !== value));
+            if(categoryId.length === 1){
+                setCategoryId(ids);
+            }
         }
     };
 
     const onChangeSeller = (e) => {
         setSellerType(e.target.value);
-        console.log(e.target.value);
     };
 
     const onChangeSlider = (value) => {
@@ -134,14 +140,26 @@ const FilteredCourses = () => {
         setEndDate(dateString);
     };
 
-    const restState = ()=>{
+    const restState = () => {
         setTrainerId('');
         setSellerType('');
         setPriceTo('');
         setPriceFrom('');
         setEndDate('');
         setStartDate('');
-    }
+        handelCheckState();
+        setIsFirstChange(true);
+        setCategoryId(categoryIds);
+    };
+
+    const handelCheckState = () => {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                checkbox.checked = false;
+            }
+        });
+    };
 
     const items = [
         {
@@ -150,7 +168,7 @@ const FilteredCourses = () => {
             label: 'CATEGORY',
             children: categories && categories.map(item=>{
                     return {
-                        key: item.id,
+                        key: `cat_${item.id}`,
                         icon: (<img src={item.image} alt='icon' width= '24px' height= '24px'/>),
                         label: item.title,
                         children: item.sub_category.map(e=>{
@@ -161,11 +179,10 @@ const FilteredCourses = () => {
                                         <input 
                                             className="form-check-input" 
                                             type="checkbox" 
-                                            name={e.tilte} 
+                                            name={item.title} 
                                             id={e.id} 
                                             value={e.id}
-                                            onChange={handleCheckboxChange}
-                                            // checked={categoryId.includes(e.id)}
+                                            onChange={(event)=>handleCheckboxChange(event, item.ids)}
                                         />
                                         <label className="form-check-label" htmlFor={e.id}>
                                             {e.title}
@@ -173,7 +190,13 @@ const FilteredCourses = () => {
                                     </div>
                                 ),
                             }
-                        })
+                        }),
+                        onTitleClick: ()=> {
+                            setCategoryId(item.ids);
+                            setCategoryIds(item.ids);
+                            setIsFirstChange(true);
+                            handelCheckState();
+                        }
                     }
                 })
         },
@@ -241,8 +264,8 @@ const FilteredCourses = () => {
                                 range
                                 step={10}
                                 max={400}
-                                min={10}
-                                defaultValue={[priceFrom || 10, priceTo || 300]}
+                                min={0}
+                                defaultValue={[priceFrom, priceTo]}
                                 // value={[priceFrom, priceTo]}
                                 onChange={onChangeSlider}
                             />
@@ -317,30 +340,45 @@ const FilteredCourses = () => {
         
     ];
 
+    const rootSubmenuKeys = ['sub1', `cat_${id}`];
+    const [openKeys, setOpenKeys] = useState(['sub1', `cat_${id}`]);
+
+    const onOpenChange = (keys) => {
+        const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+                    
+        if(latestOpenKey?.includes('cat_')){
+            if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+              setOpenKeys(latestOpenKey ? ['sub1', latestOpenKey] : ['sub1']);
+            } else {
+              setOpenKeys(latestOpenKey ? ['sub1', latestOpenKey] : rootSubmenuKeys);
+            }
+        }else{
+            setOpenKeys(['sub1', latestOpenKey, ...keys])
+        }
+    };
+
     return (
         <>
             <FilterCourses courses_length={courses.length}/>
             <section className="container-fluid px-70 py-5">
-                <Button
-                    tagType='link'
-                    onClick={restState}
-                    className='px-0'
-                    style={{
-                        textDecoration: 'underline'
-                    }}>
-                        clear
-                </Button>
                 <div className='row g-3'>
                     <div className='col-xxl-4 col-xl-3 col-lg-3 filter_side'>
                         <Layout.Sider>
-                            <Menu 
+                            <Menu
                                 theme="light" 
                                 items={items} 
-                                defaultOpenKeys={['sub1', 'sub2', 'sub3', 'sub4', 'sub5']}
+                                openKeys={openKeys}
                                 mode="inline"
                                 inlineCollapsed={collapsed}
+                                onOpenChange={onOpenChange}
                             />
                         </Layout.Sider>
+                        <Button
+                            tagType='link'
+                            onClick={restState}
+                            className="button-outLine px-4 btn-bg-white btn-filter text-center mt-4">
+                                clear
+                        </Button>
                     </div>
                     <div className='col-xxl-8 col-lg-9 ps-3'>
                         <div className='row g-3 row-cols-lg-3 row-cols-md-2 row-cols-1'>

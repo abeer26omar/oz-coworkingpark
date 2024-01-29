@@ -19,10 +19,14 @@
         margin: 0;
     }
 
-    .box-content {
-        text-align: center;
+    .locations .slick-dots {
+        bottom: 8%;
+        left: unset;
+        width: 100%;
     }
-
+    .box-locations{
+        justify-content: center !important ;
+    }
 
     .h2-text {
         font-size: var(--font-size-41);
@@ -172,10 +176,6 @@
         width: 90%;
     }
 
-    .box-content .btn-bg-white {
-        margin-top: 16px;
-    }
-
     .box-content .h2-text-box {
         text-align: left;
     }
@@ -291,13 +291,15 @@
         padding: 0;
     }
 
-    /* .box-content {
-        padding: 30px 30px;
-
-    } */
+    .box-locations {
+        margin: 25px 0px;
+    }
 
     .h2-text {
         font-size: 42px;
+    }
+    .locations .slick-dots {
+        left: -1%;
     }
 
     .box-content .h2-text-box {
@@ -386,5 +388,11 @@
         padding: 10px 10px;
     }
 }
-
-/* Styles for devices with a width above 1024px (laptops and desktops) */
+@media screen and (max-width: 575px) {
+    .locations .slick-dots{
+        bottom: 16%;
+    }
+    .box-locations {
+        margin: 25px 0px;
+    }
+}

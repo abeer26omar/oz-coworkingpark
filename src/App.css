@@ -66,7 +66,7 @@ a {
     --font-size-74: 74px;
     --font-size-66: 4rem;
     --font-size-58: 58px;
-    --font-size-52: 3.25rem;
+    --font-size-52: 3rem;
     --font-size-46: 46px;
     --font-size-41: 2.56rem;
     --font-size-40: 2rem;
@@ -198,6 +198,16 @@ a {
 }
 
 /*******************************************/
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--color-yellow);
+    transform-origin: 0%;
+    z-index: 999;
+}
 /*******************************************/
 .img_block > span{
     width: 100%;
@@ -513,7 +523,9 @@ a {
     border-bottom: 1.5px solid var(--secondary-color2);
     background: var(--neturals-color1);
 }
-
+.border-top {
+    border-top: 1.5px solid var(--secondary-color2) !important;
+} 
 .border-left {
     border-left: 1.5px solid var(--secondary-color2)
 }
@@ -523,11 +535,16 @@ a {
 }
 
 .border-bottom {
-    border-bottom: 1.5px solid var(--secondary-color2);
+    border-bottom: 1.5px solid var(--secondary-color2) !important;
 }
-@media screen and (max-width: 991.5px) {
-    .space-details .border-right {
+
+@media screen and (max-width: 767.5px) {
+    .border-right {
         border-right: none;
+        border-bottom: 1.5px solid var(--secondary-color2);
+    }
+    .border-left {
+        border-left: none;
         border-bottom: 1.5px solid var(--secondary-color2)
     }
 }
@@ -742,6 +759,11 @@ a {
 .seprator{
     border-left: 1px solid var(--secondary-color2);
 }
+@media screen and (max-width: 992px) {
+    .px_7 {
+        padding:  0 2rem !important;
+    }
+}
 @media screen and (max-width: 768px) {
     .t-center-sm{
         text-align: center;
@@ -767,6 +789,11 @@ a {
     }
     .special_padding{
      padding: 0 1.375rem !important
+    }
+}
+@media screen and (max-width: 767px) {
+    .flex_reverse{
+        flex-direction: column-reverse !important;
     }
 }
 @media (max-width: 575px) {
@@ -799,7 +826,7 @@ a {
 @media screen and (min-width: 1500px) {
     .img_block > span > img,
     .img_notLazey{
-        height: auto;
+        /* height: auto; */
     }
 }
 .ant-select-selector{

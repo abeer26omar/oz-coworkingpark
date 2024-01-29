@@ -50,7 +50,7 @@ const CoursesHistory = () => {
   return (
     <>
       <Tab.Container id="left-tabs-example" defaultActiveKey={activeTab}>
-        <div className="bg-body-tertiary navigator border_bottom">
+        <div className="navigator border_bottom">
           <div className="container-fluid d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center">
               <h1 className="title-name mb-0">OZ Knowledge History</h1>
@@ -148,7 +148,7 @@ const CoursesHistory = () => {
                                   </span>
                                 </div>
                               ) : (
-                                <Paragraph className="empty">{`there is not ${activeTab} courses yet`}</Paragraph>
+                                <Paragraph className="mb-0 course_complete">{`course completed`}</Paragraph>
                               )}
                             </div>
                           </div>
