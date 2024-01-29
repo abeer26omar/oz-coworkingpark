@@ -63,7 +63,7 @@
     margin-top: 80px;
 }
 .membershipOptionsList .card{
-    border: 1px solid #0005;
+    border: 1px solid #0005 !important;
     background-color: var(--neturals-color1);
     max-width: 26.0625rem;
 }
