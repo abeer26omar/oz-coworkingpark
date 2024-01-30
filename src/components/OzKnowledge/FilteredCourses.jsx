@@ -119,6 +119,7 @@ const FilteredCourses = () => {
             setCategoryId((prevValues) => prevValues.filter((val) => val !== value));
             if(categoryId.length === 1){
                 setCategoryId(ids);
+                setIsFirstChange(true)
             }
         }
     };

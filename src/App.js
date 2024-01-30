@@ -180,7 +180,7 @@ function App() {
     return (
       <>
       <QueryClientProvider client={queryClient}>
-      <motion.div className="progress-bar" style={{ scaleX }} />
+      {/* <motion.div className="progress-bar" style={{ scaleX }} />
       <AnimatedCursor 
         innerSize={8}
         outerSize={45}
@@ -188,7 +188,7 @@ function App() {
         outerAlpha={0.2}
         innerScale={0.7}
         outerScale={1.5}
-      />
+      /> */}
         <RouterProvider router={router}/>
       </QueryClientProvider>
       </>

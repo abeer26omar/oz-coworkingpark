@@ -64,7 +64,7 @@ const Joinus = () => {
                     alt="shape"/>
             </div>
             <section className="contactus my-5 joinus-form">
-                <div className="container-fluid">
+                <div className="container-fluid px-70">
                     <div className="head-content-left-shape text-left pb-3">
                         <div className="text-shape">
                             <h1 className="hand-write">Join us</h1>

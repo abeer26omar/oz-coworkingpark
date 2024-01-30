@@ -17,13 +17,14 @@ const MyPlan = ()=>{
     const [planData, setPlanData] = useState([]);
 
     useEffect(()=>{
-        const source = axios.CancelToken.source();
+        const controller = new AbortController();
+        const signal = controller.signal;
 
-        getMyPlans(token, userId, source).then(res=>{
+        getMyPlans(token, userId, signal).then(res=>{
             setPlans(res);
         }).catch(err=>{});
 
-        return ()=>source.cancel();
+        return () => {controller.abort()};
     },[token, userId]);
 
     useEffect(()=>{

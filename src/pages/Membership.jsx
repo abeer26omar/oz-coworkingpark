@@ -4,14 +4,17 @@ import MembershipTypes from "../components/Membership/MembershipTypes/Membership
 import MembershipHeader from "../components/Membership/MembershipHeader/MembershipHeader";
 import Services from "../components/Membership/Services/Services";
 import { DataContext } from '../apis/context/SiteDataContext';
+import { AuthContext } from '../apis/context/AuthTokenContext';
+import { getMyPlans } from '../apis/User';
 
 const Membership = () => {
 
     const {getComponentValue, ResetPageName} = useContext(DataContext);
+    const {token, userId} = useContext(AuthContext);
 
     useEffect(()=>{
         ResetPageName('membership');
-    },[])
+    },[]);
     
     return (
         <>
