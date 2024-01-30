@@ -798,7 +798,7 @@ a {
 }
 @media (max-width: 575px) {
     .f-14{
-        font-size: 14px;
+        font-size: 13px !important;
     }
     .img_block > span > img{
         height: auto;
