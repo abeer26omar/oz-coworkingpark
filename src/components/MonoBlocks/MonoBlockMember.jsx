@@ -27,9 +27,9 @@ const  MonoBlockMember = (props) => {
                                 <Button 
                                     tagType = 'link' 
                                     to={'/membership'}
-                                    className={`button-outLine`}
+                                    className={`button-outLine f-14`}
                                     style={{
-                                        width: '210px'
+                                        // width: '210px'
                                     }}>
                                     Explore Memberships
                                 </Button>
