@@ -98,117 +98,119 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                     handleSubmit
                 } = props;
                 return (
-                    <div className="container-fluid">
-                        <form className="form-filter" onSubmit={handleSubmit}>
-                            <div className="filter-component row g-3 d-flex align-items-center justify-content-around">
-                                <div className='col-xxl-2 col-md-2'>
-                                    <div className="input-group">
-                                        <input 
-                                            type="date"
-                                            name='date'
-                                            value={values.date}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur} 
-                                            className="form__field placeholderSelect" 
-                                            placeholder='Select date'/>
+                    <div className='border-top'>
+                        <div className="container-fluid">
+                            <form className="form-filter" onSubmit={handleSubmit}>
+                                <div className="filter-component row g-3 d-flex align-items-center justify-content-around">
+                                    <div className='col-xxl-2 col-md-2'>
+                                        <div className="input-group">
+                                            <input 
+                                                type="date"
+                                                name='date'
+                                                value={values.date}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur} 
+                                                className="form__field placeholderSelect" 
+                                                placeholder='Select date'/>
+                                        </div>
                                     </div>
-                                </div>
-                                {/* <div className='col-xxl-2 col-md-3'>
-                                    <select
-                                        id='wings'
-                                        name='wings'
-                                        value={values.wings}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className="form__field placeholderSelect">
-                                            <option disabled="">Wing</option>
-                                            {wings && wings.map((item, index) => (
+                                    {/* <div className='col-xxl-2 col-md-3'>
+                                        <select
+                                            id='wings'
+                                            name='wings'
+                                            value={values.wings}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className="form__field placeholderSelect">
+                                                <option disabled="">Wing</option>
+                                                {wings && wings.map((item, index) => (
+                                                    <option key={index} value={item.id}>
+                                                        {item.name}
+                                                    </option>
+                                                ))}
+                                        </select>
+                                    </div> */}
+                                    {/* <div className='col-xxl-2 col-md-3'>
+                                        <select
+                                            id='floors'
+                                            name='floors'
+                                            value={values.floors}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className="form__field placeholderSelect">
+                                            <option disabled="">floors</option>
+                                            {floors && floors.map((item, index) => (
                                                 <option key={index} value={item.id}>
                                                     {item.name}
                                                 </option>
                                             ))}
-                                    </select>
-                                </div> */}
-                                {/* <div className='col-xxl-2 col-md-3'>
-                                    <select
-                                        id='floors'
-                                        name='floors'
-                                        value={values.floors}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className="form__field placeholderSelect">
-                                        <option disabled="">floors</option>
-                                        {floors && floors.map((item, index) => (
-                                            <option key={index} value={item.id}>
-                                                {item.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div> */}
-                                <div className='col-xxl-2 col-md-3'>
-                                    <select
-                                        id='capacity'
-                                        name='capacity'
-                                        value={values.capacity}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className="form__field placeholderSelect">
-                                        <option disabled="">Capacity</option>
-                                        {capacityList && capacityList.map((item, index) => (
-                                            <option key={index} value={item}>
-                                                {item}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className='col-xxl-2 col-md-3'>
-                                    <select
-                                        id='facilities'
-                                        name='facilities'
-                                        value={values.facilities}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className="form__field placeholderSelect">
-                                        <option disabled="">Facilities</option>
-                                        {facilities && facilities.map((item, index) => (
-                                            <option key={index} value={item.id}>
-                                                {item.title}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className='col-xxl-1 col-md-2'>
-                                    <div className="form-check">
-                                        <input
-                                            id='favorites'
-                                            name='favorites'
-                                            value={values.favorites} 
-                                            type="checkbox" 
-                                            className="form-check-input"
-                                            onChange={()=>{
-                                                if(values.favorites === 1){
-                                                    values.favorites = 0
-                                                }else{
-                                                    values.favorites = 1
-                                                }
-                                            }}
+                                        </select>
+                                    </div> */}
+                                    <div className='col-xxl-2 col-md-3'>
+                                        <select
+                                            id='capacity'
+                                            name='capacity'
+                                            value={values.capacity}
+                                            onChange={handleChange}
                                             onBlur={handleBlur}
-                                        />
-                                        <label
-                                            className="form-check-label" 
-                                            htmlFor="favorites">Only Favorites</label>
+                                            className="form__field placeholderSelect">
+                                            <option disabled="">Capacity</option>
+                                            {capacityList && capacityList.map((item, index) => (
+                                                <option key={index} value={item}>
+                                                    {item}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div className='col-xxl-2 col-md-3'>
+                                        <select
+                                            id='facilities'
+                                            name='facilities'
+                                            value={values.facilities}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className="form__field placeholderSelect">
+                                            <option disabled="">Facilities</option>
+                                            {facilities && facilities.map((item, index) => (
+                                                <option key={index} value={item.id}>
+                                                    {item.title}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div className='col-xxl-1 col-md-2'>
+                                        <div className="form-check">
+                                            <input
+                                                id='favorites'
+                                                name='favorites'
+                                                value={values.favorites} 
+                                                type="checkbox" 
+                                                className="form-check-input"
+                                                onChange={()=>{
+                                                    if(values.favorites === 1){
+                                                        values.favorites = 0
+                                                    }else{
+                                                        values.favorites = 1
+                                                    }
+                                                }}
+                                                onBlur={handleBlur}
+                                            />
+                                            <label
+                                                className="form-check-label" 
+                                                htmlFor="favorites">Only Favorites</label>
+                                        </div>
+                                    </div>
+                                    <div className='col-xxl-1 col-md-2'>
+                                        <Button 
+                                            tagType='button'
+                                            type='submit'
+                                            className="btn_outline_black py-2 px-4 text-center">
+                                                apply
+                                        </Button>
                                     </div>
                                 </div>
-                                <div className='col-xxl-1 col-md-2'>
-                                    <Button 
-                                        tagType='button'
-                                        type='submit'
-                                        className="btn_outline_black py-2 px-4 text-center">
-                                            apply
-                                    </Button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 )}}
                 </Formik>

@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../UI/Button";
 import Paragraph from "../UI/Paragraph";
 import { Nav, Tab } from "react-bootstrap";
 import './ExploreOz.css';
 
 const ExploreOZ = (props) => {
+    const [activeTab, setActiveTab] = useState('one');
+    const keys = ['one', 'two', 'three', 'four'];
+    let currentIndex = 0;
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setActiveTab(keys[currentIndex]);
+            currentIndex = (currentIndex + 1) % keys.length;
+        }, 5000);
+        return () => clearInterval(timer);
+      }, []);
+
     return (
         <>
             <section className=" ExploreOz">
                 <div className="container-fluid">
-                    <Tab.Container id="left-tabs-example" defaultActiveKey="one">
+                    <Tab.Container id="left-tabs-example" activeKey={activeTab} onSelect={setActiveTab}>
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="head-content-sec">

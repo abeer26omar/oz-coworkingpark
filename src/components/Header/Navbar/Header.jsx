@@ -180,7 +180,7 @@ const Header = ({ showBlackNav, show }) => {
       key: "1",
       label: (
         <li className="drop_event">
-          <Button tagType="link" className="p-0 subMenu">
+          <Button tagType="link" className="p-0 subMenu" to={"/community/events"}>
             <span>Previous Events</span>
           </Button>
         </li>
@@ -190,7 +190,7 @@ const Header = ({ showBlackNav, show }) => {
       key: "2",
       label: (
         <li className="drop_event">
-          <Button tagType="link" className="p-0 subMenu">
+          <Button tagType="link" className="p-0 subMenu" to={"/community/events"}>
             <span>Upcoming Events</span>
           </Button>
         </li>
