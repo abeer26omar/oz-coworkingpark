@@ -38,7 +38,6 @@ const WorkTimes = () => {
           }
         });
         setTabelData(data)
-        // console.log(result);
       } catch (error) {
         console.log(error);
       }

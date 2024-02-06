@@ -5,7 +5,7 @@ import { DataContext } from '../apis/context/SiteDataContext';
 
 const Booking = () => {
 
-    const { data, ResetPageName } = useContext(DataContext);
+    const { data, isPending, ResetPageName } = useContext(DataContext);
 
     useEffect(()=>{
         ResetPageName('booking');
@@ -14,10 +14,10 @@ const Booking = () => {
     },[]);
 
     return (
-        <>
-            <BookingHeader configData={data}/>
-            <BookingSpace/>
-        </>
+      <>
+        <BookingHeader configData={data} pending={isPending} />
+        <BookingSpace />
+      </>
     );
 };
 

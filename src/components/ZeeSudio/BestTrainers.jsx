@@ -4,31 +4,17 @@ import Slider from "react-slick";
 import Button from "../UI/Button";
 import Media from "../Media/Media";
 import { useEffect, useState, useContext } from "react";
-import { getTrainersList } from '../../apis/ZeeStudio';
-import { AuthContext } from '../../apis/context/AuthTokenContext';
-
+import { getTrainersList } from "../../apis/ZeeStudio";
+import { AuthContext } from "../../apis/context/AuthTokenContext";
+import { Skeleton } from "antd";
+import { useQuery } from "@tanstack/react-query";
 const BestTrainers = () => {
-
-  const [trainersList, setTrainersList] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
-
   const { token } = useContext(AuthContext);
-
-  useEffect(()=>{
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    const getClasses = async () => {
-      try{
-        const result = await getTrainersList(token, signal);
-        setTrainersList(result);
-      }catch (error){
-        console.log(error)
-      }
-    }
-    getClasses();
-    return () => controller.abort();
-  }, []);
+  const { isPending, error, data } = useQuery({
+    queryKey: ["Trainer"],
+    queryFn: ({ signal }) => getTrainersList(token, signal),
+  });
 
   const handleSlideChange = (slideIndex) => {
     setCurrentSlide(slideIndex);
@@ -55,7 +41,6 @@ const BestTrainers = () => {
     ],
   };
 
-
   return (
     <>
       <section className="popularInstructor border-of-section">
@@ -72,33 +57,43 @@ const BestTrainers = () => {
             <div className="row">
               <div className="col-lg-8 col-md-7 col-12 border-right">
                 <Slider {...settings}>
-                  {trainersList.map((trainer) => (
-                    <div className="img_block" key={trainer.id}>
-                      <Media
-                        type="img"
-                        src={trainer.image}
-                        className="w-100 image-box"
-                        alt={trainer.name}
-                      />
+                  {data?.map((trainer) => (
+                    <div className="img_block" key={trainer?.id}>
+                      {isPending ? (
+                        <Skeleton.Image className="w-100 my-5" active />
+                      ) : (
+                        <Media
+                          type="img"
+                          src={trainer?.image}
+                          className="w-100 image-box"
+                          alt={trainer?.name}
+                        />
+                      )}
                     </div>
                   ))}
                 </Slider>
               </div>
               <div className="col-lg-4 col-md-5 col-12 my-auto ">
                 <div className="box-content p-lg-4 p-3">
-                    {trainersList.length > 0 && (
-                      <>
-                        <Paragraph className="paragraph_black">
-                          {trainersList[currentSlide].name}
-                        </Paragraph>
-                        <Paragraph className="courses_jobTitle">
-                          {trainersList[currentSlide].category.title}
-                        </Paragraph>
-                        <Paragraph className="description_black">
-                          {trainersList[currentSlide].description}
-                        </Paragraph>
-                      </>
-                    )}
+                  {data?.length > 0 && (
+                    <>
+                      {isPending ? (
+                        <Skeleton active />
+                      ) : (
+                        <>
+                          <Paragraph className="paragraph_black">
+                            {data[currentSlide]?.name}
+                          </Paragraph>
+                          <Paragraph className="courses_jobTitle">
+                            {data[currentSlide]?.category.title}
+                          </Paragraph>
+                          <Paragraph className="description_black">
+                            {data[currentSlide]?.description}
+                          </Paragraph>
+                        </>
+                      )}
+                    </>
+                  )}
                   <Button
                     tagType="link"
                     className="btn button-outLine btn-bg-white"

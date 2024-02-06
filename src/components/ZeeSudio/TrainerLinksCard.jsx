@@ -4,34 +4,35 @@ import Paragraph from "../UI/Paragraph";
 import CardTrainerLink from "../UI/CardTrainerLink";
 import { getTrainersList } from "../../apis/ZeeStudio";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
-
+import { Skeleton } from "antd";
+import SkeletonCard from "../UI/SkeletonCard";
 const TrainerLinksCard = () => {
-
   const [trainersList, setTrainersList] = useState([]);
   const [visibleCards, setVisibleCards] = useState(12);
+  const [skeleton, setSkeleton] = useState(true);
 
   const { token } = useContext(AuthContext);
- 
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
 
-    const getClasses = async () => {
-      try {
-        const result = await getTrainersList(token, signal);
-        setTrainersList(result);
-        console.log(trainersList);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getClasses();
-    return () => controller.abort();
-  }, []);
+  // useEffect(() => {
+  //   const controller = new AbortController();
+  //   const signal = controller.signal;
 
-    const handleShowMore = () => {
-      setVisibleCards((prevVisibleCards) => prevVisibleCards + 3);
-    };
+  //   const getClasses = async () => {
+  //     try {
+  //       const result = await getTrainersList(token, signal);
+  //       setTrainersList(result);
+  //       console.log(trainersList);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getClasses();
+  //   return () => controller.abort();
+  // }, []);
+
+  const handleShowMore = () => {
+    setVisibleCards((prevVisibleCards) => prevVisibleCards + 3);
+  };
 
   let content = "";
   if (trainersList.length === 0) {
@@ -53,14 +54,22 @@ const TrainerLinksCard = () => {
           />
         </div>
       );
-    }); 
+    });
   }
   return (
     <>
       <div className="container-fluid px-70">
         <div className="row py-5">
           <Paragraph className="paragraph_black">Trainers</Paragraph>
-          {content}
+          {skeleton ? (
+            [1, 2, 3].map((n, index) => (
+              <div className="col-4" key={index}>
+                <SkeletonCard />
+              </div>
+            ))
+          ) : (
+            <>{content}</>
+          )}
         </div>
         {trainersList && visibleCards < trainersList.length && (
           <div className="text-center py-5">

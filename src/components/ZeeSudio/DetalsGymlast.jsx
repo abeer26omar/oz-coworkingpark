@@ -7,9 +7,8 @@ import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import LoginAlert from "../Auth/LoginAlertModal";
-
-function DetalsGymlast({ details }) {
-
+import { Skeleton } from "antd";
+function DetalsGymlast({ details, pending }) {
   const { token } = useContext(AuthContext);
   const [showLogin, setShowLogin] = useState(false);
 
@@ -27,7 +26,7 @@ function DetalsGymlast({ details }) {
       price: value.price,
       level: value.level,
     };
-  
+
     if (token) {
       sessionStorage.setItem(
         "OZgymCourseDetails",
@@ -38,64 +37,93 @@ function DetalsGymlast({ details }) {
       setShowLogin(true);
     }
   };
+  const [skeleton, setSkeleton] = useState(false);
   return (
     <>
       <div className="container-fluid px-70 py-5">
         {details && (
           <div className="row g-3">
             <div className="col-xl-8 col-md-6 col-sm-12">
-              <img
-                src={details.image}
-                alt={details.title}
-                className="w-100"
-                height={'608px'}
-                style={{
-                  objectFit: 'cover'
-                }}
-              />
+              {pending ? (
+                <Skeleton.Image className="w-100" active />
+              ) : (
+                <>
+                  <img
+                    src={details?.image}
+                    alt={details?.title}
+                    className="w-100"
+                    height={"608px"}
+                    style={{
+                      objectFit: "cover",
+                    }}
+                  />
+                </>
+              )}
+
               <div className="py-4">
-                <Paragraph className="desc_small light">
-                  {moment(details.end_date, "YYYY-MM-DD").format("MMMM DD, YYYY")}
-                </Paragraph>
+                {pending ? (
+                  <Skeleton active paragraph={false} title={true} />
+                ) : (
+                  <>
+                    <Paragraph className="desc_small light">
+                      {moment(details?.end_date, "YYYY-MM-DD").format(
+                        "MMMM DD, YYYY"
+                      )}
+                    </Paragraph>
+                  </>
+                )}
               </div>
             </div>
             <div className="col-xl-4 col-md-6 col-sm-12">
               <div className="bg-gymDetails py-4 px-4 ">
-                <Paragraph className="card-title">Class Details</Paragraph>
-                <Paragraph className="desc_small_light py-3">
-                  {details.details}
-                </Paragraph>
-                <Paragraph className="desc_small light py-2 ">
-                  Duration :
-                  <span className="desc_small"> {details.duration}</span>
-                </Paragraph>
-                <Paragraph className="desc_small light py-2 ">
-                  Intensity :
-                  <span className="desc_small"> {details.intensity}</span>
-                </Paragraph>
-                <Paragraph className="desc_small light py-2 ">
-                  Fitness Level :
-                  <span className="desc_small"> {details.level}</span>
-                </Paragraph>
-                <Paragraph className="desc_small light ">
-                  Schedule :
-                  <span className="desc_small">{details.schedule}</span>
-                </Paragraph>
-                <Paragraph className="desc_small light py-2 ">
-                  Start & End Time :
-                  <span className="desc_small">
-                    <span className="px-2">
-                      {moment(details.start_time, 'HH:mm:ss').format("hh:mm a")}
-                    </span>
-                    -<span className="px-2">{moment(details.end_time, 'HH:mm:ss').format("hh:mm a")}</span>
-                  </span>
-                </Paragraph>
-                <Paragraph className="desc_small light py-2 ">
-                  Price :
-                  <span className="desc_small">
-                    {Math.floor(details.price)} Egp
-                  </span>
-                </Paragraph>
+                {pending ? (
+                  <Skeleton active paragraph={{ rows: 5 }} />
+                ) : (
+                  <>
+                    <Paragraph className="card-title">Class Details</Paragraph>
+                    <Paragraph className="desc_small_light py-3">
+                      {details?.details}
+                    </Paragraph>
+                    <Paragraph className="desc_small light py-2 ">
+                      Duration :
+                      <span className="desc_small"> {details?.duration}</span>
+                    </Paragraph>
+                    <Paragraph className="desc_small light py-2 ">
+                      Intensity :
+                      <span className="desc_small"> {details?.intensity}</span>
+                    </Paragraph>
+                    <Paragraph className="desc_small light py-2 ">
+                      Fitness Level :
+                      <span className="desc_small"> {details?.level}</span>
+                    </Paragraph>
+                    <Paragraph className="desc_small light ">
+                      Schedule :
+                      <span className="desc_small">{details?.schedule}</span>
+                    </Paragraph>
+                    <Paragraph className="desc_small light py-2 ">
+                      Start & End Time :
+                      <span className="desc_small">
+                        <span className="px-2">
+                          {moment(details?.start_time, "HH:mm:ss").format(
+                            "hh:mm a"
+                          )}
+                        </span>
+                        -
+                        <span className="px-2">
+                          {moment(details?.end_time, "HH:mm:ss").format(
+                            "hh:mm a"
+                          )}
+                        </span>
+                      </span>
+                    </Paragraph>
+                    <Paragraph className="desc_small light py-2 ">
+                      Price :
+                      <span className="desc_small">
+                        {Math.floor(details?.price)} Egp
+                      </span>
+                    </Paragraph>
+                  </>
+                )}
                 <Button
                   tagType="link"
                   onClick={() => HandelSummery(details)}
@@ -109,17 +137,25 @@ function DetalsGymlast({ details }) {
               <Paragraph className="paragraph_black">
                 The Healthy Life Style For All
               </Paragraph>
-              <Paragraph className="description_black light">
-                {details.descriptions}
-              </Paragraph>              
+              {pending ? (
+                <Skeleton active paragraph={{ rows: 1 }} />
+              ) : (
+                <Paragraph className="description_black light">
+                  {details.descriptions}
+                </Paragraph>
+              )}
             </div>
             <div className="col-12 py-5 video-container position-relative">
-              <video
-                src={details.video}
-                className="w-100"
-                height="616px"
-                controls
-              />
+              {pending ? (
+                <Skeleton.Image active />
+              ) : (
+                <video
+                  src={details.video}
+                  className="w-100"
+                  height="616px"
+                  controls
+                />
+              )}
             </div>
           </div>
         )}
