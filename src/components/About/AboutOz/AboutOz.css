@@ -120,6 +120,17 @@
     display: flex;
     justify-content: end;
 }
+ .food_mobile {
+     display: none;
+ }
+@media screen and (max-width: 1250px) {
+    .food{
+        display: none;
+    } 
+    .food_mobile {
+         display: flex;
+     }
+}
 @media screen and (max-width: 1200px) {
     .img-width{
         width: 100%;
@@ -128,12 +139,8 @@
         position: static;
         width: 100%;
     }
-    .food{
-        display: none;
-    }
-    .food_mobile{
-        display: flex;
-    } 
+   
+   
 }
 @media screen and (max-width: 1024.5px) {
     .width-75{

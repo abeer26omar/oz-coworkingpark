@@ -2,7 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "./App.css";
 import "../src/assets/fonts/golden-hopes/golden-hopes.otf";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from './apis/context/SiteDataContext';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { motion, useScroll, useSpring } from "framer-motion";
 import AnimatedCursor from "react-animated-cursor";
@@ -170,7 +171,6 @@ function App() {
           { path:'invoice', element: <Invoice />}
         ]}
     ]);
-    const queryClient = new QueryClient();
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, {
       stiffness: 100,
@@ -180,7 +180,7 @@ function App() {
     return (
       <>
       <QueryClientProvider client={queryClient}>
-      <motion.div className="progress-bar" style={{ scaleX }} />
+      {/* <motion.div className="progress-bar" style={{ scaleX }} />
       <AnimatedCursor 
         innerSize={8}
         outerSize={45}
@@ -188,7 +188,7 @@ function App() {
         outerAlpha={0.2}
         innerScale={0.7}
         outerScale={1.5}
-      />
+      /> */}
         <RouterProvider router={router}/>
       </QueryClientProvider>
       </>

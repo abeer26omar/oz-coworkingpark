@@ -3,6 +3,8 @@ import "./Content.css";
 import Button from "../../UI/Button";
 import Media from "../../Media/Media";
 import Paragraph from "../../UI/Paragraph";
+import { Skeleton } from "antd";
+
 const RightContentFB = (props) => {
     return (
       <>
@@ -18,24 +20,28 @@ const RightContentFB = (props) => {
             <div className="row flex_reverse border-of-section">
               <div className="col-md-6 col-lg-4 col-sm-12 col-xs-6 m-auto ">
                 <div className="box-content  p-lg-4 p-3">
-                  {props.configData
-                    ? props.configData.map((configItem, index) => (
-                        <React.Fragment key={index}>
-                          {configItem.key === "home_page_ozy_title" && (
-                            <Paragraph className="paragraph_black">
-                              {configItem.value}
-                            </Paragraph>
-                          )}
-                          {configItem.key === "home_page_ozy_description" && (
-                            <Paragraph className="description_black">
-                              {
-                                "From delicious breakfasts that kick-start your engine, indulgent coffee breaks, perfected by energising bites to freshly prepared meals where impeccable service comes alive, OZ promises a culinary affair, guaranteeing to generate your body and mind."
-                              }
-                            </Paragraph>
-                          )}
-                        </React.Fragment>
-                      ))
-                    : ""}
+                  {props.pending ? (
+                    <>
+                      (<Skeleton active paragraph={{ rows: 2 }} />)
+                    </>
+                  ) : (
+                    props.configData.map((configItem, index) => (
+                      <React.Fragment key={index}>
+                        {configItem.key === "home_page_ozy_title" && (
+                          <Paragraph className="paragraph_black">
+                            {configItem.value}
+                          </Paragraph>
+                        )}
+                        {configItem.key === "home_page_ozy_description" && (
+                          <Paragraph className="description_black">
+                            {
+                              "From delicious breakfasts that kick-start your engine, indulgent coffee breaks, perfected by energising bites to freshly prepared meals where impeccable service comes alive, OZ promises a culinary affair, guaranteeing to generate your body and mind."
+                            }
+                          </Paragraph>
+                        )}
+                      </React.Fragment>
+                    ))
+                  )}
                   <Button
                     to={"/ozys"}
                     className="btn button-outLine btn-bg-white"
@@ -45,22 +51,26 @@ const RightContentFB = (props) => {
                   </Button>
                 </div>
               </div>
-              {props.configData
-                ? props.configData.map((configItem, index) => (
-                    <React.Fragment key={index}>
-                      {configItem.key === "home_page_ozy_image" && (
-                        <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-left img_block">
-                          <Media
-                            type="img"
-                            className="image-box w-100"
-                            src={configItem.value}
-                            alt="Our OZ Vision"
-                          />
-                        </div>
-                      )}
-                    </React.Fragment>
-                  ))
-                : ""}
+              {props.pending ? (
+                <>
+                  (<Skeleton.Image active />)
+                </>
+              ) : (
+                props.configData.map((configItem, index) => (
+                  <React.Fragment key={index}>
+                    {configItem.key === "home_page_ozy_image" && (
+                      <div className="col-md-6 col-lg-8 col-sm-12 col-xs-6 border-left img_block">
+                        <Media
+                          type="img"
+                          className="image-box w-100"
+                          src={configItem.value}
+                          alt="Our OZ Vision"
+                        />
+                      </div>
+                    )}
+                  </React.Fragment>
+                ))
+              )}
             </div>
           </div>
         </section>

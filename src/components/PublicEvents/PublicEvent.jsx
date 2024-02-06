@@ -1,7 +1,9 @@
 import React from "react";
 import "./PublicEvent.css";
-import PublicEventList from './PublicEventList';
+import PublicEventList from "./PublicEventList";
 import Paragraph from "../UI/Paragraph";
+import { Skeleton } from "antd";
+
 
 const PublicEvent = (props) => {
   return (
@@ -18,26 +20,32 @@ const PublicEvent = (props) => {
             </div>
             <div className="border-of-section">
               <div className="row p-sm-5 p-3 justify-content-between align-items-center">
-                {props.configData
-                  ? props.configData.map((configItem, index) => (
-                      <React.Fragment key={index}>
-                        {configItem.key === "home_page_event_title" && (
-                          <div className="col-sm-12 col-lg-5">
-                            <Paragraph className="paragraph_black">
-                              {configItem.value}
-                            </Paragraph>
-                          </div>
-                        )}
-                        {configItem.key === "home_page_event_description" && (
-                          <div className="col-sm-12 col-lg-7 m-auto">
-                            <Paragraph className="description_black">
-                              {configItem.value}
-                            </Paragraph>
-                          </div>
-                        )}
-                      </React.Fragment>
-                    ))
-                  : ""}
+                {props.pending ? (
+                  <>
+                    <>
+                      (<Skeleton active Paragraph={{ rows: 2 }} />)
+                    </>
+                  </>
+                ) : (
+                  props.configData.map((configItem, index) => (
+                    <React.Fragment key={index}>
+                      {configItem.key === "home_page_event_title" && (
+                        <div className="col-sm-12 col-lg-5">
+                          <Paragraph className="paragraph_black">
+                            {configItem.value}
+                          </Paragraph>
+                        </div>
+                      )}
+                      {configItem.key === "home_page_event_description" && (
+                        <div className="col-sm-12 col-lg-7 m-auto">
+                          <Paragraph className="description_black">
+                            {configItem.value}
+                          </Paragraph>
+                        </div>
+                      )}
+                    </React.Fragment>
+                  ))
+                )}
               </div>
               <PublicEventList />
             </div>
@@ -48,4 +56,4 @@ const PublicEvent = (props) => {
   );
 };
 
-export default React.memo(PublicEvent) ;
+export default React.memo(PublicEvent);
