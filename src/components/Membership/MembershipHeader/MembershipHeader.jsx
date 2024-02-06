@@ -8,7 +8,7 @@ const MembershipHeader = ({title}) => {
     
     return (
       <>
-        <div className="bg-body-tertiary navigator">
+        <div className="navigator">
           <div className="container-fluid py-2 py-xl-0 py-md-0">
             <div className="d-flex justify-content-between align-items-center">
               <div className="d-flex align-items-center">

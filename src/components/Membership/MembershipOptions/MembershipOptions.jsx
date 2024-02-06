@@ -14,6 +14,8 @@ import MembershipTypesSliderCorporate from '../MembershipTypes/MembershipTypesSl
 import Button from '../../UI/Button';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import ApplyPlanModal from './ApplyPlanModal';
+import {upgradePlan} from '../../../apis/User';
+import { Modal } from 'antd';
 
 const MembershipOptions = () => {
 
@@ -41,7 +43,28 @@ const MembershipOptions = () => {
         const priceDicounted =  price * discount / 100;
         return price-priceDicounted;
     }
-
+    const upgradeYourPlan = async (plan_Id) => {
+        try{
+            const result = await upgradePlan(token, plan_Id);
+                Modal.success({
+                    title: result.status,
+                    content: result.message_data,
+                    footer: false,
+                    centered: true,
+                    closable: true,
+                    maskClosable: true
+                });
+        }catch(error){
+            Modal.error({
+                title: error.response.data.status,
+                content: error.response.data.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
+            });
+        }
+    };
     const setSlectedMemebershipDetails = (id, type, price, discount, description, time, time_count) => {
        const selectedPlan = {
             mainPlan: typeDetials?.name,
@@ -55,8 +78,23 @@ const MembershipOptions = () => {
        } 
        sessionStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
        setPlanId(id);
-       if(token && time === 'day'){
-            setShow(true)
+       if(token){
+            if(time === 'day'){
+                setShow(true);
+            }else{
+                if(id !== sessionStorage.getItem('userPlanIdOZ')){
+                    upgradeYourPlan(id);
+                }else{
+                    Modal.error({
+                        title: 'error',
+                        content: 'You Already Joined This Plan',
+                        footer: false,
+                        centered: true,
+                        closable: true,
+                        maskClosable: true
+                    });
+                }
+            }
         }else{
             navigate('/joinus');
         }

@@ -8,11 +8,11 @@ const HouseServices = ({location_amenities, dark_theme}) => {
     return (
         <section id="amenities" className={`p-60 ${dark_theme ? 'dark_theme' : ''}`}>
             <div className="position-relative">
-                <Media
+                <img
                     type="img" src={vector} className="position-absolute"
-                    style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>
+                    style={{top: "-106px", left: "0", width: "100px"}} alt="shape"/>
             </div>
-            <div className="container">
+            <div className="container-fluid px-70">
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="head-content-left-shape text-left pb-3 position-relative">

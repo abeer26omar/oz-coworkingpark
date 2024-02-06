@@ -160,7 +160,7 @@ export const getFavoriates = async (token, type, signal) => {
     return response.data.data;
 };
 
-export const getMyPlans = async (token, UserId, source) => {
+export const getMyPlans = async (token, UserId, signal) => {
         
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -172,7 +172,7 @@ export const getMyPlans = async (token, UserId, source) => {
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-        cancelToken: source.token,
+        signal: signal,
     };
 
     const response = await axios(config);
@@ -264,7 +264,9 @@ export const upgradePlan = async (token, type, days) => {
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
     formData.append('type', type);
-    formData.append('days', days);
+    if(days){
+        formData.append('days', days);
+    }
 
     const config = {
         method: 'post',

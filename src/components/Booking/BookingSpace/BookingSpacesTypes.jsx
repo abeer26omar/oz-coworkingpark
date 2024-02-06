@@ -66,7 +66,7 @@ const BookingSpacesTypes = ({venues, placeId,spaceTitle})=>{
     return (
         <>
             <div className="row border-top g-3 border-bottom booking-space-margin align-items-center">
-                <div className="col-xl-6 col-lg-4 col-12 border-right">
+                <div className="col-xl-6 col-lg-4 col-12">
                     {spaceTitle && <h2 className="book-title mb-0">{spaceTitle}</h2>}
                 </div>
                 <div className="col-xl-6 col-lg-8 col-12 px-3 d-flex flex-wrap align-items-center justify-content-between">
@@ -114,14 +114,14 @@ const BookingSpacesTypes = ({venues, placeId,spaceTitle})=>{
                         </Button>
                     </div>
                 </div>
-                <div className="filter border-top border-bottom">
+                <div className='p-0'>
                     <BookingFilter 
                         isOpen={isFilterOpen}
                         placeId={placeId} 
                         getFilteredData={getFilteredData}/>
                 </div>
             </div>
-                    <div className="booking-section border-top border-bottom">
+                    <div className="booking-section border-bottom">
                         {empty && <Paragraph className='empty'>{empty}</Paragraph>}
                         {error && <Paragraph className='text-danger empty'>{error}</Paragraph>}
                         <div className="row" id={spaceTitle}>

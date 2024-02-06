@@ -5,18 +5,17 @@ import * as Yup from "yup";
 import { Login } from "../../apis/AuthApi";
 import { useNavigate, useLocation } from "react-router-dom";
 import Button  from '../UI/Button';
-import SweetAlert2 from 'react-sweetalert2';
 import {requestForToken} from '../../apis/firebase';
+import { getMyPlans } from '../../apis/User';
+import { Modal } from 'antd';
 
 const LoginForm = ({profile, provider})=>{
     const navigate = useNavigate();
     const location = useLocation();
-    const [swalProps, setSwalProps] = useState({});
     const [userInfo, setUSerInfo] = useState({});
     const { handleLogin } = useContext(AuthContext);
     const [notificationToken, setNotificationToken] = useState('');
     const [previousLocation, setPreviousLocation] = useState(sessionStorage.getItem('prevLocationOZ'));
-
     useEffect(() => {
       setPreviousLocation(sessionStorage.getItem('prevLocationOZ'));
     }, []);
@@ -46,10 +45,18 @@ const LoginForm = ({profile, provider})=>{
     },[]);
 
     const handleSubmit = async (values) => {
+        const controller = new AbortController();
+        const signal = controller.signal;
         try {
             const result = await Login(values.email, values.password, provider, notificationToken);
             handleLogin(result);
-            const prevRoute = previousLocation === '/newpassword' 
+            const prevRoute = previousLocation === '/newpassword';
+            if(result){
+                try{
+                    const response = await getMyPlans(result.access_token, result.user_id, signal);
+                    sessionStorage.setItem('userPlanIdOZ', response['active'][0]?.id);
+                }catch(error){}
+            }
             if(prevRoute){
                 navigate('/');
                 sessionStorage.removeItem('prevLocationOZ')
@@ -57,13 +64,13 @@ const LoginForm = ({profile, provider})=>{
                 navigate(-1);
             }
         } catch (error) {
-            setSwalProps({
-                show: true,
-                icon: 'error',
+            Modal.error({
                 title: error.response.data.status,
-                text: error.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
+                content: error.response.data.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
             });
         }
     };
@@ -150,7 +157,6 @@ const LoginForm = ({profile, provider})=>{
                 </form>
             )}}
             </Formik>
-            <SweetAlert2 {...swalProps} />
         </>
     )
 }
