@@ -121,7 +121,7 @@ const BookingSpacesTypes = ({venues, placeId,spaceTitle})=>{
                         getFilteredData={getFilteredData}/>
                 </div>
             </div>
-                    <div className="booking-section border-bottom">
+                    <div className="booking-section">
                         {empty && <Paragraph className='empty'>{empty}</Paragraph>}
                         {error && <Paragraph className='text-danger empty'>{error}</Paragraph>}
                         <div className="row" id={spaceTitle}>

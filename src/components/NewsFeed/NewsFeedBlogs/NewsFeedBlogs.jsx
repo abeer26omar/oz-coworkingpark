@@ -21,7 +21,7 @@ const NewsFeedBlogs = () => {
 
     const getSearchResult = (searchResult, error, empty) => {
         setNewsFeedData(searchResult);
-        setError(error);
+        setError(error); 
         setEmpty(empty);
     };
 

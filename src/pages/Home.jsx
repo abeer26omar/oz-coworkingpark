@@ -23,6 +23,7 @@ const Home = () => {
   const { ResetPageName, isPending, data, error, getComponentValue } = useContext(DataContext);
 
   useEffect(() => {
+    ResetPageName('home')
     const bookingVideo = () => {
       getComponentValue("header")?.map((configItem) => {
         if (configItem.key === "home_page_header_video") {

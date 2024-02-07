@@ -50,7 +50,7 @@ const LoginForm = ({profile, provider})=>{
         try {
             const result = await Login(values.email, values.password, provider, notificationToken);
             handleLogin(result);
-            const prevRoute = previousLocation === '/newpassword';
+            const prevRoute = previousLocation === '/newpassword' || previousLocation === '/register';
             if(result){
                 try{
                     const response = await getMyPlans(result.access_token, result.user_id, signal);

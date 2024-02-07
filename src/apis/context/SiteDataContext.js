@@ -6,7 +6,7 @@ const DataContext = createContext();
 export const queryClient = new QueryClient();
 
 const  DataProvider = ({children})=>{
-  const [pageName, setPageName] = useState("");
+  const [pageName, setPageName] = useState("home");
  
   const { isPending, data, error } = useQuery({
     queryKey: ["page", pageName],

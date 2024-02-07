@@ -4,17 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import Paragraph from  '../UI/Paragraph';
 import Button from '../UI/Button';
 import OTPInput from "otp-input-react";
-import SweetAlert2 from 'react-sweetalert2';
 import { ResendOtp, ConfirmOTP } from '../../apis/AuthApi';
 import { AuthContext } from '../../apis/context/AuthTokenContext';
 import './Auth.css';
+import { Modal as modal } from 'antd';
 
 const RegisterOTPModal = (props) => {
 
     const [OTP, setOTP] = useState('');
-    const [swalProps, setSwalProps] = useState({});
-    const [response, setResponse] = useState('');
-    const [responseType, setResponseType] = useState()
     const navigate = useNavigate();
     const { handelRegister } = useContext(AuthContext);
 
@@ -24,42 +21,36 @@ const RegisterOTPModal = (props) => {
             handelRegister(result, props.userData);
             navigate(-1);
         } catch (error) {
-            setSwalProps({
-                show: true,
-                icon: 'error',
+            modal.error({
                 title: error.response.data.status,
-                text: error.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
+                content: error.response.data.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
             });
-            setResponseType(false);
-            setResponse(error.response.data.message);
         }
     }
     const Resend_Otp = async () => {
         try{
             const result = await ResendOtp(props.email);
-            setSwalProps({
-                show: true,
-                icon: 'success',
+            modal.success({
                 title: 'success',
-                text: 'OTP send successfully',
-                showConfirmButton: false,
-                timer: 1500
+                content: 'OTP send successfully',
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
             });
-            setResponseType(true);
-            setResponse('success')
         } catch (error) {
-            setSwalProps({
-                show: true,
-                icon: 'error',
+            modal.error({
                 title: error.response.data.status,
-                text: error.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
+                content: error.response.data.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
             });
-            setResponseType(false);
-            setResponse(error.response.data.message)
         }
     }
     return (
@@ -92,7 +83,6 @@ const RegisterOTPModal = (props) => {
                                 <Button className='p-0 otp_resend' tagType='link' onClick={Resend_Otp}>Re-send</Button>
                             </Paragraph>
                         </div>
-                        <Paragraph className={`text-center mb-0 ${responseType ? 'text-success' : 'text-danger'}`}>{response}</Paragraph>
                         <div className="text-center py-4">
                             <Button    
                                 tagType='link'
@@ -101,7 +91,6 @@ const RegisterOTPModal = (props) => {
                         </div>
                     </Modal.Body>
             </Modal>
-            <SweetAlert2 {...swalProps} />
         </>
     )
 

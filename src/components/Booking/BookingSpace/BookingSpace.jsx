@@ -5,8 +5,9 @@ import Slider from "react-slick";
 import axios from "axios";
 import LastBooking from "../LastBooking/LastBooking";
 import BookingSpacesTypes from "./BookingSpacesTypes";
-import { getAmenitiesGroup, getVenues } from "../../../apis/Booking";
+import { getAmenitiesGroup, getVenues, getLastBooking } from "../../../apis/Booking";
 import { AuthContext } from "../../../apis/context/AuthTokenContext";
+import Paragraph from "../../UI/Paragraph";
 
 const BookingSpace = () => {
   const [bookingPlaces, setBookingPlaces] = useState([]);
@@ -19,6 +20,7 @@ const BookingSpace = () => {
   const amenity = searchParams.get("amenity");
   const amenityid = searchParams.get("id");
   const [activeSlide, setActiveSlide] = useState(amenityid);
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     if (sliderRef.current) {
@@ -29,17 +31,29 @@ const BookingSpace = () => {
   useEffect(() => {
     const source = axios.CancelToken.source();
 
-        getAmenitiesGroup(token).then(res=>{
+        getAmenitiesGroup(token, userId, branchId).then(res=>{
             setBookingPlaces(res);
             if(amenity && amenityid){
                 changeSpace(amenityid, amenity);
             }else{
-                changeSpace(res[0].id,res[0].name);
+                changeSpace(res[0].id, res[0].name);
             }
         }).catch(err=>{});
 
     return () => source.cancel();
   }, [amenity, amenityid]);
+
+  useEffect(()=>{
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    if(spaceId){
+        getLastBooking(token, userId, spaceId, signal).then(res=>{
+            setCards(Object.values(res))
+        }).catch(err=>{})
+    }
+    return ()=>controller.abort();
+  },[spaceId]);
 
     const changeSpace = (amenities_group_id, spaceTitle) => {
         getVenues(token, userId, branchId === null ? '1' : branchId, amenities_group_id).then(res=>{
@@ -102,6 +116,7 @@ const BookingSpace = () => {
       <section className="booking-space">
         <div className="container-fluid">
           <div className="row">
+            {bookingPlaces.length === 0 && (<Paragraph className='empty mb-0'>there is no spaces yet!!</Paragraph>)}
             <Slider {...settings} ref={sliderRef}>
               {bookingPlaces &&
                 bookingPlaces.map((place, index) => {
@@ -142,7 +157,7 @@ const BookingSpace = () => {
         </div>
       </section>
 
-      {token && <LastBooking placeId={spaceId} />}
+      {(token && cards.length > 0) && <LastBooking cards={cards} />}
     </>
   );
 };

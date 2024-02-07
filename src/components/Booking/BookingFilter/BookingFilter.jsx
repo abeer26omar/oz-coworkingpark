@@ -5,6 +5,7 @@ import SweetAlert2 from 'react-sweetalert2';
 import './BookingFilter.css';
 import Button from '../../UI/Button';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
+import { Select } from 'antd';
 
 const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
 
@@ -12,7 +13,7 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
     const [floors, setFloors] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [swalProps, setSwalProps] = useState({});
-    const { token, userId } = useContext(AuthContext);
+    const { token, userId, branchId } = useContext(AuthContext);
 
     const capacityList = [
         '+1',
@@ -51,7 +52,7 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
             const result = await getFilters(
                 token,
                 userId,
-                1,
+                branchId,
                 placeId,
                 values.date,
                 values.wings,
@@ -147,36 +148,42 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                                         </select>
                                     </div> */}
                                     <div className='col-xxl-2 col-md-3'>
-                                        <select
+                                        <Select
                                             id='capacity'
                                             name='capacity'
-                                            value={values.capacity}
+                                            defaultValue={values.capacity || undefined}
+                                            value={values.capacity || undefined}
+                                            className="form__field placeholderSelect"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            className="form__field placeholderSelect">
-                                            <option disabled="">Capacity</option>
+                                            bordered={false}
+                                            placeholder={'Choose capacity'}
+                                        >
                                             {capacityList && capacityList.map((item, index) => (
-                                                <option key={index} value={item}>
+                                                <Select.Option key={index} value={item}>
                                                     {item}
-                                                </option>
+                                                </Select.Option>
                                             ))}
-                                        </select>
+                                        </Select>
                                     </div>
                                     <div className='col-xxl-2 col-md-3'>
-                                        <select
+                                        <Select
                                             id='facilities'
                                             name='facilities'
-                                            value={values.facilities}
+                                            defaultValue={values.facilities || undefined}
+                                            value={values.facilities || undefined}
+                                            className="form__field placeholderSelect"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            className="form__field placeholderSelect">
-                                            <option disabled="">Facilities</option>
+                                            bordered={false}
+                                            placeholder={'Choose facilities'}
+                                        >
                                             {facilities && facilities.map((item, index) => (
-                                                <option key={index} value={item.id}>
+                                                <Select.Option key={index} value={item.id}>
                                                     {item.title}
-                                                </option>
+                                                </Select.Option>
                                             ))}
-                                        </select>
+                                        </Select>
                                     </div>
                                     <div className='col-xxl-1 col-md-2'>
                                         <div className="form-check">

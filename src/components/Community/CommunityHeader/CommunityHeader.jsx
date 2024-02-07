@@ -10,7 +10,7 @@ import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
 const CommunityHeader = (props) => {
     return (
         <>
-            <div className="bg-body-tertiary navigator community">
+            <div className="navigator community">
                 <Container fluid>
                     <div className='d-flex justify-content-between align-items-center change_dir'>
                         <div className='d-flex'>

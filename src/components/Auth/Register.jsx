@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from 'react-router-dom';
 import vector from "../../assets/images/Vector.png";
 import facebook from "../../assets/images/icons/Facebook.svg";
 import google from "../../assets/images/icons/Google.svg";
 import linkedin from "../../assets/images/icons/linkedin.svg";
 import "./Auth.css";
-import Media from "../Media/Media";
 import Paragraph from "../UI/Paragraph";
 import Button from "../UI/Button";
 import RegisterForm from './RegisterForm';
@@ -17,6 +17,13 @@ import {
 const Register = () => {
     const [provider, setProvider] = useState('');
     const [profile, setProfile] = useState(null);
+    const location = useLocation();
+
+    useEffect(()=>{
+        const route = location.pathname;
+        sessionStorage.setItem('prevLocationOZ', route)
+    },[]);
+
     return (
         <>
             <section className="contactus auth my-5">
@@ -27,7 +34,7 @@ const Register = () => {
                             alt="shape"/>
                     </div>
                 </div>
-                    <div className="container">
+                    <div className="container-fluid px-70">
                         <div className="row">
                             <div className="col-lg-6">
                                 <div className="pb-3 position-relative">

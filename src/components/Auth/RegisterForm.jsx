@@ -210,7 +210,7 @@ const RegisterForm = ({provider, profile})=>{
                                 bordered={false}
                                 placeholder={'Choose Type'}
                             >
-                                {siteConfig && Object.entries(siteConfig.profile_dropdown?.fid_4.data).map(([key, value]) => (
+                                {siteConfig && Object.entries(siteConfig.profile_dropdown?.fid_4?.data).map(([key, value]) => (
                                     <Select.Option key={key} value={key}>
                                         {value}
                                     </Select.Option>

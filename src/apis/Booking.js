@@ -2,10 +2,12 @@ import axios from 'axios';
 import FormData from 'form-data';
 
 
-export const getAmenitiesGroup = async (token) => {
+export const getAmenitiesGroup = async (token, user_id, branch_id) => {
     
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('user_id', user_id);
+    formData.append('branch_id', branch_id);
 
     const config = {
         method: 'post',

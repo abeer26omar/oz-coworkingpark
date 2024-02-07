@@ -1,35 +1,19 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './LastBooking.css';
-import { getLastBooking } from '../../../apis/Booking';
 import BookingSpaceList from '../BookingSpace/BookingSpaceList';
-import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import  Button from '../../UI/Button';
 
-const LastBooking = ({placeId}) => {
+const LastBooking = ({cards}) => {
 
-    const [cards, setCards] = useState([]);
-    const { token, userId } = useContext(AuthContext);
     const [visibleCards, setVisibleCards] = useState(3);
 
     const handleShowMore = () => {
         setVisibleCards(prevVisibleCards => prevVisibleCards + 3);
     };
-
-    useEffect(()=>{
-        const controller = new AbortController();
-        const signal = controller.signal;
-
-        if(placeId){
-            getLastBooking(token, userId, placeId, signal).then(res=>{
-                setCards(Object.values(res))
-            }).catch(err=>{})
-        }
-        return ()=>controller.abort();
-    },[placeId]);
     
     return (
         <>
-            <section className="last-booking">
+            <section className="last-booking border-top">
                 <div className="container-fluid">
                     <div className="booking-section">
                         <div className="row">
