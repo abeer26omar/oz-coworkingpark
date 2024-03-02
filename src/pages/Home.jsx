@@ -16,7 +16,7 @@ import OZAmenities from "../components/Home/OZAmenities";
 import ExploreOZ from "../components/Home/ExploreOZ";
 import ZeeStudio from "../components/Home/ZeeStudio";
 import OZKnowledge from "../components/Home/OZKnowledge";
-import { AuthContext } from "../apis/context/AuthTokenContext";
+import {Helmet} from "react-helmet";
 
 const Home = () => {
   const [video, setVideo] = useState("");
@@ -36,6 +36,10 @@ const Home = () => {
 
   return (
     <>
+      <Helmet>
+          <title>OZ-coworking park | Home</title>
+          <meta name="description" content="Helmet application" />
+      </Helmet>
       <MainHeaderWrapper configData={getComponentValue("header")} video={video}>
         <SectionHeader
           configData={getComponentValue("header")}
