@@ -26,17 +26,23 @@ const SectionHeader = (props) => {
             props.configData.map((configItem, index) => (
               <React.Fragment key={index}>
                 {configItem.key === "home_page_main_header" && (
-                  <Paragraph className="main_header_title mb-0">
+                  <Paragraph className="main_header_title mb-0"
+                    data_aos="fade" 
+                    data_aos_delay="0">
                     {configItem.value}
                   </Paragraph>
                 )}
                 {configItem.key === "home_page_sub_header" && (
-                  <Paragraph className="head_paragraph mb-0">
+                  <Paragraph className="head_paragraph mb-0"
+                    data_aos="fade" 
+                    data_aos_delay="100">
                     {configItem.value}
                   </Paragraph>
                 )}
                 {configItem.key === "home_page_header_description" && (
-                  <Paragraph className="description mb-0">
+                  <Paragraph className="description mb-0"
+                    data_aos="fade" 
+                    data_aos_delay="150">
                     {configItem.value}
                   </Paragraph>
                 )}
@@ -48,6 +54,8 @@ const SectionHeader = (props) => {
               tagType="link"
               className="btn btn_outline me-2"
               to={"/about"}
+              data_aos="fade" 
+              data_aos_delay="200"
             >
               Explore More
             </Button>
@@ -55,6 +63,8 @@ const SectionHeader = (props) => {
               tagType="link"
               onClick={handleShow}
               className="play-modal d-flex align-items-center"
+              data_aos="fade" 
+              data_aos_delay="250"
             >
               <svg
                 width="24"

@@ -13,7 +13,9 @@ const LeftContent = ({ configData, pending }) => {
           <div className="row">
             <div className="col-lg-12">
               <div className="head-content-sec">
-                <Paragraph className="head_feature">{"Our Vision"}</Paragraph>
+                <Paragraph className="head_feature" 
+                    data_aos="fade" 
+                    data_aos_delay="0">Our Vision</Paragraph>
               </div>
             </div>
           </div>
@@ -28,12 +30,15 @@ const LeftContent = ({ configData, pending }) => {
                   configData.map((configItem, index) => (
                     <React.Fragment key={index}>
                       {configItem.key === "home_page_about_us_title" && (
-                        <Paragraph className="paragraph_black">
+                        <Paragraph className="paragraph_black" data_aos="fade" 
+                        data_aos_delay="100">
                           {configItem.value}
                         </Paragraph>
                       )}
                       {configItem.key === "home_page_about_us_description" && (
-                        <Paragraph className="description_black">
+                        <Paragraph className="description_black" 
+                        data_aos="fade" 
+                        data_aos_delay="150">
                           {configItem.value}
                         </Paragraph>
                       )}
@@ -44,6 +49,8 @@ const LeftContent = ({ configData, pending }) => {
                   tagType="link"
                   className="btn_outline_black"
                   to={"/about"}
+                  data_aos="fade" 
+                    data_aos_delay="200"
                 >
                   Our Vision
                 </Button>
@@ -63,6 +70,8 @@ const LeftContent = ({ configData, pending }) => {
                         className="image-box w-100"
                         src={configItem.value}
                         alt="Our OZ Vision"
+                        data_aos="fade" 
+                        data_aos_delay="0"
                       />
                     </div>
                   )}

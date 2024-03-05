@@ -13,8 +13,9 @@ const OurSpaces = (props) => {
           <div className="row">
             <div className="col-lg-12">
               <div className="head-content-sec">
-                <Paragraph className="head_feature">
-                  {"Our Workspaces"}
+                <Paragraph className="head_feature" data_aos="fade" 
+                    data_aos_delay="0">
+                  Our Workspaces
                 </Paragraph>
               </div>
             </div>
@@ -31,12 +32,14 @@ const OurSpaces = (props) => {
                   props.configData.map((configItem, index) => (
                     <React.Fragment key={index}>
                       {configItem.key === "home_page_space_title" && (
-                        <Paragraph className="paragraph_black">
+                        <Paragraph className="paragraph_black" data_aos="fade" 
+                        data_aos_delay="100">
                           {configItem.value}
                         </Paragraph>
                       )}
                       {configItem.key === "home_page_space_description" && (
-                        <Paragraph className="description_black">
+                        <Paragraph className="description_black" data_aos="fade" 
+                        data_aos_delay="150">
                           {configItem.value}
                         </Paragraph>
                       )}
@@ -47,6 +50,8 @@ const OurSpaces = (props) => {
                   tagType="link"
                   className="btn button-outLine btn-bg-white"
                   to={"/"}
+                  data_aos="fade" 
+                    data_aos_delay="200"
                 >
                   Explore
                 </Buttons>
@@ -67,6 +72,8 @@ const OurSpaces = (props) => {
                         className="image-box w-100"
                         src={configItem.value}
                         alt="Our OZ Vision"
+                        data_aos="fade" 
+                    data_aos_delay="100"
                       />
                     </div>
                   )}
