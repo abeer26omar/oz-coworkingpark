@@ -436,6 +436,13 @@ p.list-option-item{
     font-weight: 700;
     line-height: 120%;
 }
+.dynamic_wraper{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 @media screen and (max-width: 1440px) {
     .paragraph_black{
         font-size: var(--font-size-40);

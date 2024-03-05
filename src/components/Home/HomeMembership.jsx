@@ -12,7 +12,8 @@ const HomeMembership = ({ configData, pending }) => {
           <div className="row">
             <div className="col-lg-12">
               <div className="head-content-sec">
-                <Paragraph className="head_feature">{"Membership"}</Paragraph>
+                <Paragraph className="head_feature" data_aos="fade" 
+                    data_aos_delay="0">Membership</Paragraph>
               </div>
             </div>
             <div className="border-of-section">
@@ -26,7 +27,8 @@ const HomeMembership = ({ configData, pending }) => {
                     <React.Fragment key={index}>
                       {configItem.key === "home_page_membership_title" && (
                         <div className="col-sm-12 col-lg-5">
-                          <Paragraph className="paragraph_black">
+                          <Paragraph className="paragraph_black" data_aos="fade" 
+                    data_aos_delay="100">
                             {configItem.value}
                           </Paragraph>
                         </div>
@@ -34,7 +36,8 @@ const HomeMembership = ({ configData, pending }) => {
                       {configItem.key ===
                         "home_page_membership_description" && (
                         <div className="col-sm-12 col-lg-7 m-auto">
-                          <Paragraph className="description_black">
+                          <Paragraph className="description_black" data_aos="fade" 
+                    data_aos_delay="150">
                             {configItem.value}
                           </Paragraph>
                         </div>
@@ -49,8 +52,10 @@ const HomeMembership = ({ configData, pending }) => {
                   tagType="link"
                   to={`/membership`}
                   className="btn button-outLine btn-bg-white"
+                  data_aos="fade" 
+                    data_aos_delay="200"
                 >
-                  {"explore"}
+                  explore
                 </Button>
               </div>
             </div>

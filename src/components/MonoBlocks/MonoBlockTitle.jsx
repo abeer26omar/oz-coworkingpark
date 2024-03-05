@@ -26,16 +26,19 @@ const MonoBlockTitle = ({ configData, pending }) => {
                   configData.map((configItem, index) => (
                     <React.Fragment key={index}>
                       {configItem.key === "home_page_mono_block_title" && (
-                        <Paragraph className="white_monoBlock_title">
+                        <Paragraph className="white_monoBlock_title" 
+                          data_aos="fade" 
+                          data_aos_delay="0"
+                        >
                           {configItem.value}
                         </Paragraph>
                       )}
                       {configItem.key ===
                         "home_page_mono_block_description" && (
                         <Paragraph
-                          className={
-                            "m_b_center monoBlock_description w-75 mx-auto"
-                          }
+                          className="m_b_center monoBlock_description w-75 mx-auto"
+                          data_aos='fade' 
+                          data_aos_delay='100'
                         >
                           {configItem.value}
                         </Paragraph>
@@ -49,6 +52,8 @@ const MonoBlockTitle = ({ configData, pending }) => {
                   tagType="link"
                   className={`btn button-outLine col`}
                   to={"/booking"}
+                  data_aos='fade' 
+                  data_aos_delay='200'
                 >
                   Booking
                 </Button>
@@ -56,6 +61,8 @@ const MonoBlockTitle = ({ configData, pending }) => {
                   tagType="link"
                   className={`btn button-outLine my-3 col`}
                   to={"/community/events"}
+                  data_aos='fade' 
+                  data_aos_delay='250'
                 >
                   events
                 </Button>
@@ -63,6 +70,8 @@ const MonoBlockTitle = ({ configData, pending }) => {
                   tagType="link"
                   className={`btn button-outLine col`}
                   to={"/membership"}
+                  data_aos='fade' 
+                  data_aos_delay='300'
                 >
                   memberships
                 </Button>

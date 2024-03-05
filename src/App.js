@@ -1,7 +1,10 @@
+import React ,{ useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "./App.css";
 import "../src/assets/fonts/golden-hopes/golden-hopes.otf";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from './apis/context/SiteDataContext';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -82,6 +85,14 @@ import CourseTracting from './components/OzKnowledge/Course Tracting/CourseTract
 import BookCourse from './components/OzKnowledge/BookCourse';
 
 function App() {
+
+    useEffect(() => {
+      AOS.init({
+        duration: 1200,
+        once: true, 
+      });
+    }, []);
+
     const router = createBrowserRouter([
       {
         path: "/",

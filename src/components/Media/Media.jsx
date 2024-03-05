@@ -13,6 +13,10 @@ const Media = (props) => {
                     height={props.height}
                     className={props.className}
                     onClick={props.onClick}
+                    data-aos={props.data_aos} 
+                    data-aos-delay={props.data_aos_delay}
+                    data-aos-duration={props.data_aos_duration}
+                    data-aos-once={props.data_aos_once}
                 />
             }
             {props.type === 'video' &&

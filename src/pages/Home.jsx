@@ -38,7 +38,7 @@ const Home = () => {
     <>
       <Helmet>
           <title>OZ-coworking park | Home</title>
-          <meta name="description" content="Helmet application" />
+          <meta name="description" content="OZ-coworking park" />
       </Helmet>
       <MainHeaderWrapper configData={getComponentValue("header")} video={video}>
         <SectionHeader
