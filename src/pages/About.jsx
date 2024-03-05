@@ -19,7 +19,7 @@ const About = () => {
     <>
       <AboutHeader configData={getComponentValue("about_us_page")} pending={isPending} />
       <AboutOz configData={getComponentValue("about_us_page")} pending={isPending} />
-    </>
+    </> 
   );
 };
 

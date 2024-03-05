@@ -4,7 +4,7 @@ import { getListMembershipTypes } from "../../../apis/MembershipApi";
 import MembershipTypesList from "./MembershipTypesList";
 import { AuthContext } from "../../../apis/context/AuthTokenContext";
 
-const MembershipTypesSlider = () => {
+const MembershipTypesSlider = ({currentMemberId}) => {
   const [types, setTypes] = useState([]);
   const { token } = useContext(AuthContext);
 
@@ -23,7 +23,7 @@ const MembershipTypesSlider = () => {
   const settings = {
     dots: false,
     arrows: true,
-    slidesToShow: 3,
+    slidesToShow: types?.length-1 || 3,
     slidesToScroll: 1,
     infinite: true,
     centerMode: true,
@@ -83,19 +83,21 @@ const MembershipTypesSlider = () => {
         {types &&
           types.map((listMembershipType, index) => {
             const { id, name, logo, link, description } = listMembershipType;
-            return (
-              <div className="px-2" key={index}>
-                <MembershipTypesList
-                  className={"t-center-sm"}
-                  id={id}
-                  name={name}
-                  logo={logo}
-                  link={link}
-                  description={description}
-                  image={logo}
-                />
-              </div>
-            );
+            if(currentMemberId !== id){
+              return (
+                <div className="px-2" key={index}>
+                  <MembershipTypesList
+                    className={"t-center-sm"}
+                    id={id}
+                    name={name}
+                    logo={logo}
+                    link={link}
+                    description={description}
+                    image={logo}
+                  />
+                </div>
+              )
+            }
           })}
       </Slider>
       {/* {isError && <Paragraph>there is no membership type to display</Paragraph>} */}

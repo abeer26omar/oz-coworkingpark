@@ -8,6 +8,7 @@ import Img4 from "../../assets/images/Rounds (4).jpg";
 import { getWorkingScheduleList } from '../../apis/ZeeStudio';
 import { AuthContext } from '../../apis/context/AuthTokenContext';
 import { Space, Table } from "antd";
+import * as DOMPurify from 'dompurify';
 
 const WorkTimes = () => {
 
@@ -28,11 +29,12 @@ const WorkTimes = () => {
       try {
         const result = await getWorkingScheduleList(token, formattedDate, signal);
         const data = result.map(item=>{
+          const descriptions = <div className='text-start py-2' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.details) }}></div>
           return {
               key: item.id,
               Time: `${item.start_time.slice(0, 5)} - ${item.end_time.slice(0, 5)}`,
               Type: item.level,
-              Workout: item.details,
+              Workout: descriptions,
               Trainner: item.trainer?.name,
               Bg: item.trainer?.image,
           }

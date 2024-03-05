@@ -91,13 +91,7 @@ const SingleNewFeed = () => {
                     </div>
 
 
-                    <div className="ms-auto">
-
-                        <>
-
-
-                        </>
-                    </div>
+                    
 
 
                 </div>

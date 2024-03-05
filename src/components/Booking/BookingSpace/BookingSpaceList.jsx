@@ -31,7 +31,7 @@ const BookingSpaceList = ({id, img, description, price, name, amenities, is_favo
                     }}>{name}</Card.Title>
 
                     <ul className="list-options ">
-                        {amenities.slice(0, 3).map((single, index) => {
+                        {amenities?.slice(0, 3).map((single, index) => {
                             return (
                                 <li className="list-option-item" key={index}>{single.name}</li>
                             )

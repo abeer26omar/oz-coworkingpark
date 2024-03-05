@@ -34,7 +34,7 @@ const SpaceDetails = ({venueDetails}) => {
                                         Space Description
                                     </Paragraph>
                                     <Paragraph className="p-description">
-                                        {venueDetails.description}
+                                        {venueDetails?.description}
                                     </Paragraph>
                                 </div>
                                 <div className="catering">
@@ -61,8 +61,8 @@ const SpaceDetails = ({venueDetails}) => {
                                         Price
                                     </Paragraph>
                                     <div className="price-list">
-                                        <span className='discount pe-2'>{venueDetails.price} EGP / Hour</span>
-                                        <span>{venueDetails.price_discounted} EGP / Hour</span>
+                                        {(venueDetails?.price != venueDetails?.price_discounted) && (<span className='discount pe-2'>{venueDetails?.price} EGP / Hour</span>)}
+                                        <span>{venueDetails?.price_discounted} EGP / Hour</span>
                                     </div>
                                 </div>
                                 <div className="space-facilities mb-5">
@@ -71,7 +71,7 @@ const SpaceDetails = ({venueDetails}) => {
                                     </Paragraph>
                                     <div className="facilities-list">
                                         <ul>
-                                            {(venueDetails.facilities && venueDetails.facilities !== null) &&
+                                            {(venueDetails?.facilities && venueDetails?.facilities !== null) &&
                                                 venueDetails.facilities.slice(0,3).map((service,index)=>{
                                                     return (
                                                         <li className='' key={index}>
@@ -98,7 +98,7 @@ const SpaceDetails = ({venueDetails}) => {
                                     <Paragraph className="h2-description">
                                         capacity
                                     </Paragraph>
-                                    <span>{venueDetails.capacity} Persons</span>
+                                    <span>{venueDetails?.capacity} Persons</span>
                                 </div>
 
                             </div>

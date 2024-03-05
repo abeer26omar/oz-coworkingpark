@@ -9,7 +9,7 @@ const MainHeaderWrapper = (props)=>{
 
     useEffect(()=>{
         const timer = setInterval(()=>{
-            if(props.image){
+            if(props?.image){
                 if(props.image.length > 1){
                     setImageIndex((prevIndex) => (prevIndex + 1) % props.image.length);
                 }
@@ -20,11 +20,11 @@ const MainHeaderWrapper = (props)=>{
     },[imageIndex]);
 
     useEffect(()=>{
-        if(props.getVideoTitle){
+        if(props?.getVideoTitle){
             props.getVideoTitle(props.video[videoIndex]?.title);
         }
         const timer = setInterval(()=>{
-            if(props.video){
+            if(props?.video){
                 if(props.video.length > 1){
                     setVideoIndex((prevIndex) => (prevIndex + 1) % props.video.length);
                     if(props.getVideoTitle){
@@ -44,7 +44,7 @@ const MainHeaderWrapper = (props)=>{
                     <video 
                         className={`${classes.video_bg}`} 
                         alt="oz video" 
-                        src={props.video[videoIndex]?.video || props.video} 
+                        src={props.video[videoIndex]?.video || props?.video} 
                         autoPlay 
                         muted 
                         loop
@@ -53,7 +53,7 @@ const MainHeaderWrapper = (props)=>{
                 {props.image && 
                     <div style={
                         {
-                            backgroundImage: `url(${props.image[imageIndex].image || props.image})`,
+                            backgroundImage: `url(${props.image[imageIndex]?.image || props?.image})`,
                         }
                     } className={`${classes.img_bg}`}></div>
                 }

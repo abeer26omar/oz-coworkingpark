@@ -1,12 +1,12 @@
 .amenities-list {
-    display: flex;
+    /* display: flex; */
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
   }
   
   .amenities-list::-webkit-scrollbar {
-    display: none; /* Hide scrollbar */
+    display: none;
   }
   
   .amenities-list > * {

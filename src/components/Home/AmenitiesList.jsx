@@ -109,43 +109,43 @@ const AmenitiesList = () => {
     return (
         <>
         <div className="col-lg-12 AmenitiesList_videos">
-                <div ref={amenitiesListRef} className="amenities-list">
-            <Slider {...settings} className="home-events">
-                    {AmenitiesList && AmenitiesList.map((AmenitiesList, index) =>{
-                        const {id, title, video, icon} = AmenitiesList;
-                        return(
-                                    <HoverVideoPlayer
-                                        key={index}
-                                        videoSrc={video}
-                                        overlayTransitionDuration={1000}
-                                        restartOnPaused
-                                        hoverOverlay={
-                                            <div className=''
-                                                style={{
-                                                    backgroundColor: "#00000070",
-                                                    position: "absolute",
-                                                    top: "0",
-                                                    left: "0",
-                                                    width: "100%",
-                                                    height: "100%",
-                                                    display: "flex",
-                                                    justifyContent: "center",
-                                                    alignItems: "center",
-                                                    flexDirection: 'column',
-                                                    transition:".7s"
-                                                }}>
-                                                    <img src={icon} alt={title} width='40px' height='40px' style={{
-                                                        width: '40px',
-                                                        height: '40px'
-                                                    }}/>
-                                                    <Paragraph className='overlay_p'>{title}</Paragraph>
-                                            </div>          
-                                        }
-                                    />
-                        )
-                    })}
-            </Slider>
-                </div>
+            <div className="amenities-list" ref={amenitiesListRef}>
+                <Slider {...settings} className="home-events">
+                        {AmenitiesList && AmenitiesList.map((AmenitiesList, index) =>{
+                            const {id, title, video, icon} = AmenitiesList;
+                            return(
+                                        <HoverVideoPlayer
+                                            key={index}
+                                            videoSrc={video}
+                                            overlayTransitionDuration={1000}
+                                            restartOnPaused
+                                            hoverOverlay={
+                                                <div className=''
+                                                    style={{
+                                                        backgroundColor: "#00000070",
+                                                        position: "absolute",
+                                                        top: "0",
+                                                        left: "0",
+                                                        width: "100%",
+                                                        height: "100%",
+                                                        display: "flex",
+                                                        justifyContent: "center",
+                                                        alignItems: "center",
+                                                        flexDirection: 'column',
+                                                        transition:".7s"
+                                                    }}>
+                                                        <img src={icon} alt={title} width='40px' height='40px' style={{
+                                                            width: '40px',
+                                                            height: '40px'
+                                                        }}/>
+                                                        <Paragraph className='overlay_p'>{title}</Paragraph>
+                                                </div>          
+                                            }
+                                        />
+                            )
+                        })}
+                </Slider>
+            </div>
         </div>
         {!AmenitiesList && <Paragraph>there is no Amenities to display</Paragraph>}
         </>

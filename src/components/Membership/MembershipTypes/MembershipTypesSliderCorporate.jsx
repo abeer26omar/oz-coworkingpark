@@ -5,7 +5,7 @@ import MembershipTypesList from './MembershipTypesList';
 import Paragraph from '../../UI/Paragraph';
 import {AuthContext} from '../../../apis/context/AuthTokenContext';
 
-const MembershipTypesSliderCorporate = (props) => {
+const MembershipTypesSliderCorporate = ({currentMemberId}) => {
 
     const [types, setTypes] = useState([]);
     const {token} = useContext(AuthContext);
@@ -23,7 +23,7 @@ const MembershipTypesSliderCorporate = (props) => {
     const settings = {
         dots: false,
         arrows: true,
-        slidesToShow: 3,
+        slidesToShow: types?.length-1 || 3,
         slidesToScroll: 1,
         infinite: false,
         centerMode: false,
@@ -79,6 +79,7 @@ const MembershipTypesSliderCorporate = (props) => {
         <Slider {...settings} className='corporate_slider'>
             {types && types.map((listMembershipType, index) => {
                 const {id, name, link, description, logo} = listMembershipType;
+                if(currentMemberId !== id){
                 return (
                         <div key={index}>
                             <MembershipTypesList
@@ -89,7 +90,8 @@ const MembershipTypesSliderCorporate = (props) => {
                                 image={logo}
                             />
                         </div>
-                );
+                )
+                }
             })}
         </Slider>
         {!types && <Paragraph>there is no membership type to display</Paragraph>}

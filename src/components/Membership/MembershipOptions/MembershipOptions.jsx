@@ -199,9 +199,9 @@ const MembershipOptions = () => {
                         <div className='col-lg-12'>
                             <h2 className="h2-text-bold">Other Membership {typeDetials?.is_individual === '1' ? 'individulal' : 'corporate'}</h2>
                             {typeDetials?.is_individual === '1' ? (
-                                <MembershipTypesSlider />
+                                <MembershipTypesSlider currentMemberId={id} />
                             ) : (
-                                <MembershipTypesSliderCorporate />
+                                <MembershipTypesSliderCorporate currentMemberId={id} />
                             )}
                         </div>
                     </Row>

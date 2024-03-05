@@ -5,6 +5,7 @@ import Media from '../Media/Media';
 import img from '../../assets/images/image 12.png';
 import { getInstructorsList } from '../../apis/OzKnowledge';
 import { AuthContext } from '../../apis/context/AuthTokenContext';
+import * as DOMPurify from 'dompurify';
 
 const PopularInstructor = ({details}) => {
 
@@ -97,9 +98,7 @@ const PopularInstructor = ({details}) => {
                         <Paragraph className="courses_jobTitle">
                           {details[currentSlide].category?.title}
                         </Paragraph>
-                        <Paragraph className="description_black">
-                          {details[currentSlide].description}
-                        </Paragraph>
+                        <div className='description_black py-2' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(details[currentSlide]?.description) }}></div>
                       </>
                     )}
                   </div>

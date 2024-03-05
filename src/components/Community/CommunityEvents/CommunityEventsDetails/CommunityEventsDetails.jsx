@@ -57,6 +57,7 @@ const CommunityEventsDetails = () => {
     const url = window.location.href;
 
     const attend = async () => {
+        setReload(false);
         if(token){
             try{
                 const result = await checkEvent(token, userId, id);
@@ -108,17 +109,20 @@ const CommunityEventsDetails = () => {
     };
 
     const cancel = async () => {
+        setReload(false);
         try{
             const res = await cancelEventAttend(token, userId, eventDetails.event_attend_id);
-            Modal.success({
-                title: res.status,
-                content: res.message,
-                footer: false,
-                centered: true,
-                closable: true,
-                maskClosable: true
-            });
-            setReload(true)
+            if(res){
+                Modal.success({
+                    title: res.status,
+                    content: res.message,
+                    footer: false,
+                    centered: true,
+                    closable: true,
+                    maskClosable: true
+                });
+                setReload(true);
+            }
         }catch (error){
             Modal.error({
                 title: error.response.data.status,
@@ -210,7 +214,7 @@ const CommunityEventsDetails = () => {
     
     return (
         <>
-            <div className="bg-body-tertiary navigator-feed">
+            <div className="navigator-feed">
                 <div className='container-fluid'>
                     <div className='d-flex'>
                         <h1 className="title-name mb-0">

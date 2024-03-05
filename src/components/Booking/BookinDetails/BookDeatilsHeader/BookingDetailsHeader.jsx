@@ -23,7 +23,7 @@ const BookingDetailsHeader = ({venueDetails}) => {
                 <AddToFavButton is_favorite={venueDetails.is_favorite} id={venueDetails.id} add_fav={true} type='venue'/>
 
                 <MainHeaderWrapper 
-                    image={(venueDetails.gallery && venueDetails.gallery.length !== 0) && venueDetails.gallery} 
+                    image={(venueDetails?.gallery && venueDetails?.gallery.length !== 0) && venueDetails.gallery} 
                     special_flex={venueDetails.online_booking ? 'justify-content-lg-center justify-content-start' : 'justify-content-center'}
                     height='670px'>
                     <div className="container text-center">

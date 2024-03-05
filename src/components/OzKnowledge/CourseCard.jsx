@@ -8,7 +8,7 @@ const CourseCard = ({coursesDetails}) => {
         <>
             <div className='card h-100'>
                 <div className='card-header header_course'>
-                    <img src={coursesDetails.image} className="card-img-top" alt="..." height='229px'/>
+                    <img src={coursesDetails.image} className="card-img-top" alt={coursesDetails.title} height='229px'/>
                         <div className='padge_grey'>
                             <span>{coursesDetails.category?.title}</span>
                         </div>

@@ -15,6 +15,7 @@ import AboutCourse from './AboutCourse';
 import PopularCourses from '../PopularCourses';
 import AboutInstractor from './AboutInstractor';
 import LoginAlert from "../../Auth/LoginAlertModal";
+import * as DOMPurify from 'dompurify';
 
 const CourseDetails = () => {
 
@@ -64,9 +65,7 @@ const CourseDetails = () => {
                         <Paragraph className='head_paragraph mb-4' style={{
                             fontSize: '2.25rem'
                         }}>{course?.title}</Paragraph>
-                                
-                        <Paragraph className='description mb-4'>{course?.details}</Paragraph>
-                                
+                        <div className='description mb-4' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(course?.details) }}></div>                                
                             <div className='conrse_details d-flex mb-4'>
                                 <div className='d-flex align-items-center'>
                                     <img src={star} alt='star icon'/>

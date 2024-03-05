@@ -6,6 +6,8 @@ import { getTrainingClasses } from "../../apis/ZeeStudio";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { Skeleton, Space } from "antd";
 import { useQuery } from "@tanstack/react-query";
+import * as DOMPurify from 'dompurify';
+
 const CardsGym = () => {
   const [classesList, setClassesList] = useState([]);
   // const [error, setError] = useState("");
@@ -25,7 +27,7 @@ const CardsGym = () => {
     );
   }
   if (data) {
-    content = data.map((item, index) => {
+    content = data?.map((item, index) => {
       return (
         <div className="col my-2" key={index}>
           <div className="card my-2 h-100 text-start">
@@ -51,9 +53,7 @@ const CardsGym = () => {
               ) : (
                 <>
                   <Paragraph className="card-title">{item.title}</Paragraph>
-                  <Paragraph className="description_black py-2">
-                    {item.descriptions.slice(0, 70)}
-                  </Paragraph>
+                  <div className='description_black py-2' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.descriptions.slice(0, 70)) }}></div>
                 </>
               )}
               <div className="d-flex justify-content-between align-items-center ">
