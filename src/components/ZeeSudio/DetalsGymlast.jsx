@@ -38,6 +38,13 @@ function DetalsGymlast({ details, pending }) {
     }
   };
   const [skeleton, setSkeleton] = useState(false);
+  const [isOpen, setIsopen] = useState(false);
+  // const showMore =
+  //   details?.details.length > details?.details.length - 1 &&
+  //   details?.details.slice(0, Num);
+  // const showMore = () => {
+  //   setNum(!Num);
+  // };
   return (
     <>
       <div className="container-fluid px-70 py-5">
@@ -75,16 +82,29 @@ function DetalsGymlast({ details, pending }) {
               </div>
             </div>
             <div className="col-xl-4 col-md-6 col-sm-12">
-              <div className="bg-gymDetails py-4 px-4 ">
+              <div className="bg-gymDetails py-4 px-4 " height="100%">
                 {pending ? (
                   <Skeleton active paragraph={{ rows: 5 }} />
                 ) : (
                   <>
                     <Paragraph className="card-title">Class Details</Paragraph>
-                    <Paragraph className="desc_small_light py-3">
+                    <Paragraph
+                      dangerouslySetInnerHTML={{ __html: details?.details }}
+                      className={
+                        isOpen
+                          ? "desc_small_light py-3 "
+                          : "desc_small_light show-more-paragraph mt-3"
+                      }
+                    >
                       {details?.details}
                     </Paragraph>
-                    <Paragraph className="desc_small light py-2 ">
+                    <li
+                      className="desc_small_light d-inline hover-paragraph-show  "
+                      onClick={() => setIsopen(!isOpen)}
+                    >
+                      {isOpen ? <u>Show Less</u> : <u>Show More...</u>}
+                    </li>
+                    <Paragraph className="desc_small light py-2 mt-3">
                       Duration :
                       <span className="desc_small"> {details?.duration}</span>
                     </Paragraph>
