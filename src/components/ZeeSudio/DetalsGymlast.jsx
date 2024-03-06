@@ -8,6 +8,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import LoginAlert from "../Auth/LoginAlertModal";
 import { Skeleton } from "antd";
+import * as DOMPurify from "dompurify";
+
 function DetalsGymlast({ details, pending }) {
   const { token } = useContext(AuthContext);
   const [showLogin, setShowLogin] = useState(false);
@@ -89,11 +91,13 @@ function DetalsGymlast({ details, pending }) {
                   <>
                     <Paragraph className="card-title">Class Details</Paragraph>
                     <Paragraph
-                      dangerouslySetInnerHTML={{ __html: details?.details }}
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(details?.details),
+                      }}
                       className={
                         isOpen
-                          ? "desc_small_light py-3 "
-                          : "desc_small_light show-more-paragraph mt-3"
+                          ? "desc_small_light py-3 animate__animated "
+                          : "desc_small_light show-more-paragraph mt-3  "
                       }
                     >
                       {details?.details}
