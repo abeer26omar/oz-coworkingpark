@@ -23,7 +23,7 @@ const CancelationReasonModal = (props) => {
         const source = axios.CancelToken.source();
 
         getCancelReasonsList(token, userId, source).then(res=>{
-            setCancelReasons(res);
+            setCancelReasons(res.data);
         }).catch(err=>{});
 
         return ()=>source.cancel();
@@ -109,7 +109,7 @@ const CancelationReasonModal = (props) => {
                                     handleSubmit }) => (
 
                                     <form className='m-4' onSubmit={handleSubmit}>
-                                        { cancelReasons && cancelReasons.map((reason, index) => {
+                                        { (cancelReasons && cancelReasons.length !==0 ) && cancelReasons.map((reason, index) => {
                                             return (
                                                 <div className="d-flex justify-content-start form-check border-bottom p-3" key={index}>
                                                     <input 

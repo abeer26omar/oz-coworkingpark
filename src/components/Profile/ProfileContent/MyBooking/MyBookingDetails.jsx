@@ -218,7 +218,7 @@ const MyBookingDetails = () => {
                                     <ul className="list-options d-flex p-0 py-3 m-0">
                                         {booking && booking.venueData?.facilities.map((item, index)=>{
                                             return (
-                                                <li className="list-option-item" key={index}><img src={item.logo} alt={item.name} />{item.name}</li>
+                                                <li className="list-option-item" key={index}><img src={item.logo} alt={item.name} width='27.43px' height='20.57px'/>{item.name}</li>
                                             )
                                         })}
                                     </ul>

@@ -79,13 +79,14 @@ const MembershipTypesSlider = ({currentMemberId}) => {
   };
   return (
     <>
-      <Slider {...settings} className="individual_slider">
+      {/* <Slider {...settings} className="individual_slider"> */}
+      <div className="row">
         {types &&
           types.map((listMembershipType, index) => {
             const { id, name, logo, link, description } = listMembershipType;
             if(currentMemberId !== id){
               return (
-                <div className="px-2" key={index}>
+                <div className=" col-4 px-2" key={index}>
                   <MembershipTypesList
                     className={"t-center-sm"}
                     id={id}
@@ -99,7 +100,9 @@ const MembershipTypesSlider = ({currentMemberId}) => {
               )
             }
           })}
-      </Slider>
+
+      </div>
+      {/* </Slider> */}
       {/* {isError && <Paragraph>there is no membership type to display</Paragraph>} */}
     </>
   );
