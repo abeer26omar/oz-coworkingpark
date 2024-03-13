@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Nav, Tab } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import "./BookingSummary.css";
@@ -9,11 +9,12 @@ import Media from "../../../../Media/Media";
 import { getBranchById } from "../../../../../apis/config";
 import { AuthContext } from "../../../../../apis/context/AuthTokenContext";
 import Button from "../../../../UI/Button";
-import { confirmBooking } from "../../../../../apis/Booking";
+import { confirmBooking, rescheduleBooking } from "../../../../../apis/Booking";
 import Paragraph from "../../../../UI/Paragraph";
 import TermsAndConditionsModal from "../../../../UI/TermsAndConditionsModal";
 import ShareButton from "../../../../UI/ShareButton";
-import SweetAlert2 from "react-sweetalert2";
+import { useSearchParams } from "react-router-dom";
+import { Modal } from "antd";
 
 const BookingSummary = () => {
   const [bookingData, setBookingData] = useState(
@@ -25,11 +26,13 @@ const BookingSummary = () => {
   const [branch, setBransh] = useState();
   const [show, setShow] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
-  const [swalProps, setSwalProps] = useState({});
   const [payment, setPayment] = useState(1);
   const { token, userId, branchId } = useContext(AuthContext);
 
   const handelClose = () => setShow(false);
+
+  const [searchParams] = useSearchParams();
+  const reschedule = searchParams.get("reschedule");
 
   useEffect(() => {
     setBookingData(JSON.parse(sessionStorage.getItem("BookingOZDetails")));
@@ -99,14 +102,9 @@ const BookingSummary = () => {
       month: "short",
       day: "numeric",
     };
-    return (
-      <>
-        <span className="mb-0 text-center ms-3">
-          {date.toLocaleDateString("en-US", options)}
-        </span>
-      </>
-    );
-  };
+    return date.toLocaleDateString("en-US", options);
+  }
+
   const setDateApi = (roomdate) => {
     const date = new Date(roomdate);
     const year = date.getFullYear();
@@ -114,19 +112,15 @@ const BookingSummary = () => {
     const day = String(date.getDate()).padStart(2, "0");
     const dateNew = `${year}-${month}-${day}`;
     return dateNew;
-  };
+  }
 
   const setTime = (roomdate) => {
     const date = new Date(roomdate);
 
-    return (
-      <span className="mb-0 text-center ms-3">
-        {date.toLocaleTimeString("en-us", {
+    return date.toLocaleTimeString("en-us", {
           hour: "2-digit",
           minute: "2-digit",
-        })}
-      </span>
-    );
+        })
   };
 
   const setTimeApi = (roomdate) => {
@@ -148,12 +142,8 @@ const BookingSummary = () => {
       (durationInMs % (1000 * 60 * 60)) / (1000 * 60)
     );
 
-    return (
-      <span className="mb-0 text-center">
-        {durationHours} Hours - {durationMinutes} MIN
-      </span>
-    );
-  };
+    return `${durationHours} Hours - ${durationMinutes} MIN`;
+  }
 
   useEffect(() => {
     getBranchById(token, branchId).then((res) => {
@@ -170,43 +160,58 @@ const BookingSummary = () => {
         }, 0);
       const total_price =
         service_price + bookingData.spaceDetails.price_discounted;
-      const result = await confirmBooking(
-        token,
-        userId,
-        bookingData.spaceDetails.amenitie.branche_id,
-        bookingData.spaceDetails.id,
-        bookingData.numberOfPeople,
-        bookingData.spaceDetails.booking_code,
-        bookingService,
-        bookingData.spaceDetails.price_discounted,
-        service_price,
-        total_price,
-        setDateApi(bookingData.date),
-        setTimeApi(bookingData.time.start),
-        setTimeApi(bookingData.time.end)
-      );
-      if (result) {
-        sessionStorage.removeItem("BookingOZDetails");
-        sessionStorage.removeItem("BookingOZServices");
-        setSwalProps({
-          show: true,
-          icon: "success",
-          title: result.status,
-          text: result.message,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        handleBookingClick();
-      }
+        if(reschedule){
+          const result = await rescheduleBooking(
+            token,
+            userId,
+            bookingData.id,
+            bookingData.spaceDetails.id,
+            setDateApi(bookingData.date),
+            setTimeApi(bookingData.time.start),
+            setTimeApi(bookingData.time.end)
+            );
+          if (result) {
+            sessionStorage.removeItem("BookingOZDetails");
+            sessionStorage.removeItem("BookingOZServices");
+            sessionStorage.removeItem("BookingOZDetailsId");
+            Modal.success({
+              title: result.status,
+              content: result.message,
+            });
+            handleBookingClick();
+          }
+        }else{
+          const result = await confirmBooking(
+            token,
+            userId,
+            bookingData.spaceDetails.amenitie.branche_id,
+            bookingData.spaceDetails.id,
+            bookingData.numberOfPeople,
+            bookingData.spaceDetails.booking_code,
+            bookingService,
+            bookingData.spaceDetails.price_discounted,
+            service_price,
+            total_price,
+            setDateApi(bookingData.date),
+            setTimeApi(bookingData.time.start),
+            setTimeApi(bookingData.time.end)
+          );
+          if (result) {
+            sessionStorage.removeItem("BookingOZDetails");
+            sessionStorage.removeItem("BookingOZServices");
+            sessionStorage.removeItem("BookingOZDetailsId");
+            Modal.success({
+              title: result.status,
+              content: result.message,
+            });
+            handleBookingClick();
+          }
+        }
     } catch (error) {
-      setSwalProps({
-        show: true,
-        icon: "error",
-        title: error.response.data.status,
-        text: error.response.data.message,
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      Modal.error({
+        title: 'error',
+        content: error.response.data.message,
+      })
     }
   };
 
@@ -221,7 +226,7 @@ const BookingSummary = () => {
                         width={'100%'} 
                         className=""/>
                 </div> */}
-        <div className="container-fluid px-4">
+        <div className="container-fluid px-70">
           <Tab.Container
             activeKey={steps[activeStep]?.key}
             onSelect={handleTabSelect}
@@ -284,6 +289,7 @@ const BookingSummary = () => {
                                   height="32"
                                   viewBox="0 0 32 32"
                                   fill="none"
+                                  className="me-3"
                                 >
                                   <path
                                     d="M9.33398 5.33203V3.33203"
@@ -324,6 +330,7 @@ const BookingSummary = () => {
                                   height="32"
                                   viewBox="0 0 32 32"
                                   fill="none"
+                                  className="me-3"
                                 >
                                   <circle
                                     cx="16"
@@ -411,9 +418,8 @@ const BookingSummary = () => {
                                     stroke-linecap="round"
                                   />
                                 </svg>
-
-                                                                <span className='ms-3'>{bookingData?.numberOfPeople} People</span>
-                                                            </li>
+                                <span className='ms-3'>{bookingData?.numberOfPeople} People</span>
+                                </li>
                                                             <li>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                                                 <path d="M17.3327 9.33333C17.3327 10.0697 16.7357 10.6667 15.9993 10.6667C15.263 10.6667 14.666 10.0697 14.666 9.33333C14.666 8.59695 15.263 8 15.9993 8C16.7357 8 17.3327 8.59695 17.3327 9.33333Z" stroke="#BDBDBD" stroke-width="1.5"/>
@@ -641,7 +647,6 @@ const BookingSummary = () => {
           </Tab.Container>
         </div>
       </section>
-      <SweetAlert2 {...swalProps} />
       <TermsAndConditionsModal show={show} onHide={handelClose} />
     </>
   );

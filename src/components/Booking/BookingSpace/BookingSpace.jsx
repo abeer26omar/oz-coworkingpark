@@ -149,12 +149,12 @@ const BookingSpace = () => {
                 })}
             </Slider>
           </div>
+        </div>
           <BookingSpacesTypes
             venues={venues}
             placeId={spaceId}
             spaceTitle={spaceTitle}
           />
-        </div>
       </section>
 
       {(token && cards.length > 0) && <LastBooking cards={cards} />}

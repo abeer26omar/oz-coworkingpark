@@ -759,15 +759,16 @@ a {
 .seprator{
     border-left: 1px solid var(--secondary-color2);
 }
+.individual_slider .slick-slide div{
+    height: 550px;
+}
 @media screen and (max-width: 992px) {
     .px_7 {
         padding:  0 2rem !important;
     }
 }
 @media screen and (max-width: 768px) {
-    .t-center-sm{
-        text-align: center;
-    }
+    
     .px-70 {
         padding: 0 2rem;
     }
@@ -796,7 +797,10 @@ a {
         flex-direction: column-reverse !important;
     }
 }
-@media (max-width: 575px) {
+@media (max-width: 576px) {
+    .t-center-sm{
+        text-align: center;
+    }
     .f-14{
         font-size: 13px !important;
     }

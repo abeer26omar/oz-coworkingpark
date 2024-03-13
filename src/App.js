@@ -38,6 +38,7 @@ import Register from './components/Auth/Register';
 import ForgetPass from './components/Auth/ForgetPass';
 import NewPassword from './components/Auth/NewPassword';
 import MyBookingDetails from "./components/Profile/ProfileContent/MyBooking/MyBookingDetails";
+import RescheduleBooking from './components/Profile/ProfileContent/MyBooking/RescheduleBooking';
 import MyplanDetials from './components/Profile/ProfileContent/MyPlan/PlanDetails';
 import MyEventDetails from "./components/Profile/ProfileContent/MyEvents/MyEventDetilas";
 import Ozys from './components/Ozys/Ozys';
@@ -88,7 +89,7 @@ function App() {
 
     useEffect(() => {
       AOS.init({
-        duration: 1200,
+        duration: 1500,
         once: true, 
       });
     }, []);
@@ -152,6 +153,7 @@ function App() {
           { path:'booking', element: <Booking />},
           { path:'bookingDetails/:id', element: <BookingDetails />},
           { path:'mybookingDetails/:id', element: <MyBookingDetails />},
+          { path:'RescheduleBooking/:id', element: <RescheduleBooking />},
           { path:'myplanDetials/:id', element: <MyplanDetials />},
           { path:'myeventDetails/:id', element: <MyEventDetails/>},
           { path:'bookingDetails/bookNow', element: <BookingSummary />},

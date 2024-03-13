@@ -303,6 +303,11 @@
 .order-details .line {
     border-bottom: 1px solid #fff;
 }
+@media screen and (max-width: 768px) {
+    .summary-bg .border-right{
+        border: 0px solid transparent;
+    }
+}
 @media screen and (max-width: 575.5px) {
     .summary-bg{
         padding: 37px 25px;

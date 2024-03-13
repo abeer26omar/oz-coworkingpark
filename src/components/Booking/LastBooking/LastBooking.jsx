@@ -13,8 +13,8 @@ const LastBooking = ({cards}) => {
     
     return (
         <>
-            <section className="last-booking border-top">
-                <div className="container-fluid">
+            <section className="last-booking border-top p-60">
+                <div className="container-fluid px-70">
                     <div className="booking-section">
                         <div className="row">
                             <div className="col-lg-12">

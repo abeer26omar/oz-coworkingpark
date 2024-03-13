@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './SpaceDetails.css';
-import Paragraph from '../../../UI/Paragraph';
+import '../../../../Booking/BookinDetails/SpaceDetails/SpaceDetails.css';
+import Paragraph from '../../../../UI/Paragraph';
 import Select from 'react-select';
 
-const SpaceDetails = ({venueDetails}) => {
+const SpaceDetails = ({venueDetails, getId}) => {
     const optionList = (venueDetails.services && venueDetails.services !== null) && 
     venueDetails.services.map(item=>{
         return { value: item.id , label: item.name , price: item.price }
@@ -20,6 +20,7 @@ const SpaceDetails = ({venueDetails}) => {
         const data = JSON.parse(sessionStorage.getItem("BookingOZServices"));
         if(data){
             setSelectedOptions(data)
+            getId(data.id)
         }
     },[])
     return (
