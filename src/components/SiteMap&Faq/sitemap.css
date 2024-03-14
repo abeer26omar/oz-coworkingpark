@@ -65,8 +65,16 @@
     font-weight: 700;
     position: absolute;
     line-height: 88.8px;
-    top: -500%;
-    left: 45%;
+
+}
+.title_faq{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -200%;
+    right: 10%;
+        
 }
 /* ////////////////////// */
 .card-chat{
@@ -152,6 +160,11 @@
 @media screen and (max-width:767px) {
 .tabs_faq .title {
     font-size: var(--font-size-11);
+}
+.title_faq {
+    top: 300%;
+    right: -30%;
+
 }
 .title_head{
     left: 10%;

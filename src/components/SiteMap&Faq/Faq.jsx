@@ -35,7 +35,7 @@ const handleClick6 = () => {
     <>
       <div className="position-relative">
         <MainHeaderWrapper image={faq}>
-          <div className="container text-center">
+          <div className="container text-center title_faq">
             <Paragraph className="title_head">FAQ</Paragraph>
           </div>
         </MainHeaderWrapper>
