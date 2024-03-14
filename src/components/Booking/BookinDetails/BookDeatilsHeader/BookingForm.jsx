@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import "react-datepicker/dist/react-datepicker.css";
 import './BookingForm.css'
 import DatePicker from "react-datepicker";
@@ -9,24 +9,19 @@ import Toast from 'react-bootstrap/Toast';
 import {checkAvailability} from '../../../../apis/Booking';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import ShowAvaliablesModal from './ShowAvaliablesModal';
-import TimeRangePicker from '../../../UI/TimeRangePicker';
 
-const BookingForm = ({venueDetails, token}) => {
-    
+const BookingForm = ({venueDetails, token, reschedule, bookingId}) => {
+
     const [startDate, setStartDate] = useState(null);
     const [selectedStartTime, setSelectedStartTime] = useState(null);
     const [selectedEndTime, setSelectedEndTime] = useState(null);
-    const [isOpen, setIsOpen] = useState(false);
     const [show, setShow] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
     const [counter, setCounter] = useState(0);
-    const [initialCount, setInitialCount] = useState(0);
     const [avaliableDate, setAvaliableDates] = useState([]);
     const [showAvailable, setShowAvailable] = useState(false);
     const navigate = useNavigate();
-    const target = useRef(null);
-    const [selectedRange, setSelectedRange] = useState([null, null]);
     const [userNewTimeInfo, setUserNewTimeInfo] = useState(null)
     const { userId } = useContext(AuthContext);
 
@@ -36,59 +31,13 @@ const BookingForm = ({venueDetails, token}) => {
         setStartDate(utcDate);
     };
 
-    const handleRangeChange = (range) => {
-        setSelectedRange(range);
-    };
-
     const handleStartTimeChange = (startTime) => {
-        console.log(startTime);
         setSelectedStartTime(startTime);
         setSelectedEndTime(null);
     };
 
     const handleEndTimeChange = (endTime) => {
         setSelectedEndTime(endTime);
-
-    };
-
-    const handleInitialCountChange = (event) => {
-        event.preventDefault();
-
-        setInitialCount(event.target.value);
-    };
-
-    const openSelectGuest = (event) => {
-        event.preventDefault();
-        setIsOpen(!isOpen);
-        setShowTooltip(false);
-    }
-
-    const closeSelectGuest = (event) => {
-        event.preventDefault();
-        setIsOpen(!isOpen);
-    }
-   
-    const increment = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        if(counter < venueDetails.capacity){
-            setCounter(counter + 1)
-        }else{
-            setShowTooltip(!showTooltip);
-        }
-    }
-
-    const decrement = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        if (counter > 1) {
-            setCounter((prevCount) => prevCount - 1);
-        }
-    };
-
-    const handleReset = (event) => {
-        event.preventDefault();
-        setCounter(initialCount);
     };
 
     const handelHide = () => setShow(false);
@@ -99,6 +48,7 @@ const BookingForm = ({venueDetails, token}) => {
         try{
             if((startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
                 const bookingData  = {
+                    id: JSON.parse(sessionStorage.getItem('BookingOZDetailsId')),
                     date: startDate,
                     time: {
                         start: selectedStartTime,
@@ -118,7 +68,11 @@ const BookingForm = ({venueDetails, token}) => {
                     const timeEndStamp = Math.floor(timeEnd.getTime() / 1000);
                     const result = await checkAvailability(token, userId, venueDetails.id, venueDetails.buffering_time, formattedDate, timeStartStamp, timeEndStamp);
                     if(result.conflict.length === 0){
-                        navigate('/bookingDetails/bookNow');
+                        if(reschedule){
+                            navigate('/bookingDetails/bookNow?reschedule=true');
+                        }else{
+                            navigate('/bookingDetails/bookNow');
+                        }
                     }else{
                         setShowAvailable(true);
                         setAvaliableDates(result.available);
@@ -131,6 +85,24 @@ const BookingForm = ({venueDetails, token}) => {
             }
         }catch (error){
 
+        }
+    };
+
+    const increment = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if(counter < venueDetails.capacity){
+            setCounter(counter + 1)
+        }else{
+            setShowTooltip(!showTooltip);
+        }
+    }
+
+    const decrement = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (counter > 1) {
+            setCounter((prevCount) => prevCount - 1);
         }
     };
 
@@ -175,25 +147,28 @@ const BookingForm = ({venueDetails, token}) => {
                                 <li className="col-lg-3 col-12 bookbottom__li bookbottom__li--select bookbottom__li--select-guests">
                                     <div className="bookbottom__select position-relative">
                                         <div class="btn-group">
-                                            <button class="btn button-select-guest dropdown-toggle dropup" 
-                                                type="button" id="dropdownMenuButton" 
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                {(counter !== null && counter !== 0) ? `${counter} persons` : "Number of People"}
-                                            </button>
-                                            
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{
-                                                backgroundColor: 'transparent',
-                                                border: 'none'
-                                            }}>
-                                                <div className='counter-container'>
-                                                    <span>{`Max Room Capacity is ${venueDetails.capacity}`}</span>
-                                                    <button className="decrement-btn" onClick={decrement}>-
-                                                    </button>
-                                                    <p className="counter-number">{counter}</p>
-                                                    <button onClick={increment}>+
-                                                    </button>
-                                                </div>
-                                            </ul>
+                                            {reschedule ? (<p className="counter-number mb-0">{counter} persons</p>) :
+                                            (<>
+                                                <button class="btn button-select-guest dropdown-toggle dropup" 
+                                                    type="button" id="dropdownMenuButton" 
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    {(counter !== null && counter !== 0) ? `${counter} persons` : "Number of People"}
+                                                </button>
+                                                
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{
+                                                    backgroundColor: 'transparent',
+                                                    border: 'none'
+                                                }}>
+                                                    <div className='counter-container'>
+                                                        <span>{`Max Room Capacity is ${venueDetails.capacity}`}</span>
+                                                        <button className="decrement-btn" onClick={decrement}>-
+                                                        </button>
+                                                        <p className="counter-number">{counter}</p>
+                                                        <button onClick={increment}>+
+                                                        </button>
+                                                    </div>
+                                                </ul>
+                                            </>)}
                                         </div>
                                     </div>
                                 </li>

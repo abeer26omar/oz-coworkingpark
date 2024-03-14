@@ -224,6 +224,7 @@ const Header = ({ showBlackNav, show }) => {
                       borderBottom: isActive ? `2px solid black` : "none",
                     })}
                     to={"/booking"}
+                    end
                   >
                     <span>booking</span>
                   </NavLink>
@@ -237,6 +238,7 @@ const Header = ({ showBlackNav, show }) => {
                       borderBottom: isActive ? `2px solid black` : "none",
                     })}
                     to={"/membership"}
+                    end
                   >
                     <span>membership</span>
                   </NavLink>
@@ -249,6 +251,7 @@ const Header = ({ showBlackNav, show }) => {
                     borderBottom: isActive ? `2px solid black` : "none",
                   })}
                   to={"/private"}
+                  end
                 >
                   <span>private events</span>
                 </NavLink>
@@ -262,6 +265,7 @@ const Header = ({ showBlackNav, show }) => {
                       borderBottom: isActive ? `2px solid black` : "none",
                     })}
                     to={"/community"}
+                    end
                   >
                     <span>community</span>
                   </NavLink>
@@ -275,6 +279,7 @@ const Header = ({ showBlackNav, show }) => {
                       borderBottom: isActive ? `2px solid black` : "none",
                     })}
                     to={"/community/events"}
+                    end
                   >
                     <span>events</span>
                   </NavLink>
@@ -439,7 +444,7 @@ const Header = ({ showBlackNav, show }) => {
                         onClick={() => setCloseNav(!closeNav)}
                         className="p-0"
                         tagType="link"
-                        to={"/events"}
+                        to={"/community/events"}
                       >
                         Events
                       </Button>

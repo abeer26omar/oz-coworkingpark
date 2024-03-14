@@ -4,6 +4,7 @@ import "./BookinHeader.css";
 import MainHeaderWrapper from "../../UI/MainHeaderWrapper";
 import Paragraph from "../../UI/Paragraph";
 import { Skeleton } from "antd";
+
 const BookingHeader = (props) => {
   const [video, setVideo] = useState("");
 

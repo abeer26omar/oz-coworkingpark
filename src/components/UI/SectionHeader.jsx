@@ -35,7 +35,7 @@ const SectionHeader = (props) => {
                 {configItem.key === "home_page_sub_header" && (
                   <Paragraph className="head_paragraph mb-0"
                     data_aos="fade" 
-                    data_aos_delay="100">
+                    data_aos_delay="150">
                     {configItem.value}
                   </Paragraph>
                 )}

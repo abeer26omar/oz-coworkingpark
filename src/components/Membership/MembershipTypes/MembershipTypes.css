@@ -6,7 +6,9 @@
     /*box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);*/
     box-shadow: none;
 }
-
+.membership-types .slick-dots {
+    bottom: -40px;
+}
 .membership-types .card-title {
     font-family: couture, sans-serif;
     font-style: normal;

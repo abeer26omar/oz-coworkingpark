@@ -39,9 +39,13 @@ const MembershipOptions = () => {
         getMemebershipDetails();
     },[token, id]);
 
-    const calcDiscount = (price, discount) => {
-        const priceDicounted =  price * discount / 100;
-        return price-priceDicounted;
+    const calcDiscount = (price, discount, discount_type) => {
+        if(discount_type === 'fixed'){
+            return price-discount;
+        }else{
+            const priceDicounted =  price * discount / 100;
+            return price-priceDicounted;
+        }
     }
     const upgradeYourPlan = async (plan_Id) => {
         try{
@@ -147,7 +151,7 @@ const MembershipOptions = () => {
                                                                     <span>{typeDetials?.name}</span>
                                                                     <h1 className='py-3'>{item.type}</h1>
                                                                     <span className={`px-2 ${item.discount !== '0' ? 'discount' : 'priceafter' }`}>{item.price} / {item.time_count} {item.time}</span>
-                                                                    {item.discount !== '0' && <span className='mb-0 priceafter'>{calcDiscount(item.price, item.discount)} / {item.time_count} {item.time}</span>}
+                                                                    {item.discount !== '0' && <span className='mb-0 priceafter'>{calcDiscount(item.price, item.discount, item.discount_type)} / {item.time_count} {item.time}</span>}
                                                                 </div>
                                                                 <div className='card-body'>
                                                                     <Paragraph><img type='img' src={check_yes} alt='check_mark' /> Your Plan Benefits</Paragraph>

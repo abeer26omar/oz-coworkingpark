@@ -20,7 +20,7 @@ const MyBookingDetails = () => {
     const [showRemainderModal, setShowRemainderModal] = useState(false);
     const [showRatingModal, setShowRatingModal] = useState(false);
     const [booking, setBooking] = useState(false);
-    const { token, userId } = useContext(AuthContext);
+    const { token } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
@@ -104,18 +104,20 @@ const MyBookingDetails = () => {
     const handelReschedule = (e) => {
         e.preventDefault();
         const data  = {
+            id: id,
             date: setLocalTime(booking.check_in_formmated),
             time: {
                 start: setLocalTime(booking.check_in_formmated),
                 end: setLocalTime(booking.check_out_formmated)
             },
-            numberOfPeople: booking.invites.length,
+            numberOfPeople: booking.guests,
             spaceDetails: booking.venueData,
             services: JSON.parse(sessionStorage.getItem("BookingOZServices"))
         };
         sessionStorage.setItem("BookingOZDetails", JSON.stringify(data));
+        sessionStorage.setItem("BookingOZDetailsId", JSON.stringify(id));
 
-        navigate(`/bookingDetails/${booking.venueData?.id}`);
+        navigate(`/RescheduleBooking/${booking.venueData?.id}`);
     }
 
     return (

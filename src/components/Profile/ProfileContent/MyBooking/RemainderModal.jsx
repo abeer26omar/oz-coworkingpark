@@ -1,11 +1,26 @@
 import Modal from 'react-bootstrap/Modal';
 import Paragraph from  '../../../UI/Paragraph';
 import Button from '../../../UI/Button';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { extendBooking } from '../../../../apis/Booking';
+import { AuthContext } from '../../../../apis/context/AuthTokenContext';
+import { TimePicker } from 'antd';
 
 const RemainderModal = (props)=>{
+
+    const { token } = useContext(AuthContext);
+    const [value, setValue] = useState(null);
+
+    const onChange = (time) => {
+        setValue(time);
+    }
+
+    const extend = async () => {
+        const res = await extendBooking(token, props.booking_id, )
+    }
+
     return (
         <>
             <Modal
@@ -42,18 +57,27 @@ const RemainderModal = (props)=>{
                                     className="form__label d-flex align-items-center justify-content-start">
                                         Extend time
                                 </label>
-                                <input 
-                                    type={"time"}
+                                <TimePicker 
+                                    value={value} 
+                                    onChange={onChange} 
+                                    format='HH:mm'
+                                    open={true}/>
+
+                                {/* <input 
+                                    type="time"
                                     id="extendtime" 
                                     name="extendtime"
                                     className="form__field color-grey"
-                                />
+                                    required
+                                    step="60"
+                                /> */}
                             </div>
                             <div className="col-12 d-flex justify-content-center py-3">
                                 <Button 
                                     type='submit'
                                     tagType='button'
-                                    className="btn_outline_black auth_btn_padding w-100">
+                                    className="btn_outline_black auth_btn_padding w-100"
+                                    onClick={extend}>
                                     confirm
                                 </Button>
                             </div>

@@ -195,7 +195,7 @@ export const confirmBooking = async (token,
 
     const response = await axios(config);
         
-    return response.data.data;
+    return response.data;
 };
 
 export const getCancelReasonsList = async (token, UserId, source) => {
@@ -306,4 +306,48 @@ export const requestBooking = async (token, userId, branch_id, venueId, bookingD
     const response = await axios(config);
         
     return response.data.data;
+};
+
+export const rescheduleBooking = async (token, userId, booking_id, venueId, date_time, check_in, check_out) => {
+        
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('user_id', userId);
+    formData.append('booking_id', booking_id);
+    formData.append('venue_id', venueId);
+    formData.append('date_time', date_time);
+    formData.append('check_in', check_in);
+    formData.append('check_out', check_out);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/reschedule-booking?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data;
+};
+
+export const extendBooking = async (token, booking_id, extend_time) => {
+        
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('booking_id', booking_id);
+    formData.append('extend_time', extend_time);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/extend-booking?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+        
+    return response.data;
 };

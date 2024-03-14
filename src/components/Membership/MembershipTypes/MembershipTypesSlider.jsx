@@ -1,24 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Slider from "react-slick";
+import { useQuery } from '@tanstack/react-query';
 import { getListMembershipTypes } from "../../../apis/MembershipApi";
 import MembershipTypesList from "./MembershipTypesList";
 import { AuthContext } from "../../../apis/context/AuthTokenContext";
+import Paragraph from '../../UI/Paragraph';
 
 const MembershipTypesSlider = ({currentMemberId}) => {
-  const [types, setTypes] = useState([]);
+
   const { token } = useContext(AuthContext);
 
-  useEffect(() => {
-    const getMemebershipTypes = async () => {
-      try {
-        const result = await getListMembershipTypes(token, "no");
-        setTypes(result["individual"]);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getMemebershipTypes();
-  }, [token]);
+  const { error, data: types } = useQuery({
+    queryKey: ['listMembershipTypes', token],
+    queryFn: ({signal}) => getListMembershipTypes(token, "no", signal)
+  });
 
   const settings = {
     dots: false,
@@ -76,34 +71,32 @@ const MembershipTypesSlider = ({currentMemberId}) => {
         settings: "unslick",
       },
     ],
-  };
+  }
+
   return (
     <>
-      {/* <Slider {...settings} className="individual_slider"> */}
-      <div className="row">
-        {types &&
-          types.map((listMembershipType, index) => {
-            const { id, name, logo, link, description } = listMembershipType;
-            if(currentMemberId !== id){
-              return (
-                <div className=" col-4 px-2" key={index}>
-                  <MembershipTypesList
-                    className={"t-center-sm"}
-                    id={id}
-                    name={name}
-                    logo={logo}
-                    link={link}
-                    description={description}
-                    image={logo}
-                  />
-                </div>
-              )
-            }
-          })}
-
-      </div>
-      {/* </Slider> */}
-      {/* {isError && <Paragraph>there is no membership type to display</Paragraph>} */}
+      <Slider {...settings} className="individual_slider mb-4">
+          {types &&
+            types['individual'].map((listMembershipType, index) => {
+              const { id, name, logo, link, description } = listMembershipType;
+              if(currentMemberId !== id){
+                return (
+                  <div className="col-4 px-2" key={index}>
+                    <MembershipTypesList
+                      className={"t-center-sm"}
+                      id={id}
+                      name={name}
+                      logo={logo}
+                      link={link}
+                      description={description}
+                      image={logo}
+                    />
+                  </div>
+                )
+              }
+            })}
+        </Slider>
+      {error && <Paragraph className='empty'>there is no membership type to display</Paragraph>}
     </>
   );
 };
