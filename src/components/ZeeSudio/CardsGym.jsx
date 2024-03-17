@@ -6,7 +6,7 @@ import { getTrainingClasses } from "../../apis/ZeeStudio";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { Skeleton, Space } from "antd";
 import { useQuery } from "@tanstack/react-query";
-import * as DOMPurify from 'dompurify';
+import * as DOMPurify from "dompurify";
 
 const CardsGym = () => {
   const [classesList, setClassesList] = useState([]);
@@ -43,7 +43,7 @@ const CardsGym = () => {
                 />
               </>
             )}
-            <div className="card-body">
+            <div className="card-body h-100">
               {isPending ? (
                 <Skeleton
                   active
@@ -52,8 +52,17 @@ const CardsGym = () => {
                 />
               ) : (
                 <>
-                  <Paragraph className="card-title">{item.title}</Paragraph>
-                  <div className='description_black py-2' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.descriptions.slice(0, 70)) }}></div>
+                  <Paragraph className="card-title">
+                    {item.title.slice(0, 20)}
+                  </Paragraph>
+                  <div
+                    className="description_black py-2"
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(
+                        item.descriptions.slice(0, 70)
+                      ),
+                    }}
+                  ></div>
                 </>
               )}
               <div className="d-flex justify-content-between align-items-center ">
