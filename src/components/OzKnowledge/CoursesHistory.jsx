@@ -105,8 +105,14 @@ const CoursesHistory = () => {
                 planData.map((item, index) => {
                   return (
                     <>
-                      <div className="card card_event my-3" key={index} onClick={()=>{navigate(`/coursetracting/${item.id}`)}}>
-                        <div className="row align-items-center">
+                      <div
+                        className="card card_event my-3"
+                        key={index}
+                        onClick={() => {
+                          navigate(`/coursetracting/${item.id}`);
+                        }}
+                      >
+                        <div className="row justify-content-center align-items-center">
                           <div className="col-xxl-3 col-xl-4 col-lg-4 col-md-4 col-sm-12 d-flex justify-content-start p-sm-0">
                             <img
                               src={item.training?.image}
@@ -119,11 +125,17 @@ const CoursesHistory = () => {
                             />
                           </div>
                           <div className="col-xxl-8 col-xl-7 col-lg-7 col-md-7 col-sm-12 d-flex align-items-center">
-                            <div className="p-2" style={{
-                              width: '100%'
-                            }}>
+                            <div
+                              className="p-2"
+                              style={{
+                                width: "100%",
+                              }}
+                            >
                               <Paragraph className="course_date">
-                                Date Submitted: {moment(item.invoice_date).format("MMM DD, YYYY")}
+                                Date Submitted:{" "}
+                                {moment(item.invoice_date).format(
+                                  "MMM DD, YYYY"
+                                )}
                               </Paragraph>
                               <Paragraph className="course_details_title">
                                 {item.training?.title}
