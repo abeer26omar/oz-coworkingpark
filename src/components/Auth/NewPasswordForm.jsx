@@ -13,8 +13,8 @@ const NewPasswordForm = ()=>{
     const navigate = useNavigate();
 
     const handleSubmit = async (values) => {
-        const email = sessionStorage.getItem("emailuseroz");
-        const otp = sessionStorage.getItem("otpuseroz");
+        const email = localStorage.getItem("emailuseroz");
+        const otp = localStorage.getItem("otpuseroz");
         try {
             const result = await ForgotPasswordChange(email, otp, values.password);
             if(result){
@@ -26,8 +26,8 @@ const NewPasswordForm = ()=>{
                     showConfirmButton: false,
                     timer: 1500
                 });
-                sessionStorage.removeItem("emailuseroz");
-                sessionStorage.removeItem("otpuseroz");
+                localStorage.removeItem("emailuseroz");
+                localStorage.removeItem("otpuseroz");
                 navigate('/login')
             }
         } catch (error) {

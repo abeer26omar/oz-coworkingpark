@@ -26,7 +26,8 @@ const Header = ({ showBlackNav, show }) => {
   const [bookingPlaces, setBookingPlaces] = useState([]);
   const [subBranchMenu, setSubBranchMenu] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const { token, handelChangeBranch, branchId } = useContext(AuthContext);
+
+  const { token, handelChangeBranch, branchId, userId } = useContext(AuthContext);
   const [closeNav, setCloseNav] = useState(true);
   const Navigate = useNavigate();
 
@@ -68,7 +69,7 @@ const Header = ({ showBlackNav, show }) => {
   }, [token]);
 
   useEffect(() => {
-    getAmenitiesGroup(token)
+    getAmenitiesGroup(token, userId, branchId)
       .then((res) => {
         setBookingPlaces(res);
       })

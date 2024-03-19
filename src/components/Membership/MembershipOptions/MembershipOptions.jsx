@@ -80,13 +80,13 @@ const MembershipOptions = () => {
             time_count: time_count,
             discount: discount
        } 
-       sessionStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
+       localStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
        setPlanId(id);
        if(token){
             if(time === 'day'){
                 setShow(true);
             }else{
-                if(id !== sessionStorage.getItem('userPlanIdOZ')){
+                if(id !== localStorage.getItem('userPlanIdOZ')){
                     upgradeYourPlan(id);
                 }else{
                     Modal.error({
@@ -174,7 +174,7 @@ const MembershipOptions = () => {
                                                                         <Button 
                                                                             tagType='link'
                                                                             to={`/singleMember/${item.id}`}
-                                                                            onClick={()=>{sessionStorage.setItem('membership', typeDetials?.name)}}
+                                                                            onClick={()=>{localStorage.setItem('membership', typeDetials?.name)}}
                                                                             className='ex_link mb-3'>{'explore more'}</Button>
                                                                         <Button 
                                                                             tagType='link'

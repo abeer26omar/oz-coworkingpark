@@ -28,7 +28,7 @@ const ShowAvaliablesModal = (props) => {
     };
 
     const confirmBookingData = () => {
-        const userData = JSON.parse(sessionStorage.getItem("BookingOZDetails"));
+        const userData = JSON.parse(localStorage.getItem("BookingOZDetails"));
         const updatedUserData = {
             ...userData,
             time: {

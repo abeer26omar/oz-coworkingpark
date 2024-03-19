@@ -8,8 +8,7 @@ import "aos/dist/aos.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from './apis/context/SiteDataContext';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { motion, useScroll, useSpring } from "framer-motion";
-import AnimatedCursor from "react-animated-cursor";
+import { useScroll, useSpring } from "framer-motion";
 import RootLayout from './pages/RootLayout';
 import Membership from "./pages/Membership";
 import Login from "./components/Auth/Login";
@@ -76,7 +75,6 @@ import CoursesHistory from './components/OzKnowledge/CoursesHistory';
 import OZCourses from './components/OzKnowledge/OZCourses';
 import CourseDetails from './components/OzKnowledge/CourseDetails/CourseDetails';
 import RouterGuard from './apis/RouterGuard';
-import HttpInterceptor from './apis/LoadingInterceptor';
 import MoreClasses from "./components/ZeeSudio/MoreClasses";
 import OurTrainerPage from "./components/ZeeSudio/OurTrainerPage";
 import GymDetails from "./components/ZeeSudio/GymDetails";
@@ -193,15 +191,7 @@ function App() {
     return (
       <>
       <QueryClientProvider client={queryClient}>
-      {/* <motion.div className="progress-bar" style={{ scaleX }} />
-      <AnimatedCursor 
-        innerSize={8}
-        outerSize={45}
-        color='208, 223, 0'
-        outerAlpha={0.2}
-        innerScale={0.7}
-        outerScale={1.5}
-      /> */}
+      {/* <motion.div className="progress-bar" style={{ scaleX }} />*/}
         <RouterProvider router={router}/>
       </QueryClientProvider>
       </>

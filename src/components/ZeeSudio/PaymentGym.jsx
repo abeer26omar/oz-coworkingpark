@@ -16,7 +16,7 @@ const PaymentGym = () => {
   const [current, setCurrent] = useState(0);
   const [bookingResult, setBookingResult] = useState({});
   const [paymentDetails, setPaymentDetails] = useState(
-    JSON.parse(sessionStorage.getItem("OZgymCourseDetails"))
+    JSON.parse(localStorage.getItem("OZgymCourseDetails"))
   );
   const [inputValue, setInputValue] = useState();
 
@@ -81,7 +81,7 @@ const PaymentGym = () => {
   };
  
   useEffect(() => {
-    setPaymentDetails(JSON.parse(sessionStorage.getItem("OZgymCourseDetails")));
+    setPaymentDetails(JSON.parse(localStorage.getItem("OZgymCourseDetails")));
   }, []);
 
   const items = steps.map((item) => ({

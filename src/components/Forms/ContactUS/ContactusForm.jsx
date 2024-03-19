@@ -14,14 +14,14 @@ const ContactusForm = ()=>{
     const [code, setCode] = useState(false);
     const siteConfig = useContext(SiteConfigContext);
     const { userProfileDate } = useContext(AuthContext);
-    const [type, setType] = useState(sessionStorage.getItem('MembershipInquireOZ'));
+    const [type, setType] = useState(localStorage.getItem('MembershipInquireOZ'));
 
     const optionList = siteConfig && Object.entries(siteConfig.profile_dropdown?.fid_4.data).map(item=>{
         return { value: item.id , label: item.name }
     });
 
     useEffect(()=>{
-        setType(sessionStorage.getItem('MembershipInquireOZ'))
+        setType(localStorage.getItem('MembershipInquireOZ'))
     },[]);
 
     const handleSubmit = async (values) => {

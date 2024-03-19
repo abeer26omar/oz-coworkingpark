@@ -13,11 +13,11 @@ const SpaceDetails = ({venueDetails}) => {
 
     const handleChange = (data)=>{
         setSelectedOptions(data);
-        sessionStorage.setItem("BookingOZServices", JSON.stringify(data));
+        localStorage.setItem("BookingOZServices", JSON.stringify(data));
     }
     
     useEffect(()=>{
-        const data = JSON.parse(sessionStorage.getItem("BookingOZServices"));
+        const data = JSON.parse(localStorage.getItem("BookingOZServices"));
         if(data){
             setSelectedOptions(data)
         }

@@ -16,7 +16,7 @@ const BookCourse = () => {
   const [bookingResult, setBookingResult] = useState({});
   const [messageApi, contextHolder] = message.useMessage();
   const [paymentDetails, setPaymentDetails] = useState(
-    JSON.parse(sessionStorage.getItem("OZCourseDetails"))
+    JSON.parse(localStorage.getItem("OZCourseDetails"))
   );
   const [inputValue, setInputValue] = useState();
 
@@ -80,7 +80,7 @@ const BookCourse = () => {
   };
  
   useEffect(() => {
-    setPaymentDetails(JSON.parse(sessionStorage.getItem("OZCourseDetails")));
+    setPaymentDetails(JSON.parse(localStorage.getItem("OZCourseDetails")));
   }, []);
 
   const items = steps.map((item) => ({

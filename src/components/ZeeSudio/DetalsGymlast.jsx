@@ -30,7 +30,7 @@ function DetalsGymlast({ details, pending }) {
     };
 
     if (token) {
-      sessionStorage.setItem(
+      localStorage.setItem(
         "OZgymCourseDetails",
         JSON.stringify(gymCourseDetails)
       );

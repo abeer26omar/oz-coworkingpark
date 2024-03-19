@@ -4,10 +4,10 @@ import Paragraph from  '../../UI/Paragraph';
 
 const InvoiceModal = ({show, onHide}) => {
 
-    const [details, setDetails] = useState(JSON.parse(sessionStorage.getItem('invoiceOZ')));
+    const [details, setDetails] = useState(JSON.parse(localStorage.getItem('invoiceOZ')));
 
     useEffect(()=>{
-        const data = JSON.parse(sessionStorage.getItem('invoiceOZ'));
+        const data = JSON.parse(localStorage.getItem('invoiceOZ'));
         setDetails(data);
     },[])
 

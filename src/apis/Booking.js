@@ -11,7 +11,7 @@ export const getAmenitiesGroup = async (token, user_id, branch_id) => {
 
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/get-amenitie-groups?access_token=${token}&skip=true`,
+        url: `${process.env.REACT_APP_API_URL}/api/get-amenitie-groups?access_token=${token}`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,

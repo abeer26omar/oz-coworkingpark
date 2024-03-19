@@ -18,7 +18,7 @@ import { Modal } from 'antd';
 const MemberPackage = () => {
     const {id} = useParams();
     const [packageDetails, setPackageDetails] = useState({});
-    const [membershipType, setMemebershipType] = useState(sessionStorage.getItem('membership'))
+    const [membershipType, setMemebershipType] = useState(localStorage.getItem('membership'))
     const { token, userId } = useContext(AuthContext);
     const [show, setShow] = useState(false);
 
@@ -86,12 +86,12 @@ const MemberPackage = () => {
             time_count: time_count,
             discount: discount
        }
-        sessionStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
+        localStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
         if(token){
             if(time === 'day'){
                 setShow(true)
             }else{
-                if(id !== sessionStorage.getItem('userPlanIdOZ')){
+                if(id !== localStorage.getItem('userPlanIdOZ')){
                     upgradeYourPlan(id);
                 }else{
                     Modal.error({

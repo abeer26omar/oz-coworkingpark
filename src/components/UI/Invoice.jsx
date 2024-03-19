@@ -3,7 +3,7 @@ import Paragraph from "./Paragraph";
 
 const Invoice = () => {
 
-    const [invoice, setInvoice] = useState(JSON.parse(sessionStorage.getItem('OZInvoice')));
+    const [invoice, setInvoice] = useState(JSON.parse(localStorage.getItem('OZInvoice')));
 
     const setDate = (roomdate) => {
       const parts = roomdate.split(/[- :]/);
@@ -66,7 +66,7 @@ const Invoice = () => {
                             <h2>{invoice?.paymentMethod ==='cash' ? 'Amount Due' : 'Receipt'} 
                               <br/> 
                               <span style={{
-                                fontFamily: 'questrial'
+                                fontFamily: 'Roboto'
                               }}>#</span>{invoice.invoice_info?.invoice_no}</h2>
                             <div className="d-flex justify-content-between">
                               <div>

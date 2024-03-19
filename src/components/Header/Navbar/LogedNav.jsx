@@ -168,7 +168,7 @@ const LogedNav = ({showBlackNav, token, show})=>{
                 <li  className="li_img border_profile_bottom">
                     <img className='rounded-circle' alt='profile' width='80px' height='80px' src={userProfileDate?.avatar || Profile}/>
                     <div className='info_profile ps-3'> 
-                        <Button className='name_profile p-0 text-start' to={'/profile'} tagType='link'>{userProfileDate?.name}</Button>
+                        <Button className='name_profile p-0 text-start' to={'/profile'} tagType='link'>{userProfileDate?.first_name} {userProfileDate?.last_name}</Button>
                         <Paragraph className='email mb-0 text-center'>{userProfileDate?.email}</Paragraph>
                     </div>
                 </li> 

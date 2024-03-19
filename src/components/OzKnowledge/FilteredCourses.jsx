@@ -32,7 +32,7 @@ const FilteredCourses = () => {
     const { token } = useContext(AuthContext);
 
     useEffect(()=>{
-        const categoryIds = sessionStorage.getItem('coursesIdsOz').split(',');
+        const categoryIds = localStorage.getItem('coursesIdsOz').split(',');
         const numArray = categoryIds.map(Number);
         setCategoryId(numArray);
         setCategoryIds(numArray);

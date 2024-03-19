@@ -15,9 +15,9 @@ const LoginForm = ({profile, provider})=>{
     const [userInfo, setUSerInfo] = useState({});
     const { handleLogin } = useContext(AuthContext);
     const [notificationToken, setNotificationToken] = useState('');
-    const [previousLocation, setPreviousLocation] = useState(sessionStorage.getItem('prevLocationOZ'));
+    const [previousLocation, setPreviousLocation] = useState(localStorage.getItem('prevLocationOZ'));
     useEffect(() => {
-      setPreviousLocation(sessionStorage.getItem('prevLocationOZ'));
+      setPreviousLocation(localStorage.getItem('prevLocationOZ'));
     }, []);
     
     useEffect(()=>{
@@ -54,12 +54,12 @@ const LoginForm = ({profile, provider})=>{
             if(result){
                 try{
                     const response = await getMyPlans(result.access_token, result.user_id, signal);
-                    sessionStorage.setItem('userPlanIdOZ', response['active'][0]?.id);
+                    localStorage.setItem('userPlanIdOZ', response['active'][0]?.id);
                 }catch(error){}
             }
             if(prevRoute){
                 navigate('/');
-                sessionStorage.removeItem('prevLocationOZ')
+                localStorage.removeItem('prevLocationOZ')
             }else{
                 navigate(-1);
             }

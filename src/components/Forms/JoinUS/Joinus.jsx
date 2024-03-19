@@ -12,14 +12,14 @@ import { Select } from 'antd';
 
 const Joinus = () => {
 
-    const [plan, setPlan] = useState(JSON.parse(sessionStorage.getItem('selectedPlanOZ')));
+    const [plan, setPlan] = useState(JSON.parse(localStorage.getItem('selectedPlanOZ')));
     const [swalProps, setSwalProps] = useState({});
     const siteConfig = useContext(SiteConfigContext);
     const { userProfileDate } = useContext(AuthContext)
     const [userInfo, setUSerInfo] = useState(userProfileDate);
 
     useEffect(()=>{
-        const planDetails = JSON.parse(sessionStorage.getItem('selectedPlanOZ'));
+        const planDetails = JSON.parse(localStorage.getItem('selectedPlanOZ'));
         setPlan(planDetails);
     },[]);
 

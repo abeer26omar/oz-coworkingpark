@@ -112,10 +112,10 @@ const MyBookingDetails = () => {
             },
             numberOfPeople: booking.guests,
             spaceDetails: booking.venueData,
-            services: JSON.parse(sessionStorage.getItem("BookingOZServices"))
+            services: JSON.parse(localStorage.getItem("BookingOZServices"))
         };
-        sessionStorage.setItem("BookingOZDetails", JSON.stringify(data));
-        sessionStorage.setItem("BookingOZDetailsId", JSON.stringify(id));
+        localStorage.setItem("BookingOZDetails", JSON.stringify(data));
+        localStorage.setItem("BookingOZDetailsId", JSON.stringify(id));
 
         navigate(`/RescheduleBooking/${booking.venueData?.id}`);
     }

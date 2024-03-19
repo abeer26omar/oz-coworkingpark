@@ -15,7 +15,7 @@ const ProfileActions = ({details, canceled}) => {
             checkIn: eventData?.check_in_formmated,
             checkOut: eventData?.check_out_formmated
         }
-        sessionStorage.setItem('OZInvoice', JSON.stringify(data));
+        localStorage.setItem('OZInvoice', JSON.stringify(data));
     }
 
     return (

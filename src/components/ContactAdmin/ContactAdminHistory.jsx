@@ -27,7 +27,7 @@ const ContactAdminHistory = () => {
     };
 
     const getDetails = (item) => {
-        sessionStorage.setItem('replydetailsOZ', JSON.stringify(item))
+        localStorage.setItem('replydetailsOZ', JSON.stringify(item))
         navigate('/replydetails');
     }
     if(isPending){

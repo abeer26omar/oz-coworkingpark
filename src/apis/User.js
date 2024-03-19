@@ -73,7 +73,7 @@ export const updateUserInfo = async ({
     hobbies,
     interest
     }) => {
-    const token = sessionStorage.getItem('TokenOZ');
+    const token = localStorage.getItem('TokenOZ');
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
     formData.append('birthday', birthday);
@@ -105,7 +105,7 @@ return response.data.data;
 
 export const RequestUpdateUserInfo = async (key, old_value, new_value, otp) => {
 
-    const token = sessionStorage.getItem('TokenOZ');
+    const token = localStorage.getItem('TokenOZ');
     const formData = new FormData();
         formData.append('server_key', process.env.REACT_APP_SERVER_KEY)
         formData.append('key', key);

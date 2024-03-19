@@ -9,7 +9,7 @@ const KnowledgeDescription = ({ categories, info, isPending }) => {
   const navigate = useNavigate();
 
   const HandelCourses = (id, ids) => {
-    sessionStorage.setItem('coursesIdsOz', ids)
+    localStorage.setItem('coursesIdsOz', ids)
     navigate(`/courses/${id}`);
   };
 

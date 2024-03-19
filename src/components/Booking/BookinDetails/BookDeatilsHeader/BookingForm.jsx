@@ -10,7 +10,7 @@ import {checkAvailability} from '../../../../apis/Booking';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import ShowAvaliablesModal from './ShowAvaliablesModal';
 
-const BookingForm = ({venueDetails, token, reschedule, bookingId}) => {
+const BookingForm = ({venueDetails, token, reschedule}) => {
 
     const [startDate, setStartDate] = useState(null);
     const [selectedStartTime, setSelectedStartTime] = useState(null);
@@ -48,7 +48,7 @@ const BookingForm = ({venueDetails, token, reschedule, bookingId}) => {
         try{
             if((startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
                 const bookingData  = {
-                    id: JSON.parse(sessionStorage.getItem('BookingOZDetailsId')),
+                    id: JSON.parse(localStorage.getItem('BookingOZDetailsId')),
                     date: startDate,
                     time: {
                         start: selectedStartTime,
@@ -56,9 +56,9 @@ const BookingForm = ({venueDetails, token, reschedule, bookingId}) => {
                     },
                     numberOfPeople: counter,
                     spaceDetails: venueDetails,
-                    services: JSON.parse(sessionStorage.getItem("BookingOZServices"))
+                    services: JSON.parse(localStorage.getItem("BookingOZServices")),
                 };
-                sessionStorage.setItem("BookingOZDetails", JSON.stringify(bookingData));
+                localStorage.setItem("BookingOZDetails", JSON.stringify(bookingData));
                 if(token){
                     const dateObject = new Date(startDate);
                     const formattedDate = dateObject.toISOString().substring(0, 10);
@@ -107,7 +107,7 @@ const BookingForm = ({venueDetails, token, reschedule, bookingId}) => {
     };
 
     useEffect(()=>{
-        const data = JSON.parse(sessionStorage.getItem("BookingOZDetails"));
+        const data = JSON.parse(localStorage.getItem("BookingOZDetails"));
         if(data){
             setStartDate(new Date(data.date));
             setSelectedStartTime(new Date(data.time.start));
@@ -117,7 +117,7 @@ const BookingForm = ({venueDetails, token, reschedule, bookingId}) => {
     },[userNewTimeInfo]);
 
     const updateTimeInfo = (data) => {
-        sessionStorage.setItem("BookingOZDetails", JSON.stringify(data));
+        localStorage.setItem("BookingOZDetails", JSON.stringify(data));
         setUserNewTimeInfo(data);
     };
 
@@ -215,10 +215,9 @@ const BookingForm = ({venueDetails, token, reschedule, bookingId}) => {
                                     <div className="bookbottom__select active" data-target="roomType">
                                         <div className="bookbottom__select-text ">
                                             <div className="position-relative">
-                                                <div className="time-container px-xl-4 px-lg-2">
+                                                <div className="time-container d-flex px-xl-4 px-lg-2">
                                                     {selectedEndTime ? (
                                                             <div className="d-flex justify-content-evenly align-items-center">
-                                                                <p className='mb-0'>
                                                                     <DatePicker
                                                                         onChange={handleStartTimeChange}
                                                                         showTimeSelect
@@ -229,12 +228,11 @@ const BookingForm = ({venueDetails, token, reschedule, bookingId}) => {
                                                                         selectsStart
                                                                         startDate={selectedStartTime}
                                                                         endDate={selectedEndTime}
-                                                                        fixedHeight
+                                                                        
                                                                         placeholderText={selectedStartTime.toLocaleTimeString([],{ hour: 'numeric', minute: 'numeric' })}
                                                                         className="place-text"
-                                                                    >
-                                                                    </DatePicker>
-                                                                </p>
+                                                                    />
+                                                                    
                                                                 <p className="mb-0 mx-2">-</p>
                                                                 <p className="place-text mb-0">{selectedEndTime.toLocaleTimeString([],{ hour: 'numeric', minute: 'numeric' })}</p>
                                                             </div>

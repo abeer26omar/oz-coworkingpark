@@ -44,7 +44,7 @@ const CourseDetails = () => {
       };
     
       if (token) {
-        sessionStorage.setItem(
+        localStorage.setItem(
           "OZCourseDetails",
           JSON.stringify(gymCourseDetails)
         );

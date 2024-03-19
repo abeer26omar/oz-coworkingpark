@@ -4,10 +4,10 @@ import Paragraph from '../UI/Paragraph';
 
 const ContactAdminReply = () => {
 
-    const [details, setDetails] = useState(JSON.parse(sessionStorage.getItem('replydetailsOZ')));
+    const [details, setDetails] = useState(JSON.parse(localStorage.getItem('replydetailsOZ')));
 
     useEffect(()=>{
-        setDetails(JSON.parse(sessionStorage.getItem('replydetailsOZ')))
+        setDetails(JSON.parse(localStorage.getItem('replydetailsOZ')))
     },[]);
 
     const setDate = (roomdate) => {

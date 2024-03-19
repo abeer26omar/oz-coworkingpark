@@ -18,10 +18,10 @@ import { Modal } from "antd";
 
 const BookingSummary = () => {
   const [bookingData, setBookingData] = useState(
-    JSON.parse(sessionStorage.getItem("BookingOZDetails"))
+    JSON.parse(localStorage.getItem("BookingOZDetails"))
   );
   const [bookingService, setBookingService] = useState(
-    JSON.parse(sessionStorage.getItem("BookingOZServices"))
+    JSON.parse(localStorage.getItem("BookingOZServices"))
   );
   const [branch, setBransh] = useState();
   const [show, setShow] = useState(false);
@@ -35,8 +35,8 @@ const BookingSummary = () => {
   const reschedule = searchParams.get("reschedule");
 
   useEffect(() => {
-    setBookingData(JSON.parse(sessionStorage.getItem("BookingOZDetails")));
-    setBookingService(JSON.parse(sessionStorage.getItem("BookingOZServices")));
+    setBookingData(JSON.parse(localStorage.getItem("BookingOZDetails")));
+    setBookingService(JSON.parse(localStorage.getItem("BookingOZServices")));
   }, []);
 
   const steps = [
@@ -171,9 +171,9 @@ const BookingSummary = () => {
             setTimeApi(bookingData.time.end)
             );
           if (result) {
-            sessionStorage.removeItem("BookingOZDetails");
-            sessionStorage.removeItem("BookingOZServices");
-            sessionStorage.removeItem("BookingOZDetailsId");
+            localStorage.removeItem("BookingOZDetails");
+            localStorage.removeItem("BookingOZServices");
+            localStorage.removeItem("BookingOZDetailsId");
             Modal.success({
               title: result.status,
               content: result.message,
@@ -197,9 +197,9 @@ const BookingSummary = () => {
             setTimeApi(bookingData.time.end)
           );
           if (result) {
-            sessionStorage.removeItem("BookingOZDetails");
-            sessionStorage.removeItem("BookingOZServices");
-            sessionStorage.removeItem("BookingOZDetailsId");
+            localStorage.removeItem("BookingOZDetails");
+            localStorage.removeItem("BookingOZServices");
+            localStorage.removeItem("BookingOZDetailsId");
             Modal.success({
               title: result.status,
               content: result.message,
@@ -218,6 +218,7 @@ const BookingSummary = () => {
   return (
     <>
       <section className="summary position-relative">
+        {console.log(bookingData)}
         {/* <div className="img_float">
                     <img
                         type="img"
@@ -419,7 +420,7 @@ const BookingSummary = () => {
                                   />
                                 </svg>
                                 <span className='ms-3'>{bookingData?.numberOfPeople} People</span>
-                                </li>
+                              </li>
                                                             <li>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                                                 <path d="M17.3327 9.33333C17.3327 10.0697 16.7357 10.6667 15.9993 10.6667C15.263 10.6667 14.666 10.0697 14.666 9.33333C14.666 8.59695 15.263 8 15.9993 8C16.7357 8 17.3327 8.59695 17.3327 9.33333Z" stroke="#BDBDBD" stroke-width="1.5"/>
@@ -555,7 +556,9 @@ const BookingSummary = () => {
 
                                                     <div className="col-lg-6 col-md-6 col-sm-12 order-summary">
                                                         <div className="order-details">
-                                                            <h2>Amount Due<br/> #1123334</h2>
+                                                            <h2>Amount Due<br/><span style={{
+                                                              fontFamily: 'Roboto'
+                                                            }}>#</span>1123334</h2>
                                                             <div
                                                                 className="d-flex align-items-center justify-content-between">
                                                                 <span
