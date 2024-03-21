@@ -8,11 +8,11 @@ import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 const ChangePassword = () => {
 
     const [swalProps, setSwalProps] = useState({});
-    const { userProfileDate } = useContext(AuthContext)
+    const { userProfileData } = useContext(AuthContext)
 
     const changePasswordInfo = async (values)=>{
         try {
-            const result = await changePassword(userProfileDate.email, values.currentPassword, values.newPassword);
+            const result = await changePassword(userProfileData.email, values.currentPassword, values.newPassword);
             setSwalProps({
                 show: true,
                 icon: 'success',
@@ -39,7 +39,7 @@ const ChangePassword = () => {
         <>
             <Formik
                 initialValues={{
-                    email: userProfileDate ? userProfileDate.email : '',
+                    email: userProfileData ? userProfileData.email : '',
                     currentPassword: '',
                     newPassword: '',
                     confirmPassword: '',

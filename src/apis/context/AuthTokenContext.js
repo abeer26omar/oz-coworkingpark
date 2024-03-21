@@ -6,21 +6,21 @@ const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('TokenOZ'));
     const [userId, setUserId] = useState(localStorage.getItem('userIdOZ'));
     const [activeUserId, setActiveUserId] = useState(localStorage.getItem('activeUserOZ'));
-    const [userProfileDate, setUserProfileData] = useState(JSON.parse(localStorage.getItem('userProfileDate')));
+    const [userProfileData, setUserProfileData] = useState(JSON.parse(localStorage.getItem('userProfileData')));
     const [branchId, setBranchId] = useState(localStorage.getItem('branchIdOZ'));
 
     useEffect(() => {
         const storedToken = localStorage.getItem('TokenOZ');
         const storedUserId = localStorage.getItem('userIdOZ');
         const storedActiveUserId = localStorage.getItem('activeUserOZ');
-        const storedUserProfileDate = JSON.parse(localStorage.getItem('userProfileDate'));
+        const storeduserProfileData = JSON.parse(localStorage.getItem('userProfileData'));
         const storedBranchId = localStorage.getItem('branchIdOZ');
 
         if (storedToken) {
             setToken(storedToken);
             setUserId(storedUserId);
             setActiveUserId(storedActiveUserId);
-            setUserProfileData(storedUserProfileDate);
+            setUserProfileData(storeduserProfileData);
         }
         setBranchId(storedBranchId)
     }, [token, userId, activeUserId, branchId]);
@@ -30,7 +30,7 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem('TokenOZ', loginDetails.access_token);
         localStorage.setItem("userIdOZ", loginDetails.user_id);
         localStorage.setItem("activeUserOZ", loginDetails.account_data.active);
-        localStorage.setItem("userProfileDate", JSON.stringify({
+        localStorage.setItem("userProfileData", JSON.stringify({
             name: loginDetails.account_data.name,
             email: loginDetails.account_data.email,
             avatar: loginDetails.account_data.avatar,
@@ -63,7 +63,7 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem('TokenOZ', authDetails.access_token);
         localStorage.setItem("userIdOZ", authDetails.user_id);
         localStorage.setItem("activeUserOZ", authDetails.active);
-        localStorage.setItem("userProfileDate", JSON.stringify({
+        localStorage.setItem("userProfileData", JSON.stringify({
             name: userDetails?.name,
             email: userDetails?.email,
             avatar: userDetails?.avatar,
@@ -86,7 +86,7 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem('TokenOZ');
         localStorage.removeItem('userIdOZ');
         localStorage.removeItem('activeUserOZ');
-        localStorage.removeItem('userProfileDate')
+        localStorage.removeItem('userProfileData');
         setToken('');
         setUserId('');
         setActiveUserId('');
@@ -94,13 +94,17 @@ const AuthProvider = ({ children }) => {
     };
 
     const modifyUserData = (userDetails) => {
-        localStorage.setItem("userProfileDate", JSON.stringify({
+        localStorage.setItem("userProfileData", JSON.stringify({
             name: userDetails?.name,
             email: userDetails?.email,
             avatar: userDetails?.avatar,
             first_name: userDetails?.first_name,
             last_name: userDetails?.last_name,
-            phone_number: userDetails?.phone_number
+            phone_number: userDetails?.phone_number,
+            membership_discount_roles: userDetails?.membership_discount_roles,
+            membership_packages: userDetails?.membership_packages,
+            zee_knowledge: userDetails?.zee_knowledge,
+            zee_studio: userDetails?.zee_studio
         }));
 
         setUserProfileData({
@@ -109,7 +113,11 @@ const AuthProvider = ({ children }) => {
             avatar: userDetails?.avatar,
             first_name: userDetails?.first_name,
             last_name: userDetails?.last_name,
-            phone_number: userDetails?.phone_number
+            phone_number: userDetails?.phone_number,
+            membership_discount_roles: userDetails?.membership_discount_roles,
+            membership_packages: userDetails?.membership_packages,
+            zee_knowledge: userDetails?.zee_knowledge,
+            zee_studio: userDetails?.zee_studio
         });
     }
 
@@ -124,7 +132,7 @@ const AuthProvider = ({ children }) => {
             userId, 
             branchId, 
             activeUserId, 
-            userProfileDate, 
+            userProfileData, 
             handleLogin, 
             handelRegister, 
             handleLogout, 

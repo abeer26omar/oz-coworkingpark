@@ -35,7 +35,7 @@ const LogedNav = ({showBlackNav, token, show})=>{
         getList();
     };
 
-    const { handleLogout, userProfileDate } = useContext(AuthContext);
+    const { handleLogout, userProfileData } = useContext(AuthContext);
 
     const handelLogout = async () => {
         SetOpen(!Open);
@@ -166,10 +166,10 @@ const LogedNav = ({showBlackNav, token, show})=>{
             key: '1',
             label: (
                 <li  className="li_img border_profile_bottom">
-                    <img className='rounded-circle' alt='profile' width='80px' height='80px' src={userProfileDate?.avatar || Profile}/>
+                    <img className='rounded-circle' alt='profile' width='80px' height='80px' src={userProfileData?.avatar || Profile}/>
                     <div className='info_profile ps-3'> 
-                        <Button className='name_profile p-0 text-start' to={'/profile'} tagType='link'>{userProfileDate?.first_name} {userProfileDate?.last_name}</Button>
-                        <Paragraph className='email mb-0 text-center'>{userProfileDate?.email}</Paragraph>
+                        <Button className='name_profile p-0 text-start' to={'/profile'} tagType='link'>{userProfileData?.first_name} {userProfileData?.last_name}</Button>
+                        <Paragraph className='email mb-0 text-center'>{userProfileData?.email}</Paragraph>
                     </div>
                 </li> 
             )
@@ -242,12 +242,12 @@ const LogedNav = ({showBlackNav, token, show})=>{
                     items: itemsProfile
                 }}
                 trigger={['click']}
-                className='notifications_icon'
+                className='notifications_icon mx-2'
             >
                 <a onClick={(e) => e.preventDefault()} style={{
                     cursor: 'pointer'
                 }}>
-                    <span className='user_name me-2'>{userProfileDate?.first_name}</span>
+                    <span className='user_name me-2'>{userProfileData?.first_name}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z" stroke={showBlackNav ? '#fff' : 'black'} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M4.27344 18.3457C4.27344 18.3457 6.50246 15.5 12.0024 15.5C17.5024 15.5 19.7315 18.3457 19.7315 18.3457" stroke={showBlackNav ? '#fff' : 'black'} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

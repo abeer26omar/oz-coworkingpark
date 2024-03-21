@@ -8,7 +8,7 @@ import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import RequestFormModal from '../../BookingSpace/RequestFormModal';
 import AddToFavButton from '../../../UI/AddToFavButton';
 
-const BookingDetailsHeader = ({venueDetails}) => {
+const BookingDetailsHeader = ({venueDetails, services}) => {
 
     const [showRequestModal, setShowRequestModal] = useState(false);
     const { token } = useContext(AuthContext);
@@ -36,7 +36,7 @@ const BookingDetailsHeader = ({venueDetails}) => {
                         )}
                     </div>
                 </MainHeaderWrapper>
-                {venueDetails.online_booking && <BookingForm venueDetails={venueDetails} token={token}/>}
+                {venueDetails.online_booking && <BookingForm venueDetails={venueDetails} token={token} services={services}/>}
             </div>
             <RequestFormModal 
                 show={showRequestModal}

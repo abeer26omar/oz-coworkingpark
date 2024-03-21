@@ -9,8 +9,10 @@ import Toast from 'react-bootstrap/Toast';
 import {checkAvailability} from '../../../../apis/Booking';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import ShowAvaliablesModal from './ShowAvaliablesModal';
+import moment from 'moment';
+import { Modal } from 'antd';
 
-const BookingForm = ({venueDetails, token, reschedule}) => {
+const BookingForm = ({venueDetails, reschedule, services}) => {
 
     const [startDate, setStartDate] = useState(null);
     const [selectedStartTime, setSelectedStartTime] = useState(null);
@@ -22,8 +24,10 @@ const BookingForm = ({venueDetails, token, reschedule}) => {
     const [avaliableDate, setAvaliableDates] = useState([]);
     const [showAvailable, setShowAvailable] = useState(false);
     const navigate = useNavigate();
-    const [userNewTimeInfo, setUserNewTimeInfo] = useState(null)
-    const { userId } = useContext(AuthContext);
+    const [userNewTimeInfo, setUserNewTimeInfo] = useState(null);
+    const { userId, userProfileData, token } = useContext(AuthContext);
+    const [amentiyGroupId, setAmenityGroupId] = useState('');
+    const [discountAmentiyGroupId, setDiscountAmentiyGroupId] = useState('');
 
     const handleDateChange = (date) => {
         const timezoneOffset = date.getTimezoneOffset();
@@ -47,44 +51,188 @@ const BookingForm = ({venueDetails, token, reschedule}) => {
         e.preventDefault();
         try{
             if((startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
-                const bookingData  = {
-                    id: JSON.parse(localStorage.getItem('BookingOZDetailsId')),
-                    date: startDate,
-                    time: {
-                        start: selectedStartTime,
-                        end: selectedEndTime
-                    },
-                    numberOfPeople: counter,
-                    spaceDetails: venueDetails,
-                    services: JSON.parse(localStorage.getItem("BookingOZServices")),
-                };
-                localStorage.setItem("BookingOZDetails", JSON.stringify(bookingData));
                 if(token){
-                    const dateObject = new Date(startDate);
-                    const formattedDate = dateObject.toISOString().substring(0, 10);
-                    const timeStart = new Date(selectedStartTime);
-                    const timeStartStamp = Math.floor(timeStart.getTime() / 1000);
-                    const timeEnd = new Date(selectedEndTime);
-                    const timeEndStamp = Math.floor(timeEnd.getTime() / 1000);
-                    const result = await checkAvailability(token, userId, venueDetails.id, venueDetails.buffering_time, formattedDate, timeStartStamp, timeEndStamp);
-                    if(result.conflict.length === 0){
-                        if(reschedule){
-                            navigate('/bookingDetails/bookNow?reschedule=true');
-                        }else{
-                            navigate('/bookingDetails/bookNow');
-                        }
-                    }else{
-                        setShowAvailable(true);
-                        setAvaliableDates(result.available);
+                    if(amentiyGroupId){
+                        const hours = calcReservationHours(selectedStartTime, selectedEndTime);
+                        checkForBackage(hours);
+                    }else if(discountAmentiyGroupId){
+                        const discount = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount;
+                        const price = userProfileData?.membership_discount_roles[discountAmentiyGroupId].price;
+                        const type = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount_type === 'percentage' ? '%' : '';
+
+                        return Modal.info({
+                            title: 'Membership Package',
+                            content: `Enjoy ${discount} ${type} Off From Room Price`,
+                            footer: true,
+                            centered: true,
+                            closable: true,
+                            maskClosable: true
+                        });
                     }
                 }else{
                     setShow(true);
                 }
+                addUserDetails();
             }else{
-                setShowToast(true)
+                setShowToast(true);
             }
         }catch (error){
 
+        }
+    };
+
+    const calcReservationHours = (start, end) => {
+        const startTime = moment(start, 'h:mm A');
+        const endTime = moment(end, 'h:mm A');
+        
+        const duration = moment.duration(endTime.diff(startTime));
+        
+        const hours = duration.hours();
+        return hours;
+    };
+
+    const addUserDetails = () => {
+        const bookingData  = {
+            id: JSON.parse(localStorage.getItem('BookingOZDetailsId')),
+            date: startDate,
+            time: {
+                start: selectedStartTime,
+                end: selectedEndTime
+            },
+            numberOfPeople: counter,
+            spaceDetails: venueDetails,
+            services: services,
+            price: calcPrice()
+        };
+        localStorage.setItem("BookingOZDetails", JSON.stringify(bookingData));
+    };
+
+    const calcPrice = () => {
+        let Finalprice;
+        if(amentiyGroupId || discountAmentiyGroupId){
+            if(amentiyGroupId){
+                Finalprice = 0;
+            }
+            if(discountAmentiyGroupId){
+                Finalprice = userProfileData?.membership_discount_roles[discountAmentiyGroupId].price;
+            }
+        }
+        else{
+            Finalprice =  venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price;
+        }
+        const service_price = services.reduce((sum, item) => sum + item.price, 0);
+        const total_price = Finalprice + service_price;
+        return JSON.stringify({total_price: total_price, service_price: service_price, booking_price: Finalprice});
+    };
+
+    const checkForBackage = (hours) => {
+        const how_many_hours = userProfileData?.membership_packages[amentiyGroupId].how_many_hours;
+        const max_hours = userProfileData?.membership_packages[amentiyGroupId].max_hours;
+        const used_hours = userProfileData?.membership_packages[amentiyGroupId].used_hours;
+
+        if(how_many_hours === used_hours){
+            if(discountAmentiyGroupId){
+                const discount = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount;
+                const price = userProfileData?.membership_discount_roles[discountAmentiyGroupId].price;
+                const type = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount_type === 'percentage' ? '%' : '';
+
+                return Modal.info({
+                    title: 'Membership Package',
+                    content: `You Have Consumed Your Package Free Hours And Now Enjoy ${discount} ${type} Off From Room Price`,
+                    centered: true,
+                    onOk: checkAvailabileTimes,
+                    okText: 'confirm'
+                });
+            }else{
+                return Modal.warning({
+                    title: 'Membership Package',
+                    content: `You Have Consumed Your Package Free Hours`,
+                    centered: true,
+                    onOk: checkAvailabileTimes,
+                    okText: 'confirm'
+                });
+            }
+        }else{
+            if(max_hours){
+                if(hours > max_hours){
+                    return Modal.warning({
+                        title: 'Membership Package',
+                        content: `You Have Only ${max_hours} Hours For Reservation In Your package`,
+                        footer: false,
+                        centered: true,
+                        closable: true,
+                        maskClosable: true
+                        // stop booking 
+                    });
+                }else {
+                    return Modal.info({
+                        title: 'Membership Package',
+                        content: `You Have ${max_hours} Hours free For Reservations Included In Your package`,
+                        centered: true,
+                        onOk: checkAvailabileTimes,
+                        okText: 'confirm'
+                    });
+                }
+
+            }else{
+                if(hours > how_many_hours){
+                    return Modal.info({
+                        title: 'Membership Package',
+                        content: `You Have Only ${how_many_hours} Hours For Reservation In Your package`,
+                        footer: false,
+                        centered: true,
+                        closable: true,
+                        maskClosable: true
+                        // stop booking 
+                    });
+                }else {
+                    return Modal.info({
+                        title: 'Membership Package',
+                        content: `You Have ${how_many_hours} Hours free For Reservations Included In Your package`,
+                        centered: true,
+                        onOk: checkAvailabileTimes,
+                        okText: 'confirm'
+                    });
+                }
+            }
+        }
+    };
+
+    const checkAvailabileTimes = async () => {
+        const dateObject = new Date(startDate);
+        const formattedDate = dateObject.toISOString().substring(0, 10);
+        const timeStart = new Date(selectedStartTime);
+        const timeStartStamp = Math.floor(timeStart.getTime() / 1000);
+        const timeEnd = new Date(selectedEndTime);
+        const timeEndStamp = Math.floor(timeEnd.getTime() / 1000);
+        try{
+            const result = await checkAvailability(
+                token, 
+                userId, 
+                venueDetails.id, 
+                venueDetails.buffering_time, 
+                formattedDate, 
+                timeStartStamp, 
+                timeEndStamp);
+                if(result.conflict.length === 0){
+                    if(reschedule){
+                        navigate('/bookingDetails/bookNow?reschedule=true');
+                    }else{
+                        navigate('/bookingDetails/bookNow');
+                    }
+                }else{
+                    setShowAvailable(true);
+                    setAvaliableDates(result.available);
+                }
+        } catch (error){
+            Modal.error({
+                title: error.response.data.status,
+                content: error.response.data.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
+            })
         }
     };
 
@@ -96,7 +244,7 @@ const BookingForm = ({venueDetails, token, reschedule}) => {
         }else{
             setShowTooltip(!showTooltip);
         }
-    }
+    };
 
     const decrement = (event) => {
         event.preventDefault();
@@ -115,6 +263,20 @@ const BookingForm = ({venueDetails, token, reschedule}) => {
             setCounter(data.numberOfPeople);
         }
     },[userNewTimeInfo]);
+
+    useEffect(()=>{
+        if(token){
+            const groupIds = Object.keys(userProfileData?.membership_packages);
+            const discountGroupIds = Object.keys(userProfileData?.membership_discount_roles);
+            const groupId = venueDetails?.amenitie?.group_id.toString();
+            if(groupIds.includes(groupId)) {
+                setAmenityGroupId(groupId);
+            }
+            if(discountGroupIds.includes(groupId)){
+                setDiscountAmentiyGroupId(groupId);
+            }
+        }
+    },[venueDetails, userProfileData]);
 
     const updateTimeInfo = (data) => {
         localStorage.setItem("BookingOZDetails", JSON.stringify(data));
@@ -195,6 +357,7 @@ const BookingForm = ({venueDetails, token, reschedule}) => {
                                         className="bookbottom__datetitle text-center"
                                         selected={startDate}
                                         placeholderText="Select Date"
+                                        minDate={new Date()}
                                         onChange={handleDateChange}
                                         fixedHeight
                                     />
@@ -222,13 +385,12 @@ const BookingForm = ({venueDetails, token, reschedule}) => {
                                                                         onChange={handleStartTimeChange}
                                                                         showTimeSelect
                                                                         showTimeSelectOnly
-                                                                        timeIntervals={15}
+                                                                        timeIntervals={30}
                                                                         timeCaption="Start Time"
                                                                         dateFormat="h:mm aa"
                                                                         selectsStart
                                                                         startDate={selectedStartTime}
                                                                         endDate={selectedEndTime}
-                                                                        
                                                                         placeholderText={selectedStartTime.toLocaleTimeString([],{ hour: 'numeric', minute: 'numeric' })}
                                                                         className="place-text"
                                                                     />
@@ -245,7 +407,7 @@ const BookingForm = ({venueDetails, token, reschedule}) => {
                                                                 onChange={handleStartTimeChange}
                                                                 showTimeSelect
                                                                 showTimeSelectOnly
-                                                                timeIntervals={5}
+                                                                timeIntervals={30}
                                                                 timeCaption="Check In"
                                                                 dateFormat="h:mm aa"
                                                                 selectsStart
@@ -262,7 +424,7 @@ const BookingForm = ({venueDetails, token, reschedule}) => {
                                                                     onChange={handleEndTimeChange}
                                                                     showTimeSelect
                                                                     showTimeSelectOnly
-                                                                    timeIntervals={15}
+                                                                    timeIntervals={30}
                                                                     timeCaption="End Time"
                                                                     dateFormat="h:mm aa"
                                                                     selectsEnd
@@ -318,7 +480,8 @@ const BookingForm = ({venueDetails, token, reschedule}) => {
             </Toast>
             <RequestFormModal 
                 show={show}
-                handleClose={handelHide}/>
+                handleClose={handelHide}
+            />
             <ShowAvaliablesModal 
                 show={showAvailable}
                 onHide={handelAvailableHide}

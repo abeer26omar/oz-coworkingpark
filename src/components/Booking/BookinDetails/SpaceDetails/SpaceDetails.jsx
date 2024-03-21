@@ -3,7 +3,8 @@ import './SpaceDetails.css';
 import Paragraph from '../../../UI/Paragraph';
 import Select from 'react-select';
 
-const SpaceDetails = ({venueDetails}) => {
+const SpaceDetails = ({venueDetails, getServices}) => {
+
     const optionList = (venueDetails.services && venueDetails.services !== null) && 
     venueDetails.services.map(item=>{
         return { value: item.id , label: item.name , price: item.price }
@@ -14,6 +15,7 @@ const SpaceDetails = ({venueDetails}) => {
     const handleChange = (data)=>{
         setSelectedOptions(data);
         localStorage.setItem("BookingOZServices", JSON.stringify(data));
+        getServices(data);
     }
     
     useEffect(()=>{
@@ -21,7 +23,16 @@ const SpaceDetails = ({venueDetails}) => {
         if(data){
             setSelectedOptions(data)
         }
-    },[])
+    },[]);
+
+    const dicountRoules = (price, price_discounted, default_price_per) => {
+        if(price === price_discounted){
+            return (<span className={'priceafter'}>{price} EGP / {default_price_per}</span>)
+        }else if(price > price_discounted){
+            return (<span className='mb-0 '><span className='discount'>{price}</span> {price_discounted} EGP / {default_price_per}</span>)
+        }
+    }
+
     return (
         <>
         {
@@ -62,8 +73,7 @@ const SpaceDetails = ({venueDetails}) => {
                                         Price
                                     </Paragraph>
                                     <div className="price-list">
-                                        {(venueDetails?.price != venueDetails?.price_discounted) && (<span className='discount pe-2'>{venueDetails?.price} EGP / Hour</span>)}
-                                        <span>{venueDetails?.price_discounted} EGP / Hour</span>
+                                        {dicountRoules(venueDetails?.price, venueDetails?.price_discounted, venueDetails?.default_price_per)}
                                     </div>
                                 </div>
                                 <div className="space-facilities mb-5">

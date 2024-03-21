@@ -15,19 +15,17 @@ import TermsAndConditionsModal from "../../../../UI/TermsAndConditionsModal";
 import ShareButton from "../../../../UI/ShareButton";
 import { useSearchParams } from "react-router-dom";
 import { Modal } from "antd";
+import { getUserInfo } from '../../../../../apis/User';
 
 const BookingSummary = () => {
-  const [bookingData, setBookingData] = useState(
-    JSON.parse(localStorage.getItem("BookingOZDetails"))
-  );
-  const [bookingService, setBookingService] = useState(
-    JSON.parse(localStorage.getItem("BookingOZServices"))
-  );
+
+  const [bookingData, setBookingData] = useState(JSON.parse(localStorage.getItem("BookingOZDetails")));
+  const [bookingService, setBookingService] = useState(JSON.parse(localStorage.getItem("BookingOZServices")));
   const [branch, setBransh] = useState();
   const [show, setShow] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [payment, setPayment] = useState(1);
-  const { token, userId, branchId } = useContext(AuthContext);
+  const { token, userId, branchId, modifyUserData } = useContext(AuthContext);
 
   const handelClose = () => setShow(false);
 
@@ -152,14 +150,8 @@ const BookingSummary = () => {
   }, [bookingData, branchId]);
 
   const confirmBookingVenue = async () => {
+    const price = JSON.parse(bookingData.price);
     try {
-      const service_price =
-        bookingService &&
-        bookingService.reduce((total, service) => {
-          return total + service.price;
-        }, 0);
-      const total_price =
-        service_price + bookingData.spaceDetails.price_discounted;
         if(reschedule){
           const result = await rescheduleBooking(
             token,
@@ -179,6 +171,7 @@ const BookingSummary = () => {
               content: result.message,
             });
             handleBookingClick();
+            getUserDataInfo();
           }
         }else{
           const result = await confirmBooking(
@@ -189,9 +182,9 @@ const BookingSummary = () => {
             bookingData.numberOfPeople,
             bookingData.spaceDetails.booking_code,
             bookingService,
-            bookingData.spaceDetails.price_discounted,
-            service_price,
-            total_price,
+            price.booking_price,
+            price.service_price,
+            price.total_price,
             setDateApi(bookingData.date),
             setTimeApi(bookingData.time.start),
             setTimeApi(bookingData.time.end)
@@ -205,6 +198,7 @@ const BookingSummary = () => {
               content: result.message,
             });
             handleBookingClick();
+            getUserDataInfo();
           }
         }
     } catch (error) {
@@ -215,18 +209,19 @@ const BookingSummary = () => {
     }
   };
 
+  const getUserDataInfo = async () => {
+      const controller = new AbortController();
+      const signal = controller.signal;
+      try{
+        const res = await getUserInfo(token, userId, signal);
+        modifyUserData(res['user_data']);
+      }catch(err){
+        console.log(err);
+      }
+  }
   return (
     <>
       <section className="summary position-relative">
-        {console.log(bookingData)}
-        {/* <div className="img_float">
-                    <img
-                        type="img"
-                        src={shape}
-                        alt="shape"
-                        width={'100%'} 
-                        className=""/>
-                </div> */}
         <div className="container-fluid px-70">
           <Tab.Container
             activeKey={steps[activeStep]?.key}
@@ -238,7 +233,9 @@ const BookingSummary = () => {
               ))}
             </Nav>
             <Tab.Content>
-              {steps.map((step) => (
+              {steps.map((step) => {
+                const price = JSON.parse(bookingData.price);
+                return (
                 <Tab.Pane key={step.key} eventKey={step.key}>
                   <h2 className="step-label">{step.label}</h2>
                   {step.key === "summary" && (
@@ -421,20 +418,14 @@ const BookingSummary = () => {
                                 </svg>
                                 <span className='ms-3'>{bookingData?.numberOfPeople} People</span>
                               </li>
-                                                            <li>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                                                <path d="M17.3327 9.33333C17.3327 10.0697 16.7357 10.6667 15.9993 10.6667C15.263 10.6667 14.666 10.0697 14.666 9.33333C14.666 8.59695 15.263 8 15.9993 8C16.7357 8 17.3327 8.59695 17.3327 9.33333Z" stroke="#BDBDBD" stroke-width="1.5"/>
-                                                                <path d="M24 8C21.7909 8 20 6.20914 20 4" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
-                                                                <path d="M24 10.668C21.7909 10.668 20 12.4588 20 14.668" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
-                                                                <path d="M8 8C10.2091 8 12 6.20914 12 4" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
-                                                                <path d="M8 10.668C10.2091 10.668 12 12.4588 12 14.668" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
-                                                                <path d="M5.33398 28.5178H8.34723C9.69504 28.5178 11.0574 28.6583 12.3691 28.9285C14.6894 29.4065 17.1324 29.4645 19.4766 29.085C20.6324 28.8979 21.7687 28.6118 22.7973 28.1154C23.7258 27.6672 24.8632 27.0355 25.6272 26.3279C26.3901 25.6213 27.1846 24.4649 27.7486 23.561C28.2321 22.7859 27.9982 21.8349 27.2334 21.2574C26.3837 20.6159 25.1229 20.616 24.2735 21.2577L21.8639 23.0779C20.93 23.7833 19.9099 24.4327 18.6948 24.6265C18.5487 24.6499 18.3955 24.6711 18.2358 24.6896M18.2358 24.6896C18.1877 24.6952 18.139 24.7005 18.0897 24.7055M18.2358 24.6896C18.4302 24.6479 18.6232 24.5281 18.8043 24.37C19.6619 23.6215 19.7162 22.36 18.9721 21.5242C18.7994 21.3302 18.5974 21.1685 18.3727 21.0345C14.643 18.8099 8.83987 20.5043 5.33398 22.9906M18.2358 24.6896C18.1871 24.7 18.1384 24.7055 18.0897 24.7055M18.0897 24.7055C17.3919 24.7772 16.5755 24.7957 15.6697 24.7102" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
-                                                                <path d="M23.219 13.8856C24 13.1046 24 11.8475 24 9.33333C24 6.81918 24 5.5621 23.219 4.78105M23.219 13.8856C22.4379 14.6667 21.1808 14.6667 18.6667 14.6667H13.3333C10.8192 14.6667 9.5621 14.6667 8.78105 13.8856M23.219 13.8856C23.219 13.8856 23.219 13.8856 23.219 13.8856ZM23.219 4.78105C22.4379 4 21.1808 4 18.6667 4L13.3333 4C10.8192 4 9.5621 4 8.78105 4.78105M23.219 4.78105C23.219 4.78105 23.219 4.78105 23.219 4.78105ZM8.78105 4.78105C8 5.5621 8 6.81918 8 9.33333C8 11.8475 8 13.1046 8.78105 13.8856M8.78105 4.78105C8.78105 4.78105 8.78105 4.78105 8.78105 4.78105ZM8.78105 13.8856C8.78105 13.8856 8.78105 13.8856 8.78105 13.8856Z" stroke="black" stroke-width="1.5"/>
-                                                            </svg>
-                                                            <span className='ms-3'>{bookingData?.spaceDetails.price} EGP</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                              <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                  <path d="M17.3327 9.33333C17.3327 10.0697 16.7357 10.6667 15.9993 10.6667C15.263 10.6667 14.666 10.0697 14.666 9.33333C14.666 8.59695 15.263 8 15.9993 8C16.7357 8 17.3327 8.59695 17.3327 9.33333Z" stroke="#BDBDBD" stroke-width="1.5"/><path d="M24 8C21.7909 8 20 6.20914 20 4" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/><path d="M24 10.668C21.7909 10.668 20 12.4588 20 14.668" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/><path d="M8 8C10.2091 8 12 6.20914 12 4" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/><path d="M8 10.668C10.2091 10.668 12 12.4588 12 14.668" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/><path d="M5.33398 28.5178H8.34723C9.69504 28.5178 11.0574 28.6583 12.3691 28.9285C14.6894 29.4065 17.1324 29.4645 19.4766 29.085C20.6324 28.8979 21.7687 28.6118 22.7973 28.1154C23.7258 27.6672 24.8632 27.0355 25.6272 26.3279C26.3901 25.6213 27.1846 24.4649 27.7486 23.561C28.2321 22.7859 27.9982 21.8349 27.2334 21.2574C26.3837 20.6159 25.1229 20.616 24.2735 21.2577L21.8639 23.0779C20.93 23.7833 19.9099 24.4327 18.6948 24.6265C18.5487 24.6499 18.3955 24.6711 18.2358 24.6896M18.2358 24.6896C18.1877 24.6952 18.139 24.7005 18.0897 24.7055M18.2358 24.6896C18.4302 24.6479 18.6232 24.5281 18.8043 24.37C19.6619 23.6215 19.7162 22.36 18.9721 21.5242C18.7994 21.3302 18.5974 21.1685 18.3727 21.0345C14.643 18.8099 8.83987 20.5043 5.33398 22.9906M18.2358 24.6896C18.1871 24.7 18.1384 24.7055 18.0897 24.7055M18.0897 24.7055C17.3919 24.7772 16.5755 24.7957 15.6697 24.7102" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/><path d="M23.219 13.8856C24 13.1046 24 11.8475 24 9.33333C24 6.81918 24 5.5621 23.219 4.78105M23.219 13.8856C22.4379 14.6667 21.1808 14.6667 18.6667 14.6667H13.3333C10.8192 14.6667 9.5621 14.6667 8.78105 13.8856M23.219 13.8856C23.219 13.8856 23.219 13.8856 23.219 13.8856ZM23.219 4.78105C22.4379 4 21.1808 4 18.6667 4L13.3333 4C10.8192 4 9.5621 4 8.78105 4.78105M23.219 4.78105C23.219 4.78105 23.219 4.78105 23.219 4.78105ZM8.78105 4.78105C8 5.5621 8 6.81918 8 9.33333C8 11.8475 8 13.1046 8.78105 13.8856M8.78105 4.78105C8.78105 4.78105 8.78105 4.78105 8.78105 4.78105ZM8.78105 13.8856C8.78105 13.8856 8.78105 13.8856 8.78105 13.8856Z" stroke="black" stroke-width="1.5"/>
+                                  </svg>
+                                  <span className='ms-3'>{price.total_price} EGP</span>
+                              </li>
+                            </ul>
+                          </div>
                                                     <div className="col-lg-6 col-12">
                                                         <ul className="list-details px-sm-3 px-1">
                                                             <li>
@@ -472,10 +463,7 @@ const BookingSummary = () => {
 
                                                         </ul>
                                                     </div>
-
-
                                                 </div>
-
                                             </div>
                                             <div className="terms">
                                                 <Button 
@@ -485,8 +473,9 @@ const BookingSummary = () => {
                                                 </Button>
                                             </div>
                                             <div className="step-one">
-                                                <a className="btn button-outLine btn-bg-white"
-                                                        onClick={handleBookingClick}>Booking
+                                                <a 
+                                                  className="btn button-outLine btn-bg-white"
+                                                  onClick={handleBookingClick}>Booking
                                                 </a>
                                             </div>
 
@@ -534,7 +523,7 @@ const BookingSummary = () => {
                                                                 </div>
                                                                 <div className="step-one">
                                                                     <a className="btn button-outLine btn-bg-white"
-                                                                            onClick={confirmBookingVenue}>Confirm
+                                                                    onClick={confirmBookingVenue}>Confirm
                                                                     </a>
                                                                 </div>
                                                             </Form>
@@ -550,8 +539,7 @@ const BookingSummary = () => {
                                     )}
                                     {step.key === 'invoice' && (
                                         <> 
-
-                                            <div className="">
+                                          <div className="">
                                                 <div className="row">
 
                                                     <div className="col-lg-6 col-md-6 col-sm-12 order-summary">
@@ -581,7 +569,7 @@ const BookingSummary = () => {
                                                                   <span
                                                                       className="item-name">{bookingData?.spaceDetails.title}</span>
                                                                     <span className="item-price">
-                                                                    {bookingData?.spaceDetails.price} EGP
+                                                                    {price.total_price} EGP
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -589,16 +577,16 @@ const BookingSummary = () => {
                               <div className="d-flex align-items-center justify-content-between line">
                                 <span className="date-period">Tax 14%</span>
                                 <span className="location">
-                                  {(bookingData?.spaceDetails.price * 14) / 100}
+                                  {(price.total_price * 14) / 100}
                                   EGP
                                 </span>
                               </div>
                               <div className="d-flex align-items-center justify-content-between item-box">
                                 <span className="item-total">Total Price:</span>
                                 <span className="item-total-price">
-                                  {(bookingData?.spaceDetails.price * 14) /
+                                  {(price.total_price * 14) /
                                     100 +
-                                    bookingData?.spaceDetails.price}{" "}
+                                    price.total_price}{" "}
                                   EGP
                                 </span>
                               </div>
@@ -612,8 +600,8 @@ const BookingSummary = () => {
                               <div className="booking-items">
                                 <span>Date : {setDate(bookingData?.date)}</span>
                                 <span>
-                                  Time : {setTime(bookingData?.time.start)}{" "}
-                                  {setTime(bookingData?.time.end)}{" "}
+                                  Time : {setTime(bookingData?.time.start)}{"-"}
+                                  {setTime(bookingData?.time.end)}{"/"}
                                   {getPeriod(
                                     bookingData?.time.start,
                                     bookingData?.time.end
@@ -645,7 +633,7 @@ const BookingSummary = () => {
                     </>
                   )}
                 </Tab.Pane>
-              ))}
+              )})}
             </Tab.Content>
           </Tab.Container>
         </div>

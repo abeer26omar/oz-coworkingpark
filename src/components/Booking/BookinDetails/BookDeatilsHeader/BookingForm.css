@@ -187,7 +187,10 @@ bookbottom__ul img {
     background-color: var(--primary-color);
     color: #fff;
 }
-
+.select-date-costume .react-datepicker__day--disabled{
+    background-color: #f0f0f0;
+    opacity: .6;
+}
 .select-date-costume .react-datepicker__day--selected {
     border-radius: 0;
     background-color: var(--primary-color);

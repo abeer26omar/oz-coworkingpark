@@ -11,6 +11,7 @@ const BookingDetails = () => {
     const {id} = useParams();
     const { token } = useContext(AuthContext);
     const [venueDetails, setVenueDetails] = useState({});
+    const [services, setServices] = useState();
 
     useEffect(()=>{
         const source = axios.CancelToken.source();
@@ -22,10 +23,13 @@ const BookingDetails = () => {
         return ()=>source.cancel(); 
     },[id, token]);
 
+    const getServices = (services) => {
+        setServices(services);
+    }
     return (
         <>
-            <BookingDetailsHeader venueDetails={venueDetails} />
-            <SpaceDetails venueDetails={venueDetails}/>
+            <BookingDetailsHeader venueDetails={venueDetails} services={services} />
+            <SpaceDetails venueDetails={venueDetails} getServices={getServices} />
         </>
     )
 };

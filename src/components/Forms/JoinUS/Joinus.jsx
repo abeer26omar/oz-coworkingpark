@@ -15,8 +15,8 @@ const Joinus = () => {
     const [plan, setPlan] = useState(JSON.parse(localStorage.getItem('selectedPlanOZ')));
     const [swalProps, setSwalProps] = useState({});
     const siteConfig = useContext(SiteConfigContext);
-    const { userProfileDate } = useContext(AuthContext)
-    const [userInfo, setUSerInfo] = useState(userProfileDate);
+    const { userProfileData } = useContext(AuthContext)
+    const [userInfo, setUSerInfo] = useState(userProfileData);
 
     useEffect(()=>{
         const planDetails = JSON.parse(localStorage.getItem('selectedPlanOZ'));
