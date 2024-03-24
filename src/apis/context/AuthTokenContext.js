@@ -8,6 +8,7 @@ const AuthProvider = ({ children }) => {
     const [activeUserId, setActiveUserId] = useState(localStorage.getItem('activeUserOZ'));
     const [userProfileData, setUserProfileData] = useState(JSON.parse(localStorage.getItem('userProfileData')));
     const [branchId, setBranchId] = useState(localStorage.getItem('branchIdOZ'));
+    const [planId, setBlanId] = useState(localStorage.getItem('userPlanIdOZ'));
 
     useEffect(() => {
         const storedToken = localStorage.getItem('TokenOZ');
@@ -15,12 +16,14 @@ const AuthProvider = ({ children }) => {
         const storedActiveUserId = localStorage.getItem('activeUserOZ');
         const storeduserProfileData = JSON.parse(localStorage.getItem('userProfileData'));
         const storedBranchId = localStorage.getItem('branchIdOZ');
+        const storedBlanId = localStorage.getItem('userPlanIdOZ');
 
         if (storedToken) {
             setToken(storedToken);
             setUserId(storedUserId);
             setActiveUserId(storedActiveUserId);
             setUserProfileData(storeduserProfileData);
+            setBlanId(storedBlanId);
         }
         setBranchId(storedBranchId)
     }, [token, userId, activeUserId, branchId]);
@@ -125,6 +128,9 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem('branchIdOZ', branchId);
     };
     
+    const savePlanId = (id) => {
+        localStorage.setItem('userPlanIdOZ', id);
+    }
 
     return (
         <AuthContext.Provider value={{   
@@ -132,12 +138,14 @@ const AuthProvider = ({ children }) => {
             userId, 
             branchId, 
             activeUserId, 
-            userProfileData, 
+            userProfileData,
+            planId, 
             handleLogin, 
             handelRegister, 
             handleLogout, 
             handelChangeBranch, 
             modifyUserData,
+            savePlanId
          }}
         >
             {children}

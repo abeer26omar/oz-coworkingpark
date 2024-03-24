@@ -13,7 +13,7 @@ const LoginForm = ({profile, provider})=>{
     const navigate = useNavigate();
     const location = useLocation();
     const [userInfo, setUSerInfo] = useState({});
-    const { handleLogin } = useContext(AuthContext);
+    const { handleLogin, savePlanId } = useContext(AuthContext);
     const [notificationToken, setNotificationToken] = useState('');
     const [previousLocation, setPreviousLocation] = useState(localStorage.getItem('prevLocationOZ'));
     useEffect(() => {
@@ -54,7 +54,7 @@ const LoginForm = ({profile, provider})=>{
             if(result){
                 try{
                     const response = await getMyPlans(result.access_token, result.user_id, signal);
-                    localStorage.setItem('userPlanIdOZ', response['active'][0]?.id);
+                    savePlanId(response['active'][0]?.id);
                 }catch(error){}
             }
             if(prevRoute){

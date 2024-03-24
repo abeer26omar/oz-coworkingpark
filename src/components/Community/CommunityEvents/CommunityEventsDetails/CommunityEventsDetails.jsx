@@ -25,7 +25,7 @@ const CommunityEventsDetails = () => {
     const [image, setImage] = useState('');
     const [swalProps, setSwalProps] = useState({});
     const [reload, setReload] = useState(false);
-    const { token, userId } = useContext(AuthContext);
+    const { token, userId, planId} = useContext(AuthContext);
     const {data, ResetPageName} = useContext(DataContext);
     const [show, setShow] = useState(false);
     
@@ -62,27 +62,7 @@ const CommunityEventsDetails = () => {
             try{
                 const result = await checkEvent(token, userId, id);
                 if(result.bookable){
-                    try{
-                        const res = await attendEvent(token, userId, id);
-                        Modal.success({
-                            title: res.status,
-                            content: res.message,
-                            footer: false,
-                            centered: true,
-                            closable: true,
-                            maskClosable: true
-                        });
-                        setReload(true)
-                    }catch(error){
-                        Modal.error({
-                            title: error.response.data.status,
-                            content: error.response.data.message,
-                            footer: false,
-                            centered: true,
-                            closable: true,
-                            maskClosable: true
-                        });
-                    }
+                    checkPackage();
                 } else{
                     Modal.success({
                         title: result.status,
@@ -105,6 +85,50 @@ const CommunityEventsDetails = () => {
             }
         }else{
             setShow(true);
+        }
+    };
+    const checkPackage = () => {
+        if(eventDetails?.active_membership_discount && eventDetails?.active_membership_discount !== null){
+            if(+planId === eventDetails?.active_membership_discount?.id){
+                const discount = eventDetails?.active_membership_discount?.discount;
+                const discount_type = eventDetails?.active_membership_discount?.discount_type === 'percentage' ? '%' : '';
+                const price =  eventDetails?.active_membership_discount?.price;
+                Modal.info({
+                    title: 'Membership Package',
+                    content: `You Have ${discount} ${discount_type} Included In Your Membership Package 
+                    Final Price: ${CalcPrice(discount, price, eventDetails?.active_membership_discount?.discount_type)}`,
+                    centered: true,
+                    onOk: attendEventCheck,
+                    okText: 'confirm',
+                    closable: true,
+                    maskClosable: true
+                });
+            }
+        }else{
+            attendEventCheck()
+        }
+    }
+    const attendEventCheck = async () => {
+        try{
+            const res = await attendEvent(token, userId, id);
+            Modal.success({
+                title: res.status,
+                content: res.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
+            });
+            setReload(true);
+        }catch(error){
+            Modal.error({
+                title: error.response.data.status,
+                content: error.response.data.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
+            });
         }
     };
 
@@ -135,6 +159,16 @@ const CommunityEventsDetails = () => {
         }
     };
 
+    const CalcPrice = (discount, price, discount_type) => {
+        if (price === '0'){
+            if(discount_type === 'fixed'){
+                return eventDetails?.default_price - discount;
+            }else{
+                const priceDicounted =  eventDetails?.default_price * discount / 100;
+                return eventDetails?.default_price - priceDicounted;
+            }
+        }
+    }
     const settings = {
         dots: true,
         infinite: true,
