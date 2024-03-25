@@ -59,7 +59,7 @@ const PopularCourses = () => {
           }}
         >
           <Paragraph className="head_feature">
-            {"Most Popular Course"}
+            Most Popular Course
           </Paragraph>
         </div>
         <div

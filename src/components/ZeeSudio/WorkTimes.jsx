@@ -41,7 +41,6 @@ const WorkTimes = () => {
         });
         setTabelData(data)
       } catch (error) {
-        console.log(error);
       }
     };
     getWorkingScedule();

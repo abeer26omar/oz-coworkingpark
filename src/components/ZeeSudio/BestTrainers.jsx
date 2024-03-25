@@ -47,7 +47,7 @@ const BestTrainers = () => {
     <>
       <section className="popularInstructor border-of-section">
         <div className="head-content-sec">
-          <Paragraph className="head_feature">{"Our Trainers"}</Paragraph>
+          <Paragraph className="head_feature">Our Trainers</Paragraph>
         </div>
         <div
           className="border-of-section"

@@ -50,7 +50,8 @@ export const getTrainingClasses = async (token, limit, page, search_text, start_
   return response.data.data;
 };
 
-export const getClassById = async (token, signal , id)  => {
+export const getClassById = async (token, id, signal)  => {
+  
   const formData = new FormData();
   formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
   formData.append("id" ,id);

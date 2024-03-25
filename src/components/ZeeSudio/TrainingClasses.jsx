@@ -15,7 +15,6 @@ function TrainingClasses({
     e.preventDefault();
     setIsFilterOpen(!isFilterOpen);
   };
-  // const [limit , setLimit] = useState()
   return (
     <>
       <div className="navigator border-solid my-3">
@@ -24,7 +23,7 @@ function TrainingClasses({
             <div className="col-xl-4 col-md-6 col-sm-12 py-3 py-xl-0">
               <div className="d-flex align-items-center justify-content-between">
                 <h2 className="paragraph_black mb-0 mx-auto">
-                  {"training Classes"}
+                  training Classes
                 </h2>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

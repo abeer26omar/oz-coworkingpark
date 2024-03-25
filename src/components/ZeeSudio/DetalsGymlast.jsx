@@ -1,52 +1,78 @@
 import React, { useContext, useState } from "react";
-import Media from "../Media/Media";
-import details from "../../assets/images/DetalPage.jpg";
 import Paragraph from "../UI/Paragraph";
 import Button from "../UI/Button";
 import moment from "moment";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import LoginAlert from "../Auth/LoginAlertModal";
-import { Skeleton } from "antd";
+import { Skeleton, Modal } from "antd";
 import * as DOMPurify from "dompurify";
 
-function DetalsGymlast({ details, pending }) {
-  const { token } = useContext(AuthContext);
+const DetalsGymlast = ({ details, pending }) => {
+
+  const { token, userProfileData } = useContext(AuthContext);
   const [showLogin, setShowLogin] = useState(false);
+  const [isOpen, setIsopen] = useState(false);
 
   const handelClose = () => setShowLogin(false);
 
   const navigate = useNavigate();
 
   const HandelSummery = (value) => {
+    const zeePackage = userProfileData.zee_studio; 
+    if (token) {
+      if(zeePackage){
+        if(zeePackage.total_remaining_courses > 0){
+          Modal.info({
+            title: 'Membership Package',
+            content: `You Have ${zeePackage.total_free_courses} Free Courses Included In Your Package,
+            Remaning: ${zeePackage.total_remaining_courses} Course`,
+            centered: true,
+            onOk: () => navigatePayment(value, 'Free'),
+            okText: 'confirm',
+            closable: true,
+            maskClosable: true
+          });
+        }else{
+          const discount_type = zeePackage.zee_studio_discount_type === 'percentage' ? '%' : '';
+          Modal.info({
+            title: 'Membership Package',
+            content: `You Have Consumed Your Free Courses, Now Enjoy ${zeePackage.discount} ${discount_type} Discount,
+            Course Price: ${calcPrice(value.price, zeePackage.discount, discount_type)} EGP`,
+            centered: true,
+            onOk: () => navigatePayment(value, calcPrice(value.price, zeePackage.discount, discount_type)),
+            okText: 'confirm',
+            closable: true,
+            maskClosable: true
+          });
+        }
+      }
+    } else {
+      setShowLogin(true);
+    }
+  };
+  const calcPrice = (price, discount, discount_type) => {
+    if(discount_type === 'fixed'){
+      return price - discount;
+    }else{
+        const priceDicounted =  price * discount / 100;
+        return price - priceDicounted;
+    }
+  }
+  const navigatePayment = (value, price) => {
     const gymCourseDetails = {
       id: value.id,
       title: value.title,
       date: value.start_date,
       duration: value.duration,
       schedule: value.schedule,
-      price: value.price,
+      price: price,
       level: value.level,
     };
-
-    if (token) {
-      localStorage.setItem(
-        "OZgymCourseDetails",
-        JSON.stringify(gymCourseDetails)
-      );
-      navigate(`/payment`);
-    } else {
-      setShowLogin(true);
-    }
+    localStorage.setItem("OZgymCourseDetails", JSON.stringify(gymCourseDetails));
+    navigate(`/payment`);
   };
-  const [skeleton, setSkeleton] = useState(false);
-  const [isOpen, setIsopen] = useState(false);
-  // const showMore =
-  //   details?.details.length > details?.details.length - 1 &&
-  //   details?.details.slice(0, Num);
-  // const showMore = () => {
-  //   setNum(!Num);
-  // };
+
   return (
     <>
       <div className="container-fluid px-70 py-5">
@@ -103,7 +129,7 @@ function DetalsGymlast({ details, pending }) {
                       {details?.details}
                     </Paragraph>
                     <li
-                      className="desc_small_light d-inline hover-paragraph-show  "
+                      className="desc_small_light d-inline hover-paragraph-show"
                       onClick={() => setIsopen(!isOpen)}
                     >
                       {isOpen ? <u>Show Less</u> : <u>Show More...</u>}
@@ -152,8 +178,8 @@ function DetalsGymlast({ details, pending }) {
                   tagType="link"
                   onClick={() => HandelSummery(details)}
                   className="btn button-outLine btn-bg-white"
-                >
-                  {"Book a Class"}
+                >Book a Class
+                  {/* {details.attended === true ? '' : 'Book a Class'} */}
                 </Button>
               </div>
             </div>

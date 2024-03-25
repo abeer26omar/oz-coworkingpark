@@ -4,7 +4,7 @@ import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import { getCoursesById } from '../../../apis/OzKnowledge';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Skeleton, Alert } from 'antd';
+import { Skeleton, Alert, Modal } from 'antd';
 import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
 import Paragraph from '../../UI/Paragraph';
 import Button from '../../UI/Button';
@@ -19,39 +19,74 @@ import * as DOMPurify from 'dompurify';
 
 const CourseDetails = () => {
 
-    const { token } = useContext(AuthContext);
+    const { token, userProfileData } = useContext(AuthContext);
     const { id } = useParams();
     const [showLogin, setShowLogin] = useState(false);
 
     const handelClose = () => setShowLogin(false);
 
-  const { isPending, error, data: course } = useQuery({
-    queryKey: ['courseDetails', id],
-    queryFn: ({signal}) => getCoursesById(token, signal, id)
-  });
+    const { isPending, error, data: course } = useQuery({
+      queryKey: ['courseDetails', id],
+      queryFn: ({signal}) => getCoursesById(token, signal, id)
+    });
 
     const navigate = useNavigate();
 
     const HandelSummery = (value) => {
+      const knowledgePackage = userProfileData.zee_knowledge; 
+      if (token) {
+        if(knowledgePackage){
+          if(knowledgePackage.total_remaining_courses > 0){
+            Modal.info({
+              title: 'Membership Package',
+              content: `You Have ${knowledgePackage.total_free_courses} Free Courses Included In Your Package,
+              Remaning: ${knowledgePackage.total_remaining_courses} Course`,
+              centered: true,
+              onOk: () => navigatePayment(value, 'Free'),
+              okText: 'confirm',
+              closable: true,
+              maskClosable: true
+            });
+          }else{
+            const discount_type = knowledgePackage.zee_knowledge_discount_type === 'percentage' ? '%' : '';
+            Modal.info({
+              title: 'Membership Package',
+              content: `You Have Consumed Your Free Courses, Now Enjoy ${knowledgePackage.discount} ${discount_type} Discount,
+              Course Price: ${calcPrice(value.price, knowledgePackage.discount, discount_type)} EGP`,
+              centered: true,
+              onOk: () => navigatePayment(value, calcPrice(value.price, knowledgePackage.discount, discount_type)),
+              okText: 'confirm',
+              closable: true,
+              maskClosable: true
+            });
+          }
+        }
+      } else {
+        setShowLogin(true);
+      }
+    };
+
+    const calcPrice = (price, discount, discount_type) => {
+      if(discount_type === 'fixed'){
+        return price - discount;
+      }else{
+          const priceDicounted =  price * discount / 100;
+          return price - priceDicounted;
+      }
+    };
+
+    const navigatePayment = (value, price) => {
       const gymCourseDetails = {
         id: value.id,
         title: value.title,
         date: value.start_date,
-        duration: `${value.course_hours} hours`,
-        schedule: value.category?.title,
-        price: value.price,
-        level: value.category?.title,
+        duration: value.duration,
+        schedule: value.schedule,
+        price: price,
+        level: value.level,
       };
-    
-      if (token) {
-        localStorage.setItem(
-          "OZCourseDetails",
-          JSON.stringify(gymCourseDetails)
-        );
-        navigate(`/bookclass`);
-      } else {
-        setShowLogin(true);
-      }
+      localStorage.setItem("OZgymCourseDetails", JSON.stringify(gymCourseDetails));
+      navigate(`/payment`);
     };
 
     return (

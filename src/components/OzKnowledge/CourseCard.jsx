@@ -1,4 +1,4 @@
-import { Rate } from 'antd';
+import { Rate, Badge } from 'antd';
 import Paragraph from '../UI/Paragraph';
 import Button from '../UI/Button';
 
@@ -8,7 +8,13 @@ const CourseCard = ({coursesDetails}) => {
         <>
             <div className='card h-100'>
                 <div className='card-header header_course'>
-                    <img src={coursesDetails.image} className="card-img-top" alt={coursesDetails.title} height='229px'/>
+                    {coursesDetails?.allow_free === 0 ? 
+                        (<Badge.Ribbon text="Free" color="gold">
+                            <img src={coursesDetails.image} className="card-img-top" alt={coursesDetails.title} height='229px'/>
+                        </Badge.Ribbon>) : (
+                            <img src={coursesDetails.image} className="card-img-top" alt={coursesDetails.title} height='229px'/>
+                        )
+                    }
                         <div className='padge_grey'>
                             <span>{coursesDetails.category?.title}</span>
                         </div>

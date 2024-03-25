@@ -1,19 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import MainHeaderWrapper from "../UI/MainHeaderWrapper";
 import Paragraph from "../UI/Paragraph";
-import Gym from "../../assets/images/Gym.jpg";
-import { KnowledgeHome } from "../../apis/OzKnowledge";
-import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { Skeleton } from "antd";
-import { useQuery } from "@tanstack/react-query";
-const HeadZeeStuido = (props) => {
-  const { token } = useContext(AuthContext);
-  const { isPending, error, data } = useQuery({
-    queryKey: ["knowldge"],
-    queryFn: ({ signal }) => KnowledgeHome(token, signal),
-  });
 
-
+const HeadZeeStuido = ({error, isPending, data}) => {
+  
   return (
     <>
       <MainHeaderWrapper image={data?.studio_slider} key={""}>

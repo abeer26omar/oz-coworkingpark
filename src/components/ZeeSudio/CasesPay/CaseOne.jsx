@@ -20,7 +20,7 @@ function CaseOne({ details }) {
           </li>
           <li className="d-flex align-items-center mb-4">
             <Alarm />
-            <Paragraph className="mb-0 mx-2">{details.duration}</Paragraph>
+            <Paragraph className="mb-0 mx-2">{details.duration} Hour</Paragraph>
           </li>
           <li className="d-flex align-items-center mb-4">
             <Advanced />
@@ -29,7 +29,7 @@ function CaseOne({ details }) {
           <li className="d-flex align-items-center mb-4">
             <Payment />
             <Paragraph className="mb-0 mx-2">
-              {Math.floor(details.price)} EGP
+              {details.price === 'Free' ? 'Free' : `${Math.floor(details.price)} EGP`}
             </Paragraph>
           </li>
         </ul>

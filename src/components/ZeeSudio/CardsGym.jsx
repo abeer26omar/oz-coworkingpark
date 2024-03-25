@@ -4,14 +4,11 @@ import Button from "../UI/Button";
 import Paragraph from "../UI/Paragraph";
 import { getTrainingClasses } from "../../apis/ZeeStudio";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
-import { Skeleton, Space } from "antd";
+import { Skeleton, Badge } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import * as DOMPurify from "dompurify";
 
 const CardsGym = () => {
-  const [classesList, setClassesList] = useState([]);
-  // const [error, setError] = useState("");
-  const [skeleton, setSkeleton] = useState(false);
 
   const { token } = useContext(AuthContext);
   const { isPending, error, data } = useQuery({
@@ -35,15 +32,32 @@ const CardsGym = () => {
               <Skeleton.Image active />
             ) : (
               <>
-                <Media
-                  type="img"
-                  src={item.image}
-                  className="w-100"
-                  alt={item.title}
-                />
+                  {item?.allow_free === 0 ? (<Badge.Ribbon text="Free" color="gold">
+                    <Media
+                      type="img"
+                      src={item.image}
+                      className="w-100"
+                      alt={item.title}
+                      style={{
+                        height: '352px',
+                        objectFit: 'cover'
+                      }}
+                    />
+                  </Badge.Ribbon>) : (
+                    <Media
+                      type="img"
+                      src={item.image}
+                      className="w-100"
+                      alt={item.title}
+                      style={{
+                        height: '352px',
+                        objectFit: 'cover'
+                      }}
+                    />
+                  )}
               </>
             )}
-            <div className="card-body h-100">
+            <div className="card-body">
               {isPending ? (
                 <Skeleton
                   active
@@ -75,7 +89,7 @@ const CardsGym = () => {
                       to={`/gymdetails/${item.id}`}
                       className="button-outLine btn-bg-white m-auto-unset"
                     >
-                      {"Explore More"}
+                      Explore More
                     </Button>
                   </>
                 )}

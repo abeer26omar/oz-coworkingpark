@@ -5,33 +5,17 @@ import {AuthContext} from '../../apis/context/AuthTokenContext';
 import { useParams } from 'react-router-dom';
 import {getClassById} from '../../apis/ZeeStudio';
 import { useQuery } from "@tanstack/react-query";
-function GymDetails() {
 
-  const [classDetails, setClassDetails] = useState({});
+const GymDetails = () => {
+
   const { token } = useContext(AuthContext);
   const { id } = useParams();
+  
     const { isPending, error, data } = useQuery({
-      queryKey: ["Trainer"],
-      queryFn: ({ signal }) => getClassById(token, signal, id),
+      queryKey: ["class-details"],
+      queryFn: ({ signal }) => getClassById(token, id, signal),
     });
 
-  // useEffect(() => {
-  //   const controller = new AbortController();
-  //   const signal = controller.signal;
-
-  //   const getClass = async () => {
-  //     try {
-  //       const result = await getClassById(token, signal, id);
-  //       setClassDetails(result);
-  //       console.log(result);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getClass();
-  //   return () => {controller.abort()};
-  // }, []);
-  
   return (
     <>
       <HeaderDetalGym details={data} pending={isPending} />
