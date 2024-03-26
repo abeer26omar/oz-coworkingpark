@@ -1,7 +1,7 @@
 import axios from 'axios';
 import FormData from 'form-data';
 
-export const getListMembershipTypes = async (token, business_bundle, {signal}) => {
+export const getListMembershipTypes = async (token, business_bundle) => {
         const formData = new FormData();
         formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
         formData.append('business_bundle', business_bundle);
@@ -12,7 +12,6 @@ export const getListMembershipTypes = async (token, business_bundle, {signal}) =
             data: formData,
             maxContentLength: Infinity,
             maxBodyLength: Infinity,
-            signal: signal,
         };
 
         const response = await axios(config);

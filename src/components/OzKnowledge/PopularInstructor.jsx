@@ -12,24 +12,6 @@ const PopularInstructor = ({details}) => {
     const [instractors, setInstractors] = useState([]);
     const [currentSlide, setCurrentSlide] = useState(0);
 
-    // const { token } = useContext(AuthContext);
-
-    // useEffect(()=>{
-    //     const controller = new AbortController();
-    //     const signal = controller.signal;
-
-    //     const getCategories = async () => {
-    //         try{
-    //             const result = await getInstructorsList(token, signal, 3, 0);
-    //             setInstractors(result);
-    //         }catch (error){
-    //             console.log(error);
-    //         }
-    //     }
-    //     getCategories();
-    //     return () => controller.abort();
-    // }, []);
-
     const handleSlideChange = (slideIndex) => {
         setCurrentSlide(slideIndex);
     };
@@ -60,7 +42,7 @@ const PopularInstructor = ({details}) => {
         <section className="popularInstructor border-of-section">
           <div className="head-content-sec">
             <Paragraph className="head_feature">
-              {"Our Best Instructor"}
+              Our Best Instructor
             </Paragraph>
           </div>
           <div
@@ -71,7 +53,7 @@ const PopularInstructor = ({details}) => {
           >
             <div className="container-fluid">
               <div className="row">
-                <div className="col-lg-8 col-md-7 col-12 border-right">
+                <div className="col-lg-8 col-md-7 col-12 pb-4 border-right">
                   <Slider {...settings}>
                     {details?.map((item, index) => {
                       return (
@@ -81,6 +63,10 @@ const PopularInstructor = ({details}) => {
                             src={item.image}
                             className="image-box"
                             alt={item.name}
+                            style={{
+                              height: '512px',
+                              objectFit: 'cover'
+                            }}
                           />
                         </div>
                       );
@@ -88,7 +74,7 @@ const PopularInstructor = ({details}) => {
                   </Slider>
                 </div>
 
-                <div className="col-lg-4 col-md-5 col-12 my-auto  pe-0 position-relative">
+                <div className="col-lg-4 col-md-5 col-12 my-auto pe-0 position-relative">
                   <div className="box-content p-lg-4 p-3">
                     {details?.length > 0 && (
                       <>
@@ -98,7 +84,7 @@ const PopularInstructor = ({details}) => {
                         <Paragraph className="courses_jobTitle">
                           {details[currentSlide].category?.title}
                         </Paragraph>
-                        <div className='description_black py-2' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(details[currentSlide]?.description) }}></div>
+                        <div className='description_black sideSection_desc py-2' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(details[currentSlide]?.description) }}></div>
                       </>
                     )}
                   </div>

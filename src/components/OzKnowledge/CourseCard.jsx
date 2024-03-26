@@ -6,13 +6,21 @@ const CourseCard = ({coursesDetails}) => {
 
     return (
         <>
-            <div className='card h-100'>
+            <div className='card'>
                 <div className='card-header header_course'>
                     {coursesDetails?.allow_free === 0 ? 
                         (<Badge.Ribbon text="Free" color="gold">
-                            <img src={coursesDetails.image} className="card-img-top" alt={coursesDetails.title} height='229px'/>
+                            <img src={coursesDetails.image} className="card-img-top" alt={coursesDetails.title}
+                            style={{
+                                height: '229px',
+                                objectFit: 'cover'
+                            }}/>
                         </Badge.Ribbon>) : (
-                            <img src={coursesDetails.image} className="card-img-top" alt={coursesDetails.title} height='229px'/>
+                            <img src={coursesDetails.image} className="card-img-top" alt={coursesDetails.title}
+                            style={{
+                                height: '229px',
+                                objectFit: 'cover'
+                            }}/>
                         )
                     }
                         <div className='padge_grey'>
@@ -20,7 +28,7 @@ const CourseCard = ({coursesDetails}) => {
                         </div>
                 </div>                
                 <div className='card-body'>
-                    <Paragraph className='courseCardTitle'>{coursesDetails.title}</Paragraph>
+                    <Paragraph className='courseCardTitle dynamic_wraper'>{coursesDetails.title}</Paragraph>
                     <div className='d-flex align-items-center'>
                         <Rate disabled allowHalf defaultValue={coursesDetails.rate} />
                         <span className='rate_count ms-2'>{`(${coursesDetails.rate})`}</span>

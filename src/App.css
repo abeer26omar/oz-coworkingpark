@@ -762,6 +762,13 @@ a {
 .individual_slider .slick-slide div{
     height: 550px;
 }
+/* .slick_knowledge  .slick-slide > div{
+    height: 416px;
+} */
+.box-content{
+    position: relative;
+    z-index: 9;
+}
 @media screen and (max-width: 992px) {
     .px_7 {
         padding:  0 2rem !important;
