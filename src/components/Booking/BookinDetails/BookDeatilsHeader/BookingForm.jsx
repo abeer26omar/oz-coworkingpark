@@ -50,34 +50,72 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
     const saveBookingData = async (e)=>{
         e.preventDefault();
         try{
-            if((startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
-                if(token){
-                    if(amentiyGroupId){
-                        const hours = calcReservationHours(selectedStartTime, selectedEndTime);
-                        checkForBackage(hours);
-                    }else if(discountAmentiyGroupId){
-                        const discount = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount;
-                        const price = userProfileData?.membership_discount_roles[discountAmentiyGroupId].price;
-                        const type = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount_type === 'percentage' ? '%' : '';
-
-                        return Modal.info({
-                            title: 'Membership Package',
-                            content: `Enjoy ${discount} ${type} Off From Room Price`,
-                            footer: true,
-                            centered: true,
-                            closable: true,
-                            maskClosable: true
-                        });
-                    }
-                }else{
-                    setShow(true);
-                }
-                addUserDetails();
+            if(venueDetails.default_price_per === 'day'){
+                fullDayReservation();
             }else{
-                setShowToast(true);
+                if((startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
+                    if(token){
+                        if(amentiyGroupId){
+                            const hours = calcReservationHours(selectedStartTime, selectedEndTime);
+                            checkForBackage(hours);
+                        }else if(discountAmentiyGroupId){
+                            const discount = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount;
+                            const price = userProfileData?.membership_discount_roles[discountAmentiyGroupId].price;
+                            const type = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount_type === 'percentage' ? '%' : '';
+    
+                            return Modal.info({
+                                title: 'Membership Package',
+                                content: `Enjoy ${discount} ${type} Off From Room Price`,
+                                footer: true,
+                                centered: true,
+                                closable: true,
+                                maskClosable: true
+                            });
+                        }else{
+                            checkAvailabileTimes();
+                        }
+                    }else{
+                        setShow(true);
+                    }
+                    addUserDetails();
+                }else{
+                    setShowToast(true);
+                }
             }
         }catch (error){
 
+        }
+    };
+
+    const fullDayReservation = () => {
+        if(startDate !== null){
+            if(token){
+                if(amentiyGroupId){
+                    const hours = calcReservationHours(selectedStartTime, selectedEndTime);
+                    checkForBackage(hours);
+                }else if(discountAmentiyGroupId){
+                    const discount = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount;
+                    const price = userProfileData?.membership_discount_roles[discountAmentiyGroupId].price;
+                    const type = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount_type === 'percentage' ? '%' : '';
+
+                    return Modal.info({
+                        title: 'Membership Package',
+                        content: `Enjoy ${discount} ${type} Off From Room Price`,
+                        footer: true,
+                        centered: true,
+                        closable: true,
+                        maskClosable: true
+                    });
+                }else{
+                    checkAvailabileTimes();
+                }
+                
+            }else{
+                setShow(true);
+            }
+            addUserDetails();
+        }else{
+            setShowToast(true);
         }
     };
 
@@ -141,7 +179,9 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                     content: `You Have Consumed Your Package Free Hours And Now Enjoy ${discount} ${type} Off From Room Price`,
                     centered: true,
                     onOk: checkAvailabileTimes,
-                    okText: 'confirm'
+                    okText: 'confirm',
+                    closable: true,
+                    maskClosable: true
                 });
             }else{
                 return Modal.warning({
@@ -149,7 +189,9 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                     content: `You Have Consumed Your Package Free Hours`,
                     centered: true,
                     onOk: checkAvailabileTimes,
-                    okText: 'confirm'
+                    okText: 'confirm',
+                    closable: true,
+                    maskClosable: true
                 });
             }
         }else{
@@ -170,7 +212,9 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                         content: `You Have ${max_hours} Hours free For Reservations Included In Your package`,
                         centered: true,
                         onOk: checkAvailabileTimes,
-                        okText: 'confirm'
+                        okText: 'confirm',
+                        closable: true,
+                        maskClosable: true
                     });
                 }
 
@@ -191,7 +235,9 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                         content: `You Have ${how_many_hours} Hours free For Reservations Included In Your package`,
                         centered: true,
                         onOk: checkAvailabileTimes,
-                        okText: 'confirm'
+                        okText: 'confirm',
+                        closable: true,
+                        maskClosable: true
                     });
                 }
             }
@@ -379,67 +425,66 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                                         <div className="bookbottom__select-text ">
                                             <div className="position-relative">
                                                 <div className="time-container d-flex px-xl-4 px-lg-2">
-                                                    {selectedEndTime ? (
+                                                    {venueDetails.default_price_per === 'day' ? 'Full Day' : 
+                                                        selectedEndTime ? (
                                                             <div className="d-flex justify-content-evenly align-items-center">
+                                                                <DatePicker 
+                                                                    onChange={handleStartTimeChange}
+                                                                    showTimeSelect
+                                                                    showTimeSelectOnly
+                                                                    timeIntervals={30}
+                                                                    timeCaption="Start Time"
+                                                                    dateFormat="h:mm aa"
+                                                                    selectsStart
+                                                                    startDate={selectedStartTime}
+                                                                    endDate={selectedEndTime}
+                                                                    placeholderText={selectedStartTime.toLocaleTimeString([],{ hour: 'numeric', minute: 'numeric' })}
+                                                                    className="place-text"
+                                                                />
+                                                                    <p className="mb-0 mx-2">-</p>
+                                                                    <p className="place-text mb-0">{selectedEndTime.toLocaleTimeString([],{ hour: 'numeric', minute: 'numeric' })}</p>
+                                                                </div>
+                                                            ) : (
+                                                                <>
                                                                     <DatePicker
+                                                                        selected={selectedStartTime}
                                                                         onChange={handleStartTimeChange}
                                                                         showTimeSelect
                                                                         showTimeSelectOnly
                                                                         timeIntervals={30}
-                                                                        timeCaption="Start Time"
+                                                                        timeCaption="Check In"
                                                                         dateFormat="h:mm aa"
                                                                         selectsStart
                                                                         startDate={selectedStartTime}
                                                                         endDate={selectedEndTime}
-                                                                        placeholderText={selectedStartTime.toLocaleTimeString([],{ hour: 'numeric', minute: 'numeric' })}
+                                                                        fixedHeight
+                                                                        placeholderText="Select Time"
                                                                         className="place-text"
+                                                                        // Open the start time picker automatically
                                                                     />
-                                                                    
-                                                                <p className="mb-0 mx-2">-</p>
-                                                                <p className="place-text mb-0">{selectedEndTime.toLocaleTimeString([],{ hour: 'numeric', minute: 'numeric' })}</p>
-                                                            </div>
-
-
-                                                    ) : (
-                                                        <>
-                                                            <DatePicker
-                                                                selected={selectedStartTime}
-                                                                onChange={handleStartTimeChange}
-                                                                showTimeSelect
-                                                                showTimeSelectOnly
-                                                                timeIntervals={30}
-                                                                timeCaption="Check In"
-                                                                dateFormat="h:mm aa"
-                                                                selectsStart
-                                                                startDate={selectedStartTime}
-                                                                endDate={selectedEndTime}
-                                                                fixedHeight
-                                                                placeholderText="Select Time"
-                                                                className="place-text"
-                                                                // Open the start time picker automatically
-                                                            />
-                                                            {selectedStartTime && (
-                                                                <DatePicker
-                                                                    selected={selectedEndTime}
-                                                                    onChange={handleEndTimeChange}
-                                                                    showTimeSelect
-                                                                    showTimeSelectOnly
-                                                                    timeIntervals={30}
-                                                                    timeCaption="End Time"
-                                                                    dateFormat="h:mm aa"
-                                                                    selectsEnd
-                                                                    startDate={selectedStartTime}
-                                                                    endDate={selectedEndTime}
-                                                                    minTime={selectedStartTime}
-                                                                    maxTime={new Date().setHours(23, 45)}
-                                                                    disabled={!selectedStartTime}
-                                                                    fixedHeight
-                                                                    className="place-text"
-                                                                    open={true} // Open the end time picker automatically
-                                                                />
-                                                            )}
-                                                        </>
-                                                    )}
+                                                                    {selectedStartTime && (
+                                                                        <DatePicker
+                                                                            selected={selectedEndTime}
+                                                                            onChange={handleEndTimeChange}
+                                                                            showTimeSelect
+                                                                            showTimeSelectOnly
+                                                                            timeIntervals={30}
+                                                                            timeCaption="End Time"
+                                                                            dateFormat="h:mm aa"
+                                                                            selectsEnd
+                                                                            startDate={selectedStartTime}
+                                                                            endDate={selectedEndTime}
+                                                                            minTime={selectedStartTime}
+                                                                            maxTime={new Date().setHours(23, 45)}
+                                                                            disabled={!selectedStartTime}
+                                                                            fixedHeight
+                                                                            className="place-text"
+                                                                            open={true} // Open the end time picker automatically
+                                                                        />
+                                                                    )}
+                                                                </>
+                                                            )
+                                                    }
                                                 </div>
                                             </div>
                                         </div>

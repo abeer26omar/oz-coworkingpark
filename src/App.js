@@ -82,6 +82,7 @@ import GymHistory from "./components/ZeeSudio/GymHistory";
 import PaymentGym from "./components/ZeeSudio/PaymentGym";
 import CourseTracting from './components/OzKnowledge/Course Tracting/CourseTracting';
 import BookCourse from './components/OzKnowledge/BookCourse';
+import BookingSummarySteps from './components/BookingSummary/BookingSummarySteps';
 
 function App() {
 
@@ -143,6 +144,7 @@ function App() {
           { path:'community', element: <Community />},
           { path:'community/events', element: <CommunityEventsExplore />},
           { path:'events/:name/:id', element: <CommunityEventsDetails />},
+          { path:'event-bookingSummary', element: <BookingSummarySteps />},
           { path:'community/newsfeed', element: <NewsFeed />},
           { path:'community/newsfeed/singleFeed/:id', element: <SingleNewFeed />},
           { path:'private', element: <PrivateEvents />},

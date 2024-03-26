@@ -17,6 +17,7 @@ import { DataContext } from '../../../../apis/context/SiteDataContext';
 import Paragraph from '../../../UI/Paragraph';
 import LoginAlert from '../../../Auth/LoginAlertModal';
 import moment from 'moment';
+import {useNavigate} from 'react-router-dom'; 
 
 const CommunityEventsDetails = () => {
 
@@ -28,7 +29,7 @@ const CommunityEventsDetails = () => {
     const { token, userId, planId} = useContext(AuthContext);
     const {data, ResetPageName} = useContext(DataContext);
     const [show, setShow] = useState(false);
-    
+    const navigate = useNavigate();
     const handelHide = ()=>setShow(false);
 
     useEffect(()=>{
@@ -56,8 +57,21 @@ const CommunityEventsDetails = () => {
     
     const url = window.location.href;
 
+    const navigatePayment = (price) => {
+        const OZEventAttend = {
+          id: eventDetails.id,
+          date: eventDetails.dates,
+          title: eventDetails.event_name,
+          genre: eventDetails.event_type?.name,
+          capacity: eventDetails.capacity,
+          price: price
+        };
+        localStorage.setItem("OZEventAttend", JSON.stringify(OZEventAttend));
+        navigate(`/event-bookingSummary`);
+    };
+
     const attend = async () => {
-        setReload(false);
+        // setReload(false);
         if(token){
             try{
                 const result = await checkEvent(token, userId, id);
@@ -87,6 +101,7 @@ const CommunityEventsDetails = () => {
             setShow(true);
         }
     };
+
     const checkPackage = () => {
         if(eventDetails?.active_membership_discount && eventDetails?.active_membership_discount !== null){
             if(+planId === eventDetails?.active_membership_discount?.id){
@@ -98,37 +113,14 @@ const CommunityEventsDetails = () => {
                     content: `You Have ${discount} ${discount_type} Included In Your Membership Package 
                     Final Price: ${CalcPrice(discount, price, eventDetails?.active_membership_discount?.discount_type)}`,
                     centered: true,
-                    onOk: attendEventCheck,
+                    onOk: () => navigatePayment(CalcPrice(discount, price, eventDetails?.active_membership_discount?.discount_type)),
                     okText: 'confirm',
                     closable: true,
                     maskClosable: true
                 });
             }
         }else{
-            attendEventCheck()
-        }
-    }
-    const attendEventCheck = async () => {
-        try{
-            const res = await attendEvent(token, userId, id);
-            Modal.success({
-                title: res.status,
-                content: res.message,
-                footer: false,
-                centered: true,
-                closable: true,
-                maskClosable: true
-            });
-            setReload(true);
-        }catch(error){
-            Modal.error({
-                title: error.response.data.status,
-                content: error.response.data.message,
-                footer: false,
-                centered: true,
-                closable: true,
-                maskClosable: true
-            });
+            navigatePayment(eventDetails.default_price);
         }
     };
 
@@ -168,7 +160,8 @@ const CommunityEventsDetails = () => {
                 return eventDetails?.default_price - priceDicounted;
             }
         }
-    }
+    };
+
     const settings = {
         dots: true,
         infinite: true,
@@ -179,7 +172,7 @@ const CommunityEventsDetails = () => {
         autoplay: true,
         autoplaySpeed: 3000,
         lazyLoad: true
-    }
+    };
 
     const settingsGallry = {
         dots: false,
@@ -192,7 +185,7 @@ const CommunityEventsDetails = () => {
         autoplay: true,
         autoplaySpeed: 3000,
         lazyLoad: true,
-    }
+    };
     
     const compareTime = (eventEnd, eventId) => {
         
@@ -244,7 +237,7 @@ const CommunityEventsDetails = () => {
             }
         }
 
-    }
+    };
     
     return (
         <>
@@ -274,7 +267,7 @@ const CommunityEventsDetails = () => {
                             <div className="box-content">
                                 <h2 className="h2-text-box">{eventDetails && eventDetails.event_name}</h2>
                                 <div className="event-type-details">
-                                    <span className="status-event">Status: <span>{eventDetails && eventDetails.event_type?.name}</span></span>
+                                    <span className="status-event">genre: <span>{eventDetails && eventDetails.event_type?.name}</span></span>
                                 </div>
                                 <div
                                     className="d-flex  mb-5 amenities-box-details">
