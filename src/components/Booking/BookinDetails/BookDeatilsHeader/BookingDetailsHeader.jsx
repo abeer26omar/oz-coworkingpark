@@ -20,28 +20,28 @@ const BookingDetailsHeader = ({venueDetails, services}) => {
         <>
             <div className='position-relative booking_details'>
                 
-                <AddToFavButton is_favorite={venueDetails.is_favorite} id={venueDetails.id} add_fav={true} type='venue'/>
+                <AddToFavButton is_favorite={venueDetails?.is_favorite} id={venueDetails?.id} add_fav={true} type='venue'/>
 
                 <MainHeaderWrapper 
-                    image={(venueDetails?.gallery && venueDetails?.gallery.length !== 0) && venueDetails.gallery} 
-                    special_flex={venueDetails.online_booking ? 'justify-content-lg-center justify-content-start' : 'justify-content-center'}
+                    image={(venueDetails?.gallery && venueDetails?.gallery.length !== 0) && venueDetails?.gallery} 
+                    special_flex={venueDetails?.online_booking ? 'justify-content-lg-center justify-content-start' : 'justify-content-center'}
                     height='670px'>
                     <div className="container text-center">
                         <Paragraph className="text-one">Booking</Paragraph>
-                        <Paragraph className="text-two mb-4">{venueDetails.title}</Paragraph>
-                        {!venueDetails.online_booking && (
+                        <Paragraph className="text-two mb-4">{venueDetails?.title}</Paragraph>
+                        {!venueDetails?.online_booking && (
                             <Button tagType='link'
                             className="button-outLine"
                             onClick={handleShow}>Book Now</Button>
                         )}
                     </div>
                 </MainHeaderWrapper>
-                {venueDetails.online_booking && <BookingForm venueDetails={venueDetails} token={token} services={services}/>}
+                {venueDetails?.online_booking && <BookingForm venueDetails={venueDetails} token={token} services={services}/>}
             </div>
             <RequestFormModal 
                 show={showRequestModal}
                 handleClose={handleClose}
-                venueId={venueDetails.id}/>
+                venueId={venueDetails?.id}/>
         </>
     );
 };

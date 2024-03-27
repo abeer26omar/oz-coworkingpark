@@ -139,7 +139,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
             },
             numberOfPeople: counter,
             spaceDetails: venueDetails,
-            services: services,
+            services: services || [],
             price: calcPrice()
         };
         localStorage.setItem("BookingOZDetails", JSON.stringify(bookingData));
@@ -160,7 +160,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
         }
         const service_price = services.reduce((sum, item) => sum + item.price, 0);
         const total_price = Finalprice + service_price;
-        return JSON.stringify({total_price: total_price, service_price: service_price, booking_price: Finalprice});
+        return JSON.stringify({total_price: total_price, service_price: service_price, booking_price: Finalprice, venue_price: venueDetails?.price});
     };
 
     const checkForBackage = (hours) => {

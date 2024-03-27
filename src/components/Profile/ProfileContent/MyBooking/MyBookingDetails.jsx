@@ -232,11 +232,11 @@ const MyBookingDetails = () => {
                                     Services
                                 </Paragraph>
                                 <ul className="list-options d-flex p-0 py-3 m-0">
-                                    {/* {booking && booking.services.map((item, index)=>{
+                                    {booking && booking?.services.map((item, index)=>{
                                         return (
-                                            <li className="list-option-item" key={index}>{item.name}</li>
+                                            <li className="list-option-item" key={index}>{item.service_name}</li>
                                         )
-                                    })} */}
+                                    })}
                                 </ul>
                             </div>
                         </div>

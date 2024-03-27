@@ -1,29 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './SpaceDetails.css';
 import Paragraph from '../../../UI/Paragraph';
 import Select from 'react-select';
 
 const SpaceDetails = ({venueDetails, getServices}) => {
 
-    const optionList = (venueDetails.services && venueDetails.services !== null) && 
-    venueDetails.services.map(item=>{
+    const optionList = (venueDetails?.services && venueDetails?.services !== null) && 
+    venueDetails?.services.map(item=>{
         return { value: item.id , label: item.name , price: item.price }
     })
     
-    const [selectedOptions, setSelectedOptions] = useState();
+    const [selectedOptions, setSelectedOptions] = useState(JSON.parse(localStorage.getItem("BookingOZServices")) || []);
 
     const handleChange = (data)=>{
         setSelectedOptions(data);
         localStorage.setItem("BookingOZServices", JSON.stringify(data));
         getServices(data);
-    }
-    
-    useEffect(()=>{
-        const data = JSON.parse(localStorage.getItem("BookingOZServices"));
-        if(data){
-            setSelectedOptions(data)
-        }
-    },[]);
+    };
 
     const dicountRoules = (price, price_discounted, default_price_per) => {
         if(price === price_discounted){

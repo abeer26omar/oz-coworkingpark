@@ -3,7 +3,7 @@ import Paragraph from "./Paragraph";
 
 const Invoice = () => {
 
-    const [invoice, setInvoice] = useState(JSON.parse(localStorage.getItem('OZInvoice')));
+    const invoice = JSON.parse(localStorage.getItem('OZInvoice')) || {};
 
     const setDate = (roomdate) => {
       const parts = roomdate.split(/[- :]/);

@@ -11,6 +11,7 @@ const Booking = () => {
         ResetPageName('booking');
         localStorage.removeItem("BookingOZDetails");
         localStorage.removeItem("BookingOZServices");
+        localStorage.removeItem("BookingOZDetailsId");
     },[]);
 
     return (

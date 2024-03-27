@@ -15,7 +15,7 @@ const BookingSummarySteps = () => {
   const {token, userId} = useContext(AuthContext)
   const [current, setCurrent] = useState(0);
   const [bookingResult, setBookingResult] = useState({});
-  const [eventDetails, setEventDetails] = useState(JSON.parse(localStorage.getItem("OZEventAttend")));
+  const eventDetails = JSON.parse(localStorage.getItem("OZEventAttend")) || {};
   const [inputValue, setInputValue] = useState();
 
   const getPaymentValue = (value) => {
@@ -61,7 +61,7 @@ const BookingSummarySteps = () => {
             maskClosable: true,
         });
     }
-};
+  };
 
   const next = () => {
     if (current === 1) {
@@ -77,10 +77,6 @@ const BookingSummarySteps = () => {
       setCurrent(current + 1);
     }
   };
- 
-  useEffect(() => {
-    setEventDetails(JSON.parse(localStorage.getItem("OZEventAttend")));
-  }, []);
 
   const items = steps.map((item) => ({
     key: item.title,

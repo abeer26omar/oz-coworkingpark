@@ -42,7 +42,7 @@ export const getVenues = async (token, userId, branch_id, amenities_group_id) =>
     return response.data.data;
 };
 
-export const getVenueById = async (token, venue_id, source) => {
+export const getVenueById = async (token, venue_id, signal) => {
     
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -54,7 +54,7 @@ export const getVenueById = async (token, venue_id, source) => {
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-        cancelToken: source.token
+        signal: signal
     };
 
     const response = await axios(config);

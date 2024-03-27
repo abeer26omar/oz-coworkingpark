@@ -188,7 +188,6 @@
 .order-summary {
     padding: 37px 49px;
     background-color: #fff;
-
 }
 
 .order-summary-black {
@@ -250,7 +249,7 @@
 }
 
 .pill {
-    padding-bottom: 200px;
+    min-height: 300px;
 }
 
 .order-description .item-name {

@@ -6,7 +6,9 @@ import { getTrainersList } from "../../apis/ZeeStudio";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { Skeleton } from "antd";
 import SkeletonCard from "../UI/SkeletonCard";
+
 const TrainerLinksCard = () => {
+  
   const [trainersList, setTrainersList] = useState([]);
   const [visibleCards, setVisibleCards] = useState(12);
   const [skeleton, setSkeleton] = useState(false);
