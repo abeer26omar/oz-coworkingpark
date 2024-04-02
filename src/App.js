@@ -83,6 +83,7 @@ import PaymentGym from "./components/ZeeSudio/PaymentGym";
 import CourseTracting from './components/OzKnowledge/Course Tracting/CourseTracting';
 import BookCourse from './components/OzKnowledge/BookCourse';
 import BookingSummarySteps from './components/BookingSummary/BookingSummarySteps';
+import MembershipSummary from './components/Membership/MembershipSummary';
 
 function App() {
 
@@ -140,6 +141,7 @@ function App() {
           { path:'membership', element: <Membership />},  
           { path:'membership/:id', element: <MembershipOptions />},
           { path:'singleMember/:id', element: <MemberPackage />},
+          { path:'membershipSummary', element: <MembershipSummary />},
           { path:'spaces', element: <Spaces />},
           { path:'community', element: <Community />},
           { path:'community/events', element: <CommunityEventsExplore />},

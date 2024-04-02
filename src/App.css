@@ -219,7 +219,16 @@ a {
     object-fit: cover;
 }
 /****************** Form Fields ****************/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 .css-13cymwt-control,
 .css-13cymwt-control:focus,
 .css-13cymwt-control:hover,

@@ -1,4 +1,5 @@
 import axios from "axios";
+import FormData from 'form-data';
 
 
 
@@ -161,6 +162,23 @@ export const getAmenities = async ()=>{
     const config = {
         method: 'get',
         url: `${process.env.REACT_APP_API_CONFIG_URL}/api/oz_benefits`,
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+};
+
+export const applyPromoCode = async (token, code, signal)=>{
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('code', code);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/apply-promo?access_token=${token}`,
+        data: formData,
+        signal: signal
     };
 
     const response = await axios(config);

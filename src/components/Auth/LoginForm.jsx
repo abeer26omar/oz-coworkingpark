@@ -8,17 +8,19 @@ import Button  from '../UI/Button';
 import {requestForToken} from '../../apis/firebase';
 import { getMyPlans } from '../../apis/User';
 import { Modal } from 'antd';
+import RegisterOTPModal from './RegisterOTPModal';
 
 const LoginForm = ({profile, provider})=>{
     const navigate = useNavigate();
-    const location = useLocation();
+    const [show, setShow] = useState(false);
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [userData, setUserData] = useState({});
     const [userInfo, setUSerInfo] = useState({});
     const { handleLogin, savePlanId } = useContext(AuthContext);
     const [notificationToken, setNotificationToken] = useState('');
-    const [previousLocation, setPreviousLocation] = useState(localStorage.getItem('prevLocationOZ'));
-    useEffect(() => {
-      setPreviousLocation(localStorage.getItem('prevLocationOZ'));
-    }, []);
+    const previousLocation = localStorage.getItem('prevLocationOZ');
+    const handleClose = () => setShow(false);
     
     useEffect(()=>{
         if(provider === 'google'){
@@ -64,14 +66,20 @@ const LoginForm = ({profile, provider})=>{
                 navigate(-1);
             }
         } catch (error) {
-            Modal.error({
-                title: error.response.data.status,
-                content: error.response.data.message,
-                footer: false,
-                centered: true,
-                closable: true,
-                maskClosable: true
-            });
+            if(error.response.data.otp){
+                setEmail(values.email);
+                setMessage(error.response.data.message);
+                setShow(true);
+            }else{
+                Modal.error({
+                    title: error.response.data.status,
+                    content: error.response.data.message,
+                    footer: false,
+                    centered: true,
+                    closable: true,
+                    maskClosable: true
+                });
+            }
         }
     };
     
@@ -157,6 +165,13 @@ const LoginForm = ({profile, provider})=>{
                 </form>
             )}}
             </Formik>
+            <RegisterOTPModal 
+                show={show}
+                onHide={handleClose}
+                email={email}
+                userData={userData}
+                message={message}
+            />
         </>
     )
 }

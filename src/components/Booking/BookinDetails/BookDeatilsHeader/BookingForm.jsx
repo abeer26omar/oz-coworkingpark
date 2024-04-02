@@ -11,6 +11,7 @@ import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import ShowAvaliablesModal from './ShowAvaliablesModal';
 import moment from 'moment';
 import { Modal } from 'antd';
+import { addMonths, isAfter, subMonths } from 'date-fns';
 
 const BookingForm = ({venueDetails, reschedule, services}) => {
 
@@ -30,9 +31,10 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
     const [discountAmentiyGroupId, setDiscountAmentiyGroupId] = useState('');
 
     const handleDateChange = (date) => {
-        const timezoneOffset = date.getTimezoneOffset();
-        const utcDate = new Date(date.getTime() - timezoneOffset * 60000);
-        setStartDate(utcDate);
+        console.log('fhfhf');
+        // const timezoneOffset = date.getTimezoneOffset();
+        // const utcDate = new Date(date.getTime() - timezoneOffset * 60000);
+        // setStartDate(utcDate);
     };
 
     const handleStartTimeChange = (startTime) => {
@@ -295,10 +297,63 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
     const decrement = (event) => {
         event.preventDefault();
         event.stopPropagation();
-        if (counter > 1) {
+        if (counter > 4) {
             setCounter((prevCount) => prevCount - 1);
         }
     };
+    const handlePrevClick = (prevMonth, setCurrentMonth) => {
+        const currentDate = new Date();
+        const threeMonthsAgo = subMonths(currentDate, 3);
+        if (isAfter(prevMonth, threeMonthsAgo)) {
+          setCurrentMonth(prevMonth);
+        }
+    };
+    
+    const handleNextClick = (nextMonth, setCurrentMonth) => {
+        const currentDate = new Date();
+        const threeMonthsAhead = addMonths(currentDate, 3);
+        if (isAfter(threeMonthsAhead, nextMonth)) {
+          setCurrentMonth(nextMonth);
+        }else{
+            Modal.info({
+                title: 'Admin Contact',
+                content: `Please, Contact Admin`,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
+            })
+        }
+    };
+    const renderCustomHeader = ({
+        date,
+        decreaseMonth,
+        increaseMonth,
+        prevMonthButtonDisabled,
+        nextMonthButtonDisabled,
+      }) => (
+        <div className="react-datepicker__header d-flex">
+            <div className="react-datepicker__current-month">
+                {date.toLocaleString('default', { month: 'long', year: 'numeric' })}
+            </div>
+            <button type="button" 
+                className="react-datepicker__navigation react-datepicker__navigation--previous react-datepicker__navigation--previous--disabled" 
+                aria-label="Previous Month"
+              onClick={() => handlePrevClick(subMonths(date, 1), decreaseMonth)}
+                >
+                    <span class="react-datepicker__navigation-icon react-datepicker__navigation-icon--previous">Previous Month</span>
+            </button>
+          
+            <button 
+                type="button" 
+                className="react-datepicker__navigation react-datepicker__navigation--next" 
+                aria-label="Next Month"
+              onClick={() => handleNextClick(addMonths(date, 1), increaseMonth)}
+            >
+                <span class="react-datepicker__navigation-icon react-datepicker__navigation-icon--next">Next Month</span>
+            </button>
+        </div>
+    );
 
     useEffect(()=>{
         const data = JSON.parse(localStorage.getItem("BookingOZDetails"));
@@ -368,12 +423,22 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                                                     border: 'none'
                                                 }}>
                                                     <div className='counter-container'>
-                                                        <span>{`Max Room Capacity is ${venueDetails.capacity}`}</span>
-                                                        <button className="decrement-btn" onClick={decrement}>-
-                                                        </button>
-                                                        <p className="counter-number">{counter}</p>
-                                                        <button onClick={increment}>+
-                                                        </button>
+                                                        <span>{`Room Capacity From 4 To ${venueDetails.capacity}`}</span>
+                                                        <button className="decrement-btn" onClick={decrement}>-</button>
+                                                        <input 
+                                                            type='number' 
+                                                            className="input counter-number" 
+                                                            min={4} 
+                                                            max={venueDetails?.capacity} 
+                                                            value={counter === 0 ? 4 : counter} 
+                                                            onChange={(e) => {
+                                                                const value = parseInt(e.target.value, 10);
+                                                                if (!isNaN(value) && value >= 4 && value <= venueDetails.capacity) {
+                                                                    setCounter(value);
+                                                                }
+                                                            }}
+                                                        />
+                                                        <button onClick={increment}>+</button>
                                                     </div>
                                                 </ul>
                                             </>)}
@@ -404,8 +469,11 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                                         selected={startDate}
                                         placeholderText="Select Date"
                                         minDate={new Date()}
+                                        maxDate={addMonths(new Date(), 3)}
                                         onChange={handleDateChange}
                                         fixedHeight
+                                        showDisabledMonthNavigation
+                                        renderCustomHeader={renderCustomHeader}
                                     />
 
                                 </li>

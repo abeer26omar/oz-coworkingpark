@@ -259,13 +259,16 @@ export const addExtraBundle = async (token, membership_id) => {
     return response.data.data;
 };
 
-export const upgradePlan = async (token, type, days) => {
+export const upgradePlan = async (token, type, days, price) => {
         
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
     formData.append('type', type);
     if(days){
         formData.append('days', days);
+    }
+    if(price){
+        formData.append('price', price);
     }
 
     const config = {

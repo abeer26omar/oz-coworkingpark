@@ -75,8 +75,9 @@ const BookingSpacesTypes = ({venues, placeId,spaceTitle})=>{
                             </svg>
                         </div>
                     </div>
-                    <div className={`col-lg-8 col-12 px-3 d-flex flex-wrap align-items-center justify-content-${isFilterOpen ? 'between' : '-lg-center'} justify-content-end column_reverse`}>
-                        {isFilterOpen && (<div className='col-lg-6 col-12'>
+                    <div className={`col-lg-8 col-12 px-3 d-flex flex-wrap align-items-center justify-content-end`}>
+                        {/* justify-content-${isFilterOpen ? 'between' : '-lg-center'} column_reverse */}
+                        {/* {isFilterOpen && (<div className='col-lg-6 col-12'>
                             <div className="input-group">
                                 <input 
                                     type="text" 
@@ -86,7 +87,7 @@ const BookingSpacesTypes = ({venues, placeId,spaceTitle})=>{
                                 />
                                 <span className="icon-custom"><FiSearch/></span>
                             </div>
-                        </div>)}
+                        </div>)} */}
                         <div className="btn-spaces-filter">
                             <Button 
                                 tagType='link' 

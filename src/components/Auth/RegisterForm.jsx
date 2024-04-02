@@ -59,14 +59,19 @@ const RegisterForm = ({provider, profile})=>{
                 setMessage(result.message);
                 setShow(true);
         } catch (error) {
-            modal.error({
-                title: error.response.data.status,
-                content: error.response.data.message,
-                footer: false,
-                centered: true,
-                closable: true,
-                maskClosable: true
-            });
+            if(error.response.data.data.otp){
+                setMessage(error.response.data.message);
+                setShow(true);
+            }else{
+                modal.error({
+                    title: error.response.data.status,
+                    content: error.response.data.message,
+                    footer: false,
+                    centered: true,
+                    closable: true,
+                    maskClosable: true
+                });
+            }
         }
     }
     return (

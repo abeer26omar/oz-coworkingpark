@@ -1,4 +1,3 @@
-/*! CSS Used from: https://www.properhotel.com/wp-content/themes/properhotel/css/style.css ; media=all */
 .bookbottom__ul {
     display: flex;
     list-style: none;
@@ -6,7 +5,6 @@
     justify-content: center;
     margin-bottom: 0;
 }
-
 .bookbottom__li {
     flex: auto;
     border: 1px solid rgba(251, 251, 251, .8);
@@ -93,7 +91,7 @@ bookbottom__ul img {
     color: #000;
 }
 
-.select-date-costume react-datepicker__month-container {
+.select-date-costume .react-datepicker__month-container {
     width: 393px;
     height: 367px;
 }
@@ -343,7 +341,8 @@ bookbottom__ul img {
     border: 1px solid #BDBDBD;
 }
 
-.counter-container .counter-number {
+.counter-container .counter-number,
+.counter-container .counter-number.input {
     color: #000;
     border-radius: 4px;
     border: 1px solid #BDBDBD;
@@ -354,6 +353,10 @@ bookbottom__ul img {
     align-items: center;
     margin: 0;
     margin: 0px 8px;
+}
+.counter-container .counter-number.input {
+    width: 45px;
+    text-align: center;
 }
 
 .counter-container > span {
