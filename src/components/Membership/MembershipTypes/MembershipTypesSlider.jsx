@@ -18,8 +18,14 @@ const MembershipTypesSlider = ({currentMemberId}) => {
   const settings = {
     dots: false,
     arrows: true,
-    slidesToShow: types?.length-1 || 3,
-    slidesToScroll: 1,
+    slidesToShow:
+      types && types.individual
+      ? types.individual.length > 3
+        ? 3
+        : currentMemberId
+        ? types.individual.length - 1
+        : types.individual.length
+      : 0,
     infinite: true,
     centerMode: true,
     centerPadding: "50px",
@@ -27,22 +33,26 @@ const MembershipTypesSlider = ({currentMemberId}) => {
       {
         breakpoint: 1500,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
+          slidesToShow:
+            types && types.individual
+            ? types.individual.length > 3
+              ? 3
+              : currentMemberId
+              ? types.individual.length - 1
+              : types.individual.length
+            : 0,
         },
       },
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 768,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
           centerMode: false,
         },
       },
@@ -50,7 +60,6 @@ const MembershipTypesSlider = ({currentMemberId}) => {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1,
           centerMode: false,
           dots: true,
           arrows: false,
@@ -67,7 +76,7 @@ const MembershipTypesSlider = ({currentMemberId}) => {
         },
       },
       {
-        breakpoint: 3,
+        breakpoint: 2,
         settings: "unslick",
       },
     ],
