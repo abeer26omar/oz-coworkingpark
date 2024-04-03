@@ -21,7 +21,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
     const [show, setShow] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
-    const [counter, setCounter] = useState(0);
+    const [counter, setCounter] = useState(4);
     const [avaliableDate, setAvaliableDates] = useState([]);
     const [showAvailable, setShowAvailable] = useState(false);
     const navigate = useNavigate();
@@ -31,10 +31,9 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
     const [discountAmentiyGroupId, setDiscountAmentiyGroupId] = useState('');
 
     const handleDateChange = (date) => {
-        console.log('fhfhf');
-        // const timezoneOffset = date.getTimezoneOffset();
-        // const utcDate = new Date(date.getTime() - timezoneOffset * 60000);
-        // setStartDate(utcDate);
+        const timezoneOffset = date.getTimezoneOffset();
+        const utcDate = new Date(date.getTime() - timezoneOffset * 60000);
+        setStartDate(utcDate);
     };
 
     const handleStartTimeChange = (startTime) => {
@@ -415,7 +414,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                                                 <button class="btn button-select-guest dropdown-toggle dropup" 
                                                     type="button" id="dropdownMenuButton" 
                                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                                    {(counter !== null && counter !== 0) ? `${counter} persons` : "Number of People"}
+                                                    {(counter !== null && counter !== 4) ? `${counter} persons` : `Start wiyh ${counter} of People`}
                                                 </button>
                                                 
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{

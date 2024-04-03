@@ -253,9 +253,6 @@
     line-height: 120%;
     text-transform: uppercase;
 }
-ul{
-    list-style: none;
-}
 .price-promo p{
     color: #000;
     font-family: var(--couture-font);

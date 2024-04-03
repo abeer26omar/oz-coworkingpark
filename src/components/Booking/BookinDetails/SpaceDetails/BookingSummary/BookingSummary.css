@@ -91,10 +91,21 @@
     list-style: none;
     padding: 0
 }
-
+a{
+    cursor: pointer;
+}
+.service_price{
+    color: var(--Primary-1, #000);
+    font-family: var(--questrial-font);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    margin: 0 27px 32px;
+}
 .list-details li {
     color: var(--primary-color);
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -103,7 +114,9 @@
     display: flex;
     align-items: center;
 }
-
+.list-details li:last-child {
+    margin-bottom: 0;
+}
 .list-details img {
     width: 32px;
     height: 32px;
