@@ -84,15 +84,15 @@ const PublicEventList = ({}) => {
                   />
 
                   <div className="card-body py-4">
-                    <Card.Title
+                    <Card.Title className="dynamic_wraper_1"
                       onClick={() => {
                         navigate(`/events/communityEventsDetails/${event.id}`);
                       }}
                     >
-                      {`${event.event_name.slice(0, 16)} ...`}
+                      {event.event_name}
                     </Card.Title>
-                    <Card.Text className="py-2">
-                      {event.description?.slice(0, 30)} ...
+                    <Card.Text className="my-3 dynamic_wraper">
+                      {event.description}
                     </Card.Text>
                     <Button
                       to={`/events/communityEventsDetails/${event.id}`}

@@ -168,7 +168,7 @@ export const getAmenities = async ()=>{
     return response.data.data;
 };
 
-export const applyPromoCode = async (token, code, signal)=>{
+export const applyPromoCode = async (token, code)=>{
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -176,9 +176,10 @@ export const applyPromoCode = async (token, code, signal)=>{
 
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/apply-promo?access_token=${token}`,
+        url: `${process.env.REACT_APP_API_URL}/api/apply-promo?access_token=${token}`,
         data: formData,
-        signal: signal
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
     };
 
     const response = await axios(config);
@@ -194,7 +195,7 @@ export const getInovice = async (token, id, type)=>{
 
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/transactions?access_token=${token}`,
+        url: `${process.env.REACT_APP_API_URL}/api/transactions?access_token=${token}`,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,

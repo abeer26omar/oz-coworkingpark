@@ -783,6 +783,41 @@ input[type=number] {
     position: relative;
     z-index: 9;
 }
+.apply_btn{
+    color: var(--black-color);
+    border: none;
+    background-color: transparent;
+    font-family: var(--couture-font);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    border-bottom: 1px solid var(--black-color);
+    padding: 0;
+    border-radius: 0;
+}
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    color: var(--black-color);
+    border-color: transparent;
+    box-shadow: none;
+}
+.ant-btn-default {
+    background: transparent;
+    box-shadow: none;
+}
+.summary_item{
+    color: var(--black-color);
+    font-family: var(--questrial-font);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    transition: all ease .3s;
+}
+.promoApplided{
+    color: var(--secondary-color2);
+    text-decoration: line-through;
+}
 @media screen and (max-width: 992px) {
     .px_7 {
         padding:  0 2rem !important;

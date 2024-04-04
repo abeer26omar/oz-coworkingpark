@@ -1,28 +1,68 @@
 import React, { useContext, useState } from "react";
+import { useMutation } from '@tanstack/react-query';
+import { Button } from 'antd';
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { applyPromoCode } from '../../apis/config';
 
 const PromoCode = ({price, getPrice}) => {
+
     const [code, setCode] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState('');
+    const [error, seterror] = useState('');
     const {token} = useContext(AuthContext);
 
     const handelChange = (e) => {
         setCode(e.target.value);
+        seterror('');
+        setSuccess('');
     };
+
+    // const {mutate, isError, error, isSuccess } = useMutation({
+    //     mutationFn: ({code}) => applyPromoCode(token, code),
+    //     // onSuccess: (data) => {
+    //     //     calcPrice(data?.discount, data?.discount_type);
+    //     //     setLoading(false);
+    //     // },
+    //     // onError: () => {
+    //     //     setLoading(false);
+    //     // }
+
+    // });
 
     const addPromoCode = async () => {
         if(code !== ''){
-            const controller = new AbortController();
-            const signal = controller.signal;
-            const result = await applyPromoCode(token, code, signal);
+            setLoading(true);
+            seterror('');
+            setSuccess('');
+            try{
+                const result = await applyPromoCode(token, code);
+                calcPrice(result?.discount, result?.discount_type);
+                setLoading(false);
+                setSuccess('Applied')
+            }catch(error){
+                setLoading(false);
+                seterror(error.response.data.message);
+            }
         }else{
 
         }
-
     };
 
+    const calcPrice = (discount, discount_type) => {
+        if(discount_type === 'fixed'){
+            const final_price = price - discount;
+            getPrice(final_price);
+        }else{
+            const discunt_value = (price * discount) / 100 ;
+            const final_price = price - discunt_value;
+            getPrice(final_price);
+        }
+    }
+
     return(
-        <div className="col-12 d-flex justify-content-between align-items-center mb-0">
+        <>
+            <div className="col-12 d-flex justify-content-between align-items-center mb-0">
             <div className="col-10 d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="21" viewBox="0 0 26 21" fill="none">
                     <path d="M15.406 1H10.594C6.05726 1 3.78888 1 2.37949 2.39124C1.40909 3.34915 1.10684 4.70903 1.01269 6.925C0.994023 7.36445 0.984687 7.58418 1.06761 7.73078C1.15054 7.87738 1.48159 8.06032 2.1437 8.42622C2.87903 8.83258 3.37608 9.60899 3.37608 10.5C3.37608 11.391 2.87903 12.1674 2.1437 12.5738C1.4816 12.9397 1.15054 13.1226 1.06761 13.2692C0.984687 13.4158 0.994022 13.6355 1.01269 14.075C1.10684 16.291 1.40909 17.6509 2.37949 18.6088C3.78888 20 6.05726 20 10.594 20H15.406C19.9427 20 22.2111 20 23.6205 18.6088C24.5909 17.6509 24.8932 16.291 24.9873 14.075C25.006 13.6355 25.0153 13.4158 24.9324 13.2692C24.8495 13.1226 24.5184 12.9397 23.8563 12.5738C23.121 12.1674 22.6239 11.391 22.6239 10.5C22.6239 9.60899 23.121 8.83258 23.8563 8.42622C24.5184 8.06032 24.8495 7.87738 24.9324 7.73078C25.0153 7.58418 25.006 7.36445 24.9873 6.925C24.8932 4.70903 24.5909 3.34915 23.6205 2.39124C22.2111 1 19.9427 1 15.406 1Z" stroke="#BDBDBD" stroke-width="1.5"/>
@@ -40,14 +80,21 @@ const PromoCode = ({price, getPrice}) => {
                     onChange={handelChange}                    
                 />
             </div>
-            <a 
-                className='ex_link' 
-                style={{
-                    color: 'black'
-                }}
-                onClick={addPromoCode}> APPLY
-            </a>
+            <Button className='apply_btn' loading={loading} onClick={addPromoCode}>
+               APPLY
+            </Button>
         </div>
+            {error !== '' ? 
+                (<div class="text-danger d-flex align-items-center" role="alert">
+                    {error}
+                </div>) 
+                : null}
+            {success !== '' ? 
+                (<div class="text-success d-flex align-items-center" role="alert">
+                    Applied
+                </div>) 
+                : null}
+        </>
     )
 };
 export default PromoCode;

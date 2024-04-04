@@ -32,24 +32,24 @@ const CaseOne = ({ details }) => {
         </svg>
       </div>
       <div className="w-100 row p-5 bg_white">
-        <div className="col-md-6 col-12">
           <span className="mainPlan">Summary</span>
-          <Paragraph className="paragraph_black py-3">
-            {details.selectedPackage}
+          <Paragraph className="paragraph_black pt-3 pb-5">
+            {details?.selectedPackage}
           </Paragraph>
+        <div className="col-md-6 col-12">
           <ul className="p-0" style={{
             listStyle: 'none'
           }}>
             <li className="d-flex align-items-center mb-4">
               <Calunder />
-              <Paragraph className="mb-0 mx-2">{details.selected_plan}</Paragraph>
+              <Paragraph className="summary_item mb-0 mx-2">{details?.selected_plan}</Paragraph>
             </li>
             <li className="d-flex align-items-center mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
               <path d="M26.2502 17.6663L26.4947 15.0687C26.6867 13.0286 26.7827 12.0085 26.4337 11.5869C26.2449 11.3588 25.9882 11.219 25.7137 11.1949C25.2063 11.1503 24.5691 11.8757 23.2947 13.3266C22.6356 14.0769 22.306 14.4521 21.9384 14.5102C21.7347 14.5424 21.5271 14.5093 21.339 14.4146C20.9996 14.2438 20.7732 13.78 20.3206 12.8524L17.9346 7.96316C17.0792 6.21038 16.6515 5.33398 16.0007 5.33398C15.3498 5.33398 14.9221 6.21038 14.0667 7.96317L11.6807 12.8524C11.2281 13.78 11.0017 14.2438 10.6623 14.4146C10.4742 14.5093 10.2666 14.5424 10.0629 14.5102C9.69528 14.4521 9.36574 14.0769 8.70665 13.3266C7.4322 11.8757 6.79498 11.1503 6.28757 11.1949C6.01309 11.219 5.75636 11.3588 5.56757 11.5869C5.21857 12.0085 5.31457 13.0286 5.50658 15.0687L5.75105 17.6663C6.15388 21.9464 6.35529 24.0865 7.61675 25.3769C8.87821 26.6673 10.7688 26.6673 14.5501 26.6673H17.4512C21.2325 26.6673 23.1231 26.6673 24.3845 25.3769C25.646 24.0865 25.8474 21.9464 26.2502 17.6663Z" stroke="black" stroke-width="2"/>
               <path d="M15.0898 16.5575C15.4951 15.8304 15.6978 15.4668 16.0008 15.4668C16.3038 15.4668 16.5064 15.8304 16.9118 16.5575L17.0166 16.7456C17.1318 16.9522 17.1894 17.0555 17.2792 17.1237C17.369 17.1919 17.4808 17.2172 17.7045 17.2678L17.9081 17.3138C18.6952 17.4919 19.0888 17.581 19.1824 17.8821C19.276 18.1832 19.0077 18.4969 18.4711 19.1244L18.3323 19.2867C18.1798 19.465 18.1036 19.5542 18.0693 19.6645C18.035 19.7748 18.0465 19.8937 18.0696 20.1316L18.0906 20.3482C18.1717 21.1854 18.2123 21.604 17.9671 21.7901C17.722 21.9762 17.3535 21.8065 16.6166 21.4672L16.4259 21.3794C16.2165 21.283 16.1118 21.2347 16.0008 21.2347C15.8898 21.2347 15.7851 21.283 15.5757 21.3794L15.385 21.4672C14.648 21.8065 14.2796 21.9762 14.0344 21.7901C13.7893 21.604 13.8299 21.1854 13.911 20.3482L13.932 20.1316C13.955 19.8937 13.9666 19.7748 13.9323 19.6645C13.898 19.5542 13.8217 19.465 13.6692 19.2867L13.5304 19.1244C12.9938 18.4969 12.7255 18.1832 12.8192 17.8821C12.9128 17.581 13.3063 17.4919 14.0934 17.3138L14.2971 17.2678C14.5207 17.2172 14.6326 17.1919 14.7224 17.1237C14.8122 17.0555 14.8697 16.9522 14.9849 16.7456L15.0898 16.5575Z" stroke="#BDBDBD" stroke-width="2"/>
             </svg>
-              <Paragraph className="mb-0 mx-2">{details.mainPlan}</Paragraph>
+              <Paragraph className="summary_item mb-0 mx-2">{details?.mainPlan}</Paragraph>
             </li>
             <li className="d-flex align-items-center mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
@@ -59,7 +59,7 @@ const CaseOne = ({ details }) => {
                 <path opacity="0.5" d="M3.66602 26.8499H6.67926C8.02707 26.8499 9.38939 26.9903 10.7011 27.2605C13.0214 27.7386 15.4645 27.7965 17.8086 27.417C18.9644 27.2299 20.1007 26.9439 21.1293 26.4474C22.0579 25.9992 23.1953 25.3675 23.9593 24.6599C24.7221 23.9533 25.5167 22.7969 26.0806 21.893C26.5642 21.1179 26.3303 20.167 25.5654 19.5894C24.7158 18.9479 23.455 18.948 22.6055 19.5897L20.1959 21.4099C19.2621 22.1154 18.242 22.7648 17.0268 22.9586C16.8807 22.9819 16.7276 23.0031 16.5678 23.0216M16.5678 23.0216C16.5197 23.0272 16.471 23.0325 16.4218 23.0376M16.5678 23.0216C16.7622 22.98 16.9553 22.8601 17.1364 22.702C17.994 21.9535 18.0482 20.692 17.3041 19.8562C17.1314 19.6623 16.9294 19.5005 16.7048 19.3666C12.975 17.142 7.1719 18.8363 3.66602 21.3226M16.5678 23.0216C16.5192 23.0321 16.4704 23.0376 16.4218 23.0376M16.4218 23.0376C15.7239 23.1092 14.9076 23.1277 14.0017 23.0422" stroke="black" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
                 {details?.amenities.map(item=>{
-                  return (<span className='me-2'>{item.title},</span>)
+                  return (<span className='me-2 summary_item'>{item.title},</span>)
                 })}
             </li>
             <li>
@@ -67,7 +67,7 @@ const CaseOne = ({ details }) => {
                 <path d="M5.33398 13.5257C5.33398 7.52914 10.1096 2.66797 16.0007 2.66797C21.8917 2.66797 26.6673 7.52914 26.6673 13.5257C26.6673 19.4753 23.2629 26.4179 17.9512 28.9006C16.713 29.4793 15.2883 29.4793 14.0501 28.9006C8.73842 26.4179 5.33398 19.4753 5.33398 13.5257Z" stroke="black" stroke-width="2"/>
                 <ellipse cx="16" cy="13.332" rx="4" ry="4" stroke="#BDBDBD" stroke-width="2"/>
               </svg>
-              <span className='ms-2'>{branch}</span>
+              <span className='ms-2 summary_item'>{branch}</span>
             </li>
           </ul>
         </div>
@@ -77,12 +77,12 @@ const CaseOne = ({ details }) => {
           }}>
             <li className="d-flex align-items-center mb-4">
               <Payment />
-              <Paragraph className="mb-0 mx-2">
-                {Math.floor(details.price)} EGP
+              <Paragraph className={`mb-0 mx-2 summary_item ${priceAfterPromo !== '' ? 'promoApplided' : ''}`}>
+                {Math.floor(details?.price)} EGP
               </Paragraph>
             </li>
             <li className="mb-0">
-              <PromoCode price={details.price} getPrice={getPrice}/>
+              <PromoCode price={details?.price} getPrice={getPrice}/>
             </li>
               <div className="my-32" style={{
                 borderBottom: '1px solid black'
