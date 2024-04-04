@@ -5,7 +5,7 @@ const CaseThree = ( {bookingResult} ) => {
 
 
   return (
-    <div className="bg_white">
+    <div className="w-100 bg_white">
       <div className="row" >
         <div className="col-lg-6 col-md-6 col-sm-12 order-summary">
           <div className="order-details">
@@ -34,7 +34,7 @@ const CaseThree = ( {bookingResult} ) => {
                 <span className="date-period">Subtotal</span>
               </div>
               <div className="d-flex align-items-center justify-content-between item-box ">
-                <span className="item-name">{bookingResult?.course?.title}</span>
+                <span className="item-name">{bookingResult?.title}</span>
                 <span className="item-price">
                   {bookingResult?.invoice_price} {' '}EGP
                 </span>
@@ -60,10 +60,10 @@ const CaseThree = ( {bookingResult} ) => {
         <div className="col-lg-6 col-md-6 col-sm-12 order-summary-black ">
           <div className="order-details">
             <div className="line">
-              <h2>{bookingResult.course?.title}</h2>
+              <h2>{bookingResult?.title}</h2>
             </div>
             <div className="booking-items">
-              <span>Date: {moment(bookingResult.course?.start_date, 'HH:mm:ss').format("dddd, MMM. D, YYYY")} </span>
+              <span>Date: {moment(bookingResult?.start_date, 'HH:mm:ss').format("dddd, MMM. D, YYYY")} </span>
               {/* <span>
                 Time :{bookingResult.course?.start_time}{"-"}
                 {bookingResult.course?.end_time}

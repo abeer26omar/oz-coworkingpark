@@ -184,3 +184,22 @@ export const applyPromoCode = async (token, code, signal)=>{
     const response = await axios(config);
     return response.data.data;
 };
+
+export const getInovice = async (token, id, type)=>{
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('type', type);
+    formData.append('id', id);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/transactions?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+};

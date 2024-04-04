@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Steps, message } from "antd";
 import Paragraph from "../UI/Paragraph";
 import CaseOne from "./CasesPay/CaseOne";
@@ -6,6 +6,7 @@ import CaseTwo from "./CasesPay/CaseTwo";
 import CaseThree from "./CasesPay/CaseThree";
 import Button from "../UI/Button";
 import { upgradePlan } from '../../apis/User';
+import { getInovice } from '../../apis/config';
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +16,7 @@ const MembershipSummary = () => {
   const [current, setCurrent] = useState(0);
   const [bookingResult, setBookingResult] = useState({});
   const [messageApi, contextHolder] = message.useMessage();
+  const [invoice, setInvoice] = useState({});
   const paymentDetails = JSON.parse(localStorage.getItem("selectedPlanOZ"));
   
   const [inputValue, setInputValue] = useState();
@@ -27,8 +29,8 @@ const MembershipSummary = () => {
 
   const steps = [
     {
-      title: "Summary Booking",
-      ContentTitle: "Summary Booking",
+      title: "Summary Membership",
+      ContentTitle: "Summary Membership",
       content: <CaseOne details={paymentDetails} />,
     },
     {
@@ -50,7 +52,10 @@ const MembershipSummary = () => {
       Modal.success({
         title: result.status,
         content: result.message_data,
-        afterClose: ()=>setCurrent(current + 1)
+        afterClose: ()=>{
+          getInoviceTransaction(result?.transaction_id);
+          setCurrent(current + 1);
+        }
       });
     }catch(error){
       Modal.error({
@@ -58,6 +63,15 @@ const MembershipSummary = () => {
         content: error.response.data.message,
         afterClose: ()=>navigate('/membership')
       });
+    }
+  };
+
+  const getInoviceTransaction = async (id) => {
+    try{
+      const result = await getInovice(token, id, 'all');
+      console.log(result);
+    }catch(error){
+      console.log(error);
     }
   };
 
@@ -84,28 +98,31 @@ const MembershipSummary = () => {
   return (
     <>
       <div
-        className="container py-5 steps-payment"
-        style={{
-          minHeight: "50vh",
-        }}
+        className="container-fluid p-70 steps-payment"
+        // style={{
+        //   minHeight: "50vh",
+        // }}
       >
-        <div className="px_7">
-          <Steps
-            type="navigation"
-            size="small"
-            current={current}
-            className="site-navigation-steps"
-            items={items}
-          />
+        <div className="px_7" style={{
+              textAlign: '-webkit-center'
+        }}>
+          <div className="col-9 d-flex justify-content-center align-items-center">
+            <Steps
+              type="navigation"
+              size="small"
+              current={current}
+              className="site-navigation-steps"
+              items={items}
+            />
+          </div>
         </div>
         <div>
           <Paragraph className="paragraph_black py-5 font-5">
             {steps[current].ContentTitle}
           </Paragraph>
-          <div className={current < steps.length - 1 ? "px_7" : null}>
+          <div className={current < steps.length - 1 ? "" : null}>
             <div
-              className=""
-              // style={current < steps.length - 1 ? '' : null}
+              className="d-flex flex-column justify-content-center align-items-center"
             >
               {steps[current].content}
 

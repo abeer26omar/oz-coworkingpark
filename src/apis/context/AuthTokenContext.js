@@ -90,6 +90,13 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem('userIdOZ');
         localStorage.removeItem('activeUserOZ');
         localStorage.removeItem('userProfileData');
+        localStorage.removeItem('coursesIdsOz');
+        localStorage.removeItem('bookingData');
+        localStorage.removeItem('OZInvoice');
+        localStorage.removeItem('BookingOZDetails');
+        localStorage.removeItem('OZEventAttend');
+        localStorage.removeItem('selectedPlanOZ');
+        localStorage.removeItem('membership');
         setToken('');
         setUserId('');
         setActiveUserId('');

@@ -135,13 +135,14 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
             id: JSON.parse(localStorage.getItem('BookingOZDetailsId')),
             date: startDate,
             time: {
-                start: selectedStartTime,
-                end: selectedEndTime
+                start: startDate,
+                end: startDate
             },
             numberOfPeople: counter,
             spaceDetails: venueDetails,
             services: services || [],
-            price: calcPrice()
+            price: calcPrice(),
+            fullDay: venueDetails.default_price_per === 'day' ? 'Full Day' : ''
         };
         localStorage.setItem("BookingOZDetails", JSON.stringify(bookingData));
     };
@@ -248,9 +249,9 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
     const checkAvailabileTimes = async () => {
         const dateObject = new Date(startDate);
         const formattedDate = dateObject.toISOString().substring(0, 10);
-        const timeStart = new Date(selectedStartTime);
+        const timeStart = new Date(startDate);
         const timeStartStamp = Math.floor(timeStart.getTime() / 1000);
-        const timeEnd = new Date(selectedEndTime);
+        const timeEnd = new Date(startDate);
         const timeEndStamp = Math.floor(timeEnd.getTime() / 1000);
         try{
             const result = await checkAvailability(

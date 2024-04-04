@@ -94,6 +94,10 @@
 a{
     cursor: pointer;
 }
+.my-32{
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
 .service_price{
     color: var(--Primary-1, #000);
     font-family: var(--questrial-font);

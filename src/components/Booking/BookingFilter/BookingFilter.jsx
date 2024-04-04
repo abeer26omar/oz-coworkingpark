@@ -86,7 +86,7 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                         <div className="container-fluid">
                             <form className="form-filter" onSubmit={handleSubmit}>
                                 <div className="filter-component row g-3 d-flex align-items-center justify-content-around">
-                                    <div className='col-xxl-2 col-md-2'>
+                                    <div className='col-xxl-3 col-md-2'>
                                         <div className="input-group">
                                             <input 
                                                 type="date"
@@ -98,7 +98,7 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                                                 placeholder='Select date'/>
                                         </div>
                                     </div>
-                                    <div className='col-xxl-2 col-md-3'>
+                                    <div className='col-xxl-3 col-md-3'>
                                         <Select
                                             id='capacity'
                                             name='capacity'
@@ -117,7 +117,7 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                                             ))}
                                         </Select>
                                     </div>
-                                    <div className='col-xxl-2 col-md-3'>
+                                    <div className='col-xxl-3 col-md-3'>
                                         <Select
                                             id='facilities'
                                             name='facilities'
@@ -137,7 +137,7 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                                         </Select>
                                     </div>
 
-                                    <div className='col-xxl-1 col-md-2'>
+                                    <div className='col-xxl-2 col-md-2 justify-content-end d-flex'>
                                         <Button 
                                             tagType='button'
                                             type='submit'
