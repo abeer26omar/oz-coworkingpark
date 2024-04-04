@@ -136,28 +136,7 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                                             ))}
                                         </Select>
                                     </div>
-                                    <div className='col-xxl-1 col-md-2'>
-                                        <div className="form-check">
-                                            <input
-                                                id='favorites'
-                                                name='favorites'
-                                                value={values.favorites} 
-                                                type="checkbox" 
-                                                className="form-check-input"
-                                                onChange={()=>{
-                                                    if(values.favorites === 1){
-                                                        values.favorites = 0
-                                                    }else{
-                                                        values.favorites = 1
-                                                    }
-                                                }}
-                                                onBlur={handleBlur}
-                                            />
-                                            <label
-                                                className="form-check-label" 
-                                                htmlFor="favorites">Only Favorites</label>
-                                        </div>
-                                    </div>
+
                                     <div className='col-xxl-1 col-md-2'>
                                         <Button 
                                             tagType='button'

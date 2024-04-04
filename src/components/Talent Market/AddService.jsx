@@ -235,9 +235,10 @@ const AddService = () => {
                                                     id='contactType'
                                                     name='contactType'
                                                     defaultValue={values.contactType || undefined}
-                                                    value={values.contactType || undefined}
+                                                    value={values.contactType || 'chat'}
                                                     className="form__field placeholderSelect"
                                                     onBlur={handleBlur}
+                                                    //
                                                     onChange={(value) => {setFieldValue('contactType', value)}}
                                                     bordered={false}
                                                     placeholder={'select how people contact you'}

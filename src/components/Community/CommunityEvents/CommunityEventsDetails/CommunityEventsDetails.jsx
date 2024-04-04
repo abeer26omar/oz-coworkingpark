@@ -352,9 +352,6 @@ const CommunityEventsDetails = () => {
                             <div className="event-type-details">
                                 <Paragraph className="status-event">Price:<br /><span className='mt-3'>{eventDetails.default_price} EGP</span></Paragraph>
                             </div>
-                            <div className="event-type-details">
-                                <Paragraph className="status-event">capacity:<br /><span className='mt-3'>{eventDetails.capacity} person</span></Paragraph>
-                            </div>
                                 
                             </div>
                             <div className="event-type-details">
