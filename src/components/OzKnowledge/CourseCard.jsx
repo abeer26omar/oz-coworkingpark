@@ -28,7 +28,7 @@ const CourseCard = ({coursesDetails}) => {
                         </div>
                 </div>                
                 <div className='card-body'>
-                    <Paragraph className='courseCardTitle dynamic_wraper'>{coursesDetails.title}</Paragraph>
+                    <Paragraph className='courseCardTitle dynamic_wraper_1'>{coursesDetails.title}</Paragraph>
                     <div className='d-flex align-items-center'>
                         <Rate disabled allowHalf defaultValue={coursesDetails.rate} />
                         <span className='rate_count ms-2'>{`(${coursesDetails.rate})`}</span>

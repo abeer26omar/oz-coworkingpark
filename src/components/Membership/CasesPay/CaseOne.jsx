@@ -10,7 +10,7 @@ import { getBranchById } from "../../../apis/config";
 
 const CaseOne = ({ details }) => {
 
-  const [branch, setBransh] = useState();
+  const [branch, setBransh] = useState('');
   const [priceAfterPromo, setPriceAfterPromo] = useState('');
   const { token, branchId } = useContext(AuthContext);
 
@@ -62,7 +62,7 @@ const CaseOne = ({ details }) => {
                   return (<span className='me-2 summary_item'>{item.title},</span>)
                 })}
             </li>
-            <li>
+            <li className="d-flex align-items-center mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                 <path d="M5.33398 13.5257C5.33398 7.52914 10.1096 2.66797 16.0007 2.66797C21.8917 2.66797 26.6673 7.52914 26.6673 13.5257C26.6673 19.4753 23.2629 26.4179 17.9512 28.9006C16.713 29.4793 15.2883 29.4793 14.0501 28.9006C8.73842 26.4179 5.33398 19.4753 5.33398 13.5257Z" stroke="black" stroke-width="2"/>
                 <ellipse cx="16" cy="13.332" rx="4" ry="4" stroke="#BDBDBD" stroke-width="2"/>

@@ -2,23 +2,22 @@ import React, { useContext, useEffect, useState } from "react";
 import { Modal, Steps, message } from "antd";
 import Paragraph from "../UI/Paragraph";
 import CaseOne from "./CasesPay/CaseOne";
-import CaseTwo from "./CasesPay/CaseTwo";
-import CaseThree from "./CasesPay/CaseThree";
+import CaseTwo from "../PaymentCases/CaseTwo";
+import CaseThree from "../PaymentCases/CaseThree";
 import Button from "../UI/Button";
 import { BookKnowledgeCourse } from "../../apis/OzKnowledge";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { useNavigate } from "react-router-dom";
+import { getInovice } from '../../apis/config';
 
 const BookCourse = () => {
 
-  const {token} = useContext(AuthContext)
+  const {token, userProfileData} = useContext(AuthContext);
   const [current, setCurrent] = useState(0);
   const [bookingResult, setBookingResult] = useState({});
   const [messageApi, contextHolder] = message.useMessage();
-  const [paymentDetails, setPaymentDetails] = useState(
-    JSON.parse(localStorage.getItem("OZCourseDetails"))
-  );
   const [inputValue, setInputValue] = useState();
+  const paymentDetails =  JSON.parse(localStorage.getItem("OZCourseDetails"));
 
   const navigate = useNavigate();
 
@@ -26,11 +25,28 @@ const BookCourse = () => {
     setInputValue(value);
   };
 
+  const HandelSummery = () => {
+    const knowledgePackage = userProfileData.zee_knowledge; 
+      if(knowledgePackage){
+        if(knowledgePackage.total_remaining_courses > 0){
+          return `You Have ${knowledgePackage.total_free_courses} Free Courses Included In Your Package,
+          Remaning: ${knowledgePackage.total_remaining_courses} Course`;
+
+        }else{
+          const discount_type = knowledgePackage.zee_knowledge_discount_type === 'percentage' ? '%' : '';
+          return `You Have Consumed Your Free Courses, Now Enjoy ${knowledgePackage.discount} ${discount_type} Discount,
+          Course Price: ${calcPrice(paymentDetails.price, knowledgePackage.discount, discount_type)} EGP`;
+        }
+      }else{
+        return '';
+      }
+  };
+
   const steps = [
     {
       title: "Summary Booking",
-      ContentTitle: "Summary Booking",
-      content: <CaseOne details={paymentDetails} />,
+      ContentTitle: "Summary Course",
+      content: <CaseOne details={paymentDetails} discountRoles= {HandelSummery()} />,
     },
     {
       title: "Payment Method",
@@ -50,11 +66,16 @@ const BookCourse = () => {
     try {
       const result = await BookKnowledgeCourse(token, paymentDetails.id, paymentDetails.date, inputValue, signal)
       setBookingResult(result.data);
-      Modal.success({
-        title: result.status,
-        content: result.message,
-        afterClose: ()=>setCurrent(current + 1)
-      });
+      if(result){
+        getInoviceTransaction(result?.data?.transaction_id);
+        Modal.success({
+          title: result.status,
+          content: result.message,
+          afterClose: ()=>{
+            setCurrent(current + 1);
+          }
+        });
+      }
     }catch(error){
       Modal.error({
         title: 'error',
@@ -62,8 +83,17 @@ const BookCourse = () => {
         afterClose: ()=>navigate('/knowledge')
       });
     }
+  };
+  
+  const getInoviceTransaction = async (id) => {
+    try{
+      const result = await getInovice(token, id, 'all');
+      console.log(result);
+    }catch(error){
+      console.log(error);
+    }
+  };
 
-  }
   const next = () => {
     if (current === 1) {
       if(inputValue === null || inputValue === undefined){
@@ -78,43 +108,43 @@ const BookCourse = () => {
       setCurrent(current + 1);
     }
   };
- 
-  useEffect(() => {
-    setPaymentDetails(JSON.parse(localStorage.getItem("OZCourseDetails")));
-  }, []);
 
   const items = steps.map((item) => ({
     key: item.title,
     title: item.title,
   }));
 
+  const calcPrice = (price, discount, discount_type) => {
+    if(discount_type === 'fixed'){
+      return price - discount;
+    }else{
+        const priceDicounted =  price * discount / 100;
+        return price - priceDicounted;
+    }
+  };
+
   return (
     <>
-   
-      <div
-        className="container py-5 steps-payment"
-        style={{
-          minHeight: "50vh",
-        }}
-      >
-        <div className="px_7">
-          <Steps
-            type="navigation"
-            size="small"
-            current={current}
-            className="site-navigation-steps"
-            items={items}
-          />
-        </div>
-        <div>
+    <div className="container-fluid p-70 steps-payment">
+        <div className="px_7" style={{
+              textAlign: '-webkit-center'
+        }}>
+          <div className="col-9 d-flex justify-content-center align-items-center">
+            <Steps
+              type="navigation"
+              size="small"
+              current={current}
+              className="site-navigation-steps"
+              items={items}
+            />
+          </div>
+      </div>
+    <div>
           <Paragraph className="paragraph_black py-5 font-5">
             {steps[current].ContentTitle}
           </Paragraph>
           <div className={current < steps.length - 1 ? "px_7" : null}>
-            <div
-              className=""
-              // style={current < steps.length - 1 ? '' : null}
-            >
+            <div className="d-flex flex-column justify-content-center align-items-center">
               {steps[current].content}
 
               <div className="text-center p-5">

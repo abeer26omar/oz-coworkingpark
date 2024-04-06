@@ -19,7 +19,7 @@ import * as DOMPurify from 'dompurify';
 
 const CourseDetails = () => {
 
-    const { token, userProfileData } = useContext(AuthContext);
+    const { token } = useContext(AuthContext);
     const { id } = useParams();
     const [showLogin, setShowLogin] = useState(false);
 
@@ -32,61 +32,22 @@ const CourseDetails = () => {
 
     const navigate = useNavigate();
 
-    const HandelSummery = (value) => {
-      const knowledgePackage = userProfileData.zee_knowledge; 
+    const navigatePayment = (value) => {
       if (token) {
-        if(knowledgePackage){
-          if(knowledgePackage.total_remaining_courses > 0){
-            Modal.info({
-              title: 'Membership Package',
-              content: `You Have ${knowledgePackage.total_free_courses} Free Courses Included In Your Package,
-              Remaning: ${knowledgePackage.total_remaining_courses} Course`,
-              centered: true,
-              onOk: () => navigatePayment(value, 'Free'),
-              okText: 'confirm',
-              closable: true,
-              maskClosable: true
-            });
-          }else{
-            const discount_type = knowledgePackage.zee_knowledge_discount_type === 'percentage' ? '%' : '';
-            Modal.info({
-              title: 'Membership Package',
-              content: `You Have Consumed Your Free Courses, Now Enjoy ${knowledgePackage.discount} ${discount_type} Discount,
-              Course Price: ${calcPrice(value.price, knowledgePackage.discount, discount_type)} EGP`,
-              centered: true,
-              onOk: () => navigatePayment(value, calcPrice(value.price, knowledgePackage.discount, discount_type)),
-              okText: 'confirm',
-              closable: true,
-              maskClosable: true
-            });
-          }
-        }
+        const gymCourseDetails = {
+          id: value.id,
+          title: value.title,
+          date: value.start_date,
+          duration: value.course_hours,
+          schedule: value.schedule,
+          price: value.price,
+          level: value.category?.title,
+        };
+        localStorage.setItem("OZCourseDetails", JSON.stringify(gymCourseDetails));
+        navigate(`/course-bookingSummary`);
       } else {
         setShowLogin(true);
       }
-    };
-
-    const calcPrice = (price, discount, discount_type) => {
-      if(discount_type === 'fixed'){
-        return price - discount;
-      }else{
-          const priceDicounted =  price * discount / 100;
-          return price - priceDicounted;
-      }
-    };
-
-    const navigatePayment = (value, price) => {
-      const gymCourseDetails = {
-        id: value.id,
-        title: value.title,
-        date: value.start_date,
-        duration: value.duration,
-        schedule: value.schedule,
-        price: price,
-        level: value.level,
-      };
-      localStorage.setItem("OZgymCourseDetails", JSON.stringify(gymCourseDetails));
-      navigate(`/payment`);
     };
 
     return (
@@ -118,7 +79,7 @@ const CourseDetails = () => {
                                     <img src={confirmedIcon} alt='confirmed Icon'/>
                                 </div>
                             </div>
-                            <Button tagType='link' className="btn white_bg_btn me-2" onClick={()=>{HandelSummery(course)}}>Attend</Button>
+                            <Button tagType='link' className="btn white_bg_btn me-2" onClick={()=>{navigatePayment(course)}}>Attend</Button>
                     </div>
                 </div>
             </MainHeaderWrapper>

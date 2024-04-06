@@ -99,7 +99,7 @@ const GymHistory = () => {
                               src={item.training?.image}
                               alt="img"
                               width="100%"
-                              height="256px"
+                              height="auto"
                               style={{
                                 objectFit: "cover",
                               }}

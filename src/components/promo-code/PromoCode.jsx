@@ -10,6 +10,7 @@ const PromoCode = ({price, getPrice}) => {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState('');
     const [error, seterror] = useState('');
+    const [disabled, setDisabled] = useState(false);
     const {token} = useContext(AuthContext);
 
     const handelChange = (e) => {
@@ -39,7 +40,8 @@ const PromoCode = ({price, getPrice}) => {
                 const result = await applyPromoCode(token, code);
                 calcPrice(result?.discount, result?.discount_type);
                 setLoading(false);
-                setSuccess('Applied')
+                setSuccess('Applied');
+                setDisabled(true);
             }catch(error){
                 setLoading(false);
                 seterror(error.response.data.message);
@@ -77,10 +79,15 @@ const PromoCode = ({price, getPrice}) => {
                     placeholder="Enter your Promo Code"
                     name="promoCode"
                     value={code}
-                    onChange={handelChange}                    
+                    onChange={handelChange}
+                    disabled={disabled}                    
                 />
             </div>
-            <Button className='apply_btn' loading={loading} onClick={addPromoCode}>
+            <Button 
+                className='apply_btn' 
+                loading={loading} 
+                onClick={addPromoCode}
+                disabled={disabled}>
                APPLY
             </Button>
         </div>

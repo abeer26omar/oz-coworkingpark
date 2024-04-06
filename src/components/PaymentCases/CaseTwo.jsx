@@ -9,7 +9,7 @@ const CaseTwo = ({ getPaymentValue }) => {
   };
   return (
     <>
-      <div className="p-5 bg_white">
+      <div className="p-5 bg_white col-md-8 col-12">
         <Paragraph className="paragraph_black light py-3">
           Choose Payment Method
         </Paragraph>

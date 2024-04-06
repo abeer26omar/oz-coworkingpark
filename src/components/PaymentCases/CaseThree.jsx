@@ -21,7 +21,7 @@ const CaseThree = ( {bookingResult} ) => {
               </span>
               <span className="location w-40" 
               dangerouslySetInnerHTML={{
-                __html: bookingResult?.invoice_address.replace(/\n/g, "<br />"),
+                __html: bookingResult?.invoice_address?.replace(/\n/g, "<br />"),
               }}>
                 {/* {bookingResult.invoice_address} */}
               </span>

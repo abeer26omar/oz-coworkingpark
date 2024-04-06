@@ -82,8 +82,8 @@ import GymHistory from "./components/ZeeSudio/GymHistory";
 import PaymentGym from "./components/ZeeSudio/PaymentGym";
 import CourseTracting from './components/OzKnowledge/Course Tracting/CourseTracting';
 import BookCourse from './components/OzKnowledge/BookCourse';
-import BookingSummarySteps from './components/BookingSummary/BookingSummarySteps';
-import MembershipSummary from './components/Membership/MembershipSummary';
+import BookingSummaryEvents from './components/EventsBookingSummary/BookingSummaryEvents';
+import BookingSummaryMembership from './components/Membership/BookingSummaryMembership';
 
 function App() {
 
@@ -141,12 +141,12 @@ function App() {
           { path:'membership', element: <Membership />},  
           { path:'membership/:id', element: <MembershipOptions />},
           { path:'singleMember/:id', element: <MemberPackage />},
-          { path:'membershipSummary', element: <MembershipSummary />},
+          { path:'membership-bookingSummary', element: <BookingSummaryMembership />},
           { path:'spaces', element: <Spaces />},
           { path:'community', element: <Community />},
           { path:'community/events', element: <CommunityEventsExplore />},
           { path:'events/:name/:id', element: <CommunityEventsDetails />},
-          { path:'event-bookingSummary', element: <BookingSummarySteps />},
+          { path:'event-bookingSummary', element: <BookingSummaryEvents />},
           { path:'community/newsfeed', element: <NewsFeed />},
           { path:'community/newsfeed/singleFeed/:id', element: <SingleNewFeed />},
           { path:'private', element: <PrivateEvents />},
@@ -174,14 +174,14 @@ function App() {
           { path:'knowledge', element: <Knowledge />},
           { path:'courses/:id', element: <OZCourses />},
           { path:'coursedetails/:id', element: <CourseDetails />},
-          { path:'bookclass', element: <BookCourse />},
+          { path:'course-bookingSummary', element: <BookCourse />},
           { path:'coursesHistory', element: <RouterGuard element={CoursesHistory} />},
           { path:'coursetracting/:id', element: <CourseTracting />},
           { path: "zeestudio", element: <ZeeStudio /> },
           { path: "ourgymclasses", element: <MoreClasses /> },
           { path: "ourtrainer", element: <OurTrainerPage /> },
           { path: "gymdetails/:id", element: <GymDetails /> },
-          { path: "payment", element: <PaymentGym/> },
+          { path: "class-bookingSummary", element: <PaymentGym/> },
           { path: "gymhistory", element: <RouterGuard element={GymHistory} /> },
           { path:'invoice', element: <Invoice />}
         ]}

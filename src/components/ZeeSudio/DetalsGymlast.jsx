@@ -18,59 +18,22 @@ const DetalsGymlast = ({ details, pending }) => {
 
   const navigate = useNavigate();
 
-  const HandelSummery = (value) => {
-    const zeePackage = userProfileData.zee_studio; 
+  const navigatePayment = (value) => {
     if (token) {
-      if(zeePackage){
-        if(zeePackage.total_remaining_courses > 0){
-          Modal.info({
-            title: 'Membership Package',
-            content: `You Have ${zeePackage.total_free_courses} Free Courses Included In Your Package,
-            Remaning: ${zeePackage.total_remaining_courses} Course`,
-            centered: true,
-            onOk: () => navigatePayment(value, 'Free'),
-            okText: 'confirm',
-            closable: true,
-            maskClosable: true
-          });
-        }else{
-          const discount_type = zeePackage.zee_studio_discount_type === 'percentage' ? '%' : '';
-          Modal.info({
-            title: 'Membership Package',
-            content: `You Have Consumed Your Free Courses, Now Enjoy ${zeePackage.discount} ${discount_type} Discount,
-            Course Price: ${calcPrice(value.price, zeePackage.discount, discount_type)} EGP`,
-            centered: true,
-            onOk: () => navigatePayment(value, calcPrice(value.price, zeePackage.discount, discount_type)),
-            okText: 'confirm',
-            closable: true,
-            maskClosable: true
-          });
-        }
-      }
-    } else {
+      const gymCourseDetails = {
+        id: value.id,
+        title: value.title,
+        date: value.start_date,
+        duration: value.duration,
+        schedule: value.schedule,
+        price: value.price,
+        level: value.level,
+      };
+      localStorage.setItem("OZgymCourseDetails", JSON.stringify(gymCourseDetails));
+      navigate(`/class-bookingSummary`);
+    }else {
       setShowLogin(true);
     }
-  };
-  const calcPrice = (price, discount, discount_type) => {
-    if(discount_type === 'fixed'){
-      return price - discount;
-    }else{
-        const priceDicounted =  price * discount / 100;
-        return price - priceDicounted;
-    }
-  }
-  const navigatePayment = (value, price) => {
-    const gymCourseDetails = {
-      id: value.id,
-      title: value.title,
-      date: value.start_date,
-      duration: value.duration,
-      schedule: value.schedule,
-      price: price,
-      level: value.level,
-    };
-    localStorage.setItem("OZgymCourseDetails", JSON.stringify(gymCourseDetails));
-    navigate(`/payment`);
   };
 
   return (
@@ -176,7 +139,7 @@ const DetalsGymlast = ({ details, pending }) => {
                 )}
                 <Button
                   tagType="link"
-                  onClick={() => HandelSummery(details)}
+                  onClick={() => navigatePayment(details)}
                   className="btn button-outLine btn-bg-white"
                 >Book a Class
                   {/* {details.attended === true ? '' : 'Book a Class'} */}
@@ -195,14 +158,12 @@ const DetalsGymlast = ({ details, pending }) => {
                 </Paragraph>
               )}
             </div>
-            <div className="col-12 py-5 video-container position-relative">
+            <div className="col-12 py-5 d-flex justify-content-center video-container position-relative">
               {pending ? (
                 <Skeleton.Image active />
               ) : (
                 <video
                   src={details.video}
-                  className="w-100"
-                  height="616px"
                   controls
                 />
               )}

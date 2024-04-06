@@ -22,7 +22,7 @@ const PopularCourses = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     centerMode: true,
-    centerPadding: "60px 0px 0px",
+    centerPadding: "40px 0px 0px",
     responsive: [
       {
         breakpoint: 1300,

@@ -22,7 +22,7 @@ import {useNavigate} from 'react-router-dom';
 const CommunityEventsDetails = () => {
 
     const {id} = useParams();
-    const [eventDetails, setEventDetails] = useState([]);
+    const [eventDetails, setEventDetails] = useState({});
     const [image, setImage] = useState('');
     const [swalProps, setSwalProps] = useState({});
     const [reload, setReload] = useState(false);
@@ -59,24 +59,24 @@ const CommunityEventsDetails = () => {
 
     const navigatePayment = (price) => {
         const OZEventAttend = {
-          id: eventDetails.id,
-          date: eventDetails.dates,
-          title: eventDetails.event_name,
-          genre: eventDetails.event_type?.name,
-          capacity: eventDetails.capacity,
-          price: price
+          id: eventDetails?.id,
+          date: eventDetails?.dates,
+          title: eventDetails?.event_name,
+          genre: eventDetails?.event_type?.name,
+          capacity: eventDetails?.capacity,
+          price: price,
+          active_membership_discount: eventDetails?.active_membership_discount
         };
         localStorage.setItem("OZEventAttend", JSON.stringify(OZEventAttend));
         navigate(`/event-bookingSummary`);
     };
 
     const attend = async () => {
-        // setReload(false);
         if(token){
             try{
                 const result = await checkEvent(token, userId, id);
                 if(result.bookable){
-                    checkPackage();
+                    navigatePayment(eventDetails.default_price);
                 } else{
                     Modal.success({
                         title: result.status,
@@ -99,28 +99,6 @@ const CommunityEventsDetails = () => {
             }
         }else{
             setShow(true);
-        }
-    };
-
-    const checkPackage = () => {
-        if(eventDetails?.active_membership_discount && eventDetails?.active_membership_discount !== null){
-            if(+planId === eventDetails?.active_membership_discount?.id){
-                const discount = eventDetails?.active_membership_discount?.discount;
-                const discount_type = eventDetails?.active_membership_discount?.discount_type === 'percentage' ? '%' : '';
-                const price =  eventDetails?.active_membership_discount?.price;
-                Modal.info({
-                    title: 'Membership Package',
-                    content: `You Have ${discount} ${discount_type} Included In Your Membership Package 
-                    Final Price: ${CalcPrice(discount, price, eventDetails?.active_membership_discount?.discount_type)}`,
-                    centered: true,
-                    onOk: () => navigatePayment(CalcPrice(discount, price, eventDetails?.active_membership_discount?.discount_type)),
-                    okText: 'confirm',
-                    closable: true,
-                    maskClosable: true
-                });
-            }
-        }else{
-            navigatePayment(eventDetails.default_price);
         }
     };
 
@@ -148,17 +126,6 @@ const CommunityEventsDetails = () => {
                 closable: true,
                 maskClosable: true
             });
-        }
-    };
-
-    const CalcPrice = (discount, price, discount_type) => {
-        if (price === '0'){
-            if(discount_type === 'fixed'){
-                return eventDetails?.default_price - discount;
-            }else{
-                const priceDicounted =  eventDetails?.default_price * discount / 100;
-                return eventDetails?.default_price - priceDicounted;
-            }
         }
     };
 

@@ -2,15 +2,15 @@ import React, { useContext, useState } from "react";
 import { Modal, Steps, message } from "antd";
 import Paragraph from "../UI/Paragraph";
 import CaseOne from "./CasesPay/CaseOne";
-import CaseTwo from "./CasesPay/CaseTwo";
-import CaseThree from "./CasesPay/CaseThree";
+import CaseTwo from "../PaymentCases/CaseTwo";
+import CaseThree from "../PaymentCases/CaseThree";
 import Button from "../UI/Button";
 import { upgradePlan } from '../../apis/User';
 import { getInovice } from '../../apis/config';
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { useNavigate } from "react-router-dom";
 
-const MembershipSummary = () => {
+const BookingSummaryMembership = () => {
 
   const {token} = useContext(AuthContext)
   const [current, setCurrent] = useState(0);
@@ -53,7 +53,7 @@ const MembershipSummary = () => {
         title: result.status,
         content: result.message_data,
         afterClose: ()=>{
-          getInoviceTransaction(result?.transaction_id);
+          getInoviceTransaction(result?.data?.transaction_id);
           setCurrent(current + 1);
         }
       });
@@ -97,12 +97,7 @@ const MembershipSummary = () => {
 
   return (
     <>
-      <div
-        className="container-fluid p-70 steps-payment"
-        // style={{
-        //   minHeight: "50vh",
-        // }}
-      >
+      <div className="container-fluid p-70 steps-payment">
         <div className="px_7" style={{
               textAlign: '-webkit-center'
         }}>
@@ -120,7 +115,7 @@ const MembershipSummary = () => {
           <Paragraph className="paragraph_black py-5 font-5">
             {steps[current].ContentTitle}
           </Paragraph>
-          <div className={current < steps.length - 1 ? "" : null}>
+          <div className={current < steps.length - 1 ? "px_7" : null}>
             <div
               className="d-flex flex-column justify-content-center align-items-center"
             >
@@ -157,4 +152,4 @@ const MembershipSummary = () => {
   );
 };
 
-export default MembershipSummary;
+export default BookingSummaryMembership;

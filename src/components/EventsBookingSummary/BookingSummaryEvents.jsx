@@ -2,18 +2,20 @@ import React, { useContext, useEffect, useState } from "react";
 import { Modal, Steps, message } from "antd";
 import Paragraph from "../UI/Paragraph";
 import CaseOne from "./CaseOne";
-import CaseTwo from "./CaseTwo";
-import CaseThree from "./CaseThree";
+import CaseTwo from "../PaymentCases/CaseTwo";
+import CaseThree from "../PaymentCases/CaseThree";
 import Button from "../UI/Button";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { useNavigate } from "react-router-dom";
 import { attendEvent } from '../../apis/Events';
+import { getInovice } from '../../apis/config';
 
-const BookingSummarySteps = () => {
+const BookingSummaryEvents = () => {
 
   const [messageApi, contextHolder] = message.useMessage();
-  const {token, userId} = useContext(AuthContext)
+  const {token, userId, planId} = useContext(AuthContext);
   const [current, setCurrent] = useState(0);
+  const [discountRole, setDiscountRole] = useState('');
   const [bookingResult, setBookingResult] = useState({});
   const eventDetails = JSON.parse(localStorage.getItem("OZEventAttend")) || {};
   const [inputValue, setInputValue] = useState();
@@ -27,8 +29,8 @@ const BookingSummarySteps = () => {
   const steps = [
     {
       title: "Summary Booking",
-      ContentTitle: "Summary Booking",
-      content: <CaseOne details={eventDetails} />,
+      ContentTitle: "Summary Attend Events",
+      content: <CaseOne details={eventDetails} discountRole={discountRole} />,
     },
     {
       title: "Payment Method",
@@ -49,8 +51,11 @@ const BookingSummarySteps = () => {
             title: res.status,
             content: res.message,
             centered: true,
-            onOk: () => setCurrent(current + 1)
-        });
+            afterClose: ()=>{
+              getInoviceTransaction(res?.transaction_id);
+              setCurrent(current + 1);
+            }
+          });
     }catch(error){
         Modal.error({
             title: error.response.data.status,
@@ -60,6 +65,15 @@ const BookingSummarySteps = () => {
             closable: true,
             maskClosable: true,
         });
+    }
+  };
+
+  const getInoviceTransaction = async (id) => {
+    try{
+      const result = await getInovice(token, id, 'all');
+      console.log(result);
+    }catch(error){
+      console.log(error);
     }
   };
 
@@ -78,6 +92,34 @@ const BookingSummarySteps = () => {
     }
   };
 
+  const CalcPrice = (discount, price, discount_type) => {
+    if (price !== '0'){
+        if(discount_type === 'fixed'){
+            return eventDetails?.price - discount;
+        }else{
+            const priceDicounted =  eventDetails?.price * discount / 100;
+            return eventDetails?.price - priceDicounted;
+        }
+    }else{
+      return eventDetails?.price;
+    }
+  };
+
+  useEffect(()=>{
+    const checkPackage = () => {
+      if(eventDetails?.active_membership_discount && eventDetails?.active_membership_discount !== null){
+        if(+planId === eventDetails?.active_membership_discount?.id){
+          const discount = eventDetails?.active_membership_discount?.discount;
+          const discount_type = eventDetails?.active_membership_discount?.discount_type === 'percentage' ? '%' : '';
+          const price =  eventDetails?.active_membership_discount?.price;
+          setDiscountRole(`You Have ${discount} ${discount_type} Included In Your Membership Package 
+          Final Price: ${CalcPrice(discount, price, eventDetails?.active_membership_discount?.discount_type)}`)
+        }
+      }
+    };
+    checkPackage();
+  },[eventDetails]);
+
   const items = steps.map((item) => ({
     key: item.title,
     title: item.title,
@@ -85,13 +127,11 @@ const BookingSummarySteps = () => {
 
   return (
     <>
-      <div
-        className="container py-5 steps-payment"
-        style={{
-          minHeight: "50vh",
-        }}
-      >
-        <div className="px_7">
+      <div className="container-fluid p-70 steps-payment">
+        <div className="px_7" style={{
+              textAlign: '-webkit-center'
+        }}>
+        <div className="col-9 d-flex justify-content-center align-items-center">
           <Steps
             type="navigation"
             size="small"
@@ -100,14 +140,14 @@ const BookingSummarySteps = () => {
             items={items}
           />
         </div>
+        </div>
         <div>
           <Paragraph className="paragraph_black py-5 font-5">
             {steps[current].ContentTitle}
           </Paragraph>
-          <div className={current < steps.length - 1 ? "px_7" : null}>
+          <div>
             <div
-              className=""
-              // style={current < steps.length - 1 ? '' : null}
+              className="d-flex flex-column justify-content-center align-items-center"
             >
               {steps[current].content}
 
@@ -142,4 +182,4 @@ const BookingSummarySteps = () => {
   );
 };
 
-export default BookingSummarySteps;
+export default BookingSummaryEvents;

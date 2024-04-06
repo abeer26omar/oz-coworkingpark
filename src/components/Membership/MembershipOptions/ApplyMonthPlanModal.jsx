@@ -87,7 +87,7 @@ const ApplyMonthPlanModal = (props) => {
             amenities: props.details.amenities
         } 
        localStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
-        navigate('/membershipSummary');
+        navigate('/membership-bookingSummary');
     }
 
     const getPlan = (plan) => {
