@@ -19,16 +19,14 @@ import Home from "./pages/Home";
 import Community from "./pages/Community";
 import NewsFeed from "./pages/NewsFeed";
 import SingleNewFeed from "./components/NewsFeed/NewsFeedBlogs/SingleNewFeed/SingleNewFeed";
-import CommunityEventsExplore
-    from "./components/Community/CommunityEvents/CommunityEventsExplore/CommunityEventsExplore";
-import CommunityEventsDetails
-    from "./components/Community/CommunityEvents/CommunityEventsDetails/CommunityEventsDetails";
+import CommunityEventsExplore from "./components/Community/CommunityEvents/CommunityEventsExplore/CommunityEventsExplore";
+import CommunityEventsDetails from "./components/Community/CommunityEvents/CommunityEventsDetails/CommunityEventsDetails";
 import PrivateEvents from "./pages/PrivateEvents";
 import Houses from "./pages/Houses";
 import HouseDetails from "./components/Houses/HousesDetails/HouseDetails";
 import Booking from "./pages/Booking";
 import BookingDetails from "./components/Booking/BookinDetails/BookingDetails";
-import BookingSummary from "./components/Booking/BookinDetails/SpaceDetails/BookingSummary/BookingSummary";
+import BookingSummaryVenue from "./components/Booking/BookinDetails/SpaceDetails/BookingSummary/BookingSummaryVenue";
 import Gallery from "./pages/Gallery";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
@@ -158,7 +156,7 @@ function App() {
           { path:'RescheduleBooking/:id', element: <RescheduleBooking />},
           { path:'myplanDetials/:id', element: <MyplanDetials />},
           { path:'myeventDetails/:id', element: <MyEventDetails/>},
-          { path:'bookingDetails/bookNow', element: <BookingSummary />},
+          { path:'bookingDetails/bookNow', element: <BookingSummaryVenue />},
           { path:'community/galleryshow', element: <Gallery />},
           { path:'ozys', element: <Ozys />},
           { path:'amenities', element: <Amenities />},

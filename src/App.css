@@ -164,6 +164,9 @@ a {
     padding-bottom: 60px;
 }
 /*******************************************/
+.fs-16{
+    font-size: 16px;
+}
 .head_color{
     color: var(--Head_color);
 }

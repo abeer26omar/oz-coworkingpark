@@ -9,9 +9,14 @@ export const getAmenitiesGroup = async (token, user_id, branch_id) => {
     formData.append('user_id', user_id);
     formData.append('branch_id', branch_id);
 
+    const URL = `${process.env.REACT_APP_API_URL}/api/get-amenitie-groups?access_token=${token}&skip=true`;
+    // if(token){
+    //     URL = `${process.env.REACT_APP_API_URL}/api/get-amenitie-groups?access_token=${token}`;
+    // }
+
     const config = {
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/get-amenitie-groups?access_token=${token}`,
+        url: URL,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
@@ -152,7 +157,8 @@ export const checkAvailability = async (token,
     return response.data.data;
 };
 
-export const confirmBooking = async (token, 
+export const confirmBooking = async (
+    token, 
     UserId,
     branch_id,
     venue_id,
@@ -164,7 +170,12 @@ export const confirmBooking = async (token,
     total_price,
     date_time,
     check_in,
-    check_out) => {
+    check_out,
+    promo_code_id,
+    promo_discount,
+    booking_discount,
+    service_discount
+    ) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -183,6 +194,14 @@ export const confirmBooking = async (token,
         services.forEach(service => {
             formData.append('service[]', service.value);
         });
+    }
+    if(promo_code_id){
+        formData.append('promo_code_id', promo_code_id);
+        formData.append('promo_discount', promo_discount);
+    }
+    if(booking_discount){
+        formData.append('booking_discount', booking_discount);
+        formData.append('service_discount', service_discount);
     }
 
     const config = {

@@ -5,21 +5,21 @@ import DatePicker from "react-datepicker";
 import {useNavigate} from "react-router-dom";
 import Button from '../../../UI/Button';
 import RequestFormModal from '../../../Auth/LoginAlertModal';
-import Toast from 'react-bootstrap/Toast';
 import {checkAvailability} from '../../../../apis/Booking';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import ShowAvaliablesModal from './ShowAvaliablesModal';
 import moment from 'moment';
-import { Modal } from 'antd';
+import { Modal, message } from 'antd';
 import { addMonths, isAfter, subMonths } from 'date-fns';
 
 const BookingForm = ({venueDetails, reschedule, services}) => {
 
+
+    const [messageApi, contextHolder] = message.useMessage();
     const [startDate, setStartDate] = useState(null);
     const [selectedStartTime, setSelectedStartTime] = useState(null);
     const [selectedEndTime, setSelectedEndTime] = useState(null);
     const [show, setShow] = useState(false);
-    const [showToast, setShowToast] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false);
     const [counter, setCounter] = useState(4);
     const [avaliableDate, setAvaliableDates] = useState([]);
@@ -29,6 +29,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
     const { userId, userProfileData, token } = useContext(AuthContext);
     const [amentiyGroupId, setAmenityGroupId] = useState('');
     const [discountAmentiyGroupId, setDiscountAmentiyGroupId] = useState('');
+    const [packagePrice, setPackagePrice] = useState({});
 
     const handleDateChange = (date) => {
         const timezoneOffset = date.getTimezoneOffset();
@@ -48,76 +49,37 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
     const handelHide = () => setShow(false);
     const handelAvailableHide = () => setShowAvailable(false);
 
-    const saveBookingData = async (e)=>{
+    const saveBookingData =  (e)=>{
         e.preventDefault();
-        try{
-            if(venueDetails.default_price_per === 'day'){
-                fullDayReservation();
-            }else{
-                if((startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
-                    if(token){
-                        if(amentiyGroupId){
-                            const hours = calcReservationHours(selectedStartTime, selectedEndTime);
-                            checkForBackage(hours);
-                        }else if(discountAmentiyGroupId){
-                            const discount = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount;
-                            const price = userProfileData?.membership_discount_roles[discountAmentiyGroupId].price;
-                            const type = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount_type === 'percentage' ? '%' : '';
-    
-                            return Modal.info({
-                                title: 'Membership Package',
-                                content: `Enjoy ${discount} ${type} Off From Room Price`,
-                                footer: true,
-                                centered: true,
-                                closable: true,
-                                maskClosable: true
-                            });
-                        }else{
-                            checkAvailabileTimes();
-                        }
-                    }else{
-                        setShow(true);
-                    }
-                    addUserDetails();
-                }else{
-                    setShowToast(true);
-                }
-            }
-        }catch (error){
-
-        }
-    };
-
-    const fullDayReservation = () => {
-        if(startDate !== null){
             if(token){
-                if(amentiyGroupId){
-                    const hours = calcReservationHours(selectedStartTime, selectedEndTime);
-                    checkForBackage(hours);
-                }else if(discountAmentiyGroupId){
-                    const discount = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount;
-                    const price = userProfileData?.membership_discount_roles[discountAmentiyGroupId].price;
-                    const type = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount_type === 'percentage' ? '%' : '';
-
-                    return Modal.info({
-                        title: 'Membership Package',
-                        content: `Enjoy ${discount} ${type} Off From Room Price`,
-                        footer: true,
-                        centered: true,
-                        closable: true,
-                        maskClosable: true
-                    });
+                if(venueDetails.default_price_per === 'day'){
+                    if(startDate !== null){
+                        addUserDetails('day');
+                    }else{
+                        messageApi.open({
+                            type: 'error',
+                            content: 'Please select Your booking details!',
+                            style: {
+                                marginTop: '20vh',
+                            },
+                        });
+                    }
                 }else{
-                    checkAvailabileTimes();
+                    if((startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
+                        addUserDetails('hour');
+                    }else{
+                        messageApi.open({
+                            type: 'error',
+                            content: 'Please select Your booking details!',
+                            style: {
+                                marginTop: '20vh',
+                            },
+                        });
+                    }
                 }
-                
             }else{
                 setShow(true);
             }
-            addUserDetails();
-        }else{
-            setShowToast(true);
-        }
     };
 
     const calcReservationHours = (start, end) => {
@@ -127,123 +89,141 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
         const duration = moment.duration(endTime.diff(startTime));
         
         const hours = duration.hours();
-        return hours;
+        const minutes = duration.minutes();
+        const totalMinutes = hours * 60 + minutes;
+
+        return totalMinutes;
     };
 
-    const addUserDetails = () => {
+    const addUserDetails = (type) => {
         const bookingData  = {
             id: JSON.parse(localStorage.getItem('BookingOZDetailsId')),
             date: startDate,
             time: {
-                start: startDate,
-                end: startDate
+                start: selectedStartTime,
+                end: selectedEndTime
             },
             numberOfPeople: counter,
             spaceDetails: venueDetails,
             services: services || [],
-            price: calcPrice(),
-            fullDay: venueDetails.default_price_per === 'day' ? 'Full Day' : ''
+            membershipPackageOffer: clacPackage(type),
+            price: venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price,
+            service_price : services.reduce((sum, item) => sum + item.price, 0),
+            fullDay: venueDetails.default_price_per === 'day' ? 'Full Day' : '',
         };
         localStorage.setItem("BookingOZDetails", JSON.stringify(bookingData));
     };
 
-    const calcPrice = () => {
-        let Finalprice;
-        if(amentiyGroupId || discountAmentiyGroupId){
-            if(amentiyGroupId){
-                Finalprice = 0;
+    const clacPackage = (type) => {
+        if(amentiyGroupId){
+            if(type === 'day'){
+                const hours = 24 * 60;
+                return checkForBackage(hours, type);
+            }else{
+                const hours = calcReservationHours(selectedStartTime, selectedEndTime);
+                return checkForBackage(hours, type);
             }
-            if(discountAmentiyGroupId){
-                Finalprice = userProfileData?.membership_discount_roles[discountAmentiyGroupId].price;
-            }
+        }else if(discountAmentiyGroupId){
+            const discount = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount;
+            const price = userProfileData?.membership_discount_roles[discountAmentiyGroupId].price;
+            const type = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount_type === 'percentage' ? '%' : '';
+            addUserDetails()
+            return {
+                description: `Enjoy ${discount} ${type} Off`, 
+                price: price
+            };
+        }else{
+            checkAvailabileTimes()
         }
-        else{
-            Finalprice =  venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price;
-        }
-        const service_price = services.reduce((sum, item) => sum + item.price, 0);
-        const total_price = Finalprice + service_price;
-        return JSON.stringify({total_price: total_price, service_price: service_price, booking_price: Finalprice, venue_price: venueDetails?.price});
-    };
+    }
 
-    const checkForBackage = (hours) => {
+    const checkForBackage = (hours, type) => {
         const how_many_hours = userProfileData?.membership_packages[amentiyGroupId].how_many_hours;
         const max_hours = userProfileData?.membership_packages[amentiyGroupId].max_hours;
         const used_hours = userProfileData?.membership_packages[amentiyGroupId].used_hours;
 
-        if(how_many_hours === used_hours){
+        const how_many_hours_min = how_many_hours * 60 ;
+        const max_hours_min = max_hours * 60;
+        const used_hours_min = used_hours * 60;
+
+        if(how_many_hours_min === used_hours_min){
             if(discountAmentiyGroupId){
                 const discount = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount;
                 const price = userProfileData?.membership_discount_roles[discountAmentiyGroupId].price;
                 const type = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount_type === 'percentage' ? '%' : '';
-
-                return Modal.info({
-                    title: 'Membership Package',
-                    content: `You Have Consumed Your Package Free Hours And Now Enjoy ${discount} ${type} Off From Room Price`,
-                    centered: true,
-                    onOk: checkAvailabileTimes,
-                    okText: 'confirm',
-                    closable: true,
-                    maskClosable: true
-                });
+                checkAvailabileTimes();
+                return {
+                    description: `Enjoy ${discount} ${type} Off From Room Price`, 
+                    price: price
+                };
             }else{
-                return Modal.warning({
-                    title: 'Membership Package',
-                    content: `You Have Consumed Your Package Free Hours`,
-                    centered: true,
-                    onOk: checkAvailabileTimes,
-                    okText: 'confirm',
-                    closable: true,
-                    maskClosable: true
-                });
+                checkAvailabileTimes();
+                return ``;
             }
         }else{
-            if(max_hours){
-                if(hours > max_hours){
-                    return Modal.warning({
-                        title: 'Membership Package',
-                        content: `You Have Only ${max_hours} Hours For Reservation In Your package`,
-                        footer: false,
-                        centered: true,
-                        closable: true,
-                        maskClosable: true
-                        // stop booking 
-                    });
+            if(max_hours_min){
+                if(hours > max_hours_min){
+                    if(type === 'day'){
+                        checkAvailabileTimes();
+                        return {
+                            description: `You Have Only ${max_hours} Hours free Included In Your package`,
+                            price: venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price,
+                            hours: hours
+                        };
+                    }else{
+                        return Modal.warning({
+                            title: 'Membership Package',
+                            content: `You Have Only ${max_hours} Hours For Reservation In Your package`,
+                            footer: true,
+                            centered: true,
+                            closable: true,
+                            maskClosable: true
+                            // stop booking 
+                        });
+                    }
                 }else {
-                    return Modal.info({
-                        title: 'Membership Package',
-                        content: `You Have ${max_hours} Hours free For Reservations Included In Your package`,
-                        centered: true,
-                        onOk: checkAvailabileTimes,
-                        okText: 'confirm',
-                        closable: true,
-                        maskClosable: true
-                    });
+                    checkAvailabileTimes();
+                    return {
+                        description: `You Have ${max_hours} Hours free Included In Your package`, 
+                        price: 0, 
+                        hours: hours
+                    };
                 }
 
             }else{
-                if(hours > how_many_hours){
-                    return Modal.info({
-                        title: 'Membership Package',
-                        content: `You Have Only ${how_many_hours} Hours For Reservation In Your package`,
-                        footer: false,
-                        centered: true,
-                        closable: true,
-                        maskClosable: true
-                        // stop booking 
-                    });
+                if(hours > how_many_hours_min){
+                    if(type === 'day'){
+                        checkAvailabileTimes();
+                        return {
+                            description: `You Have Only ${how_many_hours} Hours free Included In Your package`,
+                            price: venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price,
+                            hours: hours
+                        };
+                    }else{
+                        const freeHours_min = hours - how_many_hours_min;
+                        checkAvailabileTimes();
+                        return {
+                            description: `You Have Only ${how_many_hours} Hours free Included In Your package`,
+                            price: calculateReservationPrice(freeHours_min, venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price),
+                            hours: hours
+                        }
+                    }
                 }else {
-                    return Modal.info({
-                        title: 'Membership Package',
-                        content: `You Have ${how_many_hours} Hours free For Reservations Included In Your package`,
-                        centered: true,
-                        onOk: checkAvailabileTimes,
-                        okText: 'confirm',
-                        closable: true,
-                        maskClosable: true
-                    });
+                    checkAvailabileTimes();
+                    return {
+                        description: `You Have ${how_many_hours} Hours free Included In Your package`,
+                        price: 0, 
+                        hours: hours
+                    };
                 }
             }
         }
+    };
+
+    const calculateReservationPrice = (totalMinutes, hourlyRate) => {
+        const durationInHours = totalMinutes / 60;
+        const totalPrice = durationInHours * hourlyRate;
+        return totalPrice;
     };
 
     const checkAvailabileTimes = async () => {
@@ -301,6 +281,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
             setCounter((prevCount) => prevCount - 1);
         }
     };
+
     const handlePrevClick = (prevMonth, setCurrentMonth) => {
         const currentDate = new Date();
         const threeMonthsAgo = subMonths(currentDate, 3);
@@ -325,6 +306,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
             })
         }
     };
+
     const renderCustomHeader = ({
         date,
         decreaseMonth,
@@ -574,23 +556,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                     </div>
                 </div>
             </div>
-            <Toast 
-                onClose={() => setShowToast(false)} 
-                show={showToast} 
-                delay={3000} 
-                autohide 
-                bg={'info'}
-                position={'top-center'}
-                style={{
-                    position: 'absolute',
-                    bottom: '15%',
-                    zIndex: '9'
-                }}>
-                <Toast.Body style={{
-                    color: '#fff',
-                    textTransform: 'capitalize'
-                }}>Please select Your booking details!</Toast.Body>
-            </Toast>
+            {contextHolder}
             <RequestFormModal 
                 show={show}
                 handleClose={handelHide}

@@ -190,8 +190,8 @@ export const getInovice = async (token, id, type)=>{
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
-    formData.append('type', type);
     formData.append('id', id);
+    formData.append('type', type);
 
     const config = {
         method: 'post',

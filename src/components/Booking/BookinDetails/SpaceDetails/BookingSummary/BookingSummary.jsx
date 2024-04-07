@@ -17,6 +17,7 @@ import { useSearchParams } from "react-router-dom";
 import { Modal } from "antd";
 import { getUserInfo } from '../../../../../apis/User';
 import PromoCode from '../../../../promo-code/PromoCode';
+import moment from 'moment';
 
 const BookingSummary = () => {
 
@@ -26,6 +27,7 @@ const BookingSummary = () => {
   const [show, setShow] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [payment, setPayment] = useState(1);
+  const [priceAfterPromo, setPriceAfterPromo] = useState('');
   const { token, userId, branchId, modifyUserData } = useContext(AuthContext);
 
   const handelClose = () => setShow(false);
@@ -209,6 +211,7 @@ const BookingSummary = () => {
         console.log(err);
       }
   };
+  
   const removeService = (index) => {
     // Create a copy of the services array without the item to be removed
     const updatedServices = bookingServices.filter((_, i) => i !== index);
@@ -225,7 +228,6 @@ const BookingSummary = () => {
     setBookingServices(JSON.parse(localStorage.getItem("BookingOZServices")));
   }, []);
 
-  const [priceAfterPromo, setPriceAfterPromo] = useState('');
 
   const getPrice = (value) => {
     setPriceAfterPromo(value);
@@ -331,7 +333,7 @@ const BookingSummary = () => {
                                     stroke-linecap="round"
                                   />
                                 </svg>
-                                {setDate(bookingData?.date)}
+                                {moment(bookingData?.date).format("dddd, MMM. D, YYYY")}
                               </li>
                               <li>
                                 <svg
@@ -512,7 +514,7 @@ const BookingSummary = () => {
                         </a>
                       </div>
                     </>
-                                    )}
+                  )}
                                     {step.key === 'payment' && (
                                         <>
                                             <div className="payment-bg">
