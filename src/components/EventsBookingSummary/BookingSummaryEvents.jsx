@@ -6,7 +6,6 @@ import CaseTwo from "../PaymentCases/CaseTwo";
 import CaseThree from "../PaymentCases/CaseThree";
 import Button from "../UI/Button";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
-import { useNavigate } from "react-router-dom";
 import { attendEvent } from '../../apis/Events';
 import { getInovice } from '../../apis/config';
 
@@ -60,7 +59,7 @@ const BookingSummaryEvents = () => {
 
   const attendEventCheck = async () => {
     try{
-        const res = await attendEvent(token, userId, eventDetails.id, promo_code_id, promo_code_id);
+        const res = await attendEvent(token, userId, eventDetails.id, promo_code_id, promo_discount);
         Modal.success({
             title: res.status,
             content: res.message,

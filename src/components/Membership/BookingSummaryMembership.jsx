@@ -18,8 +18,9 @@ const BookingSummaryMembership = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [invoice, setInvoice] = useState({});
   const paymentDetails = JSON.parse(localStorage.getItem("selectedPlanOZ"));
-  
   const [inputValue, setInputValue] = useState();
+  const [promo_code_id, setPromo_code_id] = useState(0);
+  const [promo_discount, setPromo_discount] = useState(0);
 
   const navigate = useNavigate();
 
@@ -27,11 +28,23 @@ const BookingSummaryMembership = () => {
     setInputValue(value);
   };
 
+  const getPromoId = (value) => {
+    setPromo_code_id(value);
+  };
+
+  const getPromoValue = (value) => {
+    setPromo_discount(value);
+  };
+
   const steps = [
     {
       title: "Summary Membership",
       ContentTitle: "Summary Membership",
-      content: <CaseOne details={paymentDetails} />,
+      content: <CaseOne 
+        details={paymentDetails}
+        getPromoId={getPromoId}
+        getPromoValue={getPromoValue}
+      />,
     },
     {
       title: "Payment Method",
@@ -47,7 +60,7 @@ const BookingSummaryMembership = () => {
 
   const bookRequset = async () => {
     try {
-      const result = await upgradePlan(token, paymentDetails.planId, paymentDetails.selected_plan_price);
+      const result = await upgradePlan(token, paymentDetails.planId, paymentDetails.selected_plan_price, promo_code_id, promo_discount);
       setBookingResult(result.data);
       Modal.success({
         title: result.status,

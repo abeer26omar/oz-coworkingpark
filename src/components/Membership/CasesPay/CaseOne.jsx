@@ -8,7 +8,7 @@ import PromoCode from '../../promo-code/PromoCode';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import { getBranchById } from "../../../apis/config";
 
-const CaseOne = ({ details }) => {
+const CaseOne = ({ details, getPromoValue, getPromoId }) => {
 
   const [branch, setBransh] = useState('');
   const [priceAfterPromo, setPriceAfterPromo] = useState('');
@@ -82,7 +82,8 @@ const CaseOne = ({ details }) => {
               </Paragraph>
             </li>
             <li className="mb-0">
-              <PromoCode price={details?.price} getPrice={getPrice}/>
+              <PromoCode price={details?.price} getPrice={getPrice} getPromoId={getPromoId} 
+                getPromoValue={getPromoValue}/>
             </li>
               <div className="my-32" style={{
                 borderBottom: '1px solid black'

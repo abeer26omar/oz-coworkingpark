@@ -172,6 +172,8 @@ export const BookKnowledgeCourse = async (
   class_id,
   classDate,
   paymentType,
+  promo_code_id, 
+  promo_discount,
   signal
 ) => {
   const formData = new FormData();
@@ -181,6 +183,11 @@ export const BookKnowledgeCourse = async (
   formData.append("date", classDate);
   formData.append("payment_type", paymentType);
 
+  if(promo_code_id){
+    formData.append('promo_code_id', promo_code_id);
+    formData.append('promo_discount', promo_discount);
+  }
+  
   const config = {
     method: "post",
     url: `${process.env.REACT_APP_API_URL}/api/zee_knowledge_invoice_confirm?access_token=${token}`,

@@ -7,7 +7,7 @@ import Payment from "../../UI/Icons/Payment";
 import moment from "moment";
 import PromoCode from '../../promo-code/PromoCode';
 
-function CaseOne({ details, discountRoles }) {
+function CaseOne({ details, discountRoles, getPromoValue, getPromoId }) {
   const [priceAfterPromo, setPriceAfterPromo] = useState('');
 
   const getPrice = (value) => {
@@ -56,7 +56,12 @@ function CaseOne({ details, discountRoles }) {
       
           </li>
           <li className="mb-0">
-              <PromoCode price={details?.price} getPrice={getPrice}/>
+              <PromoCode 
+                price={details?.price} 
+                getPrice={getPrice}
+                getPromoId={getPromoId} 
+                getPromoValue={getPromoValue}
+              />
             </li>
               <div className="my-32" style={{
                 borderBottom: '1px solid black'

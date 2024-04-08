@@ -18,9 +18,19 @@ const PaymentGym = () => {
   const [bookingResult, setBookingResult] = useState({});
   const paymentDetails = JSON.parse(localStorage.getItem("OZgymCourseDetails"))
   const [inputValue, setInputValue] = useState();
+  const [promo_code_id, setPromo_code_id] = useState(0);
+  const [promo_discount, setPromo_discount] = useState(0);
 
   const getPaymentValue = (value) => {
     setInputValue(value);
+  };
+
+  const getPromoId = (value) => {
+    setPromo_code_id(value);
+  };
+
+  const getPromoValue = (value) => {
+    setPromo_discount(value);
   };
 
   const navigate = useNavigate();
@@ -41,6 +51,7 @@ const PaymentGym = () => {
         return '';
       }
   };
+
   const calcPrice = (price, discount, discount_type) => {
     if(discount_type === 'fixed'){
       return price - discount;
@@ -54,7 +65,12 @@ const PaymentGym = () => {
     {
       title: "Summary Booking",
       ContentTitle: "Summary Class",
-      content: <CaseOne details={paymentDetails} discountRoles= {HandelSummery()} />,
+      content: <CaseOne 
+        details={paymentDetails} 
+        discountRoles= {HandelSummery()}
+        getPromoId={getPromoId}
+        getPromoValue={getPromoValue}
+      />,
     },
     {
       title: "Payment Method",
@@ -72,7 +88,7 @@ const PaymentGym = () => {
     const controller = new AbortController();
     const signal = controller.signal;
     try {
-      const result = await BookGymClass(token, paymentDetails.id, paymentDetails.date, inputValue, signal)
+      const result = await BookGymClass(token, paymentDetails.id, paymentDetails.date, inputValue, promo_code_id, promo_discount, signal)
       setBookingResult(result.data);
       if(result){
         getInoviceTransaction(result?.data?.transaction_id);

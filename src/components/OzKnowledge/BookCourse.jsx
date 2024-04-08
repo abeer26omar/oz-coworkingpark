@@ -18,11 +18,21 @@ const BookCourse = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [inputValue, setInputValue] = useState();
   const paymentDetails =  JSON.parse(localStorage.getItem("OZCourseDetails"));
+  const [promo_code_id, setPromo_code_id] = useState(0);
+  const [promo_discount, setPromo_discount] = useState(0);
 
   const navigate = useNavigate();
 
   const getPaymentValue = (value) => {
     setInputValue(value);
+  };
+
+  const getPromoId = (value) => {
+    setPromo_code_id(value);
+  };
+
+  const getPromoValue = (value) => {
+    setPromo_discount(value);
   };
 
   const HandelSummery = () => {
@@ -46,7 +56,12 @@ const BookCourse = () => {
     {
       title: "Summary Booking",
       ContentTitle: "Summary Course",
-      content: <CaseOne details={paymentDetails} discountRoles= {HandelSummery()} />,
+      content: <CaseOne 
+        details={paymentDetails} 
+        discountRoles= {HandelSummery()}
+        getPromoId={getPromoId}
+        getPromoValue={getPromoValue} 
+      />,
     },
     {
       title: "Payment Method",
@@ -64,7 +79,7 @@ const BookCourse = () => {
     const controller = new AbortController();
     const signal = controller.signal;
     try {
-      const result = await BookKnowledgeCourse(token, paymentDetails.id, paymentDetails.date, inputValue, signal)
+      const result = await BookKnowledgeCourse(token, paymentDetails.id, paymentDetails.date, inputValue, promo_code_id, promo_discount,signal)
       setBookingResult(result.data);
       if(result){
         getInoviceTransaction(result?.data?.transaction_id);
