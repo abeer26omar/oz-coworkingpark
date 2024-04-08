@@ -15,7 +15,6 @@ import Button from '../../UI/Button';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import ApplyPlanModal from './ApplyPlanModal';
 import ApplyMonthPlanModal from './ApplyMonthPlanModal';
-import {upgradePlan} from '../../../apis/User';
 import { Modal } from 'antd';
 import { useQuery } from '@tanstack/react-query';
 

@@ -64,7 +64,7 @@ const MyBooking = ()=>{
                         {
                             data && Object.keys(data).map((item,index)=>{
                                 return (
-                                    <Nav.Item className='col-4 text-center p-0' key={index}>
+                                    <Nav.Item className='col-4 justify-content-center text-center p-0' key={index}>
                                         <Nav.Link 
                                             className="booking_navlink" 
                                             eventKey={item}

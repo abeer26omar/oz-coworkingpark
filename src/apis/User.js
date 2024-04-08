@@ -259,17 +259,17 @@ export const addExtraBundle = async (token, membership_id) => {
     return response.data.data;
 };
 
-export const upgradePlan = async (token, type, days, price, promo_code_id, promo_discount) => {
+export const upgradePlan = async (token, type, price, days, promo_code_id, promo_discount) => {
         
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
     formData.append('type', type);
+    formData.append('price', price);
+    
     if(days){
         formData.append('days', days);
     }
-    if(price){
-        formData.append('price', price);
-    }
+
     if(promo_code_id){
         formData.append('promo_code_id', promo_code_id);
         formData.append('promo_discount', promo_discount);

@@ -78,11 +78,14 @@ const CaseOne = ({ details, getPromoValue, getPromoId }) => {
             <li className="d-flex align-items-center mb-4">
               <Payment />
               <Paragraph className={`mb-0 mx-2 summary_item ${priceAfterPromo !== '' ? 'promoApplided' : ''}`}>
-                {Math.floor(details?.price)} EGP
+                {Math.floor(details?.selected_plan_price)} EGP
               </Paragraph>
             </li>
             <li className="mb-0">
-              <PromoCode price={details?.price} getPrice={getPrice} getPromoId={getPromoId} 
+              <PromoCode 
+                price={details?.selected_plan_price}
+                getPrice={getPrice} 
+                getPromoId={getPromoId} 
                 getPromoValue={getPromoValue}/>
             </li>
               <div className="my-32" style={{
@@ -91,7 +94,7 @@ const CaseOne = ({ details, getPromoValue, getPromoId }) => {
             <li className="price-promo">
               <div className="d-flex justify-content-between align-items-center">
                 <p>Total Price:</p>
-                <p>{priceAfterPromo} EGP</p>
+                <p>{priceAfterPromo || details?.selected_plan_price} EGP</p>
               </div>
             </li>
           </ul>

@@ -2,18 +2,25 @@ import moment from "moment";
 
 const CaseThree = ( {bookingResult} ) => {
 
+    const calcTax = (price) => {
+        const tax = price * 14 / 100;
+        return tax;
+    }
+
   return (
     <div className="w-100 bg_white">
       <div className="row" >
         <div className="col-lg-6 col-md-6 col-sm-12 order-summary">
           <div className="order-details">
             <h2>
-              {bookingResult?.invoice_title}
-              <br /> #{bookingResult?.invoice_id}
+              {bookingResult?.status === 'paid' ? 'Receipt' : 'Amount Due'}
+              <br /><span style={{
+                fontFamily:'roboto'
+              }}>#</span>{bookingResult?.id}
             </h2>
             <div className="d-flex align-items-center justify-content-between">
               <span className="date-period">
-                Date Period: {moment(bookingResult?.invoice_date).format("MMM DD, YYYY")}
+                Date Period: {moment(bookingResult?.payload?.pro_current_start).format("MMM DD, YYYY")}
                 <br />
                 <span className="invoice">Invoice</span>
               </span>
@@ -32,24 +39,29 @@ const CaseThree = ( {bookingResult} ) => {
                 <span className="date-period">Subtotal</span>
               </div>
               <div className="d-flex align-items-center justify-content-between item-box ">
-                <span className="item-name">{bookingResult?.title}</span>
-                <span className="item-price">
-                  {bookingResult?.invoice_price} {' '}EGP
+                <span className="item-name">{bookingResult?.payload?.package?.name}</span>
+                <span className={`item-price ${bookingResult?.price_before_discount !== bookingResult?.price ? 'promoApplided light' : ''}`}>
+                  {bookingResult?.price_before_discount} {' '}EGP
                 </span>
               </div>
+              {bookingResult?.price_before_discount !== bookingResult?.price ? (<div className="d-flex align-items-end justify-content-end item-box ">
+                <span className={`item-price`}>
+                  {bookingResult?.price} {' '}EGP
+                </span>
+              </div>) : ''}
             </div>
 
             <div className="d-flex align-items-center justify-content-between line">
-              <span className="date-period">Tax {bookingResult?.invoice_tax}%</span>
+              <span className="date-period">Tax {'14'}%</span>
               <span className="location">
-                {Math.floor(bookingResult?.invoice_tax_value)} {' '}
+                {Math.floor(calcTax(bookingResult?.price))} {' '}
                 EGP
               </span>
             </div>
             <div className="d-flex align-items-center justify-content-between item-box">
               <span className="item-total">Total Price:</span>
               <span className="item-total-price">
-                {Math.floor(bookingResult?.invoice_total)} {' '}
+                {Math.floor(bookingResult?.price) + Math.floor(calcTax(bookingResult?.price))} {' '}
                 EGP
               </span>
             </div>
@@ -58,15 +70,14 @@ const CaseThree = ( {bookingResult} ) => {
         <div className="col-lg-6 col-md-6 col-sm-12 order-summary-black ">
           <div className="order-details">
             <div className="line">
-              <h2>{bookingResult?.title}</h2>
+              <h2>{bookingResult?.payload?.package?.name}</h2>
             </div>
             <div className="booking-items">
-              <span>Date: {moment(bookingResult?.start_date, 'HH:mm:ss').format("dddd, MMM. D, YYYY")} </span>
-              {/* <span>
-                Time :{bookingResult.course?.start_time}{"-"}
-                {bookingResult.course?.end_time}
-              </span> */}
-              {bookingResult?.payment_type === 'cash' && (<span>Cash notes: {bookingResult?.payment_type}</span>)}
+              <span>Start : {moment(bookingResult?.payload?.pro_current_start).format("dddd, MMM. D, YYYY")} </span>
+              <span>End : {moment(bookingResult?.payload?.pro_current_end).format("dddd, MMM. D, YYYY")}</span>
+              <span>Duration : {bookingResult?.payload?.pro_current_months} Months</span>
+
+              {bookingResult?.payment_method === 'cash' && (<span>Cash notes: Total payment due in 2 days.</span>)}
             </div>
           </div>
         </div>

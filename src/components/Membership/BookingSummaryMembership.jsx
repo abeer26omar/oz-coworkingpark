@@ -3,7 +3,7 @@ import { Modal, Steps, message } from "antd";
 import Paragraph from "../UI/Paragraph";
 import CaseOne from "./CasesPay/CaseOne";
 import CaseTwo from "../PaymentCases/CaseTwo";
-import CaseThree from "../PaymentCases/CaseThree";
+import CaseThree from "./CasesPay/CaseThree";
 import Button from "../UI/Button";
 import { upgradePlan } from '../../apis/User';
 import { getInovice } from '../../apis/config';
@@ -53,20 +53,19 @@ const BookingSummaryMembership = () => {
     },
     {
       title: "Invoice details",
-      ContentTitle: bookingResult?.invoice_title,
+      ContentTitle: bookingResult?.status === 'paid' ? 'Receipt' : 'Amount Due',
       content: <CaseThree bookingResult={bookingResult} />,
     },
   ];
 
   const bookRequset = async () => {
     try {
-      const result = await upgradePlan(token, paymentDetails.planId, paymentDetails.selected_plan_price, promo_code_id, promo_discount);
-      setBookingResult(result.data);
+      const result = await upgradePlan(token, paymentDetails.planId, paymentDetails.selected_plan_price, 0,promo_code_id, promo_discount);
       Modal.success({
         title: result.status,
         content: result.message_data,
         afterClose: ()=>{
-          getInoviceTransaction(result?.data?.transaction_id);
+          getInoviceTransaction(result?.transaction_id, 'ManagePro');
           setCurrent(current + 1);
         }
       });
@@ -79,10 +78,10 @@ const BookingSummaryMembership = () => {
     }
   };
 
-  const getInoviceTransaction = async (id) => {
+  const getInoviceTransaction = async (id, type) => {
     try{
-      const result = await getInovice(token, id, 'all');
-      console.log(result);
+      const result = await getInovice(token, id, type);
+      setBookingResult(result);
     }catch(error){
       console.log(error);
     }
@@ -128,7 +127,7 @@ const BookingSummaryMembership = () => {
           <Paragraph className="paragraph_black py-5 font-5">
             {steps[current].ContentTitle}
           </Paragraph>
-          <div className={current < steps.length - 1 ? "px_7" : null}>
+          <div className={current < steps.length - 1 ? "" : null}>
             <div
               className="d-flex flex-column justify-content-center align-items-center"
             >
