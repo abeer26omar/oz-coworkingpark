@@ -119,12 +119,17 @@ export const checkEvent = async (token, userId, eventId) => {
     return response.data.data;
 };
 
-export const attendEvent = async (token, userId, eventId) => {
+export const attendEvent = async (token, userId, eventId, promo_code_id, promo_discount) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
     formData.append('user_id', userId);
     formData.append('event_id', eventId);
+
+    if(promo_code_id){
+        formData.append('promo_code_id', promo_code_id);
+        formData.append('promo_discount', promo_discount);
+    }
 
     const config = {
         method: 'post',

@@ -9,7 +9,7 @@ import PromoCode from '../promo-code/PromoCode';
 import { AuthContext } from '../../apis/context/AuthTokenContext';
 import { getBranchById } from "../../apis/config";
 
-function CaseOne({ details, discountRole }) {
+function CaseOne({ details, discountRole, getPromoValue, getPromoId }) {
   const [branch, setBransh] = useState('');
   const [priceAfterPromo, setPriceAfterPromo] = useState('');
   const [price, setPrice] = useState(details.price);
@@ -91,7 +91,12 @@ function CaseOne({ details, discountRole }) {
 
             }
             <li className="mb-0">
-              <PromoCode price={details?.price} getPrice={getPrice}/>
+              <PromoCode 
+                price={details?.price} 
+                getPrice={getPrice}
+                getPromoId={getPromoId} 
+                getPromoValue={getPromoValue}
+              />
             </li>
               <div className="my-32" style={{
                 borderBottom: '1px solid black'

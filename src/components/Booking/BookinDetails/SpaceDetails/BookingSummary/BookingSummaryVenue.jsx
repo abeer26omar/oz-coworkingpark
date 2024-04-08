@@ -82,7 +82,7 @@ const BookingSummaryVenue = () => {
                 return bookingData.spaceDetails.price;
             }else {
                 // const actualPrice = 
-                // return price
+                return price;
             }
         }else{
             return bookingData.spaceDetails.price;

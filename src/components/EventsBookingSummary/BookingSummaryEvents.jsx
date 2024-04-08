@@ -19,18 +19,32 @@ const BookingSummaryEvents = () => {
   const [bookingResult, setBookingResult] = useState({});
   const eventDetails = JSON.parse(localStorage.getItem("OZEventAttend")) || {};
   const [inputValue, setInputValue] = useState();
+  const [promo_code_id, setPromo_code_id] = useState(0);
+  const [promo_discount, setPromo_discount] = useState(0);
 
   const getPaymentValue = (value) => {
     setInputValue(value);
   };
 
-  const navigate = useNavigate();
+  const getPromoId = (value) => {
+    setPromo_code_id(value);
+  };
+
+  const getPromoValue = (value) => {
+    setPromo_discount(value);
+  };
+
 
   const steps = [
     {
       title: "Summary Booking",
       ContentTitle: "Summary Attend Events",
-      content: <CaseOne details={eventDetails} discountRole={discountRole} />,
+      content: <CaseOne 
+          details={eventDetails} 
+          discountRole={discountRole} 
+          getPromoId={getPromoId}
+          getPromoValue={getPromoValue}
+        />,
     },
     {
       title: "Payment Method",
@@ -46,7 +60,7 @@ const BookingSummaryEvents = () => {
 
   const attendEventCheck = async () => {
     try{
-        const res = await attendEvent(token, userId, eventDetails.id);
+        const res = await attendEvent(token, userId, eventDetails.id, promo_code_id, promo_code_id);
         Modal.success({
             title: res.status,
             content: res.message,

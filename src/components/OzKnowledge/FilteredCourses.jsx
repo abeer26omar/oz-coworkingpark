@@ -21,7 +21,7 @@ const FilteredCourses = () => {
     const [page, setPage] = useState(0);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [priceFrom, setPriceFrom] = useState(0);
+    const [priceFrom, setPriceFrom] = useState(1);
     const [priceTo, setPriceTo] = useState(400); 
     const [categoryId, setCategoryId] = useState([]);
     const [categoryIds, setCategoryIds] = useState([]);
@@ -128,10 +128,10 @@ const FilteredCourses = () => {
         setSellerType(e.target.value);
     };
 
-    const onChangeSlider = (value) => {
-        setPriceFrom(value[0]);
-        setPriceTo(value[1]);
-    };
+    // const onChangeSlider = (value) => {
+    //     setPriceFrom(value[0]);
+    //     setPriceTo(value[1]);
+    // };
 
     const onChangeDateStart = (dateString) => {
         setStartDate(dateString);
@@ -247,21 +247,21 @@ const FilteredCourses = () => {
                             <div className='col-5'>
                                 <InputNumber
                                     controls={false}
-                                    addonAfter="USD"
+                                    addonAfter="EGP"
                                     value={priceFrom}
-                                    onChange={onChangeSlider}
+                                    // onChange={onChangeSlider}
                                 />
                             </div>
                             <div className='col-5'>
                                 <InputNumber
                                     controls={false}
-                                    addonAfter="USD"
+                                    addonAfter="EGP"
                                     value={priceTo}
-                                    onChange={onChangeSlider}
+                                    // onChange={onChangeSlider}
                                 />
                             </div>
                         </div>
-                            <Slider 
+                            {/* <Slider 
                                 range
                                 step={10}
                                 max={400}
@@ -269,7 +269,7 @@ const FilteredCourses = () => {
                                 defaultValue={[priceFrom, priceTo]}
                                 // value={[priceFrom, priceTo]}
                                 onChange={onChangeSlider}
-                            />
+                            /> */}
                         </div>
                     ),
                 }
