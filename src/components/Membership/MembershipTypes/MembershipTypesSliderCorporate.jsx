@@ -86,7 +86,9 @@ const MembershipTypesSliderCorporate = ({currentMemberId}) => {
 
     return (
         <>
-        <Slider {...settings} className='corporate_slider'>
+        {types && types['corporate']?.lenght > 1 ? 
+        (
+            <Slider {...settings} className='corporate_slider'>
             {types && types['corporate'].map((listMembershipType, index) => {
                 const {id, name, link, description, logo} = listMembershipType;
                 if(currentMemberId !== id){
@@ -102,7 +104,29 @@ const MembershipTypesSliderCorporate = ({currentMemberId}) => {
                     </div>
                 )}
             })}
-        </Slider>
+            </Slider>
+        ) 
+        :
+        (
+            <>
+            {types && types['corporate'].map((listMembershipType, index) => {
+                const {id, name, link, description, logo} = listMembershipType;
+                if(currentMemberId !== id){
+                    return (  
+                        <div className="col-4 px-2" key={index}>
+                   <MembershipTypesList
+                           id={id}
+                           name={name}
+                           link={link}
+                           description={description}
+                           image={logo}
+                       />
+                   </div>)
+                }
+            })}
+            </>
+        )}
+        
         {!types && <Paragraph>there is no membership type to display</Paragraph>}
         </>
     );

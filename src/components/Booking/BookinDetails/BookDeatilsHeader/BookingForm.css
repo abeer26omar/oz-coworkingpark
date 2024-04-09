@@ -271,7 +271,7 @@ bookbottom__ul img {
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
-    line-height: 120%; /* 21.6px */
+    line-height: 120%;
     border: 0;
     background-color: transparent;
     width: 100%;
@@ -377,8 +377,48 @@ bookbottom__ul img {
 
     width: 110%;
 }
+@media screen and (max-width: 1200px) {
+    .place-text,
+    .bookbottom__li * {
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 991.5px) {
+    .bookbottom__li {
+        border: none;
+        flex: none;
+    }
+    .reservebutton{
+        border: 1px solid var(--white-color);
+        margin-bottom: 1rem;
+    }
+    .bookbottom__select .btn-group .button-select-guest,
+    .bookbottom__form input[type="text"], 
+    .bookbottom__form input[type="password"]{
+        text-decoration: underline;
+    }
+}
 @media screen and (max-width: 768px) {
     .bookbottom__ul{
         flex-direction: column;
+    }
+}
+@media screen and (max-width: 575px) {
+    .select-date-costume .react-datepicker__month-container {
+        width: 368px;
+    }
+}
+@media screen and (max-width: 425px) {
+    .react-datepicker__time-container {
+        width: 350px;
+    }
+}
+@media screen and (max-width: 320px) {
+    .select-date-costume .react-datepicker__month-container ,
+    .react-datepicker__time-container {
+        width: 300px;
+    }
+    .select-date-costume .react-datepicker__navigation--previous {
+        left: 260px;
     }
 }

@@ -62,7 +62,9 @@ const BookingSummaryVenue = () => {
                     if(servicePrice){
                         setPrice(servicePrice);
                     }
-                    setPrice('0');
+                    else{
+                      setPrice('0');
+                    }
                 }else{
                     if(servicePrice){
                         setPrice(servicePrice + price);
@@ -180,9 +182,9 @@ const BookingSummaryVenue = () => {
                     bookingData.numberOfPeople,
                     bookingData.spaceDetails.booking_code,
                     bookingData.services,
-                    // bookingData.spaceDetails.price,
+                    price - servicePrice,
                     servicePrice,
-                    promo_discount ? price -  promo_discount : price,
+                    promo_discount ? price - promo_discount : price,
                     setDateApi(bookingData.date),
                     setTimeApi(bookingData.time.start),
                     setTimeApi(bookingData.time.end),

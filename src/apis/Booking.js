@@ -324,7 +324,7 @@ export const requestBooking = async (token, userId, branch_id, venueId, bookingD
 
     const response = await axios(config);
         
-    return response.data.data;
+    return response.data;
 };
 
 export const rescheduleBooking = async (token, userId, booking_id, venueId, date_time, check_in, check_out) => {

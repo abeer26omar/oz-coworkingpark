@@ -9,21 +9,54 @@ import PromoCode from '../promo-code/PromoCode';
 import { AuthContext } from '../../apis/context/AuthTokenContext';
 import { getBranchById } from "../../apis/config";
 
-function CaseOne({ details, discountRole, getPromoValue, getPromoId }) {
-  const [branch, setBransh] = useState('');
-  const [priceAfterPromo, setPriceAfterPromo] = useState('');
-  const [price, setPrice] = useState(details.price);
-  const { token, branchId } = useContext(AuthContext);
+function CaseOne({ details, getPromoValue, getPromoId }) {
+    const [branch, setBransh] = useState('');
+    const [priceAfterPromo, setPriceAfterPromo] = useState('');
+    const [price, setPrice] = useState(details.price);
+    const { token, branchId, planId } = useContext(AuthContext);
 
-  const getPrice = (value) => {
-    setPriceAfterPromo(value);
-  };
+    const getPrice = (value) => {
+      setPriceAfterPromo(value);
+    };
 
-  useEffect(() => {
-    getBranchById(token, branchId).then((res) => {
-      setBransh(res.name);
-    });
-  }, [branchId]);
+    useEffect(() => {
+      getBranchById(token, branchId).then((res) => {
+        setBransh(res.name);
+      });
+    }, [branchId]);
+
+    const CalcPrice = (discount, discount_type) => {
+          if(discount_type === 'fixed'){
+              return details?.price - discount;
+          }else{
+              const priceDicounted =  details?.price * discount / 100;
+              return details?.price - priceDicounted;
+          }
+    };
+    
+    const checkPackage = () => {
+      if(details?.active_membership_discount && details?.active_membership_discount !== null){
+        if(+planId === details?.active_membership_discount?.id){
+          const discount = details?.active_membership_discount?.discount;
+          const discount_type = details?.active_membership_discount?.discount_type === 'percentage' ? '%' : '';
+          const price =  details?.active_membership_discount?.price;
+          return (
+            <>
+              <Paragraph className={`mb-0 mx-2 summary_item ${priceAfterPromo !== '' ? 'promoApplided' : ''}`}>
+                  {CalcPrice(discount, price, discount_type)} EGP
+              </Paragraph>
+              <Paragraph className='mb-0 mx-2 fs-16 light'>
+                You Have {discount} {discount_type} Off
+              </Paragraph>
+            </>
+          )
+        }else{
+          return details?.price;
+        }
+      }else{
+        return details?.price;
+      }
+    };
 
   return (
     <>
@@ -71,25 +104,8 @@ function CaseOne({ details, discountRole, getPromoValue, getPromoId }) {
           }}>
             <li className="d-flex align-items-center mb-4">
               <Payment />
-              <Paragraph className={`mb-0 mx-2 summary_item ${priceAfterPromo !== '' ? 'promoApplided' : ''}`}>
-                {Math.floor(details.price)} EGP
-              </Paragraph>
+              {checkPackage()}
             </li>
-            {details.active_membership_discount.price !== '0' ? (
-              <>
-               {(discountRole && discountRole !== '') &&
-              (<li className="d-flex align-items-center mb-4">
-                <span className="mainPlan">Membership Discount</span>
-                <Paragraph className={`mb-0 mx-2 summary_item ${priceAfterPromo !== '' ? 'promoApplided' : ''}`}>
-                  {discountRole}
-                </Paragraph>
-              </li>)
-            }
-              </>
-            )
-            : ""
-
-            }
             <li className="mb-0">
               <PromoCode 
                 price={details?.price} 

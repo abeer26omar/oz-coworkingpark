@@ -3,7 +3,7 @@ import { Modal, Steps, message } from "antd";
 import Paragraph from "../UI/Paragraph";
 import CaseOne from "./CaseOne";
 import CaseTwo from "../PaymentCases/CaseTwo";
-import CaseThree from "../PaymentCases/CaseThree";
+import CaseThree from "./CaseThree";
 import Button from "../UI/Button";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { attendEvent } from '../../apis/Events';
@@ -14,7 +14,6 @@ const BookingSummaryEvents = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const {token, userId, planId} = useContext(AuthContext);
   const [current, setCurrent] = useState(0);
-  const [discountRole, setDiscountRole] = useState('');
   const [bookingResult, setBookingResult] = useState({});
   const eventDetails = JSON.parse(localStorage.getItem("OZEventAttend")) || {};
   const [inputValue, setInputValue] = useState();
@@ -23,7 +22,7 @@ const BookingSummaryEvents = () => {
 
   const getPaymentValue = (value) => {
     setInputValue(value);
-  };
+  }
 
   const getPromoId = (value) => {
     setPromo_code_id(value);
@@ -40,7 +39,6 @@ const BookingSummaryEvents = () => {
       ContentTitle: "Summary Attend Events",
       content: <CaseOne 
           details={eventDetails} 
-          discountRole={discountRole} 
           getPromoId={getPromoId}
           getPromoValue={getPromoValue}
         />,
@@ -52,7 +50,7 @@ const BookingSummaryEvents = () => {
     },
     {
       title: "Invoice details",
-      ContentTitle: bookingResult?.invoice_title,
+      ContentTitle: bookingResult?.status === 'paid' ? 'Receipt' : 'Amount Due',
       content: <CaseThree bookingResult={bookingResult} />,
     },
   ];
@@ -84,7 +82,7 @@ const BookingSummaryEvents = () => {
   const getInoviceTransaction = async (id) => {
     try{
       const result = await getInovice(token, id, 'all');
-      console.log(result);
+      setBookingResult(result);
     }catch(error){
       console.log(error);
     }
@@ -104,34 +102,6 @@ const BookingSummaryEvents = () => {
       setCurrent(current + 1);
     }
   };
-
-  const CalcPrice = (discount, price, discount_type) => {
-    if (price !== '0'){
-        if(discount_type === 'fixed'){
-            return eventDetails?.price - discount;
-        }else{
-            const priceDicounted =  eventDetails?.price * discount / 100;
-            return eventDetails?.price - priceDicounted;
-        }
-    }else{
-      return eventDetails?.price;
-    }
-  };
-
-  useEffect(()=>{
-    const checkPackage = () => {
-      if(eventDetails?.active_membership_discount && eventDetails?.active_membership_discount !== null){
-        if(+planId === eventDetails?.active_membership_discount?.id){
-          const discount = eventDetails?.active_membership_discount?.discount;
-          const discount_type = eventDetails?.active_membership_discount?.discount_type === 'percentage' ? '%' : '';
-          const price =  eventDetails?.active_membership_discount?.price;
-          setDiscountRole(`You Have ${discount} ${discount_type} Included In Your Membership Package 
-          Final Price: ${CalcPrice(discount, price, eventDetails?.active_membership_discount?.discount_type)}`)
-        }
-      }
-    };
-    checkPackage();
-  },[eventDetails]);
 
   const items = steps.map((item) => ({
     key: item.title,

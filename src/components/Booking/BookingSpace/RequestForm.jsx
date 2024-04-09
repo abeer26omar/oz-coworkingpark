@@ -142,7 +142,7 @@ const RequestForm = ({venueId})=>{
                         <Button 
                             tagType='button'
                             type="submit" 
-                            className="btn_outline_black">Request</Button>
+                            className="btn_outline_black">Submit</Button>
                     </div>
                 </form>
             )}}
