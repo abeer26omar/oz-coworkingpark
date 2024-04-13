@@ -33,7 +33,7 @@ const SpaceDetails = ({venueDetails, getServices}) => {
                 <section className="space-details">
                     <div className="container-fluid">
                         <div className="row p-3">
-                            <div className="col-lg-6 col-12 p-sm-5 p-3 border-right">
+                            <div className="col-md-6 col-12 p-lg-5 p-3 border-right">
                                 <div className="space-description mb-5">
                                     <Paragraph className="h2-description">
                                         Space Description
@@ -60,7 +60,7 @@ const SpaceDetails = ({venueDetails, getServices}) => {
                                 </div>
 
                             </div>
-                            <div className="col-lg-6 col-12 p-sm-5 p-3 m-sm-auto">
+                            <div className="col-md-6 col-12 p-lg-5 p-3 m-sm-auto">
                                 <div className="space-price mb-5">
                                     <Paragraph className="h2-description">
                                         Price
@@ -84,11 +84,6 @@ const SpaceDetails = ({venueDetails, getServices}) => {
                                                                 type="img" 
                                                                 src={service.logo}
                                                                 alt={service.name}
-                                                                width={'56px'}
-                                                                height={'56px'}
-                                                                style={{
-                                                                    objectFit: 'scale-down'
-                                                                }}
                                                             />
                                                             {service.name}
                                                         </li>
@@ -106,7 +101,6 @@ const SpaceDetails = ({venueDetails, getServices}) => {
                                 </div>
 
                             </div>
-
                         </div>
                     </div>
                 </section>

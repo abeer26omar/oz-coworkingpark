@@ -64,7 +64,6 @@ const CaseOne = ({bookingData, servicesPrice, price, getPromoValue, getPromoId})
     return (
         <>
             <div className="w-100 summary-bg">
-                <div className="row">
                     <div className="col-lg-12">
                         <div className="box-summary">
                             <div className="head-box-summary">
@@ -101,8 +100,9 @@ const CaseOne = ({bookingData, servicesPrice, price, getPromoValue, getPromoId})
                             </div>
                         </div>
                     </div>
+                <div className="row g-4">
                     <div className="col-lg-6 col-12 border-right">
-                        <ul className="list-details px-sm-3 px-1 mb-0">
+                        <ul className="list-details mb-0">
                             <li>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -267,7 +267,7 @@ const CaseOne = ({bookingData, servicesPrice, price, getPromoValue, getPromoId})
                         </ul>
                     </div>
                     <div className="col-lg-6 col-12">
-                        <ul className="list-details px-sm-3 px-1">
+                        <ul className="list-details">
                             <li className="align-items-start">
                                 <svg xmlns="http://www.w3.org/2000/svg" className='me-3' width="32" height="32" viewBox="0 0 32 32" fill="none">
                                   <path d="M14.481 4.48577C15.1566 3.2739 15.4944 2.66797 15.9993 2.66797C16.5043 2.66797 16.8421 3.2739 17.5177 4.48577L17.6924 4.79929C17.8844 5.14367 17.9804 5.31585 18.13 5.42947C18.2797 5.54308 18.4661 5.58525 18.8389 5.66959L19.1783 5.74638C20.4901 6.0432 21.146 6.19161 21.3021 6.69343C21.4581 7.19525 21.011 7.71814 20.1166 8.76393L19.8853 9.03449C19.6311 9.33167 19.5041 9.48026 19.4469 9.66408C19.3897 9.84791 19.4089 10.0462 19.4474 10.4427L19.4823 10.8036C19.6175 12.199 19.6852 12.8966 19.2766 13.2068C18.8681 13.5169 18.2539 13.2341 17.0257 12.6686L16.7079 12.5223C16.3589 12.3616 16.1843 12.2812 15.9993 12.2812C15.8144 12.2812 15.6398 12.3616 15.2908 12.5223L14.973 12.6686C13.7448 13.2341 13.1306 13.5169 12.7221 13.2068C12.3135 12.8966 12.3812 12.199 12.5164 10.8036L12.5513 10.4427C12.5898 10.0462 12.609 9.84791 12.5518 9.66408C12.4946 9.48026 12.3676 9.33167 12.1134 9.03449L11.8821 8.76393C10.9877 7.71814 10.5406 7.19525 10.6966 6.69343C10.8527 6.19161 11.5086 6.0432 12.8204 5.74638L13.1598 5.66959C13.5326 5.58525 13.719 5.54308 13.8687 5.42947C14.0183 5.31585 14.1143 5.14367 14.3063 4.79929L14.481 4.48577Z" stroke="black" stroke-width="1.5"/>
@@ -280,7 +280,7 @@ const CaseOne = ({bookingData, servicesPrice, price, getPromoValue, getPromoId})
                                     <div className="col-10 d-flex flex-column">
                                         {bookingServices?.map((item, index)=>{
                                             return (
-                                            <div className="col-lg-6 col-12 d-flex align-items-center justify-content-between mb-3" key={index}>
+                                            <div className="col-xl-6 col-12 d-flex align-items-center justify-content-between mb-3" key={index}>
                                                 <p className='mb-0'>{item.label}</p>
                                                 <p className="mb-0 service_price">{item.price} EGP</p>
                                                 <a className="" onClick={() => removeService(index)}> x </a>
@@ -298,7 +298,7 @@ const CaseOne = ({bookingData, servicesPrice, price, getPromoValue, getPromoId})
                                   {price === '0' ? 'Free' : price + ' EGP'}
                                 </span>
                             </li>
-                            {bookingData?.membershipPackageOffer && (<li>
+                              {bookingData?.membershipPackageOffer && (<li>
                                 <Paragraph className='mb-0 mx-2 fs-16 light'>
                                     {bookingData.membershipPackageOffer?.description}
                                 </Paragraph>

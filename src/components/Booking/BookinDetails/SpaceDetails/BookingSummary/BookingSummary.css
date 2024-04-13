@@ -319,6 +319,17 @@ a{
 .order-details .line {
     border-bottom: 1px solid #fff;
 }
+@media screen and (max-width: 1024px) {
+    .summary-bg {
+        padding: 20px;
+    }
+}
+@media screen and (max-width: 992px) {
+    .summary-bg .border-right {
+        border-right: none;
+        border-bottom: 1.5px solid var(--secondary-color2);
+    }
+}
 @media screen and (max-width: 768px) {
     .summary-bg .border-right{
         border: 0px solid transparent;
@@ -340,9 +351,22 @@ a{
     .change_dir{
         flex-direction: column;
     }
+    .counter-container {
+        width: 320px;
+        left: -50%;
+    }
+    .counter-container > span {
+        margin-right: 30px;
+    }
+    
 }
 @media screen and (max-width: 425px) {
     .head-box-summary h2 {
         font-size: 20px;
+    }
+}
+@media screen and (max-width: 320px) {
+    .counter-container {
+        width: 260px;
     }
 }

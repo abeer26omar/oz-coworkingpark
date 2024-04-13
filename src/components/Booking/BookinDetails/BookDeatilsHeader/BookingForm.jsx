@@ -59,9 +59,6 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                         messageApi.open({
                             type: 'error',
                             content: 'Please select Your booking details!',
-                            style: {
-                                marginTop: '20vh',
-                            },
                         });
                     }
                 }else{
@@ -71,9 +68,6 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                         messageApi.open({
                             type: 'error',
                             content: 'Please select Your booking details!',
-                            style: {
-                                marginTop: '20vh',
-                            },
                         });
                     }
                 }
@@ -151,21 +145,23 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
         const used_hours_min = used_hours * 60;
 
         if(how_many_hours_min === used_hours_min){
-            console.log('step 0');
             if(discountAmentiyGroupId){
-                console.log('step discount');
                 const discount = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount;
                 const price = userProfileData?.membership_discount_roles[discountAmentiyGroupId].price;
                 const type = userProfileData?.membership_discount_roles[discountAmentiyGroupId].discount_type === 'percentage' ? '%' : '';
                 checkAvailabileTimes();
                 return {
                     description: `Enjoy ${discount} ${type} Off From Room Price`, 
-                    price: price
+                    price: price,
+                    booking_price: calculateReservationPrice(hours, venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price)
                 };
             }else{
-                console.log('step nothing');
                 checkAvailabileTimes();
-                return ``;
+                return {
+                    description: '', 
+                    price: venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price,
+                    booking_price: calculateReservationPrice(hours, venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price)
+                };
             }
         }else{
             if(max_hours_min){
@@ -175,7 +171,8 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                         return {
                             description: `You Have Only ${max_hours} Hours free Included In Your package`,
                             price: venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price,
-                            hours: hours
+                            hours: hours,
+                            booking_price: venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price
                         };
                     }else{
                         return Modal.warning({
@@ -193,7 +190,8 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                     return {
                         description: `You Have ${max_hours} Hours free Included In Your package`, 
                         price: 0, 
-                        hours: hours
+                        hours: hours,
+                        booking_price: calculateReservationPrice(hours, venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price)
                     };
                 }
 
@@ -204,7 +202,8 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                         return {
                             description: `You Have Only ${how_many_hours} Hours free Included In Your package`,
                             price: venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price,
-                            hours: hours
+                            hours: hours,
+                            booking_price: venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price
                         };
                     }else{
                         const freeHours_min = hours - how_many_hours_min;
@@ -212,7 +211,8 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                         return {
                             description: `You Have Only ${how_many_hours} Hours free Included In Your package`,
                             price: calculateReservationPrice(freeHours_min, venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price),
-                            hours: hours
+                            hours: hours,
+                            booking_price: calculateReservationPrice(hours, venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price)
                         }
                     }
                 }else {
@@ -220,7 +220,8 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                     return {
                         description: `You Have ${how_many_hours} Hours free Included In Your package`,
                         price: 0, 
-                        hours: hours
+                        hours: hours,
+                        booking_price: calculateReservationPrice(hours, venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price)
                     };
                 }
             }
@@ -385,9 +386,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                         <form className="bookbottom__form d-flex justify-content-center">
                             <ul className="row col-lg-12 col-6 bookbottom__ul p-0">
                                 <div className='col-lg-4 d-flex justify-content-center p-0'>
-                                    <li className="bookbottom__li bookbottom__li--icon bookbottom__li--icon-guests" style={{
-                                        width: '85px'
-                                    }}>
+                                    <li className="col-lg-3 bookbottom__li bookbottom__li--icon bookbottom__li--icon-guests">
                                         <div className="bookbottom__guesticon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
                                                 <circle cx="44.1593" cy="32.421" r="8.42103" stroke="white" stroke-width="3.5"/>
@@ -399,7 +398,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                                             </svg>
                                         </div>
                                     </li>
-                                    <li className="bookbottom__li bookbottom__li--select bookbottom__li--select-guests">
+                                    <li className="col-lg-9 bookbottom__li bookbottom__li--select bookbottom__li--select-guests">
                                         <div className="bookbottom__select position-relative">
                                             <div class="btn-group">
                                                 {reschedule ? (<p className="counter-number mb-0">{counter} persons</p>) :
@@ -439,7 +438,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                                     </li>
                                 </div>
                                 <div className='col-lg-3 d-flex justify-content-center p-0'>
-                                    <li className="col-lg-1 bookbottom__li bookbottom__li--icon bookbottom__li--icon-datepicker">
+                                    <li className="col-lg-3 bookbottom__li bookbottom__li--icon bookbottom__li--icon-datepicker">
                                         <div className="bookbottom__calicon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
                                             <path d="M24 43.4803C24 35.7427 24 31.8739 26.3434 29.4702C28.6869 27.0664 32.4585 27.0664 40.0019 27.0664H48.0029C55.5463 27.0664 59.318 27.0664 61.6614 29.4702C64.0048 31.8739 64.0048 35.7427 64.0048 43.4803V47.5838C64.0048 55.3214 64.0048 59.1902 61.6614 61.594C59.318 63.9978 55.5463 63.9978 48.0029 63.9978H40.0019C32.4585 63.9978 28.6869 63.9978 26.3434 61.594C24 59.1902 24 55.3214 24 47.5838V43.4803Z" stroke="white" stroke-width="2"/>
@@ -456,7 +455,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
 
                                         </div>
                                     </li>
-                                    <li className="col-lg-2 bookbottom__li bookbottom__li--datepicker select-date-costume">
+                                    <li className="col-lg-9 bookbottom__li bookbottom__li--datepicker select-date-costume">
                                         <DatePicker
                                             className="bookbottom__datetitle text-center"
                                             selected={startDate}
@@ -472,8 +471,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                                     </li>
                                 </div>
                                 <div className='col-lg-3 d-flex justify-content-center p-0'>
-
-                                    <li className="col-lg-1 bookbottom__li bookbottom__li--icon">
+                                    <li className="col-lg-3 bookbottom__li bookbottom__li--icon">
                                         <div className="bookbottom__roomicon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
                                             <circle cx="44" cy="46" r="18" stroke="white" stroke-width="3.5"/>
@@ -483,7 +481,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
                                         </svg>
                                         </div>
                                     </li>
-                                    <li className="col-lg-2 bookbottom__li bookbottom__li--select">
+                                    <li className="col-lg-9 bookbottom__li bookbottom__li--select">
                                         <div className="bookbottom__select active" data-target="roomType">
                                             <div className="bookbottom__select-text ">
                                                 <div className="position-relative">

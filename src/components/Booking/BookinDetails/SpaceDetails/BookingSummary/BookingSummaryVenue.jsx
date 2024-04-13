@@ -182,7 +182,7 @@ const BookingSummaryVenue = () => {
                     bookingData.numberOfPeople,
                     bookingData.spaceDetails.booking_code,
                     bookingData.services,
-                    price - servicePrice,
+                    bookingData.membershipPackageOffer.booking_price,
                     servicePrice,
                     promo_discount ? price - promo_discount : price,
                     setDateApi(bookingData.date),
