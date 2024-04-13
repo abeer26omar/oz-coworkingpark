@@ -28,6 +28,7 @@ const DetalsGymlast = ({ details, pending }) => {
         schedule: value.schedule,
         price: value.price,
         level: value.level,
+        free: value.allow_free
       };
       localStorage.setItem("OZgymCourseDetails", JSON.stringify(gymCourseDetails));
       navigate(`/class-bookingSummary`);

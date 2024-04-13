@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Paragraph from "../../UI/Paragraph";
 import Calunder from "../../UI/Icons/Calunder";
 import Alarm from "../../UI/Icons/Alarm";
@@ -10,10 +10,24 @@ import PromoCode from '../../promo-code/PromoCode';
 function CaseOne({ details, discountRoles, getPromoValue, getPromoId }) {
 
   const [priceAfterPromo, setPriceAfterPromo] = useState('');
+  const [price, setPrice] = useState(Math.floor(details?.price));
 
   const getPrice = (value) => {
     setPriceAfterPromo(value);
   };
+
+  useEffect(()=>{
+    const applayRoles = () => {
+      if(discountRoles && discountRoles !== ''){
+        if(discountRoles?.price === 'Free'){
+          setPrice(discountRoles?.price)
+        }else{
+          setPrice(Math.floor(discountRoles?.price))
+        }
+      }
+    }
+    applayRoles()
+  },[])
 
   return (
     <>
@@ -51,17 +65,22 @@ function CaseOne({ details, discountRoles, getPromoValue, getPromoId }) {
               <div className="d-flex">
                 <Payment />
                 <Paragraph className="summary_item mb-0 mx-2">
-                  Free
+                {price}
                 </Paragraph>
               </div>
                 <Paragraph className="mb-0 ms-5">
-                  {discountRoles}
+                {discountRoles?.desc}
                 </Paragraph>
               </>
 
             ) : 
             (
-              <Paragraph className="mb-0 mx-2">{Math.floor(details?.price)} EGP </Paragraph>
+              <div className="d-flex">
+                <Payment />
+                <Paragraph className={`summary_item mb-0 mx-2 ${priceAfterPromo !== '' ? 'promoApplided' : ''}`}>
+                  {price} EGP 
+                </Paragraph>
+              </div>
             )}
       
           </li>
@@ -79,7 +98,7 @@ function CaseOne({ details, discountRoles, getPromoValue, getPromoId }) {
             <li className="price-promo">
               <div className="d-flex justify-content-between align-items-center">
                 <p>Total Price:</p>
-                <p>{priceAfterPromo ? priceAfterPromo : details?.price} EGP</p>
+                <p>{priceAfterPromo ? priceAfterPromo : price} EGP</p>
               </div>
             </li>
         </ul>

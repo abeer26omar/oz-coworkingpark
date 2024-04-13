@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
-import Media from "../Media/Media";
 import Button from "../UI/Button";
 import Paragraph from "../UI/Paragraph";
-import { Skeleton } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from '../../apis/context/AuthTokenContext';
 import { getTrainingClasses } from "../../apis/ZeeStudio";
-import * as DOMPurify from "dompurify";
+import ZeeCard from './ZeeCard';
 
 const CardsClasses = ({ classesGym, getLimit , pending }) => {
 
@@ -27,71 +25,7 @@ const CardsClasses = ({ classesGym, getLimit , pending }) => {
     content = data?.map((item, index) => {
       return (
         <div className="col my-2" key={index}>
-          <div className="card my-2 h-100 text-start">
-            {isPending ? (
-              <Skeleton.Image active />
-            ) : (
-              <>
-                <Media
-                  type="img"
-                  src={item.image}
-                  className="w-100"
-                  alt={item.title}
-                  style={{
-                    height: '352px',
-                    objectFit: 'cover'
-                  }}
-                />
-              </>
-            )}
-            <div className="card-body">
-              {isPending ? (
-                <Skeleton
-                  active
-                  title={{ width: 300 }}
-                  paragraph={{ row: 1 }}
-                />
-              ) : (
-                <>
-                  <Paragraph className="card-title">
-                    {item.title.slice(0, 20)}
-                  </Paragraph>
-                  <div
-                    className="description_black py-2"
-                    dangerouslySetInnerHTML={{
-                      __html: DOMPurify.sanitize(
-                        item.descriptions.slice(0, 70)
-                      ),
-                    }}
-                  ></div>
-                </>
-              )}
-              <div className="d-flex justify-content-between align-items-center ">
-                {isPending ? (
-                  <Skeleton.Input active />
-                ) : (
-                  <>
-                    <Button
-                      tagType="link"
-                      to={`/gymdetails/${item.id}`}
-                      className="button-outLine btn-bg-white m-auto-unset"
-                    >
-                      {"Explore More"}
-                    </Button>
-                  </>
-                )}
-                {isPending ? (
-                  <Skeleton active title={{ width: 100 }} paragraph={false} />
-                ) : (
-                  <>
-                    <Paragraph className="card-title">
-                      {Math.floor(item.price)} Egp
-                    </Paragraph>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
+          <ZeeCard isPending={isPending} item={item} />
         </div>
       );
     });

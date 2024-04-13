@@ -3,7 +3,7 @@ import { Modal, Steps, message } from "antd";
 import Paragraph from "../UI/Paragraph";
 import CaseOne from "./CasesPay/CaseOne";
 import CaseTwo from "../PaymentCases/CaseTwo";
-import CaseThree from "../PaymentCases/CaseThree";
+import CaseThree from "./CasesPay/CaseThree";
 import Button from "../UI/Button";
 import { BookKnowledgeCourse } from "../../apis/OzKnowledge";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
@@ -37,19 +37,26 @@ const BookCourse = () => {
 
   const HandelSummery = () => {
     const knowledgePackage = userProfileData.zee_knowledge; 
+    if(paymentDetails.free === 1){
       if(knowledgePackage){
         if(knowledgePackage.total_remaining_courses > 0){
-          return `You Have ${knowledgePackage.total_free_courses} Free Courses Included In Your Package,
-          Remaning: ${knowledgePackage.total_remaining_courses} Course`;
+          return {
+            desc: `You Have ${knowledgePackage.total_free_courses} Free Courses Included In Your Package,
+            Remaning: ${knowledgePackage.total_remaining_courses} Course`,
+            price: 'Free'
+          };
 
         }else{
           const discount_type = knowledgePackage.zee_knowledge_discount_type === 'percentage' ? '%' : '';
-          return `You Have Consumed Your Free Courses, Now Enjoy ${knowledgePackage.discount} ${discount_type} Discount,
-          Course Price: ${calcPrice(paymentDetails.price, knowledgePackage.discount, discount_type)} EGP`;
+          return {
+            desc: `Enjoy ${knowledgePackage.discount} ${discount_type} Off`,
+            price: `${calcPrice(paymentDetails.price, knowledgePackage.discount, discount_type)} EGP`
+          };
         }
       }else{
         return '';
       }
+    }
   };
 
   const steps = [
@@ -70,7 +77,7 @@ const BookCourse = () => {
     },
     {
       title: "Invoice details",
-      ContentTitle: bookingResult?.invoice_title,
+      ContentTitle: bookingResult?.status === 'paid' ? 'Receipt' : 'Amount Due',
       content: <CaseThree bookingResult={bookingResult} />,
     },
   ];
@@ -102,7 +109,7 @@ const BookCourse = () => {
   
   const getInoviceTransaction = async (id) => {
     try{
-      const result = await getInovice(token, id, 'all');
+      const result = await getInovice(token, id, 'ZeeKnowladgeInvoice');
       console.log(result);
     }catch(error){
       console.log(error);
@@ -131,10 +138,10 @@ const BookCourse = () => {
 
   const calcPrice = (price, discount, discount_type) => {
     if(discount_type === 'fixed'){
-      return price - discount;
+        return Math.floor(price - discount);
     }else{
         const priceDicounted =  price * discount / 100;
-        return price - priceDicounted;
+        return Math.floor(price - priceDicounted);
     }
   };
 
@@ -158,7 +165,7 @@ const BookCourse = () => {
           <Paragraph className="paragraph_black py-5 font-5">
             {steps[current].ContentTitle}
           </Paragraph>
-          <div className={current < steps.length - 1 ? "px_7" : null}>
+          <div className={current < steps.length - 1 ? "" : null}>
             <div className="d-flex flex-column justify-content-center align-items-center">
               {steps[current].content}
 

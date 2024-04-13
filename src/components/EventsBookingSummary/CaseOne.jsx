@@ -24,15 +24,6 @@ function CaseOne({ details, getPromoValue, getPromoId }) {
         setBransh(res.name);
       });
     }, [branchId]);
-
-    const CalcPrice = (discount, discount_type) => {
-          if(discount_type === 'fixed'){
-              return details?.price - discount;
-          }else{
-              const priceDicounted =  details?.price * discount / 100;
-              return details?.price - priceDicounted;
-          }
-    };
     
     const checkPackage = () => {
       if(details?.active_membership_discount && details?.active_membership_discount !== null){
@@ -40,11 +31,9 @@ function CaseOne({ details, getPromoValue, getPromoId }) {
           const discount = details?.active_membership_discount?.discount;
           const discount_type = details?.active_membership_discount?.discount_type === 'percentage' ? '%' : '';
           const price =  details?.active_membership_discount?.price;
+          // CalcPrice(discount, price, discount_type);
           return (
             <>
-              <Paragraph className={`mb-0 mx-2 summary_item ${priceAfterPromo !== '' ? 'promoApplided' : ''}`}>
-                  {CalcPrice(discount, price, discount_type)} EGP
-              </Paragraph>
               <Paragraph className='mb-0 mx-2 fs-16 light'>
                 You Have {discount} {discount_type} Off
               </Paragraph>
@@ -57,6 +46,29 @@ function CaseOne({ details, getPromoValue, getPromoId }) {
         return details?.price;
       }
     };
+
+    useEffect(()=>{
+      const CalcPrice = () => {
+        if(details?.active_membership_discount && details?.active_membership_discount !== null){
+          if(+planId === details?.active_membership_discount?.id){
+            const discount = details?.active_membership_discount?.discount;
+            const discount_type = details?.active_membership_discount?.discount_type === 'percentage' ? '%' : '';
+            const price =  details?.active_membership_discount?.price;
+              if(discount_type === 'fixed'){
+                setPrice(details?.price - discount);
+              }else{
+                const priceDicounted =  details?.price * discount / 100;
+                setPrice(details?.price - priceDicounted);
+              }
+          }else{
+            return details?.price;
+          }
+        }else{
+          return details?.price;
+        }
+      };
+      CalcPrice();
+    },[])
 
   return (
     <>
@@ -104,11 +116,14 @@ function CaseOne({ details, getPromoValue, getPromoId }) {
           }}>
             <li className="d-flex align-items-center mb-4">
               <Payment />
+              <Paragraph className={`mb-0 mx-2 summary_item ${priceAfterPromo !== '' ? 'promoApplided' : ''}`}>
+                {price} EGP
+              </Paragraph>
               {checkPackage()}
             </li>
             <li className="mb-0">
               <PromoCode 
-                price={details?.price} 
+                price={price} 
                 getPrice={getPrice}
                 getPromoId={getPromoId} 
                 getPromoValue={getPromoValue}
@@ -120,7 +135,7 @@ function CaseOne({ details, getPromoValue, getPromoId }) {
             <li className="price-promo">
               <div className="d-flex justify-content-between align-items-center">
                 <p>Total Price:</p>
-                <p>{priceAfterPromo ? priceAfterPromo : details?.price} EGP</p>
+                <p>{priceAfterPromo ? priceAfterPromo : price} EGP</p>
               </div>
             </li>
           </ul>

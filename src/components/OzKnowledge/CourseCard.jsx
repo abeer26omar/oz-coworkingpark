@@ -8,7 +8,7 @@ const CourseCard = ({coursesDetails}) => {
         <>
             <div className='card'>
                 <div className='card-header header_course'>
-                    {coursesDetails?.allow_free === 0 ? 
+                    {coursesDetails?.allow_free === 1 ? 
                         (<Badge.Ribbon text="Free" color="gold">
                             <img src={coursesDetails.image} className="card-img-top" alt={coursesDetails.title}
                             style={{
@@ -34,7 +34,7 @@ const CourseCard = ({coursesDetails}) => {
                         <span className='rate_count ms-2'>{`(${coursesDetails.rate})`}</span>
                     </div>
                     <div className='d-flex justify-content-between align-items-center pt-4'>
-                        <Paragraph className='courseCardTitle mb-0'>{Math.floor(coursesDetails.price)} Egp</Paragraph>
+                        <Paragraph className='courseCardTitle mb-0'>{Math.floor(coursesDetails.price)} EGP</Paragraph>
                         <Button 
                             tagType='link'
                             to={`/coursedetails/${coursesDetails.id}`}

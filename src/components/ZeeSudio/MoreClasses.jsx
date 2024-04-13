@@ -6,6 +6,7 @@ import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { getTrainingClasses } from "../../apis/ZeeStudio";
 import { useQuery } from "@tanstack/react-query";
 function MoreClasses() {
+  
   const [limit, setLimit] = useState(12);
   const [classesGymFilter, setClassesGymFilter] = useState([]);
 

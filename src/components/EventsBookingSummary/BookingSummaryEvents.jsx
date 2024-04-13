@@ -81,7 +81,7 @@ const BookingSummaryEvents = () => {
 
   const getInoviceTransaction = async (id) => {
     try{
-      const result = await getInovice(token, id, 'all');
+      const result = await getInovice(token, id, 'EventAttendee');
       setBookingResult(result);
     }catch(error){
       console.log(error);

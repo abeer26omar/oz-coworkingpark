@@ -5,7 +5,7 @@ const CaseThree = ( {bookingResult} ) => {
 
 
   return (
-    <div className="bg_white">
+    <div className="w-100 bg_white">
       <div className="row" >
         <div className="col-lg-6 col-md-6 col-sm-12 order-summary">
           <div className="order-details">

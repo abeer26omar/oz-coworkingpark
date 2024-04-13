@@ -2,13 +2,11 @@ import moment from "moment";
 
 const CaseThree = ( {bookingResult} ) => {
  
-  const courseTime =
-  Math.floor(bookingResult.training.end_time.slice(0, 2))-
-  Math.floor(bookingResult.training.start_time.slice(0, 2)) ;
+  const courseTime = Math.floor(bookingResult.training.end_time.slice(0, 2)) - Math.floor(bookingResult.training.start_time.slice(0, 2)) ;
    
   return (
     <div className="">
-      <div className="row">
+      <div className="w-100 row">
         <div className="col-lg-6 col-md-6 col-sm-12 order-summary">
           <div className="order-details">
             <h2>

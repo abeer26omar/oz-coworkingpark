@@ -3,7 +3,7 @@ import { Modal, Steps, message } from "antd";
 import Paragraph from "../UI/Paragraph";
 import CaseOne from "./CasesPay/CaseOne";
 import CaseTwo from "../PaymentCases/CaseTwo";
-import CaseThree from "../PaymentCases/CaseThree";
+import CaseThree from "./CasesPay/CaseThree";
 import Button from "../UI/Button";
 import { BookGymClass } from "../../apis/ZeeStudio";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
@@ -36,28 +36,35 @@ const PaymentGym = () => {
   const navigate = useNavigate();
 
   const HandelSummery = (value) => {
-    const zeePackage = userProfileData.zee_studio; 
+    const zeePackage = userProfileData.zee_studio;
+    if(paymentDetails.free === 1){
       if(zeePackage){
         if(zeePackage.total_remaining_courses > 0){
-          return `You Have ${zeePackage.total_free_courses} Free Courses Included In Your Package,
-          Remaning: ${zeePackage.total_remaining_courses} Course`;
+          return {
+            desc: `You Have ${zeePackage.total_free_courses} Free Courses Included In Your Package, 
+                    Remaning: ${zeePackage.total_remaining_courses} Course`,
+            price: 'Free'
+          };
           
         }else{
           const discount_type = zeePackage.zee_studio_discount_type === 'percentage' ? '%' : '';
-          return `You Have Consumed Your Free Courses, Now Enjoy ${zeePackage.discount} ${discount_type} Discount,
-            Course Price: ${calcPrice(value.price, zeePackage.discount, discount_type)} EGP`;
+          return {
+            desc: `Enjoy ${zeePackage.discount} ${discount_type} Off`,
+            price: `${calcPrice(value.price, zeePackage.discount, discount_type)} EGP`
+          };
         }
       }else{
         return '';
       }
+    } 
   };
 
   const calcPrice = (price, discount, discount_type) => {
     if(discount_type === 'fixed'){
-      return price - discount;
+      return Math.floor(price - discount);
     }else{
         const priceDicounted =  price * discount / 100;
-        return price - priceDicounted;
+        return Math.floor(price - priceDicounted);
     }
   }
 
@@ -79,7 +86,7 @@ const PaymentGym = () => {
     },
     {
       title: "Invoice details",
-      ContentTitle: bookingResult?.invoice_title,
+      ContentTitle: bookingResult?.status === 'paid' ? 'Receipt' : 'Amount Due',
       content: <CaseThree bookingResult={bookingResult} />,
     },
   ];
@@ -112,7 +119,7 @@ const PaymentGym = () => {
 
   const getInoviceTransaction = async (id) => {
     try{
-      const result = await getInovice(token, id, 'all');
+      const result = await getInovice(token, id, 'ZeeInvoice');
       console.log(result);
     }catch(error){
       console.log(error);
@@ -159,7 +166,7 @@ const PaymentGym = () => {
           <Paragraph className="paragraph_black py-5 font-5">
             {steps[current].ContentTitle}
           </Paragraph>
-          <div className={current < steps.length - 1 ? "px_7" : null}>
+          <div className={current < steps.length - 1 ? "" : null}>
             <div className="d-flex flex-column justify-content-center align-items-center"
               // style={current < steps.length - 1 ? '' : null}
             >
