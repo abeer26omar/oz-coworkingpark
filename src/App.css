@@ -933,3 +933,47 @@ input[type=number] {
 .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover{
     background-color: transparent !important;
 }
+.count_session{
+        background-color: #000;
+        padding: 15px 20px;
+        
+}
+.fit_session{
+        font-family: Couture;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+}
+.number_session{
+       color: #FFF;
+        text-align: center;
+        font-family: Questrial;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%;
+}
+.times_session{
+        color:  #000;
+        font-family: Questrial;
+        font-size: 11px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+      
+}
+.card-sessions{
+    padding: 8px 16px;
+}
+.me_32{
+    margin-right: 32px;
+}
+.head_session{
+        color: #1B2129;
+        font-family: Couture;
+        font-size: 26px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+}

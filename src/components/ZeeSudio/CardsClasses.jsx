@@ -9,6 +9,7 @@ import ZeeCard from './ZeeCard';
 const CardsClasses = ({ classesGym, getLimit , pending }) => {
 
   const { token } = useContext(AuthContext);
+  
   const { isPending, error, data } = useQuery({
     queryKey: ["training"],
     queryFn: ({ signal }) =>
