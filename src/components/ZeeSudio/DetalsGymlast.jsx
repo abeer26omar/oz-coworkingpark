@@ -7,6 +7,7 @@ import { AuthContext } from "../../apis/context/AuthTokenContext";
 import LoginAlert from "../Auth/LoginAlertModal";
 import { Skeleton, Modal } from "antd";
 import * as DOMPurify from "dompurify";
+import CardSession from "../UI/CardSession";
 
 const DetalsGymlast = ({ details, pending }) => {
 
@@ -158,6 +159,19 @@ const DetalsGymlast = ({ details, pending }) => {
                   {details.descriptions}
                 </Paragraph>
               )}
+            </div>
+            <div className="row py-5">
+              <div className="col-12 mb-4">
+                <p className="head_session">Yoga Sessions </p>
+              </div>
+               {details.sessions &&  details?.sessions?.map((session, index) =>{
+                let counter = 1
+                return(<>
+                  <div key={index} className="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                    <CardSession index={counter++} session={session} />
+                  </div>
+                </>)
+              })}
             </div>
             <div className="col-12 py-5 d-flex justify-content-center video-container position-relative">
               {pending ? (
