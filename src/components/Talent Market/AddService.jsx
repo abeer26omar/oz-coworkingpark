@@ -8,14 +8,16 @@ import { AuthContext } from '../../apis/context/AuthTokenContext';
 import { getServices, getPostCost } from '../../apis/Market';
 import { useNavigate } from 'react-router-dom';
 import { Select, Modal } from 'antd';
+import InputTags from './InputTags';
 
 const AddService = () => {
     
     const [images, setImages] = useState([]);
     const [services, setServices] = useState([]);
     const [postCost, setPostCost] = useState('');
+    const [tags, setTags] = useState();
     const {token, userId, branch_id} = useContext(AuthContext);
-    const contacts = ['email', 'call', 'chat'];
+    const contacts = ['chat', 'email', 'call'];
     const key = 'updatable';
     const navigate = useNavigate();
 
@@ -47,10 +49,6 @@ const AddService = () => {
     }, []);
 
     const handleSubmit = async (values) => {
-
-        const controller = new AbortController();
-        const signal = controller.signal;
-
         try{
             const result = await createProject(token, 
                 userId,
@@ -63,7 +61,7 @@ const AddService = () => {
                 values.portfolioLink,
                 values.contactType,
                 values.period,
-                signal);
+                tags);
                 if(result){
                     Modal.success({
                         title: result.message,
@@ -95,6 +93,10 @@ const AddService = () => {
         setImages(images[0]);
     };
 
+    const getTags = (value) => {
+        setTags(value.join(','));
+    };
+
     return (
         <>
             <Formik 
@@ -115,18 +117,20 @@ const AddService = () => {
                     handleSubmit(values);
                 }}
                 validationSchema={Yup.object().shape({
-                    serviceName: Yup.string().required(),
-                    serviceType: Yup.string().required(),
-                    portfolioLink: Yup.string().required(),
-                    description: Yup.string().required(),
-                    contactType: Yup.string().required(),
-                    cost: Yup.string().required(),
-                    period: Yup.string().required(),
+                    serviceName: Yup.string().required('service name is required'),
+                    serviceType: Yup.string().required('service type is required'),
+                    portfolioLink: Yup.string().required('portoflio link is required'),
+                    description: Yup.string().required('description is required'),
+                    contactType: Yup.string().required('contact type is required'),
+                    cost: Yup.string().required('cost is required'),
+                    period: Yup.string().required('period is required'),
                 })}
                 enableReinitialize>
                 {props => {
                     const {
                     values,
+                    errors,
+                    touched,
                     handleChange,
                     handleBlur,
                     handleSubmit,
@@ -135,26 +139,26 @@ const AddService = () => {
                 return (
                     <>
                         <div className='border-bottom'>
-                        <div className="navigator">
-                            <div className="container-fluid">
-                                <div className='d-flex'>
-                                    <h1 className="title-name mb-0">
-                                        Add New Posting
-                                    </h1>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="2"
-                                        height="127"
-                                        viewBox="0 0 2 127"
-                                        fill="none"
-                                    >
-                                        <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
-                                    </svg>
+                            <div className="navigator">
+                                <div className="container-fluid">
+                                    <div className='d-flex'>
+                                        <h1 className="title-name mb-0">
+                                            Add New Posting
+                                        </h1>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="2"
+                                            height="127"
+                                            viewBox="0 0 2 127"
+                                            fill="none"
+                                        >
+                                            <path d="M1 0L1.00001 127" stroke="#BDBDBD" stroke-width="1.5"/>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        </div>
-                        <div className='container-fluid'>
+                        <div className='container-fluid px-70'>
                             <form className="form-filter" onSubmit={handleSubmit}>
                                 <div className="container-fluid">
                                     <div className="row g-5 align-items-center">
@@ -174,6 +178,7 @@ const AddService = () => {
                                                     onChange={handleChange}
                                                     onBlur={handleBlur} 
                                                 />
+                                                {errors.serviceName && touched.serviceName && <p className='text-danger mb-0'>{errors.serviceName}</p>}
                                             </div>
                                         </div>
                                         <div className="col-md-6 col-12">
@@ -196,6 +201,7 @@ const AddService = () => {
                                                         </Select.Option>
                                                     ))}
                                                 </Select>
+                                                {errors.serviceType && touched.serviceType && <p className='text-danger mb-0'>{errors.serviceType}</p>}
                                             </div>
                                         </div>
                                         <div className="col-md-6 col-12">
@@ -211,6 +217,7 @@ const AddService = () => {
                                                     onChange={handleChange}
                                                     onBlur={handleBlur} 
                                                 />
+                                                {errors.portfolioLink && touched.portfolioLink && <p className='text-danger mb-0'>{errors.portfolioLink}</p>}
                                             </div>
                                         </div>
                                         <div className="col-md-6 col-12">
@@ -226,6 +233,7 @@ const AddService = () => {
                                                     onChange={handleChange}
                                                     onBlur={handleBlur} 
                                                 />
+                                                {errors.description && touched.description && <p className='text-danger mb-0'>{errors.description}</p>}
                                             </div>
                                         </div>
                                         <div className="col-md-6 col-12">
@@ -235,10 +243,9 @@ const AddService = () => {
                                                     id='contactType'
                                                     name='contactType'
                                                     defaultValue={values.contactType || undefined}
-                                                    value={values.contactType || 'chat'}
+                                                    value={values.contactType || undefined}
                                                     className="form__field placeholderSelect"
                                                     onBlur={handleBlur}
-                                                    //
                                                     onChange={(value) => {setFieldValue('contactType', value)}}
                                                     bordered={false}
                                                     placeholder={'select how people contact you'}
@@ -249,6 +256,7 @@ const AddService = () => {
                                                         </Select.Option>
                                                     ))}
                                                 </Select>
+                                                {errors.contactType && touched.contactType && <p className='text-danger mb-0'>{errors.contactType}</p>}
                                             </div>
                                         </div>
                                         <div className="col-md-6 col-12">
@@ -266,6 +274,7 @@ const AddService = () => {
                                                             onChange={handleChange}
                                                             onBlur={handleBlur} 
                                                         />
+                                                        {errors.cost && touched.cost && <p className='text-danger mb-0'>{errors.cost}</p>}
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6 col-12">
@@ -280,6 +289,7 @@ const AddService = () => {
                                                             onChange={handleChange}
                                                             onBlur={handleBlur} 
                                                         />
+                                                        {errors.period && touched.period && <p className='text-danger mb-0'>{errors.period}</p>}
                                                     </div>
                                                 </div>
                                             </div>
@@ -298,6 +308,13 @@ const AddService = () => {
                                                     onBlur={handleBlur}
                                                     disabled 
                                                 />
+                                                {errors.postCost && touched.postCost && <p className='text-danger mb-0'>{errors.postCost}</p>}
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6 col-12">
+                                            <div className="form__group field my-3">
+                                                <label htmlFor="tags" className="form__label">Enter Tags</label>
+                                                <InputTags getTags={getTags} />
                                             </div>
                                         </div>
                                         <div className='col-12 text-center'>

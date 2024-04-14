@@ -821,6 +821,20 @@ input[type=number] {
     color: var(--secondary-color2);
     text-decoration: line-through;
 }
+.react-tagsinput-input {
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+}
+.react-tagsinput--focused{
+    border-color: var(--secondary-color2) !important;
+}
+.react-tagsinput-tag {
+    background-color: #eaedef !important;
+    border-radius: 8px !important;
+    border: 1px solid transparent !important;
+    color: #736f6f !important;
+    margin-bottom: 0 !important;
+}
 @media screen and (max-width: 992px) {
     .px_7 {
         padding:  0 2rem !important;
