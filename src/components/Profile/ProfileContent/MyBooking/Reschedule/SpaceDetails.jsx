@@ -4,8 +4,8 @@ import Paragraph from '../../../../UI/Paragraph';
 import Select from 'react-select';
 
 const SpaceDetails = ({venueDetails, getId}) => {
-    const optionList = (venueDetails.services && venueDetails.services !== null) && 
-    venueDetails.services.map(item=>{
+    const optionList = (venueDetails?.services && venueDetails?.services !== null) && 
+    venueDetails?.services.map(item=>{
         return { value: item.id , label: item.name , price: item.price }
     })
     

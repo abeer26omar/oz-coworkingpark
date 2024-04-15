@@ -117,7 +117,7 @@ const MyBookingDetails = () => {
         localStorage.setItem("BookingOZDetails", JSON.stringify(data));
         localStorage.setItem("BookingOZDetailsId", JSON.stringify(id));
 
-        navigate(`/RescheduleBooking/${booking.venueData?.id}`);
+        navigate(`/bookingDetails/${booking.venueData?.id}?reschedule=reschedule`);
     }
 
     return (

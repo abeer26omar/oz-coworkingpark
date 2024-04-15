@@ -83,11 +83,10 @@ const BookingSummaryVenue = () => {
         if(bookingData.membershipPackageOffer){
             const price = bookingData.membershipPackageOffer.price;
             if(price === 0){
-                return (bookingData.spaceDetails.price > bookingData.spaceDetails?.price_discounted) ? 
-                bookingData.spaceDetails?.price_discounted : bookingData.spaceDetails?.price;
+                return bookingData.membershipPackageOffer.booking_price;
             }else {
-                // const actualPrice = 
-                return price;
+                const actualPrice = bookingData.membershipPackageOffer.booking_price - price;
+                return actualPrice;
             }
         }else{
             return (bookingData.spaceDetails.price > bookingData.spaceDetails?.price_discounted) ? 

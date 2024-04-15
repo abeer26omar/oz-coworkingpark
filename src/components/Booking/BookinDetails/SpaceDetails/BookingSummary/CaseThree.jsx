@@ -1,9 +1,21 @@
 import moment from "moment";
 
 const CaseThree = ( {bookingResult, bookingData} ) => {
-    const calcTax = (price) => {
-        const tax = price * 14 / 100;
+    const calcTax = (price, discount, total) => {
+      if((price === discount) && (price === total)){
+        return 0;
+      }else{
+        const tax = total * 14 / 100;
         return tax;
+      }
+    }
+    const calcTotal = (price, discount, total) => {
+      if((price === discount) && (price === total)){
+        return 0;
+      }else{
+        const tax = calcTax(price, discount, total);
+        return total + tax;
+      }
     }
 
     const calcDuration = (startMoment, endMoment) => {
@@ -47,21 +59,18 @@ const CaseThree = ( {bookingResult, bookingData} ) => {
               </div>
               <div className="d-flex align-items-center justify-content-between item-box ">
                 <span className="item-name">{bookingData?.spaceDetails.title}</span>
-                <span className={`item-price ${bookingResult?.payload?.booking_price === bookingResult?.payload?.booking_discount ? 'promoApplided light' : ''}`}>
-                  {
-                    (bookingResult?.payload?.booking_price === bookingResult?.payload?.booking_discount) 
-                    ? bookingResult?.payload?.booking_price
-                    : bookingResult?.payload?.booking_price - bookingResult?.payload?.booking_discount
-                  }
+                <span className={`item-price ${((bookingResult?.payload?.booking_price - bookingResult?.payload?.booking_discount) >= 0 && (bookingResult?.payload?.booking_discount !== 0))  ? 'promoApplided light' : ''}`}>
+                  {bookingResult?.payload?.booking_price}
                   {' '}EGP
                 </span>
               </div>
-              {bookingResult?.payload?.booking_price === bookingResult?.payload?.booking_discount 
-                ? (<div className="d-flex align-items-end justify-content-end item-box ">
+              {/* {(bookingResult?.payload?.booking_price === bookingResult?.payload?.booking_discount) || ()
+                ? () : ''} */}
+              {bookingResult?.payload?.booking_discount !== 0 && (<div className="d-flex align-items-end justify-content-end item-box ">
                 <span className={`item-price`}>
                   {bookingResult?.payload?.booking_price - bookingResult?.payload?.booking_discount} {' '}EGP
                 </span>
-              </div>) : ''}
+              </div>)}
               {bookingResult?.payload?.service_price !== 0 && (<div className="d-flex align-items-center justify-content-between item-box ">
                 <span className="item-name">{'Services'}</span>
                 <span className={`item-price`}>
@@ -74,15 +83,15 @@ const CaseThree = ( {bookingResult, bookingData} ) => {
             <div className="d-flex align-items-center justify-content-between line">
               <span className="date-period">Tax {'14'}%</span>
               <span className="location">
-                {Math.floor(calcTax(bookingResult?.payload?.total_price))} {' '}
+                {Math.floor(calcTax(bookingResult?.payload?.booking_price, bookingResult?.payload?.booking_discount, +bookingResult?.payload?.total_price))} {' '}
                 EGP
               </span>
             </div>
             <div className="d-flex align-items-center justify-content-between item-box">
               <span className="item-total">Total Price:</span>
               <span className="item-total-price">
-              {Math.floor(bookingResult?.payload?.total_price) + Math.floor(calcTax(bookingResult?.payload?.total_price))} {' '}
-                EGP
+                {calcTotal(bookingResult?.payload?.booking_price, bookingResult?.payload?.booking_discount, +bookingResult?.payload?.total_price)}
+                {' '}EGP
               </span>
             </div>
           </div>
