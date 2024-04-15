@@ -1,13 +1,21 @@
 import moment from "moment";
 
-const CaseThree = ( {bookingResult} ) => {
+const CaseThree = ( {bookingResult, bookingData} ) => {
     const calcTax = (price) => {
         const tax = price * 14 / 100;
         return tax;
     }
 
+    const calcDuration = (startMoment, endMoment) => {
+      const duration = moment.duration(endMoment.diff(startMoment));
+      const hours = duration.hours();
+      const minutes = duration.minutes();
+      return hours + " hours and " + minutes + " minutes"
+    }
+
   return (
     <div className="w-100 bg_white">
+      {console.log(bookingData)}
       <div className="row" >
         <div className="col-lg-6 col-md-6 col-sm-12 order-summary">
           <div className="order-details">
@@ -19,7 +27,7 @@ const CaseThree = ( {bookingResult} ) => {
             </h2>
             <div className="d-flex align-items-center justify-content-between">
               <span className="date-period">
-                Date Period: {moment(bookingResult?.payload?.pro_current_start).format("MMM DD, YYYY")}
+                Date Period: {moment.unix(bookingResult?.payload?.check_in).format("MMM DD, YYYY")}
                 <br />
                 <span className="invoice">Invoice</span>
               </span>
@@ -38,29 +46,42 @@ const CaseThree = ( {bookingResult} ) => {
                 <span className="date-period">Subtotal</span>
               </div>
               <div className="d-flex align-items-center justify-content-between item-box ">
-                <span className="item-name">{bookingResult?.payload?.event?.event_name}</span>
-                <span className={`item-price ${bookingResult?.price_before_discount !== bookingResult?.price ? 'promoApplided light' : ''}`}>
-                  {bookingResult?.price_before_discount} {' '}EGP
+                <span className="item-name">{bookingData?.spaceDetails.title}</span>
+                <span className={`item-price ${bookingResult?.payload?.booking_price === bookingResult?.payload?.booking_discount ? 'promoApplided light' : ''}`}>
+                  {
+                    (bookingResult?.payload?.booking_price === bookingResult?.payload?.booking_discount) 
+                    ? bookingResult?.payload?.booking_price
+                    : bookingResult?.payload?.booking_price - bookingResult?.payload?.booking_discount
+                  }
+                  {' '}EGP
                 </span>
               </div>
-              {bookingResult?.price_before_discount !== bookingResult?.price ? (<div className="d-flex align-items-end justify-content-end item-box ">
+              {bookingResult?.payload?.booking_price === bookingResult?.payload?.booking_discount 
+                ? (<div className="d-flex align-items-end justify-content-end item-box ">
                 <span className={`item-price`}>
-                  {bookingResult?.price} {' '}EGP
+                  {bookingResult?.payload?.booking_price - bookingResult?.payload?.booking_discount} {' '}EGP
                 </span>
               </div>) : ''}
+              {bookingResult?.payload?.service_price !== 0 && (<div className="d-flex align-items-center justify-content-between item-box ">
+                <span className="item-name">{'Services'}</span>
+                <span className={`item-price`}>
+                  {bookingResult?.payload?.service_price}
+                  {' '}EGP
+                </span>
+              </div>)}
             </div>
 
             <div className="d-flex align-items-center justify-content-between line">
               <span className="date-period">Tax {'14'}%</span>
               <span className="location">
-                {Math.floor(calcTax(bookingResult?.price))} {' '}
+                {Math.floor(calcTax(bookingResult?.payload?.total_price))} {' '}
                 EGP
               </span>
             </div>
             <div className="d-flex align-items-center justify-content-between item-box">
               <span className="item-total">Total Price:</span>
               <span className="item-total-price">
-              {Math.floor(bookingResult?.price) + Math.floor(calcTax(bookingResult?.price))} {' '}
+              {Math.floor(bookingResult?.payload?.total_price) + Math.floor(calcTax(bookingResult?.payload?.total_price))} {' '}
                 EGP
               </span>
             </div>
@@ -69,12 +90,13 @@ const CaseThree = ( {bookingResult} ) => {
         <div className="col-lg-6 col-md-6 col-sm-12 order-summary-black ">
           <div className="order-details">
             <div className="line">
-              <h2>{bookingResult?.payload?.event?.event_name}</h2>
+              <h2>{bookingData?.spaceDetails.title}</h2>
             </div>
             <div className="booking-items">
-            <span>Start : {moment(bookingResult?.payload?.event?.dates[0]?.check_in_date).format("dddd, MMM. D, YYYY")} </span>
-              <span>End : {moment(bookingResult?.payload?.event?.dates[0]?.check_out_date).format("dddd, MMM. D, YYYY")}</span>
-              {/* <span>Duration : {bookingResult?.payload?.pro_current_months} Months</span> */}
+              <span>Start: {moment.unix(bookingResult?.payload?.check_in).format("dddd, MMM. D, YYYY, h:mm A")} </span>
+              <span>End: {moment.unix(bookingResult?.payload?.check_out).format("dddd, MMM. D, YYYY, h:mm A")}</span>
+              <span>Duration: {calcDuration(moment.unix(bookingResult?.payload?.check_in), moment.unix(bookingResult?.payload?.check_out))}</span>
+              <span>Number: {bookingResult?.payload?.guests} Of People</span>
 
               {bookingResult?.payment_method === 'cash' && (<span>Cash notes: Total payment due in 2 days.</span>)}
             </div>

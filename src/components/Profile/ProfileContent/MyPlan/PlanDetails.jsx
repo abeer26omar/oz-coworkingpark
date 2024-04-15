@@ -28,10 +28,12 @@ const PlanDetails = () => {
                     <div className="container text-center">
                         <Paragraph className="text-one">plan details</Paragraph>
                         <Paragraph className="text-two">{plan?.name}</Paragraph>
-                        {plan?.time_progress >= 90 && (<Button 
-                            tagType='link' 
-                            className='btn_outline mt-4'
-                            onClick={handleOpen}>Add Extra</Button>)}
+                        {/* {plan?.time_progress >= 90 && ( */}
+                            <Button 
+                                tagType='link' 
+                                className='btn_outline mt-4'
+                                onClick={handleOpen}>Add Extra</Button>
+                        {/* )} */}
                     </div>
                 </MainHeaderWrapper>
             </div>
