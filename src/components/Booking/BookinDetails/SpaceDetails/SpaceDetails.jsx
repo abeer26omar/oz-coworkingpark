@@ -22,7 +22,7 @@ const SpaceDetails = ({venueDetails, getServices}) => {
         if(price === price_discounted){
             return (<span className={'priceafter'}>{price} EGP / {default_price_per}</span>)
         }else if(price > price_discounted){
-            return (<span className='mb-0 '><span className='discount'>{price}</span> {price_discounted} EGP / {default_price_per}</span>)
+            return (<span className='mb-0 '><span className='discount'>{price} EGP</span> {price_discounted} EGP / {default_price_per}</span>)
         }
     }
 

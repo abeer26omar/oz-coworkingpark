@@ -3,7 +3,7 @@ import { Modal, Steps, message } from "antd";
 import Paragraph from "../../../../UI/Paragraph";
 import CaseOne from "./CaseOne";
 import CaseTwo from "../../../../PaymentCases/CaseTwo";
-import CaseThree from "../../../../PaymentCases/CaseThree";
+import CaseThree from "./CaseThree";
 import Button from "../../../../UI/Button";
 import { AuthContext } from "../../../../../apis/context/AuthTokenContext";
 import { getInovice } from '../../../../../apis/config';
@@ -110,7 +110,7 @@ const BookingSummaryVenue = () => {
         },
         {
             title: "Invoice details",
-            ContentTitle: bookingResult?.invoice_title,
+            ContentTitle: bookingResult?.status === 'paid' ? 'Receipt' : 'Amount Due',
             content: <CaseThree bookingResult={bookingResult} />,
         },
     ];
@@ -167,13 +167,14 @@ const BookingSummaryVenue = () => {
                     content: result.message,
                     centered: true,
                     afterClose: ()=>{
-                        getInoviceTransaction(result?.data.reservation_id);
+                        getInoviceTransaction(result?.data?.transaction_id);
                         getUserDataInfo();
                         setCurrent(current + 1);
                     }
                 });
               }
             }else{
+              const total_price = promo_discount ? price - promo_discount : price ; 
               const result = await confirmBooking(
                     token,
                     userId,
@@ -199,7 +200,7 @@ const BookingSummaryVenue = () => {
                     content: result.message,
                     centered: true,
                     afterClose: ()=>{
-                        getInoviceTransaction(result?.data.reservation_id);
+                        getInoviceTransaction(result?.data?.transaction_id);
                         getUserDataInfo();
                         setCurrent(current + 1);
                     }

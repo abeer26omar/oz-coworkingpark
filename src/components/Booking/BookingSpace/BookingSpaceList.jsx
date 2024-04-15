@@ -5,7 +5,7 @@ import Button from "../../UI/Button";
 import AddToFavButton from '../../UI/AddToFavButton';
 import { useNavigate } from "react-router-dom";
 
-const BookingSpaceList = ({id, img, description, price, name, amenities, is_favorite}) => {
+const BookingSpaceList = ({id, img, description, price, name, amenities, is_favorite, default_price_per}) => {
     const navigate = useNavigate()
     return (
         <>
@@ -28,7 +28,7 @@ const BookingSpaceList = ({id, img, description, price, name, amenities, is_favo
                 <Card.Body>
                     <Card.Title onClick={()=>{navigate(`/bookingDetails/${id}`)}} style={{
                         cursor: 'pointer'
-                    }}>{name}</Card.Title>
+                    }} className='dynamic_wraper_1'>{name}</Card.Title>
 
                     <ul className="list-options ">
                         {amenities?.slice(0, 3).map((single, index) => {
@@ -37,10 +37,10 @@ const BookingSpaceList = ({id, img, description, price, name, amenities, is_favo
                             )
                         })}
                     </ul>
-                    <Card.Text>{description}</Card.Text>
+                    <Card.Text className='dynamic_wraper'>{description}</Card.Text>
                     <div
                         className="d-flex justify-content-between align-items-center card-footer p-0">
-                        <span className="price-hour">{price} EGP / Hour</span>
+                        <span className="price-hour">{price} EGP / {default_price_per}</span>
                         <Button to={`/bookingDetails/${id}`} tagType='link' className='btn_outline_black'>Book Now</Button>
                     </div>
 
