@@ -10,26 +10,29 @@ const CardsClasses = ({ classesGym, getLimit , pending }) => {
 
   const { token } = useContext(AuthContext);
   
-  const { isPending, error, data } = useQuery({
-    queryKey: ["training"],
-    queryFn: ({ signal }) =>
-      getTrainingClasses(token, 6, 0, "", "", "", signal),
-  });
+  // const { isPending, error, data } = useQuery({
+  //   queryKey: ["training"],
+  //   queryFn: ({ signal }) =>
+  //     getTrainingClasses(token, 6, 0, "", "", "", signal),
+  // });
 
   let content = "";
-  if (isPending) {
-    content = (
-      <Paragraph className="empty mb-0">there is not classes yet</Paragraph>
-    );
-  }
-  if (data) {
-    content = data?.map((item, index) => {
-      return (
-        <div className="col my-2" key={index}>
-          <ZeeCard isPending={isPending} item={item} />
-        </div>
-      );
-    });
+  // if () {
+    // }
+    if (classesGym) {
+      if(classesGym.length === 0){
+          content = (
+            <Paragraph className="empty mb-0">there is not classes yet</Paragraph>
+          );
+      }else{
+        content = classesGym?.map((item, index) => {
+          return (
+            <div className="col my-2" key={index}>
+              <ZeeCard isPending={pending} item={item} />
+            </div>
+          );
+        });
+      }
   };
 
   const HandelShowMore = (e) => {

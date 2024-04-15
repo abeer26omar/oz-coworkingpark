@@ -523,6 +523,10 @@ input[type=number] {
 
 }
 
+span{
+    text-transform: capitalize;
+}
+
 /*end*/
 /*Start Circle Shape*/
 .shape-right img {

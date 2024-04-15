@@ -160,11 +160,12 @@ const DetalsGymlast = ({ details, pending }) => {
                 </Paragraph>
               )}
             </div>
-            <div className="row py-5">
+            <section className="py-5">
               <div className="col-12 mb-4">
-                <p className="head_session">Yoga Sessions </p>
+                <p className="head_session">{details?.title} Sessions </p>
               </div>
-               {details.sessions &&  details?.sessions?.map((session, index) =>{
+            <div className="row">
+               {details?.sessions &&  details?.sessions?.map((session, index) =>{
                 let counter = 1
                 return(<>
                   <div key={index} className="col-xl-3 col-lg-3 col-md-4 col-sm-6">
@@ -173,6 +174,7 @@ const DetalsGymlast = ({ details, pending }) => {
                 </>)
               })}
             </div>
+            </section>
             <div className="col-12 py-5 d-flex justify-content-center video-container position-relative">
               {pending ? (
                 <Skeleton.Image active />

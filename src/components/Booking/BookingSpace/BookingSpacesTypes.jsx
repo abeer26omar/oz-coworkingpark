@@ -139,14 +139,15 @@ const BookingSpacesTypes = ({venues, placeId,spaceTitle})=>{
                                             <>
                                                 <div className="col-lg-4 col-md-6 col-sm-12" key={index}>
                                                     <BookingSpaceList 
-                                                        id={book.id}
-                                                        place_type={book.title} 
-                                                        img={book.gallery[0]?.image}
-                                                        name={book.title} 
-                                                        description={book.description}
-                                                        amenities={book.facilities} 
-                                                        price={book.price}
-                                                        is_favorite={book.is_favorite}/>
+                                                        id={book?.id}
+                                                        place_type={book?.title} 
+                                                        img={book?.gallery[0]?.image}
+                                                        name={book?.title} 
+                                                        description={book?.description}
+                                                        amenities={book?.facilities} 
+                                                        price={book?.price}
+                                                        is_favorite={book?.is_favorite}
+                                                        default_price_per={book?.default_price_per}/>
                                                 </div>
                                             </>
                                         )
