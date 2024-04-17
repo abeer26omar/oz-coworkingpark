@@ -5,7 +5,7 @@ import Button from '../UI/Button';
 import Media from '../Media/Media';
 import { Nav, Tab } from "react-bootstrap";
 
-const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
+const PrivateEventsDetailsList = ({address, image, id, index , desc , desc_2 , hrefTag}) => {
     const isEven = index % 2 === 0;
     const reverse = !isEven;
 
@@ -14,15 +14,18 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
 
         return (
             <>
+            {console.log(address)}
                 <Tab.Container id="left-tabs-example" defaultActiveKey="1">
                     <div className="col-lg-4 col-md-6 col-12 m-auto">
                         <div className="box-content p-xl-4 p-2">
                             <Paragraph className="h2-text-box">{address}</Paragraph>
                             <Paragraph className="p-text-box">
-                                Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
-                                amet, consectetur dipiscing
+                               {desc}
                             </Paragraph>
-                            <ul className="places text-start">
+                              <Paragraph className="p-text-box">
+                               {desc_2}
+                            </Paragraph>
+                            {/* <ul className="places text-start">
                                 <Tab.Content animation>
                                     {places.map((place, index) => (
                                         <Tab.Pane eventKey={index}>
@@ -30,10 +33,10 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                                         </Tab.Pane>
                                     ))}
                                 </Tab.Content>
-                            </ul>
+                            </ul> */}
                             <div className="d-flex buttons-group">
                                 <Button to="/contactus" className="btn button-outLine btn-bg-white m-0" tagType='link'>inquire</Button>
-                                <a href="#!" className="btn button-outLine btn-bg-white btn-pdf" title='comming Soon' style={{
+                                <a target='_blank' href={hrefTag} className="btn button-outLine btn-bg-white btn-pdf" title='comming Soon' style={{
                                     cursor: 'not-allowed'
                                 }}>Download PDF</a>
 
@@ -46,7 +49,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                             <Media
                                 type='img'
                                 id={`image-place-${id}`}
-                                src={img}
+                                src={image}
                                 className="image-box w-100"
                                 alt="news feed"
                             />
@@ -62,7 +65,7 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                             <Media
                                 type='img'
                                 id={`image-place-${id}`}
-                                src={img}
+                                src={image}
                                 className="image-box w-100"
                                 alt="news feed"
                             />
@@ -71,10 +74,12 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                         <div className="box-content p-xl-4 p-2">
                             <Paragraph className="h2-text-box">{address}</Paragraph>
                             <Paragraph className="p-text-box">
-                                Lorem ipsum dolor sit amet, consectetur dipiscing elit eiusmod Lorem ipsum dolor sit
-                                amet, consectetur dipiscing
+                              {desc}
                             </Paragraph>
-                            <ul className="places text-start">
+                             <Paragraph className="p-text-box">
+                               {desc_2}
+                            </Paragraph>
+                            {/* <ul className="places text-start">
                                 <Tab.Content animation>
                                     {places.map((place, index) => (
                                         <Tab.Pane eventKey={index}>
@@ -82,10 +87,10 @@ const PrivateEventsDetailsList = ({address, img, id, index, places}) => {
                                         </Tab.Pane>
                                     ))}
                                 </Tab.Content>
-                            </ul>
+                            </ul> */}
                             <div className="d-flex buttons-group">
                                 <Button to="/contactus" className="btn button-outLine btn-bg-white m-0" tagType='link'>inquire</Button>
-                                <a href="#!" className="btn button-outLine btn-bg-white btn-pdf" title='comming Soon' style={{
+                                <a target='_blank' href={hrefTag} className="btn button-outLine btn-bg-white btn-pdf" title='comming Soon' style={{
                                     cursor: 'not-allowed'
                                 }}>Download PDF</a>
                             </div>

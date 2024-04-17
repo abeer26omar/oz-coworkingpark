@@ -20,7 +20,7 @@ const CardSession = ({index, session}) =>{
 
     return (
         <div className="card d-flex  flex-column  justify-content-between card-sessions">
-        {console.log(index)}
+
         <div className="d-flex  align-items-center mb-3">
             <div className="count_session">
                 <h5 className="number_session mb-0">{keyIndex}</h5>
