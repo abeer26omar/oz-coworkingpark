@@ -10,7 +10,7 @@ import { Logout } from '../../../apis/AuthApi';
 import Button from '../../UI/Button';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import { getNotificationList } from '../../../apis/User';
-import { Badge, Dropdown } from 'antd';
+import { Badge, Dropdown, Modal } from 'antd';
 import { useNavigate } from "react-router-dom";
 
 const LogedNav = ({showBlackNav, token, show})=>{
@@ -20,6 +20,7 @@ const LogedNav = ({showBlackNav, token, show})=>{
     const [activeTab, setActiveTab] = useState('all');
     const [seenCount, setSeenCount] = useState(0);
     const [notification, setNotification] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const Navigate = useNavigate();
 
 
@@ -102,6 +103,7 @@ const LogedNav = ({showBlackNav, token, show})=>{
     const handelRoute = (type, object) =>{
         switch (type){
             case 'booking_reminder_extension': 
+                Navigate(`/mybookingDetails/${object?.id}?reminder=true`);
             break;
             case 'booking_confirmed':
                 Navigate(`/mybookingDetails/${object?.reservation_id}`);
@@ -113,62 +115,54 @@ const LogedNav = ({showBlackNav, token, show})=>{
                 Navigate(`/mybookingDetails/${object?.reservation_id}`);
             break;
             case 'booking_rating':
-                console.log(object);
                 Navigate(`/mybookingDetails/${object?.id}?rate=true`);
             break;
             case 'booking_reminder':
-                console.log(type);
-
+                Navigate(`/mybookingDetails/${object?.id}`);
             break;
             case 'booking_invitations':
-                console.log(type);
-
-            break;
-            case 'admin_reply':
-                console.log(type);
+                Navigate(`/mybookingDetails/${object?.id}`);
             break;
             case 'membership_reminder':
-                console.log(type);
+                Navigate(`/myplanDetials/${object?.id}?addExtra=true`);
             break;
             case 'membership_cancel':
-                console.log(type);
+                // there is no cancellation for membership
             break;
             case 'membership_upgrade':
-                console.log(type);
+                Navigate(`/myplanDetials/${object?.id}`);
             break;
             case 'membership_amenitties_use':
-                console.log(type);
-
-
+                Navigate(`/myplanDetials/${object?.id}`);
             break;
             case 'event_cancelation':
-                console.log(type);
-
-            break;
-            
-            case 'chat_notification':
-                console.log(type);
-
-            break;
-            case 'newsfeed':
-                console.log(type);
-
-            break;
-            case 'event_accept_ad':
-                console.log(type);
-
-            break;
-            case 'interest_events':
-                console.log(type);
-
+                Navigate(`/myeventDetails/${object?.id}`);
             break;
             case 'event_reminder':
-                console.log(type);
+                Navigate(`/myeventDetails/${object?.id}`);
+            break;
+            case 'event_accept_ad':
+                Navigate(`/projectDetails/${object?.id}`);
+            break;
+            case 'newsfeed':
+                Navigate(`/community/newsfeed/singleFeed/${object?.id}`);
+            break;
+            case 'interest_events':
+                console.log(object);
+            break;
+            case 'chat_notification':
+                console.log(object);
+                // Navigate(`/dmchat/provider/${object?.id}`);
+            break;
+            case 'admin_reply':
+                Navigate(`/contactadmin`);
+            break;
+            case 'from_dashbord':
+                console.log(object);
 
             break;
-            
             default:
-                console.log('diff');
+                console.log('default');
             break;
         }
 
@@ -332,6 +326,11 @@ const LogedNav = ({showBlackNav, token, show})=>{
                     </svg>
                 </a>
             </Dropdown>
+            <Modal title="Basic Modal" open={isModalOpen}>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+            </Modal>
         </>
     );
 }
