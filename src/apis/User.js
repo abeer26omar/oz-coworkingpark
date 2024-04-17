@@ -256,7 +256,7 @@ export const addExtraBundle = async (token, membership_id) => {
 
     const response = await axios(config);
         
-    return response.data.data;
+    return response.data;
 };
 
 export const upgradePlan = async (token, type, price, days, promo_code_id, promo_discount) => {

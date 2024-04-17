@@ -34,7 +34,7 @@ function MoreClasses() {
       getTrainingClasses(
         token,
         limit,
-        0,
+        1,
         searchFilter,
         dateFilter,
         categoreyFilter,

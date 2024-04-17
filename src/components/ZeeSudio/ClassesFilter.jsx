@@ -48,7 +48,7 @@ const ClassesFilter = ({
       {isOpen && (
         <div className="container-fluid border-top">
           <form className="form-filter">
-            <div className="filter-component row ">
+            <div className="filter-component row justify-content-between">
               <div className="col-xl-3 col-md-6 col-sm-6">
                 <div className="input-group">
                   <input
@@ -102,7 +102,7 @@ const ClassesFilter = ({
                   ))}
                 </Select>
               </div>
-              <div className="col-xl-2 col-md-6 col-sm-6 ">
+              {/* <div className="col-xl-2 col-md-6 col-sm-6 ">
                 <div className="input-group">
                   <input
                     type="text"
@@ -116,8 +116,8 @@ const ClassesFilter = ({
                     placeholder="add price"
                   />
                 </div>
-              </div>
-              <div className="col-xl-2 col-md-12 col-sm-6 btn-filter-responsive">
+              </div> */}
+              <div className="col-xl-2 col-md-12 col-sm-6 btn-filter-responsive d-flex justify-content-end">
                 <Button
                   tagType="button"
                   type="button"

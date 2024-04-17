@@ -5,14 +5,14 @@ import DatePicker from "react-datepicker";
 import {useNavigate} from "react-router-dom";
 import Button from '../../../UI/Button';
 import RequestFormModal from '../../../Auth/LoginAlertModal';
-import {checkAvailability} from '../../../../apis/Booking';
+import {checkAvailability, rescheduleBooking} from '../../../../apis/Booking';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import ShowAvaliablesModal from './ShowAvaliablesModal';
 import moment from 'moment';
 import { Modal, message } from 'antd';
 import { addMonths, isAfter, subMonths } from 'date-fns';
 
-const BookingForm = ({venueDetails, reschedule, services}) => {
+const BookingForm = ({venueDetails, reschedule, services, venue_id}) => {
 
 
     const [messageApi, contextHolder] = message.useMessage();
@@ -28,6 +28,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
     const [userNewTimeInfo, setUserNewTimeInfo] = useState(null);
     const { userId, userProfileData, token } = useContext(AuthContext);
     const [amentiyGroupId, setAmenityGroupId] = useState('');
+    const [bookingId, setBookingId] = useState('');
     const [discountAmentiyGroupId, setDiscountAmentiyGroupId] = useState('');
     const [packagePrice, setPackagePrice] = useState({});
 
@@ -52,28 +53,80 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
     const saveBookingData =  (e)=>{
         e.preventDefault();
             if(token){
-                if(venueDetails.default_price_per === 'day'){
-                    if(startDate !== null){
-                        addUserDetails('day');
-                    }else{
-                        messageApi.open({
-                            type: 'error',
-                            content: 'Please select Your booking details!',
-                        });
-                    }
+                if(reschedule){
+                    rescheduleHandler();
                 }else{
-                    if((startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
-                        addUserDetails('hour');
+                    if(venueDetails.default_price_per === 'day'){
+                        if(startDate !== null){
+                            addUserDetails('day');
+                        }else{
+                            messageApi.open({
+                                type: 'error',
+                                content: 'Please select Your booking details!',
+                            });
+                        }
                     }else{
-                        messageApi.open({
-                            type: 'error',
-                            content: 'Please select Your booking details!',
-                        });
+                        if((startDate !== null) && (selectedStartTime !== null) && (selectedEndTime !== null)){
+                            addUserDetails('hour');
+                        }else{
+                            messageApi.open({
+                                type: 'error',
+                                content: 'Please select Your booking details!',
+                            });
+                        }
                     }
                 }
             }else{
                 setShow(true);
             }
+    };
+
+    const rescheduleHandler = async () => {
+        try{
+            const result = await rescheduleBooking(
+                token,
+                userId,
+                bookingId,
+                venue_id,
+                setDateApi(startDate),
+                setTimeApi(selectedStartTime),
+                setTimeApi(selectedEndTime)
+            );
+          if (result) {
+            Modal.success({
+                title: result.status,
+                content: result.message,
+                centered: true,
+                afterClose: ()=>{
+                    navigate(`/mybookingDetails/${bookingId}`)
+                }
+            });
+          }
+        }catch (error) {
+            Modal.error({
+              title: 'error',
+              content: error.response.data.message,
+            })
+        }
+    };
+
+    const setDateApi = (roomdate) => {
+        const date = new Date(roomdate);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        const dateNew = `${year}-${month}-${day}`;
+        return dateNew;
+    };
+
+    const setTimeApi = (roomdate) => {
+        const date = new Date(roomdate);
+        const newTime = date.toLocaleTimeString("en-us", {
+          hour12: false,
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        return newTime;
     };
 
     const calcReservationHours = (start, end) => {
@@ -130,7 +183,9 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
             checkAvailabileTimes();
             const hours = calcReservationHours(selectedStartTime, selectedEndTime);
             return {
-                price: calculateReservationPrice(hours, venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price)
+                price: calculateReservationPrice(hours, venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price),
+                description: ``, 
+                booking_price: calculateReservationPrice(hours, venueDetails?.price > venueDetails?.price_discounted ? venueDetails?.price_discounted : venueDetails?.price)
             }
         }
     }
@@ -352,6 +407,7 @@ const BookingForm = ({venueDetails, reschedule, services}) => {
             setSelectedStartTime(new Date(data.time.start));
             setSelectedEndTime(new Date(data.time.end));
             setCounter(data.numberOfPeople);
+            setBookingId(data.id);
         }
     },[userNewTimeInfo]);
 

@@ -11,7 +11,7 @@ import Button from '../../UI/Button';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import { getNotificationList } from '../../../apis/User';
 import { Badge, Dropdown } from 'antd';
-
+import { useNavigate } from "react-router-dom";
 
 const LogedNav = ({showBlackNav, token, show})=>{
 
@@ -20,6 +20,7 @@ const LogedNav = ({showBlackNav, token, show})=>{
     const [activeTab, setActiveTab] = useState('all');
     const [seenCount, setSeenCount] = useState(0);
     const [notification, setNotification] = useState([]);
+    const Navigate = useNavigate();
 
 
     const handProp = (e)=>{
@@ -32,7 +33,7 @@ const LogedNav = ({showBlackNav, token, show})=>{
     const handleTabClick = (key) => {
         setActiveTab(key);
         setSeenCount(0);
-        getList();
+        getList(key);
     };
 
     const { handleLogout, userProfileData } = useContext(AuthContext);
@@ -47,9 +48,9 @@ const LogedNav = ({showBlackNav, token, show})=>{
         }
     };
 
-    const getList = async () => {
+    const getList = async (tab) => {
         try{
-            const result = await getNotificationList(token, activeTab);
+            const result = await getNotificationList(token, tab);
             setNotification(result);
             setSeenCount(0);
             result.map(item => {
@@ -94,11 +95,84 @@ const LogedNav = ({showBlackNav, token, show})=>{
         );
     }
 
-
     useEffect(()=>{
         setSeenCount(0);
-        getList();
-    },[token, activeTab])
+    },[token, activeTab]);
+
+    const handelRoute = (type, object) =>{
+        switch (type){
+            case 'booking_reminder_extension': 
+            break;
+            case 'booking_confirmed':
+                Navigate(`/mybookingDetails/${object?.reservation_id}`);
+            break;
+            case 'booking_cancelation':
+                Navigate(`/mybookingDetails/${object?.id}`);
+            break;
+            case 'booking_reschedule':
+                Navigate(`/mybookingDetails/${object?.reservation_id}`);
+            break;
+            case 'booking_rating':
+                console.log(object);
+                Navigate(`/mybookingDetails/${object?.id}?rate=true`);
+            break;
+            case 'booking_reminder':
+                console.log(type);
+
+            break;
+            case 'booking_invitations':
+                console.log(type);
+
+            break;
+            case 'admin_reply':
+                console.log(type);
+            break;
+            case 'membership_reminder':
+                console.log(type);
+            break;
+            case 'membership_cancel':
+                console.log(type);
+            break;
+            case 'membership_upgrade':
+                console.log(type);
+            break;
+            case 'membership_amenitties_use':
+                console.log(type);
+
+
+            break;
+            case 'event_cancelation':
+                console.log(type);
+
+            break;
+            
+            case 'chat_notification':
+                console.log(type);
+
+            break;
+            case 'newsfeed':
+                console.log(type);
+
+            break;
+            case 'event_accept_ad':
+                console.log(type);
+
+            break;
+            case 'interest_events':
+                console.log(type);
+
+            break;
+            case 'event_reminder':
+                console.log(type);
+
+            break;
+            
+            default:
+                console.log('diff');
+            break;
+        }
+
+    };
 
     const itemsNotifications = [{
         key: '1',
@@ -139,16 +213,19 @@ const LogedNav = ({showBlackNav, token, show})=>{
                         </div>
                         <Tab.Pane eventKey={activeTab} className='noti_container'>
                             <ul className='ps-0'>
-                                {notification && notification.map((item, index)=>{
+                                {notification && notification?.map((item, index)=>{
                                     return (
-                                        <li className="border-dropdown d-flex px-sm-4 px-2" key={index}>
-                                            <img className='rounded-circle' alt='profile' src={item.icon}/>
-                                            <div className='info_profile mt-4 ms-4'> 
-                                                <Paragraph className='profile_notifications mb-2'>{item.title}</Paragraph>
-                                                <Paragraph className='grey-span2 mb-2'>{item.text}</Paragraph>
-                                                <Paragraph className='email mb-2' alt='#/'>{setDay(item.time_formmated)}</Paragraph>
-                                            </div>
-                                        </li>
+                                            <li className="border-dropdown d-flex px-sm-4 px-2" key={index} 
+                                                onClick={() => {
+                                                handelRoute(item?.type, item?.object);
+                                              }}>
+                                                <img className='rounded-circle' alt='profile' src={item.icon}/>
+                                                <div className='info_profile mt-4 ms-4'> 
+                                                    <Paragraph className='profile_notifications mb-2'>{item.title}</Paragraph>
+                                                    <Paragraph className='grey-span2 mb-2'>{item.text}</Paragraph>
+                                                    <Paragraph className='email mb-2' alt='#/'>{setDay(item.time_formmated)}</Paragraph>
+                                                </div>
+                                            </li>
                                     )
                                 })}
                                 {(notification && notification.length === 0) && <Paragraph className='empty py-5 px-3'>
@@ -225,7 +302,7 @@ const LogedNav = ({showBlackNav, token, show})=>{
                 trigger={['click']}
                 className='notifications_icon'
             >
-                <a onClick={(e) => e.preventDefault()} style={{
+                <a onClick={(e) => {e.preventDefault();getList(activeTab)}} style={{
                     cursor: 'pointer'
                 }}>
                     <Badge dot={show}>

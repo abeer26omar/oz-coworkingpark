@@ -60,16 +60,18 @@ const BookingSummaryVenue = () => {
                 const price = bookingData.membershipPackageOffer.price;
                 if(price === 0){
                     if(servicePrice){
-                        setPrice(servicePrice);
+                      setPrice(servicePrice);
                     }
                     else{
-                      setPrice('0');
+                      setPrice(0);
+                      setservicePrice(0);
                     }
                 }else{
                     if(servicePrice){
                         setPrice(servicePrice + price);
                     }else{
                         setPrice(price);
+                        setservicePrice(0);
                     }
                 }
             }
@@ -81,13 +83,14 @@ const BookingSummaryVenue = () => {
         if(bookingData.membershipPackageOffer){
             const price = bookingData.membershipPackageOffer.price;
             if(price === 0){
-                return bookingData.spaceDetails.price;
+                return bookingData.membershipPackageOffer.booking_price;
             }else {
-                // const actualPrice = 
-                return price;
+                const actualPrice = bookingData.membershipPackageOffer.booking_price - price;
+                return actualPrice;
             }
         }else{
-            return bookingData.spaceDetails.price;
+            return (bookingData.spaceDetails.price > bookingData.spaceDetails?.price_discounted) ? 
+            bookingData.spaceDetails?.price_discounted : bookingData.spaceDetails?.price;
         }
     };
 
@@ -111,7 +114,7 @@ const BookingSummaryVenue = () => {
         {
             title: "Invoice details",
             ContentTitle: bookingResult?.status === 'paid' ? 'Receipt' : 'Amount Due',
-            content: <CaseThree bookingResult={bookingResult} />,
+            content: <CaseThree bookingResult={bookingResult} bookingData={bookingData} />,
         },
     ];
 
@@ -174,7 +177,10 @@ const BookingSummaryVenue = () => {
                 });
               }
             }else{
-              const total_price = promo_discount ? price - promo_discount : price ; 
+              const total_price = promo_discount ? price - promo_discount : price 
+              const final_total_price = total_price === 0 ? (bookingData.membershipPackageOffer.booking_price + servicePrice) 
+              : total_price;
+
               const result = await confirmBooking(
                     token,
                     userId,
@@ -185,7 +191,7 @@ const BookingSummaryVenue = () => {
                     bookingData.services,
                     bookingData.membershipPackageOffer.booking_price,
                     servicePrice,
-                    promo_discount ? price - promo_discount : price,
+                    final_total_price,
                     setDateApi(bookingData.date),
                     setTimeApi(bookingData.time.start),
                     setTimeApi(bookingData.time.end),

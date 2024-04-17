@@ -3,7 +3,7 @@ import './SpaceDetails.css';
 import Paragraph from '../../../UI/Paragraph';
 import Select from 'react-select';
 
-const SpaceDetails = ({venueDetails, getServices}) => {
+const SpaceDetails = ({venueDetails, getServices, reschedule}) => {
 
     const optionList = (venueDetails?.services && venueDetails?.services !== null) && 
     venueDetails?.services.map(item=>{
@@ -55,6 +55,7 @@ const SpaceDetails = ({venueDetails, getServices}) => {
                                             onChange={handleChange}
                                             isSearchable={true}
                                             isMulti
+                                            isDisabled={reschedule}
                                         />
                                     </div>
                                 </div>
