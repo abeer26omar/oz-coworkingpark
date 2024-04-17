@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import MainHeaderWrapper from '../../../UI/MainHeaderWrapper';
 import Paragraph from '../../../UI/Paragraph';
@@ -21,6 +21,8 @@ const MyBookingDetails = () => {
     const [showRatingModal, setShowRatingModal] = useState(false);
     const [booking, setBooking] = useState(false);
     const { token } = useContext(AuthContext);
+    const [searchParams] = useSearchParams();
+    const rate = searchParams.get("rate");
     const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
@@ -118,7 +120,13 @@ const MyBookingDetails = () => {
         localStorage.setItem("BookingOZDetailsId", JSON.stringify(id));
 
         navigate(`/bookingDetails/${booking.venueData?.id}?reschedule=reschedule`);
-    }
+    };
+
+    useEffect(()=>{
+        if(rate){
+            setShowRatingModal(true)
+        }
+    },[rate])
 
     return (
         <>

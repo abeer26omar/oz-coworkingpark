@@ -18,7 +18,7 @@ const LoginForm = ({profile, provider})=>{
     const [userData, setUserData] = useState({});
     const [userInfo, setUSerInfo] = useState({});
     const { handleLogin, savePlanId } = useContext(AuthContext);
-    const [notificationToken, setNotificationToken] = useState('');
+    // const [notificationToken, setNotificationToken] = useState('');
     const previousLocation = localStorage.getItem('prevLocationOZ');
     const handleClose = () => setShow(false);
     
@@ -38,10 +38,7 @@ const LoginForm = ({profile, provider})=>{
 
     useEffect(()=>{
         const getToken = async () => {
-            try{
-                const result = await requestForToken();
-                setNotificationToken(result);
-            }catch(error){}
+            
         }
         getToken();
     },[]);
@@ -49,6 +46,17 @@ const LoginForm = ({profile, provider})=>{
     const handleSubmit = async (values) => {
         const controller = new AbortController();
         const signal = controller.signal;
+
+        let notificationToken = '';
+
+        try{
+            const result = await requestForToken();
+            notificationToken = result;
+        }catch(error){
+            console.log(error);
+            notificationToken = '';
+        };
+
         try {
             const result = await Login(values.email, values.password, provider, notificationToken);
             handleLogin(result);
