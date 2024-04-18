@@ -215,3 +215,30 @@ export const getGalleryData = async () => {
     const response = await axios(config);
     return response.data.data;
 }
+
+
+
+// export const config = async(page_name)=>{
+//     const config = {
+//         method: 'get',
+//         url: `${process.env.REACT_APP_API_CONFIG_URL}/api/config?page=${page_name}`
+//     };
+//     const response = await axios(config)
+//     return response.data.data;
+// }
+
+export  const getPrivateEvent = async (token, data) =>{
+        // const formData = new FormData();
+    // formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+
+    const config = {
+        method: 'get',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/private_event_items?access_token=${token}`,
+        // data: formData,
+        // maxContentLength: Infinity,
+        // maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+}
