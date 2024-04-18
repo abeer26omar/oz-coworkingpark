@@ -37,7 +37,7 @@ const ContactAdminHistory = () => {
     return (
         <>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-            <div className="bg-body-tertiary navigator border_bottom">
+            <div className="navigator border_bottom">
                 <div className='container-fluid d-flex justify-content-between align-items-center'>
                     <div className='d-flex align-items-center'>
                         <h1 className="title-name mb-0">Contact Admin History</h1>
