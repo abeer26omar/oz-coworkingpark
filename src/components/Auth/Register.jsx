@@ -21,7 +21,7 @@ const Register = () => {
 
     useEffect(()=>{
         const route = location.pathname;
-        sessionStorage.setItem('prevLocationOZ', route)
+        localStorage.setItem('prevLocationOZ', route)
     },[]);
 
     return (

@@ -45,6 +45,7 @@
 .card{
     border: none !important;
     border-radius: 0 !important;
+    overflow: hidden;
 }
 .card .card-img-top {
     border-radius: 0 !important;
@@ -184,6 +185,9 @@
     border: none;
     padding: 0 !important;
 }
+.sideSection_desc{
+    max-width: 80%;
+}
 @media screen and (max-width: 1200px) {
     .slick_knowledge .slick-next {
         right: 8% !important;
@@ -192,6 +196,9 @@
 @media screen and (max-width: 992px) {
     .slick_knowledge .slick-next {
         right: 4% !important;
+    }
+    .sideSection_desc{
+        max-width: 100%;
     }
 }
 @media screen and (max-width: 768px) {
@@ -393,7 +400,7 @@
 .yellow_circle_instractors{
     position: absolute;
     right: 0;
-    bottom: -30%;
+    bottom: 0%;
 }
 @media screen and (max-width: 768px) {
     .circle_yellow,

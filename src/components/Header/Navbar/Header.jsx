@@ -26,7 +26,8 @@ const Header = ({ showBlackNav, show }) => {
   const [bookingPlaces, setBookingPlaces] = useState([]);
   const [subBranchMenu, setSubBranchMenu] = useState(true);
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const { token, handelChangeBranch, branchId } = useContext(AuthContext);
+
+  const { token, handelChangeBranch, branchId, userId } = useContext(AuthContext);
   const [closeNav, setCloseNav] = useState(true);
   const Navigate = useNavigate();
 
@@ -68,7 +69,7 @@ const Header = ({ showBlackNav, show }) => {
   }, [token]);
 
   useEffect(() => {
-    getAmenitiesGroup(token)
+    getAmenitiesGroup(token, userId, branchId)
       .then((res) => {
         setBookingPlaces(res);
       })
@@ -224,6 +225,7 @@ const Header = ({ showBlackNav, show }) => {
                       borderBottom: isActive ? `2px solid black` : "none",
                     })}
                     to={"/booking"}
+                    end
                   >
                     <span>booking</span>
                   </NavLink>
@@ -237,6 +239,7 @@ const Header = ({ showBlackNav, show }) => {
                       borderBottom: isActive ? `2px solid black` : "none",
                     })}
                     to={"/membership"}
+                    end
                   >
                     <span>membership</span>
                   </NavLink>
@@ -249,6 +252,7 @@ const Header = ({ showBlackNav, show }) => {
                     borderBottom: isActive ? `2px solid black` : "none",
                   })}
                   to={"/private"}
+                  end
                 >
                   <span>private events</span>
                 </NavLink>
@@ -262,6 +266,7 @@ const Header = ({ showBlackNav, show }) => {
                       borderBottom: isActive ? `2px solid black` : "none",
                     })}
                     to={"/community"}
+                    end
                   >
                     <span>community</span>
                   </NavLink>
@@ -275,6 +280,7 @@ const Header = ({ showBlackNav, show }) => {
                       borderBottom: isActive ? `2px solid black` : "none",
                     })}
                     to={"/community/events"}
+                    end
                   >
                     <span>events</span>
                   </NavLink>
@@ -439,7 +445,7 @@ const Header = ({ showBlackNav, show }) => {
                         onClick={() => setCloseNav(!closeNav)}
                         className="p-0"
                         tagType="link"
-                        to={"/events"}
+                        to={"/community/events"}
                       >
                         Events
                       </Button>

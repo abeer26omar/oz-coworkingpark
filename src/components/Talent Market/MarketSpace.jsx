@@ -59,7 +59,7 @@ const MarketSpace = ()=>{
       <>
         <section className="booking-space p-0">
           <div className="container-fluid">
-            <div className="row border-top border-bottom align-items-center">
+            <div className="row border-bottom border-top align-items-center">
               <div className="col-lg-3 col-md-3 col-sm-12 border-right py-4">
                 <h2 className="book-title mb-0 p-0 text-center">
                   {"services"}
@@ -227,13 +227,13 @@ const MarketSpace = ()=>{
                 </div>
               </div>
             </div>
-            <div className="filter border-top border-bottom">
+            {isFilterOpen && (<div className="filter border-bottom">
               <MarketFilter
                 isOpen={isFilterOpen}
                 getFilteredData={getFilteredData}
               />
-            </div>
-            <div className="booking-section border-top border-bottom">
+            </div>)}
+            <div className="booking-section my-5">
               {empty && <Paragraph className="empty">{empty}</Paragraph>}
               {error && (
                 <Paragraph className="text-danger empty">{error}</Paragraph>

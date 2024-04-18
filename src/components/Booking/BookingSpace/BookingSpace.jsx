@@ -10,50 +10,50 @@ import { AuthContext } from "../../../apis/context/AuthTokenContext";
 import Paragraph from "../../UI/Paragraph";
 
 const BookingSpace = () => {
-  const [bookingPlaces, setBookingPlaces] = useState([]);
-  const [spaceTitle, setSpaceTitle] = useState("");
-  const [spaceId, setSpaceId] = useState("");
-  const [venues, setVenues] = useState([]);
-  const { token, userId, branchId } = useContext(AuthContext);
-  const sliderRef = useRef(null);
-  const [searchParams] = useSearchParams();
-  const amenity = searchParams.get("amenity");
-  const amenityid = searchParams.get("id");
-  const [activeSlide, setActiveSlide] = useState(amenityid);
-  const [cards, setCards] = useState([]);
+    const [bookingPlaces, setBookingPlaces] = useState([]);
+    const [spaceTitle, setSpaceTitle] = useState("");
+    const [spaceId, setSpaceId] = useState("");
+    const [venues, setVenues] = useState([]);
+    const { token, userId, branchId } = useContext(AuthContext);
+    const sliderRef = useRef(null);
+    const [searchParams] = useSearchParams();
+    const amenity = searchParams.get("amenity");
+    const amenityid = searchParams.get("id");
+    const [activeSlide, setActiveSlide] = useState(amenityid);
+    const [cards, setCards] = useState([]);
 
-  useEffect(() => {
-    if (sliderRef.current) {
-      sliderRef.current.slickGoTo(activeSlide);
-    }
-  }, [activeSlide]);
+    useEffect(() => {
+      if (sliderRef.current) {
+        sliderRef.current.slickGoTo(activeSlide);
+      }
+    }, [activeSlide]);
 
-  useEffect(() => {
-    const source = axios.CancelToken.source();
+    useEffect(() => {
+      const source = axios.CancelToken.source();
 
-        getAmenitiesGroup(token, userId, branchId).then(res=>{
-            setBookingPlaces(res);
-            if(amenity && amenityid){
-                changeSpace(amenityid, amenity);
-            }else{
-                changeSpace(res[0].id, res[0].name);
-            }
-        }).catch(err=>{});
+          getAmenitiesGroup(token, userId, branchId).then(res=>{
+              setBookingPlaces(res);
+              if(amenity && amenityid){
+                  changeSpace(amenityid, amenity);
+              }else{
+                  changeSpace(res[0].id, res[0].name);
+              }
+          }).catch(err=>{});
 
-    return () => source.cancel();
-  }, [amenity, amenityid]);
+      return () => source.cancel();
+    }, [amenity, amenityid]);
 
-  useEffect(()=>{
-    const controller = new AbortController();
-    const signal = controller.signal;
+    useEffect(()=>{
+      const controller = new AbortController();
+      const signal = controller.signal;
 
-    if(spaceId){
-        getLastBooking(token, userId, spaceId, signal).then(res=>{
-            setCards(Object.values(res))
-        }).catch(err=>{})
-    }
-    return ()=>controller.abort();
-  },[spaceId]);
+      if(spaceId){
+          getLastBooking(token, userId, spaceId, signal).then(res=>{
+              setCards(Object.values(res))
+          }).catch(err=>{})
+      }
+      return ()=>controller.abort();
+    },[spaceId]);
 
     const changeSpace = (amenities_group_id, spaceTitle) => {
         getVenues(token, userId, branchId === null ? '1' : branchId, amenities_group_id).then(res=>{
@@ -63,53 +63,53 @@ const BookingSpace = () => {
         }).catch(err=>{})
     };
 
-  let settings = {
-    dots: false,
-    arrows: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    align: "center",
-    lazyLoad: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
+    let settings = {
+      dots: false,
+      arrows: true,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 5,
+      slidesToScroll: 1,
+      align: "center",
+      lazyLoad: true,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 1,
+          },
         },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+          },
         },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          },
         },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
         },
+      ],
+      beforeChange: (current, next) => {
+        setActiveSlide(next);
       },
-    ],
-    beforeChange: (current, next) => {
-      setActiveSlide(next);
-    },
-  };
+    };
 
-  const handleSlideClick = (index) => {
-    setActiveSlide(index);
-  };
+    const handleSlideClick = (index) => {
+      setActiveSlide(index);
+    };
 
   return (
     <>
@@ -149,12 +149,12 @@ const BookingSpace = () => {
                 })}
             </Slider>
           </div>
+        </div>
           <BookingSpacesTypes
             venues={venues}
             placeId={spaceId}
             spaceTitle={spaceTitle}
           />
-        </div>
       </section>
 
       {(token && cards.length > 0) && <LastBooking cards={cards} />}

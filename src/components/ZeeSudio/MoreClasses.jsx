@@ -5,8 +5,11 @@ import CardsClasses from "./CardsClasses";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { getTrainingClasses } from "../../apis/ZeeStudio";
 import { useQuery } from "@tanstack/react-query";
+
 function MoreClasses() {
+  
   const [limit, setLimit] = useState(12);
+  const [page, setPage] = useState(0);
   const [classesGymFilter, setClassesGymFilter] = useState([]);
 
   const [dateFilter, setDateFilter] = useState("");
@@ -24,7 +27,7 @@ function MoreClasses() {
     queryKey: [
       "trainingClasses",
       limit,
-      0,
+      page,
       searchFilter,
       dateFilter,
       categoreyFilter,
@@ -33,7 +36,7 @@ function MoreClasses() {
       getTrainingClasses(
         token,
         limit,
-        0,
+        page,
         searchFilter,
         dateFilter,
         categoreyFilter,

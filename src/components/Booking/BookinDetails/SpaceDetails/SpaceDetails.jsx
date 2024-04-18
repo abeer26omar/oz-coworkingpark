@@ -1,26 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './SpaceDetails.css';
 import Paragraph from '../../../UI/Paragraph';
 import Select from 'react-select';
 
-const SpaceDetails = ({venueDetails}) => {
-    const optionList = (venueDetails.services && venueDetails.services !== null) && venueDetails.services.map(item=>{
+const SpaceDetails = ({venueDetails, getServices, reschedule}) => {
+
+    const optionList = (venueDetails?.services && venueDetails?.services !== null) && 
+    venueDetails?.services.map(item=>{
         return { value: item.id , label: item.name , price: item.price }
     })
     
-    const [selectedOptions, setSelectedOptions] = useState();
+    const [selectedOptions, setSelectedOptions] = useState(JSON.parse(localStorage.getItem("BookingOZServices")) || []);
 
     const handleChange = (data)=>{
         setSelectedOptions(data);
-        sessionStorage.setItem("BookingOZServices", JSON.stringify(data));
-    }
-    
-    useEffect(()=>{
-        const data = JSON.parse(sessionStorage.getItem("BookingOZServices"));
-        if(data){
-            setSelectedOptions(data)
+        localStorage.setItem("BookingOZServices", JSON.stringify(data));
+        getServices(data);
+    };
+
+    const dicountRoules = (price, price_discounted, default_price_per) => {
+        if(price === price_discounted){
+            return (<span className={'priceafter'}>{price} EGP / {default_price_per}</span>)
+        }else if(price > price_discounted){
+            return (<span className='mb-0 '><span className='discount'>{price} EGP</span> {price_discounted} EGP / {default_price_per}</span>)
         }
-    },[])
+    }
+
     return (
         <>
         {
@@ -28,13 +33,13 @@ const SpaceDetails = ({venueDetails}) => {
                 <section className="space-details">
                     <div className="container-fluid">
                         <div className="row p-3">
-                            <div className="col-lg-6 col-12 p-sm-5 p-3 border-right">
+                            <div className="col-md-6 col-12 p-lg-5 p-3 border-right">
                                 <div className="space-description mb-5">
                                     <Paragraph className="h2-description">
                                         Space Description
                                     </Paragraph>
                                     <Paragraph className="p-description">
-                                        {venueDetails.description}
+                                        {venueDetails?.description}
                                     </Paragraph>
                                 </div>
                                 <div className="catering">
@@ -50,19 +55,19 @@ const SpaceDetails = ({venueDetails}) => {
                                             onChange={handleChange}
                                             isSearchable={true}
                                             isMulti
+                                            isDisabled={reschedule}
                                         />
                                     </div>
                                 </div>
 
                             </div>
-                            <div className="col-lg-6 col-12 p-sm-5 p-3 m-sm-auto">
+                            <div className="col-md-6 col-12 p-lg-5 p-3 m-sm-auto">
                                 <div className="space-price mb-5">
                                     <Paragraph className="h2-description">
                                         Price
                                     </Paragraph>
                                     <div className="price-list">
-                                        <span className='discount pe-2'>{venueDetails.price} EGP / Hour</span>
-                                        <span>{venueDetails.price_discounted} EGP / Hour</span>
+                                        {dicountRoules(venueDetails?.price, venueDetails?.price_discounted, venueDetails?.default_price_per)}
                                     </div>
                                 </div>
                                 <div className="space-facilities mb-5">
@@ -71,7 +76,7 @@ const SpaceDetails = ({venueDetails}) => {
                                     </Paragraph>
                                     <div className="facilities-list">
                                         <ul>
-                                            {(venueDetails.facilities && venueDetails.facilities !== null) &&
+                                            {(venueDetails?.facilities && venueDetails?.facilities !== null) &&
                                                 venueDetails.facilities.slice(0,3).map((service,index)=>{
                                                     return (
                                                         <li className='' key={index}>
@@ -80,11 +85,6 @@ const SpaceDetails = ({venueDetails}) => {
                                                                 type="img" 
                                                                 src={service.logo}
                                                                 alt={service.name}
-                                                                width={'56px'}
-                                                                height={'56px'}
-                                                                style={{
-                                                                    objectFit: 'scale-down'
-                                                                }}
                                                             />
                                                             {service.name}
                                                         </li>
@@ -98,11 +98,10 @@ const SpaceDetails = ({venueDetails}) => {
                                     <Paragraph className="h2-description">
                                         capacity
                                     </Paragraph>
-                                    <span>{venueDetails.capacity} Persons</span>
+                                    <span>{venueDetails?.capacity} Persons</span>
                                 </div>
 
                             </div>
-
                         </div>
                     </div>
                 </section>

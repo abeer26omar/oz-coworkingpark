@@ -3,7 +3,7 @@ import Button from '../../UI/Button';
 
 const MembershipHeader = ({title}) => {
     const handelInguireType = () => {
-        sessionStorage.setItem('MembershipInquireOZ', 'membership')
+        localStorage.setItem('MembershipInquireOZ', 'membership')
     }
     
     return (

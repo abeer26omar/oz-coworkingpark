@@ -17,18 +17,19 @@ import { DataContext } from '../../../../apis/context/SiteDataContext';
 import Paragraph from '../../../UI/Paragraph';
 import LoginAlert from '../../../Auth/LoginAlertModal';
 import moment from 'moment';
+import {useNavigate} from 'react-router-dom'; 
 
 const CommunityEventsDetails = () => {
 
     const {id} = useParams();
-    const [eventDetails, setEventDetails] = useState([]);
+    const [eventDetails, setEventDetails] = useState({});
     const [image, setImage] = useState('');
     const [swalProps, setSwalProps] = useState({});
     const [reload, setReload] = useState(false);
-    const { token, userId } = useContext(AuthContext);
+    const { token, userId, planId} = useContext(AuthContext);
     const {data, ResetPageName} = useContext(DataContext);
     const [show, setShow] = useState(false);
-    
+    const navigate = useNavigate();
     const handelHide = ()=>setShow(false);
 
     useEffect(()=>{
@@ -56,32 +57,26 @@ const CommunityEventsDetails = () => {
     
     const url = window.location.href;
 
+    const navigatePayment = (price) => {
+        const OZEventAttend = {
+          id: eventDetails?.id,
+          date: eventDetails?.dates,
+          title: eventDetails?.event_name,
+          genre: eventDetails?.event_type?.name,
+          capacity: eventDetails?.capacity,
+          price: price,
+          active_membership_discount: eventDetails?.active_membership_discount
+        };
+        localStorage.setItem("OZEventAttend", JSON.stringify(OZEventAttend));
+        navigate(`/event-bookingSummary`);
+    };
+
     const attend = async () => {
         if(token){
             try{
                 const result = await checkEvent(token, userId, id);
                 if(result.bookable){
-                    try{
-                        const res = await attendEvent(token, userId, id);
-                        Modal.success({
-                            title: res.status,
-                            content: res.message,
-                            footer: false,
-                            centered: true,
-                            closable: true,
-                            maskClosable: true
-                        });
-                        setReload(true)
-                    }catch(error){
-                        Modal.error({
-                            title: error.response.data.status,
-                            content: error.response.data.message,
-                            footer: false,
-                            centered: true,
-                            closable: true,
-                            maskClosable: true
-                        });
-                    }
+                    navigatePayment(eventDetails.default_price);
                 } else{
                     Modal.success({
                         title: result.status,
@@ -108,17 +103,20 @@ const CommunityEventsDetails = () => {
     };
 
     const cancel = async () => {
+        setReload(false);
         try{
             const res = await cancelEventAttend(token, userId, eventDetails.event_attend_id);
-            Modal.success({
-                title: res.status,
-                content: res.message,
-                footer: false,
-                centered: true,
-                closable: true,
-                maskClosable: true
-            });
-            setReload(true)
+            if(res){
+                Modal.success({
+                    title: res.status,
+                    content: res.message,
+                    footer: false,
+                    centered: true,
+                    closable: true,
+                    maskClosable: true
+                });
+                setReload(true);
+            }
         }catch (error){
             Modal.error({
                 title: error.response.data.status,
@@ -141,7 +139,7 @@ const CommunityEventsDetails = () => {
         autoplay: true,
         autoplaySpeed: 3000,
         lazyLoad: true
-    }
+    };
 
     const settingsGallry = {
         dots: false,
@@ -154,7 +152,7 @@ const CommunityEventsDetails = () => {
         autoplay: true,
         autoplaySpeed: 3000,
         lazyLoad: true,
-    }
+    };
     
     const compareTime = (eventEnd, eventId) => {
         
@@ -206,11 +204,11 @@ const CommunityEventsDetails = () => {
             }
         }
 
-    }
+    };
     
     return (
         <>
-            <div className="bg-body-tertiary navigator-feed">
+            <div className="navigator-feed">
                 <div className='container-fluid'>
                     <div className='d-flex'>
                         <h1 className="title-name mb-0">
@@ -236,7 +234,7 @@ const CommunityEventsDetails = () => {
                             <div className="box-content">
                                 <h2 className="h2-text-box">{eventDetails && eventDetails.event_name}</h2>
                                 <div className="event-type-details">
-                                    <span className="status-event">Status: <span>{eventDetails && eventDetails.event_type?.name}</span></span>
+                                    <span className="status-event">genre: <span>{eventDetails && eventDetails.event_type?.name}</span></span>
                                 </div>
                                 <div
                                     className="d-flex  mb-5 amenities-box-details">
@@ -320,9 +318,6 @@ const CommunityEventsDetails = () => {
                             <div className="event-type-details">
                             <div className="event-type-details">
                                 <Paragraph className="status-event">Price:<br /><span className='mt-3'>{eventDetails.default_price} EGP</span></Paragraph>
-                            </div>
-                            <div className="event-type-details">
-                                <Paragraph className="status-event">capacity:<br /><span className='mt-3'>{eventDetails.capacity} person</span></Paragraph>
                             </div>
                                 
                             </div>

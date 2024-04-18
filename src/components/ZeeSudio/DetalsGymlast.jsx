@@ -1,43 +1,43 @@
 import React, { useContext, useState } from "react";
-import Media from "../Media/Media";
-import details from "../../assets/images/DetalPage.jpg";
 import Paragraph from "../UI/Paragraph";
 import Button from "../UI/Button";
 import moment from "moment";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import LoginAlert from "../Auth/LoginAlertModal";
-import { Skeleton } from "antd";
-function DetalsGymlast({ details, pending }) {
-  const { token } = useContext(AuthContext);
+import { Skeleton, Modal } from "antd";
+import * as DOMPurify from "dompurify";
+import CardSession from "../UI/CardSession";
+
+const DetalsGymlast = ({ details, pending }) => {
+
+  const { token, userProfileData } = useContext(AuthContext);
   const [showLogin, setShowLogin] = useState(false);
+  const [isOpen, setIsopen] = useState(false);
 
   const handelClose = () => setShowLogin(false);
 
   const navigate = useNavigate();
 
-  const HandelSummery = (value) => {
-    const gymCourseDetails = {
-      id: value.id,
-      title: value.title,
-      date: value.start_date,
-      duration: value.duration,
-      schedule: value.schedule,
-      price: value.price,
-      level: value.level,
-    };
-
+  const navigatePayment = (value) => {
     if (token) {
-      sessionStorage.setItem(
-        "OZgymCourseDetails",
-        JSON.stringify(gymCourseDetails)
-      );
-      navigate(`/payment`);
-    } else {
+      const gymCourseDetails = {
+        id: value.id,
+        title: value.title,
+        date: value.start_date,
+        duration: value.duration,
+        schedule: value.schedule,
+        price: value.price,
+        level: value.level,
+        free: value.allow_free
+      };
+      localStorage.setItem("OZgymCourseDetails", JSON.stringify(gymCourseDetails));
+      navigate(`/class-bookingSummary`);
+    }else {
       setShowLogin(true);
     }
   };
-  const [skeleton, setSkeleton] = useState(false);
+
   return (
     <>
       <div className="container-fluid px-70 py-5">
@@ -75,16 +75,31 @@ function DetalsGymlast({ details, pending }) {
               </div>
             </div>
             <div className="col-xl-4 col-md-6 col-sm-12">
-              <div className="bg-gymDetails py-4 px-4 ">
+              <div className="bg-gymDetails py-4 px-4 " height="100%">
                 {pending ? (
                   <Skeleton active paragraph={{ rows: 5 }} />
                 ) : (
                   <>
                     <Paragraph className="card-title">Class Details</Paragraph>
-                    <Paragraph className="desc_small_light py-3">
+                    <Paragraph
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(details?.details),
+                      }}
+                      className={
+                        isOpen
+                          ? "desc_small_light py-3 animate__animated "
+                          : "desc_small_light show-more-paragraph mt-3  "
+                      }
+                    >
                       {details?.details}
                     </Paragraph>
-                    <Paragraph className="desc_small light py-2 ">
+                    <li
+                      className="desc_small_light d-inline hover-paragraph-show"
+                      onClick={() => setIsopen(!isOpen)}
+                    >
+                      {isOpen ? <u>Show Less</u> : <u>Show More...</u>}
+                    </li>
+                    <Paragraph className="desc_small light py-2 mt-3">
                       Duration :
                       <span className="desc_small"> {details?.duration}</span>
                     </Paragraph>
@@ -126,10 +141,10 @@ function DetalsGymlast({ details, pending }) {
                 )}
                 <Button
                   tagType="link"
-                  onClick={() => HandelSummery(details)}
+                  onClick={() => navigatePayment(details)}
                   className="btn button-outLine btn-bg-white"
-                >
-                  {"Book a Class"}
+                >Book a Class
+                  {/* {details.attended === true ? '' : 'Book a Class'} */}
                 </Button>
               </div>
             </div>
@@ -145,14 +160,27 @@ function DetalsGymlast({ details, pending }) {
                 </Paragraph>
               )}
             </div>
-            <div className="col-12 py-5 video-container position-relative">
+            <section className="py-5">
+              <div className="col-12 mb-4">
+                <p className="head_session">{details?.title} Sessions </p>
+              </div>
+            <div className="row">
+               {details?.sessions &&  details?.sessions?.map((session, index) =>{
+                let counter = 1
+                return(<>
+                  <div key={index} className="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                    <CardSession index={counter++} session={session} />
+                  </div>
+                </>)
+              })}
+            </div>
+            </section>
+            <div className="col-12 py-5 d-flex justify-content-center video-container position-relative">
               {pending ? (
                 <Skeleton.Image active />
               ) : (
                 <video
                   src={details.video}
-                  className="w-100"
-                  height="616px"
                   controls
                 />
               )}

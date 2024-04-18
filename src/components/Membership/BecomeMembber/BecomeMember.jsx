@@ -13,7 +13,7 @@ const BecomeMember = ({ configData, pending }) => {
               {pending ? (
                 <Skeleton.Image active className="w-100" />
               ) : (
-                configData.map((configItem, index) => (
+                configData?.map((configItem, index) => (
                   <React.Fragment key={index}>
                     {(configItem.key === "membership_page_image" ||
                       configItem.key === "home_page_space_image") && (
@@ -33,7 +33,7 @@ const BecomeMember = ({ configData, pending }) => {
                 {pending ? (
                   <Skeleton active paragraph={{ rows: 3 }} />
                 ) : (
-                  configData.map((configItem, index) => (
+                  configData?.map((configItem, index) => (
                     <React.Fragment key={index}>
                       {(configItem.key === "membership_page_main_title" ||
                         configItem.key === "home_page_space_title") && (

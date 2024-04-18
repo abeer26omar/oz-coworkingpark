@@ -9,8 +9,9 @@ const Booking = () => {
 
     useEffect(()=>{
         ResetPageName('booking');
-        sessionStorage.removeItem("BookingOZDetails");
-        sessionStorage.removeItem("BookingOZServices");
+        localStorage.removeItem("BookingOZDetails");
+        localStorage.removeItem("BookingOZServices");
+        localStorage.removeItem("BookingOZDetailsId");
     },[]);
 
     return (

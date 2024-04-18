@@ -8,8 +8,7 @@ import "aos/dist/aos.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from './apis/context/SiteDataContext';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { motion, useScroll, useSpring } from "framer-motion";
-import AnimatedCursor from "react-animated-cursor";
+import { useScroll, useSpring } from "framer-motion";
 import RootLayout from './pages/RootLayout';
 import Membership from "./pages/Membership";
 import Login from "./components/Auth/Login";
@@ -20,16 +19,14 @@ import Home from "./pages/Home";
 import Community from "./pages/Community";
 import NewsFeed from "./pages/NewsFeed";
 import SingleNewFeed from "./components/NewsFeed/NewsFeedBlogs/SingleNewFeed/SingleNewFeed";
-import CommunityEventsExplore
-    from "./components/Community/CommunityEvents/CommunityEventsExplore/CommunityEventsExplore";
-import CommunityEventsDetails
-    from "./components/Community/CommunityEvents/CommunityEventsDetails/CommunityEventsDetails";
+import CommunityEventsExplore from "./components/Community/CommunityEvents/CommunityEventsExplore/CommunityEventsExplore";
+import CommunityEventsDetails from "./components/Community/CommunityEvents/CommunityEventsDetails/CommunityEventsDetails";
 import PrivateEvents from "./pages/PrivateEvents";
 import Houses from "./pages/Houses";
 import HouseDetails from "./components/Houses/HousesDetails/HouseDetails";
 import Booking from "./pages/Booking";
 import BookingDetails from "./components/Booking/BookinDetails/BookingDetails";
-import BookingSummary from "./components/Booking/BookinDetails/SpaceDetails/BookingSummary/BookingSummary";
+import BookingSummaryVenue from "./components/Booking/BookinDetails/SpaceDetails/BookingSummary/BookingSummaryVenue";
 import Gallery from "./pages/Gallery";
 import About from "./pages/About";
 import Profile from "./pages/Profile";
@@ -38,6 +35,7 @@ import Register from './components/Auth/Register';
 import ForgetPass from './components/Auth/ForgetPass';
 import NewPassword from './components/Auth/NewPassword';
 import MyBookingDetails from "./components/Profile/ProfileContent/MyBooking/MyBookingDetails";
+import RescheduleBooking from './components/Profile/ProfileContent/MyBooking/RescheduleBooking';
 import MyplanDetials from './components/Profile/ProfileContent/MyPlan/PlanDetails';
 import MyEventDetails from "./components/Profile/ProfileContent/MyEvents/MyEventDetilas";
 import Ozys from './components/Ozys/Ozys';
@@ -75,7 +73,6 @@ import CoursesHistory from './components/OzKnowledge/CoursesHistory';
 import OZCourses from './components/OzKnowledge/OZCourses';
 import CourseDetails from './components/OzKnowledge/CourseDetails/CourseDetails';
 import RouterGuard from './apis/RouterGuard';
-import HttpInterceptor from './apis/LoadingInterceptor';
 import MoreClasses from "./components/ZeeSudio/MoreClasses";
 import OurTrainerPage from "./components/ZeeSudio/OurTrainerPage";
 import GymDetails from "./components/ZeeSudio/GymDetails";
@@ -83,12 +80,14 @@ import GymHistory from "./components/ZeeSudio/GymHistory";
 import PaymentGym from "./components/ZeeSudio/PaymentGym";
 import CourseTracting from './components/OzKnowledge/Course Tracting/CourseTracting';
 import BookCourse from './components/OzKnowledge/BookCourse';
+import BookingSummaryEvents from './components/EventsBookingSummary/BookingSummaryEvents';
+import BookingSummaryMembership from './components/Membership/BookingSummaryMembership';
 
 function App() {
 
     useEffect(() => {
       AOS.init({
-        duration: 1200,
+        duration: 1500,
         once: true, 
       });
     }, []);
@@ -140,10 +139,12 @@ function App() {
           { path:'membership', element: <Membership />},  
           { path:'membership/:id', element: <MembershipOptions />},
           { path:'singleMember/:id', element: <MemberPackage />},
+          { path:'membership-bookingSummary', element: <BookingSummaryMembership />},
           { path:'spaces', element: <Spaces />},
           { path:'community', element: <Community />},
           { path:'community/events', element: <CommunityEventsExplore />},
           { path:'events/:name/:id', element: <CommunityEventsDetails />},
+          { path:'event-bookingSummary', element: <BookingSummaryEvents />},
           { path:'community/newsfeed', element: <NewsFeed />},
           { path:'community/newsfeed/singleFeed/:id', element: <SingleNewFeed />},
           { path:'private', element: <PrivateEvents />},
@@ -152,9 +153,10 @@ function App() {
           { path:'booking', element: <Booking />},
           { path:'bookingDetails/:id', element: <BookingDetails />},
           { path:'mybookingDetails/:id', element: <MyBookingDetails />},
+          { path:'RescheduleBooking/:id', element: <RescheduleBooking />},
           { path:'myplanDetials/:id', element: <MyplanDetials />},
           { path:'myeventDetails/:id', element: <MyEventDetails/>},
-          { path:'bookingDetails/bookNow', element: <BookingSummary />},
+          { path:'bookingDetails/bookNow', element: <BookingSummaryVenue />},
           { path:'community/galleryshow', element: <Gallery />},
           { path:'ozys', element: <Ozys />},
           { path:'amenities', element: <Amenities />},
@@ -170,14 +172,14 @@ function App() {
           { path:'knowledge', element: <Knowledge />},
           { path:'courses/:id', element: <OZCourses />},
           { path:'coursedetails/:id', element: <CourseDetails />},
-          { path:'bookclass', element: <BookCourse />},
+          { path:'course-bookingSummary', element: <BookCourse />},
           { path:'coursesHistory', element: <RouterGuard element={CoursesHistory} />},
           { path:'coursetracting/:id', element: <CourseTracting />},
           { path: "zeestudio", element: <ZeeStudio /> },
           { path: "ourgymclasses", element: <MoreClasses /> },
           { path: "ourtrainer", element: <OurTrainerPage /> },
           { path: "gymdetails/:id", element: <GymDetails /> },
-          { path: "payment", element: <PaymentGym/> },
+          { path: "class-bookingSummary", element: <PaymentGym/> },
           { path: "gymhistory", element: <RouterGuard element={GymHistory} /> },
           { path:'invoice', element: <Invoice />}
         ]}
@@ -191,15 +193,7 @@ function App() {
     return (
       <>
       <QueryClientProvider client={queryClient}>
-      {/* <motion.div className="progress-bar" style={{ scaleX }} />
-      <AnimatedCursor 
-        innerSize={8}
-        outerSize={45}
-        color='208, 223, 0'
-        outerAlpha={0.2}
-        innerScale={0.7}
-        outerScale={1.5}
-      /> */}
+      {/* <motion.div className="progress-bar" style={{ scaleX }} />*/}
         <RouterProvider router={router}/>
       </QueryClientProvider>
       </>

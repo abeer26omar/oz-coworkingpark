@@ -74,7 +74,7 @@
 .bg-gymDetails{
     background-color: #fff;
     /* border-radius: 10px; */
-    height: 608px;
+    /* height: 608px; */
 }
 .steps-payment .ant-steps.ant-steps-navigation .ant-steps-item {
     overflow:  hidden !important;

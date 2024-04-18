@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { Layout, Menu, Slider, InputNumber, DatePicker, Select } from 'antd';
+import { useNavigate } from "react-router-dom";
 import CourseCard from './CourseCard';
 import FilterCourses from './FilterCourses';
 import { getCoursesList, getCategoriesList, getInstructorsList } from '../../apis/OzKnowledge';
@@ -18,11 +19,11 @@ const FilteredCourses = () => {
     const [trainers, setTrainers] = useState([]);
 
     const [limit, setLimit] = useState(10);
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
-    const [priceFrom, setPriceFrom] = useState(0);
-    const [priceTo, setPriceTo] = useState(400); 
+    const [priceFrom, setPriceFrom] = useState('');
+    const [priceTo, setPriceTo] = useState(''); 
     const [categoryId, setCategoryId] = useState([]);
     const [categoryIds, setCategoryIds] = useState([]);
     const [isFirstChange, setIsFirstChange] = useState(true);
@@ -30,9 +31,10 @@ const FilteredCourses = () => {
     const [trainerId, setTrainerId] = useState('');
 
     const { token } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(()=>{
-        const categoryIds = sessionStorage.getItem('coursesIdsOz').split(',');
+        const categoryIds = localStorage.getItem('coursesIdsOz').split(',');
         const numArray = categoryIds.map(Number);
         setCategoryId(numArray);
         setCategoryIds(numArray);
@@ -128,11 +130,6 @@ const FilteredCourses = () => {
         setSellerType(e.target.value);
     };
 
-    const onChangeSlider = (value) => {
-        setPriceFrom(value[0]);
-        setPriceTo(value[1]);
-    };
-
     const onChangeDateStart = (dateString) => {
         setStartDate(dateString);
     };
@@ -167,12 +164,12 @@ const FilteredCourses = () => {
             key: 'sub1',
             icon: null,
             label: 'CATEGORY',
-            children: categories && categories.map(item=>{
+            children: categories && categories?.map(item=>{
                     return {
                         key: `cat_${item.id}`,
                         icon: (<img src={item.image} alt='icon' width= '24px' height= '24px'/>),
-                        label: item.title,
-                        children: item.sub_category.map(e=>{
+                        label: item?.title,
+                        children: item?.sub_category.map(e=>{
                             return {
                                 key: e.id,
                                 label: (
@@ -197,6 +194,8 @@ const FilteredCourses = () => {
                             setCategoryIds(item.ids);
                             setIsFirstChange(true);
                             handelCheckState();
+                            navigate(`/courses/${item.id}`);
+
                         }
                     }
                 })
@@ -247,21 +246,21 @@ const FilteredCourses = () => {
                             <div className='col-5'>
                                 <InputNumber
                                     controls={false}
-                                    addonAfter="USD"
+                                    addonAfter="EGP"
                                     value={priceFrom}
-                                    onChange={onChangeSlider}
+                                    // onChange={onChangeSlider}
                                 />
                             </div>
                             <div className='col-5'>
                                 <InputNumber
                                     controls={false}
-                                    addonAfter="USD"
+                                    addonAfter="EGP"
                                     value={priceTo}
-                                    onChange={onChangeSlider}
+                                    // onChange={onChangeSlider}
                                 />
                             </div>
                         </div>
-                            <Slider 
+                            {/* <Slider 
                                 range
                                 step={10}
                                 max={400}
@@ -269,7 +268,7 @@ const FilteredCourses = () => {
                                 defaultValue={[priceFrom, priceTo]}
                                 // value={[priceFrom, priceTo]}
                                 onChange={onChangeSlider}
-                            />
+                            /> */}
                         </div>
                     ),
                 }

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import MainHeaderWrapper from '../../../UI/MainHeaderWrapper';
 import Paragraph from '../../../UI/Paragraph';
@@ -20,7 +20,10 @@ const MyBookingDetails = () => {
     const [showRemainderModal, setShowRemainderModal] = useState(false);
     const [showRatingModal, setShowRatingModal] = useState(false);
     const [booking, setBooking] = useState(false);
-    const { token, userId } = useContext(AuthContext);
+    const { token } = useContext(AuthContext);
+    const [searchParams] = useSearchParams();
+    const rate = searchParams.get("rate");
+    const reminder = searchParams.get("reminder");
     const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
@@ -104,19 +107,33 @@ const MyBookingDetails = () => {
     const handelReschedule = (e) => {
         e.preventDefault();
         const data  = {
+            id: id,
             date: setLocalTime(booking.check_in_formmated),
             time: {
                 start: setLocalTime(booking.check_in_formmated),
                 end: setLocalTime(booking.check_out_formmated)
             },
-            numberOfPeople: booking.invites.length,
+            numberOfPeople: booking.guests,
             spaceDetails: booking.venueData,
-            services: JSON.parse(sessionStorage.getItem("BookingOZServices"))
+            services: JSON.parse(localStorage.getItem("BookingOZServices"))
         };
-        sessionStorage.setItem("BookingOZDetails", JSON.stringify(data));
+        localStorage.setItem("BookingOZDetails", JSON.stringify(data));
+        localStorage.setItem("BookingOZDetailsId", JSON.stringify(id));
 
-        navigate(`/bookingDetails/${booking.venueData?.id}`);
-    }
+        navigate(`/bookingDetails/${booking.venueData?.id}?reschedule=reschedule`);
+    };
+
+    useEffect(()=>{
+        if(rate){
+            setShowRatingModal(true)
+        }
+    },[rate]);
+
+    useEffect(()=>{
+        if(reminder){
+            setShowRemainderModal(true)
+        }
+    },[reminder]);
 
     return (
         <>
@@ -218,7 +235,7 @@ const MyBookingDetails = () => {
                                     <ul className="list-options d-flex p-0 py-3 m-0">
                                         {booking && booking.venueData?.facilities.map((item, index)=>{
                                             return (
-                                                <li className="list-option-item" key={index}><img src={item.logo} alt={item.name} />{item.name}</li>
+                                                <li className="list-option-item" key={index}><img src={item.logo} alt={item.name} width='27.43px' height='20.57px'/>{item.name}</li>
                                             )
                                         })}
                                     </ul>
@@ -230,11 +247,11 @@ const MyBookingDetails = () => {
                                     Services
                                 </Paragraph>
                                 <ul className="list-options d-flex p-0 py-3 m-0">
-                                    {/* {booking && booking.services.map((item, index)=>{
+                                    {booking && booking?.services.map((item, index)=>{
                                         return (
-                                            <li className="list-option-item" key={index}>{item.name}</li>
+                                            <li className="list-option-item" key={index}>{item.service_name}</li>
                                         )
-                                    })} */}
+                                    })}
                                 </ul>
                             </div>
                         </div>

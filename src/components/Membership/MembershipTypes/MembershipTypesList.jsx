@@ -9,7 +9,7 @@ const MembershipTypesList = ({ id, image, name, description, className }) => {
 
   return (
     <>
-      <div className="card h-100 text-start">
+      <div className="card text-start">
         <Media
           type="img"
           src={image}
@@ -17,8 +17,8 @@ const MembershipTypesList = ({ id, image, name, description, className }) => {
           alt={name}
           onClick={() => navigate(`/membership/${id}`)}
         />
-        <div className={`card-body ${className}`}>
-          <Paragraph className="card-title">{name}</Paragraph>
+        <div className={`card-body ${className} d-flex flex-column`}>
+          <Paragraph className="card-title mx-0">{name}</Paragraph>
           <Paragraph className='dynamic_wraper'>
             {description}
           </Paragraph>
@@ -26,7 +26,7 @@ const MembershipTypesList = ({ id, image, name, description, className }) => {
             tagType="link"
             to={`/membership/${id}`}
             name={name}
-            className="btn button-outLine btn-bg-white"
+            className="btn button-outLine btn-bg-white mx-sm-0 mx-auto"
           >
             Find out more
           </Button>

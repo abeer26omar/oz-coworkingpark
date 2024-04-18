@@ -91,10 +91,25 @@
     list-style: none;
     padding: 0
 }
-
+a{
+    cursor: pointer;
+}
+.my-32{
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+.service_price{
+    color: var(--Primary-1, #000);
+    font-family: var(--questrial-font);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    margin: 0 27px 32px;
+}
 .list-details li {
     color: var(--primary-color);
-    font-family: Questrial;
+    font-family: var(--questrial-font);
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -103,7 +118,9 @@
     display: flex;
     align-items: center;
 }
-
+.list-details li:last-child {
+    margin-bottom: 0;
+}
 .list-details img {
     width: 32px;
     height: 32px;
@@ -188,7 +205,6 @@
 .order-summary {
     padding: 37px 49px;
     background-color: #fff;
-
 }
 
 .order-summary-black {
@@ -250,7 +266,7 @@
 }
 
 .pill {
-    padding-bottom: 200px;
+    min-height: 300px;
 }
 
 .order-description .item-name {
@@ -303,6 +319,22 @@
 .order-details .line {
     border-bottom: 1px solid #fff;
 }
+@media screen and (max-width: 1024px) {
+    .summary-bg {
+        padding: 20px;
+    }
+}
+@media screen and (max-width: 992px) {
+    .summary-bg .border-right {
+        border-right: none;
+        border-bottom: 1.5px solid var(--secondary-color2);
+    }
+}
+@media screen and (max-width: 768px) {
+    .summary-bg .border-right{
+        border: 0px solid transparent;
+    }
+}
 @media screen and (max-width: 575.5px) {
     .summary-bg{
         padding: 37px 25px;
@@ -319,9 +351,22 @@
     .change_dir{
         flex-direction: column;
     }
+    .counter-container {
+        width: 320px;
+        left: -50%;
+    }
+    .counter-container > span {
+        margin-right: 30px;
+    }
+    
 }
 @media screen and (max-width: 425px) {
     .head-box-summary h2 {
         font-size: 20px;
+    }
+}
+@media screen and (max-width: 320px) {
+    .counter-container {
+        width: 260px;
     }
 }

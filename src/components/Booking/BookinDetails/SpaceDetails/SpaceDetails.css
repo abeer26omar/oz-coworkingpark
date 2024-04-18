@@ -155,6 +155,17 @@
     line-height: 120%; /* 21.6px */
     margin-top: 32px;
 }
+.space-details .space-facilities .facilities-list img{
+    width: 56px;
+    height: 56px;
+    object-fit: scale-down;
+}
+@media screen and (max-width: 768px) {
+    .space-details .space-facilities .facilities-list img{
+        width: 35px;
+        height: 35px;
+    }
+}
 @media screen and (max-width: 375px) {
     .space-details .space-facilities .facilities-list ul li{
         margin-right: 36px;

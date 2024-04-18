@@ -68,7 +68,7 @@ const MyEventDetails = () => {
             price: eventData.default_price,
             numberOfPeople: 1
         }
-        sessionStorage.setItem('OZInvoice', JSON.stringify(data));
+        localStorage.setItem('OZInvoice', JSON.stringify(data));
     }
 
     return (

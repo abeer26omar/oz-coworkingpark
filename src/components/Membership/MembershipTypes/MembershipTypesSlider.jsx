@@ -1,30 +1,31 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Slider from "react-slick";
+import { useQuery } from '@tanstack/react-query';
 import { getListMembershipTypes } from "../../../apis/MembershipApi";
 import MembershipTypesList from "./MembershipTypesList";
 import { AuthContext } from "../../../apis/context/AuthTokenContext";
+import Paragraph from '../../UI/Paragraph';
 
-const MembershipTypesSlider = () => {
-  const [types, setTypes] = useState([]);
+const MembershipTypesSlider = ({currentMemberId}) => {
+
   const { token } = useContext(AuthContext);
 
-  useEffect(() => {
-    const getMemebershipTypes = async () => {
-      try {
-        const result = await getListMembershipTypes(token, "no");
-        setTypes(result["individual"]);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getMemebershipTypes();
-  }, [token]);
+  const { error, data: types } = useQuery({
+    queryKey: ['listMembershipTypes', token],
+    queryFn: ({signal}) => getListMembershipTypes(token, "no", signal)
+  });
 
   const settings = {
     dots: false,
     arrows: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToShow:
+      types && types.individual
+      ? types.individual.length > 3
+        ? 3
+        : currentMemberId
+        ? types.individual.length - 1
+        : types.individual.length
+      : 0,
     infinite: true,
     centerMode: true,
     centerPadding: "50px",
@@ -32,22 +33,26 @@ const MembershipTypesSlider = () => {
       {
         breakpoint: 1500,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
+          slidesToShow:
+            types && types.individual
+            ? types.individual.length > 3
+              ? 3
+              : currentMemberId
+              ? types.individual.length - 1
+              : types.individual.length
+            : 0,
         },
       },
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 768,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
           centerMode: false,
         },
       },
@@ -55,7 +60,6 @@ const MembershipTypesSlider = () => {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1,
           centerMode: false,
           dots: true,
           arrows: false,
@@ -72,33 +76,36 @@ const MembershipTypesSlider = () => {
         },
       },
       {
-        breakpoint: 3,
+        breakpoint: 2,
         settings: "unslick",
       },
     ],
-  };
+  }
+
   return (
     <>
-      <Slider {...settings} className="individual_slider">
-        {types &&
-          types.map((listMembershipType, index) => {
-            const { id, name, logo, link, description } = listMembershipType;
-            return (
-              <div className="px-2" key={index}>
-                <MembershipTypesList
-                  className={"t-center-sm"}
-                  id={id}
-                  name={name}
-                  logo={logo}
-                  link={link}
-                  description={description}
-                  image={logo}
-                />
-              </div>
-            );
-          })}
-      </Slider>
-      {/* {isError && <Paragraph>there is no membership type to display</Paragraph>} */}
+      <Slider {...settings} className="individual_slider mb-4">
+          {types &&
+            types['individual'].map((listMembershipType, index) => {
+              const { id, name, logo, link, description } = listMembershipType;
+              if(currentMemberId !== id){
+                return (
+                  <div className="col-4 px-2" key={index}>
+                    <MembershipTypesList
+                      className={"t-center-sm"}
+                      id={id}
+                      name={name}
+                      logo={logo}
+                      link={link}
+                      description={description}
+                      image={logo}
+                    />
+                  </div>
+                )
+              }
+            })}
+        </Slider>
+      {error && <Paragraph className='empty'>there is no membership type to display</Paragraph>}
     </>
   );
 };

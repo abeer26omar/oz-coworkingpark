@@ -6,29 +6,31 @@ import { getTrainersList } from "../../apis/ZeeStudio";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { Skeleton } from "antd";
 import SkeletonCard from "../UI/SkeletonCard";
+
 const TrainerLinksCard = () => {
+  
   const [trainersList, setTrainersList] = useState([]);
   const [visibleCards, setVisibleCards] = useState(12);
-  const [skeleton, setSkeleton] = useState(true);
+  const [skeleton, setSkeleton] = useState(false);
 
   const { token } = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   const controller = new AbortController();
-  //   const signal = controller.signal;
+  useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
 
-  //   const getClasses = async () => {
-  //     try {
-  //       const result = await getTrainersList(token, signal);
-  //       setTrainersList(result);
-  //       console.log(trainersList);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getClasses();
-  //   return () => controller.abort();
-  // }, []);
+    const getClasses = async () => {
+      try {
+        const result = await getTrainersList(token, signal);
+        setTrainersList(result);
+        console.log(trainersList);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getClasses();
+    return () => controller.abort();
+  }, []);
 
   const handleShowMore = () => {
     setVisibleCards((prevVisibleCards) => prevVisibleCards + 3);
@@ -46,7 +48,7 @@ const TrainerLinksCard = () => {
         <div className="col-xl-4 col-md-6 col-sm-12 my-2" key={index}>
           <CardTrainerLink
             src={item.image}
-            title={item.name}
+            title={item.name.slice(0, 25)}
             desc={item.description.slice(0, 100)}
             hrefInsta={item.instagram}
             hrefFace={item.facebook}
@@ -58,6 +60,7 @@ const TrainerLinksCard = () => {
   }
   return (
     <>
+      {console.log("llllllllllllllll")}
       <div className="container-fluid px-70">
         <div className="row py-5">
           <Paragraph className="paragraph_black">Trainers</Paragraph>

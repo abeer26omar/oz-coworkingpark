@@ -14,76 +14,61 @@ import MembershipTypesSliderCorporate from '../MembershipTypes/MembershipTypesSl
 import Button from '../../UI/Button';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import ApplyPlanModal from './ApplyPlanModal';
-import {upgradePlan} from '../../../apis/User';
+import ApplyMonthPlanModal from './ApplyMonthPlanModal';
 import { Modal } from 'antd';
+import { useQuery } from '@tanstack/react-query';
 
 const MembershipOptions = () => {
 
     const {id} = useParams();
-    const [typeDetials, setTypeDetials] = useState();
     const { token } = useContext(AuthContext);
     const [planId, setPlanId] = useState(null);
     const [show, setShow] = useState(false);
-
+    const [showMonthPlan, setShowMonthPlan] = useState(false);
+    const [item, setItem] = useState({});
+    const [planName, setPlanName] = useState('');
     const navigate = useNavigate(); 
 
     const handelHide = () => setShow(false);
+    const handelMonthModalHide = () => setShowMonthPlan(false);
 
-    useEffect(()=>{
-        const getMemebershipDetails = async () => {
-            try {
-                const result = await getMembershipOptions(token, id);
-                setTypeDetials(result);
-            }catch (err){console.log(err)}
+    const { error, data: typeDetials} = useQuery({
+        queryKey: ['get-membership-options', id],
+        queryFn: ({signal}) => getMembershipOptions(token, id, signal)
+    });
+
+    const calcDiscount = (price, discount, discount_type) => {
+        if(discount_type === 'fixed'){
+            return price-discount;
+        }else{
+            const priceDicounted =  price * discount / 100;
+            return price-priceDicounted;
         }
-        getMemebershipDetails();
-    },[token, id]);
-
-    const calcDiscount = (price, discount) => {
-        const priceDicounted =  price * discount / 100;
-        return price-priceDicounted;
     }
-    const upgradeYourPlan = async (plan_Id) => {
-        try{
-            const result = await upgradePlan(token, plan_Id);
-                Modal.success({
-                    title: result.status,
-                    content: result.message_data,
-                    footer: false,
-                    centered: true,
-                    closable: true,
-                    maskClosable: true
-                });
-        }catch(error){
-            Modal.error({
-                title: error.response.data.status,
-                content: error.response.data.message,
-                footer: false,
-                centered: true,
-                closable: true,
-                maskClosable: true
-            });
-        }
-    };
-    const setSlectedMemebershipDetails = (id, type, price, discount, description, time, time_count) => {
+    
+    const addSlectedMemebershipDetails = (name, item) => {
        const selectedPlan = {
             mainPlan: typeDetials?.name,
-            selectedPackage: type,
-            price: price,
-            priceDicounted: calcDiscount(price, discount),
-            description: description,
-            time: time,
-            time_count: time_count,
-            discount: discount
+            selectedPackage: item.type,
+            price: item.price,
+            priceDicounted: calcDiscount(item.price, item.discount),
+            description: item.description,
+            time: item.time,
+            time_count: item.time_count,
+            discount: item.discount,
+            item: item
        } 
-       sessionStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
-       setPlanId(id);
+       localStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
+       setPlanId(item.id);
        if(token){
-            if(time === 'day'){
+            if(item.time === 'day'){
                 setShow(true);
             }else{
-                if(id !== sessionStorage.getItem('userPlanIdOZ')){
-                    upgradeYourPlan(id);
+                if(item.id !== localStorage.getItem('userPlanIdOZ')){
+                    setShowMonthPlan(true);
+                    setItem(item);
+                    setPlanName(name);
+                    // upgradeYourPlan(item.id);
                 }else{
                     Modal.error({
                         title: 'error',
@@ -146,8 +131,8 @@ const MembershipOptions = () => {
                                                                 <div className='card-header'>
                                                                     <span>{typeDetials?.name}</span>
                                                                     <h1 className='py-3'>{item.type}</h1>
-                                                                    <span className={`px-2 ${item.discount !== '0' ? 'discount' : 'priceafter' }`}>{item.price} / {item.time_count} {item.time}</span>
-                                                                    {item.discount !== '0' && <span className='mb-0 priceafter'>{calcDiscount(item.price, item.discount)} / {item.time_count} {item.time}</span>}
+                                                                    <span className={`px-2 ${item.discount !== '0' ? 'discount' : 'priceafter' }`}>{item.price} / {item.time}</span>
+                                                                    {item.discount !== '0' && <span className='mb-0 priceafter'>{calcDiscount(item.price, item.discount, item.discount_type)} / {item.time}</span>}
                                                                 </div>
                                                                 <div className='card-body'>
                                                                     <Paragraph><img type='img' src={check_yes} alt='check_mark' /> Your Plan Benefits</Paragraph>
@@ -170,12 +155,12 @@ const MembershipOptions = () => {
                                                                         <Button 
                                                                             tagType='link'
                                                                             to={`/singleMember/${item.id}`}
-                                                                            onClick={()=>{sessionStorage.setItem('membership', typeDetials?.name)}}
-                                                                            className='ex_link mb-3'>{'explore more'}</Button>
+                                                                            onClick={()=>{localStorage.setItem('membership', typeDetials?.name)}}
+                                                                            className='ex_link mb-3'>explore more</Button>
                                                                         <Button 
                                                                             tagType='link'
-                                                                            onClick={()=>setSlectedMemebershipDetails(item.id, item.type, item.price, item.discount, item.description, item.time, item.time_count)}
-                                                                            className='btn_outline_black d-block auth_btn_padding'>{'apply'}</Button>
+                                                                            onClick={()=>addSlectedMemebershipDetails(typeDetials?.name, item)}
+                                                                            className='btn_outline_black d-block auth_btn_padding'>apply</Button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -199,9 +184,9 @@ const MembershipOptions = () => {
                         <div className='col-lg-12'>
                             <h2 className="h2-text-bold">Other Membership {typeDetials?.is_individual === '1' ? 'individulal' : 'corporate'}</h2>
                             {typeDetials?.is_individual === '1' ? (
-                                <MembershipTypesSlider />
+                                <MembershipTypesSlider currentMemberId={id} />
                             ) : (
-                                <MembershipTypesSliderCorporate />
+                                <MembershipTypesSliderCorporate currentMemberId={id} />
                             )}
                         </div>
                     </Row>
@@ -212,6 +197,13 @@ const MembershipOptions = () => {
                 show={show}
                 onHide={handelHide}
                 type={planId}
+            />
+            <ApplyMonthPlanModal 
+                show={showMonthPlan}
+                onHide={handelMonthModalHide}
+                type={planId}
+                details={item}
+                planName={planName}
             />
         </>
     );

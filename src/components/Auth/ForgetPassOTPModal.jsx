@@ -18,8 +18,8 @@ const ForgetPassOTPModal = (props) => {
     const Confirm_OTP = async () => {
         try {
             const result = await ConfirmOTP(OTP, props.email, 'forgot_password');
-            sessionStorage.setItem("emailuseroz", props.email);
-            sessionStorage.setItem("otpuseroz", OTP);
+            localStorage.setItem("emailuseroz", props.email);
+            localStorage.setItem("otpuseroz", OTP);
             navigate('/newpassword');
         } catch (error) {
             setSwalProps({

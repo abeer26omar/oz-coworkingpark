@@ -101,7 +101,7 @@ export const createProject = async (token,
     portfolio_link,
     contact_type,
     period,
-    signal) => {
+    tags) => {
 
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
@@ -115,6 +115,7 @@ export const createProject = async (token,
     formData.append('portfolio_link', portfolio_link);
     formData.append('contact_type', contact_type);
     formData.append('period', period);
+    formData.append('tags', tags);
 
     const config = {
         method: 'post',
@@ -122,7 +123,6 @@ export const createProject = async (token,
         data: formData,
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
-        signal: signal
     };
 
     const response = await axios(config);

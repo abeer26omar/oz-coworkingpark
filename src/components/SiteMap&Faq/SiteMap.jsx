@@ -14,11 +14,11 @@ const  SiteMap  = () => {
   
   const [types, setTypes] = useState([]);
   const [bookingPlaces, setBookingPlaces] = useState([]);
-  const { token } = useContext(AuthContext);
+  const { token, userId, branchId } = useContext(AuthContext);
 
     useEffect(()=>{
 
-      getAmenitiesGroup(token).then(res=>{
+      getAmenitiesGroup(token, userId, branchId).then(res=>{
           setBookingPlaces(res);
       }).catch(err=>{});
 

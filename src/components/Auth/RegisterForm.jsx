@@ -4,22 +4,20 @@ import * as Yup from "yup";
 import { Register } from "../../apis/AuthApi";
 import Button  from '../UI/Button';
 import RegisterOTPModal from './RegisterOTPModal';
-import SweetAlert2 from 'react-sweetalert2';
 import { SiteConfigContext } from '../../apis/context/SiteConfigContext';
 import { AuthContext } from '../../apis/context/AuthTokenContext';
-import { Select } from 'antd';
+import { Select, Modal as modal } from 'antd';
 
 const RegisterForm = ({provider, profile})=>{
 
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
     const [userInfo, setUSerInfo] = useState({});
-    const [swalProps, setSwalProps] = useState({});
     const [userData, setUserData] = useState({});
     const [code, setCode] = useState(false);
     const handleClose = () => setShow(false);
     const siteConfig = useContext(SiteConfigContext);
-    const { handleLogin } = useContext(AuthContext);
 
     useEffect(()=>{
         if(provider === 'google'){
@@ -58,16 +56,22 @@ const RegisterForm = ({provider, profile})=>{
                 values.confirm_password);
                 setEmail(values.email);
                 setUserData(result.account_data);
+                setMessage(result.message);
                 setShow(true);
         } catch (error) {
-            setSwalProps({
-                show: true,
-                icon: 'error',
-                title: error.response.data.status,
-                text: error.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
-            });
+            if(error.response.data.data.otp){
+                setMessage(error.response.data.message);
+                setShow(true);
+            }else{
+                modal.error({
+                    title: error.response.data.status,
+                    content: error.response.data.message,
+                    footer: false,
+                    centered: true,
+                    closable: true,
+                    maskClosable: true
+                });
+            }
         }
     }
     return (
@@ -286,8 +290,9 @@ const RegisterForm = ({provider, profile})=>{
                 show={show}
                 onHide={handleClose}
                 email={email}
-                userData={userData}/>
-            <SweetAlert2 {...swalProps} />
+                userData={userData}
+                message={message}
+            />
         </>
     )
 }

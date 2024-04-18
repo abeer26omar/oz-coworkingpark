@@ -8,7 +8,7 @@ import MarketSpace from './MarketSpace';
 const TalentMarket = (props) => {
     return (
         <>
-            <div className="bg-body-tertiary navigator">
+            <div className="navigator">
                 <Container fluid className='justify-content-start'>
                     <div className='d-flex align-items-center'>
                         <h1 className="title-name mb-0">

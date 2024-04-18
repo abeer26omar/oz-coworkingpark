@@ -13,6 +13,7 @@ const Media = (props) => {
                     height={props.height}
                     className={props.className}
                     onClick={props.onClick}
+                    style={props.style}
                     data-aos={props.data_aos} 
                     data-aos-delay={props.data_aos_delay}
                     data-aos-duration={props.data_aos_duration}

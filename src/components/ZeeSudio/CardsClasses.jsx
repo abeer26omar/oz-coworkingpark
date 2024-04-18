@@ -1,63 +1,45 @@
-import React, { useState } from "react";
-import Media from "../Media/Media";
+import React, { useContext } from "react";
 import Button from "../UI/Button";
 import Paragraph from "../UI/Paragraph";
-// import { Skeleton } from "antd";
-// import { useQuery } from "@tanstack/react-query";
-import SkeletonCard  from "../UI/SkeletonCard"
+import { useQuery } from "@tanstack/react-query";
+import { AuthContext } from '../../apis/context/AuthTokenContext';
+import { getTrainingClasses } from "../../apis/ZeeStudio";
+import ZeeCard from './ZeeCard';
+
 const CardsClasses = ({ classesGym, getLimit , pending }) => {
-  const [limit, setLimit] = useState(12);
+
+  const { token } = useContext(AuthContext);
+  
+  // const { isPending, error, data } = useQuery({
+  //   queryKey: ["training"],
+  //   queryFn: ({ signal }) =>
+  //     getTrainingClasses(token, 6, 0, "", "", "", signal),
+  // });
+
   let content = "";
-  if (classesGym?.length === 0) {
-    content = (
-      <Paragraph className="empty mb-0">there is not classes yet</Paragraph>
-    );
-  }
-  if (classesGym) { 
-    content = classesGym.map((card, index) => {
-      return (
-        <>
-          <div
-            className="col-xxl-4 col-xl-4 col-md-6 col-sm-12 my-2"
-            key={index}
-          >
-            <div className="card my-2 h-100 text-start">
-              <Media
-                type="img"
-                src={card.image}
-                className="w-100"
-                alt={card.title}
-              />
-              <div className="card-body">
-                <Paragraph className="card-title">{card.title}</Paragraph>
-                <Paragraph className="description_black py-2">
-                  {card.descriptions.slice(0, 150)}
-                </Paragraph>
-                <div className="d-flex justify-content-between align-items-center flex-dir-responsive ">
-                  <Button
-                    tagType="link"
-                    to={`/gymdetails/${card.id}`}
-                    className="btn button-outLine btn-bg-white  m-auto-unset"
-                  >
-                    {"Explore More"}
-                  </Button>
-                  <Paragraph className="card-title mt-3 mt-xl-0">
-                    {Math.floor(card.price)} Egp
-                  </Paragraph>
-                </div>
-              </div>
+  // if () {
+    // }
+    if (classesGym) {
+      if(classesGym.length === 0){
+          content = (
+            <Paragraph className="empty mb-0">there is not classes yet</Paragraph>
+          );
+      }else{
+        content = classesGym?.map((item, index) => {
+          return (
+            <div className="col my-2" key={index}>
+              <ZeeCard isPending={pending} item={item} />
             </div>
-          </div>
-        </>
-      );
-    });
-  }
+          );
+        });
+      }
+  };
 
   const HandelShowMore = (e) => {
     e.stopPropagation();
 
-    setLimit((prevLimit) => prevLimit + 3);
-    getLimit(limit);
+    // setLimit((prevLimit) => prevLimit + 3);
+    // getLimit(limit);
   
   };
 
@@ -69,30 +51,19 @@ const CardsClasses = ({ classesGym, getLimit , pending }) => {
             <span className="card-title mx-2">{classesGym?.length}</span>
             Results Founds
           </Paragraph>
-          {pending &&
-            [1, 2, 3, 4, 5].map((n, index) => {
-              return (
-                <div
-                  className="px-sm-2 px-0 col-xxl-4 col-xl-4 col-md-6 col-sm-12"
-                  key={index}
-                >
-                  <SkeletonCard />
-                </div>
-              );
-            })}
+        </div>
+        <div className="row row-cols-xl-3 row-cols-md-2 row-cols-sm-1 py-5">
           {content}
         </div>
-        {/* {classesGym && visibleCards < classesGym.length && ( */}
         <div className="text-center">
           <Button
             tagType="button"
             onClick={HandelShowMore}
             className="btn button-outLine btn-bg-white m-auto-unset"
           >
-            {"View More"}
+            View More
           </Button>
         </div>
-        {/* )} */}
       </div>
     </>
   );

@@ -5,34 +5,32 @@ import Button  from '../../UI/Button';
 import Paragraph from '../../UI/Paragraph';
 import {requestBooking} from '../../../apis/Booking';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
-import SweetAlert2 from 'react-sweetalert2';
-import {Select} from 'antd';
+import {Modal as modal} from 'antd';
 
 const RequestForm = ({venueId})=>{
 
     const {token, userId, branchId} = useContext(AuthContext);
-    const [swalProps, setSwalProps] = useState({});
 
     const handleSubmit = async (values)=>{
         try{
             const result = await requestBooking(token, userId, branchId, 
                 venueId, values.date, values.company_name, values.activities, values.comments);
-                setSwalProps({
-                    show: true,
-                    icon: 'success',
+                modal.success({
                     title: result.status,
-                    text: result.message,
-                    showConfirmButton: false,
-                    timer: 1500
+                    content: result.message,
+                    footer: false,
+                    centered: true,
+                    closable: true,
+                    maskClosable: true
                 });
         }catch(error){
-            setSwalProps({
-                show: true,
-                icon: 'error',
+            modal.error({
                 title: error.response.data.status,
-                text: error.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
+                content: error.response.data.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
             });
         }
     }
@@ -53,7 +51,6 @@ const RequestForm = ({venueId})=>{
                 }}
                 validationSchema={Yup.object().shape({
                     company_name: Yup.string().required(),
-                    activities: Yup.string().required(),
                     comments: Yup.string().required(),
                     date: Yup.string().required()
                 })}>
@@ -71,9 +68,9 @@ const RequestForm = ({venueId})=>{
                 } = props;
             return (
                 <form className="row" onSubmit={handleSubmit}>
-                    <Paragraph className="bold-head mb-3 p-0">Request Booking</Paragraph>
+                    <Paragraph className="bold-head mb-3 p-0">Inquire</Paragraph>
                     <div className="form__group field my-3 group-check">
-                        <label htmlFor="company_name" className="form__label">Company Name \ User Name</label>
+                        <label htmlFor="company_name" className="form__label">Company Name</label>
                         <input 
                             id='company_name'
                             type="text"
@@ -82,7 +79,7 @@ const RequestForm = ({venueId})=>{
                                 ? "form__field is-invalid"
                                 : "form__field"
                             }
-                            placeholder="Enter Your Company Name \ User Name"
+                            placeholder="Enter Your Company Name"
                             name="company_name"
                             value={values.company_name}
                             onChange={handleChange}
@@ -105,7 +102,7 @@ const RequestForm = ({venueId})=>{
                            />
                         {errors.date && touched.date && <p className='text-danger mb-0'>{errors.date}</p>}
                     </div>
-                    <div className="form__group field my-3 group-check">
+                    {/* <div className="form__group field my-3 group-check">
                         <label htmlFor="activities" className="form__label">Activities</label>
                         <Select
                             id='activities'
@@ -121,7 +118,7 @@ const RequestForm = ({venueId})=>{
                                 <Select.Option value="startup">startup</Select.Option>
                         </Select>
                         {errors.activities && touched.activities && <p className='text-danger mb-0'>{errors.activities}</p>}
-                    </div>
+                    </div> */}
                     <div className="form__group field my-3 group-check">
                         <label htmlFor="comments" className="form__label">Comments</label>
                         <input 
@@ -145,12 +142,11 @@ const RequestForm = ({venueId})=>{
                         <Button 
                             tagType='button'
                             type="submit" 
-                            className="btn_outline_black">Request</Button>
+                            className="btn_outline_black">Submit</Button>
                     </div>
                 </form>
             )}}
             </Formik>
-            <SweetAlert2 {...swalProps} />
         </>
     )
 }

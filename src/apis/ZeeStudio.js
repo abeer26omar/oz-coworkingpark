@@ -50,7 +50,8 @@ export const getTrainingClasses = async (token, limit, page, search_text, start_
   return response.data.data;
 };
 
-export const getClassById = async (token, signal , id)  => {
+export const getClassById = async (token, id, signal)  => {
+  
   const formData = new FormData();
   formData.append("server_key", process.env.REACT_APP_SERVER_KEY);
   formData.append("id" ,id);
@@ -109,7 +110,7 @@ export const getWorkingScheduleList = async (token, date, signal) => {
   return response.data.data;
 };
 
-export const BookGymClass = async (token, class_id, classDate, paymentType, signal) => {
+export const BookGymClass = async (token, class_id, classDate, paymentType, promo_code_id, promo_discount, signal) => {
 
   const formData = new FormData();
 
@@ -118,6 +119,10 @@ export const BookGymClass = async (token, class_id, classDate, paymentType, sign
   formData.append("date", classDate);
   formData.append("payment_type", paymentType);
 
+  if(promo_code_id){
+    formData.append('promo_code_id', promo_code_id);
+    formData.append('promo_discount', promo_discount);
+  }
   const config = {
     method: "post",
     url: `${process.env.REACT_APP_API_URL}/api/zee_invoice_confirm?access_token=${token}`,

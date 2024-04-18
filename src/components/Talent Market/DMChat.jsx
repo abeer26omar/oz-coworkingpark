@@ -106,7 +106,7 @@ const DMChat = () => {
     },[project, user, msgSend, reload]);
 
     useEffect(()=>{
-        const data = JSON.parse(sessionStorage.getItem('recipentOZData'))
+        const data = JSON.parse(localStorage.getItem('recipentOZData'))
         setrecipentData(data);
     },[]);
 

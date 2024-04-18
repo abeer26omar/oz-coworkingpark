@@ -8,8 +8,9 @@ const KnowledgeDescription = ({ categories, info, isPending }) => {
 
   const navigate = useNavigate();
 
-  const HandelCourses = (id, ids) => {
-    sessionStorage.setItem('coursesIdsOz', ids)
+  const HandelCourses = (id, ids, item) => {
+    localStorage.setItem('coursesIdsOz', ids);
+    localStorage.setItem('courseOzCat', JSON.stringify(item));
     navigate(`/courses/${id}`);
   };
 
@@ -193,13 +194,13 @@ const KnowledgeDescription = ({ categories, info, isPending }) => {
         )}
         <div className="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-lg-5 g-3 justify-content-center py-5">
           {categories &&
-            categories.map((item, index) => {
+            categories?.map((item, index) => {
               return (
                 <div className="col" key={index}>
                   <div className="categorey_box d-flex flex-column justify-content-center align-items-center">
                     <div
                       className="popular_icon mb-3"
-                      onClick={() => HandelCourses(item.id, item.ids)}
+                      onClick={() => HandelCourses(item.id, item.ids, categories)}
                     >
                       <img
                         src={item.image}

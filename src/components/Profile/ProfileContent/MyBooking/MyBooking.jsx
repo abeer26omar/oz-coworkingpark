@@ -5,30 +5,24 @@ import { getMyBookingList } from '../../../../apis/Booking';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import Paragraph from '../../../UI/Paragraph';
 import '../../ProfileTabs/ProfileTabs.css';
+import { useQuery } from '@tanstack/react-query';
 
 const MyBooking = ()=>{
     const navigate = useNavigate();
-    const [data, setData] = useState();
+    // const [data, setData] = useState();
     const [bookingData, setBookingData] = useState([]);
     const [activeTab, setActiveTab] = useState('upcoming');
     const { token, userId } = useContext(AuthContext);
 
+    const {data ,isPending, isError, error } = useQuery({
+        queryKey: ['my-booking'],
+        queryFn: ({signal}) => getMyBookingList(token, userId, signal)
+
+    });
     const handleTabClick = (key) => {
         setActiveTab(key);
         setBookingData(data[key]);
     };
-    useEffect(()=>{
-        const controller = new AbortController();
-        const signal = controller.signal;
-
-        getMyBookingList(token, userId, signal).then(res=>{
-            setData(res)
-        })
-        .catch(err =>{
-            console.log(err);
-        });
-        return ()=>controller.abort();
-    },[token, userId]);
 
     useEffect(()=>{
         if(data){
@@ -70,7 +64,7 @@ const MyBooking = ()=>{
                         {
                             data && Object.keys(data).map((item,index)=>{
                                 return (
-                                    <Nav.Item className='col-4 text-center p-0' key={index}>
+                                    <Nav.Item className='col-4 justify-content-center text-center p-0' key={index}>
                                         <Nav.Link 
                                             className="booking_navlink" 
                                             eventKey={item}

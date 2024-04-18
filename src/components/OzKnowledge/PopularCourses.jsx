@@ -20,10 +20,9 @@ const PopularCourses = () => {
     dots: false,
     arrows: true,
     slidesToShow: 3,
-    slidesToScroll: 3,
-    infinite: true,
+    slidesToScroll: 1,
     centerMode: true,
-    centerPadding: "60px 0px 0px 0px",
+    centerPadding: "40px 0px 0px",
     responsive: [
       {
         breakpoint: 1300,
@@ -59,7 +58,7 @@ const PopularCourses = () => {
           }}
         >
           <Paragraph className="head_feature">
-            {"Most Popular Course"}
+            Most Popular Course
           </Paragraph>
         </div>
         <div

@@ -73,7 +73,7 @@ export const updateUserInfo = async ({
     hobbies,
     interest
     }) => {
-    const token = sessionStorage.getItem('TokenOZ');
+    const token = localStorage.getItem('TokenOZ');
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
     formData.append('birthday', birthday);
@@ -105,7 +105,7 @@ return response.data.data;
 
 export const RequestUpdateUserInfo = async (key, old_value, new_value, otp) => {
 
-    const token = sessionStorage.getItem('TokenOZ');
+    const token = localStorage.getItem('TokenOZ');
     const formData = new FormData();
         formData.append('server_key', process.env.REACT_APP_SERVER_KEY)
         formData.append('key', key);
@@ -256,18 +256,24 @@ export const addExtraBundle = async (token, membership_id) => {
 
     const response = await axios(config);
         
-    return response.data.data;
+    return response.data;
 };
 
-export const upgradePlan = async (token, type, days) => {
+export const upgradePlan = async (token, type, price, days, promo_code_id, promo_discount) => {
         
     const formData = new FormData();
     formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
     formData.append('type', type);
+    formData.append('price', price);
+    
     if(days){
         formData.append('days', days);
     }
 
+    if(promo_code_id){
+        formData.append('promo_code_id', promo_code_id);
+        formData.append('promo_discount', promo_discount);
+    }
     const config = {
         method: 'post',
         url: `${process.env.REACT_APP_API_URL}/api/upgrade?access_token=${token}`,

@@ -1,29 +1,31 @@
 import React, {useEffect, useState, useContext} from 'react';
 import Slider from "react-slick";
+import { useQuery } from '@tanstack/react-query';
 import { getListMembershipTypes } from '../../../apis/MembershipApi';
 import MembershipTypesList from './MembershipTypesList';
 import Paragraph from '../../UI/Paragraph';
 import {AuthContext} from '../../../apis/context/AuthTokenContext';
 
-const MembershipTypesSliderCorporate = (props) => {
+const MembershipTypesSliderCorporate = ({currentMemberId}) => {
+    
+    const { token } = useContext(AuthContext);
 
-    const [types, setTypes] = useState([]);
-    const {token} = useContext(AuthContext);
-
-    useEffect(()=>{
-        const getMemebershipTypes = async () => {
-            try {
-                const result = await getListMembershipTypes(token, 'no');
-                setTypes(result['corporate']);
-            }catch (err){console.log(err)}
-        }
-        getMemebershipTypes();
-    },[token]);
+    const { error, data: types } = useQuery({
+        queryKey: ['listMembershipTypes-corporate', token],
+        queryFn: ({signal}) => getListMembershipTypes(token, "no", signal)
+    });
 
     const settings = {
         dots: false,
         arrows: true,
-        slidesToShow: 3,
+        slidesToShow: 
+            types && types.corporate
+            ? types.corporate.length > 3
+            ? 3
+            : currentMemberId
+            ? types.corporate.length - 1
+            : types.corporate.length
+            : 0,
         slidesToScroll: 1,
         infinite: false,
         centerMode: false,
@@ -31,7 +33,14 @@ const MembershipTypesSliderCorporate = (props) => {
             {
                 breakpoint: 1500,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 
+                        types && types.corporate
+                        ? types.corporate.length > 3
+                        ? 3
+                        : currentMemberId
+                        ? types.corporate.length - 1
+                        : types.corporate.length
+                        : 0,
                     slidesToScroll: 1,
                 }
             },
@@ -74,24 +83,50 @@ const MembershipTypesSliderCorporate = (props) => {
         ]
 
     };
+
     return (
         <>
-        <Slider {...settings} className='corporate_slider'>
-            {types && types.map((listMembershipType, index) => {
+        {types && types['corporate']?.lenght > 1 ? 
+        (
+            <Slider {...settings} className='corporate_slider'>
+            {types && types['corporate'].map((listMembershipType, index) => {
                 const {id, name, link, description, logo} = listMembershipType;
+                if(currentMemberId !== id){
                 return (
-                        <div key={index}>
-                            <MembershipTypesList
+                    <div className="col-4 px-2" key={index}>
+                        <MembershipTypesList
                                 id={id}
                                 name={name}
                                 link={link}
                                 description={description}
                                 image={logo}
                             />
-                        </div>
-                );
+                    </div>
+                )}
             })}
-        </Slider>
+            </Slider>
+        ) 
+        :
+        (
+            <>
+            {types && types['corporate'].map((listMembershipType, index) => {
+                const {id, name, link, description, logo} = listMembershipType;
+                if(currentMemberId !== id){
+                    return (  
+                        <div className="col-4 px-2" key={index}>
+                   <MembershipTypesList
+                           id={id}
+                           name={name}
+                           link={link}
+                           description={description}
+                           image={logo}
+                       />
+                   </div>)
+                }
+            })}
+            </>
+        )}
+        
         {!types && <Paragraph>there is no membership type to display</Paragraph>}
         </>
     );

@@ -6,7 +6,7 @@ import { config } from "../apis/config";
 
 const About = () => {
   const { isPending, data, error } = useQuery({
-    queryKey: ["page"],
+    queryKey: ["about-us"],
     queryFn: ({ signal }) => config("about_us", signal),
   });
 
@@ -19,7 +19,7 @@ const About = () => {
     <>
       <AboutHeader configData={getComponentValue("about_us_page")} pending={isPending} />
       <AboutOz configData={getComponentValue("about_us_page")} pending={isPending} />
-    </>
+    </> 
   );
 };
 

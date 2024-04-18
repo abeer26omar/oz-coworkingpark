@@ -1,6 +1,7 @@
 import React from "react";
 import Media from "../Media/Media";
 import Paragraph from "./Paragraph";
+import * as DOMPurify from 'dompurify';
 
 function CardTrainerLink(props) {
   return (
@@ -11,9 +12,8 @@ function CardTrainerLink(props) {
           <Paragraph className="card-title border-bottom-black pb-4">
             {props.title}
           </Paragraph>
-          <Paragraph className="description_black  py-2">
-            {props.desc}
-          </Paragraph>
+          <div className="description_black py-2" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.desc) }}>
+          </div>
           <div>
             <a href={props.hrefInsta}>
               <svg

@@ -4,10 +4,10 @@ import Paragraph from '../UI/Paragraph';
 
 const ContactAdminReply = () => {
 
-    const [details, setDetails] = useState(JSON.parse(sessionStorage.getItem('replydetailsOZ')));
+    const [details, setDetails] = useState(JSON.parse(localStorage.getItem('replydetailsOZ')));
 
     useEffect(()=>{
-        setDetails(JSON.parse(sessionStorage.getItem('replydetailsOZ')))
+        setDetails(JSON.parse(localStorage.getItem('replydetailsOZ')))
     },[]);
 
     const setDate = (roomdate) => {
@@ -19,7 +19,7 @@ const ContactAdminReply = () => {
 
     return (
         <>
-            <div className="bg-body-tertiary navigator border_bottom">
+            <div className="navigator border_bottom">
                 <div className='container-fluid d-flex flex-sm-row flex-column justify-content-between align-items-center'>
                     <div className='d-flex align-items-center'>
                             <h1 className="title-name mb-0">Contact Admin History</h1>

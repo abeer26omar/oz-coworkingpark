@@ -31,7 +31,7 @@ const ServiceDetails = () => {
 
     return (
         <>
-            <div className="bg-body-tertiary navigator">
+            <div className="navigator">
                 <div className="container-fluid">
                     <div className='d-flex'>
                         <h1 className="title-name mb-0">
@@ -134,7 +134,7 @@ const ServiceDetails = () => {
                                                                 id: service.user_id?.id,
                                                                 avatar: service.user_id?.avatar
                                                             }
-                                                            sessionStorage.setItem('recipentOZData',JSON.stringify(recipent));
+                                                            localStorage.setItem('recipentOZData',JSON.stringify(recipent));
                                                             navigate(`/dmchat/${service.id}/${service.user_id?.id}`)
                                                         }else{
                                                             setShow(true);

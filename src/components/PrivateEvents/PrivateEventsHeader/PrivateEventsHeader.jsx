@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useEffect , useState , useContext}from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-scroll";
 import prevent from "../../../assets/images/videos/prevent.mp4";
@@ -7,9 +7,16 @@ import MainHeaderWrapper from "../../UI/MainHeaderWrapper";
 import { PrivateEventsData } from "../../../Data/PrivateEventsData";
 import Paragraph from "../../UI/Paragraph";
 import Slider from "react-slick";
-const PrivateEventsHeader = () => {
+import { AuthContext } from "../../../apis/context/AuthTokenContext";
+import { getBranches } from "../../../apis/config";
+const PrivateEventsHeader = (props) => {
+  const [branches, setBranches] = useState([]);
+  const [imageValue, setImageValue] = useState("");
+  const { token } = useContext(AuthContext);
+  
+
   const settings = {
-    slidesToShow: PrivateEventsData.lenght || 4,
+    slidesToShow: branches?.lenght < 4  ?   branches?.length : 4,
     arrows: false,
     slidesToScroll: 1,
     autoplay: false,
@@ -33,9 +40,40 @@ const PrivateEventsHeader = () => {
     ],
   };
 
+
+
+  useEffect(() => {
+    const bookingVideo = () => {
+      props.configData?.map((configItem) => {
+        if (configItem.key === "private_events_image") {
+          setImageValue(configItem.value);
+        }
+      });
+    };
+    bookingVideo();
+  }, [props]);
+useEffect (()=>{
+    const controller = new AbortController();
+    const signal = controller.signal;
+  const getBranchesData = async () =>{
+    try{
+      const res = await  getBranches(token, signal)
+      // console.log(res)
+      setBranches(res)
+
+    }catch(error){
+
+    }
+  } 
+  getBranchesData()
+
+return () => controller.abort();
+ 
+},[])
+  
   return (
     <>
-      <div className="bg-body-tertiary navigator private slider-sm-responsive">
+      <div className="navigator private slider-sm-responsive">
         <Container fluid>
           <div className="d-flex align-items-center justify-content-between  row">
             <div className="d-flex col-xl-6 col-md-4 col-sm-12">
@@ -58,17 +96,17 @@ const PrivateEventsHeader = () => {
             {/*  */}
             <div className="col-xl-6 col-md-8 col-sm-12">
               <Slider {...settings} >
-                {PrivateEventsData.map((addevent, index) => {
-                  const { address } = addevent;
+                {branches?.map((branch, index) => {
+                  // const { address } = branch?.name;
                   return (
                     <Link
                       className="nav-link-two links-margin "
-                      to={address}
+                      to={branch?.name}
                       smooth={true}
                       duration={100}
                       key={index}
                     >
-                      {address}
+                      {branch?.name}
                     </Link>
                   );
                 })}
@@ -79,23 +117,25 @@ const PrivateEventsHeader = () => {
         </Container>
       </div>
 
-            <MainHeaderWrapper  video={prevent}>
+            <MainHeaderWrapper  image={imageValue}>
                 <div className={`container-fluid px-70 py-5`}>
                     <div className='col-md-6 col-12'>
-                        {/* {props.configData ? props.configData.map((configItem, index) => (
-                            <React.Fragment key={index}> */}
-            {/* {configItem.key === 'booking_page_title' && ( */}
-            <Paragraph className="head_paragraph mb-3">
-              {"Private Events"}
-            </Paragraph>
-            {/* )} */}
-            {/* {configItem.key === 'booking_page_description' && ( */}
-            <Paragraph className="description mb-0">
-              {` Welcome to the vibrant world of OZ, where creativity thrives, and connections are made. Nestled in the heart of the city, OZ offers a range of versatile venues for rent, perfect for hosting a wide variety of events. Whether you're planning a corporate conference, a product launch, a networking event, or a social gathering, our venues are designed to meet your every need. With state-of-the-art facilities, flexible spaces, and a dynamic atmosphere, our coworking park provides the ideal backdrop for a successful and memorable event,`}
-            </Paragraph>
-            {/* )} */}
-            {/* </React.Fragment>
-                        )): ''} */}
+                      {props.configData ? props.configData.map((configItem , index) =>(
+                        <React.Fragment key={index}>
+                          {configItem.key ===  "private_events_title" &&  
+                           <Paragraph className="head_paragraph mb-3">
+                             {configItem.value}
+                            </Paragraph>
+                             }
+                    {configItem.key === 'private_events_description' && (
+                        <Paragraph className="description mb-0">
+                                 {configItem.value}
+                
+                        </Paragraph>
+                    ) }
+                        </React.Fragment>
+                      )) :""} 
+             
           </div>
         </div>
       </MainHeaderWrapper>

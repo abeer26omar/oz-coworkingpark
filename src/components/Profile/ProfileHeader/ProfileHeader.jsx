@@ -7,8 +7,8 @@ import { DisableContext } from '../../../apis/context/DisableStateContext';
 
 const ProfileHeader = () => {
 
-    const { userProfileDate } = useContext(AuthContext);
-    const [avatar, setAvatar] = useState(userProfileDate.avatar);
+    const { userProfileData } = useContext(AuthContext);
+    const [avatar, setAvatar] = useState(userProfileData.avatar);
     const { stateDisable, imageValue } = useContext(DisableContext);
 
     const editProfile = (event) => {
@@ -17,7 +17,7 @@ const ProfileHeader = () => {
             setAvatar(URL.createObjectURL(file));
             imageValue(file);
         }else{
-            setAvatar(userProfileDate.avatar)
+            setAvatar(userProfileData.avatar)
         }
     };
 
@@ -25,7 +25,7 @@ const ProfileHeader = () => {
         <>
             <section className="profile-header p-5 border-bottom">
                 <div className="container-fluid">
-                    {userProfileDate && <div className="d-flex align-items-center flex-sm-row flex-column">
+                    {userProfileData && <div className="d-flex align-items-center flex-sm-row flex-column">
                         <Media
                             type="img" 
                             src={avatar} 
@@ -41,8 +41,8 @@ const ProfileHeader = () => {
                                 </>
                             ) : (
                                 <>
-                                    <h2 className="user-name pt-sm-0 pt-2">{userProfileDate.name}</h2>
-                                    <span className="job-name">{userProfileDate.email}</span>
+                                    <h2 className="user-name pt-sm-0 pt-2">{userProfileData.name}</h2>
+                                    <span className="job-name">{userProfileData.email}</span>
                                 </>
                             )}
                             </div>

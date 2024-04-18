@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Formik } from 'formik';
-import { getWings, getFloors, getFacilities, getFilters} from '../../../apis/FilterBooking';
+import { getFacilities, getFilters} from '../../../apis/FilterBooking';
 import SweetAlert2 from 'react-sweetalert2';
 import './BookingFilter.css';
 import Button from '../../UI/Button';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import { Select } from 'antd';
+import { useQuery } from '@tanstack/react-query';
 
 const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
 
-    const [wings, setWings] = useState([]);
-    const [floors, setFloors] = useState([]);
-    const [facilities, setFacilities] = useState([]);
     const [swalProps, setSwalProps] = useState({});
     const { token, userId, branchId } = useContext(AuthContext);
 
@@ -28,50 +26,37 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
         '+10',
     ];
 
-    useEffect(()=>{
-        const controller = new AbortController();
-        const signal = controller.signal;
-
-        getWings(token, signal).then(res=>{
-            setWings(res);
-        }).catch(err=>{});
-
-        getFloors(token, signal).then(res=>{
-            setFloors(res);
-        }).catch(err=>{});
-
-        getFacilities(token, signal).then(res=>{
-            setFacilities(res);
-        }).catch(err=>{});
-
-        return ()=>controller.abort();
-    },[]);
+    const { error, data: facilities } = useQuery({
+        queryKey: ['get-facilites'],
+        queryFn: ({signal}) => getFacilities(token, signal)
+    });
     
     const handleSubmit = async (values) => {
-        try{
-            const result = await getFilters(
-                token,
-                userId,
-                branchId,
-                placeId,
-                values.date,
-                values.wings,
-                values.floors,
-                values.capacity,
-                values.facilities,
-                values.favorites);
-            getFilteredData(result);
-        }
-        catch (error){
-            setSwalProps({
-                show: true,
-                icon: 'error',
-                title: error.response.data.status,
-                text: error.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
-            });
-        }
+        console.log(values);
+        // try{
+        //     const result = await getFilters(
+        //         token,
+        //         userId,
+        //         branchId,
+        //         placeId,
+        //         values.date,
+        //         values.wings,
+        //         values.floors,
+        //         values.capacity,
+        //         values.facilities,
+        //         values.favorites);
+        //     getFilteredData(result);
+        // }
+        // catch (error){
+        //     setSwalProps({
+        //         show: true,
+        //         icon: 'error',
+        //         title: error.response.data.status,
+        //         text: error.response.data.message,
+        //         showConfirmButton: false,
+        //         timer: 1500
+        //     });
+        // }
     }
     return (
         <>
@@ -80,8 +65,6 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                     initialValues={
                         { 
                             date:'',
-                            wings: '',
-                            floors: '',
                             capacity: '',
                             facilities: '',
                             favorites: 0
@@ -103,7 +86,7 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                         <div className="container-fluid">
                             <form className="form-filter" onSubmit={handleSubmit}>
                                 <div className="filter-component row g-3 d-flex align-items-center justify-content-around">
-                                    <div className='col-xxl-2 col-md-2'>
+                                    <div className='col-xxl-3 col-md-2'>
                                         <div className="input-group">
                                             <input 
                                                 type="date"
@@ -115,39 +98,7 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                                                 placeholder='Select date'/>
                                         </div>
                                     </div>
-                                    {/* <div className='col-xxl-2 col-md-3'>
-                                        <select
-                                            id='wings'
-                                            name='wings'
-                                            value={values.wings}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            className="form__field placeholderSelect">
-                                                <option disabled="">Wing</option>
-                                                {wings && wings.map((item, index) => (
-                                                    <option key={index} value={item.id}>
-                                                        {item.name}
-                                                    </option>
-                                                ))}
-                                        </select>
-                                    </div> */}
-                                    {/* <div className='col-xxl-2 col-md-3'>
-                                        <select
-                                            id='floors'
-                                            name='floors'
-                                            value={values.floors}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            className="form__field placeholderSelect">
-                                            <option disabled="">floors</option>
-                                            {floors && floors.map((item, index) => (
-                                                <option key={index} value={item.id}>
-                                                    {item.name}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div> */}
-                                    <div className='col-xxl-2 col-md-3'>
+                                    <div className='col-xxl-3 col-md-3'>
                                         <Select
                                             id='capacity'
                                             name='capacity'
@@ -166,7 +117,7 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                                             ))}
                                         </Select>
                                     </div>
-                                    <div className='col-xxl-2 col-md-3'>
+                                    <div className='col-xxl-3 col-md-3'>
                                         <Select
                                             id='facilities'
                                             name='facilities'
@@ -185,29 +136,8 @@ const BookingFilter = ({isOpen, placeId, getFilteredData}) => {
                                             ))}
                                         </Select>
                                     </div>
-                                    <div className='col-xxl-1 col-md-2'>
-                                        <div className="form-check">
-                                            <input
-                                                id='favorites'
-                                                name='favorites'
-                                                value={values.favorites} 
-                                                type="checkbox" 
-                                                className="form-check-input"
-                                                onChange={()=>{
-                                                    if(values.favorites === 1){
-                                                        values.favorites = 0
-                                                    }else{
-                                                        values.favorites = 1
-                                                    }
-                                                }}
-                                                onBlur={handleBlur}
-                                            />
-                                            <label
-                                                className="form-check-label" 
-                                                htmlFor="favorites">Only Favorites</label>
-                                        </div>
-                                    </div>
-                                    <div className='col-xxl-1 col-md-2'>
+
+                                    <div className='col-xxl-2 col-md-2 justify-content-end d-flex'>
                                         <Button 
                                             tagType='button'
                                             type='submit'

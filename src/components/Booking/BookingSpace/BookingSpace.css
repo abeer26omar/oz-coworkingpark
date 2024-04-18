@@ -65,9 +65,6 @@
     margin-right: 24px;
 }
 
-.booking-space .booking-section {
-    padding: 60px 0;
-}
 .card-img-top{
     object-fit: fill;
 }
@@ -76,6 +73,12 @@
     margin: 32px auto;
     border: 0;
     border-right: 0;
+    height: 544px;
+}
+.booking-space .book-card .card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .booking-space .book-card .card-title {

@@ -10,8 +10,8 @@ import { Logout } from '../../../apis/AuthApi';
 import Button from '../../UI/Button';
 import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import { getNotificationList } from '../../../apis/User';
-import { Badge, Dropdown } from 'antd';
-
+import { Badge, Dropdown, Modal } from 'antd';
+import { useNavigate } from "react-router-dom";
 
 const LogedNav = ({showBlackNav, token, show})=>{
 
@@ -20,6 +20,8 @@ const LogedNav = ({showBlackNav, token, show})=>{
     const [activeTab, setActiveTab] = useState('all');
     const [seenCount, setSeenCount] = useState(0);
     const [notification, setNotification] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const Navigate = useNavigate();
 
 
     const handProp = (e)=>{
@@ -32,10 +34,10 @@ const LogedNav = ({showBlackNav, token, show})=>{
     const handleTabClick = (key) => {
         setActiveTab(key);
         setSeenCount(0);
-        getList();
+        getList(key);
     };
 
-    const { handleLogout, userProfileDate } = useContext(AuthContext);
+    const { handleLogout, userProfileData } = useContext(AuthContext);
 
     const handelLogout = async () => {
         SetOpen(!Open);
@@ -47,9 +49,9 @@ const LogedNav = ({showBlackNav, token, show})=>{
         }
     };
 
-    const getList = async () => {
+    const getList = async (tab) => {
         try{
-            const result = await getNotificationList(token, activeTab);
+            const result = await getNotificationList(token, tab);
             setNotification(result);
             setSeenCount(0);
             result.map(item => {
@@ -94,11 +96,77 @@ const LogedNav = ({showBlackNav, token, show})=>{
         );
     }
 
-
     useEffect(()=>{
         setSeenCount(0);
-        getList();
-    },[token, activeTab])
+    },[token, activeTab]);
+
+    const handelRoute = (type, object) =>{
+        switch (type){
+            case 'booking_reminder_extension': 
+                Navigate(`/mybookingDetails/${object?.id}?reminder=true`);
+            break;
+            case 'booking_confirmed':
+                Navigate(`/mybookingDetails/${object?.reservation_id}`);
+            break;
+            case 'booking_cancelation':
+                Navigate(`/mybookingDetails/${object?.id}`);
+            break;
+            case 'booking_reschedule':
+                Navigate(`/mybookingDetails/${object?.reservation_id}`);
+            break;
+            case 'booking_rating':
+                Navigate(`/mybookingDetails/${object?.id}?rate=true`);
+            break;
+            case 'booking_reminder':
+                Navigate(`/mybookingDetails/${object?.id}`);
+            break;
+            case 'booking_invitations':
+                Navigate(`/mybookingDetails/${object?.id}`);
+            break;
+            case 'membership_reminder':
+                Navigate(`/myplanDetials/${object?.id}?addExtra=true`);
+            break;
+            case 'membership_cancel':
+                // there is no cancellation for membership
+            break;
+            case 'membership_upgrade':
+                Navigate(`/myplanDetials/${object?.id}`);
+            break;
+            case 'membership_amenitties_use':
+                Navigate(`/myplanDetials/${object?.id}`);
+            break;
+            case 'event_cancelation':
+                Navigate(`/myeventDetails/${object?.id}`);
+            break;
+            case 'event_reminder':
+                Navigate(`/myeventDetails/${object?.id}`);
+            break;
+            case 'event_accept_ad':
+                Navigate(`/projectDetails/${object?.id}`);
+            break;
+            case 'newsfeed':
+                Navigate(`/community/newsfeed/singleFeed/${object?.id}`);
+            break;
+            case 'interest_events':
+                console.log(object);
+            break;
+            case 'chat_notification':
+                console.log(object);
+                // Navigate(`/dmchat/provider/${object?.id}`);
+            break;
+            case 'admin_reply':
+                Navigate(`/contactadmin`);
+            break;
+            case 'from_dashbord':
+                console.log(object);
+
+            break;
+            default:
+                console.log('default');
+            break;
+        }
+
+    };
 
     const itemsNotifications = [{
         key: '1',
@@ -139,16 +207,19 @@ const LogedNav = ({showBlackNav, token, show})=>{
                         </div>
                         <Tab.Pane eventKey={activeTab} className='noti_container'>
                             <ul className='ps-0'>
-                                {notification && notification.map((item, index)=>{
+                                {notification && notification?.map((item, index)=>{
                                     return (
-                                        <li className="border-dropdown d-flex px-sm-4 px-2" key={index}>
-                                            <img className='rounded-circle' alt='profile' src={item.icon}/>
-                                            <div className='info_profile mt-4 ms-4'> 
-                                                <Paragraph className='profile_notifications mb-2'>{item.title}</Paragraph>
-                                                <Paragraph className='grey-span2 mb-2'>{item.text}</Paragraph>
-                                                <Paragraph className='email mb-2' alt='#/'>{setDay(item.time_formmated)}</Paragraph>
-                                            </div>
-                                        </li>
+                                            <li className="border-dropdown d-flex px-sm-4 px-2" key={index} 
+                                                onClick={() => {
+                                                handelRoute(item?.type, item?.object);
+                                              }}>
+                                                <img className='rounded-circle' alt='profile' src={item.icon}/>
+                                                <div className='info_profile mt-4 ms-4'> 
+                                                    <Paragraph className='profile_notifications mb-2'>{item.title}</Paragraph>
+                                                    <Paragraph className='grey-span2 mb-2'>{item.text}</Paragraph>
+                                                    <Paragraph className='email mb-2' alt='#/'>{setDay(item.time_formmated)}</Paragraph>
+                                                </div>
+                                            </li>
                                     )
                                 })}
                                 {(notification && notification.length === 0) && <Paragraph className='empty py-5 px-3'>
@@ -166,10 +237,10 @@ const LogedNav = ({showBlackNav, token, show})=>{
             key: '1',
             label: (
                 <li  className="li_img border_profile_bottom">
-                    <img className='rounded-circle' alt='profile' width='80px' height='80px' src={userProfileDate?.avatar || Profile}/>
+                    <img className='rounded-circle' alt='profile' width='80px' height='80px' src={userProfileData?.avatar || Profile}/>
                     <div className='info_profile ps-3'> 
-                        <Button className='name_profile p-0 text-start' to={'/profile'} tagType='link'>{userProfileDate?.name}</Button>
-                        <Paragraph className='email mb-0 text-center'>{userProfileDate?.email}</Paragraph>
+                        <Button className='name_profile p-0 text-start' to={'/profile'} tagType='link'>{userProfileData?.first_name} {userProfileData?.last_name}</Button>
+                        <Paragraph className='email mb-0 text-center'>{userProfileData?.email}</Paragraph>
                     </div>
                 </li> 
             )
@@ -225,7 +296,7 @@ const LogedNav = ({showBlackNav, token, show})=>{
                 trigger={['click']}
                 className='notifications_icon'
             >
-                <a onClick={(e) => e.preventDefault()} style={{
+                <a onClick={(e) => {e.preventDefault();getList(activeTab)}} style={{
                     cursor: 'pointer'
                 }}>
                     <Badge dot={show}>
@@ -242,12 +313,12 @@ const LogedNav = ({showBlackNav, token, show})=>{
                     items: itemsProfile
                 }}
                 trigger={['click']}
-                className='notifications_icon'
+                className='notifications_icon mx-2'
             >
                 <a onClick={(e) => e.preventDefault()} style={{
                     cursor: 'pointer'
                 }}>
-                    <span className='user_name me-2'>{userProfileDate?.first_name}</span>
+                    <span className='user_name me-2'>{userProfileData?.first_name}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z" stroke={showBlackNav ? '#fff' : 'black'} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M4.27344 18.3457C4.27344 18.3457 6.50246 15.5 12.0024 15.5C17.5024 15.5 19.7315 18.3457 19.7315 18.3457" stroke={showBlackNav ? '#fff' : 'black'} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -255,6 +326,11 @@ const LogedNav = ({showBlackNav, token, show})=>{
                     </svg>
                 </a>
             </Dropdown>
+            <Modal title="Basic Modal" open={isModalOpen}>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+            </Modal>
         </>
     );
 }

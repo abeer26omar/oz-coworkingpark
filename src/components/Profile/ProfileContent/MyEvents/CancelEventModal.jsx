@@ -1,33 +1,35 @@
-import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Paragraph from  '../../../UI/Paragraph';
 import Button from '../../../UI/Button';
-import SweetAlert2 from 'react-sweetalert2';
 import {cancelEventAttend } from '../../../../apis/Events';
+import { useNavigate } from 'react-router-dom';
+import { Modal as modal } from 'antd';
 
 const CancelEventModal = (props) => {
 
-    const [swalProps, setSwalProps] = useState({});
+    const navigate = useNavigate();
 
     const cancel = async () => {
         try{
             const res = await cancelEventAttend(props.token, props.userId, props.event_attend_id);
-            setSwalProps({
-                show: true,
-                icon: 'success',
-                title: res.status,
-                text: res.message,
-                showConfirmButton: false,
-                timer: 1500
+            modal.success({
+                title: 'success',
+                content: res.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
             });
+            props.onHide();
+            navigate('/profile/myevents');
         }catch (error){
-            setSwalProps({
-                show: true,
-                icon: 'error',
+            modal.error({
                 title: error.response.data.status,
-                text: error.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
+                content: error.response.data.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
             });
         }
     };
@@ -62,7 +64,6 @@ const CancelEventModal = (props) => {
                         </div>
                     </Modal.Body>
             </Modal>
-            <SweetAlert2 {...swalProps} />
         </>
     )
 }

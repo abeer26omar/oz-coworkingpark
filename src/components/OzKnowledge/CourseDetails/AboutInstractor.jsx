@@ -3,6 +3,7 @@ import confirmedIcon from '../../../assets/images/icons/check.svg';
 import star from '../../../assets/images/icons/star.svg';
 import videoIcon from '../../../assets/images/icons/video.svg';
 import { Skeleton } from 'antd';
+import * as DOMPurify from 'dompurify';
 
 const AboutInstractor = ({instractor, isPending}) => {
     return (
@@ -28,7 +29,7 @@ const AboutInstractor = ({instractor, isPending}) => {
                                 <img src={confirmedIcon} alt='confirmed Icon' className='ms-2'/>
                             </div>
                             {isPending && (<Skeleton paragraph active/>)}
-                            <Paragraph className='course_details_light_desc opacity-100'>{instractor?.description}</Paragraph>
+                            <div className='course_details_light_desc opacity-100' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(instractor?.description) }}></div>
                             <div className='d-flex align-items-center  mb-4'>
                                 <div className='d-flex align-items-center'>
                                     <img src={star} alt='star icon'/>

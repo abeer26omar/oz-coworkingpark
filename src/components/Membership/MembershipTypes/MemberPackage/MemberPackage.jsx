@@ -3,7 +3,6 @@ import axios from 'axios';
 import at_oz from "../../../../assets/images/at_oz.png";
 import { useParams, useNavigate } from "react-router-dom";
 import './MemberPackage.css';
-import vector from "../../../../assets/images/Vector.png";
 import Media from "../../../Media/Media";
 import MainHeaderWrapper from '../../../UI/MainHeaderWrapper';
 import Paragraph from '../../../UI/Paragraph';
@@ -12,17 +11,25 @@ import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import { getSingleItemById } from '../../../../apis/User';
 import ApplyPlanModal from '../../MembershipOptions/ApplyPlanModal';
 import HouseServices from '../../../Houses/HousesDetails/HouseServices/HouseServices';
+import {upgradePlan} from '../../../../apis/User';
+import { Modal } from 'antd';
+import ApplyMonthPlanModal from '../../MembershipOptions/ApplyMonthPlanModal';
 
 const MemberPackage = () => {
     const {id} = useParams();
     const [packageDetails, setPackageDetails] = useState({});
-    const [membershipType, setMemebershipType] = useState(sessionStorage.getItem('membership'))
+    const [membershipType, setMemebershipType] = useState(localStorage.getItem('membership'))
     const { token, userId } = useContext(AuthContext);
     const [show, setShow] = useState(false);
-
+    const [valuePlan, setValuePlan] = useState('');
+    const [showMonthPlan, setShowMonthPlan] = useState(false);
     const navigate = useNavigate(); 
+    const [planName, setPlanName] = useState('');
+    const [item, setItem] = useState({});
+    const [planId, setPlanId] = useState(null);
 
     const handelHide = () => setShow(false);
+    const handelMonthModalHide = () => setShowMonthPlan(false);
 
 
     useEffect(()=>{
@@ -50,24 +57,69 @@ const MemberPackage = () => {
         const priceDicounted =  price * discount / 100;
         return price-priceDicounted;
     }
+    const upgradeYourPlan = async (plan_Id) => {
+        try{
+            const result = await upgradePlan(token, plan_Id);
+                Modal.success({
+                    title: result.status,
+                    content: result.message_data,
+                    footer: false,
+                    centered: true,
+                    closable: true,
+                    maskClosable: true
+                });
+        }catch(error){
+            Modal.error({
+                title: error.response.data.status,
+                content: error.response.data.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
+            });
+        }
+    };
 
-    const setSlectedMemebershipDetails = (type, price, discount, website_description, time, time_count) => {
+    const addSlectedMemebershipDetails = (item) => {
         const selectedPlan = {
-            mainPlan: membershipType,
-            selectedPackage: type,
-            price: price,
-            priceDicounted: calcDiscount(price, discount),
-            website_description: website_description,
-            time: time,
-            time_count: time_count,
-            discount: discount
-       }
-        sessionStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
-        if(token && time === 'day'){
-            setShow(true)
+            mainPlan: packageDetails?.type,
+            selectedPackage: item.type,
+            price: item.price,
+            priceDicounted: calcDiscount(item.price, item.discount),
+            description: item.description,
+            time: item.time,
+            time_count: item.time_count,
+            discount: item.discount,
+        } 
+       localStorage.setItem('selectedPlanOZ', JSON.stringify(selectedPlan));
+       setPlanId(item.id);
+       if(token){
+            if(item.time === 'day'){
+                setShow(true);
+            }else{
+                if(item.id !== localStorage.getItem('userPlanIdOZ')){
+                    setShowMonthPlan(true);
+                    setItem(item);
+                    setPlanName(item?.name);
+                    // upgradeYourPlan(item.id);
+                }else{
+                    Modal.error({
+                        title: 'error',
+                        content: 'You Already Joined This Plan',
+                        footer: false,
+                        centered: true,
+                        closable: true,
+                        maskClosable: true
+                    });
+                }
+            }
         }else{
             navigate('/joinus');
         }
+    };
+    const handleChange = ({ target: { value } }) => {
+        console.log(value);
+        setValuePlan(value);
     };
 
     return (
@@ -91,7 +143,7 @@ const MemberPackage = () => {
                                     <div className='ps-3 dynamic_p' dangerouslySetInnerHTML={{ __html: packageDetails?.website_description }}></div>
                                         <Button 
                                             tagType='link'
-                                            onClick={()=>setSlectedMemebershipDetails(packageDetails.type, packageDetails.price, packageDetails.discount, packageDetails.website_description, packageDetails.time, packageDetails.time_count)}
+                                            onClick={()=>addSlectedMemebershipDetails(packageDetails)}
                                             className="btn_outline m-auto">
                                             Apply
                                         </Button>
@@ -109,49 +161,57 @@ const MemberPackage = () => {
                     </div>
                 </section>
                 <HouseServices location_amenities={packageDetails.amenities} dark_theme={true}/>
-
-                {/* <section className="what-get"> 
-                    <div className="position-relative mb-5" >
-                        <Media
-                            type="img" src={vector} className="position-absolute m-0"
-                            style={{top: "0px", left: "0", width: "100px"}} alt="shape"/>
-                    </div>
-                        <div className='container position-relative' style={{zIndex: '9'}}>
-                            <div className="head-content-left-shape text-left">
-                                <h3 className="bold-head mb-4 ">What you'll get</h3>
-                                <p className="text-content text-secondary">We offer a wide range of amenities to support our members' personal and professional growth.</p>
+                <section className='plans container-fluid py-5'>
+                    <div className='row row-cols-3 custom-radio justify-content-between align-items-center black'>
+                        <div className='col price_monthly p-4' key={'1'}>
+                            <div className='price_body'>
+                                <p className='mb-2'>Monthly</p>
+                                <div className='d-flex align-items-center mb-3'>
+                                    <p className='priceafter mb-0'>15.00 / month</p>
+                                    <span className='ms-2'>inclusive of VAT</span>
+                                </div>
+                                {/* {item.discount !== '0' && <span className='mb-0 priceafter'>{calcDiscount(item.price, item.discount, item.discount_type)} / {item.time_count} {item.time}</span>} */}
+                                <p className='mb-0 refund'>No refund if you cancel.</p>
                             </div>
                         </div>
-                        <div className="container py-5">
-                            <div className="row">
-                                {packageDetails && packageDetails.amenities?.map((i, index) => {
-                                    return (
-                                        <div className="col-lg-6 col-md-6 col-sm-12 py-5 border-all" key={index}>
-                                            <div className='row align-items-center'>
-                                                <div className="col-6">
-                                                    <div className="d-flex align-items-center">
-                                                                        <img
-                                                                            type="img" 
-                                                                            src={i.logo} 
-                                                                            alt={i.title}/>
-                                                        <h2 className="bold_desc mb-0">{i.title}</h2>
-                                                    </div>
-                                                </div>
-                                                <div className='col-6'>
-                                                    <Paragraph className='mb-0 text-content text-secondary'>{i.notes}</Paragraph>
-                                                </div>
+                            
+                                <div className='col price_monthly p-4' key={'2'}>
+                                        <div className='price_body'>
+                                            <p className='mb-2'>6 Months</p>
+                                            <div className='d-flex align-items-center mb-3'>
+                                                <p className='priceafter mb-0'>15.00 / month</p>
+                                                {/* <span className='ms-2'>inclusive of VAT</span> */}
                                             </div>
+                                            {/* {item.discount !== '0' && <span className='mb-0 priceafter'>{calcDiscount(item.price, item.discount, item.discount_type)} / {item.time_count} {item.time}</span>} */}
+                                            <p className='mb-0 refund'>No refund if you cancel.</p>
                                         </div>
-                                    )
-                                }
-                            )}
+                                </div>
+                        
+                                <div className='col price_monthly p-4' key={'3'}>
+                                        <div className='price_body'>
+                                            <p className='mb-2'>Annual</p>
+                                            <div className='d-flex align-items-center mb-3'>
+                                                <p className='priceafter mb-0'>15.00 / month</p>
+                                                <span className='ms-2'>inclusive of VAT</span>
+                                            </div>
+                                            {/* {item.discount !== '0' && <span className='mb-0 priceafter'>{calcDiscount(item.price, item.discount, item.discount_type)} / {item.time_count} {item.time}</span>} */}
+                                            <p className='mb-0 refund'>No refund if you cancel.</p>
+                                        </div>
+                                </div>
                     </div>
-                        </div>
-                </section> */}
+                           
+                </section>
             <ApplyPlanModal 
                 show={show}
                 onHide={handelHide}
                 type={id}
+            />
+            <ApplyMonthPlanModal 
+                show={showMonthPlan}
+                onHide={handelMonthModalHide}
+                type={planId}
+                details={item}
+                planName={planName}
             />
         </>
     );

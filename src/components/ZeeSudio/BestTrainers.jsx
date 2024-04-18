@@ -8,6 +8,8 @@ import { getTrainersList } from "../../apis/ZeeStudio";
 import { AuthContext } from "../../apis/context/AuthTokenContext";
 import { Skeleton } from "antd";
 import { useQuery } from "@tanstack/react-query";
+import * as DOMPurify from 'dompurify';
+
 const BestTrainers = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { token } = useContext(AuthContext);
@@ -45,7 +47,7 @@ const BestTrainers = () => {
     <>
       <section className="popularInstructor border-of-section">
         <div className="head-content-sec">
-          <Paragraph className="head_feature">{"Our Trainers"}</Paragraph>
+          <Paragraph className="head_feature">Our Trainers</Paragraph>
         </div>
         <div
           className="border-of-section"
@@ -87,9 +89,7 @@ const BestTrainers = () => {
                           <Paragraph className="courses_jobTitle">
                             {data[currentSlide]?.category.title}
                           </Paragraph>
-                          <Paragraph className="description_black">
-                            {data[currentSlide]?.description}
-                          </Paragraph>
+                          <div className='description_black py-2' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data[currentSlide]?.description) }}></div>
                         </>
                       )}
                     </>

@@ -7,11 +7,10 @@ import Button from '../../../UI/Button';
 import { getListMembershipTypes } from '../../../../apis/MembershipApi';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import { addExtraBundle } from '../../../../apis/User';
-import SweetAlert2 from 'react-sweetalert2';
+import { Modal as modal } from 'antd';
 
 const ExtrabundlesModal = (props) => {
 
-    const [swalProps, setSwalProps] = useState({});
     const [types, setTypes] = useState([]);
     const { token } = useContext(AuthContext);
 
@@ -28,23 +27,23 @@ const ExtrabundlesModal = (props) => {
     const addExtra = async (values)=>{
         try{
             const result = await addExtraBundle(token, values.bundle);
-            setSwalProps({
-                show: true,
-                icon: 'success',
+            modal.success({
                 title: result.status,
-                text: result.message,
-                showConfirmButton: false,
-                timer: 1500
-            });
+                content: result.message,
+                centered: true,
+                maskClosable: true,
+                closable: true,
+                footer: false
+            })
             props.onHide()
         }catch(error){
-            setSwalProps({
-                show: true,
-                icon: 'error',
+            modal.error({
                 title: error.response.data.status,
-                text: error.response.data.message,
-                showConfirmButton: false,
-                timer: 1500
+                content: error.response.data.message,
+                footer: false,
+                centered: true,
+                closable: true,
+                maskClosable: true
             });
         }
     };
@@ -69,7 +68,7 @@ const ExtrabundlesModal = (props) => {
                             }}
                             validationSchema={
                                 Yup.object().shape({
-                                    bundle: Yup.string().required()
+                                    bundle: Yup.string().required('Please Select Any Bundel')
                                 })
                             }
                             >
@@ -84,12 +83,12 @@ const ExtrabundlesModal = (props) => {
                                     <form className='m-4' onSubmit={handleSubmit}>
                                         { types && types.map((type, index) => {
                                             return (
-                                                <div className="d-flex justify-content-start form-check border-bottom p-3" key={index}>
+                                                <div className="d-flex justify-content-start align-items-center form-check border-bottom p-3" key={index}>
                                                     <input 
                                                         className={
                                                             errors.cancelReason && touched.cancelReason
-                                                            ? "form-check-input me-3 is-radio-invalid"
-                                                            : "form-check-input me-3"
+                                                            ? "form-check-input mt-0 ms-0 me-3 is-radio-invalid"
+                                                            : "form-check-input mt-0 ms-0 me-3"
                                                         } 
                                                         type="radio" 
                                                         name='bundle' 
@@ -103,7 +102,8 @@ const ExtrabundlesModal = (props) => {
                                                 </div>
                                             )
                                         })}
-                                        <div className='text-center'>
+                                        {errors.bundle && touched.bundle && <p className='text-danger mb-0'>{errors.bundle}</p>}
+                                        <div className='text-center mt-3'>
                                             <Button 
                                                 tagType='button'
                                                 type='submit'
@@ -116,7 +116,6 @@ const ExtrabundlesModal = (props) => {
                             </Formik>
                     </Modal.Body>
             </Modal>
-            <SweetAlert2 {...swalProps} />
         </>
     );
 }

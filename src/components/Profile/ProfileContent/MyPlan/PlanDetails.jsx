@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
+import moment from "moment";
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import ProgressBar from "@ramonak/react-progress-bar";
 import MainHeaderWrapper from '../../../UI/MainHeaderWrapper';
 import Paragraph from '../../../UI/Paragraph';
 import Button from '../../../UI/Button';
 import ProfileActions from '../ProfileActions';
 import ExtrabundlesModal from '../MyPlan/ExtrabundlesModal';
-import { getSingleItemById } from '../../../../apis/User';
 import { AuthContext } from '../../../../apis/context/AuthTokenContext';
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -16,33 +15,25 @@ const PlanDetails = () => {
 
     const {id} = useParams();
     const [show, setShow] = useState(false);
-    const [plan, setPlan] = useState({});
+    const plan = JSON.parse(localStorage.getItem('myProPlanOZ'));
     const { token } = useContext(AuthContext);
 
     const handleClose = () => setShow(false);
     const handleOpen = () => setShow(true);
 
-    useEffect(()=>{
-        const source = axios.CancelToken.source();
-
-        getSingleItemById(token, 'plan', id, source).then(res=>{
-            setPlan(res);
-        }).catch(err=>{});
-
-        return ()=>source.cancel();
-    },[token, id]);
-
     return (
         <>     
             <div className='position-relative'>
-                <MainHeaderWrapper image={plan.image} special_flex={`justify-content-md-center`}>
+                <MainHeaderWrapper image={plan?.image} special_flex={`justify-content-md-center`}>
                     <div className="container text-center">
                         <Paragraph className="text-one">plan details</Paragraph>
-                        <Paragraph className="text-two">{plan.name}</Paragraph>
-                        <Button 
-                            tagType='link' 
-                            className='btn_outline mt-4'
-                            onClick={handleOpen}>Add Extra</Button>
+                        <Paragraph className="text-two">{plan?.name}</Paragraph>
+                        {plan?.time_progress >= 90 && (
+                            <Button 
+                                tagType='link' 
+                                className='btn_outline mt-4'
+                                onClick={handleOpen}>Add Extra</Button>
+                        )}
                     </div>
                 </MainHeaderWrapper>
             </div>
@@ -61,33 +52,33 @@ const PlanDetails = () => {
                                     <div className='d-flex justify-content-between'>
                                         <div className='col-11'>
                                             <ProgressBar 
-                                                    completed={plan.time_progress}
+                                                    completed={plan?.time_progress}
                                                     bgColor={'#D0DF00'}
                                                     baseBgColor={'#C5CED340'} />
                                             <div className='my-3 d-flex justify-content-between'>
-                                                <span className='grey-span'>{plan.start_pro}</span>
-                                                <span className='grey-span'>{plan.end_pro}</span>
+                                                <span className='grey-span'>{moment(plan?.pro_current_start).format("dddd, MMM. D, YYYY")}</span>
+                                                <span className='grey-span'>{moment(plan?.pro_current_end).format("dddd, MMM. D, YYYY")}</span>
                                             </div>
                                         </div>
-                                        <span className='completed_percentage'>{plan.time_progress}%</span>  
+                                        <span className='completed_percentage'>{plan?.time_progress}%</span>  
                                     </div>
                                 </div>
                             </div>
                             <hr/>
                             <div className="space-description px-sm-5 px-3 py-5">
-                                {plan.amenities &&
-                                    plan.amenities.map((item,index)=>{
+                                {plan?.amenities &&
+                                    plan?.amenities.map((item,index)=>{
                                         return (
                                             <div className='d-flex justify-content-between pb-3 align-items-center' key={index}>
                                                 <Paragraph className='mb-0 amenities'>
-                                                    {item.title}
+                                                    {item?.title}
                                                 </Paragraph>
                                                 <div style={{
                                                     width: '64px',
                                                     height: '64px'
                                                 }}>
                                                     <CircularProgressbarWithChildren 
-                                                        value={item.progress}
+                                                        value={item?.progress}
                                                         valueEnd={100} 
                                                         styles={buildStyles({
                                                             pathTransitionDuration: 0.5,
@@ -96,7 +87,7 @@ const PlanDetails = () => {
                                                             backgroundColor: '#fff'
                                                         })}
                                                     >
-                                                        <span className='progress_percentage'>{item.progress}%</span>
+                                                        <span className='progress_percentage'>{item?.progress}%</span>
                                                     </CircularProgressbarWithChildren>
                                                 </div>
                                             </div>

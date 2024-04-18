@@ -125,6 +125,9 @@ a {
 .p-60 {
     padding: 60px 0;
 }
+.p-70 {
+    padding: 70px;
+}
 
 .p-120 {
     padding: 120px 0;
@@ -138,7 +141,8 @@ a {
     padding: 0 60px;
 }
 .py-70 {
-    padding: 4.375rem 0;
+    padding-top: 4.375rem;
+    padding-bottom: 4.375rem;
 }
 .px_7{
     padding: 0 7rem !important;
@@ -147,7 +151,8 @@ a {
     padding: 4.375rem 0 0 0;
 }
 .px-70{
-    padding: 0 4.375rem ;
+    padding-left: 4.375rem;
+    padding-right: 4.375rem;
 }
 .px-40{
     padding: 0 40px;
@@ -159,6 +164,9 @@ a {
     padding-bottom: 60px;
 }
 /*******************************************/
+.fs-16{
+    font-size: 16px;
+}
 .head_color{
     color: var(--Head_color);
 }
@@ -219,7 +227,16 @@ a {
     object-fit: cover;
 }
 /****************** Form Fields ****************/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 .css-13cymwt-control,
 .css-13cymwt-control:focus,
 .css-13cymwt-control:hover,
@@ -506,6 +523,10 @@ a {
 
 }
 
+span{
+    text-transform: capitalize;
+}
+
 /*end*/
 /*Start Circle Shape*/
 .shape-right img {
@@ -759,15 +780,72 @@ a {
 .seprator{
     border-left: 1px solid var(--secondary-color2);
 }
+.individual_slider .slick-slide div{
+    height: 550px;
+}
+/* .slick_knowledge  .slick-slide > div{
+    height: 416px;
+} */
+.box-content{
+    position: relative;
+    z-index: 9;
+}
+.apply_btn{
+    color: var(--black-color);
+    border: none;
+    background-color: transparent;
+    font-family: var(--couture-font);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    border-bottom: 1px solid var(--black-color);
+    padding: 0;
+    border-radius: 0;
+}
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    color: var(--black-color);
+    border-color: transparent;
+    box-shadow: none;
+}
+.ant-btn-default {
+    background: transparent;
+    box-shadow: none;
+}
+.summary_item{
+    color: var(--black-color);
+    font-family: var(--questrial-font);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    transition: all ease .3s;
+}
+.promoApplided{
+    color: var(--secondary-color2);
+    text-decoration: line-through;
+}
+.react-tagsinput-input {
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+}
+.react-tagsinput--focused{
+    border-color: var(--secondary-color2) !important;
+}
+.react-tagsinput-tag {
+    background-color: #eaedef !important;
+    border-radius: 8px !important;
+    border: 1px solid transparent !important;
+    color: #736f6f !important;
+    margin-bottom: 0 !important;
+}
 @media screen and (max-width: 992px) {
     .px_7 {
         padding:  0 2rem !important;
     }
 }
 @media screen and (max-width: 768px) {
-    .t-center-sm{
-        text-align: center;
-    }
+    
     .px-70 {
         padding: 0 2rem;
     }
@@ -796,7 +874,10 @@ a {
         flex-direction: column-reverse !important;
     }
 }
-@media (max-width: 575px) {
+@media (max-width: 576px) {
+    .t-center-sm{
+        text-align: center;
+    }
     .f-14{
         font-size: 13px !important;
     }
@@ -855,4 +936,48 @@ a {
 }
 .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover{
     background-color: transparent !important;
+}
+.count_session{
+        background-color: #000;
+        padding: 15px 20px;
+        
+}
+.fit_session{
+        font-family: Couture;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+}
+.number_session{
+       color: #FFF;
+        text-align: center;
+        font-family: Questrial;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%;
+}
+.times_session{
+        color:  #000;
+        font-family: Questrial;
+        font-size: 11px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+      
+}
+.card-sessions{
+    padding: 8px 16px;
+}
+.me_32{
+    margin-right: 32px;
+}
+.head_session{
+        color: #1B2129;
+        font-family: Couture;
+        font-size: 26px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
 }

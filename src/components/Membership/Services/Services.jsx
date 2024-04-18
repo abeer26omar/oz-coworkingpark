@@ -26,7 +26,7 @@ const Services = () => {
 
     return (
         <>
-            <section className={`membership-component ${isMembershipPage ? 'yellow-background p-60' : ''}`}>
+            <section className={`membership-component ${isMembershipPage ? 'yellow-background p-60' : ''} py-5`}>
                 <div className="position-relative">
                     <img
                         src={vector} 

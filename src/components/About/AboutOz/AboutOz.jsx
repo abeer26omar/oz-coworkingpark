@@ -1,17 +1,10 @@
 import React from "react";
 import "./AboutOz.css";
-import vector from "../../../assets/images/VectorRight.png";
 import AboutozFooter from "./AboutozFooter";
-import Media from "../../Media/Media";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Paragraph from "../../UI/Paragraph";
 import HouseServices from "../../Houses/HousesDetails/HouseServices/HouseServices";
-import foodMobile from "../../../assets/images/foobmobile.jpg";
-import DrinkMobile from "../../../assets/images/Drink-mobile.jpg";
-import fitMobile from "../../../assets/images/fit-img.jpg";
-import smallMobile from "../../../assets/images/smallimage.jpg";
-import tallMobile from "../../../assets/images/tallimge.jpg";
 import { Skeleton } from "antd";
 
 const AboutOz = (props) => {

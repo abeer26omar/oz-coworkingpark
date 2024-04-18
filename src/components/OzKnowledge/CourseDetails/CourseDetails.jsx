@@ -4,7 +4,7 @@ import { AuthContext } from '../../../apis/context/AuthTokenContext';
 import { getCoursesById } from '../../../apis/OzKnowledge';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Skeleton, Alert } from 'antd';
+import { Skeleton, Alert, Modal } from 'antd';
 import MainHeaderWrapper from '../../UI/MainHeaderWrapper';
 import Paragraph from '../../UI/Paragraph';
 import Button from '../../UI/Button';
@@ -15,6 +15,7 @@ import AboutCourse from './AboutCourse';
 import PopularCourses from '../PopularCourses';
 import AboutInstractor from './AboutInstractor';
 import LoginAlert from "../../Auth/LoginAlertModal";
+import * as DOMPurify from 'dompurify';
 
 const CourseDetails = () => {
 
@@ -24,30 +25,26 @@ const CourseDetails = () => {
 
     const handelClose = () => setShowLogin(false);
 
-  const { isPending, error, data: course } = useQuery({
-    queryKey: ['courseDetails', id],
-    queryFn: ({signal}) => getCoursesById(token, signal, id)
-  });
+    const { isPending, error, data: course } = useQuery({
+      queryKey: ['courseDetails', id],
+      queryFn: ({signal}) => getCoursesById(token, signal, id)
+    });
 
     const navigate = useNavigate();
 
-    const HandelSummery = (value) => {
-      const gymCourseDetails = {
-        id: value.id,
-        title: value.title,
-        date: value.start_date,
-        duration: `${value.course_hours} hours`,
-        schedule: value.category?.title,
-        price: value.price,
-        level: value.category?.title,
-      };
-    
+    const navigatePayment = (value) => {
       if (token) {
-        sessionStorage.setItem(
-          "OZCourseDetails",
-          JSON.stringify(gymCourseDetails)
-        );
-        navigate(`/bookclass`);
+        const gymCourseDetails = {
+          id: value.id,
+          title: value.title,
+          date: value.start_date,
+          duration: value.course_hours,
+          schedule: value.schedule,
+          price: value.price,
+          level: value.category?.title,
+        };
+        localStorage.setItem("OZCourseDetails", JSON.stringify(gymCourseDetails));
+        navigate(`/course-bookingSummary`);
       } else {
         setShowLogin(true);
       }
@@ -64,9 +61,7 @@ const CourseDetails = () => {
                         <Paragraph className='head_paragraph mb-4' style={{
                             fontSize: '2.25rem'
                         }}>{course?.title}</Paragraph>
-                                
-                        <Paragraph className='description mb-4'>{course?.details}</Paragraph>
-                                
+                        <div className='description mb-4' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(course?.details) }}></div>                                
                             <div className='conrse_details d-flex mb-4'>
                                 <div className='d-flex align-items-center'>
                                     <img src={star} alt='star icon'/>
@@ -84,7 +79,7 @@ const CourseDetails = () => {
                                     <img src={confirmedIcon} alt='confirmed Icon'/>
                                 </div>
                             </div>
-                            <Button tagType='link' className="btn white_bg_btn me-2" onClick={()=>{HandelSummery(course)}}>Attend</Button>
+                            <Button tagType='link' className="btn white_bg_btn me-2" onClick={()=>{navigatePayment(course)}}>Attend</Button>
                     </div>
                 </div>
             </MainHeaderWrapper>

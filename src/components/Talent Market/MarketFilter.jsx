@@ -116,7 +116,7 @@ const MarketFilter = ({
                           ))}
                       </Select>
                     </div>
-                    <div className="col-xl-3 col-md-6 col-sm-6 align-self-end">
+                    {/* <div className="col-xl-3 col-md-6 col-sm-6 align-self-end">
                       <RangeSlider
                         min={MIN}
                         max={MAX}
@@ -127,7 +127,7 @@ const MarketFilter = ({
                       <span>
                         price: [{minValue}, {maxValue}] EGP
                       </span>
-                    </div>
+                    </div> */}
                     <div className="col-xl-2 col-md-6 col-sm-6 ">
                       <div className="input-group">
                         <input

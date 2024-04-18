@@ -1,50 +1,48 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import './GalleryShow.css';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
-// import {GalleryData} from "../../../Data/GalleryData";
+import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from "react-router-dom";
 import Media from "../../Media/Media";
-import axios from "axios";
-import Button from '../../UI/Button';
 import ShareButton from '../../UI/ShareButton';
+import { getGalleryData } from '../../../apis/config';
+import { AuthContext } from '../../../apis/context/AuthTokenContext';
 
 const GalleryShow = () => {
 
     const [galleryData, setGalleryData] = useState([]);
-    const [activeTab, setActiveTab] = useState();
-    const [url, setUrl] = useState('');
+    const [activeTab, setActiveTab] = useState("");
+    const { token } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    const handleTabClick = (key) => {
-        setActiveTab(key);
-    };
+    const { isPending, error, data } = useQuery({
+        queryKey: ['gallery-data'],
+        queryFn: ({signal}) => getGalleryData(token, signal)
+    });
+
     useEffect(()=>{
-        const fullUrl = window.location.href;
-        setUrl(fullUrl);
-
-        const getGalleryData = async ()=>{
-            try{
-                const config = {
-                    method: 'get',
-                    url: `${process.env.REACT_APP_API_CONFIG_URL}/api/gallery`
-                };
-                const response = await axios(config);
-                setGalleryData(response.data.data);
-                const initialTab = Object.keys(response.data.data)[0];
-                setActiveTab(initialTab);
-            }catch(error){
-                console.error(error);
-            }
-        }
-        getGalleryData();
+        // setGalleryData(response.data.data);
+        // const initialTab = Object.keys(response.data.data)[0];
+        // setActiveTab(initialTab);
+        // getGalleryData();
     },[]);
-    
+
     useEffect(() => {
-        if (activeTab && galleryData[activeTab]) {
-            console.log(galleryData[activeTab]);
+        if(data) {
+            const initialTab = Object.keys(data)[0];
+            setActiveTab(initialTab);
+            setGalleryData(data[initialTab]);
         }
-    }, [activeTab, galleryData]);
+    }, [data]);
+
+    const HandleActive = (value) => {
+        setActiveTab(value);
+        setGalleryData(data[value]);
+    };
 
     return (
         <>
+        {console.log(galleryData)}
             <section className="gallery-show">
                 <div className="container-fluid">
                     <div className="row">
@@ -54,14 +52,14 @@ const GalleryShow = () => {
                             </div>
                         </div>
                         <div className="filterButtons">
-                            {
-                                Object.keys(galleryData).map((category, index) =>{
+                            {data && 
+                                Object.keys(data)?.map((category, index) => {
                                     return (
                                         <button
                                             key={index} 
                                             className={`btn btn-outline btn-filter-gallery border-0 ${category === activeTab ? 'active' : ''}`}
                                             type="button" 
-                                            onClick={() => handleTabClick(category)}>{category}</button>
+                                            onClick={() => HandleActive(category)}>{category}</button>
                                     )
                                 })
                             }
@@ -70,7 +68,7 @@ const GalleryShow = () => {
                             <ResponsiveMasonry
                                 columnsCountBreakPoints={{350: 1, 750: 2, 900: 3, 1024: 4}}>
                                 <Masonry columnsCount={3} gutter="30px">
-                                    {galleryData[activeTab] ? galleryData[activeTab].map((gallery) => {
+                                    {galleryData ? galleryData?.map((gallery) => {
                                         const {image, id, category, text, date, title} = gallery;
                                         return (
                                             <div key={id} className={`gallery-item mx-auto ${category}`}>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import FormData from 'form-data';
 
 
 
@@ -166,3 +167,63 @@ export const getAmenities = async ()=>{
     const response = await axios(config);
     return response.data.data;
 };
+
+export const applyPromoCode = async (token, code)=>{
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('code', code);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/apply-promo?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+};
+
+export const getInovice = async (token, id, type)=>{
+
+    const formData = new FormData();
+    formData.append('server_key', process.env.REACT_APP_SERVER_KEY);
+    formData.append('id', id);
+    formData.append('type', type);
+
+    const config = {
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/api/transactions?access_token=${token}`,
+        data: formData,
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+};
+
+export const getGalleryData = async () => {
+
+    const config = {
+        method: 'get',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/gallery`
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+};
+
+export  const getPrivateEvent = async (token, data) =>{
+    
+    const config = {
+        method: 'get',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/private_event_items?access_token=${token}`,
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+}
+

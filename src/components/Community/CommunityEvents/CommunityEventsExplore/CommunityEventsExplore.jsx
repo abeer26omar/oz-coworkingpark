@@ -37,7 +37,7 @@ const CommunityEventsExplore = () => {
 
     return (
         <>
-            <div className="bg-body-tertiary navigator-feed">
+            <div className="navigator-feed">
                 <div className='container-fluid'>
                     <div className='d-flex'>
                         <h1 className="title-name mb-0">

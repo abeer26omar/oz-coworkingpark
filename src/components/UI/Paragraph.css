@@ -201,6 +201,24 @@ p{
     font-style: normal;
     font-weight: 400;
 }
+.show-more-paragraph{
+    /* -webkit-line-clamp: 4;
+    -webkit-box-orient: horizontal;
+    overflow: hidden;
+    display: -webkit-box; */
+    display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /* white-space: nowrap; */
+
+ }
+ .hover-paragraph-show:hover{
+    cursor: pointer;
+    color: #000;
+    /* display: inline-block; */
+ }
 .grey-span{
     color: var(--black-color);
     font-family: var(--questrial-font);
@@ -440,6 +458,13 @@ p.list-option-item{
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.dynamic_wraper_1{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
     overflow: hidden;
     text-overflow: ellipsis;
 }
