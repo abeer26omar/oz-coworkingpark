@@ -8,23 +8,6 @@ const OurTrain = ({data, isPending}) => {
 
   return (
     <>
-      <div className="container-fluid px-70 py-5">
-        <Paragraph className="card-title">Description Membership</Paragraph>
-        {isPending ? (
-          <Skeleton
-            active
-            className="py-3"
-            title={false}
-            paragraph={{ row: 2 }}
-          />
-        ) : (
-          <>
-            <Paragraph className="description_black pt-3">
-              {data?.studio_slider[0]?.description}
-            </Paragraph>
-          </>
-        )}
-      </div>
       <div className="container-fluid ">
         <div class="row border-of-section">
           <div class="col-lg-12">
