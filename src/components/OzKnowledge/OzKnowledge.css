@@ -45,6 +45,7 @@
 .card{
     border: none !important;
     border-radius: 0 !important;
+    overflow: hidden;
 }
 .card .card-img-top {
     border-radius: 0 !important;

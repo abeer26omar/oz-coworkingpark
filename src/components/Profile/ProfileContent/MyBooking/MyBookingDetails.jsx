@@ -23,6 +23,7 @@ const MyBookingDetails = () => {
     const { token } = useContext(AuthContext);
     const [searchParams] = useSearchParams();
     const rate = searchParams.get("rate");
+    const reminder = searchParams.get("reminder");
     const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
@@ -126,7 +127,13 @@ const MyBookingDetails = () => {
         if(rate){
             setShowRatingModal(true)
         }
-    },[rate])
+    },[rate]);
+
+    useEffect(()=>{
+        if(reminder){
+            setShowRemainderModal(true)
+        }
+    },[reminder]);
 
     return (
         <>

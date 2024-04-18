@@ -165,7 +165,7 @@ const DMChatProvider = () => {
 
     return (
       <>
-        <div className="bg-body-tertiary navigator border_bottom">
+        <div className="navigator border_bottom">
           <div className="container-fluid">
             <div className="d-flex">
               <h1 className="title-name mb-0">DM - (Chat)</h1>
@@ -202,22 +202,22 @@ const DMChatProvider = () => {
                           {/* <span className="req_number ms-2">3</span> */}
                         </div>
                         <Nav variant="pills" className="list_container flex-column mx-auto my-3">
-                          {(chatList && chatList.length !== 0) && chatList?.map((item, index)=>{
+                          {(chatList && chatList?.length !== 0) && chatList?.map((item, index)=>{
                             return(
                                   <Nav.Item  key={index}>
                                     <Nav.Link 
                                       eventKey={index}
                                       onClick={()=>{handleTabClick(
                                         index, 
-                                        userId === item.last_message?.from_id ? item.last_message?.to_id : item.last_message?.from_id,
-                                        item.username,
-                                        item.avatar
+                                        userId === item?.last_message?.from_id ? item?.last_message?.to_id : item?.last_message?.from_id,
+                                        item?.username,
+                                        item?.avatar
                                         )}}>
                                       <UsersList
                                         onClick={HandleCaht}
-                                        src={item.avatar}
-                                        name={item.username}
-                                        massage={item.last_message?.text}
+                                        src={item?.avatar}
+                                        name={item?.username}
+                                        massage={item?.last_message?.text}
                                       />
                                     </Nav.Link>
                                   </Nav.Item>
@@ -322,10 +322,10 @@ const DMChatProvider = () => {
                                 </span>
                               </div>
                               <div className="chat_container">
-                                {messages && messages.map((message,index)=>{ 
+                                {messages && messages?.map((message,index)=>{ 
                                   return(
                                     <>
-                                      {message.position === 'left' ?  
+                                      {message?.position === 'left' ?  
                                           (
                                             <MyMassage src={message.user_data?.avatar} message={message.text} key={index}/>
                                           )
@@ -338,7 +338,7 @@ const DMChatProvider = () => {
                                   )
                                   
                                 })}
-                                {(messages && messages.length === 0) && <Paragraph className='grey-span2 text-center my-5'>start new conversation</Paragraph>}
+                                {(messages && messages?.length === 0) && <Paragraph className='grey-span2 text-center my-5'>start new conversation</Paragraph>}
                               </div>
                               <div>
                                 <form  className="d-flex justify-content-around" onSubmit={handleSendMessage}>

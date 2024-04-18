@@ -31,7 +31,7 @@ const ServiceDetails = () => {
 
     return (
         <>
-            <div className="bg-body-tertiary navigator">
+            <div className="navigator">
                 <div className="container-fluid">
                     <div className='d-flex'>
                         <h1 className="title-name mb-0">

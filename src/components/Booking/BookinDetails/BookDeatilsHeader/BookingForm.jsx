@@ -292,10 +292,22 @@ const BookingForm = ({venueDetails, reschedule, services, venue_id}) => {
     const checkAvailabileTimes = async () => {
         const dateObject = new Date(startDate);
         const formattedDate = dateObject.toISOString().substring(0, 10);
-        const timeStart = new Date(startDate);
-        const timeStartStamp = Math.floor(timeStart.getTime() / 1000);
-        const timeEnd = new Date(startDate);
-        const timeEndStamp = Math.floor(timeEnd.getTime() / 1000);
+        let timeStartStamp, timeEndStamp;
+
+        if(venueDetails.default_price_per === 'day'){
+            const timeStart = new Date(startDate);
+            timeStartStamp = Math.floor(timeStart.getTime() / 1000);
+    
+            const timeEnd = new Date(startDate);
+            timeEndStamp = Math.floor(timeEnd.getTime() / 1000);
+        }else{
+            const timeStart = new Date(selectedStartTime);
+            timeStartStamp = Math.floor(timeStart.getTime() / 1000);
+    
+            const timeEnd = new Date(selectedEndTime);
+            timeEndStamp = Math.floor(timeEnd.getTime() / 1000);
+        }
+
         try{
             const result = await checkAvailability(
                 token, 

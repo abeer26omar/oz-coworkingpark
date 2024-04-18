@@ -1,6 +1,7 @@
 import moment from "moment";
 
 const CaseThree = ( {bookingResult, bookingData} ) => {
+  
     const calcTax = (price, discount, total) => {
       if((price === discount) && (price === total)){
         return 0;
@@ -9,6 +10,7 @@ const CaseThree = ( {bookingResult, bookingData} ) => {
         return tax;
       }
     }
+
     const calcTotal = (price, discount, total) => {
       if((price === discount) && (price === total)){
         return 0;
@@ -27,7 +29,6 @@ const CaseThree = ( {bookingResult, bookingData} ) => {
 
   return (
     <div className="w-100 bg_white">
-      {console.log(bookingData)}
       <div className="row" >
         <div className="col-lg-6 col-md-6 col-sm-12 order-summary">
           <div className="order-details">

@@ -204,3 +204,14 @@ export const getInovice = async (token, id, type)=>{
     const response = await axios(config);
     return response.data.data;
 };
+
+export const getGalleryData = async () => {
+
+    const config = {
+        method: 'get',
+        url: `${process.env.REACT_APP_API_CONFIG_URL}/api/gallery`
+    };
+
+    const response = await axios(config);
+    return response.data.data;
+}
