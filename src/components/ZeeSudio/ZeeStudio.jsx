@@ -12,41 +12,19 @@ import { DataContext } from '../../apis/context/SiteDataContext'
 
 const ZeeStudio = () => {
   
-  const { token } = useContext(AuthContext);
-  useEffect(()=>{
-     const zeeStudio = async () =>{
-      try{
-      const res = await getZeeStudio("zee_studio_website")
-      console.log(res);
-      }catch(error){
+    const { token } = useContext(AuthContext);
 
-      }
-    }
-    zeeStudio()
-  },[])
-
-    // const { data, isPending, ResetPageName } = useContext(DataContext);
-
-    // useEffect(()=>{
-    //     ResetPageName('zee_studio_website');
-    //     console.log(data);
-      
-    // },[]);
-  // const { isPending, error, data } = useQuery({
-  //   queryKey: ["knowldge-zee"],
-  //   queryFn: ({ signal }) => KnowledgeHome(token, signal),
-  // });
+    const { isPending: pending , error, data: ourTrainData } = useQuery({
+      queryKey: ["knowldge-zee"],
+      queryFn: ({ signal }) => KnowledgeHome(token, signal),
+    });
 
   return (
     <>
-    {
-      // console.log(res)
-
-    }
-     {/* <HeadZeeStuido data={data} isPending={isPending} error={error}/> 
-     <OurTrain data={data} isPending={isPending} /> */}
-     <WorkTimes/>
-     <BestTrainers />
+      <HeadZeeStuido /> 
+      <OurTrain data={ourTrainData} isPending={pending} />
+      <WorkTimes/>
+      <BestTrainers />
 
     </>
   )
